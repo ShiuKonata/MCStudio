@@ -581,7 +581,7 @@ body.vtuber-page .nav-links-bar a.active { background: rgba(255,255,255,0.15); }
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 0;
-  height: calc(100vh - var(--nav-height) - var(--footer-height));
+  min-height: calc(100vh - var(--nav-height) - 72px);
   margin-top: var(--nav-height);
 }
 
@@ -910,15 +910,17 @@ body.vtuber-page .tag { background: rgba(255,255,255,0.85); border-color: rgba(2
 }
 .schedule-placeholder p { font-weight: 700; color: var(--text-mid); }
 
-/* Footer on vtuber page — fixed height, always pinned at bottom */
+/* Footer on vtuber page */
 body.vtuber-page footer {
   position: relative; z-index: 1;
-  height: var(--footer-height);
-  display: flex; align-items: center; justify-content: center;
-  padding: 0 2rem;
+  height: auto;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 0.75rem 2rem;
   background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
 }
 body.vtuber-page footer span { color: #fde68a; }
+body.vtuber-page footer p { margin: 0; }
+body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 
 /* =============================================
    RESPONSIVE

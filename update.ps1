@@ -32,13 +32,13 @@ Write-Host "  ------------------------------------------"
 
 & git add .
 & git commit -m $msg
-& git push 2>&1 | Tee-Object -Variable pushResult
-Write-Host $pushResult
+& git push
+$pushExit = $LASTEXITCODE
 
 Write-Host "  ------------------------------------------"
 Write-Host ""
 
-if ($LASTEXITCODE -eq 0) {
+if ($pushExit -eq 0) {
     Write-Host "  OK - Push successful!"
     Write-Host "  Site will update in 1-2 minutes."
     Write-Host "  Message: $msg"
