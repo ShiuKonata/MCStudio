@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⭐ Vtuber 一覽 — MC組事務所</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
+    </div>
+    <div class="nav-sub">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</div>
+    <div class="nav-links-bar">
+      <a href="index.html">🏠 首頁</a>
+      <a href="vtubers.html" class="active">⭐ Vtuber 一覽</a>
+      <a href="merch.html">🛍️ 周邊商品</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO — 橫向緊湊版：左標題，右搜尋框 -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-text">
+        <h1>⭐ Vtuber 一覽</h1>
+        <p>點擊卡片查看每位主播的詳細介紹與相關連結</p>
+      </div>
+      <div class="page-hero-search">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="搜尋名字、團體或標籤…">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VTUBERS SECTION -->
+  <div class="section">
+    <!-- 只保留篩選按鈕，搜尋已移至 Hero -->
+    <div class="filter-bar" id="filter-bar" style="margin-bottom:1.5rem"></div>
+    <div class="vtuber-grid" id="vtuber-grid"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ 由粉絲用愛製作</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

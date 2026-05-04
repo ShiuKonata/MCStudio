@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -Command \"Set-Location 'C:\\Claude Ai\\網站\\vtuber-site'; $changes = git status --porcelain 2>$null; if ($changes) { git add .; $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm'; git commit -m \"Claude 自動更新 $timestamp\" 2>$null; $push = git push 2>&1; if ($LASTEXITCODE -eq 0) { Write-Host ''; Write-Host '✅ 網站已自動部署到 GitHub Pages！約 1~2 分鐘後生效。' } else { Write-Host ''; Write-Host '⚠ 檔案已修改，但 git push 失敗，請手動執行 [一鍵更新.bat]' } } else { Write-Host '（無檔案變更，略過部署）' }\""
+          }
+        ]
+      }
+    ]
+  }
+}

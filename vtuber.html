@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vtuber 詳細介紹 — MC組事務所</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="vtuber-page">
+
+  <!-- NAVBAR (含 Vtuber 分頁列，由 JS 注入) -->
+  <nav class="navbar" id="main-navbar">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
+    </div>
+    <div class="nav-sub">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</div>
+    <div class="nav-links-bar">
+      <a href="index.html">🏠 首頁</a>
+      <a href="vtubers.html">⭐ Vtuber 一覽</a>
+      <a href="merch.html">🛍️ 周邊商品</a>
+    </div>
+    <!-- Vtuber 分頁列（JS 注入） -->
+    <div id="vtuber-tab-bar" class="vtuber-tab-bar"></div>
+  </nav>
+
+  <!-- 主要內容（JS 注入） -->
+  <div id="detail-root"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ 由粉絲用愛製作</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+</html>
