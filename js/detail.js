@@ -143,10 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="${v.spreadsheet}" target="_blank" class="detail-link-btn sheets"><span class="link-icon">📋</span> ${v.spreadsheetLabel || v.name + '的大小事'}</a>
           </div>
 
-          ${(v.taglines && v.taglines.length) || v.tagline ? `
           <div class="detail-quote">
             <div class="quote-label">口頭禪</div>
-            ${v.taglines && v.taglines.length
+            ${(v.taglines && v.taglines.length)
               ? `<div class="quote-list">
                   ${v.taglines.map(t => `
                     <div class="quote-item">
@@ -154,9 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       <span class="quote-item-text">「${t.text}」</span>
                     </div>`).join('')}
                 </div>`
-              : `<div class="quote-text">「${v.tagline}」</div>`
+              : v.tagline
+                ? `<div class="quote-text">「${v.tagline}」</div>`
+                : `<div class="quote-empty">（待新增）</div>`
             }
-          </div>` : ''}
+          </div>
         </div>
 
         <!-- TAB: 熱門直播 -->

@@ -2,7 +2,7 @@ const vtubers = [
   {
     id: "shiucoda",
     name: "詩雨蔻達",
-    nameEn: "SHIUCODA",
+    nameEn: "ShiuCoda",
     group: "預見娛樂",
     generation: "一期生",
     avatar: "https://pbs.twimg.com/profile_images/1932726820966969345/2mjbudV0_400x400.jpg",
@@ -183,7 +183,7 @@ const vtubers = [
   {
     id: "arrynia",
     name: "艾琳妮雅",
-    nameEn: "Arrynia",
+    nameEn: "Arrynia Vaeri",
     group: "預見娛樂",
     generation: "一期生",
     avatar: "https://pbs.twimg.com/profile_images/1616018346641850369/hAKPytgg_400x400.jpg",
@@ -220,7 +220,7 @@ const vtubers = [
   {
     id: "shurakukiriko",
     name: "酒樂霧子",
-    nameEn: "Shuraku Kiriko",
+    nameEn: "Kiriko",
     group: "預見娛樂",
     generation: "二期生",
     avatar: "https://pbs.twimg.com/profile_images/2039773906706534400/RTy0EGZQ_400x400.jpg",
@@ -325,7 +325,7 @@ const vtubers = [
   {
     id: "yuzukiririna",
     name: "結月莉莉奈",
-    nameEn: "Yuzuki Ririna",
+    nameEn: "Ririna",
     group: "預見娛樂",
     generation: "二期生",
     avatar: "https://pbs.twimg.com/profile_images/2039763954331951104/OlHLWeDM_400x400.jpg",
@@ -394,7 +394,7 @@ const vtubers = [
   {
     id: "wakasaito",
     name: "若櫻依兔",
-    nameEn: "Wakasa Ito",
+    nameEn: "WakasaIto",
     group: "預見娛樂",
     generation: "二期生",
     avatar: "https://pbs.twimg.com/profile_images/1936436065180549120/T_EPkPr6_400x400.jpg",
@@ -463,7 +463,7 @@ const vtubers = [
   {
     id: "kaialluria",
     name: "魁 Kai",
-    nameEn: "Kai Alluria",
+    nameEn: "Kai",
     group: "預見娛樂",
     generation: "三期生",
     avatar: "https://pbs.twimg.com/profile_images/2040296752537022465/PyQQVGKe_400x400.jpg",
@@ -639,7 +639,7 @@ const vtubers = [
   {
     id: "chamamatti",
     name: "茶帽瑪緹",
-    nameEn: "Chamamatti",
+    nameEn: "chamamatti",
     group: "預見娛樂",
     generation: "六期生",
     avatar: "https://pbs.twimg.com/profile_images/2039205870517809152/quUDhptw_400x400.jpg",
@@ -711,7 +711,7 @@ const vtubers = [
   {
     id: "momowami",
     name: "百百波美",
-    nameEn: "Momowami",
+    nameEn: "BarkBarkPomi",
     group: "預見娛樂",
     generation: "四期生",
     avatar: "https://pbs.twimg.com/profile_images/1995498526294609920/tSOMou_Y_400x400.jpg",
@@ -746,7 +746,7 @@ const vtubers = [
   {
     id: "cocoro",
     name: "心 cocor0",
-    nameEn: "Cocoro",
+    nameEn: "cocor0",
     group: "預見娛樂",
     generation: "四期生",
     avatar: "https://pbs.twimg.com/profile_images/1803285070645796864/dqPN0I-3_400x400.jpg",
@@ -778,7 +778,7 @@ const vtubers = [
   {
     id: "hanetobi",
     name: "羽芝扉扉",
-    nameEn: "Hanetobi",
+    nameEn: "Uchi Fifi",
     group: "預見娛樂",
     generation: "四期生",
     avatar: "https://pbs.twimg.com/profile_images/2039510641430663168/4xpOGnRl_400x400.jpg",
@@ -843,7 +843,7 @@ const vtubers = [
   {
     id: "kokomii",
     name: "克克米伊",
-    nameEn: "Kokomii",
+    nameEn: "KeKeMii",
     group: "預見娛樂",
     generation: "五期生",
     avatar: "https://pbs.twimg.com/profile_images/1941771357114847232/YGQile8W_400x400.jpg",
@@ -876,7 +876,7 @@ const vtubers = [
   {
     id: "peirei",
     name: "珮蕾",
-    nameEn: "Peirei",
+    nameEn: "Pele.",
     group: "預見娛樂",
     generation: "六期生",
     avatar: "https://pbs.twimg.com/profile_images/2011801229165559809/gqkdH927_400x400.jpg",

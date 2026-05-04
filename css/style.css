@@ -488,6 +488,7 @@ h1, h2, h3, h4, .card-name, .detail-name, .meta-value, .stat-number {
    ============================================= */
 footer { background: linear-gradient(135deg, var(--sky-dark) 0%, var(--sky-mid) 100%); padding: 1.5rem 2rem; text-align: center; color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 600; }
 footer span { font-weight: 900; color: #fde68a; font-family: 'Calibri', 'Noto Sans TC', sans-serif; }
+.footer-source { margin-top: 0.4rem; font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.6); letter-spacing: 0.02em; }
 /* 非 Vtuber 個人頁：頁尾推至視窗最底 */
 body:not(.vtuber-page) > footer { margin-top: auto; }
 
@@ -798,6 +799,12 @@ body.vtuber-page .tag { background: rgba(255,255,255,0.85); border-color: rgba(2
   font-weight: 800;
   font-family: 'Calibri', 'Noto Sans TC', sans-serif;
   line-height: 1.5;
+}
+.quote-empty {
+  color: #aaa;
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.05em;
 }
 
 /* Videos — 3 正方形卡片，標題漸層覆蓋於圖片底部 */
