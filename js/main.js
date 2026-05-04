@@ -69,8 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.createElement('div');
     card.className = 'vtuber-card fade-in';
     card.style.transitionDelay = `${i * 0.07}s`;
-    // 標籤：最多 10 個，每個最多 4 字
-    const tags = v.tags.slice(0, 10).map(t => t.slice(0, 5));
+    // 標籤：最多 10 個
+    // 規則：純英文數字 → 最多 8 字；含中文（含中英混合）→ 最多 5 字
+    const tags = v.tags.slice(0, 10).map(t => {
+      const hasChinese = /[一-鿿]/.test(t);
+      return t.slice(0, hasChinese ? 5 : 8);
+    });
     card.innerHTML = `
       <div class="card-cover" style="background-image: url('${v.coverImage}')">
         <div class="card-group-badge">${v.group} · ${v.generation}</div>
@@ -199,10 +203,20 @@ document.addEventListener('DOMContentLoaded', () => {
     allBtn.dataset.gen = 'all';
     filterBar.appendChild(allBtn);
 
+    const genLabel = {
+      '零期生': '0期生 大學姐',
+      '一期生': '1期生 Exitus',
+      '二期生': '2期生 MeloNyx',
+      '三期生': '3期生 Alluria',
+      '四期生': '4期生 音雲漫步',
+      '五期生': '5期生 CaKano',
+      '六期生': '6期生 ælis',
+    };
+
     generations.forEach(gen => {
       const btn = document.createElement('button');
       btn.className = 'filter-btn';
-      btn.textContent = gen;
+      btn.textContent = genLabel[gen] || gen;
       btn.dataset.gen = gen;
       filterBar.appendChild(btn);
     });

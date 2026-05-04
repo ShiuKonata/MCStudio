@@ -16,7 +16,7 @@ const vtubers = [
     description: "我是即將成為大統領的精靈CODA°(╭╮)° 跟隨我吧…嘿嘿✐☡",
     debut: "2023-02-25",
     birthday: "6月6日",
-    tags: ["台灣", "預見娛樂", "一期生", "歌勢", "吉他彈唱", "傲嬌可愛", "188cm"],
+    tags: ["台灣", "預見娛樂", "一期生", "Exitus", "歌勢", "吉他彈唱", "傲嬌可愛", "188cm"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@SHIUCODA",
@@ -90,7 +90,7 @@ const vtubers = [
     description: "這裡是帕蘿妮嗷～💧 會唱歌會吃飯會睡覺～🦖✨聽說我的一分鐘只有60秒 🎆 o(*ﾟ▽ﾟ*)o",
     debut: "2023-02-24",
     birthday: "4月17日",
-    tags: ["台灣", "預見娛樂", "一期生", "龍", "歌勢", "吃肉肉", "亮金金"],
+    tags: ["台灣", "預見娛樂", "一期生", "Exitus", "龍", "歌勢", "吃肉肉", "亮金金"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@Paroniie",
@@ -126,7 +126,7 @@ const vtubers = [
     description: "預見所屬 EXITUS - 神無月鹿比 the 浴血地獄のザ‧梅花鹿天使 aka 世紀の開創者",
     debut: "2023-02-27",
     birthday: "10月22日",
-    tags: ["台灣", "預見娛樂", "一期生", "廢鹿", "遊戲勢", "鹿女神", "攻略少女"],
+    tags: ["台灣", "預見娛樂", "一期生", "Exitus", "廢鹿", "遊戲勢", "鹿女神", "攻略少女"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@KannazukiLubee",
@@ -159,7 +159,7 @@ const vtubers = [
     description: "世界第一超級無敵可愛奇美拉 § 高中生",
     debut: "2023-03-04",
     birthday: "5月20日",
-    tags: ["台灣", "預見娛樂", "一期生", "奇美拉", "高中生", "青春無敵"],
+    tags: ["台灣", "預見娛樂", "一期生", "Exitus", "奇美拉", "高中生", "青春無敵"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@HimegiMichika",
@@ -195,7 +195,7 @@ const vtubers = [
     description: "努力體驗人類生活的搞事吸血鬼女僕🧛‍♀️",
     debut: "2023-03-03",
     birthday: "11月11日",
-    tags: ["台灣", "預見娛樂", "一期生", "吸血鬼", "女僕", "搞事"],
+    tags: ["台灣", "預見娛樂", "一期生", "Exitus", "吸血鬼", "女僕", "搞事"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@Arrynia",
@@ -232,7 +232,7 @@ const vtubers = [
     description: "一隻喜歡酒的大妖怪！每天都要快樂的喝酒聊天打遊戲🍺",
     debut: "2023-12-07",
     birthday: "6月10日",
-    tags: ["台灣", "預見娛樂", "二期生", "大妖怪", "喝酒", "遊戲", "聊天"],
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "大妖怪", "喝酒", "遊戲", "聊天"],
 
     // 社群連結
     youtube: "https://youtube.com/@ShurakuKiriko",
@@ -265,7 +265,7 @@ const vtubers = [
     description: "初めまして！瓦瓦です～～～～～可愛迷人混亂小惡魔天使",
     debut: "2023-12-04",
     birthday: "9月9日",
-    tags: ["台灣", "預見娛樂", "二期生", "小惡魔", "天使", "混亂"],
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "小惡魔", "天使", "混亂"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@Vaswawa",
@@ -301,7 +301,7 @@ const vtubers = [
     description: "最愛你們的！可愛又睿智的！ 小天使꒰ঌᐢ. ̫ .ᐢ໒꒱",
     debut: "2023-12-11",
     birthday: "11月8日",
-    tags: ["台灣", "預見娛樂", "二期生", "天使", "可愛", "睿智"],
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "天使", "可愛", "睿智"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@SinnieAris",
@@ -334,7 +334,7 @@ const vtubers = [
     description: "👆🏻這是一隻只有奶茶跟火鍋能叫得醒的夢魔🧋🍲",
     debut: "2023-12-14",
     birthday: "3月29日",
-    tags: ["台灣", "預見娛樂", "二期生", "夢魔", "奶茶", "火鍋"],
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "夢魔", "奶茶", "火鍋"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@r1ri999",
@@ -370,7 +370,7 @@ const vtubers = [
     description: "皇家騎士團最帥氣睿智美麗的團長松鼠",
     debut: "2023-12-18",
     birthday: "7月17日",
-    tags: ["台灣", "預見娛樂", "二期生", "松鼠", "騎士團長", "忠誠"],
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "松鼠", "騎士團長", "忠誠"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@ekorru",
@@ -406,7 +406,7 @@ const vtubers = [
     description: "一隻容易失眠的小兔子🌸喜歡的東西是唱歌、寵物莓咪和草莓🍓",
     debut: "2023-12-21",
     birthday: "10月1日",
-    tags: ["台灣", "預見娛樂", "二期生", "兔子", "歌勢", "草莓"],
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "兔子", "歌勢", "草莓"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@WakasaIto",
@@ -439,7 +439,7 @@ const vtubers = [
     description: "",
     debut: "2024-05-10",
     birthday: "11月13日",
-    tags: ["台灣", "預見娛樂", "三期生", "鯨魚", "文學家", "作曲編曲", "電波"],
+    tags: ["台灣", "預見娛樂", "三期生", "Alluria", "鯨魚", "文學家", "作曲編曲", "電波"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@whalefallvtuber",
@@ -475,7 +475,7 @@ const vtubers = [
     description: "是個喜歡貓貓迷因&想被巧克力淹沒的黑手黨首領",
     debut: "2024-05-10",
     birthday: "8月2日",
-    tags: ["台灣", "預見娛樂", "三期生", "貓咪", "黑手黨", "巧克力"],
+    tags: ["台灣", "預見娛樂", "三期生", "Alluria", "貓咪", "黑手黨", "巧克力"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@Kai_Alluria",
@@ -508,7 +508,7 @@ const vtubers = [
     description: "想要成為水豚的煉金術師",
     debut: "2024-05-11",
     birthday: "7月10日",
-    tags: ["台灣", "預見娛樂", "三期生", "水豚", "煉金術師"],
+    tags: ["台灣", "預見娛樂", "三期生", "Alluria", "水豚", "煉金術師"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@MukuruCh",
@@ -544,7 +544,7 @@ const vtubers = [
     description: "曾經是一隻蛇，對，會嘶嘶嘶那種，比看起來更容易害羞，還請各位小心餵食(,,・ω・,,)",
     debut: "2024-05-11",
     birthday: "10月12日",
-    tags: ["台灣", "預見娛樂", "三期生", "蛇", "害羞"],
+    tags: ["台灣", "預見娛樂", "三期生", "Alluria", "蛇", "害羞"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@Nyrfier",
@@ -578,7 +578,7 @@ const vtubers = [
     description: "給我罐罐！喵！ฅ^✧ﻌ✧^ฅ 給我貓貓也可以喔！ฅ^ↀﻌↀ^ฅ",
     debut: "2024-09-11",
     birthday: "11月22日",
-    tags: ["台灣", "預見娛樂", "四期生", "貓咪", "罐罐"],
+    tags: ["台灣", "預見娛樂", "四期生", "音雲漫步", "貓咪", "罐罐"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@Nekokaifuka22",
@@ -615,7 +615,7 @@ const vtubers = [
     description: "想成為貓的豹　(⁰▿⁰)",
     debut: "2025-04-18",
     birthday: "9月20日",
-    tags: ["台灣", "預見娛樂", "五期生", "豹", "遊戲勢"],
+    tags: ["台灣", "預見娛樂", "五期生", "CaKano", "豹", "遊戲勢"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@Chita_CH",
@@ -648,7 +648,7 @@ const vtubers = [
     description: "「請坐吧，無論你今天過得如何，都能在這裡稍稍歇息一下。」",
     debut: "2025-11-28",
     birthday: "10月6日",
-    tags: ["台灣", "預見娛樂", "六期生", "溫柔", "療癒"],
+    tags: ["台灣", "預見娛樂", "六期生", "ælis", "溫柔", "療癒"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@chamamatti",
@@ -686,7 +686,7 @@ const vtubers = [
     description: "♔歡迎來到我的國度♔",
     debut: "2024-05-11",
     birthday: "4月2日",
-    tags: ["台灣", "預見娛樂", "三期生", "國度", "帝王"],
+    tags: ["台灣", "預見娛樂", "三期生", "Alluria", "國度", "帝王"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@shiro_leon/featured",
@@ -723,7 +723,7 @@ const vtubers = [
     description: "\"要不要聽我說兩句廢話呢?\" \"嘻嘻我說完ㄌ\" \"路過此地！屁眼留下來(≖ᴗ≖๑)\"",
     debut: "2024-09-12",
     birthday: "4月12日",
-    tags: ["台灣", "預見娛樂", "四期生", "廢話", "搞笑"],
+    tags: ["台灣", "預見娛樂", "四期生", "音雲漫步", "廢話", "搞笑"],
 
     youtube: "https://www.youtube.com/@BarkBarkPomi",
     twitter: "https://x.com/BarkBarkPomi",
@@ -755,7 +755,7 @@ const vtubers = [
     description: "博士都叫我可可, 大家也叫我可可就好 🉑",
     debut: "2024-09-13",
     birthday: "3月3日",
-    tags: ["台灣", "預見娛樂", "四期生", "可可"],
+    tags: ["台灣", "預見娛樂", "四期生", "音雲漫步", "可可"],
 
     youtube: "https://www.youtube.com/@cocor0_0303",
     twitter: "https://x.com/cocor0_0303",
@@ -787,7 +787,7 @@ const vtubers = [
     description: "有網路的地方就會有扉扉",
     debut: "2024-09-14",
     birthday: "1月14日",
-    tags: ["台灣", "預見娛樂", "四期生"],
+    tags: ["台灣", "預見娛樂", "四期生", "音雲漫步"],
 
     youtube: "https://www.youtube.com/@uchififi",
     twitter: "https://x.com/uchi_fifi",
@@ -820,7 +820,7 @@ const vtubers = [
     description: "在熬夜、焦慮與奶茶之間，選擇成為魔法少女ฅ •ﻌ•♡",
     debut: "2025-04-19",
     birthday: "6月21日",
-    tags: ["台灣", "預見娛樂", "五期生", "魔法少女", "奶茶"],
+    tags: ["台灣", "預見娛樂", "五期生", "CaKano", "魔法少女", "奶茶"],
 
     youtube: "https://www.youtube.com/@NokoriCaKaNo",
     twitter: "https://x.com/nokori_0420",
@@ -852,7 +852,7 @@ const vtubers = [
     description: "是隻喜歡睡覺的熊!",
     debut: "2025-04-20",
     birthday: "7月5日",
-    tags: ["台灣", "預見娛樂", "五期生", "熊", "睡覺"],
+    tags: ["台灣", "預見娛樂", "五期生", "CaKano", "熊", "睡覺"],
 
     youtube: "https://www.youtube.com/@kekemii_0705",
     twitter: "https://x.com/kekemii_0705",
@@ -891,7 +891,7 @@ const vtubers = [
     description: "「來自賭場的世界第一公主大人」(不容許任何質疑)",
     debut: "2025-11-29",
     birthday: "6月3日",
-    tags: ["台灣", "預見娛樂", "六期生", "公主", "賭場"],
+    tags: ["台灣", "預見娛樂", "六期生", "ælis", "公主", "賭場"],
 
     youtube: "https://www.youtube.com/@Peleouo",
     twitter: "https://x.com/aelis_pele",
@@ -926,7 +926,7 @@ const vtubers = [
     description: "📜 您好呀，我是幽昵，來自仙境深處的傳令官……！",
     debut: "2025-11-30",
     birthday: "7月2日",
-    tags: ["台灣", "預見娛樂", "六期生", "傳令官", "仙境"],
+    tags: ["台灣", "預見娛樂", "六期生", "ælis", "傳令官", "仙境"],
 
     youtube: "https://www.youtube.com/@yawnii_aelis",
     twitter: "https://x.com/yawnii_aelis",
