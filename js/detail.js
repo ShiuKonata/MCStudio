@@ -1,3 +1,14 @@
+// ── 世代 → 團體名稱對應 ──────────────────────────────
+const genTeamName = {
+  '零期生': '大學姐',
+  '一期生': 'Exitus',
+  '二期生': 'MeloNyx',
+  '三期生': 'Alluria',
+  '四期生': '音雲漫步',
+  '五期生': 'CaKano',
+  '六期生': 'ælis',
+};
+
 // ── 動態套用 Vtuber 個人色 ──────────────────────────
 function applyVtuberColor(hex) {
   const r = parseInt(hex.slice(1,3), 16);
@@ -121,7 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 個人介紹 -->
         <div id="tab-profile" class="tab-panel active">
           <div class="detail-meta-grid">
-            <div class="meta-card"><div class="meta-label">所屬團體</div><div class="meta-value">${v.group}</div></div>
+            <div class="meta-card"><div class="meta-label">所屬公司</div><div class="meta-value">${v.group}</div></div>
+            <div class="meta-card"><div class="meta-label">團體名稱</div><div class="meta-value">${genTeamName[v.generation] || '—'}</div></div>
             <div class="meta-card"><div class="meta-label">世代</div><div class="meta-value">${v.generation}</div></div>
             <div class="meta-card"><div class="meta-label">出道日期</div><div class="meta-value">${v.debut}</div></div>
             <div class="meta-card"><div class="meta-label">生日</div><div class="meta-value">${v.birthday}</div></div>
