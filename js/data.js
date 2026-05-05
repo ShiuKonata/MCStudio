@@ -85,9 +85,27 @@ const vtubers = [
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Que-F4MyXCj5cVTquXECu9oAF-GQF46w543Ik5jxoyU/edit?gid=0#gid=0",
 
     videos: [
-      { id: "0Vq4fWh3RMg", title: "熱門直播 #1 NON STOP SOUL!!!" },
-      { id: "K-6YH5t-HgU", title: "熱門直播 #2 笑顔はここにある" },
-      { id: "7MUzOjbVjb4", title: "熱門直播 #3 初次見面！我是天才貓！" }
+      { id: "0Vq4fWh3RMg", title: "NON STOP SOUL!!!" },
+      { id: "K-6YH5t-HgU", title: "笑顔はここにある" },
+      { id: "7MUzOjbVjb4", title: "初次見面！我是天才貓！" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "M5f-d9Ic1O4",
@@ -126,6 +144,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "3CkoMAZxoec",
     spreadsheetLabel: "帕蘿妮的大小事",
     scheduleTitle:    "帕蘿妮的行程表",
@@ -162,6 +198,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "kc5RN-h_bAs",
     spreadsheetLabel: "鹿比的大小事",
     scheduleTitle:    "鹿比的行程表",
@@ -193,6 +247,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "tPRVSHoEEeg",
@@ -229,6 +301,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "YewmD63V5r0",
@@ -268,6 +358,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "CROYjRn86_o",
     spreadsheetLabel: "霧子的大小事",   // 試算表按鈕文字
     scheduleTitle:    "霧子的行程表",    // 行程頁標題
@@ -299,6 +407,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "DvskyppTq-0",
@@ -337,6 +463,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "vDoOnUBiuW4",
     spreadsheetLabel: "希希的大小事",
     scheduleTitle:    "希希的行程表",
@@ -368,6 +512,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
@@ -406,6 +568,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "lLZlENnAYUQ",
     spreadsheetLabel: "可露團長的大小事",
     scheduleTitle:    "可露團長的行程表",
@@ -442,6 +622,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "5Sn6bnUbeus",
     spreadsheetLabel: "氣質兔兔的大小事",
     scheduleTitle:    "氣質兔兔的行程表",
@@ -473,6 +671,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "r15JQHl8KL0",
@@ -511,6 +727,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "psgIP5rMRTA",
     spreadsheetLabel: "魁慨的大小事",
     scheduleTitle:    "魁慨的行程表",
@@ -542,6 +776,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "fO8nKY_tpzM",
@@ -580,6 +832,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "fl96oXs9Q1E",
     spreadsheetLabel: "爾菲的大小事",
     scheduleTitle:    "爾菲的行程表",
@@ -612,6 +882,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "haBTRQQeUoY",
@@ -651,6 +939,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "JAzDEWJN8LM",
     spreadsheetLabel: "崎塔的大小事",
     scheduleTitle:    "崎塔的行程表",
@@ -682,6 +988,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "_Xf6y0jkl-Q",
@@ -722,6 +1046,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "TYDgPZbXl34",
     spreadsheetLabel: "希洛的大小事",
     scheduleTitle:    "希洛的行程表",
@@ -758,6 +1100,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "bSPwY0KHks4",
     spreadsheetLabel: "波美的大小事",
     scheduleTitle:    "波美的行程表",
@@ -790,6 +1150,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "q1ls6HmTVwc",
     spreadsheetLabel: "可可的大小事",
     scheduleTitle:    "可可的行程表",
@@ -820,6 +1198,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "Vk_0sRnEmp0",
@@ -855,6 +1251,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "Od2Sczr6wmw",
     spreadsheetLabel: "諾諾的大小事",
     scheduleTitle:    "諾諾的行程表",
@@ -885,6 +1299,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "q5bBqi8DUc8",
@@ -926,6 +1358,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
     scheduleVideoId:  "xjmx-OXRdUg",
     spreadsheetLabel: "公主的大小事",
     scheduleTitle:    "公主的行程表",
@@ -959,6 +1409,24 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+    ],
+
+    shorts: [
+      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
+      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
+      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+    ],
+
+    musicClips: [
+      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
+      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
+      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    ],
+
+    videoClips: [
+      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
+      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "bae5xjjhMsI",
