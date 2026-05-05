@@ -97,9 +97,9 @@ const vtubers = [
     ],
 
     musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+      { id: "AujK7aWgRsY", title: "HoneyWorks - 可愛くてごめん | Rumi懶貓子 .Cover 〔中日歌詞〕" },
+      { id: "J7EUn1BbE18", title: "初音ミク - 神っぽいな| Rumi懶貓子 .Cover 〔中日歌詞〕" },
+      { id: "KfMSh_SnfRE", title: "「歌粹剪輯」心做し /Cover Rumi懶貓子【中日字幕】" },
     ],
 
     videoClips: [
