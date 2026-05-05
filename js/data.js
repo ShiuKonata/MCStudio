@@ -112,6 +112,10 @@ const vtubers = [
     spreadsheetLabel: "懶貓子Rumi的大小事",  // 試算表按鈕文字
     scheduleTitle:    "懶貓子Rumi的行程表",   // 行程頁標題
 
+    bgmVideoId: "0Vq4fWh3RMg",  // 背景音樂影片 ID
+    bgmStart:   0,               // 開始秒數
+    bgmLabel:   "NON STOP SOUL!!!",  // 播放器顯示的歌名
+
     color: "#F4A7C3"   // 懶貓子Rumi 代表色（柔粉紅）
   },
 
