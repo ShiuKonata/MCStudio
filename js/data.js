@@ -139,15 +139,15 @@ const vtubers = [
     spreadsheet: "https://docs.google.com/spreadsheets/d/1NcaRipM4j0rsy3z-JMYnft7IS_Gg-6qsBTW5174_zrU/edit?gid=1879656289#gid=1879656289",
 
     videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+      { id: "mnAkfuAZOUE", title: "🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】" },
+      { id: "4RTxc8acTlY", title: "🎵 Wake Up! - 帕蘿妮 Paroniie 【COVER】" },
+      { id: "Lg9nyNL-AD0", title: "🎵 星願 - 帕蘿妮 Paroniie 【Original】" }
     ],
 
     shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+      { id: "kQUtRi1x4r0", title: "我的天 這個貓我想摸想摸想摸 ♦︎ #火炬之光 #shorts." },
+      { id: "oX-JcQHIrCg", title: "虛空我老熟了！ ♦︎ #apex #shorts." },
+      { id: "68-a4gyrUws", title: "泡泡車好安全...嗎?! ♦︎ #apex #shorts." },
     ],
 
     musicClips: [
@@ -157,9 +157,9 @@ const vtubers = [
     ],
 
     videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+      { id: "2LShBQNYrxU", title: "合約上面沒有說不可以臭老闆！而且合約是我親自改過的！【帕蘿妮 Paroniie】【VTuber精華】" },
+      { id: "Vee1Sl3P6A0", title: "難過跟受傷的終究是自己。【帕蘿妮 Paroniie】【VTuber精華】" },
+      { id: "MSJYMVASn4g", title: "小小的花園裡面挖呀挖呀挖 #shorts【帕蘿妮 Paroniie】【VTuber精華】" },
     ],
 
     scheduleVideoId:  "3CkoMAZxoec",
