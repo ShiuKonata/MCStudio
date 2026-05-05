@@ -280,8 +280,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container || !items || !items.length) return;
     items.forEach(vid => {
       if (vid.id && !vid.id.startsWith('REPLACE')) {
-        const thumb    = `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`;
-        const thumbFb  = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+        // 優先用自訂縮圖，否則抓 YouTube 縮圖
+        const thumb    = vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`;
+        const thumbFb  = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
         const safeTitle = vid.title.replace(/'/g, '&#39;');
         container.innerHTML += `
           <div class="video-card" style="cursor:pointer"
