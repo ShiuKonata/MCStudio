@@ -444,7 +444,8 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1669708581632114689/1777113944/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "你們這些白痴" }
+      { context: "", text: "你們這些白痴" },
+      { context: "", text: "閉嘴啦" }
     ],
     description: "最愛你們的！可愛又睿智的！ 小天使꒰ঌᐢ. ̫ .ᐢ໒꒱",
     debut: "2023-12-11",
@@ -1340,7 +1341,8 @@ const vtubers = [
       { context: "", text: "我接喔" },
       { context: "", text: "你白目嗎?" },
       { context: "", text: "挖喜公主ㄟ" },
-      { context: "", text: "挖喜v吐爸ㄟ" }
+      { context: "", text: "挖喜v吐爸ㄟ" },
+      { context: "", text: "這是真的嗎?" }
     ],
     description: "「來自賭場的世界第一公主大人」(不容許任何質疑)",
     debut: "2025-11-29",
