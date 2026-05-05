@@ -87,7 +87,7 @@ const vtubers = [
     videos: [
       { id: "0Vq4fWh3RMg", title: "NON STOP SOUL!!!" },
       { id: "K-6YH5t-HgU", title: "笑顔はここにある" },
-      { id: "7MUzOjbVjb4", title: "初次見面！我是天才貓！" }
+      { id: "S24248F5QxQ", title: "【生日紀念】好想愛這個世界啊/この世界を愛したい" }
     ],
 
     shorts: [
