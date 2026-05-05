@@ -91,9 +91,9 @@ const vtubers = [
     ],
 
     shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+      { id: "1RMnxlGaExM", title: "懶貓子的正確道歉方式🙇‍♀️｜Rumi/懶貓子" },
+      { id: "1y778o-SAFM", title: "就說了是乖乖＞＿＜｜Rumi/懶貓子" },
+      { id: "ZkG3mH55q6Q", title: "Rumily準備好了嗎？上車囉～～🚗💨｜Rumi/懶貓子" },
     ],
 
     musicClips: [
