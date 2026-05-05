@@ -25,9 +25,27 @@ const vtubers = [
     spreadsheet: "https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740",
 
     videos: [
-      { id: "dGNwgv3beyk", title: "熱門直播 #1 哈士奇寶寶" },
-      { id: "_DzQNbQW4L0", title: "熱門直播 #2 Take Me To The Beach/Imagine Dragons" },
-      { id: "DEekDZDIywE", title: "熱門直播 #3 星座になれたら/結束バンド" }
+      { id: "dGNwgv3beyk", title: "哈士奇寶寶" },
+      { id: "_DzQNbQW4L0", title: "Take Me To The Beach / Imagine Dragons" },
+      { id: "DEekDZDIywE", title: "星座になれたら / 結束バンド" }
+    ],
+
+    shorts: [
+      { id: "xir5pgD4460", title: "主播拜託別再問這種私人的問題啦!!💧詩雨蔻達" },
+      { id: "DwMRfwmNblE", title: "GL瑟瑟夢境💧詩雨蔻達" },
+      { id: "svaBlko1J0g", title: "本格芝麻湯圓派崩潰ㄌ💧詩雨蔻達" },
+    ],
+
+    musicClips: [
+      { id: "jOaAoIqskpo", title: "CODA中文歌回總集篇-2026年3月份" },
+      { id: "60P3EJa_SVQ", title: "CODA中文歌回總集篇-2026年1月份+2月份" },
+      { id: "1wYaJopkYQA", title: "CODA中文歌回總集篇-2025年12月份" },
+    ],
+
+    videoClips: [
+      { id: "6DzGvlWL2CU", title: "當統領想給外送員小費時... | 詩雨蔻達 ShiuCoda" },
+      { id: "UGFSG4Z4J38", title: "陶喆、蔡依琳 - 今天你要嫁給我 | 詩雨蔻達 ShiuCoda Cover" },
+      { id: "UykHeePVhp0", title: "當ㄚ統手上拿到槍第一件事居然做的是..?" },
     ],
 
     scheduleVideoId:  "cCaZa-NTz0o",

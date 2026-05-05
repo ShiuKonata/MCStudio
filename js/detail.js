@@ -28,12 +28,7 @@ function applyVtuberColor(hex) {
   root.style.setProperty('--vt-shadow', `rgba(${r},${g},${b},0.18)`);
 }
 
-// ── 分頁設定（含個人色） ────────────────────────────
-const TAB_CONFIG = [
-  { key: 'profile',  label: '🐸 個人介紹', color: null },       // null = 用 vt-main
-  { key: 'videos',   label: '▶ 熱門直播',  color: '#d32f2f' },  // YouTube 紅
-  { key: 'schedule', label: '📅 行程預覽', color: '#0277bd' },  // 天空藍
-];
+// TAB_CONFIG 已改為在 DOMContentLoaded 內依 vtuber 資料動態生成
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -69,9 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.backgroundAttachment = 'fixed';
   }
 
+  // ── 動態分頁設定（依 vtuber 資料決定顯示哪些分頁）──
+  const tabConfig = [
+    { key: 'profile',    label: '🐸 個人介紹',    color: null },
+    { key: 'videos',     label: '🎵 最新音樂',    color: '#d32f2f' },
+    ...(v.shorts     && v.shorts.length     ? [{ key: 'shorts',     label: '📱 熱門Short',    color: '#ff6f00' }] : []),
+    ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦', color: '#7b1fa2' }] : []),
+    ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦', color: '#1565c0' }] : []),
+    { key: 'schedule', label: '📅 行程預覽',    color: '#0277bd' },
+  ];
+
   // ── 注入頂部分頁列 ─────────────────────────────
   const tabBar = document.getElementById('vtuber-tab-bar');
-  TAB_CONFIG.forEach((tab, i) => {
+  tabConfig.forEach((tab, i) => {
     const color = tab.color || v.color || '#888';
     const btn = document.createElement('button');
     btn.className = 'vtab-btn' + (i === 0 ? ' active' : '');
@@ -189,12 +194,36 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
 
-        <!-- TAB: 熱門直播 -->
+        <!-- TAB: 最新音樂 -->
         <div id="tab-videos" class="tab-panel">
-          <div class="detail-section-title">🎬 熱門直播 / 影片</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">精選三部人氣直播與影片，點擊前往 YouTube 觀看</p>
+          <div class="detail-section-title">🎵 最新音樂</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">最新原創&amp;Cover，點擊前往 YouTube 觀看</p>
           <div class="video-grid" id="video-grid"></div>
         </div>
+
+        <!-- TAB: 熱門Short -->
+        ${v.shorts && v.shorts.length ? `
+        <div id="tab-shorts" class="tab-panel">
+          <div class="detail-section-title">📱 熱門 Shorts</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">官方剪輯熱門前三短片 Shorts，點擊前往 YouTube 觀看</p>
+          <div class="video-grid shorts-grid" id="shorts-grid"></div>
+        </div>` : ''}
+
+        <!-- TAB: 熱門音樂推薦 -->
+        ${v.musicClips && v.musicClips.length ? `
+        <div id="tab-musicclips" class="tab-panel">
+          <div class="detail-section-title">🎶 熱門音樂推薦</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">非官方粉絲剪輯熱門前三音樂，點擊前往 YouTube 觀看</p>
+          <div class="video-grid" id="musicclips-grid"></div>
+        </div>` : ''}
+
+        <!-- TAB: 熱門影片推薦 -->
+        ${v.videoClips && v.videoClips.length ? `
+        <div id="tab-videoclips" class="tab-panel">
+          <div class="detail-section-title">🎬 熱門影片推薦</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">非官方粉絲剪輯熱門前三影片，點擊前往 YouTube 觀看</p>
+          <div class="video-grid" id="videoclips-grid"></div>
+        </div>` : ''}
 
         <!-- TAB: 行程預覽 -->
         <div id="tab-schedule" class="tab-panel">
@@ -207,33 +236,85 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   `;
 
-  // ── 影片區 ────────────────────────────────────
-  const videoGrid = document.getElementById('video-grid');
-  if (v.videos && v.videos.length) {
-    v.videos.forEach(vid => {
+  // ── YouTube 彈出視窗（Modal）────────────────────
+  const ytModal = document.createElement('div');
+  ytModal.id = 'yt-modal';
+  ytModal.className = 'yt-modal-overlay';
+  ytModal.innerHTML = `
+    <div class="yt-modal-box">
+      <button class="yt-modal-close" id="yt-modal-close" title="關閉">✕</button>
+      <div class="yt-modal-title" id="yt-modal-title"></div>
+      <div class="yt-modal-iframe-wrap">
+        <iframe id="yt-modal-iframe" src="" frameborder="0"
+          allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+      </div>
+      <a class="yt-modal-fallback" id="yt-modal-fallback" href="#" target="_blank">
+        ▶ 若無法在此播放，點此前往 YouTube 觀看
+      </a>
+    </div>`;
+  document.body.appendChild(ytModal);
+
+  function openYTModal(videoId, title) {
+    document.getElementById('yt-modal-iframe').src =
+      `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    document.getElementById('yt-modal-fallback').href =
+      `https://www.youtube.com/watch?v=${videoId}`;
+    document.getElementById('yt-modal-title').textContent = title || '';
+    ytModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeYTModal() {
+    document.getElementById('yt-modal-iframe').src = '';
+    ytModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('yt-modal-close').addEventListener('click', closeYTModal);
+  ytModal.addEventListener('click', e => { if (e.target === ytModal) closeYTModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYTModal(); });
+
+  // ── 共用：渲染影片卡片到指定容器 ────────────────
+  function renderVideoCards(items, containerId, placeholderIcon) {
+    const container = document.getElementById(containerId);
+    if (!container || !items || !items.length) return;
+    items.forEach(vid => {
       if (vid.id && !vid.id.startsWith('REPLACE')) {
-        const thumb   = `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`;
-        const thumbFb = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
-        const ytUrl   = `https://www.youtube.com/watch?v=${vid.id}`;
-        videoGrid.innerHTML += `
-          <a class="video-card" href="${ytUrl}" target="_blank">
+        const thumb    = `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`;
+        const thumbFb  = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+        const safeTitle = vid.title.replace(/'/g, '&#39;');
+        container.innerHTML += `
+          <div class="video-card" style="cursor:pointer"
+            onclick="(function(){
+              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
+              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
+              document.getElementById('yt-modal-title').textContent='${safeTitle}';
+              document.getElementById('yt-modal').classList.add('open');
+              document.body.style.overflow='hidden';
+            })()">
             <div class="video-thumb-wrap">
               <img class="video-thumb" src="${thumb}" onerror="this.src='${thumbFb}'" alt="${vid.title}">
               <div class="video-title">${vid.title}</div>
               <div class="video-play-overlay"><div class="video-play-btn">▶</div></div>
             </div>
-          </a>`;
+          </div>`;
       } else {
-        videoGrid.innerHTML += `
+        container.innerHTML += `
           <div class="video-card video-placeholder">
             <div class="video-placeholder-inner">
-              <span style="font-size:2.5rem">🎬</span>
+              <span style="font-size:2.5rem">${placeholderIcon}</span>
               <p>影片待設定</p>
             </div>
           </div>`;
       }
     });
   }
+
+  // ── 各分頁影片渲染 ────────────────────────────
+  renderVideoCards(v.videos,     'video-grid',      '🎵');
+  renderVideoCards(v.shorts,     'shorts-grid',     '📱');
+  renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
+  renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
 
   // ── 行程區 ────────────────────────────────────
   const scheduleContent = document.getElementById('schedule-content');
