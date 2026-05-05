@@ -211,7 +211,7 @@ const vtubers = [
     ],
 
     videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
+      { id: "ap2nB-I1vic", title: "鹿餅們沒日沒夜加工出來的寶石，我拍胸脯保證！(拍)【神無月鹿比】【VTuber精華】" },
       { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
