@@ -923,6 +923,102 @@ body.vtuber-page footer p { margin: 0; }
 body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 
 /* =============================================
+   SIDEBAR BGM PLAYER
+   ============================================= */
+.sidebar-bgm {
+  margin: 0.9rem 0 0.4rem;
+  padding: 0.65rem 0.8rem 0.7rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+/* 隱藏的 YouTube 播放器容器 */
+#sbgm-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sbgm-label {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.sbgm-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sbgm-play-btn {
+  background: var(--vt-main, #888);
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: white;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.sbgm-play-btn:hover { opacity: 0.82; transform: scale(1.07); }
+.sbgm-mute-btn {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.sbgm-mute-btn:hover { background: rgba(255,255,255,0.2); }
+.sbgm-info {
+  flex: 1;
+  overflow: hidden;
+}
+.sbgm-song {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sbgm-status {
+  font-size: 0.63rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.1rem;
+}
+.sbgm-bar {
+  margin-top: 0.55rem;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.sbgm-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--vt-main, #888);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+/* =============================================
    RESPONSIVE
    ============================================= */
 @media (max-width: 1100px) {

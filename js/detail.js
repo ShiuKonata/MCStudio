@@ -110,6 +110,22 @@ document.addEventListener('DOMContentLoaded', () => {
             ${v.twitch ? `<a href="${v.twitch}" target="_blank" class="sidebar-social-btn twitch" title="Twitch">🟣</a>` : ''}
           </div>
 
+          ${v.bgmVideoId ? `
+          <!-- BGM 播放器 -->
+          <div class="sidebar-bgm">
+            <div class="sbgm-label">🎵 背景音樂</div>
+            <div id="sbgm-hidden"></div>
+            <div class="sbgm-controls">
+              <button class="sbgm-play-btn" id="sbgm-play-btn" title="播放 / 暫停">▶</button>
+              <div class="sbgm-info">
+                <div class="sbgm-song">${v.bgmLabel || v.name}</div>
+                <div class="sbgm-status" id="sbgm-status">點擊播放</div>
+              </div>
+              <button class="sbgm-mute-btn" id="sbgm-mute-btn" title="靜音 / 取消靜音">🔊</button>
+            </div>
+            <div class="sbgm-bar"><div class="sbgm-bar-fill" id="sbgm-bar-fill"></div></div>
+          </div>` : ''}
+
           <!-- 導航區：所有 Vtuber + 上一位 / 下一位 -->
           <div class="sidebar-nav">
             <a href="vtubers.html" class="sidebar-nav-all">⭐ 所有 Vtuber</a>
@@ -271,4 +287,93 @@ document.addEventListener('DOMContentLoaded', () => {
   vtabBtns.forEach(btn => {
     btn.addEventListener('click', () => activateTab(btn.dataset.tab));
   });
+
+  // ── 側欄 BGM 播放器（YouTube IFrame API）──────────
+  if (v.bgmVideoId) {
+    // 載入 YouTube IFrame API
+    if (!document.getElementById('yt-iframe-api')) {
+      const ytScript = document.createElement('script');
+      ytScript.id  = 'yt-iframe-api';
+      ytScript.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(ytScript);
+    }
+
+    let ytPlayer   = null;
+    let isPlaying  = false;
+    let isMuted    = false;
+    let barTimer   = null;
+
+    const bgmVideoId = v.bgmVideoId;
+    const bgmStart   = v.bgmStart || 0;
+
+    window.onYouTubeIframeAPIReady = function () {
+      ytPlayer = new YT.Player('sbgm-hidden', {
+        height: '1',
+        width:  '1',
+        videoId: bgmVideoId,
+        playerVars: {
+          start:          bgmStart,
+          autoplay:       0,
+          controls:       0,
+          disablekb:      1,
+          fs:             0,
+          rel:            0,
+          modestbranding: 1,
+          playsinline:    1,
+        },
+        events: {
+          onStateChange: (e) => {
+            const playBtn    = document.getElementById('sbgm-play-btn');
+            const statusEl   = document.getElementById('sbgm-status');
+            if (!playBtn || !statusEl) return;
+
+            if (e.data === YT.PlayerState.PLAYING) {
+              isPlaying = true;
+              playBtn.textContent  = '⏸';
+              statusEl.textContent = '播放中';
+              // 進度條更新
+              clearInterval(barTimer);
+              barTimer = setInterval(() => {
+                const bar  = document.getElementById('sbgm-bar-fill');
+                if (!bar || !ytPlayer) return;
+                const dur  = ytPlayer.getDuration();
+                const cur  = ytPlayer.getCurrentTime();
+                if (dur > 0) bar.style.width = (cur / dur * 100) + '%';
+              }, 1000);
+            } else {
+              isPlaying = false;
+              clearInterval(barTimer);
+              if (playBtn) playBtn.textContent = '▶';
+              if (statusEl) statusEl.textContent =
+                e.data === YT.PlayerState.ENDED ? '已結束' : '已暫停';
+            }
+          },
+          onError: () => {
+            const statusEl = document.getElementById('sbgm-status');
+            if (statusEl) statusEl.textContent = '載入失敗';
+          }
+        }
+      });
+    };
+
+    // 播放 / 暫停
+    document.getElementById('sbgm-play-btn').addEventListener('click', () => {
+      if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
+      if (isPlaying) { ytPlayer.pauseVideo(); }
+      else           { ytPlayer.playVideo();  }
+    });
+
+    // 靜音 / 取消靜音
+    document.getElementById('sbgm-mute-btn').addEventListener('click', () => {
+      if (!ytPlayer || typeof ytPlayer.mute !== 'function') return;
+      if (isMuted) {
+        ytPlayer.unMute();
+        document.getElementById('sbgm-mute-btn').textContent = '🔊';
+      } else {
+        ytPlayer.mute();
+        document.getElementById('sbgm-mute-btn').textContent = '🔇';
+      }
+      isMuted = !isMuted;
+    });
+  }
 });
