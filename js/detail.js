@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabConfig = [
     { key: 'profile',    label: '🐸 個人介紹',    color: null },
     { key: 'videos',     label: '🎵 最新音樂',    color: '#d32f2f' },
-    ...(v.shorts     && v.shorts.length     ? [{ key: 'shorts',     label: '📱 熱門Short',    color: '#ff6f00' }] : []),
+    ...(v.shorts     && v.shorts.length     ? [{ key: 'shorts',     label: '📱 最新Shorts',   color: '#ff6f00' }] : []),
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦', color: '#7b1fa2' }] : []),
     ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦', color: '#1565c0' }] : []),
     { key: 'schedule', label: '📅 行程預覽',    color: '#0277bd' },
@@ -204,8 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 熱門Short -->
         ${v.shorts && v.shorts.length ? `
         <div id="tab-shorts" class="tab-panel">
-          <div class="detail-section-title">📱 熱門 Shorts</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">官方剪輯熱門前三短片 Shorts，點擊前往 YouTube 觀看</p>
+          <div class="detail-section-title">📱 最新 Shorts</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">官方剪輯最新前三短片 Shorts，點擊前往 YouTube 觀看</p>
           <div class="video-grid shorts-grid" id="shorts-grid"></div>
         </div>` : ''}
 
