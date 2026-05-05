@@ -56,6 +56,38 @@ const vtubers = [
     bgmStart:   0,             // 開始秒數（可調整到精華位置）
     bgmLabel:   "哈士奇寶寶",   // 播放器顯示的歌名
 
+    // 三視圖（refSheet 欄位存在即顯示分頁；URL 留空 = 顯示「待上傳」）
+    refSheet: "images/Coda 三視圖.jpg",
+
+    // 小知識（fanName 欄位存在即顯示分頁）
+    fanName: "呱民",
+    hashTags: [
+      { label: "Live",   tag: "#c0dalive" },
+      { label: "FanArt", tag: "#c0dart"   },
+      { label: "All",    tag: "#c0daddy"  },
+      { label: "Meme",   tag: "#詩雨願違" },
+      { label: "Music",  tag: "#c0dalala" },
+      { label: "R18",    tag: "#c0danude" },
+    ],
+    futureGoals: [
+      "成為大家的桌布或被裱框",
+      "出原創歌曲、一堆周邊",
+      "帶給大家滿滿的能量",
+      "跟很多人合唱、連動",
+      "玩很多很多恐怖遊戲",
+      "得到很多政治獻金",
+    ],
+    triviaLikes: [
+      { label: "喜歡的樂團", items: ["擊沉女孩", "海豚刑警", "午夜乒乓", "甜約翰", "美秀集團", "芒果醬"] },
+      { label: "喜歡的歌手", items: ["Vaundy", "acane", "163", "李浩偉"] },
+      { label: "喜歡的顏色", items: ["紫丁香色"] },
+      { label: "喜歡的水果", items: ["橘子"] },
+    ],
+    triviaHates: [
+      { label: "討厭的東西", items: ["青椒", "茄子", "鴿子", "米粉"] },
+      { label: "討厭的味道", items: ["薰衣草"] },
+    ],
+
     color: "#B9C468"   // SHIUCODA 代表色
   },
 

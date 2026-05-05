@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 動態分頁設定（依 vtuber 資料決定顯示哪些分頁）──
   const tabConfig = [
     { key: 'profile',    label: '🐸 個人介紹',    color: null },
+    ...('refSheet' in v ? [{ key: 'refsheet',  label: '🎨 三視圖',    color: null }]      : []),
+    ...('fanName'  in v ? [{ key: 'trivia',    label: '💡 小知識',    color: '#e65100' }] : []),
     { key: 'videos',     label: '🎵 最新音樂',    color: '#d32f2f' },
     ...(v.shorts     && v.shorts.length     ? [{ key: 'shorts',     label: '📱 最新Shorts',   color: '#ff6f00' }] : []),
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦', color: '#7b1fa2' }] : []),
@@ -94,6 +96,101 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.setProperty('--nav-height', navbar.offsetHeight + 'px');
     }
   });
+
+  // ── 三視圖 HTML ────────────────────────────────
+  const hasRefSheet  = 'refSheet' in v;
+  const hasTriviaTab = 'fanName'  in v;
+
+  const refSheetHTML = hasRefSheet ? `
+    <div id="tab-refsheet" class="tab-panel">
+      <div class="detail-section-title">🎨 三視圖</div>
+      ${v.refSheet
+        ? `<div class="refsheet-container">
+             <img class="refsheet-img" src="${v.refSheet}" alt="${v.name} 三視圖">
+           </div>`
+        : `<div class="refsheet-placeholder">
+             <span style="font-size:3rem">🎨</span>
+             <p>三視圖圖片待上傳</p>
+           </div>`
+      }
+    </div>` : '';
+
+  // ── 小知識 HTML ────────────────────────────────
+  let triviaHTML = '';
+  if (hasTriviaTab) {
+    // 粉絲名稱
+    let cards = `
+      <div class="trivia-card">
+        <div class="trivia-label">👥 粉絲名稱</div>
+        <div class="trivia-value">${v.fanName || '（待填入）'}</div>
+      </div>`;
+
+    // 主題標籤（陣列 hashTags 或舊版字串 hashTag）
+    if (v.hashTags && v.hashTags.length) {
+      cards += `
+      <div class="trivia-card trivia-full">
+        <div class="trivia-label"># 主題標籤</div>
+        <div class="trivia-items">
+          ${v.hashTags.map(h => `<span class="trivia-hashtag-pill"><span class="trivia-tag-cat">${h.label}</span>${h.tag}</span>`).join('')}
+        </div>
+      </div>`;
+    } else {
+      cards += `
+      <div class="trivia-card">
+        <div class="trivia-label"># 主題標籤</div>
+        <div class="trivia-value trivia-hashtag">${v.hashTag || '（待填入）'}</div>
+      </div>`;
+    }
+
+    // 未來目標（陣列 futureGoals 或舊版字串 futureGoal）
+    if (v.futureGoals && v.futureGoals.length) {
+      cards += `
+      <div class="trivia-card trivia-full">
+        <div class="trivia-label">🎯 未來目標</div>
+        <div class="trivia-goals">
+          ${v.futureGoals.map(g => `<div class="trivia-goal-item">✦ ${g}</div>`).join('')}
+        </div>
+      </div>`;
+    } else {
+      cards += `
+      <div class="trivia-card trivia-full">
+        <div class="trivia-label">🎯 未來目標</div>
+        <div class="trivia-value">${v.futureGoal || '（待填入）'}</div>
+      </div>`;
+    }
+
+    // 喜好（支援陣列或單一物件）
+    const likesList = Array.isArray(v.triviaLikes) ? v.triviaLikes : (v.triviaLikes ? [v.triviaLikes] : []);
+    likesList.forEach(like => {
+      if (!like.items || !like.items.length) return;
+      cards += `
+      <div class="trivia-card">
+        <div class="trivia-label">💚 ${like.label}</div>
+        <div class="trivia-items">
+          ${like.items.map(item => `<span class="trivia-item trivia-like">${item}</span>`).join('')}
+        </div>
+      </div>`;
+    });
+
+    // 討厭（支援陣列或單一物件）
+    const hatesList = Array.isArray(v.triviaHates) ? v.triviaHates : (v.triviaHates ? [v.triviaHates] : []);
+    hatesList.forEach(hate => {
+      if (!hate.items || !hate.items.length) return;
+      cards += `
+      <div class="trivia-card">
+        <div class="trivia-label">🚫 ${hate.label}</div>
+        <div class="trivia-items">
+          ${hate.items.map(item => `<span class="trivia-item trivia-hate">${item}</span>`).join('')}
+        </div>
+      </div>`;
+    });
+
+    triviaHTML = `
+    <div id="tab-trivia" class="tab-panel">
+      <div class="detail-section-title">💡 小知識</div>
+      <div class="trivia-grid">${cards}</div>
+    </div>`;
+  }
 
   // ── 主要 HTML ──────────────────────────────────
   const root = document.getElementById('detail-root');
@@ -193,6 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           </div>
         </div>
+
+        ${refSheetHTML}
+        ${triviaHTML}
 
         <!-- TAB: 最新音樂 -->
         <div id="tab-videos" class="tab-panel">
