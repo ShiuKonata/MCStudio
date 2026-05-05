@@ -193,15 +193,15 @@ const vtubers = [
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Ld0rL7quLZlt1aW0oJvzdicmQuoVP7pJ85qnguNbG2E/edit?gid=45727533#gid=45727533",
 
     videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+      { id: "VDj-McWV0JM", title: "刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】" },
+      { id: "LTK6BeCKCtI", title: "I Really Want to Stay At Your House - Rosa Walton／神無月鹿比【Cover】" },
+      { id: "dVEPJXnfGoQ", title: "ド屑 - なきそ／神無月鹿比【Cover】" }
     ],
 
     shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+      { id: "wIhLxCHLJbU", title: "【神無月鹿比🦌｜官方精華】伊瑟SS4全新賽季超多好康！超鏈者們準備回歸啦～！" },
+      { id: "3BjMFLT4m4w", title: "【神無月鹿比🦌｜官方精華】真的不是我丟下去的我一直在努力往上拉你們仔細看" },
+      { id: "54ZBljwgLbI", title: "【神無月鹿比🦌｜官方精華】這裡的人講話都好直白" },
     ],
 
     musicClips: [
