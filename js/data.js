@@ -99,7 +99,7 @@ const vtubers = [
     musicClips: [
       { id: "AujK7aWgRsY", title: "HoneyWorks - 可愛くてごめん | Rumi懶貓子 .Cover 〔中日歌詞〕" },
       { id: "J7EUn1BbE18", title: "初音ミク - 神っぽいな| Rumi懶貓子 .Cover 〔中日歌詞〕" },
-      { id: "KfMSh_SnfRE", title: "「歌粹剪輯」心做し /Cover Rumi懶貓子【中日字幕】" },
+      { id: "GuFN70xb8W4", title: "【歌枠切り抜き】猫 - Dish【Rumi/懶貓子】【Vtuber精華】" },
     ],
 
     videoClips: [
