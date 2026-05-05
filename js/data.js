@@ -194,7 +194,7 @@ const vtubers = [
 
     videos: [
       { id: "VDj-McWV0JM", title: "刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】" },
-      { id: "LTK6BeCKCtI", title: "I Really Want to Stay At Your House - Rosa Walton／神無月鹿比【Cover】" },
+      { id: "LTK6BeCKCtI", title: "I Really Want to Stay At Your House - Rosa Walton／神無月鹿比【Cover】", thumb: "images/lubee-irwsayh.jpg" },
       { id: "dVEPJXnfGoQ", title: "ド屑 - なきそ／神無月鹿比【Cover】" }
     ],
 
