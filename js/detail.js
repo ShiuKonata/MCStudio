@@ -298,13 +298,34 @@ document.addEventListener('DOMContentLoaded', () => {
       document.head.appendChild(ytScript);
     }
 
-    let ytPlayer   = null;
-    let isPlaying  = false;
-    let isMuted    = false;
-    let barTimer   = null;
+    let ytPlayer    = null;
+    let playerReady = false;
+    let isPlaying   = false;
+    let isMuted     = false;
+    let barTimer    = null;
 
     const bgmVideoId = v.bgmVideoId;
     const bgmStart   = v.bgmStart || 0;
+
+    function updatePlayUI(playing) {
+      isPlaying = playing;
+      const playBtn  = document.getElementById('sbgm-play-btn');
+      const statusEl = document.getElementById('sbgm-status');
+      if (playBtn)  playBtn.textContent  = playing ? '⏸' : '▶';
+      if (statusEl) statusEl.textContent = playing ? '播放中' : '已暫停';
+      if (playing) {
+        clearInterval(barTimer);
+        barTimer = setInterval(() => {
+          const bar = document.getElementById('sbgm-bar-fill');
+          if (!bar || !ytPlayer) return;
+          const dur = ytPlayer.getDuration();
+          const cur = ytPlayer.getCurrentTime();
+          if (dur > 0) bar.style.width = (cur / dur * 100) + '%';
+        }, 1000);
+      } else {
+        clearInterval(barTimer);
+      }
+    }
 
     window.onYouTubeIframeAPIReady = function () {
       ytPlayer = new YT.Player('sbgm-hidden', {
@@ -322,31 +343,25 @@ document.addEventListener('DOMContentLoaded', () => {
           playsinline:    1,
         },
         events: {
+          onReady: () => {
+            playerReady = true;
+            // 讓 iframe 允許 autoplay（部分瀏覽器需要）
+            const iframe = ytPlayer.getIframe();
+            if (iframe) iframe.setAttribute('allow', 'autoplay; encrypted-media');
+          },
           onStateChange: (e) => {
-            const playBtn    = document.getElementById('sbgm-play-btn');
-            const statusEl   = document.getElementById('sbgm-status');
-            if (!playBtn || !statusEl) return;
-
+            // 只處理明確的播放 / 暫停 / 結束，忽略初始化狀態 (-1, 3, 5)
             if (e.data === YT.PlayerState.PLAYING) {
-              isPlaying = true;
-              playBtn.textContent  = '⏸';
-              statusEl.textContent = '播放中';
-              // 進度條更新
+              updatePlayUI(true);
+            } else if (e.data === YT.PlayerState.PAUSED) {
+              updatePlayUI(false);
+            } else if (e.data === YT.PlayerState.ENDED) {
+              updatePlayUI(false);
+              const statusEl = document.getElementById('sbgm-status');
+              if (statusEl) statusEl.textContent = '已結束';
               clearInterval(barTimer);
-              barTimer = setInterval(() => {
-                const bar  = document.getElementById('sbgm-bar-fill');
-                if (!bar || !ytPlayer) return;
-                const dur  = ytPlayer.getDuration();
-                const cur  = ytPlayer.getCurrentTime();
-                if (dur > 0) bar.style.width = (cur / dur * 100) + '%';
-              }, 1000);
-            } else {
-              isPlaying = false;
-              clearInterval(barTimer);
-              if (playBtn) playBtn.textContent = '▶';
-              if (statusEl) statusEl.textContent =
-                e.data === YT.PlayerState.ENDED ? '已結束' : '已暫停';
             }
+            // -1 (UNSTARTED), 3 (BUFFERING), 5 (CUED) → 不改 UI
           },
           onError: () => {
             const statusEl = document.getElementById('sbgm-status');
@@ -354,26 +369,32 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       });
-    };
 
-    // 播放 / 暫停
-    document.getElementById('sbgm-play-btn').addEventListener('click', () => {
-      if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
-      if (isPlaying) { ytPlayer.pauseVideo(); }
-      else           { ytPlayer.playVideo();  }
-    });
+      // ── 按鈕事件（在 API ready 後才綁定，確保 ytPlayer 存在）──
+      const playBtn = document.getElementById('sbgm-play-btn');
+      const muteBtn = document.getElementById('sbgm-mute-btn');
 
-    // 靜音 / 取消靜音
-    document.getElementById('sbgm-mute-btn').addEventListener('click', () => {
-      if (!ytPlayer || typeof ytPlayer.mute !== 'function') return;
-      if (isMuted) {
-        ytPlayer.unMute();
-        document.getElementById('sbgm-mute-btn').textContent = '🔊';
-      } else {
-        ytPlayer.mute();
-        document.getElementById('sbgm-mute-btn').textContent = '🔇';
+      if (playBtn) {
+        playBtn.addEventListener('click', () => {
+          if (!playerReady) return;
+          if (isPlaying) { ytPlayer.pauseVideo(); }
+          else           { ytPlayer.playVideo();  }
+        });
       }
-      isMuted = !isMuted;
-    });
+
+      if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+          if (!playerReady) return;
+          if (isMuted) {
+            ytPlayer.unMute();
+            muteBtn.textContent = '🔊';
+          } else {
+            ytPlayer.mute();
+            muteBtn.textContent = '🔇';
+          }
+          isMuted = !isMuted;
+        });
+      }
+    };
   }
 });
