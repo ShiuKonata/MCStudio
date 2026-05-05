@@ -1185,6 +1185,13 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/2039510641430663168/4xpOGnRl_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1800777319789019136/1718174532/1500x500",
     tagline: "",
+    taglines: [
+      { context: "", text: "關我屁事" },
+      { context: "", text: "北七" },
+      { context: "", text: "好想工作" },
+      { context: "", text: "發瘋" },
+      { context: "", text: "吃答辯吧" }
+    ],
     description: "有網路的地方就會有扉扉",
     debut: "2024-09-14",
     birthday: "1月14日",
