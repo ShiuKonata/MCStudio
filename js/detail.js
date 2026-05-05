@@ -363,9 +363,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // -1 (UNSTARTED), 3 (BUFFERING), 5 (CUED) → 不改 UI
           },
-          onError: () => {
+          onError: (e) => {
             const statusEl = document.getElementById('sbgm-status');
-            if (statusEl) statusEl.textContent = '載入失敗';
+            // 101/150 = 禁止嵌入, 100 = 影片不存在, 5 = HTML5錯誤
+            const msg = (e.data === 101 || e.data === 150)
+              ? '影片禁止嵌入'
+              : `載入失敗 (${e.data})`;
+            if (statusEl) statusEl.textContent = msg;
           }
         }
       });
