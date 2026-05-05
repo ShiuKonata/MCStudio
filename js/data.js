@@ -34,9 +34,9 @@ const vtubers = [
     spreadsheetLabel: "Coda的大小事",   // 試算表按鈕文字
     scheduleTitle:    "大統領行程表",    // 行程頁標題
 
-    bgmVideoId: "_DzQNbQW4L0",  // 背景音樂影片 ID
-    bgmStart:   0,              // 開始秒數（可調整到精華位置）
-    bgmLabel:   "Take Me To The Beach",  // 播放器顯示的歌名
+    bgmVideoId: "dGNwgv3beyk",  // 背景音樂影片 ID
+    bgmStart:   0,             // 開始秒數（可調整到精華位置）
+    bgmLabel:   "哈士奇寶寶",   // 播放器顯示的歌名
 
     color: "#B9C468"   // SHIUCODA 代表色
   },
