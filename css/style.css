@@ -1105,6 +1105,8 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.45);
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 .refsheet-placeholder {
   display: flex;
@@ -1159,7 +1161,11 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 }
 .refsheet-display { min-height: 300px; }
 .refsheet-ver-panel { display: none; }
-.refsheet-ver-panel.active { display: block; }
+.refsheet-ver-panel.active {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 
 /* =============================================
    小知識 TAB
