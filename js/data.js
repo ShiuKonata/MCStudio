@@ -152,6 +152,7 @@ const vtubers = [
 
     // 三視圖
     refSheets: [
+      { version: "3D 版本",  url: "images/懶貓子 3D版本.jpg" },
       { version: "Ver 1.0",  url: "images/懶貓子 v1.0.png"  },
       { version: "Ver 2.0",  url: "images/懶貓子 v2.0.jpg"  },
       { version: "Ver 2.01", url: "images/懶貓子 v2.01.png" },
@@ -497,6 +498,12 @@ const vtubers = [
     spreadsheetLabel: "瓦瓦的大小事",
     scheduleTitle:    "瓦瓦的行程表",
 
+    refSheets: [
+      { version: "3D 版本", url: "images/瓦西瓦瓦 3D版本.jpg" },
+      { version: "Ver 1.0", url: "images/瓦西瓦瓦 v1.0.png"  },
+      { version: "Ver 2.0", url: "images/瓦西瓦瓦 v2.0.png"  },
+    ],
+
     color: "#B8FFEC"   // 瓦西瓦瓦 代表色（薄荷綠）
   },
 
@@ -552,6 +559,11 @@ const vtubers = [
     spreadsheetLabel: "希希的大小事",
     scheduleTitle:    "希希的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/希妮亞里絲 v1.0.png" },
+      { version: "Ver 2.0", url: "images/希妮亞里絲 v2.0.png" },
+    ],
+
     color: "#FCE8A4"   // 希妮亞里絲 代表色（奶油黃）
   },
 
@@ -602,6 +614,11 @@ const vtubers = [
     scheduleVideoId:  "ZgrFrLOQwwo",
     spreadsheetLabel: "奈奈的大小事",
     scheduleTitle:    "奈奈的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/結月莉莉奈 v1.0.png" },
+      { version: "Ver 2.0", url: "images/結月莉莉奈 v2.0.png" },
+    ],
 
     color: "#FCDFE7"   // 結月莉莉奈 代表色（粉嫩玫瑰）
   },
