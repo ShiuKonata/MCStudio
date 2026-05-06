@@ -152,8 +152,9 @@ const vtubers = [
 
     // 三視圖
     refSheets: [
-      { version: "Ver 1.0", url: "" },
-      { version: "Ver 2.0", url: "" },
+      { version: "Ver 1.0",  url: "images/懶貓子 v1.0.png"  },
+      { version: "Ver 2.0",  url: "images/懶貓子 v2.0.jpg"  },
+      { version: "Ver 2.01", url: "images/懶貓子 v2.01.png" },
     ],
 
     color: "#F4A7C3"   // 懶貓子Rumi 代表色（柔粉紅）
