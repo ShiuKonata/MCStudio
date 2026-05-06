@@ -212,6 +212,12 @@ const vtubers = [
     spreadsheetLabel: "帕蘿妮的大小事",
     scheduleTitle:    "帕蘿妮的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/帕蘿妮 v1.0.png" },
+      { version: "Ver 2.0", url: "images/帕蘿妮 v2.0.jpg" },
+      { version: "Ver 3.0", url: "images/帕蘿妮 v3.0.png" },
+    ],
+
     color: "#B2E3FF"   // 帕蘿妮 代表色（天空藍）
   },
 
@@ -266,6 +272,11 @@ const vtubers = [
     spreadsheetLabel: "鹿比的大小事",
     scheduleTitle:    "鹿比的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/神無月鹿比 v1.0.png" },
+      { version: "Ver 2.0", url: "images/神無月鹿比 v2.0.jpg" },
+    ],
+
     color: "#F2A8B9"   // 神無月鹿比 代表色（粉紅）
   },
 
@@ -316,6 +327,10 @@ const vtubers = [
     scheduleVideoId:  "tPRVSHoEEeg",
     spreadsheetLabel: "咪奇的大小事",
     scheduleTitle:    "咪奇的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/姬城三千華 v1.0.png" },
+    ],
 
     color: "#D4A8C8"   // 姬城三千華 代表色（薰衣草玫瑰，自動生成）
   },
@@ -370,6 +385,11 @@ const vtubers = [
     scheduleVideoId:  "YewmD63V5r0",
     spreadsheetLabel: "艾琳妮雅的大小事",
     scheduleTitle:    "艾琳妮雅的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/艾琳妮雅 v1.0.png" },
+      { version: "Ver 2.0", url: "images/艾琳妮雅 v2.0.png" },
+    ],
 
     color: "#28004D",  // 艾琳妮雅 代表色（深紫）
     badgeTextColor: "white"  // 深色背景，徽章文字改回白色
