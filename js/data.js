@@ -150,6 +150,12 @@ const vtubers = [
     bgmStart:   0,               // 開始秒數
     bgmLabel:   "NON STOP SOUL!!!",  // 播放器顯示的歌名
 
+    // 三視圖
+    refSheets: [
+      { version: "Ver 1.0", url: "" },
+      { version: "Ver 2.0", url: "" },
+    ],
+
     color: "#F4A7C3"   // 懶貓子Rumi 代表色（柔粉紅）
   },
 
