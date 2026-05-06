@@ -56,8 +56,10 @@ const vtubers = [
     bgmStart:   0,             // 開始秒數（可調整到精華位置）
     bgmLabel:   "哈士奇寶寶",   // 播放器顯示的歌名
 
-    // 三視圖（refSheet 欄位存在即顯示分頁；URL 留空 = 顯示「待上傳」）
-    refSheet: "images/Coda 三視圖.jpg",
+    // 三視圖（refSheets 陣列，每個版本一筆；欄位存在即顯示分頁）
+    refSheets: [
+      { version: "Ver 1.0", url: "images/Coda 三視圖.jpg" },
+    ],
 
     // 小知識（fanName 欄位存在即顯示分頁）
     fanName: "呱民",

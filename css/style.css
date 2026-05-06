@@ -1118,6 +1118,49 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 }
 .refsheet-placeholder p { margin: 0; }
 
+/* 多版本切換器 */
+.refsheet-layout {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+.refsheet-ver-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  position: sticky;
+  top: 1rem;
+}
+.refsheet-ver-btn {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.18s;
+}
+.refsheet-ver-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.25);
+}
+.refsheet-ver-btn.active {
+  background: var(--vt-pale);
+  border-color: var(--vt-main);
+  color: var(--vt-main);
+  box-shadow: 0 0 0 1px var(--vt-main);
+}
+.refsheet-display { min-height: 300px; }
+.refsheet-ver-panel { display: none; }
+.refsheet-ver-panel.active { display: block; }
+
 /* =============================================
    小知識 TAB
    ============================================= */

@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 動態分頁設定（依 vtuber 資料決定顯示哪些分頁）──
   const tabConfig = [
     { key: 'profile',    label: '🐸 個人介紹',    color: null },
-    ...('refSheet' in v ? [{ key: 'refsheet',  label: '🎨 三視圖',    color: null }]      : []),
+    ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet', label: '🎨 三視圖', color: null }] : []),
     ...('fanName'  in v ? [{ key: 'trivia',    label: '💡 小知識',    color: '#e65100' }] : []),
     { key: 'videos',     label: '🎵 最新音樂',    color: '#d32f2f' },
     ...(v.shorts     && v.shorts.length     ? [{ key: 'shorts',     label: '📱 最新Shorts',   color: '#ff6f00' }] : []),
@@ -98,22 +98,46 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── 三視圖 HTML ────────────────────────────────
-  const hasRefSheet  = 'refSheet' in v;
-  const hasTriviaTab = 'fanName'  in v;
+  const hasRefSheet  = 'refSheets' in v || 'refSheet' in v;
+  const hasTriviaTab = 'fanName'   in v;
 
-  const refSheetHTML = hasRefSheet ? `
+  let refSheetHTML = '';
+  if (hasRefSheet) {
+    // 支援新版陣列 refSheets 或舊版字串 refSheet（向下相容）
+    const sheets = v.refSheets || (v.refSheet ? [{ version: '三視圖', url: v.refSheet }] : []);
+
+    let rsInner = '';
+    if (sheets.length <= 1) {
+      // 單版本：直接顯示圖片，不需要切換器
+      const s = sheets[0] || {};
+      rsInner = s.url
+        ? `<div class="refsheet-container"><img class="refsheet-img" src="${s.url}" alt="${v.name} 三視圖"></div>`
+        : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>三視圖圖片待上傳</p></div>`;
+    } else {
+      // 多版本：左側版本選擇器 + 右側圖片顯示
+      const btns = sheets.map((s, i) =>
+        `<button class="refsheet-ver-btn${i === 0 ? ' active' : ''}" data-rsidx="${i}">${s.version}</button>`
+      ).join('');
+      const panels = sheets.map((s, i) =>
+        `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">
+          ${s.url
+            ? `<img class="refsheet-img" src="${s.url}" alt="${v.name} ${s.version}">`
+            : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${s.version} 圖片待上傳</p></div>`
+          }
+        </div>`
+      ).join('');
+      rsInner = `
+        <div class="refsheet-layout">
+          <div class="refsheet-ver-list">${btns}</div>
+          <div class="refsheet-display">${panels}</div>
+        </div>`;
+    }
+    refSheetHTML = `
     <div id="tab-refsheet" class="tab-panel">
       <div class="detail-section-title">🎨 三視圖</div>
-      ${v.refSheet
-        ? `<div class="refsheet-container">
-             <img class="refsheet-img" src="${v.refSheet}" alt="${v.name} 三視圖">
-           </div>`
-        : `<div class="refsheet-placeholder">
-             <span style="font-size:3rem">🎨</span>
-             <p>三視圖圖片待上傳</p>
-           </div>`
-      }
-    </div>` : '';
+      ${rsInner}
+    </div>`;
+  }
 
   // ── 小知識 HTML ────────────────────────────────
   let triviaHTML = '';
@@ -335,6 +359,18 @@ document.addEventListener('DOMContentLoaded', () => {
       </main>
     </div>
   `;
+
+  // ── 三視圖版本切換 ──────────────────────────────
+  document.querySelectorAll('.refsheet-ver-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = btn.dataset.rsidx;
+      document.querySelectorAll('.refsheet-ver-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.refsheet-ver-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel = document.querySelector(`.refsheet-ver-panel[data-rsidx="${idx}"]`);
+      if (panel) panel.classList.add('active');
+    });
+  });
 
   // ── YouTube 彈出視窗（Modal）────────────────────
   const ytModal = document.createElement('div');
