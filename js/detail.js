@@ -106,32 +106,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // 支援新版陣列 refSheets 或舊版字串 refSheet（向下相容）
     const sheets = v.refSheets || (v.refSheet ? [{ version: '三視圖', url: v.refSheet }] : []);
 
-    let rsInner = '';
-    if (sheets.length <= 1) {
-      // 單版本：直接顯示圖片，不需要切換器
-      const s = sheets[0] || {};
-      rsInner = s.url
-        ? `<div class="refsheet-container"><img class="refsheet-img" src="${s.url}" alt="${v.name} 三視圖"></div>`
-        : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>三視圖圖片待上傳</p></div>`;
-    } else {
-      // 多版本：左側版本選擇器 + 右側圖片顯示
-      const btns = sheets.map((s, i) =>
-        `<button class="refsheet-ver-btn${i === 0 ? ' active' : ''}" data-rsidx="${i}">${s.version}</button>`
-      ).join('');
-      const panels = sheets.map((s, i) =>
-        `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">
-          ${s.url
-            ? `<img class="refsheet-img" src="${s.url}" alt="${v.name} ${s.version}">`
-            : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${s.version} 圖片待上傳</p></div>`
-          }
-        </div>`
-      ).join('');
-      rsInner = `
-        <div class="refsheet-layout">
+    // 一律顯示左側版本列（單版本時只有一個按鈕作為版本標示）
+    const btns = sheets.map((s, i) =>
+      `<button class="refsheet-ver-btn${i === 0 ? ' active' : ''}" data-rsidx="${i}">${s.version}</button>`
+    ).join('');
+    const panels = sheets.map((s, i) =>
+      `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">
+        ${s.url
+          ? `<img class="refsheet-img" src="${s.url}" alt="${v.name} ${s.version}">`
+          : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${s.version} 圖片待上傳</p></div>`
+        }
+      </div>`
+    ).join('');
+    const rsInner = sheets.length
+      ? `<div class="refsheet-layout">
           <div class="refsheet-ver-list">${btns}</div>
           <div class="refsheet-display">${panels}</div>
-        </div>`;
-    }
+        </div>`
+      : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>三視圖圖片待上傳</p></div>`;
     refSheetHTML = `
     <div id="tab-refsheet" class="tab-panel">
       <div class="detail-section-title">🎨 三視圖</div>
