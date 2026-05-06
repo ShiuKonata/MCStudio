@@ -447,6 +447,10 @@ const vtubers = [
     spreadsheetLabel: "霧子的大小事",   // 試算表按鈕文字
     scheduleTitle:    "霧子的行程表",    // 行程頁標題
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/酒樂霧子 v1.0.png" },
+    ],
+
     color: "#C93447"   // 酒樂霧子 代表色（深紅）
   },
 
@@ -674,6 +678,10 @@ const vtubers = [
     spreadsheetLabel: "可露團長的大小事",
     scheduleTitle:    "可露團長的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/依可露 v1.0.png" },
+    ],
+
     color: "#9671B0"   // 依可露 代表色（紫羅蘭）
   },
 
@@ -727,6 +735,10 @@ const vtubers = [
     scheduleVideoId:  "5Sn6bnUbeus",
     spreadsheetLabel: "氣質兔兔的大小事",
     scheduleTitle:    "氣質兔兔的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/若櫻依兔 v1.0.png" },
+    ],
 
     color: "#AED4E9"   // 若櫻依兔 代表色（霧藍）
   },
