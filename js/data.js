@@ -240,6 +240,34 @@ const vtubers = [
       { version: "Ver 3.0", url: "images/帕蘿妮 v3.0.png" },
     ],
 
+    // 小知識
+    fanName: "蘿妮控",
+    hashTags: [
+      { label: "召喚我",      tag: "#帕妮看"    },
+      { label: "實況＆剪輯",  tag: "#Liveniie"  },
+      { label: "食物跟食譜",  tag: "#帕吃不到"  },
+      { label: "拍拍我",      tag: "#Patoniie"  },
+      { label: "MEME",        tag: "#Drapon"    },
+      { label: "忍笑大會",    tag: "#2theniie"  },
+      { label: "FanArt",      tag: "#pARTniie"  },
+      { label: "NSFW",        tag: "#18theniie" },
+    ],
+    futureGoals: [
+      "訂閱目標 1萬 → 2萬 → 5萬 → 10萬 → 20萬 → 100萬",
+      "收集寶物、賺很多錢、去很多地方吃很多的肉",
+      "學習更多的語言",
+      "演唱會＆見面會、跟很多人連動唱歌",
+      "成為最偉大的煉金術師（性轉藥水 / BOINGBOING藥水 / 變大變小藥水 / 聰明藥水）",
+      "做料理！做給大家吃（肯定捧場）",
+    ],
+    triviaLikes: [
+      { label: "喜歡的事情", items: ["吃肉肉（所有的肉）", "亮金金的金幣", "彩虹（盡頭有寶藏）"] },
+    ],
+    triviaHates: [
+      { label: "討厭的東西", items: ["蜘蛛", "打雷"] },
+      { label: "討厭的食物", items: ["香菜"] },
+    ],
+
     color: "#B2E3FF"   // 帕蘿妮 代表色（天空藍）
   },
 
