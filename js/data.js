@@ -234,6 +234,10 @@ const vtubers = [
     spreadsheetLabel: "帕蘿妮的大小事",
     scheduleTitle:    "帕蘿妮的行程表",
 
+    bgmVideoId: "Lg9nyNL-AD0",  // 背景音樂影片 ID
+    bgmStart:   0,               // 開始秒數
+    bgmLabel:   "星願",           // 播放器顯示的歌名
+
     refSheets: [
       { version: "Ver 1.0", url: "images/帕蘿妮 v1.0.png" },
       { version: "Ver 2.0", url: "images/帕蘿妮 v2.0.jpg" },
