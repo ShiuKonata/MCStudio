@@ -360,27 +360,27 @@ const vtubers = [
     spreadsheet: "https://docs.google.com/spreadsheets/d/1pd0C6wMa43aP5s0mXttaF7eOdmD79mDVCzuqctrTKfw/edit?gid=1723685746#gid=1723685746",
 
     videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
+      { id: "YQXOIu3YjyU", title: "【失礼しますが、RIP♡ COVER REMIX 2026】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "_DzQNbQW4L0", title: "Take Me To The Beach/Imagine Dragons(ft. Ado)💧詩雨蔻達w/艾琳妮雅【COVER】" },
+      { id: "KIYLfFkJecA", title: "【酔いどれ知らず Yoidore Shirazu】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
     ],
 
     shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
+      { id: "eMmW-0Y1UTw", title: "【情勒RAP】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "SZvWJFznsXs", title: "【我每天守在家裡種花包支持我老婆的副業】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "vuG2fLEqvmc", title: "【老婆被警察DIVE惹】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
     ],
 
     musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+      { id: "mkLydHtl-UI", title: "【You Don't Own Me - Grace】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "CfvU9Lp-0IU", title: "【Bad Guy - Billie Eilish】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "RMDjK2wxp-E", title: "【Blank Space - Taylor Swift】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
     ],
 
     videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+      { id: "Mf_2asOpiuw", title: "【能者多勞勇者欣梅爾（？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "cghr3y7M0Eo", title: "【麥當勞蘋果派竟是遊戲中最強武器！?】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "4gINlqMLtcU", title: "【統領竟然想丟冰山到艾琳坐的船前面！？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
     ],
 
     scheduleVideoId:  "YewmD63V5r0",
