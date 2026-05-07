@@ -392,6 +392,30 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/艾琳妮雅 v2.0.png" },
     ],
 
+    // 小知識
+    fanName: "塵艾",
+    hashTags: [
+      { label: "🦇 General", tag: "#ArrynVaer1"   },
+      { label: "🌕 Live",    tag: "#airingVaer1"  },
+      { label: "🦇 Meme",   tag: "#aMEMEa"        },
+      { label: "🌕 Art",    tag: "#ARTyn1a"        },
+      { label: "🌕 Nomnom", tag: "#孩子Vaeri艾吃" },
+    ],
+    futureGoals: [
+      "幹大事", "跟大家一起", "蒐集恐遊",
+      "寫＋演繹故事", "製冰冰箱", "我叫你笑",
+    ],
+    triviaLikes: [
+      { label: "興趣",       items: ["泡澡", "聊天", "幫忙", "寫手帳", "YouTube", "做甜點", "咖啡", "看BL漫畫", "手做", "下廚", "故事"] },
+      { label: "喜歡的事情", items: ["網路", "香香的", "夜晚", "甜點", "玻璃筆", "文具", "料理", "床"] },
+      { label: "喜歡的節目", items: ["真實犯罪", "動漫跟劇"] },
+      { label: "喜歡的遊戲", items: ["精神時光機", "養成類", "恐怖類"] },
+      { label: "喜歡的食物", items: ["冰淇淋(夏威夷豆口味)", "筍子", "菠菜", "咖哩", "酸辣湯", "烏魚子", "海鮮", "巧克力軟餅乾", "Subway", "湯類食物", "早餐", "小辣"] },
+    ],
+    triviaHates: [
+      { label: "討厭的東西", items: ["一個人", "艾哭", "葡萄乾(or any 乾)", "太辣的食物", "蟲", "陽光沙灘海", "太複雜的事物(用腦)", "暴雷", "臭臭的"] },
+    ],
+
     color: "#28004D",  // 艾琳妮雅 代表色（深紫）
     badgeTextColor: "white"  // 深色背景，徽章文字改回白色
   },
