@@ -1002,10 +1002,12 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
    ============================================= */
 .sidebar-bgm {
   margin: 0.9rem 0 0.4rem;
-  padding: 0.65rem 0.8rem 0.7rem;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
+  padding: 0.7rem 0.85rem 0.75rem;
+  background: rgba(0,0,0,0.38);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 /* 隱藏的 YouTube 播放器容器 */
 #sbgm-hidden {
@@ -1017,12 +1019,12 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   overflow: hidden;
 }
 .sbgm-label {
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.45);
+  font-size: 0.63rem;
+  color: rgba(255,255,255,0.5);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
 .sbgm-controls {
   display: flex;
@@ -1033,8 +1035,9 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   background: var(--vt-main, #888);
   border: none;
   border-radius: 50%;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
   cursor: pointer;
   font-size: 0.9rem;
   color: white;
@@ -1043,6 +1046,7 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   align-items: center;
   justify-content: center;
   transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .sbgm-play-btn:hover { opacity: 0.82; transform: scale(1.07); }
 .sbgm-mute-btn {
@@ -1051,6 +1055,7 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   border-radius: 50%;
   width: 28px;
   height: 28px;
+  min-width: 28px;
   cursor: pointer;
   font-size: 0.75rem;
   color: rgba(255,255,255,0.8);
@@ -1064,22 +1069,23 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 .sbgm-info {
   flex: 1;
   overflow: hidden;
+  min-width: 0;
 }
 .sbgm-song {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.92);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .sbgm-status {
-  font-size: 0.63rem;
+  font-size: 0.62rem;
   color: rgba(255,255,255,0.45);
   margin-top: 0.1rem;
 }
 .sbgm-bar {
-  margin-top: 0.55rem;
+  margin-top: 0.6rem;
   height: 3px;
   background: rgba(255,255,255,0.12);
   border-radius: 2px;
