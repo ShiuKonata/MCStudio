@@ -1190,7 +1190,7 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 .trivia-label {
   font-size: 0.74rem;
   font-weight: 700;
-  color: var(--vt-main, #aaa);
+  color: var(--vt-label, rgba(255,255,255,0.82));
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.4rem;
