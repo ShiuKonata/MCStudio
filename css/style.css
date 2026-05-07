@@ -1002,12 +1002,10 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
    ============================================= */
 .sidebar-bgm {
   margin: 0.9rem 0 0.4rem;
-  padding: 0.7rem 0.85rem 0.75rem;
-  background: rgba(0,0,0,0.38);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 12px;
-  width: 100%;
-  box-sizing: border-box;
+  padding: 0.65rem 0.8rem 0.7rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
 }
 /* 隱藏的 YouTube 播放器容器 */
 #sbgm-hidden {
@@ -1072,12 +1070,12 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   min-width: 0;
 }
 .sbgm-song {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.92);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: rgba(255,255,255,0.9);
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.3;
 }
 .sbgm-status {
   font-size: 0.62rem;
