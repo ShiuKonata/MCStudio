@@ -159,6 +159,27 @@ const vtubers = [
       { version: "Ver 3.0",  url: "images/懶貓子 v3.0.jpg"  },
     ],
 
+    // 小知識
+    fanName: "Rumily",
+    hashTags: [
+      { label: "配信相關 🎙", tag: "#Rumiちゃんみてみて" },
+      { label: "粉絲繪畫 🎨", tag: "#Rumiちゃん絵"      },
+      { label: "其他 💌",     tag: "#Rumiちゃんへ"       },
+    ],
+    futureGoals: [
+      "有很多朋友",
+    ],
+    triviaLikes: [
+      { label: "興趣",       items: ["吃壽司", "睡啦明天再努力", "課金", "畫畫", "玩遊戲"] },
+      { label: "喜歡的事情", items: ["BO鼠?", "FPS遊戲", "起司蛋糕", "壽司", "酒", "寶可夢"] },
+      { label: "喜歡的顏色", items: ["全部（除了橘色）"] },
+      { label: "喜歡的漫畫", items: ["反叛的魯路修", "進擊的巨人"] },
+      { label: "喜歡的角色", items: ["托拉法爾加 · 羅（海賊王）"] },
+    ],
+    triviaHates: [
+      { label: "討厭的東西", items: ["牛奶", "恐怖遊戲"] },
+    ],
+
     color: "#F4A7C3"   // 懶貓子Rumi 代表色（柔粉紅）
   },
 
