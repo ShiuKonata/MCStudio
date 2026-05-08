@@ -280,6 +280,32 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="meta-card"><div class="meta-label">生日</div><div class="meta-value">${v.birthday}</div></div>
           </div>
 
+          <!-- 出道計時器 -->
+          <div class="debut-counter">
+            <div class="debut-counter-title">出道</div>
+            <div class="debut-counter-display">
+              <div class="debut-unit">
+                <span class="debut-num" id="debut-days">--</span>
+                <span class="debut-label">日</span>
+              </div>
+              <div class="debut-sep">:</div>
+              <div class="debut-unit">
+                <span class="debut-num" id="debut-hours">--</span>
+                <span class="debut-label">時</span>
+              </div>
+              <div class="debut-sep">:</div>
+              <div class="debut-unit">
+                <span class="debut-num" id="debut-minutes">--</span>
+                <span class="debut-label">分</span>
+              </div>
+              <div class="debut-sep">:</div>
+              <div class="debut-unit">
+                <span class="debut-num debut-num-sec" id="debut-seconds">--</span>
+                <span class="debut-label">秒</span>
+              </div>
+            </div>
+          </div>
+
           <div class="detail-section-title">關於 ${v.name}</div>
           <div class="detail-description">${v.description}</div>
 
@@ -494,6 +520,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextLink = document.querySelector('.sidebar-nav-next');
     if (prevLink) prevLink.href = `vtuber.html?id=${prev.id}&tab=${key}`;
     if (nextLink) nextLink.href = `vtuber.html?id=${next.id}&tab=${key}`;
+  }
+
+  // ── 出道計時器 ────────────────────────────────
+  if (v.debut) {
+    const [yr, mo, dy] = v.debut.split('-').map(Number);
+    const debutDate = new Date(yr, mo - 1, dy, 0, 0, 0);
+
+    function updateDebutCounter() {
+      const diff = Date.now() - debutDate.getTime();
+      if (diff < 0) return;
+      const totalSec = Math.floor(diff / 1000);
+      const days    = Math.floor(totalSec / 86400);
+      const hours   = Math.floor((totalSec % 86400) / 3600);
+      const minutes = Math.floor((totalSec % 3600) / 60);
+      const seconds = totalSec % 60;
+      const pad = n => String(n).padStart(2, '0');
+      const dEl = document.getElementById('debut-days');
+      const hEl = document.getElementById('debut-hours');
+      const mEl = document.getElementById('debut-minutes');
+      const sEl = document.getElementById('debut-seconds');
+      if (dEl) dEl.textContent = days;
+      if (hEl) hEl.textContent = pad(hours);
+      if (mEl) mEl.textContent = pad(minutes);
+      if (sEl) sEl.textContent = pad(seconds);
+    }
+    updateDebutCounter();
+    setInterval(updateDebutCounter, 1000);
   }
 
   // 讀取網址中的 tab 參數，預設為 profile

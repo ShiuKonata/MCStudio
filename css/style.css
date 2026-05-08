@@ -1262,6 +1262,70 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 }
 
 /* =============================================
+   出道計時器
+   ============================================= */
+.debut-counter {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem 1rem;
+  text-align: center;
+  margin-bottom: 1.4rem;
+  flex-shrink: 0;
+}
+.debut-counter-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.debut-counter-display {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.debut-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 3rem;
+}
+.debut-num {
+  font-size: 2.4rem;
+  font-weight: 900;
+  font-family: 'Calibri', sans-serif;
+  color: white;
+  line-height: 1;
+  text-shadow:
+    0 0 12px var(--vt-light, rgba(150,220,255,0.9)),
+    0 0 28px var(--vt-main, rgba(100,180,255,0.5));
+}
+.debut-num-sec {
+  color: var(--vt-light, #b0e0ff);
+  text-shadow:
+    0 0 10px var(--vt-main, rgba(150,220,255,0.9)),
+    0 0 24px var(--vt-main, rgba(100,180,255,0.5));
+}
+.debut-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+}
+.debut-sep {
+  font-size: 2rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  line-height: 1;
+  padding-top: 0.15rem;
+  font-family: 'Calibri', sans-serif;
+}
+
+/* =============================================
    RESPONSIVE
    ============================================= */
 @media (max-width: 1100px) {
