@@ -755,12 +755,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (input)  input.value = '';
       if (countEl) countEl.style.display = 'none';
 
+      // ── 讀快取 ──────────────────────────────────
+      const ytsCacheKey = 'mc_yts_' + v.youtubeChannelId + '_' + year;
+      const ytsCached   = cacheGet(ytsCacheKey);
+      if (ytsCached) {
+        container.innerHTML = ytsCached.html;
+        ytsNextPageToken = ytsCached.nextPageToken || null;
+        if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
+        ytsLoading = false;
+        applyYtsSearch();
+        return;
+      }
+
       container.innerHTML = '<div class="ls-loading"><div class="ls-spinner"></div><span>載入中…</span></div>';
       if (moreWrap) moreWrap.style.display = 'none';
 
       try {
         if (year === 'all') {
-          // 全部：只抓第一頁，其餘靠「載入更多」
           const data = await fetchYtsPage(null);
           if (data.error) throw new Error(data.error.message);
           container.innerHTML = '';
@@ -772,8 +783,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           ytsNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
+          cacheSet(ytsCacheKey, { html: container.innerHTML, nextPageToken: ytsNextPageToken });
         } else {
-          // 特定年份：逐頁抓，超出年份範圍就停止
           let pageToken  = null;
           let totalCount = 0;
           let done       = false;
@@ -781,10 +792,9 @@ document.addEventListener('DOMContentLoaded', () => {
           do {
             const data = await fetchYtsPage(pageToken);
             if (data.error) throw new Error(data.error.message);
-            const items = data.items || [];
-            for (const item of items) {
+            for (const item of (data.items || [])) {
               const itemYear = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,4) : '';
-              if (itemYear < year) { done = true; break; }  // 已超出目標年份，停止
+              if (itemYear < year) { done = true; break; }
               if (itemYear === year) { renderYtsCard(container, item); totalCount++; }
             }
             pageToken = data.nextPageToken || null;
@@ -793,6 +803,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>' + year + ' 年尚無 Shorts</p></div>';
           }
           if (moreWrap) moreWrap.style.display = 'none';
+          cacheSet(ytsCacheKey, { html: container.innerHTML, nextPageToken: null });
         }
       } catch (err) {
         container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>API 錯誤：' + err.message + '</p></div>';
@@ -872,17 +883,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── 直播存檔（YouTube Data API v3）──────────────
-  let tryLoadLiveStreams = null;   // 提升到外層，讓 activateTab 可呼叫
-  if (v.youtubeChannelId) {
-    let lsLoading        = false;
-    let lsCurrentYear    = 'all';   // 目前選取的年份
-    let lsNextPageToken  = null;    // 僅「全部」模式使用
+  // ── 共用快取工具（sessionStorage，30 分鐘過期）──
+  const CACHE_TTL = 30 * 60 * 1000;
+  function cacheGet(key) {
+    try {
+      const raw = sessionStorage.getItem(key);
+      if (!raw) return null;
+      const obj = JSON.parse(raw);
+      if (Date.now() - obj.ts > CACHE_TTL) { sessionStorage.removeItem(key); return null; }
+      return obj;
+    } catch(e) { return null; }
+  }
+  function cacheSet(key, data) {
+    try { sessionStorage.setItem(key, JSON.stringify({ ...data, ts: Date.now() })); } catch(e) {}
+  }
 
-    // ── 渲染一筆直播卡片 ─────────────────────────
+  // ── 直播存檔（playlistItems API，1 單位/次）──────
+  let tryLoadLiveStreams = null;
+  if (v.youtubeChannelId) {
+    let lsLoading       = false;
+    let lsCurrentYear   = 'all';
+    let lsNextPageToken = null;
+
+    // 直播專屬播放清單：UULV + channelId 去掉 UC
+    const lsPlaylistId = 'UULV' + v.youtubeChannelId.slice(2);
+
     function renderLsCard(container, item) {
-      const vid      = item.id.videoId;
-      const snip     = item.snippet;
+      const snip = item.snippet;
+      const vid  = snip.resourceId && snip.resourceId.videoId;
+      if (!vid) return;
       const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
       const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
@@ -907,26 +936,17 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
     }
 
-    // ── 單次 API fetch（回傳 data 或 null）────────
-    async function fetchLsPage(pageToken, yearFilter) {
-      let url = 'https://www.googleapis.com/youtube/v3/search'
+    async function fetchLsPage(pageToken) {
+      let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
         + '?part=snippet'
-        + '&channelId=' + encodeURIComponent(v.youtubeChannelId)
-        + '&type=video'
-        + '&eventType=completed'
-        + '&order=date'
+        + '&playlistId=' + encodeURIComponent(lsPlaylistId)
         + '&maxResults=50'
         + '&key=' + encodeURIComponent(v.ytApiKey);
-      if (yearFilter && yearFilter !== 'all') {
-        url += '&publishedAfter=' + encodeURIComponent(yearFilter + '-01-01T00:00:00Z');
-        url += '&publishedBefore=' + encodeURIComponent(yearFilter + '-12-31T23:59:59Z');
-      }
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
       const res = await fetch(url);
       return await res.json();
     }
 
-    // ── 載入指定年份（自動抓完所有分頁）─────────
     async function loadYear(year) {
       if (lsLoading) return;
       lsLoading = true;
@@ -938,15 +958,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const countEl   = document.getElementById('ls-search-count');
       const input     = document.getElementById('ls-search-input');
       if (!container) { lsLoading = false; return; }
-
-      // 清除搜尋
-      if (input) input.value = '';
+      if (input)  input.value = '';
       if (countEl) countEl.style.display = 'none';
 
-      // 沒有 API Key
       if (!v.ytApiKey) {
         container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">🔑</span><p>尚未設定 YouTube API 金鑰</p></div>';
         lsLoading = false;
+        return;
+      }
+
+      // ── 讀快取 ──────────────────────────────────
+      const cacheKey = 'mc_ls_' + v.youtubeChannelId + '_' + year;
+      const cached   = cacheGet(cacheKey);
+      if (cached) {
+        container.innerHTML = cached.html;
+        lsNextPageToken = cached.nextPageToken || null;
+        if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
+        lsLoading = false;
+        applyLsSearch();
         return;
       }
 
@@ -955,8 +984,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         if (year === 'all') {
-          // 「全部」：只抓第一頁，其餘靠「載入更多」
-          const data = await fetchLsPage(null, 'all');
+          const data = await fetchLsPage(null);
           if (data.error) throw new Error(data.error.message);
           container.innerHTML = '';
           const items = data.items || [];
@@ -967,40 +995,37 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           lsNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
+          cacheSet(cacheKey, { html: container.innerHTML, nextPageToken: lsNextPageToken });
         } else {
-          // 特定年份：自動抓完所有分頁
-          let pageToken = null;
+          let pageToken  = null;
           let totalCount = 0;
+          let done       = false;
           container.innerHTML = '';
           do {
-            const data = await fetchLsPage(pageToken, year);
+            const data = await fetchLsPage(pageToken);
             if (data.error) throw new Error(data.error.message);
-            const items = data.items || [];
-            items.forEach(item => renderLsCard(container, item));
-            totalCount += items.length;
-            pageToken = data.nextPageToken || null;
-            // 更新 loading 文字
-            if (pageToken) {
-              const loadingEl = container.querySelector('.ls-loading');
-              if (loadingEl) loadingEl.querySelector('span').textContent = '已載入 ' + totalCount + ' 部，繼續載入…';
+            for (const item of (data.items || [])) {
+              const itemYear = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,4) : '';
+              if (itemYear < year) { done = true; break; }
+              if (itemYear === year) { renderLsCard(container, item); totalCount++; }
             }
-          } while (pageToken);
-
+            pageToken = data.nextPageToken || null;
+          } while (pageToken && !done);
           if (totalCount === 0) {
             container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>' + year + ' 年尚無直播存檔</p></div>';
           }
           if (moreWrap) moreWrap.style.display = 'none';
+          cacheSet(cacheKey, { html: container.innerHTML, nextPageToken: null });
         }
       } catch (err) {
         container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>API 錯誤：' + err.message + '</p></div>';
       }
       lsLoading = false;
-      applyLsSearch();   // 套用搜尋（清空狀態下無效果）
+      applyLsSearch();
     }
 
     tryLoadLiveStreams = function() { loadYear(lsCurrentYear); };
 
-    // ── 「載入更多」（僅全部模式）─────────────────
     document.addEventListener('click', e => {
       if (e.target && e.target.id === 'ls-load-more-btn') {
         if (lsLoading || !lsNextPageToken) return;
@@ -1008,7 +1033,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.disabled = true;
         const container = document.getElementById('livestreams-container');
         const moreWrap  = document.getElementById('ls-load-more-wrap');
-        fetchLsPage(lsNextPageToken, 'all').then(data => {
+        fetchLsPage(lsNextPageToken).then(data => {
           if (data.error) { lsLoading = false; return; }
           (data.items || []).forEach(item => renderLsCard(container, item));
           lsNextPageToken = data.nextPageToken || null;
@@ -1021,16 +1046,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // ── 年份按鈕切換 ──────────────────────────────
     document.addEventListener('click', e => {
-      const btn = e.target.closest('.ls-year-btn');
+      const btn = e.target.closest('.ls-year-btn[data-year]');
       if (!btn) return;
-      document.querySelectorAll('.ls-year-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.ls-year-btn[data-year]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       loadYear(btn.dataset.year);
     });
 
-    // ── 搜尋篩選（在已載入的卡片中即時過濾）──────
     function applyLsSearch() {
       const input    = document.getElementById('ls-search-input');
       const countEl  = document.getElementById('ls-search-count');
