@@ -1597,6 +1597,44 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 }
 
 /* =============================================
+   會員直播 TAB
+   ============================================= */
+.mem-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(142,36,170,0.15);
+  border: 1px solid rgba(142,36,170,0.35);
+  border-radius: var(--radius);
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.83rem;
+  color: rgba(255,255,255,0.75);
+  flex-wrap: wrap;
+}
+.mem-notice-icon { font-size: 1rem; flex-shrink: 0; }
+.mem-join-btn {
+  margin-left: auto;
+  background: #8e24aa;
+  color: white;
+  border-radius: 999px;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s;
+}
+.mem-join-btn:hover { background: #6a1b9a; }
+.mem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.mem-card { text-decoration: none; }
+.mem-badge { background: rgba(142,36,170,0.85) !important; }
+
+/* =============================================
    RESPONSIVE
    ============================================= */
 @media (max-width: 1100px) {

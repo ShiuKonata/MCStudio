@@ -104,6 +104,13 @@ const vtubers = [
       { label: "討厭的味道", items: ["薰衣草"] },
     ],
 
+    // 會員限定直播（手動填入，id 填 YouTube 影片 ID）
+    memberVideos: [
+      { id: "REPLACE_MEM_1", title: "【會限】範例影片一", date: "2024-01-01" },
+      { id: "REPLACE_MEM_2", title: "【會限】範例影片二", date: "2024-02-01" },
+      { id: "REPLACE_MEM_3", title: "【會限】範例影片三", date: "2024-03-01" },
+    ],
+
     color: "#B9C468"   // SHIUCODA 代表色
   },
 

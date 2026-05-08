@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦', color: '#1565c0' }] : []),
     { key: 'schedule', label: '📅 行程預覽',    color: '#0277bd' },
     ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: '📺 直播存檔', color: '#cc0000' }] : []),
+    ...(v.memberVideos && v.memberVideos.length ? [{ key: 'member', label: '🔒 會員直播', color: '#8e24aa' }] : []),
   ];
 
   // ── 注入頂部分頁列 ─────────────────────────────
@@ -398,6 +399,33 @@ document.addEventListener('DOMContentLoaded', () => {
           <div id="schedule-content"></div>
         </div>
 
+        ${v.memberVideos && v.memberVideos.length ? `
+        <!-- TAB: 會員直播 -->
+        <div id="tab-member" class="tab-panel">
+          <div class="detail-section-title">🔒 會員直播</div>
+          <div class="mem-notice">
+            <span class="mem-notice-icon">🔐</span>
+            <span>以下為會員限定直播，需加入頻道會員才能觀看</span>
+            <a href="${v.youtube}/membership" target="_blank" class="mem-join-btn">加入會員 →</a>
+          </div>
+          <!-- 年份篩選 -->
+          <div class="ls-year-bar" id="mem-year-bar">
+            <button class="ls-year-btn active" data-memyear="all">全部</button>
+            <button class="ls-year-btn" data-memyear="2026">2026</button>
+            <button class="ls-year-btn" data-memyear="2025">2025</button>
+            <button class="ls-year-btn" data-memyear="2024">2024</button>
+            <button class="ls-year-btn" data-memyear="2023">2023</button>
+          </div>
+          <!-- 搜尋列 -->
+          <div class="ls-search-bar">
+            <span class="ls-search-icon">🔍</span>
+            <input class="ls-search-input" id="mem-search-input" type="text" placeholder="搜尋標題或月份（例：03）" autocomplete="off">
+            <button class="ls-search-clear" id="mem-search-clear" title="清除">✕</button>
+          </div>
+          <div class="ls-search-count" id="mem-search-count"></div>
+          <div class="mem-grid" id="mem-grid"></div>
+        </div>` : ''}
+
         ${v.youtubeChannelId ? `
         <!-- TAB: 直播存檔 -->
         <div id="tab-livestreams" class="tab-panel">
@@ -543,6 +571,102 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="${v.spreadsheet}" target="_blank" class="detail-link-btn sheets"><span class="link-icon">📋</span> ${v.spreadsheetLabel || v.name + '的大小事'}</a>
     </div>`;
   scheduleContent.innerHTML = scheduleHTML;
+
+  // ── 會員直播（手動資料渲染）────────────────────
+  if (v.memberVideos && v.memberVideos.length) {
+    let memCurrentYear = 'all';
+
+    function renderMemGrid(year) {
+      memCurrentYear = year;
+      const grid     = document.getElementById('mem-grid');
+      const countEl  = document.getElementById('mem-search-count');
+      const input    = document.getElementById('mem-search-input');
+      if (!grid) return;
+      if (input)  input.value = '';
+      if (countEl) countEl.style.display = 'none';
+
+      const filtered = v.memberVideos.filter(item => {
+        if (!item.id || item.id.startsWith('REPLACE')) return false;
+        if (year === 'all') return true;
+        return item.date && item.date.startsWith(year);
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>'
+          + (year === 'all' ? '尚無會員直播資料' : year + ' 年尚無資料')
+          + '</p></div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const thumb    = item.thumb || ('https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg');
+        const ytUrl    = 'https://www.youtube.com/watch?v=' + item.id;
+        const safeTitle = (item.title || '').replace(/"/g, '&quot;');
+        return `
+          <a class="ls-card mem-card" href="${ytUrl}" target="_blank" title="${safeTitle}">
+            <div class="ls-thumb-wrap">
+              <img class="ls-thumb" src="${thumb}" alt="${safeTitle}" loading="lazy">
+              <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+              <div class="ls-duration-badge mem-badge">🔒 會員</div>
+            </div>
+            <div class="ls-info">
+              <div class="ls-title">${item.title || '（無標題）'}</div>
+              ${item.date ? '<div class="ls-date">' + item.date + '</div>' : ''}
+            </div>
+          </a>`;
+      }).join('');
+    }
+
+    // 初始渲染
+    renderMemGrid('all');
+
+    // 年份切換
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-memyear]');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn[data-memyear]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMemGrid(btn.dataset.memyear);
+    });
+
+    // 搜尋篩選
+    function applyMemSearch() {
+      const input    = document.getElementById('mem-search-input');
+      const countEl  = document.getElementById('mem-search-count');
+      const clearBtn = document.getElementById('mem-search-clear');
+      if (!input) return;
+      const q = input.value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#mem-grid .mem-card');
+      let shown = 0;
+      cards.forEach(card => {
+        const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
+        const date  = (card.querySelector('.ls-date')?.textContent  || '').toLowerCase();
+        const match = !q || title.includes(q) || date.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
+      if (countEl) {
+        if (q && cards.length > 0) {
+          countEl.textContent = '找到 ' + shown + ' / ' + cards.length + ' 部';
+          countEl.style.display = 'block';
+        } else {
+          countEl.style.display = 'none';
+        }
+      }
+    }
+
+    document.addEventListener('input', e => {
+      if (e.target && e.target.id === 'mem-search-input') applyMemSearch();
+    });
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'mem-search-clear') {
+        const input = document.getElementById('mem-search-input');
+        if (input) { input.value = ''; input.focus(); }
+        applyMemSearch();
+      }
+    });
+  }
 
   // ── 直播存檔（YouTube Data API v3）──────────────
   let tryLoadLiveStreams = null;   // 提升到外層，讓 activateTab 可呼叫
