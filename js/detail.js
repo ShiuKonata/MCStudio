@@ -74,8 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabConfig = [
     { key: 'profile',    label: '🐸 個人介紹',    color: null },
     ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet', label: '🎨 三視圖', color: null }] : []),
-    ...('fanName'  in v ? [{ key: 'trivia',       label: '💡 小知識',    color: '#e65100' }] : []),
-    ...('twitterTab' in v ? [{ key: 'twitterfeed', label: '📢 最新訊息', color: '#1d9bf0' }] : []),
+    ...('fanName'  in v ? [{ key: 'trivia',    label: '💡 小知識',    color: '#e65100' }] : []),
     { key: 'videos',     label: '🎵 最新音樂',    color: '#d32f2f' },
     ...(v.shorts     && v.shorts.length     ? [{ key: 'shorts',     label: '📱 最新Shorts',   color: '#ff6f00' }] : []),
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦', color: '#7b1fa2' }] : []),
@@ -215,28 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>`;
   }
 
-  // ── 最新訊息（Twitter 時間軸）HTML ──────────────
-  let twitterFeedHTML = '';
-  if ('twitterTab' in v) {
-    const twitterHandle = v.twitter
-      .replace(/^https?:\/\/(www\.)?(twitter|x)\.com\//, '')
-      .split('/')[0];
-    twitterFeedHTML = `
-    <div id="tab-twitterfeed" class="tab-panel">
-      <div class="detail-section-title">📢 最新訊息</div>
-      <div class="twitter-feed-wrap">
-        <a class="twitter-timeline"
-           href="https://twitter.com/${twitterHandle}"
-           data-tweet-limit="5"
-           data-theme="dark"
-           data-chrome="noheader nofooter noborders transparent"
-           data-link-color="${v.color || '#1d9bf0'}">
-          最新推文載入中...
-        </a>
-      </div>
-    </div>`;
-  }
-
   // ── 主要 HTML ──────────────────────────────────
   const root = document.getElementById('detail-root');
   root.innerHTML = `
@@ -338,7 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ${refSheetHTML}
         ${triviaHTML}
-        ${twitterFeedHTML}
 
         <!-- TAB: 最新音樂 -->
         <div id="tab-videos" class="tab-panel">
@@ -520,32 +496,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nextLink) nextLink.href = `vtuber.html?id=${next.id}&tab=${key}`;
   }
 
-  // ── Twitter Widget 懶載入 ────────────────────────
-  let twitterWidgetLoaded = false;
-  function loadTwitterWidget() {
-    if (twitterWidgetLoaded) {
-      if (window.twttr && window.twttr.widgets) window.twttr.widgets.load();
-      return;
-    }
-    twitterWidgetLoaded = true;
-    const script = document.createElement('script');
-    script.id      = 'twitter-wjs';
-    script.src     = 'https://platform.twitter.com/widgets.js';
-    script.charset = 'utf-8';
-    script.async   = true;
-    document.head.appendChild(script);
-  }
-
   // 讀取網址中的 tab 參數，預設為 profile
   const initTab = params.get('tab') || 'profile';
   activateTab(initTab);
-  if (initTab === 'twitterfeed') loadTwitterWidget();
 
   vtabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activateTab(btn.dataset.tab);
-      if (btn.dataset.tab === 'twitterfeed') loadTwitterWidget();
-    });
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
   });
 
   // ── 側欄 BGM 播放器（YouTube IFrame API）──────────

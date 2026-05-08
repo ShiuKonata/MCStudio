@@ -90,10 +90,7 @@ const vtubers = [
       { label: "討厭的味道", items: ["薰衣草"] },
     ],
 
-    color: "#B9C468",  // SHIUCODA 代表色
-
-    // 最新訊息 tab（twitterTab 欄位存在即顯示分頁）
-    twitterTab: true,
+    color: "#B9C468"   // SHIUCODA 代表色
   },
 
   {
