@@ -699,11 +699,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let ytsCurrentYear   = 'all';
     let ytsNextPageToken = null;
 
+    // Shorts 專屬播放清單 ID：UUSH + channelId 去掉前兩字 UC
+    const shortsPlaylistId = 'UUSH' + v.youtubeChannelId.slice(2);
+
     function renderYtsCard(container, item) {
-      const snip = item.snippet;
-      // 跳過正在直播或預定直播的影片
-      if (snip.liveBroadcastContent === 'live' || snip.liveBroadcastContent === 'upcoming') return;
-      const vid      = item.id.videoId;
+      const snip     = item.snippet;
+      const vid      = snip.resourceId && snip.resourceId.videoId;
+      if (!vid) return;
       const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
       const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
@@ -728,19 +730,12 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
     }
 
-    async function fetchYtsPage(pageToken, yearFilter) {
-      let url = 'https://www.googleapis.com/youtube/v3/search'
+    async function fetchYtsPage(pageToken) {
+      let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
         + '?part=snippet'
-        + '&channelId=' + encodeURIComponent(v.youtubeChannelId)
-        + '&type=video'
-        + '&videoDuration=short'
-        + '&order=date'
+        + '&playlistId=' + encodeURIComponent(shortsPlaylistId)
         + '&maxResults=50'
         + '&key=' + encodeURIComponent(v.ytApiKey);
-      if (yearFilter && yearFilter !== 'all') {
-        url += '&publishedAfter=' + encodeURIComponent(yearFilter + '-01-01T00:00:00Z');
-        url += '&publishedBefore=' + encodeURIComponent(yearFilter + '-12-31T23:59:59Z');
-      }
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
       const res = await fetch(url);
       return await res.json();
@@ -765,7 +760,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         if (year === 'all') {
-          const data = await fetchYtsPage(null, 'all');
+          // 全部：只抓第一頁，其餘靠「載入更多」
+          const data = await fetchYtsPage(null);
           if (data.error) throw new Error(data.error.message);
           container.innerHTML = '';
           const items = data.items || [];
@@ -777,17 +773,22 @@ document.addEventListener('DOMContentLoaded', () => {
           ytsNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
         } else {
+          // 特定年份：逐頁抓，超出年份範圍就停止
           let pageToken  = null;
           let totalCount = 0;
+          let done       = false;
           container.innerHTML = '';
           do {
-            const data = await fetchYtsPage(pageToken, year);
+            const data = await fetchYtsPage(pageToken);
             if (data.error) throw new Error(data.error.message);
             const items = data.items || [];
-            items.forEach(item => renderYtsCard(container, item));
-            totalCount += items.length;
+            for (const item of items) {
+              const itemYear = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,4) : '';
+              if (itemYear < year) { done = true; break; }  // 已超出目標年份，停止
+              if (itemYear === year) { renderYtsCard(container, item); totalCount++; }
+            }
             pageToken = data.nextPageToken || null;
-          } while (pageToken);
+          } while (pageToken && !done);
           if (totalCount === 0) {
             container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>' + year + ' 年尚無 Shorts</p></div>';
           }
@@ -810,7 +811,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.disabled = true;
         const container = document.getElementById('yts-container');
         const moreWrap  = document.getElementById('yts-load-more-wrap');
-        fetchYtsPage(ytsNextPageToken, 'all').then(data => {
+        fetchYtsPage(ytsNextPageToken).then(data => {
           if (data.error) { ytsLoading = false; return; }
           (data.items || []).forEach(item => renderYtsCard(container, item));
           ytsNextPageToken = data.nextPageToken || null;
