@@ -76,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet', label: '🎨 三視圖', color: null }] : []),
     ...('fanName'  in v ? [{ key: 'trivia',    label: '💡 小知識',    color: '#e65100' }] : []),
     { key: 'videos',     label: '🎵 最新音樂',    color: '#d32f2f' },
-    ...(v.shorts     && v.shorts.length     ? [{ key: 'shorts',     label: '📱 最新Shorts',   color: '#ff6f00' }] : []),
+    ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: '📱 Shorts 存檔',  color: '#ff6f00' }] :
+        v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',   color: '#ff6f00' }] : []),
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦', color: '#7b1fa2' }] : []),
     ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦', color: '#1565c0' }] : []),
     { key: 'schedule', label: '📅 行程預覽',    color: '#0277bd' },
@@ -368,12 +369,35 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="video-grid" id="video-grid"></div>
         </div>
 
-        <!-- TAB: 熱門Short -->
-        ${v.shorts && v.shorts.length ? `
+        <!-- TAB: 手動 Shorts（無 youtubeChannelId 時使用）-->
+        ${!v.youtubeChannelId && v.shorts && v.shorts.length ? `
         <div id="tab-shorts" class="tab-panel">
           <div class="detail-section-title">📱 最新 Shorts</div>
           <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">官方剪輯最新前三短片 Shorts，點擊前往 YouTube 觀看</p>
           <div class="video-grid shorts-grid" id="shorts-grid"></div>
+        </div>` : ''}
+
+        <!-- TAB: 自動抓取 Shorts 存檔 -->
+        ${v.youtubeChannelId ? `
+        <div id="tab-ytshorts" class="tab-panel">
+          <div class="detail-section-title">📱 Shorts 存檔</div>
+          <div class="ls-year-bar" id="yts-year-bar">
+            <button class="ls-year-btn active" data-ytsyear="all">全部</button>
+            <button class="ls-year-btn" data-ytsyear="2026">2026</button>
+            <button class="ls-year-btn" data-ytsyear="2025">2025</button>
+            <button class="ls-year-btn" data-ytsyear="2024">2024</button>
+            <button class="ls-year-btn" data-ytsyear="2023">2023</button>
+          </div>
+          <div class="ls-search-bar">
+            <span class="ls-search-icon">🔍</span>
+            <input class="ls-search-input" id="yts-search-input" type="text" placeholder="搜尋標題或月份（例：03）" autocomplete="off">
+            <button class="ls-search-clear" id="yts-search-clear" title="清除">✕</button>
+          </div>
+          <div class="ls-search-count" id="yts-search-count"></div>
+          <div class="livestreams-container" id="yts-container"></div>
+          <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
+            <button class="ls-load-more-btn" id="yts-load-more-btn">載入更多</button>
+          </div>
         </div>` : ''}
 
         <!-- TAB: 熱門音樂推薦 -->
@@ -668,6 +692,183 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── Shorts 存檔（YouTube Data API v3）───────────
+  let tryLoadYtShorts = null;
+  if (v.youtubeChannelId) {
+    let ytsLoading       = false;
+    let ytsCurrentYear   = 'all';
+    let ytsNextPageToken = null;
+
+    function renderYtsCard(container, item) {
+      const vid      = item.id.videoId;
+      const snip     = item.snippet;
+      const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
+      const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
+      const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
+      const title    = (snip.title || '').replace(/'/g, '&#39;');
+      container.innerHTML += `
+        <div class="ls-card" onclick="(function(){
+          document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+          document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+          document.getElementById('yt-modal-title').textContent='${title}';
+          document.getElementById('yt-modal').classList.add('open');
+          document.body.style.overflow='hidden';
+        })()">
+          <div class="ls-thumb-wrap">
+            <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+            <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+            <div class="ls-duration-badge" style="background:rgba(255,111,0,0.9)">Shorts</div>
+          </div>
+          <div class="ls-info">
+            <div class="ls-title">${snip.title || '（無標題）'}</div>
+            ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+          </div>
+        </div>`;
+    }
+
+    async function fetchYtsPage(pageToken, yearFilter) {
+      let url = 'https://www.googleapis.com/youtube/v3/search'
+        + '?part=snippet'
+        + '&channelId=' + encodeURIComponent(v.youtubeChannelId)
+        + '&type=video'
+        + '&videoDuration=short'
+        + '&order=date'
+        + '&maxResults=50'
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      if (yearFilter && yearFilter !== 'all') {
+        url += '&publishedAfter=' + encodeURIComponent(yearFilter + '-01-01T00:00:00Z');
+        url += '&publishedBefore=' + encodeURIComponent(yearFilter + '-12-31T23:59:59Z');
+      }
+      if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
+      const res = await fetch(url);
+      return await res.json();
+    }
+
+    async function loadYtsYear(year) {
+      if (ytsLoading) return;
+      ytsLoading = true;
+      ytsCurrentYear   = year;
+      ytsNextPageToken = null;
+
+      const container = document.getElementById('yts-container');
+      const moreWrap  = document.getElementById('yts-load-more-wrap');
+      const countEl   = document.getElementById('yts-search-count');
+      const input     = document.getElementById('yts-search-input');
+      if (!container) { ytsLoading = false; return; }
+      if (input)  input.value = '';
+      if (countEl) countEl.style.display = 'none';
+
+      container.innerHTML = '<div class="ls-loading"><div class="ls-spinner"></div><span>載入中…</span></div>';
+      if (moreWrap) moreWrap.style.display = 'none';
+
+      try {
+        if (year === 'all') {
+          const data = await fetchYtsPage(null, 'all');
+          if (data.error) throw new Error(data.error.message);
+          container.innerHTML = '';
+          const items = data.items || [];
+          if (!items.length) {
+            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>尚無 Shorts 資料</p></div>';
+          } else {
+            items.forEach(item => renderYtsCard(container, item));
+          }
+          ytsNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
+        } else {
+          let pageToken  = null;
+          let totalCount = 0;
+          container.innerHTML = '';
+          do {
+            const data = await fetchYtsPage(pageToken, year);
+            if (data.error) throw new Error(data.error.message);
+            const items = data.items || [];
+            items.forEach(item => renderYtsCard(container, item));
+            totalCount += items.length;
+            pageToken = data.nextPageToken || null;
+          } while (pageToken);
+          if (totalCount === 0) {
+            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>' + year + ' 年尚無 Shorts</p></div>';
+          }
+          if (moreWrap) moreWrap.style.display = 'none';
+        }
+      } catch (err) {
+        container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>API 錯誤：' + err.message + '</p></div>';
+      }
+      ytsLoading = false;
+      applyYtsSearch();
+    }
+
+    tryLoadYtShorts = function() { loadYtsYear(ytsCurrentYear); };
+
+    // 「載入更多」（全部模式）
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'yts-load-more-btn') {
+        if (ytsLoading || !ytsNextPageToken) return;
+        ytsLoading = true;
+        e.target.disabled = true;
+        const container = document.getElementById('yts-container');
+        const moreWrap  = document.getElementById('yts-load-more-wrap');
+        fetchYtsPage(ytsNextPageToken, 'all').then(data => {
+          if (data.error) { ytsLoading = false; return; }
+          (data.items || []).forEach(item => renderYtsCard(container, item));
+          ytsNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
+          const btn = document.getElementById('yts-load-more-btn');
+          if (btn) btn.disabled = false;
+          ytsLoading = false;
+          applyYtsSearch();
+        });
+      }
+    });
+
+    // 年份切換
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-ytsyear]');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn[data-ytsyear]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadYtsYear(btn.dataset.ytsyear);
+    });
+
+    // 搜尋篩選
+    function applyYtsSearch() {
+      const input    = document.getElementById('yts-search-input');
+      const countEl  = document.getElementById('yts-search-count');
+      const clearBtn = document.getElementById('yts-search-clear');
+      if (!input) return;
+      const q = input.value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#yts-container .ls-card');
+      let shown = 0;
+      cards.forEach(card => {
+        const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
+        const date  = (card.querySelector('.ls-date')?.textContent  || '').toLowerCase();
+        const match = !q || title.includes(q) || date.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
+      if (countEl) {
+        if (q && cards.length > 0) {
+          countEl.textContent = '找到 ' + shown + ' / ' + cards.length + ' 部';
+          countEl.style.display = 'block';
+        } else {
+          countEl.style.display = 'none';
+        }
+      }
+    }
+
+    document.addEventListener('input', e => {
+      if (e.target && e.target.id === 'yts-search-input') applyYtsSearch();
+    });
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'yts-search-clear') {
+        const input = document.getElementById('yts-search-input');
+        if (input) { input.value = ''; input.focus(); }
+        applyYtsSearch();
+      }
+    });
+  }
+
   // ── 直播存檔（YouTube Data API v3）──────────────
   let tryLoadLiveStreams = null;   // 提升到外層，讓 activateTab 可呼叫
   if (v.youtubeChannelId) {
@@ -889,6 +1090,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (key === 'livestreams' && tryLoadLiveStreams && !window._lsLoaded) {
       window._lsLoaded = true;
       tryLoadLiveStreams(false);
+    }
+    // Shorts 存檔：首次進入分頁時才開始載入
+    if (key === 'ytshorts' && tryLoadYtShorts && !window._ytsLoaded) {
+      window._ytsLoaded = true;
+      tryLoadYtShorts();
     }
   }
 

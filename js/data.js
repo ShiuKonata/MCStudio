@@ -44,12 +44,6 @@ const vtubers = [
       { id: "DEekDZDIywE", title: "星座になれたら / 結束バンド" }
     ],
 
-    shorts: [
-      { id: "xir5pgD4460", title: "主播拜託別再問這種私人的問題啦!!💧詩雨蔻達" },
-      { id: "DwMRfwmNblE", title: "GL瑟瑟夢境💧詩雨蔻達" },
-      { id: "svaBlko1J0g", title: "本格芝麻湯圓派崩潰ㄌ💧詩雨蔻達" },
-    ],
-
     musicClips: [
       { id: "jOaAoIqskpo", title: "CODA中文歌回總集篇-2026年3月份" },
       { id: "60P3EJa_SVQ", title: "CODA中文歌回總集篇-2026年1月份+2月份" },
