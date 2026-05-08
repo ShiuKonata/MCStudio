@@ -1362,6 +1362,35 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 /* =============================================
    直播存檔 TAB
    ============================================= */
+/* 年份篩選列 */
+.ls-year-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+.ls-year-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  border-radius: 999px;
+  padding: 0.35rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.ls-year-btn:hover:not(.active) {
+  background: rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.9);
+}
+.ls-year-btn.active {
+  background: var(--vt-main);
+  border-color: var(--vt-main);
+  color: #fff;
+  box-shadow: 0 2px 12px var(--vt-shadow);
+}
+
 /* 搜尋列 */
 .ls-search-bar {
   display: flex;

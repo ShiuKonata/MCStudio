@@ -402,9 +402,18 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 直播存檔 -->
         <div id="tab-livestreams" class="tab-panel">
           <div class="detail-section-title">📺 直播存檔</div>
+          <!-- 年份篩選 -->
+          <div class="ls-year-bar" id="ls-year-bar">
+            <button class="ls-year-btn active" data-year="all">全部</button>
+            <button class="ls-year-btn" data-year="2026">2026</button>
+            <button class="ls-year-btn" data-year="2025">2025</button>
+            <button class="ls-year-btn" data-year="2024">2024</button>
+            <button class="ls-year-btn" data-year="2023">2023</button>
+          </div>
+          <!-- 搜尋列 -->
           <div class="ls-search-bar">
             <span class="ls-search-icon">🔍</span>
-            <input class="ls-search-input" id="ls-search-input" type="text" placeholder="搜尋直播標題或日期（例：2024-03）" autocomplete="off">
+            <input class="ls-search-input" id="ls-search-input" type="text" placeholder="搜尋直播標題或月份（例：03）" autocomplete="off">
             <button class="ls-search-clear" id="ls-search-clear" title="清除">✕</button>
           </div>
           <div class="ls-search-count" id="ls-search-count"></div>
@@ -538,122 +547,165 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 直播存檔（YouTube Data API v3）──────────────
   let tryLoadLiveStreams = null;   // 提升到外層，讓 activateTab 可呼叫
   if (v.youtubeChannelId) {
-    let lsNextPageToken = null;
-    let lsLoading       = false;
+    let lsLoading        = false;
+    let lsCurrentYear    = 'all';   // 目前選取的年份
+    let lsNextPageToken  = null;    // 僅「全部」模式使用
 
-    tryLoadLiveStreams = async function(append) {
-      if (lsLoading) return;
-      lsLoading = true;
-      const container  = document.getElementById('livestreams-container');
-      const moreWrap   = document.getElementById('ls-load-more-wrap');
-      const moreBtn    = document.getElementById('ls-load-more-btn');
+    // ── 渲染一筆直播卡片 ─────────────────────────
+    function renderLsCard(container, item) {
+      const vid      = item.id.videoId;
+      const snip     = item.snippet;
+      const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
+      const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
+      const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
+      const title    = (snip.title || '').replace(/'/g, '&#39;');
+      container.innerHTML += `
+        <div class="ls-card" onclick="(function(){
+          document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+          document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+          document.getElementById('yt-modal-title').textContent='${title}';
+          document.getElementById('yt-modal').classList.add('open');
+          document.body.style.overflow='hidden';
+        })()">
+          <div class="ls-thumb-wrap">
+            <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+            <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+            <div class="ls-duration-badge">直播回放</div>
+          </div>
+          <div class="ls-info">
+            <div class="ls-title">${snip.title || '（無標題）'}</div>
+            ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+          </div>
+        </div>`;
+    }
 
-      if (!container) { lsLoading = false; return; }
-
-      // 首次載入：顯示 Loading
-      if (!append) {
-        container.innerHTML = '<div class="ls-loading"><div class="ls-spinner"></div><span>載入直播存檔中…</span></div>';
-      }
-
-      // 沒有 API Key → 顯示提示
-      if (!v.ytApiKey) {
-        container.innerHTML = `
-          <div class="ls-no-key">
-            <span style="font-size:2.5rem">🔑</span>
-            <p>尚未設定 YouTube API 金鑰</p>
-            <p style="font-size:0.82rem;opacity:.7">請在 data.js 的 ytApiKey 欄位填入 YouTube Data API v3 金鑰</p>
-          </div>`;
-        lsLoading = false;
-        return;
-      }
-
+    // ── 單次 API fetch（回傳 data 或 null）────────
+    async function fetchLsPage(pageToken, yearFilter) {
       let url = 'https://www.googleapis.com/youtube/v3/search'
         + '?part=snippet'
         + '&channelId=' + encodeURIComponent(v.youtubeChannelId)
         + '&type=video'
         + '&eventType=completed'
         + '&order=date'
-        + '&maxResults=24'
+        + '&maxResults=50'
         + '&key=' + encodeURIComponent(v.ytApiKey);
-      if (lsNextPageToken) url += '&pageToken=' + encodeURIComponent(lsNextPageToken);
-
-      try {
-        const res  = await fetch(url);
-        const data = await res.json();
-
-        if (data.error) {
-          container.innerHTML = `
-            <div class="ls-no-key">
-              <span style="font-size:2.5rem">⚠️</span>
-              <p>API 錯誤：${data.error.message}</p>
-            </div>`;
-          lsLoading = false;
-          return;
-        }
-
-        // 首次清除 loading 訊息
-        if (!append) container.innerHTML = '';
-
-        const items = data.items || [];
-        if (!items.length && !append) {
-          container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>尚無直播存檔</p></div>';
-          lsLoading = false;
-          return;
-        }
-
-        items.forEach(item => {
-          const vid   = item.id.videoId;
-          const snip  = item.snippet;
-          const thumb = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
-          const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
-          const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
-          const title    = (snip.title || '').replace(/'/g, '&#39;');
-          container.innerHTML += `
-            <div class="ls-card" onclick="(function(){
-              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
-              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
-              document.getElementById('yt-modal-title').textContent='${title}';
-              document.getElementById('yt-modal').classList.add('open');
-              document.body.style.overflow='hidden';
-            })()">
-              <div class="ls-thumb-wrap">
-                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
-                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-                <div class="ls-duration-badge">直播回放</div>
-              </div>
-              <div class="ls-info">
-                <div class="ls-title">${snip.title || '（無標題）'}</div>
-                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
-              </div>
-            </div>`;
-        });
-
-        lsNextPageToken = data.nextPageToken || null;
-        if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
-        if (moreBtn)  moreBtn.disabled = false;
-
-      } catch (err) {
-        if (!append) container.innerHTML = `
-          <div class="ls-no-key">
-            <span style="font-size:2.5rem">❌</span>
-            <p>網路錯誤，請稍後再試</p>
-          </div>`;
+      if (yearFilter && yearFilter !== 'all') {
+        url += '&publishedAfter=' + encodeURIComponent(yearFilter + '-01-01T00:00:00Z');
+        url += '&publishedBefore=' + encodeURIComponent(yearFilter + '-12-31T23:59:59Z');
       }
-      lsLoading = false;
+      if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
+      const res = await fetch(url);
+      return await res.json();
     }
 
-    // 「載入更多」按鈕
+    // ── 載入指定年份（自動抓完所有分頁）─────────
+    async function loadYear(year) {
+      if (lsLoading) return;
+      lsLoading = true;
+      lsCurrentYear   = year;
+      lsNextPageToken = null;
+
+      const container = document.getElementById('livestreams-container');
+      const moreWrap  = document.getElementById('ls-load-more-wrap');
+      const countEl   = document.getElementById('ls-search-count');
+      const input     = document.getElementById('ls-search-input');
+      if (!container) { lsLoading = false; return; }
+
+      // 清除搜尋
+      if (input) input.value = '';
+      if (countEl) countEl.style.display = 'none';
+
+      // 沒有 API Key
+      if (!v.ytApiKey) {
+        container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">🔑</span><p>尚未設定 YouTube API 金鑰</p></div>';
+        lsLoading = false;
+        return;
+      }
+
+      container.innerHTML = '<div class="ls-loading"><div class="ls-spinner"></div><span>載入中…</span></div>';
+      if (moreWrap) moreWrap.style.display = 'none';
+
+      try {
+        if (year === 'all') {
+          // 「全部」：只抓第一頁，其餘靠「載入更多」
+          const data = await fetchLsPage(null, 'all');
+          if (data.error) throw new Error(data.error.message);
+          container.innerHTML = '';
+          const items = data.items || [];
+          if (!items.length) {
+            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>尚無直播存檔</p></div>';
+          } else {
+            items.forEach(item => renderLsCard(container, item));
+          }
+          lsNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
+        } else {
+          // 特定年份：自動抓完所有分頁
+          let pageToken = null;
+          let totalCount = 0;
+          container.innerHTML = '';
+          do {
+            const data = await fetchLsPage(pageToken, year);
+            if (data.error) throw new Error(data.error.message);
+            const items = data.items || [];
+            items.forEach(item => renderLsCard(container, item));
+            totalCount += items.length;
+            pageToken = data.nextPageToken || null;
+            // 更新 loading 文字
+            if (pageToken) {
+              const loadingEl = container.querySelector('.ls-loading');
+              if (loadingEl) loadingEl.querySelector('span').textContent = '已載入 ' + totalCount + ' 部，繼續載入…';
+            }
+          } while (pageToken);
+
+          if (totalCount === 0) {
+            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>' + year + ' 年尚無直播存檔</p></div>';
+          }
+          if (moreWrap) moreWrap.style.display = 'none';
+        }
+      } catch (err) {
+        container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>API 錯誤：' + err.message + '</p></div>';
+      }
+      lsLoading = false;
+      applyLsSearch();   // 套用搜尋（清空狀態下無效果）
+    }
+
+    tryLoadLiveStreams = function() { loadYear(lsCurrentYear); };
+
+    // ── 「載入更多」（僅全部模式）─────────────────
     document.addEventListener('click', e => {
       if (e.target && e.target.id === 'ls-load-more-btn') {
+        if (lsLoading || !lsNextPageToken) return;
+        lsLoading = true;
         e.target.disabled = true;
-        tryLoadLiveStreams(true);
+        const container = document.getElementById('livestreams-container');
+        const moreWrap  = document.getElementById('ls-load-more-wrap');
+        fetchLsPage(lsNextPageToken, 'all').then(data => {
+          if (data.error) { lsLoading = false; return; }
+          (data.items || []).forEach(item => renderLsCard(container, item));
+          lsNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
+          const btn = document.getElementById('ls-load-more-btn');
+          if (btn) btn.disabled = false;
+          lsLoading = false;
+          applyLsSearch();
+        });
       }
     });
 
-    // ── 搜尋篩選 ──────────────────────────────────
+    // ── 年份按鈕切換 ──────────────────────────────
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadYear(btn.dataset.year);
+    });
+
+    // ── 搜尋篩選（在已載入的卡片中即時過濾）──────
     function applyLsSearch() {
-      const input   = document.getElementById('ls-search-input');
-      const countEl = document.getElementById('ls-search-count');
+      const input    = document.getElementById('ls-search-input');
+      const countEl  = document.getElementById('ls-search-count');
       const clearBtn = document.getElementById('ls-search-clear');
       if (!input) return;
       const q = input.value.trim().toLowerCase();
