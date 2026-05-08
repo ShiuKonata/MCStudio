@@ -72,17 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 動態分頁設定（依 vtuber 資料決定顯示哪些分頁）──
   const tabConfig = [
-    { key: 'profile',    label: '🐸 個人介紹',    color: null },
-    ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet', label: '🎨 三視圖', color: null }] : []),
-    ...('fanName'  in v ? [{ key: 'trivia',    label: '💡 小知識',    color: '#e65100' }] : []),
-    { key: 'videos',     label: '🎵 最新音樂',    color: '#d32f2f' },
-    ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: '📱 Shorts 存檔',  color: '#ff6f00' }] :
-        v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',   color: '#ff6f00' }] : []),
-    ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦', color: '#7b1fa2' }] : []),
-    ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦', color: '#1565c0' }] : []),
-    { key: 'schedule', label: '📅 行程預覽',    color: '#0277bd' },
-    ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: '📺 直播存檔', color: '#cc0000' }] : []),
-    ...(v.memberVideos && v.memberVideos.length ? [{ key: 'member', label: '🔒 會員直播', color: '#8e24aa' }] : []),
+    { key: 'profile',    label: '🐸 個人介紹',       color: null },
+    ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet',    label: '🎨 三視圖',        color: null }] : []),
+    ...('fanName'  in v ? [{ key: 'trivia',            label: '💡 小知識',        color: '#e65100' }] : []),
+    { key: 'schedule',   label: '📅 行程預覽',         color: '#0277bd' },
+    ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: '📺 直播存檔',    color: '#cc0000' }] : []),
+    ...(v.memberVideos && v.memberVideos.length ? [{ key: 'member', label: '🔒 會員直播',        color: '#8e24aa' }] : []),
+    { key: 'videos',     label: '🎵 最新音樂',         color: '#d32f2f' },
+    ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: '📱 Shorts官方剪輯', color: '#ff6f00' }] :
+        v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',    color: '#ff6f00' }] : []),
+    ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦',   color: '#7b1fa2' }] : []),
+    ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦',   color: '#1565c0' }] : []),
   ];
 
   // ── 注入頂部分頁列 ─────────────────────────────
