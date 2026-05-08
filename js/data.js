@@ -106,9 +106,9 @@ const vtubers = [
 
     // 會員限定直播（手動填入，id 填 YouTube 影片 ID）
     memberVideos: [
-      { id: "REPLACE_MEM_1", title: "【會限】範例影片一", date: "2024-01-01" },
-      { id: "REPLACE_MEM_2", title: "【會限】範例影片二", date: "2024-02-01" },
-      { id: "REPLACE_MEM_3", title: "【會限】範例影片三", date: "2024-03-01" },
+      { id: "iawtSS8RxPk", title: "【會限】練歌練吉他，連做最簡單ㄉ事都像在復健💧詩雨蔻達", date: "2026-02-04" },
+      { id: "2SfBMMaMLWY", title: "【會限】初次練歌台，絕對不是因為被逼到牆角ㄌ💧詩雨蔻達", date: "2025-11-25" },
+      { id: "QTuPCPnCKD0", title: "【會限】來做哈寶的衣服(希望五根手指都安好)💧詩雨蔻達◬三次元蛙手露出注意", date: "2025-10-29" },
     ],
 
     color: "#B9C468"   // SHIUCODA 代表色
