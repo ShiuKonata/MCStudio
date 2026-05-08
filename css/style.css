@@ -1006,6 +1006,8 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px;
+  width: 100%;
+  min-width: fit-content;
 }
 /* 隱藏的 YouTube 播放器容器 */
 #sbgm-hidden {
@@ -1257,6 +1259,28 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   font-size: 0.88rem;
   color: rgba(255,255,255,0.85);
   line-height: 1.5;
+}
+
+/* =============================================
+   最新訊息 TAB（Twitter Timeline Widget）
+   ============================================= */
+.twitter-feed-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 0.5rem 0 1rem;
+  min-height: 0;
+}
+.twitter-feed-wrap .twitter-timeline {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 300px;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.88rem;
+  display: block;
 }
 
 /* =============================================
