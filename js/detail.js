@@ -700,8 +700,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let ytsNextPageToken = null;
 
     function renderYtsCard(container, item) {
+      const snip = item.snippet;
+      // 跳過正在直播或預定直播的影片
+      if (snip.liveBroadcastContent === 'live' || snip.liveBroadcastContent === 'upcoming') return;
       const vid      = item.id.videoId;
-      const snip     = item.snippet;
       const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
       const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
