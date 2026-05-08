@@ -331,8 +331,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- 關於 ＋ 口頭禪 並排雙框 -->
           <div class="profile-duo">
             <div class="profile-about-col">
-              <div class="detail-section-title">關於 ${v.name}</div>
-              <div class="detail-description profile-fill">${v.description}</div>
+              <div class="detail-quote">
+                <div class="quote-label">關於 ${v.name}</div>
+                <p class="profile-about-text">${v.description}</p>
+              </div>
             </div>
             <div class="profile-quote-col">
               <div class="detail-quote">
