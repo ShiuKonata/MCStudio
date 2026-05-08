@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦', color: '#7b1fa2' }] : []),
     ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦', color: '#1565c0' }] : []),
     { key: 'schedule', label: '📅 行程預覽',    color: '#0277bd' },
+    ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: '📺 直播存檔', color: '#cc0000' }] : []),
   ];
 
   // ── 注入頂部分頁列 ─────────────────────────────
@@ -397,6 +398,17 @@ document.addEventListener('DOMContentLoaded', () => {
           <div id="schedule-content"></div>
         </div>
 
+        ${v.youtubeChannelId ? `
+        <!-- TAB: 直播存檔 -->
+        <div id="tab-livestreams" class="tab-panel">
+          <div class="detail-section-title">📺 直播存檔</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:1rem;font-weight:600;flex-shrink:0">歷屆直播紀錄，點擊觀看回放</p>
+          <div class="livestreams-container" id="livestreams-container"></div>
+          <div class="ls-load-more-wrap" id="ls-load-more-wrap" style="display:none">
+            <button class="ls-load-more-btn" id="ls-load-more-btn">載入更多</button>
+          </div>
+        </div>` : ''}
+
       </main>
     </div>
   `;
@@ -518,6 +530,122 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>`;
   scheduleContent.innerHTML = scheduleHTML;
 
+  // ── 直播存檔（YouTube Data API v3）──────────────
+  let tryLoadLiveStreams = null;   // 提升到外層，讓 activateTab 可呼叫
+  if (v.youtubeChannelId) {
+    let lsNextPageToken = null;
+    let lsLoading       = false;
+
+    tryLoadLiveStreams = async function(append) {
+      if (lsLoading) return;
+      lsLoading = true;
+      const container  = document.getElementById('livestreams-container');
+      const moreWrap   = document.getElementById('ls-load-more-wrap');
+      const moreBtn    = document.getElementById('ls-load-more-btn');
+
+      if (!container) { lsLoading = false; return; }
+
+      // 首次載入：顯示 Loading
+      if (!append) {
+        container.innerHTML = '<div class="ls-loading"><div class="ls-spinner"></div><span>載入直播存檔中…</span></div>';
+      }
+
+      // 沒有 API Key → 顯示提示
+      if (!v.ytApiKey) {
+        container.innerHTML = `
+          <div class="ls-no-key">
+            <span style="font-size:2.5rem">🔑</span>
+            <p>尚未設定 YouTube API 金鑰</p>
+            <p style="font-size:0.82rem;opacity:.7">請在 data.js 的 ytApiKey 欄位填入 YouTube Data API v3 金鑰</p>
+          </div>`;
+        lsLoading = false;
+        return;
+      }
+
+      let url = 'https://www.googleapis.com/youtube/v3/search'
+        + '?part=snippet'
+        + '&channelId=' + encodeURIComponent(v.youtubeChannelId)
+        + '&type=video'
+        + '&eventType=completed'
+        + '&order=date'
+        + '&maxResults=24'
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      if (lsNextPageToken) url += '&pageToken=' + encodeURIComponent(lsNextPageToken);
+
+      try {
+        const res  = await fetch(url);
+        const data = await res.json();
+
+        if (data.error) {
+          container.innerHTML = `
+            <div class="ls-no-key">
+              <span style="font-size:2.5rem">⚠️</span>
+              <p>API 錯誤：${data.error.message}</p>
+            </div>`;
+          lsLoading = false;
+          return;
+        }
+
+        // 首次清除 loading 訊息
+        if (!append) container.innerHTML = '';
+
+        const items = data.items || [];
+        if (!items.length && !append) {
+          container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>尚無直播存檔</p></div>';
+          lsLoading = false;
+          return;
+        }
+
+        items.forEach(item => {
+          const vid   = item.id.videoId;
+          const snip  = item.snippet;
+          const thumb = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
+          const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
+          const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
+          const title    = (snip.title || '').replace(/'/g, '&#39;');
+          container.innerHTML += `
+            <div class="ls-card" onclick="(function(){
+              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+              document.getElementById('yt-modal-title').textContent='${title}';
+              document.getElementById('yt-modal').classList.add('open');
+              document.body.style.overflow='hidden';
+            })()">
+              <div class="ls-thumb-wrap">
+                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+                <div class="ls-duration-badge">直播回放</div>
+              </div>
+              <div class="ls-info">
+                <div class="ls-title">${snip.title || '（無標題）'}</div>
+                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+              </div>
+            </div>`;
+        });
+
+        lsNextPageToken = data.nextPageToken || null;
+        if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
+        if (moreBtn)  moreBtn.disabled = false;
+
+      } catch (err) {
+        if (!append) container.innerHTML = `
+          <div class="ls-no-key">
+            <span style="font-size:2.5rem">❌</span>
+            <p>網路錯誤，請稍後再試</p>
+          </div>`;
+      }
+      lsLoading = false;
+    }
+
+    // 「載入更多」按鈕
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'ls-load-more-btn') {
+        e.target.disabled = true;
+        tryLoadLiveStreams(true);
+      }
+    });
+  }
+
   // ── 分頁切換邏輯 ──────────────────────────────
   const vtabBtns  = document.querySelectorAll('.vtab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
@@ -537,6 +665,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextLink = document.querySelector('.sidebar-nav-next');
     if (prevLink) prevLink.href = `vtuber.html?id=${prev.id}&tab=${key}`;
     if (nextLink) nextLink.href = `vtuber.html?id=${next.id}&tab=${key}`;
+
+    // 直播存檔：首次進入分頁時才開始載入
+    if (key === 'livestreams' && tryLoadLiveStreams && !window._lsLoaded) {
+      window._lsLoaded = true;
+      tryLoadLiveStreams(false);
+    }
   }
 
   // ── 出道計時器 ────────────────────────────────
