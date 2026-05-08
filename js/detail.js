@@ -402,7 +402,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 直播存檔 -->
         <div id="tab-livestreams" class="tab-panel">
           <div class="detail-section-title">📺 直播存檔</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:1rem;font-weight:600;flex-shrink:0">歷屆直播紀錄，點擊觀看回放</p>
+          <div class="ls-search-bar">
+            <span class="ls-search-icon">🔍</span>
+            <input class="ls-search-input" id="ls-search-input" type="text" placeholder="搜尋直播標題或日期（例：2024-03）" autocomplete="off">
+            <button class="ls-search-clear" id="ls-search-clear" title="清除">✕</button>
+          </div>
+          <div class="ls-search-count" id="ls-search-count"></div>
           <div class="livestreams-container" id="livestreams-container"></div>
           <div class="ls-load-more-wrap" id="ls-load-more-wrap" style="display:none">
             <button class="ls-load-more-btn" id="ls-load-more-btn">載入更多</button>
@@ -642,6 +647,44 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target && e.target.id === 'ls-load-more-btn') {
         e.target.disabled = true;
         tryLoadLiveStreams(true);
+      }
+    });
+
+    // ── 搜尋篩選 ──────────────────────────────────
+    function applyLsSearch() {
+      const input   = document.getElementById('ls-search-input');
+      const countEl = document.getElementById('ls-search-count');
+      const clearBtn = document.getElementById('ls-search-clear');
+      if (!input) return;
+      const q = input.value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#livestreams-container .ls-card');
+      let shown = 0;
+      cards.forEach(card => {
+        const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
+        const date  = (card.querySelector('.ls-date')?.textContent  || '').toLowerCase();
+        const match = !q || title.includes(q) || date.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
+      if (countEl) {
+        if (q && cards.length > 0) {
+          countEl.textContent = '找到 ' + shown + ' / ' + cards.length + ' 部直播';
+          countEl.style.display = 'block';
+        } else {
+          countEl.style.display = 'none';
+        }
+      }
+    }
+
+    document.addEventListener('input', e => {
+      if (e.target && e.target.id === 'ls-search-input') applyLsSearch();
+    });
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'ls-search-clear') {
+        const input = document.getElementById('ls-search-input');
+        if (input) { input.value = ''; input.focus(); }
+        applyLsSearch();
       }
     });
   }

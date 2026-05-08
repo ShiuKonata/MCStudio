@@ -1362,6 +1362,57 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 /* =============================================
    直播存檔 TAB
    ============================================= */
+/* 搜尋列 */
+.ls-search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+  transition: border-color 0.2s;
+}
+.ls-search-bar:focus-within {
+  border-color: var(--vt-main);
+}
+.ls-search-icon { font-size: 0.9rem; opacity: 0.6; flex-shrink: 0; }
+.ls-search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.ls-search-input::placeholder { color: rgba(255,255,255,0.35); }
+.ls-search-clear {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: white;
+  font-size: 0.7rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.ls-search-clear:hover { background: rgba(255,255,255,0.3); }
+.ls-search-count {
+  display: none;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  padding-left: 0.5rem;
+}
+
 .livestreams-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
