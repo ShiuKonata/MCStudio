@@ -26,6 +26,10 @@ const vtubers = [
     instagram: "https://www.instagram.com/shiucoda/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740",
 
+    // YouTube 頻道 ID（直播存檔用）
+    youtubeChannelId: "UCuPHlMEd0cR-tvAYPjGWVwQ",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
+
     // 自訂相關連結（覆蓋預設 YT/Twitter/Twitch 按鈕）
     overrideLinks: [
       { label: 'Coda的大小事', url: 'https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740', class: 'sheets',     icon: '📋' },
