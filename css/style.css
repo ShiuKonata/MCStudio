@@ -637,7 +637,7 @@ body.vtuber-page .nav-links-bar a.active { background: rgba(255,255,255,0.15); }
   margin-bottom: 1.2rem;
   font-family: 'Calibri', 'Noto Sans TC', sans-serif;
 }
-.sidebar-social { display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 1.2rem; }
+.sidebar-social { display: flex; justify-content: center; gap: 0.55rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
 .sidebar-social-btn {
   width: 42px; height: 42px; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
@@ -648,6 +648,8 @@ body.vtuber-page .nav-links-bar a.active { background: rgba(255,255,255,0.15); }
 .sidebar-social-btn.yt     { background: #ff2222; color: white; }
 .sidebar-social-btn.tw     { background: #111;    color: white; }
 .sidebar-social-btn.twitch { background: #9146ff; color: white; }
+.sidebar-social-btn.fb     { background: #1877f2; color: white; }
+.sidebar-social-btn.ig     { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: white; }
 .sidebar-back-btn {
   display: block; width: 100%;
   padding: 0.6rem; border-radius: 12px;
@@ -774,6 +776,9 @@ body.vtuber-page .tag { background: rgba(255,255,255,0.85); border-color: rgba(2
 .detail-link-btn.twitter    { background: #111;    color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
 .detail-link-btn.sheets     { background: #0f9d58; color: white; box-shadow: 0 4px 16px rgba(15,157,88,0.4); }
 .detail-link-btn.twitch-btn { background: #9146ff; color: white; box-shadow: 0 4px 16px rgba(145,70,255,0.4); }
+.detail-link-btn.hivebee    { background: #f59e0b; color: white; box-shadow: 0 4px 16px rgba(245,158,11,0.4); }
+.detail-link-btn.membership { background: linear-gradient(135deg,#7c3aed,#a78bfa); color: white; box-shadow: 0 4px 16px rgba(124,58,237,0.4); }
+.detail-link-btn.marshmallow{ background: linear-gradient(135deg,#ec4899,#f9a8d4); color: white; box-shadow: 0 4px 16px rgba(236,72,153,0.4); }
 .link-icon { font-size: 1.2rem; }
 
 /* Quote — 填滿剩餘空間，讓個人介紹頁延伸至底部 */
@@ -1259,6 +1264,28 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   font-size: 0.88rem;
   color: rgba(255,255,255,0.85);
   line-height: 1.5;
+}
+
+/* =============================================
+   個人介紹 — 關於 ＋ 口頭禪 並排雙框
+   ============================================= */
+.profile-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+}
+.profile-about-col,
+.profile-quote-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.profile-fill {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 /* =============================================

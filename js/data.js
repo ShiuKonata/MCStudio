@@ -20,9 +20,19 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@SHIUCODA",
-    twitter: "https://twitter.com/SHIUCODA",
-    twitch: "https://www.twitch.tv/sh1uc0da",
+    twitter:   "https://twitter.com/SHIUCODA",
+    twitch:    "https://www.twitch.tv/sh1uc0da",
+    facebook:  "",   // TODO: 填入 Facebook URL
+    instagram: "",   // TODO: 填入 Instagram URL
     spreadsheet: "https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740",
+
+    // 自訂相關連結（覆蓋預設 YT/Twitter/Twitch 按鈕）
+    overrideLinks: [
+      { label: 'Coda的大小事', url: 'https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740', class: 'sheets',     icon: '📋' },
+      { label: 'HiveBee',    url: '',   class: 'hivebee',    icon: '🐝' },  // TODO: 填入 HiveBee URL
+      { label: '深度會員',   url: 'https://www.youtube.com/@SHIUCODA/join', class: 'membership', icon: '💎' },
+      { label: '棉花糖',     url: '',   class: 'marshmallow', icon: '🍬' },  // TODO: 填入棉花糖 URL
+    ],
 
     videos: [
       { id: "dGNwgv3beyk", title: "哈士奇寶寶" },
