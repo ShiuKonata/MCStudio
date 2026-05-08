@@ -22,16 +22,16 @@ const vtubers = [
     youtube: "https://www.youtube.com/@SHIUCODA",
     twitter:   "https://twitter.com/SHIUCODA",
     twitch:    "https://www.twitch.tv/sh1uc0da",
-    facebook:  "",   // TODO: 填入 Facebook URL
-    instagram: "",   // TODO: 填入 Instagram URL
+    facebook:  "https://www.facebook.com/SHIUCODA/",
+    instagram: "https://www.instagram.com/shiucoda/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740",
 
     // 自訂相關連結（覆蓋預設 YT/Twitter/Twitch 按鈕）
     overrideLinks: [
       { label: 'Coda的大小事', url: 'https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740', class: 'sheets',     icon: '📋' },
-      { label: 'HiveBee',    url: '',   class: 'hivebee',    icon: '🐝' },  // TODO: 填入 HiveBee URL
-      { label: '深度會員',   url: 'https://www.youtube.com/@SHIUCODA/join', class: 'membership', icon: '💎' },
-      { label: '棉花糖',     url: '',   class: 'marshmallow', icon: '🍬' },  // TODO: 填入棉花糖 URL
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/ShiuCoda/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/ShiuCoda/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/sh1uc0da',           class: 'marshmallow', icon: '🍬' },
     ],
 
     videos: [
