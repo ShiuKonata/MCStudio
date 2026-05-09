@@ -365,6 +365,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 原創曲&Cover -->
         <div id="tab-videos" class="tab-panel">
           <div class="detail-section-title">🎵 原創曲&amp;Cover</div>
+          <div class="ls-year-bar" id="videos-filter-bar">
+            <button class="ls-year-btn active" data-vfilter="all">全部</button>
+            <button class="ls-year-btn" data-vfilter="原創曲">🎼 原創曲</button>
+            <button class="ls-year-btn" data-vfilter="Cover">🎤 Cover</button>
+          </div>
           <div class="livestreams-container" id="video-grid"></div>
         </div>
 
@@ -570,6 +575,21 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVideoCards(v.shorts,     'shorts-grid',     '📱');
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
+
+  // ── 原創曲&Cover 篩選按鈕 ──────────────────────
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.ls-year-btn[data-vfilter]');
+    if (!btn) return;
+    document.querySelectorAll('.ls-year-btn[data-vfilter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.vfilter;
+    document.querySelectorAll('#video-grid .ls-card').forEach(card => {
+      const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
+      if (filter === 'all')    card.style.display = '';
+      else if (filter === '原創曲') card.style.display = title.includes('原創') ? '' : 'none';
+      else if (filter === 'Cover')  card.style.display = title.toLowerCase().includes('cover') ? '' : 'none';
+    });
+  });
 
   // ── 行程區 ────────────────────────────────────
   const scheduleContent = document.getElementById('schedule-content');
