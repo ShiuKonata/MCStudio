@@ -39,9 +39,9 @@ const vtubers = [
     ],
 
     videos: [
-      { id: "dGNwgv3beyk", title: "哈士奇寶寶",                                    date: "2024-06-06" },
-      { id: "_DzQNbQW4L0", title: "Take Me To The Beach / Imagine Dragons",        date: "2024-04-25" },
-      { id: "DEekDZDIywE", title: "星座になれたら / 結束バンド",                    date: "2023-08-26" },
+      { id: "dGNwgv3beyk", title: "【原創】哈士奇寶寶 💧詩雨蔻達【Official Music Video】",                          date: "2026-01-10" },
+      { id: "_DzQNbQW4L0", title: "【Cover】Take Me To The Beach/Imagine Dragons(ft. Ado)💧詩雨蔻達w/艾琳妮雅",    date: "2025-08-30" },
+      { id: "DEekDZDIywE", title: "【Cover】 星座になれたら/結束バンド💧詩雨蔻達",                                  date: "2025-06-06" },
     ],
 
     musicClips: [
