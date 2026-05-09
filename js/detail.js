@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { key: 'videos',     label: '🎵 原創曲&Cover',      color: '#d32f2f' },
     ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: '📱 Shorts官方剪輯', color: '#ff6f00' }] :
         v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',    color: '#ff6f00' }] : []),
+    ...(v.newYearWishes ? [{ key: 'wishes', label: '🎍 新年願望', color: '#e91e63' }] : []),
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦',   color: '#7b1fa2' }] : []),
     ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦',   color: '#1565c0' }] : []),
   ];
@@ -404,6 +405,18 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>` : ''}
 
+        <!-- TAB: 新年願望 -->
+        ${v.newYearWishes ? `
+        <div id="tab-wishes" class="tab-panel">
+          <div class="detail-section-title">🎍 新年願望</div>
+          <div class="ls-year-bar" id="wishes-year-bar">
+            <button class="ls-year-btn active" data-wishyear="2026">2026</button>
+            <button class="ls-year-btn" data-wishyear="2025">2025</button>
+            <button class="ls-year-btn" data-wishyear="2024">2024</button>
+          </div>
+          <div class="wishes-table-wrap" id="wishes-table-wrap"></div>
+        </div>` : ''}
+
         <!-- TAB: 熱門音樂推薦 -->
         ${v.musicClips && v.musicClips.length ? `
         <div id="tab-musicclips" class="tab-panel">
@@ -575,6 +588,49 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVideoCards(v.shorts,     'shorts-grid',     '📱');
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
+
+  // ── 新年願望 ──────────────────────────────────
+  if (v.newYearWishes) {
+    function renderWishes(year) {
+      const wrap = document.getElementById('wishes-table-wrap');
+      if (!wrap) return;
+      const list = v.newYearWishes[year] || [];
+      if (!list.length) {
+        wrap.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">🎍</span><p>' + year + ' 年願望待新增</p></div>';
+        return;
+      }
+      wrap.innerHTML = `
+        <table class="wishes-table">
+          <thead>
+            <tr>
+              <th class="wt-no">No.</th>
+              <th class="wt-item">項目</th>
+              <th class="wt-goal">目標</th>
+              <th class="wt-done">是否達成</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${list.map((w, i) => `
+              <tr>
+                <td class="wt-no">${i + 1}</td>
+                <td class="wt-item">${w.item || ''}</td>
+                <td class="wt-goal">${w.goal || ''}</td>
+                <td class="wt-done">${w.achieved || '<span class="wt-blank">—</span>'}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    renderWishes(2026);
+
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-wishyear]');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn[data-wishyear]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderWishes(Number(btn.dataset.wishyear));
+    });
+  }
 
   // ── 原創曲&Cover 篩選按鈕 ──────────────────────
   document.addEventListener('click', e => {

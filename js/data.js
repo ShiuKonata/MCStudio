@@ -159,6 +159,19 @@ const vtubers = [
       { id: "iARUXWRvT0g", title: "【會限】 Gartic Phone!! 一起來畫畫傳話啦!!!💧詩雨蔻達", date: "2023-03-21" },
     ],
 
+    // 新年願望（每年填入項目、目標、是否達成）
+    newYearWishes: {
+      2026: [
+        // { item: "項目", goal: "目標說明", achieved: "" },
+      ],
+      2025: [
+        // { item: "項目", goal: "目標說明", achieved: "" },
+      ],
+      2024: [
+        // { item: "項目", goal: "目標說明", achieved: "" },
+      ],
+    },
+
     color: "#B9C468"   // SHIUCODA 代表色
   },
 
