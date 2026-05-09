@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { key: 'schedule',   label: '📅 行程預覽',         color: '#0277bd' },
     ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: '📺 直播存檔',    color: '#cc0000' }] : []),
     ...(v.memberVideos && v.memberVideos.length ? [{ key: 'member', label: '🔒 會員直播',        color: '#8e24aa' }] : []),
-    { key: 'videos',     label: '🎵 最新音樂',         color: '#d32f2f' },
+    { key: 'videos',     label: '🎵 原創曲&Cover',      color: '#d32f2f' },
     ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: '📱 Shorts官方剪輯', color: '#ff6f00' }] :
         v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',    color: '#ff6f00' }] : []),
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦',   color: '#7b1fa2' }] : []),
@@ -362,11 +362,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ${refSheetHTML}
         ${triviaHTML}
 
-        <!-- TAB: 最新音樂 -->
+        <!-- TAB: 原創曲&Cover -->
         <div id="tab-videos" class="tab-panel">
-          <div class="detail-section-title">🎵 最新音樂</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">最新原創&amp;Cover，點擊前往 YouTube 觀看</p>
-          <div class="video-grid" id="video-grid"></div>
+          <div class="detail-section-title">🎵 原創曲&amp;Cover</div>
+          <div class="livestreams-container" id="video-grid"></div>
         </div>
 
         <!-- TAB: 手動 Shorts（無 youtubeChannelId 時使用）-->
@@ -529,38 +528,38 @@ document.addEventListener('DOMContentLoaded', () => {
   ytModal.addEventListener('click', e => { if (e.target === ytModal) closeYTModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYTModal(); });
 
-  // ── 共用：渲染影片卡片到指定容器 ────────────────
+  // ── 共用：渲染影片卡片（ls-card 格式，公開影片用 modal）────
   function renderVideoCards(items, containerId, placeholderIcon) {
     const container = document.getElementById(containerId);
     if (!container || !items || !items.length) return;
     items.forEach(vid => {
       if (vid.id && !vid.id.startsWith('REPLACE')) {
-        // 優先用自訂縮圖，否則抓 YouTube 縮圖
-        const thumb    = vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`;
-        const thumbFb  = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
-        const safeTitle = vid.title.replace(/'/g, '&#39;');
+        const thumbUrl  = vid.thumb || ('https://img.youtube.com/vi/' + vid.id + '/hqdefault.jpg');
+        const safeTitle = (vid.title || '').replace(/'/g, '&#39;');
         container.innerHTML += `
-          <div class="video-card" style="cursor:pointer"
-            onclick="(function(){
-              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
-              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
-              document.getElementById('yt-modal-title').textContent='${safeTitle}';
-              document.getElementById('yt-modal').classList.add('open');
-              document.body.style.overflow='hidden';
-            })()">
-            <div class="video-thumb-wrap">
-              <img class="video-thumb" src="${thumb}" onerror="this.src='${thumbFb}'" alt="${vid.title}">
-              <div class="video-title">${vid.title}</div>
-              <div class="video-play-overlay"><div class="video-play-btn">▶</div></div>
+          <div class="ls-card" onclick="(function(){
+            document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
+            document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
+            document.getElementById('yt-modal-title').textContent='${safeTitle}';
+            document.getElementById('yt-modal').classList.add('open');
+            document.body.style.overflow='hidden';
+          })()">
+            <div class="ls-thumb-wrap">
+              <img class="ls-thumb" src="${thumbUrl}" alt="${vid.title}" loading="lazy">
+              <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+            </div>
+            <div class="ls-info">
+              <div class="ls-title">${vid.title || '（無標題）'}</div>
+              ${vid.date ? '<div class="ls-date">' + vid.date + '</div>' : ''}
             </div>
           </div>`;
       } else {
         container.innerHTML += `
-          <div class="video-card video-placeholder">
-            <div class="video-placeholder-inner">
+          <div class="ls-card" style="cursor:default">
+            <div class="ls-thumb-wrap" style="display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3)">
               <span style="font-size:2.5rem">${placeholderIcon}</span>
-              <p>影片待設定</p>
             </div>
+            <div class="ls-info"><div class="ls-title" style="opacity:.5">影片待設定</div></div>
           </div>`;
       }
     });

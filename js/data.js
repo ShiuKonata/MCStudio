@@ -39,9 +39,9 @@ const vtubers = [
     ],
 
     videos: [
-      { id: "dGNwgv3beyk", title: "哈士奇寶寶" },
-      { id: "_DzQNbQW4L0", title: "Take Me To The Beach / Imagine Dragons" },
-      { id: "DEekDZDIywE", title: "星座になれたら / 結束バンド" }
+      { id: "dGNwgv3beyk", title: "哈士奇寶寶",                                    date: "2024-06-06" },
+      { id: "_DzQNbQW4L0", title: "Take Me To The Beach / Imagine Dragons",        date: "2024-04-25" },
+      { id: "DEekDZDIywE", title: "星座になれたら / 結束バンド",                    date: "2023-08-26" },
     ],
 
     musicClips: [
