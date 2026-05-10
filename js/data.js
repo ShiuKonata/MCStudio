@@ -176,7 +176,13 @@ const vtubers = [
         { item: "陳綺貞全歌", goal: "長期挑戰：挑戰唱完全部陳綺貞的歌曲",                                                                                                                                           achieved: "" },
       ],
       2025: [
-        // { item: "項目", goal: "目標說明", achieved: "" },
+        { item: "快樂",     goal: "希望過得更快樂",                                                                       achieved: "✅ 完成" },
+        { item: "時間管理", goal: "把時間安排得更好一點",                                                                  achieved: "還有進步空間" },
+        { item: "柏德之門", goal: "把柏德之門玩完一周目",                                                                  achieved: "2026年過年有機會" },
+        { item: "新突破",   goal: "希望今年能做點不一樣的事情，例如Vtuber / 直播 / 人生，能有點不一樣的突破",              achieved: "✅ 完成" },
+        { item: "很酷很帥", goal: "成為很酷很帥的人，唱歌也要，像GD一樣玩世不恭",                                         achieved: "✅ 呱民說已經是了，完成" },
+        { item: "搭遊輪",   goal: "搭遊輪出去玩",                                                                          achieved: "太忙辦不到" },
+        { item: "過年新歌", goal: "如果能跟呱呱們過年，寫一首過年新歌",                                                    achieved: "沒有新歌了" },
       ],
       2024: [
         // { item: "項目", goal: "目標說明", achieved: "" },
