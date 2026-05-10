@@ -90,11 +90,15 @@ const vtubers = [
     ],
 
     // 畫冊（圖片放在 images/shiucoda/gallery/ 資料夾）
-    // 格式：純字串路徑，或 { src, title, color }
-    // color 可留空（自動偵測）或手動填入：red/orange/yellow/green/blue/purple/black/white/other
+    // 欄位說明：
+    //   src    ：圖片路徑（必填）
+    //   title  ：顯示名稱（選填；若留空則自動顯示檔案名稱）
+    //   member ："深度" / "一般"（選填；填了才能用會員篩選）
+    //   color  ：留空＝自動偵測主色；或手動填入 red/orange/yellow/green/blue/purple/black/white/other
     gallery: [
       // 圖片待填入，格式範例：
-      // { src: "images/shiucoda/gallery/001.jpg", title: "作者名 @xxx", color: "" },
+      // { src: "images/shiucoda/gallery/001.jpg", title: "作品名稱 @artist", member: "深度", color: "" },
+      // { src: "images/shiucoda/gallery/002.jpg", title: "作品名稱 @artist", member: "一般", color: "" },
     ],
 
     // 小知識（fanName 欄位存在即顯示分頁）

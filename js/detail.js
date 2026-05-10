@@ -422,6 +422,15 @@ document.addEventListener('DOMContentLoaded', () => {
         ${v.gallery && v.gallery.length ? `
         <div id="tab-gallery" class="tab-panel">
           <div class="detail-section-title">🖼️ 畫冊</div>
+          <!-- 會員等級篩選 -->
+          <div class="gallery-filter-label">會員等級</div>
+          <div class="ls-year-bar" id="gallery-member-bar">
+            <button class="ls-year-btn active" data-gmember="all">全部</button>
+            <button class="ls-year-btn" data-gmember="深度">💎 深度會員</button>
+            <button class="ls-year-btn" data-gmember="一般">⭐ 一般會員</button>
+          </div>
+          <!-- 顏色篩選 -->
+          <div class="gallery-filter-label" style="margin-top:0.6rem">顏色分類</div>
           <div class="ls-year-bar" id="gallery-color-bar">
             <button class="ls-year-btn active" data-gcolor="all">🎨 全部</button>
             <button class="ls-year-btn" data-gcolor="red"><span class="gcolor-dot" style="background:#e53935"></span>紅</button>
@@ -670,11 +679,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 畫冊（Gallery）────────────────────────────
   if (v.gallery && v.gallery.length) {
-    // 正規化：支援純字串路徑或 {src, title, color} 物件
+    // 正規化：支援純字串路徑或 {src, title, color, member} 物件
     const galleryItems = v.gallery.map(item =>
       typeof item === 'string'
-        ? { src: item, title: '', color: '' }
-        : { src: '', title: '', color: '', ...item }
+        ? { src: item, title: '', color: '', member: '' }
+        : { src: '', title: '', color: '', member: '', ...item }
     );
 
     const GALLERY_CACHE_KEY = 'mc_gallery_' + v.id;
@@ -684,7 +693,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (raw) galleryColors = JSON.parse(raw);
     } catch(e) {}
 
-    let galleryActiveColor = 'all';
+    let galleryActiveColor  = 'all';
+    let galleryActiveMember = 'all';
 
     const colorDotMap = {
       red:    '#e53935', orange: '#fb8c00', yellow: '#fdd835',
@@ -755,36 +765,46 @@ document.addEventListener('DOMContentLoaded', () => {
       const statsEl = document.getElementById('gallery-stats');
       if (!grid) return;
 
-      const visible = galleryActiveColor === 'all'
-        ? galleryItems
-        : galleryItems.filter(item => {
-            const c = getItemColor(item);
-            return galleryActiveColor === 'other'
-              ? !c || c === 'other'
-              : c === galleryActiveColor;
-          });
+      // 同時套用顏色篩選 + 會員等級篩選
+      const visible = galleryItems.filter(item => {
+        const c = getItemColor(item);
+        const colorMatch = galleryActiveColor === 'all'
+          ? true
+          : galleryActiveColor === 'other'
+            ? !c || c === 'other'
+            : c === galleryActiveColor;
+        const memberMatch = galleryActiveMember === 'all'
+          ? true
+          : (item.member || '') === galleryActiveMember;
+        return colorMatch && memberMatch;
+      });
 
       if (statsEl) {
-        statsEl.textContent = galleryActiveColor === 'all'
-          ? '共 ' + galleryItems.length + ' 張'
-          : visible.length + ' / ' + galleryItems.length + ' 張';
+        const isFiltered = galleryActiveColor !== 'all' || galleryActiveMember !== 'all';
+        statsEl.textContent = isFiltered
+          ? visible.length + ' / ' + galleryItems.length + ' 張'
+          : '共 ' + galleryItems.length + ' 張';
       }
 
       grid.innerHTML = visible.map((item, vi) => {
-        const color      = getItemColor(item);
-        const dotColor   = color ? (colorDotMap[color] || '#888') : null;
-        const dotStyle   = dotColor
+        const color       = getItemColor(item);
+        const dotColor    = color ? (colorDotMap[color] || '#888') : null;
+        const dotStyle    = dotColor
           ? 'background:' + dotColor + ';' + (color === 'white' ? 'border:1.5px solid rgba(0,0,0,0.18)' : '')
           : 'opacity:0';
-        const safeTitle  = (item.title || '').replace(/"/g, '&quot;');
+        // 顯示名稱：優先用 title，沒有就用檔案名（去掉副檔名）
+        const fname       = (item.src || '').split('/').pop();
+        const displayName = item.title || fname.replace(/\.[^.]+$/, '');
+        const safeTitle   = displayName.replace(/"/g, '&quot;');
+        // 會員徽章
+        const memberBadge = item.member === '深度' ? '💎' : item.member === '一般' ? '⭐' : '';
         return `
           <div class="gallery-item" data-vi="${vi}" data-src="${item.src}" data-title="${safeTitle}">
             <img src="${item.src}" alt="${safeTitle}" loading="lazy" crossorigin="anonymous"
               onerror="this.parentElement.classList.add('gallery-item-error')">
             <div class="gallery-color-dot" style="${dotStyle}"></div>
-            ${item.title
-              ? `<div class="gallery-item-overlay"><div class="gallery-item-title">${item.title}</div></div>`
-              : ''}
+            ${memberBadge ? `<div class="gallery-member-badge">${memberBadge}</div>` : ''}
+            <div class="gallery-item-label">${displayName}</div>
           </div>`;
       }).join('');
 
@@ -823,6 +843,16 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.ls-year-btn[data-gcolor]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       galleryActiveColor = btn.dataset.gcolor;
+      renderGalleryGrid();
+    });
+
+    // 會員等級篩選按鈕
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-gmember]');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn[data-gmember]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      galleryActiveMember = btn.dataset.gmember;
       renderGalleryGrid();
     });
 
@@ -884,9 +914,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!item) return;
       const grid = document.getElementById('gallery-grid');
       if (!grid || !grid.contains(item)) return;
-      const allItems  = [...grid.querySelectorAll('.gallery-item')];
+      const allItems   = [...grid.querySelectorAll('.gallery-item')];
       const clickedIdx = allItems.indexOf(item);
-      const snapItems  = allItems.map(el => ({ src: el.dataset.src, title: el.dataset.title || '' }));
+      const snapItems  = allItems.map(el => {
+        const s = el.dataset.src || '';
+        const t = el.dataset.title || s.split('/').pop().replace(/\.[^.]+$/, '');
+        return { src: s, title: t };
+      });
       openGalleryLb(clickedIdx, snapItems);
     });
   }
