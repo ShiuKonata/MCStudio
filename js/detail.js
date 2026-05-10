@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: '📱 Shorts官方剪輯', color: '#ff6f00' }] :
         v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',    color: '#ff6f00' }] : []),
     ...(v.newYearWishes ? [{ key: 'wishes', label: '🎍 新年願望', color: '#e91e63' }] : []),
+    ...(v.gallery && v.gallery.length ? [{ key: 'gallery', label: '🖼️ 畫冊', color: '#7b5ea7' }] : []),
     ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦',   color: '#7b1fa2' }] : []),
     ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦',   color: '#1565c0' }] : []),
   ];
@@ -417,6 +418,26 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="wishes-table-wrap" id="wishes-table-wrap"></div>
         </div>` : ''}
 
+        <!-- TAB: 畫冊 -->
+        ${v.gallery && v.gallery.length ? `
+        <div id="tab-gallery" class="tab-panel">
+          <div class="detail-section-title">🖼️ 畫冊</div>
+          <div class="ls-year-bar" id="gallery-color-bar">
+            <button class="ls-year-btn active" data-gcolor="all">🎨 全部</button>
+            <button class="ls-year-btn" data-gcolor="red"><span class="gcolor-dot" style="background:#e53935"></span>紅</button>
+            <button class="ls-year-btn" data-gcolor="orange"><span class="gcolor-dot" style="background:#fb8c00"></span>橙</button>
+            <button class="ls-year-btn" data-gcolor="yellow"><span class="gcolor-dot" style="background:#fdd835"></span>黃</button>
+            <button class="ls-year-btn" data-gcolor="green"><span class="gcolor-dot" style="background:#43a047"></span>綠</button>
+            <button class="ls-year-btn" data-gcolor="blue"><span class="gcolor-dot" style="background:#1e88e5"></span>藍</button>
+            <button class="ls-year-btn" data-gcolor="purple"><span class="gcolor-dot" style="background:#8e24aa"></span>紫</button>
+            <button class="ls-year-btn" data-gcolor="black"><span class="gcolor-dot" style="background:#424242;border:1.5px solid rgba(255,255,255,0.35)"></span>黑</button>
+            <button class="ls-year-btn" data-gcolor="white"><span class="gcolor-dot" style="background:#f0f0f0;border:1.5px solid rgba(255,255,255,0.35)"></span>白</button>
+            <button class="ls-year-btn" data-gcolor="other">其他</button>
+          </div>
+          <div class="gallery-stats" id="gallery-stats"></div>
+          <div class="gallery-grid" id="gallery-grid"></div>
+        </div>` : ''}
+
         <!-- TAB: 熱門音樂推薦 -->
         ${v.musicClips && v.musicClips.length ? `
         <div id="tab-musicclips" class="tab-panel">
@@ -646,6 +667,229 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (filter === 'Cover')  card.style.display = title.toLowerCase().includes('cover') ? '' : 'none';
     });
   });
+
+  // ── 畫冊（Gallery）────────────────────────────
+  if (v.gallery && v.gallery.length) {
+    // 正規化：支援純字串路徑或 {src, title, color} 物件
+    const galleryItems = v.gallery.map(item =>
+      typeof item === 'string'
+        ? { src: item, title: '', color: '' }
+        : { src: '', title: '', color: '', ...item }
+    );
+
+    const GALLERY_CACHE_KEY = 'mc_gallery_' + v.id;
+    let galleryColors = {};
+    try {
+      const raw = localStorage.getItem(GALLERY_CACHE_KEY);
+      if (raw) galleryColors = JSON.parse(raw);
+    } catch(e) {}
+
+    let galleryActiveColor = 'all';
+
+    const colorDotMap = {
+      red:    '#e53935', orange: '#fb8c00', yellow: '#fdd835',
+      green:  '#43a047', blue:   '#1e88e5', purple: '#8e24aa',
+      black:  '#424242', white:  '#f0f0f0', other:  '#9e9e9e'
+    };
+
+    // RGB → 顏色分類名稱
+    function pixelToColorName(r, g, b) {
+      const rn = r/255, gn = g/255, bn = b/255;
+      const max = Math.max(rn, gn, bn), min = Math.min(rn, gn, bn);
+      const l = (max + min) / 2;
+      const delta = max - min;
+      const s = delta === 0 ? 0 : (l > 0.5 ? delta / (2 - max - min) : delta / (max + min));
+
+      if (l > 0.88 && s < 0.18) return 'white';
+      if (l < 0.12) return 'black';
+      if (s < 0.14) return l > 0.5 ? 'white' : 'black';
+
+      let h;
+      if (delta === 0) h = 0;
+      else if (max === rn) h = ((gn - bn) / delta % 6) * 60;
+      else if (max === gn) h = ((bn - rn) / delta + 2) * 60;
+      else                 h = ((rn - gn) / delta + 4) * 60;
+      if (h < 0) h += 360;
+
+      if (h < 15 || h >= 345) return 'red';
+      if (h < 40)  return 'orange';
+      if (h < 70)  return 'yellow';
+      if (h < 150) return 'green';
+      if (h < 258) return 'blue';
+      return 'purple';
+    }
+
+    // Canvas 像素取樣偵測主色
+    function detectImgColor(imgEl) {
+      try {
+        const sz = 40;
+        const c = document.createElement('canvas');
+        c.width = sz; c.height = sz;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(imgEl, 0, 0, sz, sz);
+        const d = ctx.getImageData(0, 0, sz, sz).data;
+        const tally = {};
+        for (let i = 0; i < d.length; i += 4) {
+          if (d[i+3] < 100) continue;
+          const cn = pixelToColorName(d[i], d[i+1], d[i+2]);
+          tally[cn] = (tally[cn] || 0) + 1;
+        }
+        const entries = Object.entries(tally);
+        if (!entries.length) return 'other';
+        return entries.sort((a, b) => b[1] - a[1])[0][0];
+      } catch(e) { return 'other'; }
+    }
+
+    function saveGalleryColors() {
+      try { localStorage.setItem(GALLERY_CACHE_KEY, JSON.stringify(galleryColors)); } catch(e) {}
+    }
+
+    function getItemColor(item) {
+      if (item.color) return item.color;
+      const key = (item.src || '').split('/').pop();
+      return galleryColors[key] || null;
+    }
+
+    function renderGalleryGrid() {
+      const grid    = document.getElementById('gallery-grid');
+      const statsEl = document.getElementById('gallery-stats');
+      if (!grid) return;
+
+      const visible = galleryActiveColor === 'all'
+        ? galleryItems
+        : galleryItems.filter(item => {
+            const c = getItemColor(item);
+            return galleryActiveColor === 'other'
+              ? !c || c === 'other'
+              : c === galleryActiveColor;
+          });
+
+      if (statsEl) {
+        statsEl.textContent = galleryActiveColor === 'all'
+          ? '共 ' + galleryItems.length + ' 張'
+          : visible.length + ' / ' + galleryItems.length + ' 張';
+      }
+
+      grid.innerHTML = visible.map((item, vi) => {
+        const color      = getItemColor(item);
+        const dotColor   = color ? (colorDotMap[color] || '#888') : null;
+        const dotStyle   = dotColor
+          ? 'background:' + dotColor + ';' + (color === 'white' ? 'border:1.5px solid rgba(0,0,0,0.18)' : '')
+          : 'opacity:0';
+        const safeTitle  = (item.title || '').replace(/"/g, '&quot;');
+        return `
+          <div class="gallery-item" data-vi="${vi}" data-src="${item.src}" data-title="${safeTitle}">
+            <img src="${item.src}" alt="${safeTitle}" loading="lazy" crossorigin="anonymous"
+              onerror="this.parentElement.classList.add('gallery-item-error')">
+            <div class="gallery-color-dot" style="${dotStyle}"></div>
+            ${item.title
+              ? `<div class="gallery-item-overlay"><div class="gallery-item-title">${item.title}</div></div>`
+              : ''}
+          </div>`;
+      }).join('');
+
+      // 對尚未偵測過的圖片進行自動顏色偵測
+      grid.querySelectorAll('.gallery-item img').forEach(img => {
+        const wrapper  = img.closest('.gallery-item');
+        const src      = wrapper.dataset.src;
+        const fname    = src.split('/').pop();
+        const dataItem = galleryItems.find(gi => gi.src === src);
+        if (!dataItem || dataItem.color) return; // 已有手動顏色
+        if (galleryColors[fname]) return;         // 已偵測過
+
+        const tryDetect = () => {
+          if (img.naturalWidth === 0) return;
+          const detected = detectImgColor(img);
+          galleryColors[fname] = detected;
+          saveGalleryColors();
+          const dot = wrapper.querySelector('.gallery-color-dot');
+          if (dot) {
+            const dc = colorDotMap[detected] || '#888';
+            dot.style.cssText = 'background:' + dc + ';' + (detected === 'white' ? 'border:1.5px solid rgba(0,0,0,0.18)' : '');
+          }
+        };
+
+        if (img.complete && img.naturalWidth > 0) tryDetect();
+        else img.addEventListener('load', tryDetect, { once: true });
+      });
+    }
+
+    renderGalleryGrid();
+
+    // 顏色篩選按鈕
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-gcolor]');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn[data-gcolor]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      galleryActiveColor = btn.dataset.gcolor;
+      renderGalleryGrid();
+    });
+
+    // 燈箱（Lightbox）
+    const galleryLightbox = document.createElement('div');
+    galleryLightbox.id = 'gallery-lightbox';
+    galleryLightbox.className = 'gallery-lightbox';
+    galleryLightbox.innerHTML = `
+      <button class="gallery-lb-close" id="gallery-lb-close" title="關閉">✕</button>
+      <button class="gallery-lb-nav gallery-lb-prev" id="gallery-lb-prev">‹</button>
+      <div class="gallery-lightbox-inner">
+        <img id="gallery-lb-img" src="" alt="">
+        <div class="gallery-lb-title" id="gallery-lb-title"></div>
+        <div class="gallery-lb-counter" id="gallery-lb-counter"></div>
+      </div>
+      <button class="gallery-lb-nav gallery-lb-next" id="gallery-lb-next">›</button>`;
+    document.body.appendChild(galleryLightbox);
+
+    let lbVisibleItems = [];
+    let lbIdx = 0;
+
+    function openGalleryLb(idx, items) {
+      lbVisibleItems = items;
+      lbIdx = idx;
+      document.getElementById('gallery-lb-img').src       = items[idx].src;
+      document.getElementById('gallery-lb-title').textContent   = items[idx].title || '';
+      document.getElementById('gallery-lb-counter').textContent = (idx + 1) + ' / ' + items.length;
+      galleryLightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGalleryLb() {
+      galleryLightbox.classList.remove('open');
+      setTimeout(() => { document.getElementById('gallery-lb-img').src = ''; }, 200);
+      document.body.style.overflow = '';
+    }
+
+    function navGalleryLb(delta) {
+      lbIdx = (lbIdx + delta + lbVisibleItems.length) % lbVisibleItems.length;
+      document.getElementById('gallery-lb-img').src             = lbVisibleItems[lbIdx].src;
+      document.getElementById('gallery-lb-title').textContent   = lbVisibleItems[lbIdx].title || '';
+      document.getElementById('gallery-lb-counter').textContent = (lbIdx + 1) + ' / ' + lbVisibleItems.length;
+    }
+
+    document.getElementById('gallery-lb-close').addEventListener('click', closeGalleryLb);
+    document.getElementById('gallery-lb-prev').addEventListener('click', () => navGalleryLb(-1));
+    document.getElementById('gallery-lb-next').addEventListener('click', () => navGalleryLb(1));
+    galleryLightbox.addEventListener('click', e => { if (e.target === galleryLightbox) closeGalleryLb(); });
+    document.addEventListener('keydown', e => {
+      if (!galleryLightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')      closeGalleryLb();
+      if (e.key === 'ArrowLeft')   navGalleryLb(-1);
+      if (e.key === 'ArrowRight')  navGalleryLb(1);
+    });
+
+    // 點擊畫冊圖片開啟燈箱
+    document.addEventListener('click', e => {
+      const item = e.target.closest('.gallery-item');
+      if (!item) return;
+      const grid = document.getElementById('gallery-grid');
+      if (!grid || !grid.contains(item)) return;
+      const allItems  = [...grid.querySelectorAll('.gallery-item')];
+      const clickedIdx = allItems.indexOf(item);
+      const snapItems  = allItems.map(el => ({ src: el.dataset.src, title: el.dataset.title || '' }));
+      openGalleryLb(clickedIdx, snapItems);
+    });
+  }
 
   // ── 行程區 ────────────────────────────────────
   const scheduleContent = document.getElementById('schedule-content');

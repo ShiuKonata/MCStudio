@@ -89,6 +89,14 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/Coda 三視圖.jpg" },
     ],
 
+    // 畫冊（圖片放在 images/shiucoda/gallery/ 資料夾）
+    // 格式：純字串路徑，或 { src, title, color }
+    // color 可留空（自動偵測）或手動填入：red/orange/yellow/green/blue/purple/black/white/other
+    gallery: [
+      // 圖片待填入，格式範例：
+      // { src: "images/shiucoda/gallery/001.jpg", title: "作者名 @xxx", color: "" },
+    ],
+
     // 小知識（fanName 欄位存在即顯示分頁）
     fanName: "呱民",
     hashTags: [
