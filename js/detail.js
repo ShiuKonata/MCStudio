@@ -730,7 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Canvas 像素取樣偵測主色（白底版：過濾白色背景，只看角色顏色）
     function detectImgColor(imgEl) {
       try {
-        const sz = 80;
+        const sz = 40; // 40×40 足夠準確，比 80×80 快 4 倍
         const c = document.createElement('canvas');
         c.width = sz; c.height = sz;
         const ctx = c.getContext('2d');
@@ -853,6 +853,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderGalleryGrid();
+
+    // ── 背景預載所有白底版（-1.png），加速首次顏色偵測 ──
+    // 不等使用者滑到圖片位置，直接在背景把顏色算好存進快取
+    // 等使用者點顏色按鈕時，圓點可以立即顯示
+    (function schedulePreload() {
+      const run = () => {
+        galleryItems.forEach(item => {
+          const fname = (item.src || '').split('/').pop();
+          if (!/-1\.[^.]+$/.test(fname)) return; // 只處理白底版
+          if (item.color || galleryColors[fname]) return; // 已有顏色，跳過
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.onload = () => {
+            if (img.naturalWidth === 0) return;
+            const detected = detectImgColor(img);
+            galleryColors[fname] = detected;
+            saveGalleryColors();
+            // 若此圖目前在 DOM 裡顯示，立即更新右上角圓點
+            const wrapper = document.querySelector(
+              '.gallery-item[data-src="' + item.src.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"]'
+            );
+            const dot = wrapper && wrapper.querySelector('.gallery-color-dot');
+            if (dot && colorDotMap[detected]) {
+              dot.style.cssText = 'background:' + colorDotMap[detected];
+            }
+          };
+          img.src = item.src;
+        });
+      };
+      // 等主要內容渲染完才開始，避免搶佔頁面資源
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(run, { timeout: 4000 });
+      } else {
+        setTimeout(run, 1000);
+      }
+    })();
 
     // 顏色篩選按鈕
     document.addEventListener('click', e => {
