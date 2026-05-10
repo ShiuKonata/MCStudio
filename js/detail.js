@@ -434,7 +434,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ls-year-bar" id="gallery-color-bar">
             <button class="ls-year-btn active" data-gcolor="all">🎨 全部</button>
             <button class="ls-year-btn" data-gcolor="red"><span class="gcolor-dot" style="background:#e53935"></span>紅</button>
-            <button class="ls-year-btn" data-gcolor="orange"><span class="gcolor-dot" style="background:#fb8c00"></span>橙</button>
             <button class="ls-year-btn" data-gcolor="yellow"><span class="gcolor-dot" style="background:#fdd835"></span>黃</button>
             <button class="ls-year-btn" data-gcolor="green"><span class="gcolor-dot" style="background:#43a047"></span>綠</button>
             <button class="ls-year-btn" data-gcolor="blue"><span class="gcolor-dot" style="background:#1e88e5"></span>藍</button>
@@ -697,7 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let galleryActiveMember = 'all';
 
     const colorDotMap = {
-      red:    '#e53935', orange: '#fb8c00', yellow: '#fdd835',
+      red:    '#e53935', yellow: '#fdd835',
       green:  '#43a047', blue:   '#1e88e5', purple: '#8e24aa',
       black:  '#424242', white:  '#f0f0f0', other:  '#9e9e9e'
     };
@@ -722,8 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (h < 0) h += 360;
 
       if (h < 15 || h >= 345) return 'red';
-      if (h < 40)  return 'orange';
-      if (h < 70)  return 'yellow';
+      if (h < 70)  return 'yellow'; // 橙色範圍（H 15-40°）併入黃色
       if (h < 150) return 'green';
       if (h < 258) return 'blue';
       return 'purple';
