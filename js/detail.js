@@ -775,12 +775,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // 同時套用顏色篩選 + 會員等級篩選
       const visible = galleryItems.filter(item => {
         const fname     = (item.src || '').split('/').pop();
-        const isVariant = /-1\.[^.]+$/.test(fname); // 是否為白底版
+        const isVariant = /-1\.[^.]+$/.test(fname); // -1.png = 白底版
 
-        // 顏色篩選：只有白底版（-1.png）才參與顏色分類
-        // 當顏色篩選啟用時，只顯示白底版中顏色符合的圖
+        // 「全部」→ 只顯示 ooo.png（全身圖，複雜背景）
+        // 顏色按鈕 → 只顯示 ooo-1.png（白底）中符合顏色的圖
         const colorMatch = galleryActiveColor === 'all'
-          ? true
+          ? !isVariant   // 全部模式：只顯示 ooo.png
           : isVariant && (
               galleryActiveColor === 'other'
                 ? !getItemColor(item) || getItemColor(item) === 'other'
@@ -795,10 +795,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (statsEl) {
-        const isFiltered = galleryActiveColor !== 'all' || galleryActiveMember !== 'all';
-        statsEl.textContent = isFiltered
-          ? visible.length + ' / ' + galleryItems.length + ' 張'
-          : '共 ' + galleryItems.length + ' 張';
+        const totalOrig    = galleryItems.filter(gi => !/-1\.[^.]+$/.test((gi.src||'').split('/').pop())).length;
+        const totalVariant = galleryItems.filter(gi =>  /-1\.[^.]+$/.test((gi.src||'').split('/').pop())).length;
+        if (galleryActiveColor === 'all') {
+          statsEl.textContent = '全身圖 共 ' + totalOrig + ' 張';
+        } else {
+          statsEl.textContent = '白底圖 ' + visible.length + ' / ' + totalVariant + ' 張';
+        }
       }
 
       grid.innerHTML = visible.map((item, vi) => {
