@@ -1049,7 +1049,7 @@ const vtubers = [
     nameEn: "Kai",
     group: "預見娛樂",
     generation: "三期生",
-    avatar: "https://pbs.twimg.com/profile_images/2040296752537022465/PyQQVGKe_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2053099803433967616/sOoacE2S_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1768274785728172033/1769527111/1500x500",
     tagline: "",
     taglines: [
@@ -1154,8 +1154,8 @@ const vtubers = [
     nameEn: "Nyrfier",
     group: "預見娛樂",
     generation: "三期生",
-    avatar: "https://pbs.twimg.com/profile_images/2039722271665987584/VrGuVn9A_400x400.jpg",
-    coverImage: "https://pbs.twimg.com/profile_banners/1765762475037966336/1775045472/1500x500",
+    avatar: "https://pbs.twimg.com/profile_images/2052764874808385536/3tKm2bSY_400x400.jpg",
+    coverImage: "https://pbs.twimg.com/profile_banners/1765762475037966336/1777735064/1500x500",
     tagline: "",
     taglines: [
       { context: "", text: "好累喔" }
