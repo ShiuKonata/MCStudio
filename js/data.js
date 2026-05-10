@@ -9,9 +9,11 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1613858607606665217/1707594955/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "我跟你縮" },
-      { context: "", text: "沒錯" },
-      { context: "", text: "窩要嫁給妳" }
+      { context: "", text: "窩跟ㄋ縮" },
+      { context: "", text: "窩要嫁給妳" },
+      { context: "", text: "瘋掉" }
+      { context: "", text: "對簿幾" }
+      { context: "", text: "窩給ㄋ跪" }
     ],
     description: "我是即將成為大統領的精靈CODA°(╭╮)° 跟隨我吧…嘿嘿✐☡",
     debut: "2023-02-25",
