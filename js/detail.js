@@ -729,10 +729,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return 'purple';
     }
 
-    // Canvas 像素取樣偵測主色
+    // Canvas 像素取樣偵測主色（白底版：過濾白色背景，只看角色顏色）
     function detectImgColor(imgEl) {
       try {
-        const sz = 40;
+        const sz = 80;
         const c = document.createElement('canvas');
         c.width = sz; c.height = sz;
         const ctx = c.getContext('2d');
@@ -740,8 +740,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const d = ctx.getImageData(0, 0, sz, sz).data;
         const tally = {};
         for (let i = 0; i < d.length; i += 4) {
-          if (d[i+3] < 100) continue;
-          const cn = pixelToColorName(d[i], d[i+1], d[i+2]);
+          const r = d[i], g = d[i+1], b = d[i+2], a = d[i+3];
+          if (a < 100) continue;
+          // 過濾白色／近白色背景
+          if (r > 220 && g > 220 && b > 220) continue;
+          // 過濾輪廓黑線
+          if (r < 40 && g < 40 && b < 40) continue;
+          const cn = pixelToColorName(r, g, b);
+          // 過濾掉 white / black 分類（確保只留彩色）
+          if (cn === 'white' || cn === 'black') continue;
           tally[cn] = (tally[cn] || 0) + 1;
         }
         const entries = Object.entries(tally);
@@ -767,15 +774,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 同時套用顏色篩選 + 會員等級篩選
       const visible = galleryItems.filter(item => {
-        const c = getItemColor(item);
+        const fname     = (item.src || '').split('/').pop();
+        const isVariant = /-1\.[^.]+$/.test(fname); // 是否為白底版
+
+        // 顏色篩選：只有白底版（-1.png）才參與顏色分類
+        // 當顏色篩選啟用時，只顯示白底版中顏色符合的圖
         const colorMatch = galleryActiveColor === 'all'
           ? true
-          : galleryActiveColor === 'other'
-            ? !c || c === 'other'
-            : c === galleryActiveColor;
+          : isVariant && (
+              galleryActiveColor === 'other'
+                ? !getItemColor(item) || getItemColor(item) === 'other'
+                : getItemColor(item) === galleryActiveColor
+            );
+
         const memberMatch = galleryActiveMember === 'all'
           ? true
           : (item.member || '') === galleryActiveMember;
+
         return colorMatch && memberMatch;
       });
 
@@ -787,13 +802,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       grid.innerHTML = visible.map((item, vi) => {
-        const color       = getItemColor(item);
-        const dotColor    = color ? (colorDotMap[color] || '#888') : null;
-        const dotStyle    = dotColor
-          ? 'background:' + dotColor + ';' + (color === 'white' ? 'border:1.5px solid rgba(0,0,0,0.18)' : '')
-          : 'opacity:0';
+        // 判斷是否為白底版（-1.png）
+        const fname      = (item.src || '').split('/').pop();
+        const isVariant  = /-1\.[^.]+$/.test(fname);
+        // 只有白底版才顯示顏色圓點
+        const color      = isVariant ? getItemColor(item) : null;
+        const dotColor   = color ? (colorDotMap[color] || '#888') : null;
+        const dotStyle   = dotColor ? 'background:' + dotColor : 'opacity:0';
         // 顯示名稱：優先用 title，沒有就用檔案名（去掉副檔名）
-        const fname       = (item.src || '').split('/').pop();
         const displayName = item.title || fname.replace(/\.[^.]+$/, '');
         const safeTitle   = displayName.replace(/"/g, '&quot;');
         // 會員徽章
@@ -808,13 +824,15 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>`;
       }).join('');
 
-      // 對尚未偵測過的圖片進行自動顏色偵測
+      // 只對白底版（-1.png）做自動顏色偵測
       grid.querySelectorAll('.gallery-item img').forEach(img => {
         const wrapper  = img.closest('.gallery-item');
         const src      = wrapper.dataset.src;
         const fname    = src.split('/').pop();
+        const isVariant = /-1\.[^.]+$/.test(fname);
+        if (!isVariant) return;                   // 非白底版跳過
         const dataItem = galleryItems.find(gi => gi.src === src);
-        if (!dataItem || dataItem.color) return; // 已有手動顏色
+        if (!dataItem || dataItem.color) return;  // 已有手動顏色
         if (galleryColors[fname]) return;         // 已偵測過
 
         const tryDetect = () => {
@@ -823,9 +841,8 @@ document.addEventListener('DOMContentLoaded', () => {
           galleryColors[fname] = detected;
           saveGalleryColors();
           const dot = wrapper.querySelector('.gallery-color-dot');
-          if (dot) {
-            const dc = colorDotMap[detected] || '#888';
-            dot.style.cssText = 'background:' + dc + ';' + (detected === 'white' ? 'border:1.5px solid rgba(0,0,0,0.18)' : '');
+          if (dot && detected !== 'other') {
+            dot.style.cssText = 'background:' + (colorDotMap[detected] || '#888');
           }
         };
 
