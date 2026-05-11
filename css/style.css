@@ -1937,3 +1937,133 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   .gallery-lb-nav  { width: 36px; height: 36px; font-size: 1.3rem; }
   .gallery-lightbox-inner img { max-height: 70vh; }
 }
+
+/* =============================================
+   歌曲統計 (Song Stats Tab)
+   ============================================= */
+.ss-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.2rem;
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1rem;
+}
+.ss-date {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  flex-basis: 100%;
+}
+.ss-num {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+}
+.ss-num strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.ss-top3 {
+  background: rgba(255,255,255,0.06);
+  border-left: 3px solid #ffca28;
+  border-radius: 0 10px 10px 0;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+}
+.ss-top3-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffca28;
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.03em;
+}
+.ss-top3-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0;
+}
+.ss-medal { font-size: 1.1rem; }
+.ss-top3-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.9);
+}
+.ss-top3-cnt {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffca28;
+  background: rgba(255,202,40,0.15);
+  padding: 0.1rem 0.5rem;
+  border-radius: 99px;
+}
+
+.ss-table-wrap {
+  margin-top: 0.6rem;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+}
+.ss-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.ss-table thead tr {
+  background: rgba(255,255,255,0.1);
+}
+.ss-table th {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.ss-table td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+  vertical-align: middle;
+}
+.ss-table tr:last-child td { border-bottom: none; }
+.ss-table tr:hover td { background: rgba(255,255,255,0.04); }
+.ss-no {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.78rem;
+  width: 2.5rem;
+  text-align: right;
+}
+.ss-name { font-weight: 500; }
+.ss-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+}
+.ss-lang-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ss-cnt { white-space: nowrap; }
+.ss-cnt-badge {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 99px;
+}
+
+@media (max-width: 600px) {
+  .ss-table th:nth-child(3),
+  .ss-table td:nth-child(3) { display: none; }
+}
