@@ -121,14 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const btns = sheets.map((s, i) =>
       `<button class="refsheet-ver-btn${i === 0 ? ' active' : ''}" data-rsidx="${i}">${s.version}</button>`
     ).join('');
-    const panels = sheets.map((s, i) =>
-      `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">
-        ${s.url
-          ? `<img class="refsheet-img" src="${s.url}" alt="${v.name} ${s.version}">`
-          : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${s.version} 圖片待上傳</p></div>`
-        }
-      </div>`
-    ).join('');
+    const panels = sheets.map((s, i) => {
+      // 支援單張 url 或多張 urls（上下排列）
+      const urlList = s.urls ? s.urls : (s.url ? [s.url] : []);
+      const imgHTML = urlList.length
+        ? urlList.map(u => `<img class="refsheet-img" src="${u}" alt="${v.name} ${s.version}">`).join('')
+        : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${s.version} 圖片待上傳</p></div>`;
+      return `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">${imgHTML}</div>`;
+    }).join('');
     const rsInner = sheets.length
       ? `<div class="refsheet-layout">
           <div class="refsheet-ver-list">${btns}</div>

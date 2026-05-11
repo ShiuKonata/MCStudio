@@ -1376,8 +1376,7 @@ const vtubers = [
     scheduleTitle:    "希洛的行程表",
 
     refSheets: [
-      { version: "Ver 1.0",   url: "images/希洛萊昂 v1.0.jpg"   },
-      { version: "Ver 1.0-1", url: "images/希洛萊昂 v1.0-1.jpg" },
+      { version: "Ver 1.0", urls: ["images/希洛萊昂 v1.0.jpg", "images/希洛萊昂 v1.0-1.jpg"] },
     ],
 
     color: "#FBFFBC"   // 希洛萊昂 代表色（奶油黃）
