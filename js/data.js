@@ -288,6 +288,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Lanmewko",
+    youtubeChannelId: "UCswRX8mNNdn1fjRctZqzjgA",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Rumi__0813",
     twitch: "https://www.twitch.tv/rumi0813",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Que-F4MyXCj5cVTquXECu9oAF-GQF46w543Ik5jxoyU/edit?gid=0#gid=0",
@@ -298,11 +300,6 @@ const vtubers = [
       { id: "S24248F5QxQ", title: "【生日紀念】好想愛這個世界啊/この世界を愛したい" }
     ],
 
-    shorts: [
-      { id: "1RMnxlGaExM", title: "懶貓子的正確道歉方式🙇‍♀️｜Rumi/懶貓子" },
-      { id: "1y778o-SAFM", title: "就說了是乖乖＞＿＜｜Rumi/懶貓子" },
-      { id: "ZkG3mH55q6Q", title: "Rumily準備好了嗎？上車囉～～🚗💨｜Rumi/懶貓子" },
-    ],
 
     musicClips: [
       { id: "AujK7aWgRsY", title: "HoneyWorks - 可愛くてごめん | Rumi懶貓子 .Cover 〔中日歌詞〕" },
@@ -376,6 +373,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Paroniie",
+    youtubeChannelId: "UCChAHq4kdRZ0FJ1Jfjvr9cw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Paroniie",
     twitch: "https://www.twitch.tv/paroniie",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1NcaRipM4j0rsy3z-JMYnft7IS_Gg-6qsBTW5174_zrU/edit?gid=1879656289#gid=1879656289",
@@ -386,11 +385,6 @@ const vtubers = [
       { id: "Lg9nyNL-AD0", title: "🎵 星願 - 帕蘿妮 Paroniie 【Original】" }
     ],
 
-    shorts: [
-      { id: "kQUtRi1x4r0", title: "我的天 這個貓我想摸想摸想摸 ♦︎ #火炬之光 #shorts." },
-      { id: "oX-JcQHIrCg", title: "虛空我老熟了！ ♦︎ #apex #shorts." },
-      { id: "68-a4gyrUws", title: "泡泡車好安全...嗎?! ♦︎ #apex #shorts." },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -468,6 +462,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@KannazukiLubee",
+    youtubeChannelId: "UCF8icKLU4FGF8Ln-KlKakSg",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/kannazukilubee",
     twitch: "https://www.twitch.tv/kannazukilubee",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Ld0rL7quLZlt1aW0oJvzdicmQuoVP7pJ85qnguNbG2E/edit?gid=45727533#gid=45727533",
@@ -478,11 +474,6 @@ const vtubers = [
       { id: "dVEPJXnfGoQ", title: "ド屑 - なきそ／神無月鹿比【Cover】" }
     ],
 
-    shorts: [
-      { id: "wIhLxCHLJbU", title: "【神無月鹿比🦌｜官方精華】伊瑟SS4全新賽季超多好康！超鏈者們準備回歸啦～！" },
-      { id: "3BjMFLT4m4w", title: "【神無月鹿比🦌｜官方精華】真的不是我丟下去的我一直在努力往上拉你們仔細看" },
-      { id: "54ZBljwgLbI", title: "【神無月鹿比🦌｜官方精華】這裡的人講話都好直白" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -524,6 +515,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@HimegiMichika",
+    youtubeChannelId: "UCjcXw7nWechEaodFEWtDk1Q",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/himegi17ka",
     twitch: "https://www.twitch.tv/himegimichika",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1jBY63fnJ80H0yB60-NXEyg8tLcOQwhPbc5CckgNNeEM/edit?gid=1398960308#gid=1398960308",
@@ -534,11 +527,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -582,6 +570,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Arrynia",
+    youtubeChannelId: "UC5bHZZ2df6_oFgOM_34_-aw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Arryn1a",
     twitch: "https://www.twitch.tv/arryn1a",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1pd0C6wMa43aP5s0mXttaF7eOdmD79mDVCzuqctrTKfw/edit?gid=1723685746#gid=1723685746",
@@ -592,11 +582,6 @@ const vtubers = [
       { id: "KIYLfFkJecA", title: "【酔いどれ知らず Yoidore Shirazu】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
     ],
 
-    shorts: [
-      { id: "eMmW-0Y1UTw", title: "【情勒RAP】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
-      { id: "SZvWJFznsXs", title: "【我每天守在家裡種花包支持我老婆的副業】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
-      { id: "vuG2fLEqvmc", title: "【老婆被警察DIVE惹】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
-    ],
 
     musicClips: [
       { id: "mkLydHtl-UI", title: "【You Don't Own Me - Grace】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
@@ -666,6 +651,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://youtube.com/@ShurakuKiriko",
+    youtubeChannelId: "UCj76pRLEg2JHwDwJJXvZtSw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/shurakukiriko",
     twitch: "https://www.twitch.tv/shurakukiriko",
     spreadsheet: "https://docs.google.com/spreadsheets/d/13JIIvG5_XTPc7M0zV0WAgFUBpZgcpRfxszdjbFZ0Ul4/edit?gid=47542312#gid=47542312",
@@ -676,11 +663,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -721,6 +703,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Vaswawa",
+    youtubeChannelId: "UCZHa6yKnBnU34yRyvV3EXSA",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Vaswawa",
     twitch: "https://www.twitch.tv/vaswawa0000",
     spreadsheet: "https://docs.google.com/spreadsheets/d/14GkvYxFdP0cGi-ZbXoq7a_rVAtpfAKSf9WxTGSlDavk/edit?gid=47542312#gid=47542312",
@@ -731,11 +715,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -782,6 +761,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@SinnieAris",
+    youtubeChannelId: "UCwwVVsJTvdeUK3sj4-qxgMQ",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/SinnieAris",
     twitch: "https://www.twitch.tv/sinniearis",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1PmHGlH05mnDac3Po0e_p93AkNLv5Wr2Hz6PnMEW___Y/edit?gid=47542312#gid=47542312",
@@ -792,11 +773,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -838,6 +814,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@r1ri999",
+    youtubeChannelId: "UCbgr8vvzFLElzIxHDr2xV5w",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/hiririna",
     twitch: "https://www.twitch.tv/yuzukiririna",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1HciwDa9K66fYEIDNPm3C1lP1JoX_8zRTIc8Z8KHEwOU/edit?gid=47542312#gid=47542312",
@@ -848,11 +826,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -897,6 +870,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@ekorru",
+    youtubeChannelId: "UCVB6njJBYf-7Di03j8993AA",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/ekorru",
     twitch: "https://www.twitch.tv/ekorru",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1I3_WmwXk9YXXlHM2Z0lI0XEBPJSSl51ORizgqHkUWjY/edit?gid=47542312#gid=47542312",
@@ -907,11 +882,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -955,6 +925,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@WakasaIto",
+    youtubeChannelId: "UCGGc-KmG4fxc8D03S-H0rbw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Wakasa_Ito",
     twitch: "https://www.twitch.tv/wakasaito",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1ZiBxhztylcH5JYlRgBeQ872rHJznpYnM_Jns_RTCCKI/edit?gid=47542312#gid=47542312",
@@ -965,11 +937,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1010,6 +977,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@whalefallvtuber",
+    youtubeChannelId: "UCByO_vijBgRH1aWhQNYfw8Q",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/whalefallvtuber",
     twitch: "https://www.twitch.tv/whalefallvtuber",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Sd96nc7gMum_r51aSD_2yxeaTrTHCmkM9FdhulEBshs/edit?gid=130416740#gid=130416740",
@@ -1020,11 +989,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1064,6 +1028,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Kai_Alluria",
+    youtubeChannelId: "UCh2ykSGKiJB3f-Y8w2LWplw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/Kai_Alluria",
     twitch: "https://www.twitch.tv/kai_alluria",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1YZXyEv223KaR6OP0zQhs3SwVWvzKXE14IRPDfvrC85I/edit?gid=130416740#gid=130416740",
@@ -1074,11 +1040,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1115,6 +1076,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@MukuruCh",
+    youtubeChannelId: "UCMwY4OKlMbwJYzT_wDAXs3w",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/Mukuruvtuber",
     twitch: "https://www.twitch.tv/mukuru_vtuber",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1_hmrmI-L1cni5pwt_52CUcyZ8njXK0KtqnEq5FZka8U/edit?gid=130416740#gid=130416740",
@@ -1125,11 +1088,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1169,6 +1127,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Nyrfier",
+    youtubeChannelId: "UCE6fkoGPGOoWE6pYDalwLZQ",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/Nyrfier",
     twitch: "https://www.twitch.tv/nyrfier",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1XeB6d74Tw8tdvl5jeQYCNbEEgrMPK24OMTfTWEHR6is/edit?gid=130416740#gid=130416740",
@@ -1179,11 +1139,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1221,6 +1176,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Nekokaifuka22",
+    youtubeChannelId: "UCbr-a2yffSZRjEbwtB1s2ow",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/nekokaifuka22",
     twitch: "https://www.twitch.tv/nekokaifuka",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Wm4qzVapSKuzc5yk1lpD7aa-4CFvL5nGeAzY6BIj-tQ/edit?gid=130416740#gid=130416740",
@@ -1231,11 +1188,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1276,6 +1228,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@Chita_CH",
+    youtubeChannelId: "UC253VhyFxwgm4w1FC6-PoxQ",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/chita_cakano",
     twitch: "https://www.twitch.tv/chita_cakano",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1psY9WxG-Sdajms-s8oJ7LoEy0i6n6Jp6fiqlNz9jEYQ/edit?gid=130416740#gid=130416740",
@@ -1286,11 +1240,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1327,6 +1276,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@chamamatti",
+    youtubeChannelId: "UCcT9BcGu92uvq_R1BKvw2fw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/ch9mamatt1",
     twitch: "https://www.twitch.tv/aelis_chamamatti",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1KhII6yxRC1bR8X1Qhrd7OqYiOGyh651yimsYzi-diKg/edit?gid=130416740#gid=130416740",
@@ -1337,11 +1288,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1383,6 +1329,8 @@ const vtubers = [
 
     // 社群連結
     youtube: "https://www.youtube.com/@shiro_leon/featured",
+    youtubeChannelId: "UCIqsDMfhM3yeM9l6kNyEURg",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/ShiroLeon_",
     twitch: "https://www.twitch.tv/shirol30n",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1ukOsxfhoUFdqHDgucEJAu_xQOZTT-f-f8VrImew_1Vg/edit?gid=130416740#gid=130416740",
@@ -1393,11 +1341,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1437,6 +1380,8 @@ const vtubers = [
     tags: ["台灣", "預見娛樂", "四期生", "音雲漫步", "廢話", "搞笑"],
 
     youtube: "https://www.youtube.com/@BarkBarkPomi",
+    youtubeChannelId: "UC5_5l_AfpgJeYCxQnMnL-7A",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/BarkBarkPomi",
     twitch: "https://www.twitch.tv/barkbarkpomi",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1yUMlbwC5wLRKL56z9n21jHK0BTFRMlK6SCfGlp7J98g/edit?gid=130416740#gid=130416740",
@@ -1447,11 +1392,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1487,6 +1427,8 @@ const vtubers = [
     tags: ["台灣", "預見娛樂", "四期生", "音雲漫步", "可可"],
 
     youtube: "https://www.youtube.com/@cocor0_0303",
+    youtubeChannelId: "UC9NVe55fqFSC9iOZQJrlwrQ",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/cocor0_0303",
     twitch: "https://www.twitch.tv/cocor0_0303",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1C0uXF-iSvTFRqamTMrFGQdTocxO7kUiVDW_1vCxVZUE/edit?gid=130416740#gid=130416740",
@@ -1497,11 +1439,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1544,6 +1481,8 @@ const vtubers = [
     tags: ["台灣", "預見娛樂", "四期生", "音雲漫步"],
 
     youtube: "https://www.youtube.com/@uchififi",
+    youtubeChannelId: "UCMhjWfFiyxVjNWBJpkDotcg",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/uchi_fifi",
     twitch: "https://www.twitch.tv/uchififi",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1-KHxcePbW1x5PYboBtEWTSyjUDznk9mGM1waQ6aEgVg/edit?gid=130416740#gid=130416740",
@@ -1554,11 +1493,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1595,6 +1529,8 @@ const vtubers = [
     tags: ["台灣", "預見娛樂", "五期生", "CaKano", "魔法少女", "奶茶"],
 
     youtube: "https://www.youtube.com/@NokoriCaKaNo",
+    youtubeChannelId: "UCd4HPP11UbXLuvvhOjSABmw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/nokori_0420",
     twitch: "https://www.twitch.tv/nokori0420",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1H0BkPVKCPEXLsxNA_XlN_hf0Kn1t-FTuCDQ-ivLZ3z0/edit?gid=130416740#gid=130416740",
@@ -1605,11 +1541,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1645,6 +1576,8 @@ const vtubers = [
     tags: ["台灣", "預見娛樂", "五期生", "CaKano", "熊", "睡覺"],
 
     youtube: "https://www.youtube.com/@kekemii_0705",
+    youtubeChannelId: "UC5R0yO6i_ApJf3AkcMFe7Tw",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/kekemii_0705",
     twitch: "https://www.twitch.tv/kekemii_0705",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1kr3W1pizZkdn2Lg5gkPorcnDovyKgfWn1VnfTI0i9_U/edit?gid=130416740#gid=130416740",
@@ -1655,11 +1588,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1703,6 +1631,8 @@ const vtubers = [
     tags: ["台灣", "預見娛樂", "六期生", "ælis", "公主", "賭場"],
 
     youtube: "https://www.youtube.com/@Peleouo",
+    youtubeChannelId: "UCvc-Xz6103-uVlIK-pWTXbA",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/aelis_pele",
     twitch: "https://www.twitch.tv/p1lepe1el1",
     spreadsheet: "https://docs.google.com/spreadsheets/d/18yEOmU3YVlMIJUaS6FntVI0voe9YzsepXfANRgz2SFM/edit?gid=130416740#gid=130416740",
@@ -1713,11 +1643,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
@@ -1756,6 +1681,8 @@ const vtubers = [
     tags: ["台灣", "預見娛樂", "六期生", "ælis", "傳令官", "仙境"],
 
     youtube: "https://www.youtube.com/@yawnii_aelis",
+    youtubeChannelId: "UCRCKrkjDimBhd-gVVojpUyQ",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/yawnii_aelis",
     twitch: "https://www.twitch.tv/yawnii_aelis",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1axdysWPjMJrUgmU9qHWPkyrS3htc9SaiOpTbxERaa2A/edit?gid=130416740#gid=130416740",
@@ -1766,11 +1693,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-    shorts: [
-      { id: "REPLACE_SHORT_1", title: "熱門Short #1" },
-      { id: "REPLACE_SHORT_2", title: "熱門Short #2" },
-      { id: "REPLACE_SHORT_3", title: "熱門Short #3" },
-    ],
 
     musicClips: [
       { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
