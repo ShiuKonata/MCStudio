@@ -11,9 +11,9 @@ const vtubers = [
     taglines: [
       { context: "", text: "窩跟ㄋ縮" },
       { context: "", text: "窩要嫁給妳" },
-      { context: "", text: "瘋掉" }
-      { context: "", text: "對簿幾" }
-      { context: "", text: "窩給ㄋ跪" }
+      { context: "", text: "瘋掉" },
+      { context: "", text: "對簿幾" },
+      { context: "", text: "窩給ㄋ跪" },
     ],
     description: "我是即將成為大統領的精靈CODA°(╭╮)° 跟隨我吧…嘿嘿✐☡",
     debut: "2023-02-25",
