@@ -1006,6 +1006,11 @@ const vtubers = [
     spreadsheetLabel: "鯨諾的大小事",
     scheduleTitle:    "鯨諾的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/鯨諾 v1.0.jpg" },
+      { version: "Ver 2.0", url: "images/鯨諾 v2.0.jpg" },
+    ],
+
     color: "#66B2FF"   // 鯨諾 代表色（天藍）
   },
 
@@ -1205,6 +1210,10 @@ const vtubers = [
     spreadsheetLabel: "貳貳的大小事",
     scheduleTitle:    "貳貳的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/貳貳 v1.0.jpg" },
+    ],
+
     color: "#DFF7F3"   // 貳貳 代表色（薄荷白）
   },
 
@@ -1257,6 +1266,10 @@ const vtubers = [
     spreadsheetLabel: "崎塔的大小事",
     scheduleTitle:    "崎塔的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/崎塔 v1.0.jpg" },
+    ],
+
     color: "#6EE8DB"   // 崎塔 代表色（青綠）
   },
 
@@ -1304,6 +1317,10 @@ const vtubers = [
     scheduleVideoId:  "_Xf6y0jkl-Q",
     spreadsheetLabel: "瑪緹的大小事",
     scheduleTitle:    "瑪緹的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/茶帽瑪緹 v1.0.jpg" },
+    ],
 
     color: "#48D6CA"   // 茶帽瑪緹 代表色（青藍）
   },
@@ -1409,6 +1426,10 @@ const vtubers = [
     spreadsheetLabel: "波美的大小事",
     scheduleTitle:    "波美的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/百百波美 v1.0.jpg" },
+    ],
+
     color: "#D03869"   // 百百波美 代表色（玫紅）
   },
 
@@ -1455,6 +1476,10 @@ const vtubers = [
     scheduleVideoId:  "q1ls6HmTVwc",
     spreadsheetLabel: "可可的大小事",
     scheduleTitle:    "可可的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/心 cocor0 v1.0.jpg" },
+    ],
 
     color: "#FFB7C5"   // 心 cocor0 代表色（櫻花粉）
   },
@@ -1510,6 +1535,10 @@ const vtubers = [
     spreadsheetLabel: "扉扉的大小事",
     scheduleTitle:    "扉扉的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/羽芝扉扉 v1.0.jpg" },
+    ],
+
     color: "#FFBA84"   // 羽芝扉扉 代表色（暖橘）
   },
 
@@ -1558,6 +1587,10 @@ const vtubers = [
     spreadsheetLabel: "諾諾的大小事",
     scheduleTitle:    "諾諾的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/諾恪里 v1.0.jpg" },
+    ],
+
     color: "#FBC4EF"   // 諾恪里 代表色（夢幻粉）
   },
 
@@ -1604,6 +1637,10 @@ const vtubers = [
     scheduleVideoId:  "q5bBqi8DUc8",
     spreadsheetLabel: "米伊的大小事",
     scheduleTitle:    "米伊的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/克克米伊 v1.0.jpg" },
+    ],
 
     color: "#FFCB55"   // 克克米伊 代表色（蜂蜜黃）
   },
@@ -1660,6 +1697,10 @@ const vtubers = [
     spreadsheetLabel: "公主的大小事",
     scheduleTitle:    "公主的行程表",
 
+    refSheets: [
+      { version: "Ver 1.0", url: "images/珮蕾 v1.0.jpg" },
+    ],
+
     color: "#EF9494"   // 珮蕾 代表色（玫瑰粉）
   },
 
@@ -1709,6 +1750,10 @@ const vtubers = [
     scheduleVideoId:  "bae5xjjhMsI",
     spreadsheetLabel: "幽昵的大小事",
     scheduleTitle:    "幽昵的行程表",
+
+    refSheets: [
+      { version: "Ver 1.0", url: "images/睏睏幽昵 v1.0.jpg" },
+    ],
 
     color: "#D5DFEF"   // 睏睏幽昵 代表色（霧藍灰）
   }
