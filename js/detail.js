@@ -230,6 +230,19 @@ document.addEventListener('DOMContentLoaded', () => {
       (v.twitch ? '<a href="' + v.twitch + '" target="_blank" class="detail-link-btn twitch-btn"><span class="link-icon">🟣</span> Twitch</a>' : '') +
       '<a href="' + v.spreadsheet + '" target="_blank" class="detail-link-btn sheets"><span class="link-icon">📋</span> ' + (v.spreadsheetLabel || v.name + '的大小事') + '</a>';
 
+  // ── 動態年份按鈕 ──────────────────────────────
+  const debutYear = parseInt(v.debut.split('-')[0]);
+  const currentYear = new Date().getFullYear();
+  const lsYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
+    .map(y => `<button class="ls-year-btn" data-year="${y}">${y}</button>`)
+    .join('');
+  const ytsYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
+    .map(y => `<button class="ls-year-btn" data-ytsyear="${y}">${y}</button>`)
+    .join('');
+  const memYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
+    .map(y => `<button class="ls-year-btn" data-memyear="${y}">${y}</button>`)
+    .join('');
+
   // ── 主要 HTML ──────────────────────────────────
   const root = document.getElementById('detail-root');
   root.innerHTML = `
@@ -389,10 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="detail-section-title">📱 Shorts 存檔</div>
           <div class="ls-year-bar" id="yts-year-bar">
             <button class="ls-year-btn active" data-ytsyear="all">全部</button>
-            <button class="ls-year-btn" data-ytsyear="2026">2026</button>
-            <button class="ls-year-btn" data-ytsyear="2025">2025</button>
-            <button class="ls-year-btn" data-ytsyear="2024">2024</button>
-            <button class="ls-year-btn" data-ytsyear="2023">2023</button>
+            ${ytsYearBtns}
           </div>
           <div class="ls-search-bar">
             <span class="ls-search-icon">🔍</span>
@@ -481,10 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- 年份篩選 -->
           <div class="ls-year-bar" id="mem-year-bar">
             <button class="ls-year-btn active" data-memyear="all">全部</button>
-            <button class="ls-year-btn" data-memyear="2026">2026</button>
-            <button class="ls-year-btn" data-memyear="2025">2025</button>
-            <button class="ls-year-btn" data-memyear="2024">2024</button>
-            <button class="ls-year-btn" data-memyear="2023">2023</button>
+            ${memYearBtns}
           </div>
           <!-- 搜尋列 -->
           <div class="ls-search-bar">
@@ -503,10 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- 年份篩選 -->
           <div class="ls-year-bar" id="ls-year-bar">
             <button class="ls-year-btn active" data-year="all">全部</button>
-            <button class="ls-year-btn" data-year="2026">2026</button>
-            <button class="ls-year-btn" data-year="2025">2025</button>
-            <button class="ls-year-btn" data-year="2024">2024</button>
-            <button class="ls-year-btn" data-year="2023">2023</button>
+            ${lsYearBtns}
           </div>
           <!-- 搜尋列 -->
           <div class="ls-search-bar">
