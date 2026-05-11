@@ -91,8 +91,13 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/Coda 三視圖.jpg" },
     ],
 
-    // 歌曲統計（Google Sheets 歌單統計頁的 GID，填了才顯示分頁）
-    songStatsGid: "1765508669",
+    // 歌曲統計（各年度 Google Sheets 統計頁 GID，填了才顯示分頁）
+    songStatsGids: {
+      "2026": "1765508669",
+      "2025": "197402931",
+      "2024": "1363418050",
+      "2023": "695777376",
+    },
 
     // 畫冊（圖片放在 images/shiucoda/gallery/ 資料夾）
     // 欄位說明：

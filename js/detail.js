@@ -83,9 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
         v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',    color: '#ff6f00' }] : []),
     ...(v.newYearWishes ? [{ key: 'wishes', label: '🎍 新年願望', color: '#e91e63' }] : []),
     ...(v.gallery && v.gallery.length ? [{ key: 'gallery', label: '🖼️ 畫冊', color: '#7b5ea7' }] : []),
-    ...('songStatsGid' in v ? [{ key: 'songstats', label: '🎵 歌曲統計', color: '#c62828' }] : []),
-    ...(v.musicClips && v.musicClips.length ? [{ key: 'musicclips', label: '🎶 熱門音樂推薦',   color: '#7b1fa2' }] : []),
-    ...(v.videoClips && v.videoClips.length ? [{ key: 'videoclips', label: '🎬 熱門影片推薦',   color: '#1565c0' }] : []),
+    ...('songStatsGids' in v ? [{ key: 'songstats', label: '🎵 歌曲統計', color: '#c62828' }] : []),
+    ...((v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) ? [{ key: 'clips', label: '🎬 熱門剪輯推薦', color: '#1565c0' }] : []),
   ];
 
   // ── 注入頂部分頁列 ─────────────────────────────
@@ -458,26 +457,33 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>` : ''}
 
         <!-- TAB: 歌曲統計 -->
-        ${'songStatsGid' in v ? `
+        ${'songStatsGids' in v ? `
         <div id="tab-songstats" class="tab-panel">
           <div class="detail-section-title">🎵 歌曲統計</div>
+          <div class="ls-year-bar" id="ss-year-bar">
+            ${Object.keys(v.songStatsGids).sort((a,b)=>b-a).map((y,i)=>
+              `<button class="ls-year-btn${i===0?' active':''}" data-ssyear="${y}">${y}年</button>`
+            ).join('')}
+          </div>
           <div id="songstats-root"></div>
         </div>` : ''}
 
-        <!-- TAB: 熱門音樂推薦 -->
-        ${v.musicClips && v.musicClips.length ? `
-        <div id="tab-musicclips" class="tab-panel">
-          <div class="detail-section-title">🎶 熱門音樂推薦</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">非官方粉絲剪輯熱門前三音樂，點擊前往 YouTube 觀看</p>
-          <div class="video-grid" id="musicclips-grid"></div>
-        </div>` : ''}
-
-        <!-- TAB: 熱門影片推薦 -->
-        ${v.videoClips && v.videoClips.length ? `
-        <div id="tab-videoclips" class="tab-panel">
-          <div class="detail-section-title">🎬 熱門影片推薦</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">非官方粉絲剪輯熱門前三影片，點擊前往 YouTube 觀看</p>
-          <div class="video-grid" id="videoclips-grid"></div>
+        <!-- TAB: 熱門剪輯推薦（音樂 + 影片合併） -->
+        ${(v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) ? `
+        <div id="tab-clips" class="tab-panel">
+          <div class="detail-section-title">🎬 熱門剪輯推薦</div>
+          <div class="ls-year-bar" id="clips-type-bar">
+            ${v.musicClips && v.musicClips.length ? `<button class="ls-year-btn active" data-cliptype="music">🎶 熱門音樂剪輯</button>` : ''}
+            ${v.videoClips && v.videoClips.length ? `<button class="ls-year-btn${!(v.musicClips && v.musicClips.length) ? ' active' : ''}" data-cliptype="video">🎬 熱門影片剪輯</button>` : ''}
+          </div>
+          <div id="clips-music-panel"${!(v.musicClips && v.musicClips.length) ? ' style="display:none"' : ''}>
+            <p class="clips-desc">非官方粉絲剪輯熱門音樂，點擊前往 YouTube 觀看</p>
+            <div class="video-grid" id="musicclips-grid"></div>
+          </div>
+          <div id="clips-video-panel" style="display:none">
+            <p class="clips-desc">非官方粉絲剪輯熱門影片，點擊前往 YouTube 觀看</p>
+            <div class="video-grid" id="videoclips-grid"></div>
+          </div>
         </div>` : ''}
 
         <!-- TAB: 行程預覽 -->
@@ -549,11 +555,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── 熱門剪輯子分頁切換 ──────────────────────────
+  document.getElementById('clips-type-bar')?.addEventListener('click', e => {
+    const btn = e.target.closest('.ls-year-btn[data-cliptype]');
+    if (!btn) return;
+    document.querySelectorAll('#clips-type-bar .ls-year-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const type = btn.dataset.cliptype;
+    const music = document.getElementById('clips-music-panel');
+    const video = document.getElementById('clips-video-panel');
+    if (music) music.style.display = type === 'music' ? '' : 'none';
+    if (video) video.style.display = type === 'video' ? '' : 'none';
+  });
+
   // ── 歌曲統計 ──────────────────────────────────
-  if (v.songStatsGid) {
+  if (v.songStatsGids) {
     const _ssSpreadsheetId = (v.spreadsheet || '').match(/\/d\/([a-zA-Z0-9_-]+)\//)?.[1];
-    const _ssCacheKey = 'songstats_' + v.id;
     const _ssCacheTTL = 30 * 60 * 1000;
+    let _ssActiveYear = Object.keys(v.songStatsGids).sort((a,b)=>b-a)[0]; // 預設最新年
 
     // 簡易 CSV 解析（支援引號欄位）
     function _parseCSV(text) {
@@ -577,10 +596,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function _parseStats(rows) {
-      const stats = { date: '', total: 0, unique: 0, top3: [], songs: {} };
-      const langs = ['中文','英文','日文','自創曲','台語','V朋朋'];
-      langs.forEach(l => stats.songs[l] = []);
+      const stats = { date: '', total: 0, unique: 0, top3: [], songs: {}, langOrder: [] };
 
+      // 日期：支援「統計日期, date」或「, date」(2023 格式)
       stats.date   = rows[0]?.[1] || '';
       stats.total  = parseInt(rows[1]?.[1]) || 0;
       stats.unique = parseInt(rows[2]?.[1]) || 0;
@@ -592,41 +610,50 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name && name.trim()) stats.top3.push({ name: name.trim(), count: cnt || 1 });
       }
 
-      // 找含「中文」的標題列
-      let tableStart = -1;
+      // 動態找語言標題列（含「中文」的那列）
+      let headerRow = null, tableStart = -1;
       for (let i = 0; i < rows.length; i++) {
-        if (rows[i]?.[0] === '中文') { tableStart = i + 1; break; }
+        if (rows[i]?.[0] === '中文') { headerRow = rows[i]; tableStart = i + 1; break; }
       }
-      if (tableStart < 0) return stats;
+      if (!headerRow) return stats;
 
-      // 每語言佔兩欄：[名, 數量] × 6 語言
+      // 動態解析語言欄位（每語言佔兩欄：名稱, 數量）
+      const langCols = [];
+      for (let c = 0; c < headerRow.length - 1; c += 2) {
+        const lang = headerRow[c];
+        if (lang && lang.trim()) {
+          langCols.push({ lang: lang.trim(), nc: c, cc: c + 1 });
+          stats.songs[lang.trim()] = [];
+          stats.langOrder.push(lang.trim());
+        }
+      }
+
       for (let i = tableStart; i < rows.length; i++) {
         const row = rows[i];
         if (!row || row.every(c => !c)) continue;
-        langs.forEach((lang, idx) => {
-          const name = row[idx * 2];
-          const cnt  = parseInt(row[idx * 2 + 1]) || 1;
+        langCols.forEach(({ lang, nc, cc }) => {
+          const name = row[nc];
+          const cnt  = parseInt(row[cc]) || 1;
           if (name && name.trim()) stats.songs[lang].push({ name: name.trim(), count: cnt });
         });
       }
       return stats;
     }
 
+    const langColors = { '中文':'#e53935','英文':'#1e88e5','日文':'#8e24aa','自創曲':'#fb8c00','台語':'#43a047','V朋朋':'#00acc1','V朋朋唱歌':'#00acc1','其它語系':'#607d8b' };
+
     function _renderSongStats(stats) {
       const root = document.getElementById('songstats-root');
       if (!root) return;
-      const langs = ['中文','英文','日文','自創曲','台語','V朋朋'];
 
-      // 合併全部歌曲（含語言標籤），照次數降序
-      const allSongs = [];
-      langs.forEach(l => (stats.songs[l] || []).forEach(s => allSongs.push({...s, lang: l})));
-      allSongs.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh'));
-
-      const validLangs = langs.filter(l => (stats.songs[l] || []).length > 0);
+      const validLangs = stats.langOrder.filter(l => (stats.songs[l] || []).length > 0);
       const langCounts = {};
       validLangs.forEach(l => langCounts[l] = stats.songs[l].length);
 
-      const langColors = { '中文':'#e53935','英文':'#1e88e5','日文':'#8e24aa','自創曲':'#fb8c00','台語':'#43a047','V朋朋':'#00acc1' };
+      // 合併全部歌曲，照次數降序
+      const allSongs = [];
+      validLangs.forEach(l => (stats.songs[l] || []).forEach(s => allSongs.push({...s, lang: l})));
+      allSongs.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh'));
 
       root.innerHTML = `
         <div class="ss-summary">
@@ -645,8 +672,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>`).join('')}
         </div>` : ''}
         <div class="ls-year-bar" id="ss-lang-bar">
-          <button class="ls-year-btn active" data-slang="all">全部 (${allSongs.length})</button>
-          ${validLangs.map(l => `<button class="ls-year-btn" data-slang="${l}" style="--tab-color:${langColors[l]||'#888'}">${l} (${langCounts[l]})</button>`).join('')}
+          ${validLangs.map((l,i) => `<button class="ls-year-btn${i===0?' active':''}" data-slang="${l}" style="--tab-color:${langColors[l]||'#888'}">${l} (${langCounts[l]})</button>`).join('')}
         </div>
         <div class="ls-search-bar">
           <span class="ls-search-icon">🔍</span>
@@ -661,11 +687,11 @@ document.addEventListener('DOMContentLoaded', () => {
           </table>
         </div>`;
 
-      let activeLang = 'all', searchQ = '';
+      let activeLang = validLangs[0] || '', searchQ = '';
 
       function updateTable() {
         const filtered = allSongs.filter(s =>
-          (activeLang === 'all' || s.lang === activeLang) &&
+          s.lang === activeLang &&
           (!searchQ || s.name.toLowerCase().includes(searchQ.toLowerCase()))
         );
         document.getElementById('ss-tbody').innerHTML = filtered.map((s, i) => `
@@ -676,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td class="ss-cnt">${s.count > 1 ? `<span class="ss-cnt-badge">×${s.count}</span>` : '1'}</td>
           </tr>`).join('');
         const cntEl = document.getElementById('ss-count');
-        cntEl.textContent = searchQ ? `找到 ${filtered.length} / ${allSongs.length} 首` : '';
+        cntEl.textContent = searchQ ? `找到 ${filtered.length} / ${allSongs.filter(s=>s.lang===activeLang).length} 首` : '';
       }
       updateTable();
 
@@ -703,33 +729,45 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    window._loadSongStats = async function() {
+    async function _fetchAndRender(year) {
       const root = document.getElementById('songstats-root');
       if (!root || !_ssSpreadsheetId) return;
       root.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
 
-      // 快取檢查
+      const cacheKey = `songstats_${v.id}_${year}`;
       try {
-        const c = sessionStorage.getItem(_ssCacheKey);
+        const c = sessionStorage.getItem(cacheKey);
         if (c) {
           const { data, time } = JSON.parse(c);
           if (Date.now() - time < _ssCacheTTL) { _renderSongStats(data); return; }
         }
       } catch(e) {}
 
-      const url = `https://docs.google.com/spreadsheets/d/${_ssSpreadsheetId}/export?format=csv&gid=${v.songStatsGid}`;
+      const gid = v.songStatsGids[year];
+      const url = `https://docs.google.com/spreadsheets/d/${_ssSpreadsheetId}/export?format=csv&gid=${gid}`;
       try {
         const res = await fetch(url);
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const text = await res.text();
-        const rows = _parseCSV(text);
-        const stats = _parseStats(rows);
-        try { sessionStorage.setItem(_ssCacheKey, JSON.stringify({ data: stats, time: Date.now() })); } catch(e) {}
+        const stats = _parseStats(_parseCSV(text));
+        try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: stats, time: Date.now() })); } catch(e) {}
         _renderSongStats(stats);
       } catch(e) {
         if (root) root.innerHTML = '<div class="ls-empty">⚠️ 載入失敗，請稍後再試</div>';
       }
-    };
+    }
+
+    // 年份切換
+    document.getElementById('ss-year-bar')?.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-ssyear]');
+      if (!btn) return;
+      document.querySelectorAll('#ss-year-bar .ls-year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      _ssActiveYear = btn.dataset.ssyear;
+      _fetchAndRender(_ssActiveYear);
+    });
+
+    window._loadSongStats = function() { _fetchAndRender(_ssActiveYear); };
   }
 
   // ── YouTube 彈出視窗（Modal）────────────────────

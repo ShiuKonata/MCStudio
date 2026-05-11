@@ -1939,6 +1939,17 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 }
 
 /* =============================================
+   熱門剪輯推薦 (Clips Tab)
+   ============================================= */
+.clips-desc {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.85rem;
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* =============================================
    歌曲統計 (Song Stats Tab)
    ============================================= */
 .ss-summary {
