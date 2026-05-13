@@ -610,10 +610,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name && name.trim()) stats.top3.push({ name: name.trim(), count: cnt || 1 });
       }
 
-      // 動態找語言標題列（含「中文」的那列）
+      // 動態找語言標題列（第一欄為任一已知語言名稱即視為標題列）
+      const _knownLangs = new Set(['中文','英文','日文','自創曲','台語','V朋朋','V朋朋唱歌','其它語系','韓文']);
       let headerRow = null, tableStart = -1;
       for (let i = 0; i < rows.length; i++) {
-        if (rows[i]?.[0] === '中文') { headerRow = rows[i]; tableStart = i + 1; break; }
+        if (_knownLangs.has(rows[i]?.[0])) { headerRow = rows[i]; tableStart = i + 1; break; }
       }
       if (!headerRow) return stats;
 
@@ -637,6 +638,13 @@ document.addEventListener('DOMContentLoaded', () => {
           if (name && name.trim()) stats.songs[lang].push({ name: name.trim(), count: cnt });
         });
       }
+
+      // 若統計摘要列沒有歌名，從解析後的歌曲資料自動推算前三名
+      if (stats.top3.length === 0) {
+        const allFlat = Object.values(stats.songs).flat().sort((a, b) => b.count - a.count);
+        stats.top3 = allFlat.slice(0, 3);
+      }
+
       return stats;
     }
 
@@ -734,7 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!root || !_ssSpreadsheetId) return;
       root.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
 
-      const cacheKey = `songstats_${v.id}_${year}`;
+      const cacheKey = `songstats_v2_${v.id}_${year}`;
       try {
         const c = sessionStorage.getItem(cacheKey);
         if (c) {
