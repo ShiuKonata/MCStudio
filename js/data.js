@@ -66,11 +66,8 @@ const vtubers = [
       { id: "XHuc832HAfY", title: "【Cover】食虫植物/ 詩雨蔻達 feat.茶浣熊@TanukiiDonCh | 吉他自彈自唱",           date: "2023-01-21" },
     ],
 
-    musicClips: [
-      { id: "jOaAoIqskpo", title: "CODA中文歌回總集篇-2026年3月份" },
-      { id: "60P3EJa_SVQ", title: "CODA中文歌回總集篇-2026年1月份+2月份" },
-      { id: "1wYaJopkYQA", title: "CODA中文歌回總集篇-2025年12月份" },
-    ],
+    // 音樂剪輯頻道（自動抓取全部影片，有此欄位則不使用靜態 musicClips）
+    musicClipsChannelId: "UCuPHlMEd0cR-tvAYPjGWVwQ",
 
     videoClips: [
       { id: "6DzGvlWL2CU", title: "當統領想給外送員小費時... | 詩雨蔻達 ShiuCoda" },
