@@ -67,7 +67,7 @@ const vtubers = [
     ],
 
     // 音樂剪輯頻道（自動抓取全部影片，有此欄位則不使用靜態 musicClips）
-    musicClipsChannelId: "UCuPHlMEd0cR-tvAYPjGWVwQ",
+    musicClipsChannelId: "UCsjWfH2QUTGlrFSurA5oj2w",  // @Konata閆娘 剪輯頻道
 
     videoClips: [
       { id: "6DzGvlWL2CU", title: "當統領想給外送員小費時... | 詩雨蔻達 ShiuCoda" },
