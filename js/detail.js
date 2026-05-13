@@ -53,6 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.title = `${v.name} — MC組事務所`;
 
+  // ── 動態更新 OG / Twitter Card meta（讓 LINE 等平台抓到正確的 Vtuber 資訊）──
+  const _setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+  const _ogTitle = `${v.name}（${v.nameEn}）— MC組事務所`;
+  const _ogDesc  = `${v.description || v.name + ' 的個人介紹頁'}　收錄直播存檔、熱門影片、歌曲統計與更多資訊。`;
+  const _ogImg   = v.coverImage || v.avatar || '';
+  const _ogUrl   = `https://shiukonata.github.io/MCStudio/vtuber.html?id=${v.id}`;
+  _setMeta('meta[property="og:title"]',       _ogTitle);
+  _setMeta('meta[property="og:description"]', _ogDesc);
+  _setMeta('meta[property="og:image"]',       _ogImg);
+  _setMeta('meta[property="og:url"]',         _ogUrl);
+  _setMeta('meta[name="twitter:title"]',      _ogTitle);
+  _setMeta('meta[name="twitter:description"]',_ogDesc);
+  _setMeta('meta[name="twitter:image"]',      _ogImg);
+  _setMeta('meta[name="description"]',        _ogDesc);
+
   // ── 計算上一位 / 下一位（依出道日排序，循環）──
   const sorted = [...vtubers].sort((a, b) => new Date(a.debut) - new Date(b.debut));
   const idx  = sorted.findIndex(x => x.id === v.id);
