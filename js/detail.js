@@ -501,10 +501,22 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div id="clips-music-panel"${!((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' style="display:none"' : ''}>
             <p class="clips-desc">非官方粉絲剪輯熱門音樂，點擊前往 YouTube 觀看</p>
+            ${_musicClipsChs.length > 1 ? `<div class="ls-year-bar clips-ch-bar" id="musicclips-ch-bar">
+              ${_musicClipsChs.map((ch, i) => {
+                const lbl = (typeof ch === 'object' && ch.label) ? ch.label : ('頻道 ' + (i + 1));
+                return `<button class="ls-year-btn${i === 0 ? ' active' : ''}" data-chidx="${i}">🎞 ${lbl}</button>`;
+              }).join('')}
+            </div>` : ''}
             <div class="video-grid" id="musicclips-grid"></div>
           </div>
           <div id="clips-video-panel" style="display:none">
             <p class="clips-desc">非官方粉絲剪輯熱門影片，點擊前往 YouTube 觀看</p>
+            ${_videoClipsChs.length > 1 ? `<div class="ls-year-bar clips-ch-bar" id="videoclips-ch-bar">
+              ${_videoClipsChs.map((ch, i) => {
+                const lbl = (typeof ch === 'object' && ch.label) ? ch.label : ('頻道 ' + (i + 1));
+                return `<button class="ls-year-btn${i === 0 ? ' active' : ''}" data-chidx="${i}">🎞 ${lbl}</button>`;
+              }).join('')}
+            </div>` : ''}
             <div class="video-grid" id="videoclips-grid"></div>
           </div>
         </div>` : ''}
@@ -882,14 +894,17 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
 
-  // ── 剪輯頻道自動抓取（支援多頻道陣列 + 關鍵字篩選，結果合併後依日期排序）────
-  // channelIds 陣列元素可為：
-  //   string           → 抓取該頻道全部影片
-  //   { id, keywords } → 抓取該頻道，僅保留標題含任一 keyword 的影片（不區分大小寫）
-  async function _fetchClipsFromChannels(channelIds, gridId, emoji) {
+  // ── 剪輯頻道自動抓取（單一頻道，支援 keywords 篩選）────
+  // chEntry 可為：
+  //   string               → 抓取全部影片
+  //   { id, label, keywords } → 篩選標題含任一 keyword 的影片（不分大小寫）
+  async function _fetchClipsForChannel(chEntry, gridId, emoji) {
     const grid = document.getElementById(gridId);
-    if (!grid || !channelIds || !channelIds.length || !v.ytApiKey) return;
-    const cacheKey = `clips_ch_${channelIds.map(c => typeof c === 'string' ? c : c.id).join('_')}`;
+    if (!grid || !chEntry || !v.ytApiKey) return;
+    const channelId = typeof chEntry === 'string' ? chEntry : chEntry.id;
+    const kws = (typeof chEntry === 'object' && chEntry.keywords)
+      ? chEntry.keywords.map(k => k.toLowerCase()) : null;
+    const cacheKey = `clips_ch_${channelId}`;
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
@@ -898,14 +913,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
-
-    // 單一頻道抓取（支援 keywords 篩選）
-    async function _fetchOne(chEntry) {
-      const channelId = typeof chEntry === 'string' ? chEntry : chEntry.id;
-      const kws = (typeof chEntry === 'object' && chEntry.keywords)
-        ? chEntry.keywords.map(k => k.toLowerCase()) : null;
-      const uploadsId = 'UU' + channelId.slice(2);
-      let videos = [], pageToken = '', pageCount = 0;
+    const uploadsId = 'UU' + channelId.slice(2);
+    let videos = [], pageToken = '', pageCount = 0;
+    try {
       do {
         const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${v.ytApiKey}${pageToken ? '&pageToken=' + pageToken : ''}`;
         const res = await fetch(url);
@@ -915,7 +925,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const vid = item.snippet.resourceId?.videoId;
           if (!vid) return;
           const title = item.snippet.title || '';
-          // 有設 keywords → 篩選標題，任一關鍵字符合才收錄
           if (kws && !kws.some(k => title.toLowerCase().includes(k))) return;
           videos.push({
             id:    vid,
@@ -927,22 +936,32 @@ document.addEventListener('DOMContentLoaded', () => {
         pageToken = json.nextPageToken || '';
         pageCount++;
       } while (pageToken && pageCount < 20);
-      return videos;
-    }
-
-    try {
-      // 並行抓取所有頻道，合併後依發布日期新→舊排序
-      const results = await Promise.all(channelIds.map(_fetchOne));
-      const allVideos = results.flat().sort((a, b) => b.date.localeCompare(a.date));
       grid.innerHTML = '';
-      renderVideoCards(allVideos, gridId, emoji || '🎶');
-      try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: allVideos, time: Date.now() })); } catch(e) {}
+      renderVideoCards(videos, gridId, emoji || '🎶');
+      try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: videos, time: Date.now() })); } catch(e) {}
     } catch(e) {
       grid.innerHTML = '<div class="ls-empty">⚠️ 載入失敗，請稍後再試</div>';
     }
   }
-  if (_musicClipsChs.length) window._loadMusicClipsChannel = () => _fetchClipsFromChannels(_musicClipsChs, 'musicclips-grid', '🎶');
-  if (_videoClipsChs.length) window._loadVideoClipsChannel = () => _fetchClipsFromChannels(_videoClipsChs, 'videoclips-grid', '🎬');
+
+  // ── 頻道子標籤點擊處理 ────────────────────────────
+  function _setupChSubTabs(barId, chsList, gridId, emoji) {
+    const bar = document.getElementById(barId);
+    if (!bar) return;
+    bar.addEventListener('click', e => {
+      const btn = e.target.closest('[data-chidx]');
+      if (!btn) return;
+      bar.querySelectorAll('[data-chidx]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      _fetchClipsForChannel(chsList[parseInt(btn.dataset.chidx)], gridId, emoji);
+    });
+  }
+  _setupChSubTabs('musicclips-ch-bar', _musicClipsChs, 'musicclips-grid', '🎶');
+  _setupChSubTabs('videoclips-ch-bar', _videoClipsChs, 'videoclips-grid', '🎬');
+
+  // 進入 clips tab 時載入第一個頻道（預設）
+  if (_musicClipsChs.length) window._loadMusicClipsChannel = () => _fetchClipsForChannel(_musicClipsChs[0], 'musicclips-grid', '🎶');
+  if (_videoClipsChs.length) window._loadVideoClipsChannel = () => _fetchClipsForChannel(_videoClipsChs[0], 'videoclips-grid', '🎬');
 
   // ── 新年願望 ──────────────────────────────────
   if (v.newYearWishes) {
