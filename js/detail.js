@@ -909,7 +909,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
         const { data, time } = JSON.parse(c);
-        if (Date.now() - time < 30 * 60 * 1000) { renderVideoCards(data, gridId, emoji || '🎶'); return; }
+        if (Date.now() - time < 30 * 60 * 1000) { grid.innerHTML = ''; renderVideoCards(data, gridId, emoji || '🎶'); return; }
       }
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
