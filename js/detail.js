@@ -51,6 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // ── 多頻道支援：統一轉為陣列（相容舊版單一 channelId 欄位）──
+  const _musicClipsChs = v.musicClipsChannelIds
+    ? v.musicClipsChannelIds
+    : (v.musicClipsChannelId ? [v.musicClipsChannelId] : []);
+  const _videoClipsChs = v.videoClipsChannelIds
+    ? v.videoClipsChannelIds
+    : (v.videoClipsChannelId ? [v.videoClipsChannelId] : []);
+
   document.title = `${v.name} — MC組事務所`;
 
   // ── 動態更新 OG / Twitter Card meta（讓 LINE 等平台抓到正確的 Vtuber 資訊）──
@@ -99,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ...(v.newYearWishes ? [{ key: 'wishes', label: '🎍 新年願望', color: '#e91e63' }] : []),
     ...(v.gallery && v.gallery.length ? [{ key: 'gallery', label: '🖼️ 畫冊', color: '#7b5ea7' }] : []),
     ...('songStatsGids' in v ? [{ key: 'songstats', label: '🎵 歌曲統計', color: '#c62828' }] : []),
-    ...((v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) || v.musicClipsChannelId || v.videoClipsChannelId ? [{ key: 'clips', label: '🎬 熱門剪輯推薦', color: '#1565c0' }] : []),
+    ...((v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) || _musicClipsChs.length || _videoClipsChs.length ? [{ key: 'clips', label: '🎬 熱門剪輯推薦', color: '#1565c0' }] : []),
   ];
 
   // ── 注入頂部分頁列 ─────────────────────────────
@@ -484,14 +492,14 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>` : ''}
 
         <!-- TAB: 熱門剪輯推薦（音樂 + 影片合併） -->
-        ${(v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) || v.musicClipsChannelId || v.videoClipsChannelId ? `
+        ${(v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) || _musicClipsChs.length || _videoClipsChs.length ? `
         <div id="tab-clips" class="tab-panel">
           <div class="detail-section-title">🎬 熱門剪輯推薦</div>
           <div class="ls-year-bar" id="clips-type-bar">
-            ${(v.musicClips && v.musicClips.length) || v.musicClipsChannelId ? `<button class="ls-year-btn active" data-cliptype="music">🎶 熱門音樂剪輯</button>` : ''}
-            ${(v.videoClips && v.videoClips.length) || v.videoClipsChannelId ? `<button class="ls-year-btn${!((v.musicClips && v.musicClips.length) || v.musicClipsChannelId) ? ' active' : ''}" data-cliptype="video">🎬 熱門影片剪輯</button>` : ''}
+            ${(v.musicClips && v.musicClips.length) || _musicClipsChs.length ? `<button class="ls-year-btn active" data-cliptype="music">🎶 熱門音樂剪輯</button>` : ''}
+            ${(v.videoClips && v.videoClips.length) || _videoClipsChs.length ? `<button class="ls-year-btn${!((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' active' : ''}" data-cliptype="video">🎬 熱門影片剪輯</button>` : ''}
           </div>
-          <div id="clips-music-panel"${!((v.musicClips && v.musicClips.length) || v.musicClipsChannelId) ? ' style="display:none"' : ''}>
+          <div id="clips-music-panel"${!((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' style="display:none"' : ''}>
             <p class="clips-desc">非官方粉絲剪輯熱門音樂，點擊前往 YouTube 觀看</p>
             <div class="video-grid" id="musicclips-grid"></div>
           </div>
@@ -874,22 +882,24 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
 
-  // ── 剪輯頻道自動抓取（musicClipsChannelId / videoClipsChannelId）────
-  async function _fetchClipsFromChannel(channelId, gridId) {
+  // ── 剪輯頻道自動抓取（支援多頻道陣列，結果合併後依日期排序）────
+  async function _fetchClipsFromChannels(channelIds, gridId, emoji) {
     const grid = document.getElementById(gridId);
-    if (!grid || !channelId || !v.ytApiKey) return;
-    const cacheKey = `clips_ch_${channelId}`;
+    if (!grid || !channelIds || !channelIds.length || !v.ytApiKey) return;
+    const cacheKey = `clips_ch_${channelIds.join('_')}`;
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
         const { data, time } = JSON.parse(c);
-        if (Date.now() - time < 30 * 60 * 1000) { renderVideoCards(data, gridId, '🎶'); return; }
+        if (Date.now() - time < 30 * 60 * 1000) { renderVideoCards(data, gridId, emoji || '🎶'); return; }
       }
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
-    const uploadsId = 'UU' + channelId.slice(2);
-    let allVideos = [], pageToken = '', pageCount = 0;
-    try {
+
+    // 單一頻道抓取（全部分頁，最多 1000 部）
+    async function _fetchOne(channelId) {
+      const uploadsId = 'UU' + channelId.slice(2);
+      let videos = [], pageToken = '', pageCount = 0;
       do {
         const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${v.ytApiKey}${pageToken ? '&pageToken=' + pageToken : ''}`;
         const res = await fetch(url);
@@ -897,7 +907,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const json = await res.json();
         (json.items || []).forEach(item => {
           const vid = item.snippet.resourceId?.videoId;
-          if (vid) allVideos.push({
+          if (vid) videos.push({
             id:    vid,
             title: item.snippet.title || '',
             date:  (item.snippet.publishedAt || '').slice(0, 10),
@@ -906,16 +916,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         pageToken = json.nextPageToken || '';
         pageCount++;
-      } while (pageToken && pageCount < 20); // 最多 20 頁（1000 部）
+      } while (pageToken && pageCount < 20);
+      return videos;
+    }
+
+    try {
+      // 並行抓取所有頻道，合併後依發布日期新→舊排序
+      const results = await Promise.all(channelIds.map(_fetchOne));
+      const allVideos = results.flat().sort((a, b) => b.date.localeCompare(a.date));
       grid.innerHTML = '';
-      renderVideoCards(allVideos, gridId, '🎶');
+      renderVideoCards(allVideos, gridId, emoji || '🎶');
       try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: allVideos, time: Date.now() })); } catch(e) {}
     } catch(e) {
       grid.innerHTML = '<div class="ls-empty">⚠️ 載入失敗，請稍後再試</div>';
     }
   }
-  if (v.musicClipsChannelId) window._loadMusicClipsChannel = () => _fetchClipsFromChannel(v.musicClipsChannelId, 'musicclips-grid');
-  if (v.videoClipsChannelId) window._loadVideoClipsChannel = () => _fetchClipsFromChannel(v.videoClipsChannelId, 'videoclips-grid');
+  if (_musicClipsChs.length) window._loadMusicClipsChannel = () => _fetchClipsFromChannels(_musicClipsChs, 'musicclips-grid', '🎶');
+  if (_videoClipsChs.length) window._loadVideoClipsChannel = () => _fetchClipsFromChannels(_videoClipsChs, 'videoclips-grid', '🎬');
 
   // ── 新年願望 ──────────────────────────────────
   if (v.newYearWishes) {
