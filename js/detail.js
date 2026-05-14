@@ -882,11 +882,14 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
 
-  // ── 剪輯頻道自動抓取（支援多頻道陣列，結果合併後依日期排序）────
+  // ── 剪輯頻道自動抓取（支援多頻道陣列 + 關鍵字篩選，結果合併後依日期排序）────
+  // channelIds 陣列元素可為：
+  //   string           → 抓取該頻道全部影片
+  //   { id, keywords } → 抓取該頻道，僅保留標題含任一 keyword 的影片（不區分大小寫）
   async function _fetchClipsFromChannels(channelIds, gridId, emoji) {
     const grid = document.getElementById(gridId);
     if (!grid || !channelIds || !channelIds.length || !v.ytApiKey) return;
-    const cacheKey = `clips_ch_${channelIds.join('_')}`;
+    const cacheKey = `clips_ch_${channelIds.map(c => typeof c === 'string' ? c : c.id).join('_')}`;
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
@@ -896,8 +899,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
 
-    // 單一頻道抓取（全部分頁，最多 1000 部）
-    async function _fetchOne(channelId) {
+    // 單一頻道抓取（支援 keywords 篩選）
+    async function _fetchOne(chEntry) {
+      const channelId = typeof chEntry === 'string' ? chEntry : chEntry.id;
+      const kws = (typeof chEntry === 'object' && chEntry.keywords)
+        ? chEntry.keywords.map(k => k.toLowerCase()) : null;
       const uploadsId = 'UU' + channelId.slice(2);
       let videos = [], pageToken = '', pageCount = 0;
       do {
@@ -907,9 +913,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const json = await res.json();
         (json.items || []).forEach(item => {
           const vid = item.snippet.resourceId?.videoId;
-          if (vid) videos.push({
+          if (!vid) return;
+          const title = item.snippet.title || '';
+          // 有設 keywords → 篩選標題，任一關鍵字符合才收錄
+          if (kws && !kws.some(k => title.toLowerCase().includes(k))) return;
+          videos.push({
             id:    vid,
-            title: item.snippet.title || '',
+            title,
             date:  (item.snippet.publishedAt || '').slice(0, 10),
             thumb: item.snippet.thumbnails?.medium?.url || ''
           });

@@ -67,8 +67,10 @@ const vtubers = [
     ],
 
     // 音樂剪輯頻道（陣列，可填多個頻道，自動抓取全部影片並合併排序）
+    // 可加 keywords 篩選：只收錄標題包含任一關鍵字的影片（不分大小寫）
     musicClipsChannelIds: [
-      "UCsjWfH2QUTGlrFSurA5oj2w",  // @Konata閆娘
+      "UCsjWfH2QUTGlrFSurA5oj2w",  // @Konata閆娘（全部都是詩雨蔻達剪輯）
+      { id: "UCzqYJKopN_nYJBr7ep93jTA", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },  // 閃電流氓
     ],
 
     videoClips: [
