@@ -913,11 +913,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadsId  = (typeof chEntry === 'object' && chEntry.playlistId)
       ? chEntry.playlistId : 'UU' + channelId.slice(2);
     // 同頻道不同 typeKeywords / playlistId → 分別快取
-    const typeTag    = [
-      typeKws ? typeKws[0].replace(/\W/g, '') : '',
-      (typeof chEntry === 'object' && chEntry.playlistId) ? chEntry.playlistId.slice(0, 6) : ''
+    // 注意：不能用 replace(/\W/g,'') 處理中文，改用陣列長度＋第一字長度當 tag
+    const typeTag = [
+      typeKws    ? `tk${typeKws.length}_${typeKws[0].length}`                                          : '',
+      (typeof chEntry === 'object' && chEntry.playlistId) ? chEntry.playlistId.slice(0, 8)            : ''
     ].filter(Boolean).join('_') || 'all';
-    const cacheKey   = `clips_ch_${channelId}_${typeTag}`;
+    const cacheKey   = `clips_ch_v2_${channelId}_${typeTag}`; // v2 強制清除舊快取
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
