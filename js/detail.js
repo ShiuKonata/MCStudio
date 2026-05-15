@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div id="clips-music-panel"${!((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' style="display:none"' : ''}>
             <p class="clips-desc">非官方粉絲剪輯熱門音樂，點擊前往 YouTube 觀看</p>
-            ${_musicClipsChs.length > 1 ? `<div class="ls-year-bar clips-ch-bar" id="musicclips-ch-bar">
+            ${_musicClipsChs.length >= 1 ? `<div class="ls-year-bar clips-ch-bar" id="musicclips-ch-bar">
               ${_musicClipsChs.map((ch, i) => {
                 const lbl = (typeof ch === 'object' && ch.label) ? ch.label : ('頻道 ' + (i + 1));
                 return `<button class="ls-year-btn${i === 0 ? ' active' : ''}" data-chidx="${i}">🎞 ${lbl}</button>`;
@@ -511,7 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div id="clips-video-panel" style="display:none">
             <p class="clips-desc">非官方粉絲剪輯熱門影片，點擊前往 YouTube 觀看</p>
-            ${_videoClipsChs.length > 1 ? `<div class="ls-year-bar clips-ch-bar" id="videoclips-ch-bar">
+            ${_videoClipsChs.length >= 1 ? `<div class="ls-year-bar clips-ch-bar" id="videoclips-ch-bar">
               ${_videoClipsChs.map((ch, i) => {
                 const lbl = (typeof ch === 'object' && ch.label) ? ch.label : ('頻道 ' + (i + 1));
                 return `<button class="ls-year-btn${i === 0 ? ' active' : ''}" data-chidx="${i}">🎞 ${lbl}</button>`;
