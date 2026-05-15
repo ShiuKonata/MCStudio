@@ -1008,7 +1008,7 @@ const vtubers = [
     nameEn: "Whalefall",
     group: "預見娛樂",
     generation: "三期生",
-    avatar: "https://pbs.twimg.com/profile_images/2045500361218424832/csxJ0Cts_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2053510825772797952/6gzJgkz3_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1768216252001198080/1710825714/1500x500",
     tagline: "",
     description: "",
