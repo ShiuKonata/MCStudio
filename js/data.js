@@ -76,6 +76,7 @@ const vtubers = [
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室" },
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
       { id: "UCh00s3u4osHhNx8BlSZsECg", label: "章魚虛タコ",   keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
+      { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
     ],
 
     videoClips: [
