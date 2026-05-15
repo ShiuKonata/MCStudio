@@ -868,16 +868,10 @@ const vtubers = [
     ],
 
 
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
+    // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
+    videoClipsChannelIds: [
+      { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear" },  // 全頻道皆結月莉莉奈內容
     ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
