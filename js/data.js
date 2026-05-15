@@ -427,16 +427,12 @@ const vtubers = [
     ],
 
 
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    musicClipsChannelIds: [
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛", keywords: ["帕蘿妮", "paroniie"], typeKeywords: ["點歌台", "歌回", "cover"] },
     ],
 
-    videoClips: [
-      { id: "2LShBQNYrxU", title: "合約上面沒有說不可以臭老闆！而且合約是我親自改過的！【帕蘿妮 Paroniie】【VTuber精華】" },
-      { id: "Vee1Sl3P6A0", title: "難過跟受傷的終究是自己。【帕蘿妮 Paroniie】【VTuber精華】" },
-      { id: "MSJYMVASn4g", title: "小小的花園裡面挖呀挖呀挖 #shorts【帕蘿妮 Paroniie】【VTuber精華】" },
+    videoClipsChannelIds: [
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛", keywords: ["帕蘿妮", "paroniie"], excludeKeywords: ["點歌台", "歌回", "cover"] },
     ],
 
     scheduleVideoId:  "3CkoMAZxoec",
@@ -757,16 +753,8 @@ const vtubers = [
     ],
 
 
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    musicClipsChannelIds: [
+      { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["瓦西瓦瓦", "vaswawa"], typeKeywords: ["cover"] },
     ],
 
     scheduleVideoId:  "DvskyppTq-0",
