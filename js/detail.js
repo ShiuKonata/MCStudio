@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>` : ''}
             <div class="video-grid" id="musicclips-grid"></div>
           </div>
-          <div id="clips-video-panel" style="display:none">
+          <div id="clips-video-panel"${((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' style="display:none"' : ''}>
             <p class="clips-desc">非官方粉絲剪輯熱門影片，點擊前往 YouTube 觀看</p>
             ${_videoClipsChs.length >= 1 ? `<div class="ls-year-bar clips-ch-bar" id="videoclips-ch-bar">
               ${_videoClipsChs.map((ch, i) => {
