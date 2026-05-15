@@ -1645,7 +1645,7 @@ const vtubers = [
     nameEn: "KeKeMii",
     group: "預見娛樂",
     generation: "五期生",
-    avatar: "https://pbs.twimg.com/profile_images/1941771357114847232/YGQile8W_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2052756867378798592/6X8FR751_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1888131663596748800/1745276220/1500x500",
     tagline: "",
     description: "是隻喜歡睡覺的熊!",
