@@ -1180,16 +1180,12 @@ const vtubers = [
     ],
 
 
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
+    musicClipsChannelIds: [
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["涅爾菲", "nyrfier"], typeKeywords: ["歌切", "合唱"] },
     ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    videoClipsChannelIds: [
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
     ],
 
     scheduleVideoId:  "fl96oXs9Q1E",
@@ -1285,16 +1281,12 @@ const vtubers = [
     ],
 
 
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
+    musicClipsChannelIds: [
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
     ],
 
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    videoClipsChannelIds: [
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
