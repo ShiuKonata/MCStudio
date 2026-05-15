@@ -900,7 +900,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   typeKeywords    → 內容類型白名單（AND，還需命中此列其中一個）
   //   excludeKeywords → 內容類型黑名單（標題含其中任一 → 排除）
   //   playlistId      → 指定播放清單（如 UUSH… = Shorts 清單）
-  async function _fetchClipsForChannel(chEntry, gridId, emoji) {
+  async function _fetchClipsForChannel(chEntry, gridId, emoji, subTabBtn) {
     const grid = document.getElementById(gridId);
     if (!grid || !chEntry || !v.ytApiKey) return;
     const channelId   = typeof chEntry === 'string' ? chEntry : chEntry.id;
@@ -920,11 +920,30 @@ document.addEventListener('DOMContentLoaded', () => {
       (typeof chEntry === 'object' && chEntry.playlistId) ? chEntry.playlistId.slice(0, 8) : ''
     ].filter(Boolean).join('_') || 'all';
     const cacheKey    = `clips_ch_v2_${channelId}_${typeTag}`;
+
+    // 渲染結果；若無影片則隱藏子標籤按鈕並自動切換到下一個有影片的標籤
+    function _done(videosArr, subTabBtn) {
+      grid.innerHTML = '';
+      if (!videosArr || videosArr.length === 0) {
+        if (subTabBtn) {
+          subTabBtn.hidden = true;
+          if (subTabBtn.classList.contains('active')) {
+            subTabBtn.classList.remove('active');
+            const bar = subTabBtn.closest('.clips-ch-bar');
+            const next = bar && [...bar.querySelectorAll('[data-chidx]')].find(b => !b.hidden);
+            if (next) next.click(); // 觸發點擊 → 載入下一個頻道
+          }
+        }
+        return;
+      }
+      renderVideoCards(videosArr, gridId, emoji || '🎶');
+    }
+
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
         const { data, time } = JSON.parse(c);
-        if (Date.now() - time < 30 * 60 * 1000) { grid.innerHTML = ''; renderVideoCards(data, gridId, emoji || '🎶'); return; }
+        if (Date.now() - time < 30 * 60 * 1000) { _done(data, subTabBtn); return; }
       }
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
@@ -953,9 +972,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pageToken = json.nextPageToken || '';
         pageCount++;
       } while (pageToken && pageCount < 20);
-      grid.innerHTML = '';
-      renderVideoCards(videos, gridId, emoji || '🎶');
-      try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: videos, time: Date.now() })); } catch(e) {}
+      _done(videos, subTabBtn);
+      if (videos.length > 0) {
+        try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: videos, time: Date.now() })); } catch(e) {}
+      }
     } catch(e) {
       grid.innerHTML = '<div class="ls-empty">⚠️ 載入失敗，請稍後再試</div>';
     }
@@ -970,15 +990,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!btn) return;
       bar.querySelectorAll('[data-chidx]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      _fetchClipsForChannel(chsList[parseInt(btn.dataset.chidx)], gridId, emoji);
+      // 傳入 btn → fetch 完後若無影片自動隱藏此標籤並切換到下一個
+      _fetchClipsForChannel(chsList[parseInt(btn.dataset.chidx)], gridId, emoji, btn);
     });
   }
   _setupChSubTabs('musicclips-ch-bar', _musicClipsChs, 'musicclips-grid', '🎶');
   _setupChSubTabs('videoclips-ch-bar', _videoClipsChs, 'videoclips-grid', '🎬');
 
-  // 進入 clips tab 時載入第一個頻道（預設）
-  if (_musicClipsChs.length) window._loadMusicClipsChannel = () => _fetchClipsForChannel(_musicClipsChs[0], 'musicclips-grid', '🎶');
-  if (_videoClipsChs.length) window._loadVideoClipsChannel = () => _fetchClipsForChannel(_videoClipsChs[0], 'videoclips-grid', '🎬');
+  // 進入 clips tab 時載入第一個頻道（預設），同時傳入按鈕以便空結果時自動隱藏
+  if (_musicClipsChs.length) window._loadMusicClipsChannel = () => {
+    const btn = document.querySelector('#musicclips-ch-bar [data-chidx="0"]');
+    _fetchClipsForChannel(_musicClipsChs[0], 'musicclips-grid', '🎶', btn);
+  };
+  if (_videoClipsChs.length) window._loadVideoClipsChannel = () => {
+    const btn = document.querySelector('#videoclips-ch-bar [data-chidx="0"]');
+    _fetchClipsForChannel(_videoClipsChs[0], 'videoclips-grid', '🎬', btn);
+  };
 
   // ── 新年願望 ──────────────────────────────────
   if (v.newYearWishes) {
