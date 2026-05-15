@@ -75,7 +75,7 @@ const vtubers = [
 
     // ── 熱門音樂剪輯（Cover / 歌回）────────────────
     musicClipsChannelIds: [
-      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘" },                                                                                                         // 全部都是詩雨蔻達歌回
+      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘", typeKeywords: ["歌回"] },                                                                                 // 只抓歌回總集篇
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                             // 全部為 Cover
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["cover", "guitar", "歌回"] },  // 混合頻道 → 只抓音樂
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室" },                                                                                                         // 全部為 Cover
@@ -84,8 +84,11 @@ const vtubers = [
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                            // Guitar Cover
     ],
 
-    // ── 熱門影片精華（直播精華 / 遊戲精華）──────────
+    // ── 熱門影片精華（直播精華 / Shorts / 遊戲精華）──────────
+    // playlistId 可指定 YouTube 特定播放清單：
+    //   UUSH + channelId[2:] = 該頻道的 Shorts 專屬清單
     videoClipsChannelIds: [
+      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w" },                                                           // Shorts 精華
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華"] },
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華", "直播"] },
     ],

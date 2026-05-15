@@ -909,8 +909,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ? chEntry.keywords.map(k => k.toLowerCase()) : null;
     const typeKws    = (typeof chEntry === 'object' && chEntry.typeKeywords)
       ? chEntry.typeKeywords.map(k => k.toLowerCase()) : null;
-    // 同頻道不同 typeKeywords → 分別快取
-    const typeTag    = typeKws ? typeKws[0].replace(/\W/g, '') : 'all';
+    // playlistId：可指定特定播放清單（如 UUSH… = Shorts 專屬清單）；不填則自動用上傳清單
+    const uploadsId  = (typeof chEntry === 'object' && chEntry.playlistId)
+      ? chEntry.playlistId : 'UU' + channelId.slice(2);
+    // 同頻道不同 typeKeywords / playlistId → 分別快取
+    const typeTag    = [
+      typeKws ? typeKws[0].replace(/\W/g, '') : '',
+      (typeof chEntry === 'object' && chEntry.playlistId) ? chEntry.playlistId.slice(0, 6) : ''
+    ].filter(Boolean).join('_') || 'all';
     const cacheKey   = `clips_ch_${channelId}_${typeTag}`;
     try {
       const c = sessionStorage.getItem(cacheKey);
@@ -920,7 +926,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
-    const uploadsId = 'UU' + channelId.slice(2);
     let videos = [], pageToken = '', pageCount = 0;
     try {
       do {
