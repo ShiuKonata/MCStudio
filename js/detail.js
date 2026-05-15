@@ -894,31 +894,32 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
 
-  // ── 剪輯頻道自動抓取（單一頻道，支援雙層篩選）────
-  // chEntry 可為：
-  //   string                          → 抓取全部影片
-  //   { id, label, keywords }         → 篩選標題含任一 keyword（人名過濾，OR 邏輯）
-  //   { ..., typeKeywords }           → 額外加內容類型過濾（AND 邏輯）
-  //   同一頻道可加入 musicClipsChannelIds 和 videoClipsChannelIds 各一次，
-  //   各自用不同 typeKeywords 區分音樂 / 影片精華
+  // ── 剪輯頻道自動抓取（單一頻道，支援三層篩選）────
+  // chEntry 欄位說明：
+  //   keywords        → 人名過濾（OR，任一命中才收錄）
+  //   typeKeywords    → 內容類型白名單（AND，還需命中此列其中一個）
+  //   excludeKeywords → 內容類型黑名單（標題含其中任一 → 排除）
+  //   playlistId      → 指定播放清單（如 UUSH… = Shorts 清單）
   async function _fetchClipsForChannel(chEntry, gridId, emoji) {
     const grid = document.getElementById(gridId);
     if (!grid || !chEntry || !v.ytApiKey) return;
-    const channelId  = typeof chEntry === 'string' ? chEntry : chEntry.id;
-    const kws        = (typeof chEntry === 'object' && chEntry.keywords)
+    const channelId   = typeof chEntry === 'string' ? chEntry : chEntry.id;
+    const kws         = (typeof chEntry === 'object' && chEntry.keywords)
       ? chEntry.keywords.map(k => k.toLowerCase()) : null;
-    const typeKws    = (typeof chEntry === 'object' && chEntry.typeKeywords)
+    const typeKws     = (typeof chEntry === 'object' && chEntry.typeKeywords)
       ? chEntry.typeKeywords.map(k => k.toLowerCase()) : null;
+    const excludeKws  = (typeof chEntry === 'object' && chEntry.excludeKeywords)
+      ? chEntry.excludeKeywords.map(k => k.toLowerCase()) : null;
     // playlistId：可指定特定播放清單（如 UUSH… = Shorts 專屬清單）；不填則自動用上傳清單
-    const uploadsId  = (typeof chEntry === 'object' && chEntry.playlistId)
+    const uploadsId   = (typeof chEntry === 'object' && chEntry.playlistId)
       ? chEntry.playlistId : 'UU' + channelId.slice(2);
-    // 同頻道不同 typeKeywords / playlistId → 分別快取
-    // 注意：不能用 replace(/\W/g,'') 處理中文，改用陣列長度＋第一字長度當 tag
+    // 同頻道不同篩選條件 → 分別快取（用各陣列長度組合當 tag，避免中文被正則清掉）
     const typeTag = [
-      typeKws    ? `tk${typeKws.length}_${typeKws[0].length}`                                          : '',
-      (typeof chEntry === 'object' && chEntry.playlistId) ? chEntry.playlistId.slice(0, 8)            : ''
+      typeKws    ? `tk${typeKws.length}_${typeKws[0].length}`       : '',
+      excludeKws ? `ex${excludeKws.length}_${excludeKws[0].length}` : '',
+      (typeof chEntry === 'object' && chEntry.playlistId) ? chEntry.playlistId.slice(0, 8) : ''
     ].filter(Boolean).join('_') || 'all';
-    const cacheKey   = `clips_ch_v2_${channelId}_${typeTag}`; // v2 強制清除舊快取
+    const cacheKey    = `clips_ch_v2_${channelId}_${typeTag}`;
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
@@ -939,8 +940,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!vid) return;
           const title    = item.snippet.title || '';
           const titleLow = title.toLowerCase();
-          if (kws     && !kws.some(k    => titleLow.includes(k)))    return; // 人名過濾（OR）
-          if (typeKws && !typeKws.some(k => titleLow.includes(k)))   return; // 內容類型（OR，需同時符合人名）
+          if (kws        && !kws.some(k       => titleLow.includes(k))) return; // 人名白名單（OR）
+          if (typeKws    && !typeKws.some(k   => titleLow.includes(k))) return; // 類型白名單（AND + OR）
+          if (excludeKws &&  excludeKws.some(k => titleLow.includes(k))) return; // 類型黑名單（排除）
           videos.push({
             id:    vid,
             title,
