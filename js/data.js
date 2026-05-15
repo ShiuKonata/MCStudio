@@ -72,6 +72,7 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘" },
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
     ],
 
     videoClips: [
