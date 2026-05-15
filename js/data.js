@@ -1317,16 +1317,8 @@ const vtubers = [
     ],
 
 
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    videoClipsChannelIds: [
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508", keywords: ["茶帽瑪緹", "chamamatti", "帽帽"] },
     ],
 
     scheduleVideoId:  "_Xf6y0jkl-Q",
