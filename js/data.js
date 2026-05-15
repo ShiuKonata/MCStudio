@@ -857,9 +857,15 @@ const vtubers = [
 
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
+    // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
+    musicClipsChannelIds: [
+      { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina", keywords: ["結月莉莉奈", "ririna", "純奈"], typeKeywords: ["歌回", "唱歌"] },
+    ],
+
     // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
     videoClipsChannelIds: [
-      { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear" },  // 全頻道皆結月莉莉奈內容
+      { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear" },           // 全頻道皆結月莉莉奈內容
+      { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "純奈"], excludeKeywords: ["歌回", "唱歌"] },  // 非歌回片段
     ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
