@@ -66,17 +66,28 @@ const vtubers = [
       { id: "XHuc832HAfY", title: "【Cover】食虫植物/ 詩雨蔻達 feat.茶浣熊@TanukiiDonCh | 吉他自彈自唱",           date: "2023-01-21" },
     ],
 
-    // 音樂剪輯頻道（陣列，每個頻道獨立顯示子標籤）
-    // label   : 子標籤顯示名稱（必填）
-    // keywords: 篩選標題，只收錄含任一關鍵字的影片（不分大小寫）；不填則收錄全部
+    // 剪輯頻道設定說明：
+    //   label        : 子標籤名稱
+    //   keywords     : 人名過濾（OR），不填則全收
+    //   typeKeywords : 內容類型過濾（AND 搭配 keywords）；不填則全收
+    //                  混合頻道可同時加入 musicClipsChannelIds 和 videoClipsChannelIds，
+    //                  各自設不同 typeKeywords 達到自動分類
+
+    // ── 熱門音樂剪輯（Cover / 歌回）────────────────
     musicClipsChannelIds: [
-      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘" },
-      { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",   keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
-      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室" },
-      { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
-      { id: "UCh00s3u4osHhNx8BlSZsECg", label: "章魚虛タコ",   keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
-      { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },
+      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘" },                                                                                                         // 全部都是詩雨蔻達歌回
+      { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                             // 全部為 Cover
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["cover", "guitar", "歌回"] },  // 混合頻道 → 只抓音樂
+      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室" },                                                                                                         // 全部為 Cover
+      { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["cover", "歌回"] },             // 混合頻道 → 只抓音樂
+      { id: "UCh00s3u4osHhNx8BlSZsECg", label: "章魚虛タコ",    keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                             // 全部為 Cover
+      { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                            // Guitar Cover
+    ],
+
+    // ── 熱門影片精華（直播精華 / 遊戲精華）──────────
+    videoClipsChannelIds: [
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華"] },
+      { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華", "直播"] },
     ],
 
     videoClips: [

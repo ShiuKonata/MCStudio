@@ -894,17 +894,24 @@ document.addEventListener('DOMContentLoaded', () => {
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
 
-  // ── 剪輯頻道自動抓取（單一頻道，支援 keywords 篩選）────
+  // ── 剪輯頻道自動抓取（單一頻道，支援雙層篩選）────
   // chEntry 可為：
-  //   string               → 抓取全部影片
-  //   { id, label, keywords } → 篩選標題含任一 keyword 的影片（不分大小寫）
+  //   string                          → 抓取全部影片
+  //   { id, label, keywords }         → 篩選標題含任一 keyword（人名過濾，OR 邏輯）
+  //   { ..., typeKeywords }           → 額外加內容類型過濾（AND 邏輯）
+  //   同一頻道可加入 musicClipsChannelIds 和 videoClipsChannelIds 各一次，
+  //   各自用不同 typeKeywords 區分音樂 / 影片精華
   async function _fetchClipsForChannel(chEntry, gridId, emoji) {
     const grid = document.getElementById(gridId);
     if (!grid || !chEntry || !v.ytApiKey) return;
-    const channelId = typeof chEntry === 'string' ? chEntry : chEntry.id;
-    const kws = (typeof chEntry === 'object' && chEntry.keywords)
+    const channelId  = typeof chEntry === 'string' ? chEntry : chEntry.id;
+    const kws        = (typeof chEntry === 'object' && chEntry.keywords)
       ? chEntry.keywords.map(k => k.toLowerCase()) : null;
-    const cacheKey = `clips_ch_${channelId}`;
+    const typeKws    = (typeof chEntry === 'object' && chEntry.typeKeywords)
+      ? chEntry.typeKeywords.map(k => k.toLowerCase()) : null;
+    // 同頻道不同 typeKeywords → 分別快取
+    const typeTag    = typeKws ? typeKws[0].replace(/\W/g, '') : 'all';
+    const cacheKey   = `clips_ch_${channelId}_${typeTag}`;
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
@@ -924,8 +931,10 @@ document.addEventListener('DOMContentLoaded', () => {
         (json.items || []).forEach(item => {
           const vid = item.snippet.resourceId?.videoId;
           if (!vid) return;
-          const title = item.snippet.title || '';
-          if (kws && !kws.some(k => title.toLowerCase().includes(k))) return;
+          const title    = item.snippet.title || '';
+          const titleLow = title.toLowerCase();
+          if (kws     && !kws.some(k    => titleLow.includes(k)))    return; // 人名過濾（OR）
+          if (typeKws && !typeKws.some(k => titleLow.includes(k)))   return; // 內容類型（OR，需同時符合人名）
           videos.push({
             id:    vid,
             title,
