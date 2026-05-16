@@ -1332,12 +1332,13 @@ const vtubers = [
 
 
     musicClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",   keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
+      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮", typeKeywords: ["歌回", "之歌"] },   // 歌回剪輯 & CaKano之歌 系列
     ],
 
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",   keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
-      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮" },   // 全頻道皆崎塔非官方精華
+      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮", excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
