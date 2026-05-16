@@ -1076,7 +1076,11 @@ const vtubers = [
 
 
     musicClipsChannelIds: [
-      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko", keywords: ["鯨諾", "whalefall"] },  // 歌切彈唱 + 週年/生日應援企劃
+      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko", keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
+    ],
+
+    videoClipsChannelIds: [
+      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko", keywords: ["鯨諾", "whalefall"], typeKeywords: ["週年", "生日", "應援"] },  // 週年/生日應援企劃
     ],
 
     scheduleVideoId:  "r15JQHl8KL0",
