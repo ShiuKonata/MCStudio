@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const genCardsRow = document.getElementById('gen-cards-row');
   if (genCardsRow) {
     generations.forEach(gen => {
-      const teamName   = generationTeams[gen] || gen;
+      // 零期生為大學姐，不計入期生團體卡片
+      if (!generationTeams[gen]) return;
+      const teamName   = generationTeams[gen];
       const colors     = generationColors[gen] || ['#29b6f6', '#0277bd'];
       const memberCount = vtubers.filter(v => v.generation === gen).length;
       const card = document.createElement('a');

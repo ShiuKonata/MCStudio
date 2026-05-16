@@ -1920,9 +1920,8 @@ const generationOrder = { '零期生': 0, '一期生': 1, '二期生': 2, '三�
 const generations = [...new Set(vtubers.map(v => v.generation))]
   .sort((a, b) => (generationOrder[a] ?? 99) - (generationOrder[b] ?? 99));
 
-// 各世代團體名稱
+// 各世代團體名稱（零期生為大學姐，不計入正式期生團體）
 const generationTeams = {
-  '零期生': '懶貓子',
   '一期生': 'Exitus',
   '二期生': 'MeloNyx',
   '三期生': 'Alluria',
@@ -1931,9 +1930,8 @@ const generationTeams = {
   '六期生': 'ælis',
 };
 
-// 各世代代表漸層色 [起始色, 結束色]
+// 各世代代表漸層色 [起始色, 結束色]（零期生不顯示卡片）
 const generationColors = {
-  '零期生': ['#F59E0B', '#D97706'],
   '一期生': ['#6366F1', '#4F46E5'],
   '二期生': ['#EC4899', '#DB2777'],
   '三期生': ['#0EA5E9', '#0284C7'],
