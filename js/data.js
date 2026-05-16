@@ -1092,6 +1092,12 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/鯨諾 v2.0.jpg" },
     ],
 
+    songStatsGids: {
+      "2026": "592285729",
+      "2025": "129810642",
+      "2024": "1583821169",
+    },
+
     color: "#66B2FF"   // 鯨諾 代表色（天藍）
   },
 
@@ -1143,6 +1149,12 @@ const vtubers = [
     spreadsheetLabel: "魁慨的大小事",
     scheduleTitle:    "魁慨的行程表",
 
+    songStatsGids: {
+      "2026": "2006254463",
+      "2025": "933404155",
+      "2024": "1583821169",
+    },
+
     color: "#8B0000"   // 魁 Kai 代表色（深紅）
   },
 
@@ -1191,6 +1203,12 @@ const vtubers = [
     spreadsheetLabel: "穆總的大小事",
     scheduleTitle:    "穆總的行程表",
 
+    songStatsGids: {
+      "2026": "532167774",
+      "2025": "1796269030",
+      "2024": "1583821169",
+    },
+
     color: "#DCC5E0"   // 穆克蕗 代表色（淡紫）
   },
 
@@ -1237,6 +1255,12 @@ const vtubers = [
     scheduleVideoId:  "fl96oXs9Q1E",
     spreadsheetLabel: "爾菲的大小事",
     scheduleTitle:    "爾菲的行程表",
+
+    songStatsGids: {
+      "2026": "339833405",
+      "2025": "125957373",
+      "2024": "1583821169",
+    },
 
     color: "#008B8B"   // 涅爾菲 代表色（暗青）
   },
@@ -1290,6 +1314,12 @@ const vtubers = [
     refSheets: [
       { version: "Ver 1.0", url: "images/貳貳 v1.0.jpg" },
     ],
+
+    songStatsGids: {
+      "2026": "1294831140",
+      "2025": "1598736421",
+      "2024": "1583821169",
+    },
 
     color: "#DFF7F3"   // 貳貳 代表色（薄荷白）
   },
@@ -1345,6 +1375,10 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/崎塔 v1.0.jpg" },
     ],
 
+    songStatsGids: {
+      "2025": "1583821169",
+    },
+
     color: "#6EE8DB"   // 崎塔 代表色（青綠）
   },
 
@@ -1388,6 +1422,11 @@ const vtubers = [
     refSheets: [
       { version: "Ver 1.0", url: "images/茶帽瑪緹 v1.0.jpg" },
     ],
+
+    songStatsGids: {
+      "2026": "1217976372",
+      "2025": "1583821169",
+    },
 
     color: "#48D6CA"   // 茶帽瑪緹 代表色（青藍）
   },
@@ -1446,6 +1485,12 @@ const vtubers = [
       { version: "Ver 1.0", urls: ["images/希洛萊昂 v1.0.jpg", "images/希洛萊昂 v1.0-1.jpg"] },
     ],
 
+    songStatsGids: {
+      "2026": "1568612405",
+      "2025": "959970978",
+      "2024": "1583821169",
+    },
+
     color: "#FBFFBC"   // 希洛萊昂 代表色（奶油黃）
   },
 
@@ -1501,6 +1546,12 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/百百波美 v1.0.jpg" },
     ],
 
+    songStatsGids: {
+      "2026": "1197900768",
+      "2025": "2141809526",
+      "2024": "1583821169",
+    },
+
     color: "#D03869"   // 百百波美 代表色（玫紅）
   },
 
@@ -1551,6 +1602,12 @@ const vtubers = [
     refSheets: [
       { version: "Ver 1.0", url: "images/心 cocor0 v1.0.jpg" },
     ],
+
+    songStatsGids: {
+      "2026": "490206861",
+      "2025": "1661370640",
+      "2024": "1583821169",
+    },
 
     color: "#FFB7C5"   // 心 cocor0 代表色（櫻花粉）
   },
@@ -1610,6 +1667,12 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/羽芝扉扉 v1.0.jpg" },
     ],
 
+    songStatsGids: {
+      "2026": "285758286",
+      "2025": "635663891",
+      "2024": "1583821169",
+    },
+
     color: "#FFBA84"   // 羽芝扉扉 代表色（暖橘）
   },
 
@@ -1662,6 +1725,11 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/諾恪里 v1.0.jpg" },
     ],
 
+    songStatsGids: {
+      "2026": "2008032412",
+      "2025": "1583821169",
+    },
+
     color: "#FBC4EF"   // 諾恪里 代表色（夢幻粉）
   },
 
@@ -1712,6 +1780,11 @@ const vtubers = [
     refSheets: [
       { version: "Ver 1.0", url: "images/克克米伊 v1.0.jpg" },
     ],
+
+    songStatsGids: {
+      "2026": "1841739730",
+      "2025": "1583821169",
+    },
 
     color: "#FFCB55"   // 克克米伊 代表色（蜂蜜黃）
   },
@@ -1772,6 +1845,11 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/珮蕾 v1.0.jpg" },
     ],
 
+    songStatsGids: {
+      "2026": "1311275024",
+      "2025": "1583821169",
+    },
+
     color: "#EF9494"   // 珮蕾 代表色（玫瑰粉）
   },
 
@@ -1825,6 +1903,11 @@ const vtubers = [
     refSheets: [
       { version: "Ver 1.0", url: "images/睏睏幽昵 v1.0.jpg" },
     ],
+
+    songStatsGids: {
+      "2026": "1047080886",
+      "2025": "1583821169",
+    },
 
     color: "#D5DFEF"   // 睏睏幽昵 代表色（霧藍灰）
   }
