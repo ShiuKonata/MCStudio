@@ -133,7 +133,7 @@ h1, h2, h3, h4, .card-name, .detail-name, .meta-value, .stat-number {
    ============================================= */
 .hero-about-wrapper {
   margin-top: var(--nav-height);
-  min-height: calc(100vh - var(--nav-height));
+  min-height: auto;
   position: relative;
   background:
     url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1600&q=80')
@@ -158,7 +158,7 @@ h1, h2, h3, h4, .card-name, .detail-name, .meta-value, .stat-number {
   gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 5rem 3rem;
+  padding: 2.5rem 3rem;
   align-items: center;
   width: 100%;
 }
