@@ -385,8 +385,7 @@ const vtubers = [
 
     // 熱門影片精華（直播精華 / 遊戲精華）
     videoClipsChannelIds: [
-      // 成彦なりひこ 有新舊兩個頻道帳號，合併為同一個標籤顯示
-      { ids: ["UCMlvVMgOjH76AwolFgKEP1Q", "UC4X7qMrF5_8egxF7IEspAlg"], label: "成彦なりひこ" },
+      { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ" },   // @narihiko0714，專做懶貓子精華
     ],
 
     // 歌曲統計（各年度 Google Sheets 統計頁 GID，填了才顯示分頁）
@@ -441,6 +440,7 @@ const vtubers = [
     videoClipsChannelIds: [
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛", keywords: ["帕蘿妮", "paroniie"], excludeKeywords: ["點歌台", "歌回", "cover"] },
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["帕蘿妮", "Paroniie", "Exitus"], excludeKeywords: ["神無月鹿比", "鹿比", "艾琳妮雅"] },
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["帕蘿妮", "Paroniie"] },  // @narihiko714
     ],
 
     scheduleVideoId:  "3CkoMAZxoec",
@@ -704,6 +704,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["艾琳妮雅", "Arrynia", "Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比"] },
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia"] },  // @narihiko714
     ],
 
     color: "#28004D",  // 艾琳妮雅 代表色（深紫）
