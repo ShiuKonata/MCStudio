@@ -913,13 +913,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // playlistId：可指定特定播放清單（如 UUSH… = Shorts 專屬清單）；不填則自動用上傳清單
     const uploadsId   = (typeof chEntry === 'object' && chEntry.playlistId)
       ? chEntry.playlistId : 'UU' + channelId.slice(2);
-    // 同頻道不同篩選條件 → 分別快取（用各陣列長度組合當 tag，避免中文被正則清掉）
-    const typeTag = [
-      typeKws    ? `tk${typeKws.length}_${typeKws[0].length}`       : '',
-      excludeKws ? `ex${excludeKws.length}_${excludeKws[0].length}` : '',
-      (typeof chEntry === 'object' && chEntry.playlistId) ? chEntry.playlistId.slice(0, 8) : ''
-    ].filter(Boolean).join('_') || 'all';
-    const cacheKey    = `clips_ch_v2_${channelId}_${typeTag}`;
+    // 快取原始資料（不含篩選），同頻道所有主播共用同一份 raw cache
+    const cacheKey = `clips_ch_raw_v2_${channelId}`;
+
+    // 於顯示時套用各主播自己的關鍵字篩選
+    function applyFilters(rawItems) {
+      return rawItems.filter(item => {
+        const t = item.title.toLowerCase();
+        if (kws        && !kws.some(k        => t.includes(k))) return false; // 人名白名單（OR）
+        if (typeKws    && !typeKws.some(k    => t.includes(k))) return false; // 類型白名單（AND + OR）
+        if (excludeKws &&  excludeKws.some(k => t.includes(k))) return false; // 類型黑名單（排除）
+        return true;
+      });
+    }
 
     // 渲染結果；若無影片則隱藏子標籤按鈕並自動切換到下一個有影片的標籤
     function _done(videosArr, subTabBtn) {
@@ -939,15 +945,16 @@ document.addEventListener('DOMContentLoaded', () => {
       renderVideoCards(videosArr, gridId, emoji || '🎶');
     }
 
+    // 先讀 raw cache → 套用篩選後直接顯示
     try {
       const c = sessionStorage.getItem(cacheKey);
       if (c) {
         const { data, time } = JSON.parse(c);
-        if (Date.now() - time < 30 * 60 * 1000) { _done(data, subTabBtn); return; }
+        if (Date.now() - time < 30 * 60 * 1000) { _done(applyFilters(data), subTabBtn); return; }
       }
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
-    let videos = [], pageToken = '', pageCount = 0;
+    let rawVideos = [], pageToken = '', pageCount = 0;
     try {
       do {
         const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${v.ytApiKey}${pageToken ? '&pageToken=' + pageToken : ''}`;
@@ -957,14 +964,9 @@ document.addEventListener('DOMContentLoaded', () => {
         (json.items || []).forEach(item => {
           const vid = item.snippet.resourceId?.videoId;
           if (!vid) return;
-          const title    = item.snippet.title || '';
-          const titleLow = title.toLowerCase();
-          if (kws        && !kws.some(k       => titleLow.includes(k))) return; // 人名白名單（OR）
-          if (typeKws    && !typeKws.some(k   => titleLow.includes(k))) return; // 類型白名單（AND + OR）
-          if (excludeKws &&  excludeKws.some(k => titleLow.includes(k))) return; // 類型黑名單（排除）
-          videos.push({
+          rawVideos.push({
             id:    vid,
-            title,
+            title: item.snippet.title || '',
             date:  (item.snippet.publishedAt || '').slice(0, 10),
             thumb: item.snippet.thumbnails?.medium?.url || ''
           });
@@ -972,10 +974,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pageToken = json.nextPageToken || '';
         pageCount++;
       } while (pageToken && pageCount < 20);
-      _done(videos, subTabBtn);
-      if (videos.length > 0) {
-        try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: videos, time: Date.now() })); } catch(e) {}
-      }
+      // 快取原始資料
+      try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: rawVideos, time: Date.now() })); } catch(e) {}
+      // 套用本主播的篩選後顯示
+      _done(applyFilters(rawVideos), subTabBtn);
     } catch(e) {
       grid.innerHTML = '<div class="ls-empty">⚠️ 載入失敗，請稍後再試</div>';
     }
