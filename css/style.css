@@ -131,6 +131,14 @@ h1, h2, h3, h4, .card-name, .detail-name, .meta-value, .stat-number {
 /* =============================================
    HOMEPAGE — 櫻花背景 平行佈局
    ============================================= */
+body.home-page {
+  display: flex;
+  flex-direction: column;
+}
+body.home-page .hero-about-wrapper {
+  flex: 1;
+}
+
 .hero-about-wrapper {
   margin-top: var(--nav-height);
   min-height: auto;
