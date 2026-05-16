@@ -1525,6 +1525,7 @@ const vtubers = [
 
     refSheets: [
       { version: "Ver 1.0", urls: ["images/希洛萊昂 v1.0.jpg", "images/希洛萊昂 v1.0-1.jpg"] },
+      { version: "Ver 2.0", url: "images/希洛萊昂 v2.0.jpg" },
     ],
 
     songStatsGids: {
