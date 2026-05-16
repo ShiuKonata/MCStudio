@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const statCount  = document.getElementById('stat-count');
   const statGroups = document.getElementById('stat-groups');
   if (statCount)  statCount.textContent  = vtubers.length;
-  if (statGroups) statGroups.textContent = groups.length;
+  if (statGroups) statGroups.textContent = generations.length;
 
   // ── 以下只在有 #vtuber-grid 的頁面執行 ────────
   const grid = document.getElementById('vtuber-grid');
