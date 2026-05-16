@@ -383,6 +383,12 @@ const vtubers = [
       { label: "討厭的東西", items: ["牛奶", "恐怖遊戲"] },
     ],
 
+    // 熱門影片精華（直播精華 / 遊戲精華）
+    videoClipsChannelIds: [
+      // 成彦なりひこ 有新舊兩個頻道帳號，合併為同一個標籤顯示
+      { ids: ["UCMlvVMgOjH76AwolFgKEP1Q", "UC4X7qMrF5_8egxF7IEspAlg"], label: "成彦なりひこ" },
+    ],
+
     // 歌曲統計（各年度 Google Sheets 統計頁 GID，填了才顯示分頁）
     songStatsGids: {
       "2026": "97600450",

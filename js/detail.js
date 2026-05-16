@@ -903,18 +903,23 @@ document.addEventListener('DOMContentLoaded', () => {
   async function _fetchClipsForChannel(chEntry, gridId, emoji, subTabBtn) {
     const grid = document.getElementById(gridId);
     if (!grid || !chEntry || !v.ytApiKey) return;
-    const channelId   = typeof chEntry === 'string' ? chEntry : chEntry.id;
+    // 支援多頻道合併（ids 陣列）或單頻道（id / 字串）
+    const channelIds  = typeof chEntry === 'string' ? [chEntry]
+      : (chEntry.ids ? chEntry.ids : [chEntry.id]);
+    const channelId   = channelIds[0]; // 主 ID（向下相容）
     const kws         = (typeof chEntry === 'object' && chEntry.keywords)
       ? chEntry.keywords.map(k => k.toLowerCase()) : null;
     const typeKws     = (typeof chEntry === 'object' && chEntry.typeKeywords)
       ? chEntry.typeKeywords.map(k => k.toLowerCase()) : null;
     const excludeKws  = (typeof chEntry === 'object' && chEntry.excludeKeywords)
       ? chEntry.excludeKeywords.map(k => k.toLowerCase()) : null;
-    // playlistId：可指定特定播放清單（如 UUSH… = Shorts 專屬清單）；不填則自動用上傳清單
-    const uploadsId   = (typeof chEntry === 'object' && chEntry.playlistId)
-      ? chEntry.playlistId : 'UU' + channelId.slice(2);
-    // 快取原始資料（不含篩選），同頻道所有主播共用同一份 raw cache
-    const cacheKey = `clips_ch_raw_v2_${channelId}`;
+    // 每個頻道 ID 對應的上傳播放清單（playlistId 只對單頻道有效）
+    const uploadsIds  = channelIds.map((id, i) =>
+      (i === 0 && typeof chEntry === 'object' && chEntry.playlistId)
+        ? chEntry.playlistId : 'UU' + id.slice(2)
+    );
+    // 快取原始資料（不含篩選），以所有頻道 ID 排序後組合為 key
+    const cacheKey = `clips_ch_raw_v2_${[...channelIds].sort().join('_')}`;
 
     // 於顯示時套用各主播自己的關鍵字篩選
     function applyFilters(rawItems) {
@@ -954,26 +959,34 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch(e) {}
     grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
-    let rawVideos = [], pageToken = '', pageCount = 0;
+    let rawVideos = [];
     try {
-      do {
-        const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${v.ytApiKey}${pageToken ? '&pageToken=' + pageToken : ''}`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const json = await res.json();
-        (json.items || []).forEach(item => {
-          const vid = item.snippet.resourceId?.videoId;
-          if (!vid) return;
-          rawVideos.push({
-            id:    vid,
-            title: item.snippet.title || '',
-            date:  (item.snippet.publishedAt || '').slice(0, 10),
-            thumb: item.snippet.thumbnails?.medium?.url || ''
-          });
-        });
-        pageToken = json.nextPageToken || '';
-        pageCount++;
-      } while (pageToken && pageCount < 20);
+      // 逐一抓取所有頻道（多頻道時合併）
+      for (const uploadsId of uploadsIds) {
+        let pageToken = '', pageCount = 0;
+        try {
+          do {
+            const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${v.ytApiKey}${pageToken ? '&pageToken=' + pageToken : ''}`;
+            const res = await fetch(url);
+            if (!res.ok) break; // 此頻道失敗則跳過，繼續下一個
+            const json = await res.json();
+            (json.items || []).forEach(item => {
+              const vid = item.snippet.resourceId?.videoId;
+              if (!vid) return;
+              rawVideos.push({
+                id:    vid,
+                title: item.snippet.title || '',
+                date:  (item.snippet.publishedAt || '').slice(0, 10),
+                thumb: item.snippet.thumbnails?.medium?.url || ''
+              });
+            });
+            pageToken = json.nextPageToken || '';
+            pageCount++;
+          } while (pageToken && pageCount < 20);
+        } catch(e) {} // 單頻道失敗不影響其他頻道
+      }
+      // 依日期由新到舊排序合併結果
+      rawVideos.sort((a, b) => (b.date > a.date ? 1 : -1));
       // 快取原始資料
       try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: rawVideos, time: Date.now() })); } catch(e) {}
       // 套用本主播的篩選後顯示
