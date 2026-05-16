@@ -1268,8 +1268,9 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 .refsheet-ver-panel { display: none; }
 .refsheet-ver-panel.active {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 /* =============================================
