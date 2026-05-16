@@ -540,6 +540,10 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/神無月鹿比 v2.0.jpg" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["神無月鹿比", "鹿比", "lubee"] },
+    ],
+
     color: "#F2A8B9"   // 神無月鹿比 代表色（粉紅）
   },
 
