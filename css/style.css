@@ -1230,31 +1230,28 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 
 /* 多版本切換器 */
 .refsheet-layout {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 1.2rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
   margin-top: 0.5rem;
 }
 .refsheet-ver-list {
   display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  position: sticky;
-  top: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 .refsheet-ver-btn {
-  width: 100%;
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 1.2rem;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 10px;
+  border-radius: 20px;
   color: rgba(255,255,255,0.6);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  text-align: left;
   transition: all 0.18s;
+  white-space: nowrap;
 }
 .refsheet-ver-btn:hover {
   background: rgba(255,255,255,0.1);
