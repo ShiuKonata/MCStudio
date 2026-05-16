@@ -93,7 +93,6 @@ const vtubers = [
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    excludeKeywords: ["cover", "guitar"] },                                                                          // 非 Cover 影片（全頻道皆詩雨蔻達）
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華", "直播"] },
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["Exitus", "一期生"] },
     ],
 
     videoClips: [
@@ -434,7 +433,6 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛", keywords: ["帕蘿妮", "paroniie"], excludeKeywords: ["點歌台", "歌回", "cover"] },
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["帕蘿妮", "paroniie", "Exitus", "一期生"] },
     ],
 
     scheduleVideoId:  "3CkoMAZxoec",
@@ -543,7 +541,7 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["神無月鹿比", "鹿比", "lubee", "Exitus", "一期生"] },
+      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸" },  // 全頻道皆為神無月鹿比的應援企劃
     ],
 
     color: "#F2A8B9"   // 神無月鹿比 代表色（粉紅）
@@ -604,10 +602,6 @@ const vtubers = [
       "2024": "285108625",
       "2023": "1950043660",
     },
-
-    videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["Exitus", "一期生"] },
-    ],
 
     color: "#D4A8C8"   // 姬城三千華 代表色（薰衣草玫瑰，自動生成）
   },
@@ -696,10 +690,6 @@ const vtubers = [
       "2023": "1872053935",
     },
 
-    videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["艾琳妮雅", "Exitus", "一期生"] },
-    ],
-
     color: "#28004D",  // 艾琳妮雅 代表色（深紫）
     badgeTextColor: "white"  // 深色背景，徽章文字改回白色
   },
@@ -756,10 +746,6 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/酒樂霧子 v1.0.png" },
     ],
 
-    videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["酒樂霧子", "MeloNyx", "二期生"] },
-    ],
-
     color: "#C93447"   // 酒樂霧子 代表色（深紅）
   },
 
@@ -812,10 +798,6 @@ const vtubers = [
       "2024": "583929937",
       "2023": "1124154412",
     },
-
-    videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["MeloNyx", "二期生"] },
-    ],
 
     color: "#B8FFEC"   // 瓦西瓦瓦 代表色（薄荷綠）
   },
@@ -881,10 +863,6 @@ const vtubers = [
       "2023": "816298850",
     },
 
-    videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["MeloNyx", "二期生"] },
-    ],
-
     color: "#FCE8A4"   // 希妮亞里絲 代表色（奶油黃）
   },
 
@@ -927,7 +905,6 @@ const vtubers = [
     videoClipsChannelIds: [
       { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear" },           // 全頻道皆結月莉莉奈內容
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "純奈"], excludeKeywords: ["歌回", "唱歌"] },  // 非歌回片段
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["MeloNyx", "二期生"] },
     ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
@@ -1008,10 +985,6 @@ const vtubers = [
       "2023": "870278721",
     },
 
-    videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["MeloNyx", "二期生"] },
-    ],
-
     color: "#9671B0"   // 依可露 代表色（紫羅蘭）
   },
 
@@ -1073,10 +1046,6 @@ const vtubers = [
       "2024": "653942800",
       "2023": "64486410",
     },
-
-    videoClipsChannelIds: [
-      { id: "UCsW9oUBC4OhF018BNjvvBzg", label: "鬧欸", keywords: ["MeloNyx", "二期生"] },
-    ],
 
     color: "#AED4E9"   // 若櫻依兔 代表色（霧藍）
   },
