@@ -26,33 +26,63 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── 統計數字（優先執行，防止後續程式崩潰影響）─
-  const statCount  = document.getElementById('stat-count');
-  const statGroups = document.getElementById('stat-groups');
-  if (statCount)  statCount.textContent  = vtubers.length;
-  if (statGroups) statGroups.textContent = generations.length;
+  const statCount = document.getElementById('stat-count');
+  if (statCount) statCount.textContent = vtubers.length;
 
-  // ── 首頁世代卡片 ─────────────────────────────
-  const genCardsRow = document.getElementById('gen-cards-row');
-  if (genCardsRow) {
-    generations.forEach(gen => {
-      // 零期生為大學姐，不計入期生團體卡片
-      if (!generationTeams[gen]) return;
-      const teamName   = generationTeams[gen];
-      const colors     = generationColors[gen] || ['#29b6f6', '#0277bd'];
-      const memberCount = vtubers.filter(v => v.generation === gen).length;
-      const card = document.createElement('a');
-      card.href = `vtubers.html?gen=${encodeURIComponent(gen)}`;
-      card.className = 'gen-card';
-      card.innerHTML = `
-        <div class="gen-card-header" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})">
-          <div class="gen-card-gen">${gen}</div>
-          <div class="gen-card-name">${teamName}</div>
-        </div>
-        <div class="gen-card-body">
-          <div class="gen-card-count">${memberCount} 位成員</div>
-        </div>`;
-      genCardsRow.appendChild(card);
-    });
+  // ── 中間統計：世代團體名稱自動輪播 ──────────────
+  const carouselName = document.getElementById('stat-carousel-name');
+  const carouselGen  = document.getElementById('stat-carousel-gen');
+  if (carouselName && carouselGen) {
+    const teams = generations
+      .filter(g => generationTeams[g])
+      .map(g => ({ name: generationTeams[g], gen: g }));
+
+    let idx = 0;
+
+    // 設定 transition
+    const FADE = 'opacity 0.4s ease, transform 0.4s ease';
+    carouselName.style.transition = FADE;
+    carouselGen.style.transition  = FADE;
+    carouselName.style.display = 'block';
+    carouselGen.style.display  = 'block';
+
+    function showTeam(i) {
+      // 淡出 + 上移
+      carouselName.style.opacity   = '0';
+      carouselName.style.transform = 'translateY(-10px)';
+      carouselGen.style.opacity    = '0';
+      carouselGen.style.transform  = 'translateY(-10px)';
+
+      setTimeout(() => {
+        carouselName.textContent = teams[i].name;
+        carouselGen.textContent  = teams[i].gen;
+        // 先設到下方，再淡入
+        carouselName.style.transition = 'none';
+        carouselGen.style.transition  = 'none';
+        carouselName.style.transform  = 'translateY(10px)';
+        carouselGen.style.transform   = 'translateY(10px)';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            carouselName.style.transition = FADE;
+            carouselGen.style.transition  = FADE;
+            carouselName.style.opacity    = '1';
+            carouselName.style.transform  = 'translateY(0)';
+            carouselGen.style.opacity     = '1';
+            carouselGen.style.transform   = 'translateY(0)';
+          });
+        });
+      }, 400);
+    }
+
+    // 初始顯示
+    carouselName.textContent = teams[0].name;
+    carouselGen.textContent  = teams[0].gen;
+    idx = 1 % teams.length;
+
+    setInterval(() => {
+      showTeam(idx);
+      idx = (idx + 1) % teams.length;
+    }, 2500);
   }
 
   // ── 以下只在有 #vtuber-grid 的頁面執行 ────────
