@@ -31,6 +31,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (statCount)  statCount.textContent  = vtubers.length;
   if (statGroups) statGroups.textContent = generations.length;
 
+  // ── 首頁世代卡片 ─────────────────────────────
+  const genCardsRow = document.getElementById('gen-cards-row');
+  if (genCardsRow) {
+    generations.forEach(gen => {
+      const teamName   = generationTeams[gen] || gen;
+      const colors     = generationColors[gen] || ['#29b6f6', '#0277bd'];
+      const memberCount = vtubers.filter(v => v.generation === gen).length;
+      const card = document.createElement('a');
+      card.href = `vtubers.html?gen=${encodeURIComponent(gen)}`;
+      card.className = 'gen-card';
+      card.innerHTML = `
+        <div class="gen-card-header" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})">
+          <div class="gen-card-gen">${gen}</div>
+          <div class="gen-card-name">${teamName}</div>
+        </div>
+        <div class="gen-card-body">
+          <div class="gen-card-count">${memberCount} 位成員</div>
+        </div>`;
+      genCardsRow.appendChild(card);
+    });
+  }
+
   // ── 以下只在有 #vtuber-grid 的頁面執行 ────────
   const grid = document.getElementById('vtuber-grid');
   if (!grid) return;
@@ -236,6 +258,15 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', e => {
       searchQuery = e.target.value;
       renderCards();
+    });
+  }
+
+  // ── URL param ?gen= 支援（從首頁世代卡片跳轉）─
+  const urlGenParam = new URLSearchParams(window.location.search).get('gen');
+  if (urlGenParam && (urlGenParam === 'all' || generations.includes(urlGenParam))) {
+    activeFilter = urlGenParam;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.gen === activeFilter);
     });
   }
 

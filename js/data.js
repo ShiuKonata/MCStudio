@@ -1919,3 +1919,25 @@ const groups = [...new Set(vtubers.map(v => v.group))];
 const generationOrder = { '零期生': 0, '一期生': 1, '二期生': 2, '三期生': 3, '四期生': 4, '五期生': 5, '六期生': 6 };
 const generations = [...new Set(vtubers.map(v => v.generation))]
   .sort((a, b) => (generationOrder[a] ?? 99) - (generationOrder[b] ?? 99));
+
+// 各世代團體名稱
+const generationTeams = {
+  '零期生': '懶貓子',
+  '一期生': 'Exitus',
+  '二期生': 'MeloNyx',
+  '三期生': 'Alluria',
+  '四期生': '音雲漫步',
+  '五期生': 'CaKano',
+  '六期生': 'ælis',
+};
+
+// 各世代代表漸層色 [起始色, 結束色]
+const generationColors = {
+  '零期生': ['#F59E0B', '#D97706'],
+  '一期生': ['#6366F1', '#4F46E5'],
+  '二期生': ['#EC4899', '#DB2777'],
+  '三期生': ['#0EA5E9', '#0284C7'],
+  '四期生': ['#F97316', '#EA580C'],
+  '五期生': ['#10B981', '#059669'],
+  '六期生': ['#A855F7', '#9333EA'],
+};
