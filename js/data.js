@@ -1366,8 +1366,12 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
     ],
 
     scheduleVideoId:  "psgIP5rMRTA",
@@ -1432,8 +1436,12 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
     ],
 
     scheduleVideoId:  "fO8nKY_tpzM",
@@ -1491,11 +1499,12 @@ const vtubers = [
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     musicClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["涅爾菲", "nyrfier"], typeKeywords: ["歌切", "合唱"] },
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], typeKeywords: ["歌切", "合唱"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
     ],
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
     ],
 
     scheduleVideoId:  "fl96oXs9Q1E",
@@ -1624,14 +1633,15 @@ const vtubers = [
 
 
     musicClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",   keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
-      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮", typeKeywords: ["歌回", "之歌"] },   // 歌回剪輯 & CaKano之歌 系列
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
+      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   typeKeywords: ["歌回", "之歌"] },   // 歌回剪輯 & CaKano之歌 系列
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -1759,8 +1769,12 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
     ],
 
     scheduleVideoId:  "TYDgPZbXl34",
