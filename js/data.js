@@ -1486,6 +1486,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["量產型", "Fuka22", "貳貳"] },
+    ],
+
     scheduleVideoId:  "haBTRQQeUoY",
     spreadsheetLabel: "貳貳的大小事",
     scheduleTitle:    "貳貳的行程表",
@@ -1749,6 +1753,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"] },
+    ],
+
     scheduleVideoId:  "bSPwY0KHks4",
     spreadsheetLabel: "波美的大小事",
     scheduleTitle:    "波美的行程表",
@@ -1811,6 +1819,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
       { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
+    videoClipsChannelIds: [
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["cocor0", "可可", "心 cocor0"] },
     ],
 
     scheduleVideoId:  "q1ls6HmTVwc",
@@ -1883,6 +1895,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
       { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
+    videoClipsChannelIds: [
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "扉扉", "fifi", "uchififi"] },
     ],
 
     scheduleVideoId:  "Vk_0sRnEmp0",
