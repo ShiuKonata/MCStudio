@@ -335,11 +335,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/lanmewko',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "0Vq4fWh3RMg", title: "NON STOP SOUL!!!" },
-      { id: "K-6YH5t-HgU", title: "笑顔はここにある" },
-      { id: "S24248F5QxQ", title: "【生日紀念】好想愛這個世界啊/この世界を愛したい" }
-    ],
+    videos: [],
 
 
     musicClips: [
@@ -447,11 +443,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/paroniie',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "mnAkfuAZOUE", title: "🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】" },
-      { id: "4RTxc8acTlY", title: "🎵 Wake Up! - 帕蘿妮 Paroniie 【COVER】" },
-      { id: "Lg9nyNL-AD0", title: "🎵 星願 - 帕蘿妮 Paroniie 【Original】" }
-    ],
+    videos: [],
 
 
     musicClipsChannelIds: [
@@ -550,11 +542,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/kannazukilubee',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "VDj-McWV0JM", title: "刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】" },
-      { id: "LTK6BeCKCtI", title: "I Really Want to Stay At Your House - Rosa Walton／神無月鹿比【Cover】", thumb: "images/lubee-irwsayh.jpg" },
-      { id: "dVEPJXnfGoQ", title: "ド屑 - なきそ／神無月鹿比【Cover】" }
-    ],
+    videos: [],
 
 
     musicClips: [
@@ -690,11 +678,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/arryn1a',                 class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "YQXOIu3YjyU", title: "【失礼しますが、RIP♡ COVER REMIX 2026】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
-      { id: "_DzQNbQW4L0", title: "Take Me To The Beach/Imagine Dragons(ft. Ado)💧詩雨蔻達w/艾琳妮雅【COVER】" },
-      { id: "KIYLfFkJecA", title: "【酔いどれ知らず Yoidore Shirazu】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
-    ],
+    videos: [],
 
 
     musicClips: [
