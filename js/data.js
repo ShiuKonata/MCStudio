@@ -324,7 +324,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Rumi__0813",
     twitch: "https://www.twitch.tv/rumi0813",
+    facebook:  "https://www.facebook.com/lanmewko",
+    instagram: "https://www.instagram.com/lanmewko/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Que-F4MyXCj5cVTquXECu9oAF-GQF46w543Ik5jxoyU/edit?gid=0#gid=0",
+
+    overrideLinks: [
+      { label: '懶貓子Rumi的大小事', url: 'https://docs.google.com/spreadsheets/d/1Que-F4MyXCj5cVTquXECu9oAF-GQF46w543Ik5jxoyU/edit?gid=0#gid=0', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/lanmewko/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/lanmewko/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/lanmewko',            class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "0Vq4fWh3RMg", title: "NON STOP SOUL!!!" },
@@ -424,7 +433,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Paroniie",
     twitch: "https://www.twitch.tv/paroniie",
+    facebook:  "https://www.facebook.com/Paron11e",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1NcaRipM4j0rsy3z-JMYnft7IS_Gg-6qsBTW5174_zrU/edit?gid=1879656289#gid=1879656289",
+
+    overrideLinks: [
+      { label: '帕蘿妮的大小事', url: 'https://docs.google.com/spreadsheets/d/1NcaRipM4j0rsy3z-JMYnft7IS_Gg-6qsBTW5174_zrU/edit?gid=1879656289#gid=1879656289', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/Paroniie/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/Paroniie/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/paroniie',            class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "mnAkfuAZOUE", title: "🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】" },
@@ -518,7 +535,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/kannazukilubee",
     twitch: "https://www.twitch.tv/kannazukilubee",
+    facebook:  "https://www.facebook.com/KannazukiLubee",
+    instagram: "https://www.instagram.com/kannazukilubee/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Ld0rL7quLZlt1aW0oJvzdicmQuoVP7pJ85qnguNbG2E/edit?gid=45727533#gid=45727533",
+
+    overrideLinks: [
+      { label: '鹿比的大小事', url: 'https://docs.google.com/spreadsheets/d/1Ld0rL7quLZlt1aW0oJvzdicmQuoVP7pJ85qnguNbG2E/edit?gid=45727533#gid=45727533', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/KannazukiLubee/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/KannazukiLubee/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/kannazukilubee',            class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "VDj-McWV0JM", title: "刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】" },
@@ -575,7 +601,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/himegi17ka",
     twitch: "https://www.twitch.tv/himegimichika",
+    facebook:  "https://www.facebook.com/HimegiM17Ka",
+    instagram: "https://www.instagram.com/himegi_m17ka/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1jBY63fnJ80H0yB60-NXEyg8tLcOQwhPbc5CckgNNeEM/edit?gid=1398960308#gid=1398960308",
+
+    overrideLinks: [
+      { label: '咪奇的大小事', url: 'https://docs.google.com/spreadsheets/d/1jBY63fnJ80H0yB60-NXEyg8tLcOQwhPbc5CckgNNeEM/edit?gid=1398960308#gid=1398960308', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/HimegiMichika/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/HimegiMichika/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/himegi17ka',               class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -641,7 +676,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Arryn1a",
     twitch: "https://www.twitch.tv/arryn1a",
+    facebook:  "https://www.facebook.com/arryn1a/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1pd0C6wMa43aP5s0mXttaF7eOdmD79mDVCzuqctrTKfw/edit?gid=1723685746#gid=1723685746",
+
+    overrideLinks: [
+      { label: '艾琳妮雅的大小事', url: 'https://docs.google.com/spreadsheets/d/1pd0C6wMa43aP5s0mXttaF7eOdmD79mDVCzuqctrTKfw/edit?gid=1723685746#gid=1723685746', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/ArryniaVaeri/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/ArryniaVaeri/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/arryn1a',                 class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "YQXOIu3YjyU", title: "【失礼しますが、RIP♡ COVER REMIX 2026】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
@@ -734,7 +777,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/shurakukiriko",
     twitch: "https://www.twitch.tv/shurakukiriko",
+    facebook:  "https://www.facebook.com/profile.php?id=61552360240141",
     spreadsheet: "https://docs.google.com/spreadsheets/d/13JIIvG5_XTPc7M0zV0WAgFUBpZgcpRfxszdjbFZ0Ul4/edit?gid=47542312#gid=47542312",
+
+    overrideLinks: [
+      { label: '霧子的大小事', url: 'https://docs.google.com/spreadsheets/d/13JIIvG5_XTPc7M0zV0WAgFUBpZgcpRfxszdjbFZ0Ul4/edit?gid=47542312#gid=47542312', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/shurakukiriko/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/shurakukiriko/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/8p8hbwh8tnb77y',          class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -790,7 +841,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Vaswawa",
     twitch: "https://www.twitch.tv/vaswawa0000",
+    facebook:  "https://www.facebook.com/Vaswawa/",
+    instagram: "https://www.instagram.com/vaswawa/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/14GkvYxFdP0cGi-ZbXoq7a_rVAtpfAKSf9WxTGSlDavk/edit?gid=47542312#gid=47542312",
+
+    overrideLinks: [
+      { label: '瓦瓦的大小事', url: 'https://docs.google.com/spreadsheets/d/14GkvYxFdP0cGi-ZbXoq7a_rVAtpfAKSf9WxTGSlDavk/edit?gid=47542312#gid=47542312', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/user953a1698654472/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/user953a1698654472/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/y13sf73hnbn4lz4',              class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -851,7 +911,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/SinnieAris",
     twitch: "https://www.twitch.tv/sinniearis",
+    facebook:  "https://www.facebook.com/profile.php?id=61552753801614",
+    instagram: "https://www.instagram.com/sinniearis/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1PmHGlH05mnDac3Po0e_p93AkNLv5Wr2Hz6PnMEW___Y/edit?gid=47542312#gid=47542312",
+
+    overrideLinks: [
+      { label: '希希的大小事', url: 'https://docs.google.com/spreadsheets/d/1PmHGlH05mnDac3Po0e_p93AkNLv5Wr2Hz6PnMEW___Y/edit?gid=47542312#gid=47542312', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/SinnieAris/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/SinnieAris/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/1hlxorat4xskrkv',       class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -915,7 +984,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/hiririna",
     twitch: "https://www.twitch.tv/yuzukiririna",
+    facebook:  "https://www.facebook.com/ririna999",
+    instagram: "https://www.instagram.com/hiririna/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1HciwDa9K66fYEIDNPm3C1lP1JoX_8zRTIc8Z8KHEwOU/edit?gid=47542312#gid=47542312",
+
+    overrideLinks: [
+      { label: '奈奈的大小事', url: 'https://docs.google.com/spreadsheets/d/1HciwDa9K66fYEIDNPm3C1lP1JoX_8zRTIc8Z8KHEwOU/edit?gid=47542312#gid=47542312', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/riri999/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/riri999/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/s7sy7hnhkxrze7x',   class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -979,7 +1057,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/ekorru",
     twitch: "https://www.twitch.tv/ekorru",
+    facebook:  "https://www.facebook.com/profile.php?id=61551716686360",
+    instagram: "https://www.instagram.com/ekorru_vtuber/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1I3_WmwXk9YXXlHM2Z0lI0XEBPJSSl51ORizgqHkUWjY/edit?gid=47542312#gid=47542312",
+
+    overrideLinks: [
+      { label: '可露團長的大小事', url: 'https://docs.google.com/spreadsheets/d/1I3_WmwXk9YXXlHM2Z0lI0XEBPJSSl51ORizgqHkUWjY/edit?gid=47542312#gid=47542312', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/ekorru/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/ekorru/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/3kkf9wa19fnb675',   class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1045,7 +1132,16 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://twitter.com/Wakasa_Ito",
     twitch: "https://www.twitch.tv/wakasaito",
+    facebook:  "https://www.facebook.com/profile.php?id=61552604717695",
+    instagram: "https://www.instagram.com/wakasa.ito/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1ZiBxhztylcH5JYlRgBeQ872rHJznpYnM_Jns_RTCCKI/edit?gid=47542312#gid=47542312",
+
+    overrideLinks: [
+      { label: '氣質兔兔的大小事', url: 'https://docs.google.com/spreadsheets/d/1ZiBxhztylcH5JYlRgBeQ872rHJznpYnM_Jns_RTCCKI/edit?gid=47542312#gid=47542312', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/WakasaIto/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/WakasaIto/Subscribe',  class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdvmp8tskakyxdr',      class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
