@@ -1753,8 +1753,12 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], typeKeywords: ["米津玄師", "HoneyWorks", "愛言葉"] },
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], excludeKeywords: ["米津玄師", "HoneyWorks", "愛言葉"] },
     ],
 
     scheduleVideoId:  "bSPwY0KHks4",
