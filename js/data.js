@@ -2103,6 +2103,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["珮蕾", "Pele"] },
+    ],
+
     scheduleVideoId:  "xjmx-OXRdUg",
     spreadsheetLabel: "公主的大小事",
     scheduleTitle:    "公主的行程表",
