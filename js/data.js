@@ -1318,6 +1318,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"] },
+    ],
+
     scheduleVideoId:  "psgIP5rMRTA",
     spreadsheetLabel: "魁慨的大小事",
     scheduleTitle:    "魁慨的行程表",
@@ -1380,6 +1384,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"] },
+    ],
+
     scheduleVideoId:  "fO8nKY_tpzM",
     spreadsheetLabel: "穆總的大小事",
     scheduleTitle:    "穆總的行程表",
@@ -1438,7 +1446,8 @@ const vtubers = [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["涅爾菲", "nyrfier"], typeKeywords: ["歌切", "合唱"] },
     ],
     videoClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ", keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"] },
     ],
 
     scheduleVideoId:  "fl96oXs9Q1E",
@@ -1572,8 +1581,9 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",   keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
-      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮", excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
+      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -1699,6 +1709,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
       { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
+    videoClipsChannelIds: [
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"] },
     ],
 
     scheduleVideoId:  "TYDgPZbXl34",
