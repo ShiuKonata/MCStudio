@@ -1119,7 +1119,7 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1669648295508201474/1734874910/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "卍解．大紅蓮冰輪丸" }
+      { context: "", text: "我是氣質的偶像" }
     ],
     description: "一隻容易失眠的小兔子🌸喜歡的東西是唱歌、寵物莓咪和草莓🍓",
     debut: "2023-12-21",
