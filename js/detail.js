@@ -22,6 +22,8 @@ function applyVtuberColor(hex) {
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
   // 亮度 < 110 → 代表色太深，改用白色；否則直接用代表色
   const labelColor = brightness < 110 ? 'rgba(255,255,255,0.85)' : hex;
+  // 亮度 > 160 → 代表色太亮（如薄荷白），背景上文字改用深色；否則白字
+  const textColor  = brightness > 160 ? '#111' : 'rgba(255,255,255,0.95)';
 
   const root = document.documentElement;
   root.style.setProperty('--vt-main',   hex);
@@ -32,6 +34,7 @@ function applyVtuberColor(hex) {
   root.style.setProperty('--vt-border', `rgba(${r},${g},${b},0.28)`);
   root.style.setProperty('--vt-shadow', `rgba(${r},${g},${b},0.18)`);
   root.style.setProperty('--vt-label',  labelColor);
+  root.style.setProperty('--vt-text',   textColor);
 }
 
 // TAB_CONFIG 已改為在 DOMContentLoaded 內依 vtuber 資料動態生成
