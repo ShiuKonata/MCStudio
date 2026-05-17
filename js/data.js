@@ -354,6 +354,10 @@ const vtubers = [
       { id: "zcMfMI0ZHF0", title: "加班？門都沒有！【Rumi/懶貓子】【Vtuber精華】" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩", keywords: ["懶貓子", "Rumi", "懶貓"] },
+    ],
+
     scheduleVideoId:  "M5f-d9Ic1O4",
     spreadsheetLabel: "懶貓子Rumi的大小事",  // 試算表按鈕文字
     scheduleTitle:    "懶貓子Rumi的行程表",   // 行程頁標題
@@ -2175,6 +2179,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
       { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
+    videoClipsChannelIds: [
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
     ],
 
     scheduleVideoId:  "bae5xjjhMsI",
