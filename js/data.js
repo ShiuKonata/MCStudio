@@ -377,10 +377,6 @@ const vtubers = [
       { id: "zcMfMI0ZHF0", title: "加班？門都沒有！【Rumi/懶貓子】【Vtuber精華】" },
     ],
 
-    videoClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩", keywords: ["懶貓子", "Rumi", "懶貓"] },
-    ],
-
     scheduleVideoId:  "M5f-d9Ic1O4",
     spreadsheetLabel: "懶貓子Rumi的大小事",  // 試算表按鈕文字
     scheduleTitle:    "懶貓子Rumi的行程表",   // 行程頁標題
@@ -419,9 +415,15 @@ const vtubers = [
       { label: "討厭的東西", items: ["牛奶", "恐怖遊戲"] },
     ],
 
+    // 熱門音樂精華（歌回 / 歌枠切り抜き）
+    musicClipsChannelIds: [
+      { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ", typeKeywords: ["歌回", "歌枠"] },
+    ],
+
     // 熱門影片精華（直播精華 / 遊戲精華）
     videoClipsChannelIds: [
-      { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ" },   // @narihiko0714，專做懶貓子精華
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["懶貓子", "Rumi", "懶貓"] },
+      { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ", excludeKeywords: ["歌回", "歌枠", "直播"] },  // @narihiko0714
     ],
 
     // 歌曲統計（各年度 Google Sheets 統計頁 GID，填了才顯示分頁）
