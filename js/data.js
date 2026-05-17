@@ -415,14 +415,15 @@ const vtubers = [
       { label: "討厭的東西", items: ["牛奶", "恐怖遊戲"] },
     ],
 
-    // 熱門音樂精華（歌回 / 歌枠切り抜き）
+    // 熱門音樂精華（歌回 / 歌枠切り抜き / 演唱會）
     musicClipsChannelIds: [
       { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ", typeKeywords: ["歌回", "歌枠"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["懶貓子", "Rumi", "懶貓"], typeKeywords: ["演唱會"] },
     ],
 
     // 熱門影片精華（直播精華 / 遊戲精華）
     videoClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["懶貓子", "Rumi", "懶貓"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["懶貓子", "Rumi", "懶貓"], excludeKeywords: ["演唱會"] },
       { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ", excludeKeywords: ["歌回", "歌枠", "直播"] },  // @narihiko0714
     ],
 
