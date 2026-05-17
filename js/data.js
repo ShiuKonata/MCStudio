@@ -1204,7 +1204,14 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/whalefallvtuber",
     twitch: "https://www.twitch.tv/whalefallvtuber",
+    facebook:  "https://www.facebook.com/profile.php?id=61557412539806",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Sd96nc7gMum_r51aSD_2yxeaTrTHCmkM9FdhulEBshs/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '鯨諾的大小事', url: 'https://docs.google.com/spreadsheets/d/1Sd96nc7gMum_r51aSD_2yxeaTrTHCmkM9FdhulEBshs/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/whalefallvtuber/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/whalefallvtuber/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/co3akphbww7ctkd',           class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1262,7 +1269,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/Kai_Alluria",
     twitch: "https://www.twitch.tv/kai_alluria",
+    facebook:  "https://www.facebook.com/profile.php?id=61557632429774",
+    instagram: "https://www.instagram.com/kai_alluria/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1YZXyEv223KaR6OP0zQhs3SwVWvzKXE14IRPDfvrC85I/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '魁慨的大小事', url: 'https://docs.google.com/spreadsheets/d/1YZXyEv223KaR6OP0zQhs3SwVWvzKXE14IRPDfvrC85I/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/Kai/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/Kai/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdco270x5hdimzj', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1316,7 +1331,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/Mukuruvtuber",
     twitch: "https://www.twitch.tv/mukuru_vtuber",
+    facebook:  "https://www.facebook.com/profile.php?id=61557195855008",
+    instagram: "https://www.instagram.com/mukuru_vtuber/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1_hmrmI-L1cni5pwt_52CUcyZ8njXK0KtqnEq5FZka8U/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '穆總的大小事', url: 'https://docs.google.com/spreadsheets/d/1_hmrmI-L1cni5pwt_52CUcyZ8njXK0KtqnEq5FZka8U/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/Mukuru/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/Mukuru/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/oahdwpbhn26xgh5', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1373,7 +1396,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/Nyrfier",
     twitch: "https://www.twitch.tv/nyrfier",
+    facebook:  "https://www.facebook.com/nyrfier",
+    instagram: "https://www.instagram.com/nyrfier/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1XeB6d74Tw8tdvl5jeQYCNbEEgrMPK24OMTfTWEHR6is/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '爾菲的大小事', url: 'https://docs.google.com/spreadsheets/d/1XeB6d74Tw8tdvl5jeQYCNbEEgrMPK24OMTfTWEHR6is/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/Nyrfier/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/Nyrfier/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/4176c8dv62xp8tj', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1424,7 +1455,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/nekokaifuka22",
     twitch: "https://www.twitch.tv/nekokaifuka",
+    facebook:  "https://www.facebook.com/nekokaifuka22/",
+    instagram: "https://www.instagram.com/nekokaifuka22/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1Wm4qzVapSKuzc5yk1lpD7aa-4CFvL5nGeAzY6BIj-tQ/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '貳貳的大小事', url: 'https://docs.google.com/spreadsheets/d/1Wm4qzVapSKuzc5yk1lpD7aa-4CFvL5nGeAzY6BIj-tQ/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/nekokaifuka22/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/nekokaifuka22/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/o8my2qsvfd8q1we', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1486,7 +1525,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/chita_cakano",
     twitch: "https://www.twitch.tv/chita_cakano",
+    facebook:  "https://www.facebook.com/Chita.Cakano",
+    instagram: "https://www.instagram.com/chita_cakano/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1psY9WxG-Sdajms-s8oJ7LoEy0i6n6Jp6fiqlNz9jEYQ/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '崎塔的大小事', url: 'https://docs.google.com/spreadsheets/d/1psY9WxG-Sdajms-s8oJ7LoEy0i6n6Jp6fiqlNz9jEYQ/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/chita/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/chita/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/57v5h7z1m9gxuyk', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1540,7 +1587,14 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/ch9mamatt1",
     twitch: "https://www.twitch.tv/aelis_chamamatti",
+    facebook:  "https://www.facebook.com/chamamatti/",
+    instagram: "https://www.instagram.com/aelis_chamamatti/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1KhII6yxRC1bR8X1Qhrd7OqYiOGyh651yimsYzi-diKg/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '瑪緹的大小事', url: 'https://docs.google.com/spreadsheets/d/1KhII6yxRC1bR8X1Qhrd7OqYiOGyh651yimsYzi-diKg/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/chamamatti/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/chamamatti/Subscribe', class: 'membership', icon: '💎' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1594,7 +1648,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/ShiroLeon_",
     twitch: "https://www.twitch.tv/shirol30n",
+    facebook:  "https://www.facebook.com/profile.php?id=61557139277358",
+    instagram: "https://www.instagram.com/shiroleon_0402",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1ukOsxfhoUFdqHDgucEJAu_xQOZTT-f-f8VrImew_1Vg/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '希洛的大小事', url: 'https://docs.google.com/spreadsheets/d/1ukOsxfhoUFdqHDgucEJAu_xQOZTT-f-f8VrImew_1Vg/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/ShiroLeon/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/ShiroLeon/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/lcedt6tbm7j9olg', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1656,7 +1718,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/BarkBarkPomi",
     twitch: "https://www.twitch.tv/barkbarkpomi",
+    facebook:  "https://www.facebook.com/NekumoWanderProject",
+    instagram: "https://www.instagram.com/barkbarkpomi/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1yUMlbwC5wLRKL56z9n21jHK0BTFRMlK6SCfGlp7J98g/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '波美的大小事', url: 'https://docs.google.com/spreadsheets/d/1yUMlbwC5wLRKL56z9n21jHK0BTFRMlK6SCfGlp7J98g/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/BarkBarkPomi/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/BarkBarkPomi/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/yd8135pe2m366q3', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1713,7 +1783,14 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/cocor0_0303",
     twitch: "https://www.twitch.tv/cocor0_0303",
+    facebook:  "https://www.facebook.com/NekumoWanderProject",
+    instagram: "https://www.instagram.com/cocor0_0303/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1C0uXF-iSvTFRqamTMrFGQdTocxO7kUiVDW_1vCxVZUE/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '可可的大小事', url: 'https://docs.google.com/spreadsheets/d/1C0uXF-iSvTFRqamTMrFGQdTocxO7kUiVDW_1vCxVZUE/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/cocor0/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/cocor0/Subscribe', class: 'membership', icon: '💎' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1777,7 +1854,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/uchi_fifi",
     twitch: "https://www.twitch.tv/uchififi",
+    facebook:  "https://www.facebook.com/uchif1f1/",
+    instagram: "https://www.instagram.com/uchi_fifi",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1-KHxcePbW1x5PYboBtEWTSyjUDznk9mGM1waQ6aEgVg/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '扉扉的大小事', url: 'https://docs.google.com/spreadsheets/d/1-KHxcePbW1x5PYboBtEWTSyjUDznk9mGM1waQ6aEgVg/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/uchififi/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/uchififi/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/icg1idg6i513ru4', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1835,7 +1920,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/nokori_0420",
     twitch: "https://www.twitch.tv/nokori0420",
+    facebook:  "https://www.facebook.com/NokoriCaKaNo",
+    instagram: "https://www.instagram.com/n0kori_/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1H0BkPVKCPEXLsxNA_XlN_hf0Kn1t-FTuCDQ-ivLZ3z0/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '諾諾的大小事', url: 'https://docs.google.com/spreadsheets/d/1H0BkPVKCPEXLsxNA_XlN_hf0Kn1t-FTuCDQ-ivLZ3z0/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/Nokoricakano/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/Nokoricakano/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/vq7fin259ukl3mi', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1891,7 +1984,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/kekemii_0705",
     twitch: "https://www.twitch.tv/kekemii_0705",
+    facebook:  "https://www.facebook.com/kekemii0705",
+    instagram: "https://www.instagram.com/kekemii_0705/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1kr3W1pizZkdn2Lg5gkPorcnDovyKgfWn1VnfTI0i9_U/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '米伊的大小事', url: 'https://docs.google.com/spreadsheets/d/1kr3W1pizZkdn2Lg5gkPorcnDovyKgfWn1VnfTI0i9_U/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/user10081741941094/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/user10081741941094/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/9ir7u6drnzlzo7a', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -1955,7 +2056,15 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/aelis_pele",
     twitch: "https://www.twitch.tv/p1lepe1el1",
+    facebook:  "https://www.facebook.com/Peleouo",
+    instagram: "https://www.instagram.com/aelis_pele",
     spreadsheet: "https://docs.google.com/spreadsheets/d/18yEOmU3YVlMIJUaS6FntVI0voe9YzsepXfANRgz2SFM/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '公主的大小事', url: 'https://docs.google.com/spreadsheets/d/18yEOmU3YVlMIJUaS6FntVI0voe9YzsepXfANRgz2SFM/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/userf1171757063028/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/userf1171757063028/Subscribe', class: 'membership', icon: '💎' },
+      { label: '棉花糖',   url: 'https://marshmallow-qa.com/pqnlqsethgm3px2', class: 'marshmallow', icon: '🍬' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
@@ -2014,7 +2123,14 @@ const vtubers = [
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/yawnii_aelis",
     twitch: "https://www.twitch.tv/yawnii_aelis",
+    facebook:  "https://www.facebook.com/Yawnii.aelis/",
+    instagram: "https://www.instagram.com/yawnii_aelis/",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1axdysWPjMJrUgmU9qHWPkyrS3htc9SaiOpTbxERaa2A/edit?gid=130416740#gid=130416740",
+    overrideLinks: [
+      { label: '幽昵的大小事', url: 'https://docs.google.com/spreadsheets/d/1axdysWPjMJrUgmU9qHWPkyrS3htc9SaiOpTbxERaa2A/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/Yawnii/Donate',     class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員', url: 'https://www.hivebee.com.tw/Yawnii/Subscribe', class: 'membership', icon: '💎' },
+    ],
 
     videos: [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
