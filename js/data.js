@@ -1119,7 +1119,9 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1669648295508201474/1734874910/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "我是氣質的偶像" }
+      { context: "", text: "我是氣質的偶像" },
+      { context: "", text: "我不是夣女" },
+      { context: "", text: "我跟凪是真實存在的" }
     ],
     description: "一隻容易失眠的小兔子🌸喜歡的東西是唱歌、寵物莓咪和草莓🍓",
     debut: "2023-12-21",
