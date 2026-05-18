@@ -88,7 +88,7 @@ const vtubers = [
     // excludeKeywords：標題含任一關鍵字則排除（適合「非 Cover 以外全收」的混合頻道）
     // playlistId     ：UUSH + channelId[2:] = 該頻道 Shorts 專屬清單
     videoClipsChannelIds: [
-      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w" },                                                                     // Shorts 精華
+      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", excludeKeywords: ["歌回"] },                                           // Shorts 精華（排除歌回總集篇）
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], excludeKeywords: ["cover", "吉他"] },                    // 非 Cover 影片
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    excludeKeywords: ["cover", "guitar"] },                                                                          // 非 Cover 影片（全頻道皆詩雨蔻達）
