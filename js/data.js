@@ -1861,7 +1861,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], excludeKeywords: ["米津玄師", "HoneyWorks", "愛言葉"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], excludeKeywords: ["米津玄師", "HoneyWorks", "愛言葉"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini" },  // P↗️Y↘️派↗️對↘️ 為純emoji標題，無法keyword篩選，顯示整頻道
     ],
 
     scheduleVideoId:  "bSPwY0KHks4",
@@ -2072,6 +2073,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
       { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+    ],
+
+    videoClipsChannelIds: [
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["諾恪里", "小心結天團"] },
     ],
 
     scheduleVideoId:  "Od2Sczr6wmw",
