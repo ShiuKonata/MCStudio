@@ -1372,7 +1372,8 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",     keywords: ["魁", "Kai"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["魁", "Kai"] },
     ],
 
     scheduleVideoId:  "psgIP5rMRTA",
@@ -1443,6 +1444,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["穆克蕗", "穆總", "Mukuru"] },
     ],
 
     scheduleVideoId:  "fO8nKY_tpzM",
@@ -1506,7 +1508,8 @@ const vtubers = [
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",     keywords: ["涅爾菲", "Nyrfier", "爾菲"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["涅爾菲", "Nyrfier", "爾菲"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["涅爾菲", "Nyrfier", "爾菲"] },
     ],
 
     scheduleVideoId:  "fl96oXs9Q1E",
@@ -1644,6 +1647,7 @@ const vtubers = [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "Chita"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -1698,7 +1702,8 @@ const vtubers = [
 
 
     videoClipsChannelIds: [
-      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508", keywords: ["茶帽瑪緹", "chamamatti", "帽帽"] },
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "帽帽"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["茶帽瑪緹", "chamamatti", "帽帽"] },
     ],
 
     scheduleVideoId:  "_Xf6y0jkl-Q",
@@ -1777,7 +1782,8 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",     keywords: ["希洛萊昂", "希洛", "ShiroLeon"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["希洛萊昂", "希洛", "ShiroLeon"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["希洛萊昂", "希洛", "ShiroLeon"] },
     ],
 
     scheduleVideoId:  "TYDgPZbXl34",
@@ -1855,7 +1861,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], excludeKeywords: ["米津玄師", "HoneyWorks", "愛言葉"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], excludeKeywords: ["米津玄師", "HoneyWorks", "愛言葉"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"] },
     ],
 
     scheduleVideoId:  "bSPwY0KHks4",
@@ -2132,6 +2139,10 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    videoClipsChannelIds: [
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["克克米伊", "米伊", "kekemii"] },
+    ],
+
     scheduleVideoId:  "q5bBqi8DUc8",
     spreadsheetLabel: "米伊的大小事",
     scheduleTitle:    "米伊的行程表",
@@ -2205,7 +2216,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["珮蕾", "Pele"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["珮蕾", "Pele"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["珮蕾", "Pele"] },
     ],
 
     scheduleVideoId:  "xjmx-OXRdUg",
@@ -2275,7 +2287,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
     ],
 
     scheduleVideoId:  "bae5xjjhMsI",
