@@ -1293,7 +1293,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko", keywords: ["鯨諾", "whalefall"], typeKeywords: ["週年", "生日", "應援"] },  // 週年/生日應援企劃
+      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",      keywords: ["鯨諾", "whalefall"], typeKeywords: ["週年", "生日", "應援"] },  // 週年/生日應援企劃
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["鯨諾", "whalefall"] },
     ],
 
     scheduleVideoId:  "r15JQHl8KL0",
