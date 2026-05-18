@@ -1372,6 +1372,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",     keywords: ["魁", "Kai"] },
     ],
 
     scheduleVideoId:  "psgIP5rMRTA",
@@ -1505,6 +1506,7 @@ const vtubers = [
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",     keywords: ["涅爾菲", "Nyrfier", "爾菲"] },
     ],
 
     scheduleVideoId:  "fl96oXs9Q1E",
@@ -1775,6 +1777,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",     keywords: ["希洛萊昂", "希洛", "ShiroLeon"] },
     ],
 
     scheduleVideoId:  "TYDgPZbXl34",
