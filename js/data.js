@@ -1649,6 +1649,7 @@ const vtubers = [
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "Chita", "小心結天團", "派"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["崎塔", "Chita"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -2076,7 +2077,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["諾恪里", "小心結天團"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["諾恪里", "小心結天團"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["諾恪里", "Nokori"] },
     ],
 
     scheduleVideoId:  "Od2Sczr6wmw",
@@ -2144,7 +2146,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["克克米伊", "米伊", "kekemii", "克克米", "派"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["克克米伊", "米伊", "kekemii", "克克米", "派"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "米伊", "kekemii", "克克米"] },
     ],
 
     scheduleVideoId:  "q5bBqi8DUc8",
