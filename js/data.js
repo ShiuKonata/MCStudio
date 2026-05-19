@@ -78,7 +78,7 @@ const vtubers = [
       { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘", typeKeywords: ["歌回", "cover"] },                                                                       // 歌回總集篇 + Cover
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["cover", "吉他"] },            // 只抓 Cover
       // 孫小毛（UC4nZ-KbmFr21Qt1lN9rmbdQ）：無音樂剪輯，僅在 videoClipsChannelIds 保留精華影片
-      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    typeKeywords: ["cover", "guitar"] },                                                                    // 只抓 Cover
+      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達"], typeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的 Cover
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["cover", "歌回"] },             // 混合頻道 → 只抓音樂
       { id: "UCh00s3u4osHhNx8BlSZsECg", label: "章魚虛タコ",    keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                             // 全部為 Cover
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                            // Guitar Cover
@@ -91,7 +91,7 @@ const vtubers = [
       { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", excludeKeywords: ["歌回", "cover"] },                           // 非音樂內容（排除歌回 & Cover）
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], excludeKeywords: ["cover", "吉他"] },                    // 非 Cover 影片
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華"] },
-      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    excludeKeywords: ["cover", "guitar"] },                                                                          // 非 Cover 影片（全頻道皆詩雨蔻達）
+      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達"], excludeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的精華
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華", "直播"] },
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
       { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda"], excludeKeywords: ["歌回", "cover"] },  // 詩雨蔻達精華片段
@@ -918,7 +918,8 @@ const vtubers = [
     },
 
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyX"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                          excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",   keywords: ["瓦西瓦瓦", "vaswawa", "瓦瓦"] },
     ],
 
     color: "#B8FFEC"   // 瓦西瓦瓦 代表色（薄荷綠）
@@ -1176,6 +1177,10 @@ const vtubers = [
       "2024": "653942800",
       "2023": "64486410",
     },
+
+    musicClipsChannelIds: [
+      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室", keywords: ["若櫻依兔", "WakasaIto", "wakasaito", "Wakasalto"], typeKeywords: ["cover", "guitar"] },
+    ],
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyX"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
