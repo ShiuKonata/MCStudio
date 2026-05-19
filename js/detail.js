@@ -1,3 +1,10 @@
+// ── 全域音樂剪輯關鍵字（自動分類：標題含其中一個 → 歸為音樂剪輯）────
+const GLOBAL_MUSIC_KEYWORDS = [
+  'cover', '翻唱', '清唱', '歌回', '歌切', '原創曲', '原創',
+  '演唱', '演唱會', '唱歌', '歌曲', '歌聲', '精唱', '歌單',
+  '主題曲', 'mv', 'ost', '卡拉ok', 'karaoke', '深海少女',
+];
+
 // ── 世代 → 團體名稱對應 ──────────────────────────────
 const genTeamName = {
   // 零期生無團體名稱，不列入
@@ -925,12 +932,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const cacheKey = `clips_ch_raw_v2_${[...channelIds].sort().join('_')}`;
 
     // 於顯示時套用各主播自己的關鍵字篩選
+    // 若未設定 typeKeywords / excludeKeywords，則自動套用全域音樂關鍵字：
+    //   ・音樂格（musicclips-grid）→ 標題須含全域音樂關鍵字之一
+    //   ・影片格（videoclips-grid）→ 標題不得含全域音樂關鍵字
     function applyFilters(rawItems) {
+      const isMusicGrid = gridId === 'musicclips-grid';
+      const isVideoGrid = gridId === 'videoclips-grid';
+      const effectiveTypeKws    = typeKws    ?? (isMusicGrid ? GLOBAL_MUSIC_KEYWORDS : null);
+      const effectiveExcludeKws = excludeKws ?? (isVideoGrid ? GLOBAL_MUSIC_KEYWORDS : null);
       return rawItems.filter(item => {
         const t = item.title.toLowerCase();
-        if (kws        && !kws.some(k        => t.includes(k))) return false; // 人名白名單（OR）
-        if (typeKws    && !typeKws.some(k    => t.includes(k))) return false; // 類型白名單（AND + OR）
-        if (excludeKws &&  excludeKws.some(k => t.includes(k))) return false; // 類型黑名單（排除）
+        if (kws                  && !kws.some(k                 => t.includes(k))) return false; // 人名白名單（OR）
+        if (effectiveTypeKws     && !effectiveTypeKws.some(k    => t.includes(k))) return false; // 類型白名單（OR）
+        if (effectiveExcludeKws  &&  effectiveExcludeKws.some(k => t.includes(k))) return false; // 類型黑名單（排除）
         return true;
       });
     }
