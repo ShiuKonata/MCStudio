@@ -9,11 +9,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
 
-    /* ══ 頁面容器 ══ */
+    /* ══ 頁面容器：垂直置中 ══ */
+    .fb-outer {
+      flex: 1;                      /* 撐滿 navbar 以下至 footer 的空間 */
+      display: flex;
+      align-items: center;          /* 垂直置中 */
+      padding: 32px 32px;
+    }
     .fb-wrap {
       max-width: 1400px;
+      width: 100%;
       margin: 0 auto;
-      padding: 36px 32px 72px;
     }
 
     /* ══ 頁面標題列 ══ */
@@ -453,6 +459,7 @@
     </div>
   </nav>
 
+  <div class="fb-outer">
   <div class="fb-wrap">
 
     <!-- 頁面標題列 -->
@@ -537,7 +544,8 @@
       </div>
 
     </div>
-  </div>
+  </div><!-- fb-wrap -->
+  </div><!-- fb-outer -->
 
   <script>
     const { createClient } = supabase;
