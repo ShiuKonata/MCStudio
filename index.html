@@ -37,7 +37,7 @@
     <div class="nav-top">
       <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
     </div>
-    <div class="nav-sub">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</div>
+    <div class="nav-sub">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site ｜ <strong class="nav-fan-notice">非預見娛樂官方網站</strong></div>
     <div class="nav-links-bar">
       <a href="index.html" class="active">🏠 首頁</a>
       <a href="vtubers.html">⭐ Vtuber 一覽</a>
@@ -105,11 +105,59 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ 由粉絲用愛製作</p>
+    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ 由粉絲用愛製作 ｜ <strong class="footer-fan-notice">非預見娛樂官方網站</strong></p>
     <p class="footer-source">資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供</p>
   </footer>
 
+  <!-- 首次訪問提示（粉絲網站聲明）-->
+  <div class="fan-notice-overlay" id="fanNoticeOverlay" role="dialog" aria-modal="true" aria-label="網站聲明">
+    <div class="fan-notice-box">
+      <div class="fan-notice-icon">🐸</div>
+      <h2 class="fan-notice-title">歡迎來到 MC組事務所！</h2>
+      <div class="fan-notice-badge">📢 訪客須知</div>
+      <p class="fan-notice-body">
+        本網站為<strong>粉絲自製的介紹站</strong>，<br>
+        <strong class="fan-notice-highlight">並非預見娛樂官方網站</strong>。<br><br>
+        所有資訊來自官方公開資訊，<br>
+        由 MC 組粉絲們用愛整理維護 💚
+      </p>
+      <button class="fan-notice-btn" id="fanNoticeClose">我知道了，繼續探索 →</button>
+      <label class="fan-notice-remember">
+        <input type="checkbox" id="fanNoticeRemember" checked>
+        <span>不再顯示此提示</span>
+      </label>
+    </div>
+  </div>
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    // 首次訪問彈窗：用 localStorage 記住用戶選擇
+    (function () {
+      const overlay = document.getElementById('fanNoticeOverlay');
+      const closeBtn = document.getElementById('fanNoticeClose');
+      const rememberChk = document.getElementById('fanNoticeRemember');
+      const STORAGE_KEY = 'mc_fan_notice_seen';
+
+      // 若未記住，顯示彈窗
+      if (!localStorage.getItem(STORAGE_KEY)) {
+        overlay.classList.add('open');
+      }
+
+      closeBtn.addEventListener('click', function () {
+        overlay.classList.remove('open');
+        if (rememberChk.checked) {
+          localStorage.setItem(STORAGE_KEY, '1');
+        }
+      });
+
+      // 點擊遮罩外圍也可關閉（不記住）
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('open');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
