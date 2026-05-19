@@ -8,130 +8,251 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    /* 覆蓋主站背景，讓回報頁維持深色底 */
-    body { background: #0d0d13 !important; }
-
-    .fb-wrap {
-      max-width: 580px;
+    /* ── 頁面結構 ── */
+    .fb-page {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 48px 20px 80px;
+      padding: 48px 24px 80px;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 32px;
+      align-items: start;
     }
-    .fb-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #777;
-      text-decoration: none;
-      font-size: 13px;
-      margin-bottom: 36px;
-      transition: color .2s;
+
+    /* ── 頁頭（橫跨兩欄） ── */
+    .fb-header {
+      grid-column: 1 / -1;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(255,255,255,0.25);
+      margin-bottom: 8px;
     }
-    .fb-back:hover { color: #bbb; }
     .fb-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #f0f0f0;
+      font-size: 26px;
+      font-weight: 800;
+      color: #1a1a2e;
       margin-bottom: 6px;
     }
     .fb-sub {
-      color: #888;
       font-size: 14px;
-      margin-bottom: 36px;
+      color: #555;
     }
+
+    /* ── 卡片共用 ── */
     .fb-card {
-      background: #13131c;
-      border: 1px solid #222230;
-      border-radius: 14px;
-      padding: 32px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
     }
-    .fb-field { margin-bottom: 22px; }
+    .fb-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── 表單欄位 ── */
+    .fb-field { margin-bottom: 18px; }
     .fb-label {
       display: block;
       font-size: 13px;
-      font-weight: 500;
-      color: #aaa;
-      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 7px;
     }
-    .fb-req { color: #f87171; margin-left: 3px; }
+    .fb-req { color: #e53e3e; margin-left: 3px; }
     .fb-select,
     .fb-textarea {
       width: 100%;
-      background: #0d0d13;
-      border: 1px solid #252530;
+      background: #fff;
+      border: 1px solid #d0d5dd;
       border-radius: 8px;
-      color: #e0e0e0;
+      color: #1a1a2e;
       font-size: 14px;
-      padding: 11px 14px;
+      padding: 10px 13px;
       font-family: inherit;
-      transition: border-color .2s;
+      transition: border-color .2s, box-shadow .2s;
     }
     .fb-select {
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
+      background-position: right 13px center;
+      padding-right: 34px;
       cursor: pointer;
     }
     .fb-textarea {
       resize: vertical;
-      min-height: 130px;
+      min-height: 120px;
       line-height: 1.6;
     }
     .fb-select:focus,
     .fb-textarea:focus {
       outline: none;
-      border-color: #4a4a68;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
     }
     .fb-btn {
       width: 100%;
-      padding: 13px;
+      padding: 12px;
       background: #4f46e5;
       color: #fff;
       border: none;
       border-radius: 8px;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       font-family: inherit;
       cursor: pointer;
       transition: background .2s;
-      margin-top: 6px;
+      margin-top: 4px;
     }
-    .fb-btn:hover { background: #4338ca; }
-    .fb-btn:disabled { background: #1c1c28; color: #555; cursor: not-allowed; }
+    .fb-btn:hover    { background: #4338ca; }
+    .fb-btn:disabled { background: #c5c5e0; cursor: not-allowed; }
 
-    /* 成功畫面 */
+    /* ── 成功畫面 ── */
     .fb-success {
       display: none;
       text-align: center;
-      padding: 12px 0;
+      padding: 16px 0;
     }
     .fb-success-icon {
-      width: 68px;
-      height: 68px;
-      background: #0f2d1a;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 30px;
+      font-size: 48px;
+      margin-bottom: 14px;
     }
-    .fb-success h2 { font-size: 20px; color: #4ade80; margin-bottom: 8px; }
+    .fb-success h2 { font-size: 20px; color: #16a34a; margin-bottom: 8px; }
     .fb-success p  { color: #666; font-size: 14px; line-height: 1.7; }
-    .fb-home-btn {
+    .fb-again-btn {
       display: inline-block;
-      margin-top: 22px;
-      padding: 9px 22px;
-      background: #1c1c28;
-      color: #aaa;
-      text-decoration: none;
+      margin-top: 18px;
+      padding: 8px 20px;
+      background: #f0f0f8;
+      color: #4f46e5;
+      border: 1px solid #c7c7f0;
       border-radius: 8px;
       font-size: 13px;
-      transition: background .2s, color .2s;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      transition: background .2s;
     }
-    .fb-home-btn:hover { background: #252535; color: #ccc; }
+    .fb-again-btn:hover { background: #e5e5f8; }
+
+    /* ── 瀏覽區 ── */
+    .fb-browse-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .fb-count {
+      font-size: 12px;
+      color: #888;
+      background: rgba(0,0,0,0.06);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* 篩選 tabs */
+    .fb-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .fb-tab {
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid #d0d5dd;
+      background: #fff;
+      color: #666;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .2s;
+    }
+    .fb-tab:hover  { background: #f5f5ff; color: #4f46e5; border-color: #b0b0e0; }
+    .fb-tab.active { background: #4f46e5; color: #fff; border-color: #4f46e5; }
+
+    /* 回報項目卡片 */
+    .fb-items { display: flex; flex-direction: column; gap: 10px; max-height: 580px; overflow-y: auto; padding-right: 2px; }
+    .fb-items::-webkit-scrollbar { width: 4px; }
+    .fb-items::-webkit-scrollbar-track { background: transparent; }
+    .fb-items::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+
+    .fb-item {
+      background: #fff;
+      border: 1px solid #e8eaf0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: border-color .2s;
+    }
+    .fb-item:hover { border-color: #c0c4e0; }
+    .fb-item.resolved { opacity: .6; }
+
+    .fb-item-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .type-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 4px;
+    }
+    .type-bug     { background: #fee2e2; color: #b91c1c; }
+    .type-data    { background: #ffedd5; color: #c2410c; }
+    .type-suggest { background: #dbeafe; color: #1d4ed8; }
+    .type-other   { background: #f3f4f6; color: #4b5563; }
+
+    .status-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .status-open     { background: #dcfce7; color: #15803d; }
+    .status-resolved { background: #f3f4f6; color: #6b7280; }
+
+    .fb-item-date { font-size: 11px; color: #aaa; margin-left: auto; }
+
+    .fb-item-content {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .fb-empty {
+      text-align: center;
+      padding: 40px 0;
+      color: #aaa;
+      font-size: 14px;
+    }
+    .fb-loading {
+      text-align: center;
+      padding: 30px 0;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    /* ── RWD ── */
+    @media (max-width: 780px) {
+      .fb-page {
+        grid-template-columns: 1fr;
+        padding: 32px 16px 60px;
+        gap: 24px;
+      }
+      .fb-header { margin-bottom: 4px; }
+      .fb-items  { max-height: 400px; }
+    }
   </style>
 </head>
 <body>
@@ -149,13 +270,18 @@
     </div>
   </nav>
 
-  <div class="fb-wrap">
-    <a class="fb-back" href="index.html">← 返回首頁</a>
-    <div class="fb-title">🐞 回報問題 / 提出建議</div>
-    <p class="fb-sub">遇到 Bug 或有想說的？不需要帳號，直接填寫即可</p>
+  <div class="fb-page">
 
+    <!-- 頁頭 -->
+    <div class="fb-header">
+      <div class="fb-title">🐞 回報問題 / 提出建議</div>
+      <p class="fb-sub">遇到 Bug 或有想說的？不需要帳號，直接填寫即可</p>
+    </div>
+
+    <!-- 左欄：投稿表單 -->
     <div class="fb-card">
-      <!-- 表單 -->
+      <div class="fb-card-title">📝 提交回報</div>
+
       <div id="fb-form">
         <div class="fb-field">
           <label class="fb-label">問題類型<span class="fb-req">*</span></label>
@@ -174,14 +300,32 @@
         <button class="fb-btn" id="fb-submit" onclick="submitFeedback()">送出回報</button>
       </div>
 
-      <!-- 成功畫面 -->
       <div class="fb-success" id="fb-success">
         <div class="fb-success-icon">✅</div>
         <h2>已收到，謝謝！</h2>
         <p>我們會盡快查看並處理<br>感謝你花時間回報 🙏</p>
-        <a class="fb-home-btn" href="index.html">返回首頁</a>
+        <button class="fb-again-btn" onclick="resetForm()">再回報一則</button>
       </div>
     </div>
+
+    <!-- 右欄：已回報項目 -->
+    <div class="fb-card">
+      <div class="fb-browse-header">
+        <div class="fb-card-title" style="margin-bottom:0">📋 已回報項目</div>
+        <span class="fb-count" id="fb-count">載入中…</span>
+      </div>
+
+      <div class="fb-tabs">
+        <button class="fb-tab active" onclick="setFilter('all',this)">全部</button>
+        <button class="fb-tab" onclick="setFilter('open',this)">待處理</button>
+        <button class="fb-tab" onclick="setFilter('resolved',this)">已解決</button>
+      </div>
+
+      <div class="fb-items" id="fb-items">
+        <div class="fb-loading">載入中…</div>
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -191,6 +335,81 @@
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkbnpxcWduc255Y250dm15a2ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNjI2NzIsImV4cCI6MjA5NDczODY3Mn0.u5ZP66-3PKHKkE-Oow47_yPqoh5sSjwhXxMogtoHGjw'
     );
 
+    let allItems = [];
+    let currentFilter = 'all';
+
+    const typeMap = {
+      bug:     { cls: 'type-bug',     label: '🐛 網站 Bug'  },
+      data:    { cls: 'type-data',    label: '📝 資料錯誤'  },
+      suggest: { cls: 'type-suggest', label: '💡 功能建議'  },
+      other:   { cls: 'type-other',   label: '💬 其他'      },
+    };
+
+    function fmtDate(iso) {
+      return new Date(iso).toLocaleDateString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit' });
+    }
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ── 載入已回報項目 ──
+    async function loadItems() {
+      const { data, error } = await sb
+        .from('feedback')
+        .select('id, type, content, status, created_at')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        document.getElementById('fb-items').innerHTML = '<div class="fb-empty">載入失敗，請稍後再試</div>';
+        document.getElementById('fb-count').textContent = '–';
+        return;
+      }
+      allItems = data || [];
+      renderItems();
+    }
+
+    function setFilter(f, el) {
+      currentFilter = f;
+      document.querySelectorAll('.fb-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      renderItems();
+    }
+
+    function renderItems() {
+      const list = document.getElementById('fb-items');
+      const items = currentFilter === 'all'
+        ? allItems
+        : allItems.filter(i => i.status === currentFilter);
+
+      document.getElementById('fb-count').textContent =
+        currentFilter === 'all' ? `共 ${allItems.length} 則` :
+        currentFilter === 'open' ? `待處理 ${items.length} 則` : `已解決 ${items.length} 則`;
+
+      if (!items.length) {
+        list.innerHTML = '<div class="fb-empty">目前沒有回報 🎉</div>';
+        return;
+      }
+
+      list.innerHTML = items.map(i => {
+        const t    = typeMap[i.type] || typeMap.other;
+        const done = i.status === 'resolved';
+        const txt  = esc(i.content).length > 120
+          ? esc(i.content).substring(0, 120) + '…'
+          : esc(i.content);
+        return `
+        <div class="fb-item${done ? ' resolved' : ''}">
+          <div class="fb-item-top">
+            <span class="type-badge ${t.cls}">${t.label}</span>
+            <span class="status-badge ${done ? 'status-resolved' : 'status-open'}">${done ? '✓ 已解決' : '待處理'}</span>
+            <span class="fb-item-date">${fmtDate(i.created_at)}</span>
+          </div>
+          <div class="fb-item-content">${txt}</div>
+        </div>`;
+      }).join('');
+    }
+
+    // ── 送出回報 ──
     async function submitFeedback() {
       const type    = document.getElementById('fb-type').value;
       const content = document.getElementById('fb-content').value.trim();
@@ -205,7 +424,6 @@
       const { error } = await sb.from('feedback').insert({ type, content });
 
       if (error) {
-        console.error(error);
         alert('送出失敗，請稍後再試\n' + error.message);
         btn.disabled    = false;
         btn.textContent = '送出回報';
@@ -214,7 +432,20 @@
 
       document.getElementById('fb-form').style.display    = 'none';
       document.getElementById('fb-success').style.display = 'block';
+      loadItems(); // 重新載入清單
     }
+
+    // ── 再回報一則 ──
+    function resetForm() {
+      document.getElementById('fb-type').value    = '';
+      document.getElementById('fb-content').value = '';
+      document.getElementById('fb-success').style.display = 'none';
+      document.getElementById('fb-form').style.display    = 'block';
+      document.getElementById('fb-submit').disabled    = false;
+      document.getElementById('fb-submit').textContent = '送出回報';
+    }
+
+    loadItems();
   </script>
 
 </body>
