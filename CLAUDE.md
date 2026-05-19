@@ -101,5 +101,6 @@ vtuber-site/
 ### typeKeywords 填寫規則
 - 設定了 `typeKeywords`：只顯示標題含其中一個詞的影片
 - 沒設定 `typeKeywords` 且沒設定 `excludeKeywords`：自動套用全域音樂關鍵字篩選
-- 音樂剪輯常用 typeKeywords：`歌切`、`歌回`、`cover`、`合唱`、`線下連動`、`粉絲精華`
+- 音樂剪輯常用 typeKeywords：`歌切`、`歌回`、`cover`、`合唱`、`線下連動`
+- ❌ 禁止使用 `粉絲精華` 作為 typeKeyword（太廣，會誤抓非音樂的精華影片）
 - 影片剪輯不需 typeKeywords，改用 `excludeKeywords` 排除音樂關鍵字

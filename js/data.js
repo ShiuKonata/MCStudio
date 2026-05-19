@@ -1240,7 +1240,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",  keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",   keywords: ["鯨諾", "whalefall", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動", "粉絲精華"] },  // Alluria 線下連動合唱
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",   keywords: ["鯨諾", "whalefall", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
@@ -1309,7 +1309,7 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["魁", "Kai", "這很魁以", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動", "粉絲精華"] },  // Alluria 線下連動合唱
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["魁", "Kai", "這很魁以", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
@@ -1369,7 +1369,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "mukuru", "蕗live", "國境之南"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動", "粉絲精華"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "mukuru", "蕗live", "國境之南"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
@@ -1435,7 +1435,7 @@ const vtubers = [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], typeKeywords: ["歌切", "合唱"] },
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["涅爾菲", "Nyrfier", "爾菲"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["涅爾菲", "Nyrfier", "nyrfier", "爾菲", "涅手涅腳", "國境之南"], typeKeywords: ["歌切", "線下連動", "粉絲精華"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["涅爾菲", "Nyrfier", "nyrfier", "爾菲", "涅手涅腳", "國境之南"], typeKeywords: ["歌切", "線下連動"] },
     ],
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
@@ -1691,7 +1691,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "希洛", "ShiroLeon", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動", "粉絲精華"] },  // Alluria 線下連動合唱
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "希洛", "ShiroLeon", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
