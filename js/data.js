@@ -364,7 +364,6 @@ const vtubers = [
       { id: "gLNU5_2-Z4w", title: "【Cover】【歌ってみた】愛言葉Ⅲ｜covered by Rumi/懶貓子",                                                   date: "2021-07-18" },
     ],
 
-
     musicClips: [
       { id: "AujK7aWgRsY", title: "HoneyWorks - 可愛くてごめん | Rumi懶貓子 .Cover 〔中日歌詞〕" },
       { id: "J7EUn1BbE18", title: "初音ミク - 神っぽいな| Rumi懶貓子 .Cover 〔中日歌詞〕" },
@@ -523,7 +522,6 @@ const vtubers = [
       { id: "24Pgn47b148", title: "【Cover】🎵 彈唱練習ONETAKE ✧ 能認出幾首歌呢？｜帕蘿妮💧Paroniie cover.",                                                                    date: "2023-02-01" },
     ],
 
-
     musicClipsChannelIds: [
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie"],  typeKeywords: ["點歌台", "歌回", "cover"] },
       { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["帕蘿妮", "Paroniie"],  excludeKeywords: ["精華"] },  // Cover/歌回（排除精華）
@@ -623,17 +621,9 @@ const vtubers = [
 
     videos: [],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
     videoClips: [
       { id: "ap2nB-I1vic", title: "鹿餅們沒日沒夜加工出來的寶石，我拍胸脯保證！(拍)【神無月鹿比】【VTuber精華】" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
+
     ],
 
     scheduleVideoId:  "kc5RN-h_bAs",
@@ -687,19 +677,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
-
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     scheduleVideoId:  "tPRVSHoEEeg",
@@ -758,7 +735,6 @@ const vtubers = [
     ],
 
     videos: [],
-
 
     musicClips: [
       { id: "mkLydHtl-UI", title: "【You Don't Own Me - Grace】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
@@ -864,19 +840,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     scheduleVideoId:  "CROYjRn86_o",
     spreadsheetLabel: "霧子的大小事",   // 試算表按鈕文字
     scheduleTitle:    "霧子的行程表",    // 行程頁標題
@@ -932,7 +895,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
-
 
     musicClipsChannelIds: [
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["瓦西瓦瓦", "vaswawa"], typeKeywords: ["cover"] },
@@ -1003,19 +965,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     scheduleVideoId:  "vDoOnUBiuW4",
     spreadsheetLabel: "希希的大小事",
     scheduleTitle:    "希希的行程表",
@@ -1075,7 +1024,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
-
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
@@ -1150,19 +1098,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     scheduleVideoId:  "lLZlENnAYUQ",
     spreadsheetLabel: "可露團長的大小事",
     scheduleTitle:    "可露團長的行程表",
@@ -1227,19 +1162,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     scheduleVideoId:  "5Sn6bnUbeus",
     spreadsheetLabel: "氣質兔兔的大小事",
     scheduleTitle:    "氣質兔兔的行程表",
@@ -1296,7 +1218,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
-
 
     musicClipsChannelIds: [
       { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko", keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
@@ -1364,19 +1285,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
@@ -1435,19 +1343,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
-
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     musicClipsChannelIds: [
@@ -1511,7 +1406,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     musicClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], typeKeywords: ["歌切", "合唱"] },
@@ -1573,19 +1467,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
-
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     musicClipsChannelIds: [
@@ -1653,7 +1534,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
     musicClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   typeKeywords: ["歌回", "之歌"] },   // 歌回剪輯 & CaKano之歌 系列
@@ -1717,7 +1597,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
-
 
     musicClipsChannelIds: [
       { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508", keywords: ["茶帽瑪緹", "chamamatti", "帽帽"], typeKeywords: ["小年夜"] },
@@ -1783,19 +1662,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
-
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     musicClipsChannelIds: [
@@ -1864,19 +1730,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], typeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
     ],
@@ -1935,19 +1788,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
-
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     musicClipsChannelIds: [
@@ -2017,19 +1857,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "扉扉", "fifi", "uchififi"], typeKeywords: ["cover", "嘉賓"] },
     ],
@@ -2091,19 +1918,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["諾恪里", "小心結天團"] },
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["諾恪里", "Nokori"] },
@@ -2158,19 +1972,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
-
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     videoClipsChannelIds: [
@@ -2237,19 +2038,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
-    ],
-
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["珮蕾", "Pele"], typeKeywords: ["cover", "嘉賓"] },
     ],
@@ -2310,19 +2098,6 @@ const vtubers = [
       { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
       { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
-
-
-    musicClips: [
-      { id: "REPLACE_MUSIC_1", title: "熱門音樂 #1" },
-      { id: "REPLACE_MUSIC_2", title: "熱門音樂 #2" },
-      { id: "REPLACE_MUSIC_3", title: "熱門音樂 #3" },
-    ],
-
-    videoClips: [
-      { id: "REPLACE_CLIP_1", title: "熱門影片 #1" },
-      { id: "REPLACE_CLIP_2", title: "熱門影片 #2" },
-      { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
     videoClipsChannelIds: [
