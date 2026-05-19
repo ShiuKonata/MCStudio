@@ -2073,10 +2073,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (e.data === YT.PlayerState.PAUSED) {
               updatePlayUI(false);
             } else if (e.data === YT.PlayerState.ENDED) {
-              updatePlayUI(false);
-              const statusEl = document.getElementById('sbgm-status');
-              if (statusEl) statusEl.textContent = '已結束';
-              clearInterval(barTimer);
+              // LOOP：結束後從 bgmStart 重新播放
+              ytPlayer.seekTo(bgmStart, true);
+              ytPlayer.playVideo();
             }
             // -1 (UNSTARTED), 3 (BUFFERING), 5 (CUED) → 不改 UI
           },
