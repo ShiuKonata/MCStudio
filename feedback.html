@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
+    /* 覆蓋主站背景，讓回報頁維持深色底 */
+    body { background: #0d0d13 !important; }
+
     .fb-wrap {
       max-width: 580px;
       margin: 0 auto;
@@ -17,21 +20,21 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: #888;
+      color: #777;
       text-decoration: none;
       font-size: 13px;
       margin-bottom: 36px;
       transition: color .2s;
     }
-    .fb-back:hover { color: #ccc; }
+    .fb-back:hover { color: #bbb; }
     .fb-title {
       font-size: 24px;
       font-weight: 700;
-      color: #fff;
+      color: #f0f0f0;
       margin-bottom: 6px;
     }
     .fb-sub {
-      color: #666;
+      color: #888;
       font-size: 14px;
       margin-bottom: 36px;
     }
@@ -50,10 +53,8 @@
       margin-bottom: 8px;
     }
     .fb-req { color: #f87171; margin-left: 3px; }
-    .fb-opt { color: #555; font-weight: 400; margin-left: 6px; font-size: 12px; }
     .fb-select,
-    .fb-textarea,
-    .fb-input {
+    .fb-textarea {
       width: 100%;
       background: #0d0d13;
       border: 1px solid #252530;
@@ -79,8 +80,7 @@
       line-height: 1.6;
     }
     .fb-select:focus,
-    .fb-textarea:focus,
-    .fb-input:focus {
+    .fb-textarea:focus {
       outline: none;
       border-color: #4a4a68;
     }
@@ -165,10 +165,6 @@
           <label class="fb-label">詳細描述<span class="fb-req">*</span></label>
           <textarea class="fb-textarea" id="fb-content" placeholder="請描述你遇到的問題，或想回報的內容…"></textarea>
         </div>
-        <div class="fb-field">
-          <label class="fb-label">聯絡方式<span class="fb-opt">選填，方便我們回覆你</span></label>
-          <input class="fb-input" type="text" id="fb-contact" placeholder="Twitter / Discord ID …">
-        </div>
         <button class="fb-btn" id="fb-submit" onclick="submitFeedback()">送出回報</button>
       </div>
 
@@ -192,7 +188,6 @@
     async function submitFeedback() {
       const type    = document.getElementById('fb-type').value;
       const content = document.getElementById('fb-content').value.trim();
-      const contact = document.getElementById('fb-contact').value.trim();
       const btn     = document.getElementById('fb-submit');
 
       if (!type)    { alert('請選擇問題類型'); return; }
@@ -201,11 +196,7 @@
       btn.disabled    = true;
       btn.textContent = '送出中…';
 
-      const { error } = await sb.from('feedback').insert({
-        type,
-        content,
-        contact: contact || null
-      });
+      const { error } = await sb.from('feedback').insert({ type, content });
 
       if (error) {
         console.error(error);
