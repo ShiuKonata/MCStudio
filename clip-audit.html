@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔍 剪輯分類稽核 — MC組事務所</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0b0b10; color: #ccc; font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; font-size: 13px; min-height: 100vh; }
+
+    /* ── Header ── */
+    header { background: #111118; border-bottom: 1px solid #1e1e2a; padding: 0 20px; height: 54px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; }
+    .h-logo { font-size: 18px; font-weight: 700; color: #fff; }
+    .h-badge { background: #1c1c2e; color: #888; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid #2a2a3a; }
+    #run-btn { margin-left: auto; padding: 7px 18px; background: #4f46e5; color: #fff; border: none; border-radius: 7px; font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; transition: background .2s; }
+    #run-btn:hover  { background: #4338ca; }
+    #run-btn:disabled { background: #1c1c2e; color: #555; cursor: not-allowed; }
+
+    /* ── Progress ── */
+    #progress-wrap { background: #0f0f17; border-bottom: 1px solid #1e1e2a; padding: 10px 20px; display: none; }
+    #progress-text { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .prog-track { background: #1e1e2a; border-radius: 3px; height: 4px; overflow: hidden; }
+    .prog-fill  { height: 100%; background: #4f46e5; transition: width .25s; border-radius: 3px; }
+
+    /* ── Summary bar ── */
+    #summary-bar { background: #0f0f17; border-bottom: 1px solid #1e1e2a; padding: 10px 20px; display: none; gap: 20px; flex-wrap: wrap; }
+    .sb-item { font-size: 12px; color: #777; }
+    .sb-item strong { color: #fff; font-size: 16px; margin-right: 3px; }
+    .sb-flagged strong { color: #f87171; }
+
+    /* ── Filter bar ── */
+    #filter-bar { padding: 12px 20px; display: none; gap: 8px; flex-wrap: wrap; align-items: center; }
+    #filter-bar label { font-size: 12px; color: #888; margin-right: 4px; }
+    .f-tab { padding: 4px 12px; border-radius: 20px; border: 1px solid #222230; background: none; color: #777; font-size: 12px; cursor: pointer; font-family: inherit; transition: all .2s; }
+    .f-tab:hover  { background: #1a1a25; color: #ccc; }
+    .f-tab.active { background: #1e1e2e; color: #a5b4fc; border-color: #3b3b5a; }
+
+    /* ── Main ── */
+    main { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+    .welcome { text-align: center; padding: 60px 20px; color: #555; }
+    .welcome h2 { font-size: 18px; color: #888; margin-bottom: 12px; }
+    .welcome p  { font-size: 13px; line-height: 1.8; }
+    .welcome .warn { color: #444; font-size: 12px; margin-top: 10px; }
+
+    /* ── VTuber block ── */
+    .vt-block { background: #13131c; border: 1px solid #1e1e2a; border-radius: 10px; margin-bottom: 14px; overflow: hidden; transition: border-color .2s; }
+    .vt-block:hover { border-color: #2c2c40; }
+    .vt-block.all-ok  { opacity: .6; }
+
+    .vt-hd { padding: 12px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+    .vt-hd:hover { background: #1a1a25; }
+    .vt-name { font-size: 14px; font-weight: 600; color: #fff; }
+    .vt-gen  { font-size: 11px; color: #555; }
+    .vt-stats { margin-left: auto; display: flex; gap: 12px; align-items: center; font-size: 12px; }
+    .st-total   { color: #555; }
+    .st-ok      { color: #4ade80; }
+    .st-flagged { color: #f87171; font-weight: 600; }
+    .st-spin    { color: #666; animation: spin 1s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .vt-arr { color: #444; font-size: 10px; margin-left: 6px; transition: transform .2s; }
+    .vt-arr.open { transform: rotate(0deg); }
+    .vt-arr.closed { transform: rotate(-90deg); }
+
+    .vt-body { border-top: 1px solid #1e1e2a; }
+
+    /* ── Channel block ── */
+    .ch-block { border-bottom: 1px solid #111; padding: 12px 16px 14px; }
+    .ch-block:last-child { border-bottom: none; }
+    .ch-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .ch-type { font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 600; }
+    .ct-music { background: #1a2a3a; color: #60a5fa; }
+    .ct-video { background: #1a2a1a; color: #4ade80; }
+    .ch-label { font-size: 12px; color: #aaa; }
+    .ch-cnt  { margin-left: auto; font-size: 11px; color: #555; }
+    .ch-err  { font-size: 12px; color: #f87171; }
+
+    /* ── Video items ── */
+    .v-list { display: flex; flex-direction: column; gap: 3px; }
+    .vi { display: flex; align-items: flex-start; gap: 8px; padding: 4px 6px; border-radius: 4px; }
+    .vi:hover { background: #1a1a28; }
+    .vi-ico  { flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+    .vi-body { flex: 1; min-width: 0; }
+    .vi-title a { color: #bbb; text-decoration: none; font-size: 12px; line-height: 1.5; word-break: break-word; }
+    .vi-title a:hover { color: #fff; text-decoration: underline; }
+    .vi-date { font-size: 10px; color: #555; margin-top: 1px; }
+    .vi-flag { font-size: 10px; color: #f87171; background: rgba(248,113,113,0.15); padding: 1px 6px; border-radius: 3px; margin-top: 3px; display: inline-block; }
+    .vi.flagged .vi-title a { color: #fca5a5; }
+    .vi.flagged { background: rgba(248,113,113,0.05); border-left: 2px solid rgba(248,113,113,0.35); padding-left: 8px; }
+    .vi.warn .vi-title a { color: #fcd34d; }
+    .vi.warn { background: rgba(252,211,77,0.04); border-left: 2px solid rgba(252,211,77,0.25); padding-left: 8px; }
+    .vi-flag.warn-tag { color: #fbbf24; background: rgba(252,211,77,0.12); }
+
+    .v-more { font-size: 11px; color: #444; padding: 4px 6px; margin-top: 2px; }
+    .v-empty { font-size: 12px; color: #555; padding: 4px 0; }
+    .v-empty.warn-empty { color: #f87171; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span style="font-size:18px">🔍</span>
+    <div class="h-logo">剪輯分類稽核</div>
+    <div class="h-badge">MC組事務所</div>
+    <button id="run-btn" onclick="startAudit()">▶ 開始稽核</button>
+  </header>
+
+  <div id="progress-wrap">
+    <div id="progress-text">準備中…</div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="summary-bar" style="display:none;flex-wrap:wrap;gap:20px;background:#0f0f17;border-bottom:1px solid #1e1e2a;padding:10px 20px;">
+    <!-- filled by JS -->
+  </div>
+
+  <div id="filter-bar" style="display:none;background:#0f0f17;border-bottom:1px solid #1e1e2a;padding:10px 20px;gap:8px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:12px;color:#666">顯示：</span>
+    <button class="f-tab active" onclick="setViewFilter('all',this)">全部</button>
+    <button class="f-tab" onclick="setViewFilter('flagged',this)">🚨 有問題</button>
+    <button class="f-tab" onclick="setViewFilter('ok',this)">✓ 無問題</button>
+  </div>
+
+  <main>
+    <div class="welcome" id="welcome">
+      <h2>🔍 剪輯分類稽核工具</h2>
+      <p>逐一抓取所有主播的剪輯頻道影片，依目前關鍵字規則模擬分類，<br>標記「影片格中含音樂關鍵字」或「音樂格中無音樂關鍵字」的疑似錯分影片。</p>
+      <p class="warn">⚠️ 每次稽核約消耗 YouTube API 配額，結果會快取 30 分鐘（重新整理不重新抓）</p>
+    </div>
+    <div id="results"></div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script>
+    // ── 全域音樂關鍵字（與 detail.js 同步）──
+    const MUSIC_KW = [
+      'cover', '翻唱', '清唱', '歌回', '歌切', '原創曲', '原創',
+      '演唱', '演唱會', '唱歌', '歌曲', '歌聲', '精唱', '歌單',
+      '主題曲', 'mv', 'ost', '卡拉ok', 'karaoke', '深海少女',
+    ];
+
+    const API_KEY = (vtubers.find(v => v.ytApiKey) || {}).ytApiKey || '';
+    let _cnt = 0; // unique id counter
+
+    // ── 判斷標題是否含音樂關鍵字 ──
+    function isMusicTitle(title) {
+      const t = title.toLowerCase();
+      return MUSIC_KW.find(k => t.includes(k)) || null; // 回傳命中的關鍵字
+    }
+
+    // ── 套用過濾規則（與 detail.js 相同邏輯，含修正後版本）──
+    function applyFilters(items, ch, gridType) {
+      const isMusicGrid = gridType === 'music';
+      const isVideoGrid = gridType === 'video';
+      const kws       = ch.keywords       ? ch.keywords.map(k => k.toLowerCase())       : null;
+      const typeKws   = ch.typeKeywords   ? ch.typeKeywords.map(k => k.toLowerCase())   : null;
+      const excKws    = ch.excludeKeywords? ch.excludeKeywords.map(k => k.toLowerCase()): null;
+      // 修正邏輯：有 excludeKws 時不套全域 typeKws
+      const effType   = typeKws ?? ((isMusicGrid && !excKws) ? MUSIC_KW : null);
+      const effExcl   = excKws  ?? (isVideoGrid ? MUSIC_KW : null);
+
+      return items.filter(item => {
+        const t = item.title.toLowerCase();
+        if (kws     && !kws.some(k    => t.includes(k))) return false;
+        if (effType && !effType.some(k => t.includes(k))) return false;
+        if (effExcl &&  effExcl.some(k => t.includes(k))) return false;
+        return true;
+      });
+    }
+
+    // ── 抓取頻道影片（帶快取）──
+    async function fetchChannel(ch) {
+      const ids = typeof ch === 'string' ? [ch] : (ch.ids || [ch.id]);
+      const cacheKey = 'audit2_' + [...ids].sort().join('_');
+      try {
+        const c = sessionStorage.getItem(cacheKey);
+        if (c) { const { d, t } = JSON.parse(c); if (Date.now() - t < 30*60*1000) return d; }
+      } catch(e) {}
+
+      let videos = [];
+      for (const cid of ids) {
+        const plId = (ch.playlistId && ch.id === cid) ? ch.playlistId : 'UU' + cid.slice(2);
+        let tok = '', pg = 0;
+        try {
+          do {
+            const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${plId}&maxResults=50&key=${API_KEY}${tok ? '&pageToken='+tok : ''}`;
+            const res = await fetch(url);
+            if (!res.ok) break;
+            const json = await res.json();
+            (json.items||[]).forEach(it => {
+              const vid = it.snippet.resourceId?.videoId;
+              if (!vid) return;
+              videos.push({ id: vid, title: it.snippet.title||'', date: (it.snippet.publishedAt||'').slice(0,10) });
+            });
+            tok = json.nextPageToken || '';
+            pg++;
+          } while (tok && pg < 5);
+        } catch(e) {}
+      }
+      videos.sort((a,b) => b.date > a.date ? 1 : -1);
+      try { sessionStorage.setItem(cacheKey, JSON.stringify({ d: videos, t: Date.now() })); } catch(e) {}
+      return videos;
+    }
+
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // ── 渲染影片清單 ──
+    function renderList(container, videos, gridType, max) {
+      const shown = videos.slice(0, max);
+      shown.forEach(item => {
+        const hitKw  = isMusicTitle(item.title);
+        // 在影片格但含音樂關鍵字 → flagged（紅）
+        // 在音樂格但無音樂關鍵字 → warn（黃）
+        const flagged = isVideoGrid(gridType) &&  hitKw;
+        const warn    = isMusicGrid(gridType) && !hitKw;
+        const cls = flagged ? 'flagged' : warn ? 'warn' : '';
+        const div = document.createElement('div');
+        div.className = `vi ${cls}`;
+        div.innerHTML = `
+          <span class="vi-ico">${flagged ? '🚨' : warn ? '⚠️' : (gridType==='music' ? '🎵' : '🎬')}</span>
+          <div class="vi-body">
+            <div class="vi-title"><a href="https://youtu.be/${item.id}" target="_blank">${esc(item.title)}</a></div>
+            <div class="vi-date">${item.date}</div>
+            ${flagged ? `<span class="vi-flag">影片格含音樂關鍵字「${hitKw}」→ 應移至音樂格？</span>` : ''}
+            ${warn    ? `<span class="vi-flag warn-tag">音樂格無音樂關鍵字 → 分類是否正確？</span>` : ''}
+          </div>`;
+        container.appendChild(div);
+      });
+      if (videos.length > max) {
+        const more = document.createElement('div');
+        more.className = 'v-more';
+        more.textContent = `…還有 ${videos.length - max} 支（僅顯示前 ${max} 筆）`;
+        container.appendChild(more);
+      }
+    }
+    function isMusicGrid(g) { return g === 'music'; }
+    function isVideoGrid(g) { return g === 'video'; }
+
+    // ── 稽核單一主播 ──
+    async function auditVtuber(v, vtBlock) {
+      const musicChs = (v.musicClipsChannelIds || []).map(x => typeof x === 'string' ? {id:x} : x);
+      const videoChs = (v.videoClipsChannelIds || []).map(x => typeof x === 'string' ? {id:x} : x);
+      const body = vtBlock.querySelector('.vt-body');
+      body.innerHTML = '';
+
+      let totalVids = 0, totalFlagged = 0;
+
+      // 處理音樂格頻道
+      for (const ch of musicChs) {
+        const uid = ++_cnt;
+        const chDiv = document.createElement('div');
+        chDiv.className = 'ch-block';
+        chDiv.innerHTML = `
+          <div class="ch-hd">
+            <span class="ch-type ct-music">🎵 音樂格</span>
+            <span class="ch-label">${esc(ch.label || ch.id)}</span>
+            <span class="ch-cnt" id="cnt-${uid}">抓取中…</span>
+          </div>
+          <div class="v-list" id="vl-${uid}"></div>`;
+        body.appendChild(chDiv);
+
+        try {
+          const raw = await fetchChannel(ch);
+          const filtered = applyFilters(raw, ch, 'music');
+          document.getElementById(`cnt-${uid}`).textContent = `${filtered.length} 支`;
+          const vl = document.getElementById(`vl-${uid}`);
+          if (!filtered.length) {
+            vl.innerHTML = `<div class="v-empty warn-empty">⚠️ 無符合影片（關鍵字可能過濾掉了全部）</div>`;
+            totalFlagged++; // 音樂格空了也算問題
+          } else {
+            const warns = filtered.filter(it => !isMusicTitle(it.title));
+            if (warns.length) totalFlagged += warns.length;
+            totalVids += filtered.length;
+            renderList(vl, filtered, 'music', 30);
+          }
+        } catch(e) {
+          document.getElementById(`cnt-${uid}`).textContent = '';
+          document.getElementById(`vl-${uid}`).innerHTML = `<div class="ch-err">⚠️ 抓取失敗：${esc(e.message)}</div>`;
+        }
+      }
+
+      // 處理影片格頻道
+      for (const ch of videoChs) {
+        const uid = ++_cnt;
+        const chDiv = document.createElement('div');
+        chDiv.className = 'ch-block';
+        chDiv.innerHTML = `
+          <div class="ch-hd">
+            <span class="ch-type ct-video">🎬 影片格</span>
+            <span class="ch-label">${esc(ch.label || ch.id)}</span>
+            <span class="ch-cnt" id="cnt-${uid}">抓取中…</span>
+          </div>
+          <div class="v-list" id="vl-${uid}"></div>`;
+        body.appendChild(chDiv);
+
+        try {
+          const raw = await fetchChannel(ch);
+          const filtered = applyFilters(raw, ch, 'video');
+          const flags = filtered.filter(it => isMusicTitle(it.title));
+          document.getElementById(`cnt-${uid}`).textContent =
+            `${filtered.length} 支${flags.length ? ` ｜ 🚨 ${flags.length} 個疑似錯分` : ''}`;
+          const vl = document.getElementById(`vl-${uid}`);
+          if (!filtered.length) {
+            vl.innerHTML = `<div class="v-empty">目前無符合影片</div>`;
+          } else {
+            totalVids += filtered.length;
+            totalFlagged += flags.length;
+            renderList(vl, filtered, 'video', 50);
+          }
+        } catch(e) {
+          document.getElementById(`cnt-${uid}`).textContent = '';
+          document.getElementById(`vl-${uid}`).innerHTML = `<div class="ch-err">⚠️ 抓取失敗：${esc(e.message)}</div>`;
+        }
+      }
+
+      return { total: totalVids, flagged: totalFlagged };
+    }
+
+    // ── 主流程 ──
+    let viewFilter = 'all';
+
+    async function startAudit() {
+      document.getElementById('welcome').style.display = 'none';
+      document.getElementById('run-btn').disabled = true;
+      document.getElementById('run-btn').textContent = '稽核中…';
+      document.getElementById('progress-wrap').style.display = 'block';
+      document.getElementById('summary-bar').style.display = 'none';
+      document.getElementById('filter-bar').style.display = 'none';
+      document.getElementById('results').innerHTML = '';
+      _cnt = 0;
+
+      const pool = vtubers.filter(v =>
+        (v.musicClipsChannelIds && v.musicClipsChannelIds.length) ||
+        (v.videoClipsChannelIds  && v.videoClipsChannelIds.length)
+      );
+
+      let sumTotal = 0, sumFlagged = 0;
+
+      for (let i = 0; i < pool.length; i++) {
+        const v = pool[i];
+        document.getElementById('progress-text').textContent = `正在稽核 ${v.name}（${i+1}／${pool.length}）`;
+        document.getElementById('prog-fill').style.width = `${Math.round(i / pool.length * 100)}%`;
+
+        // 建立主播區塊
+        const vtBlock = document.createElement('div');
+        vtBlock.className = 'vt-block';
+        vtBlock.dataset.vtId = v.id;
+        vtBlock.innerHTML = `
+          <div class="vt-hd" onclick="toggleVt(this)">
+            <span class="vt-name">${esc(v.name)}</span>
+            <span class="vt-gen">${esc(v.generation)}</span>
+            <div class="vt-stats"><span class="st-spin">⟳</span> 稽核中…</div>
+            <span class="vt-arr open">▼</span>
+          </div>
+          <div class="vt-body" style="display:block"></div>`;
+        document.getElementById('results').appendChild(vtBlock);
+
+        const { total, flagged } = await auditVtuber(v, vtBlock);
+        sumTotal += total; sumFlagged += flagged;
+
+        // 更新統計
+        const stats = vtBlock.querySelector('.vt-stats');
+        if (flagged > 0) {
+          stats.innerHTML = `<span class="st-total">${total} 支</span><span class="st-flagged">🚨 ${flagged} 個問題</span>`;
+          vtBlock.dataset.hasFlagged = '1';
+        } else {
+          stats.innerHTML = `<span class="st-total">${total} 支</span><span class="st-ok">✓ 無問題</span>`;
+          vtBlock.classList.add('all-ok');
+          vtBlock.dataset.hasFlagged = '0';
+          // 無問題自動收合
+          vtBlock.querySelector('.vt-body').style.display = 'none';
+          vtBlock.querySelector('.vt-arr').classList.replace('open', 'closed');
+        }
+      }
+
+      // 完成
+      document.getElementById('progress-text').textContent = `✅ 稽核完成（${pool.length} 位主播）`;
+      document.getElementById('prog-fill').style.width = '100%';
+      document.getElementById('run-btn').disabled = false;
+      document.getElementById('run-btn').textContent = '▶ 重新稽核';
+
+      // Summary
+      const sb = document.getElementById('summary-bar');
+      sb.style.display = 'flex';
+      sb.innerHTML = `
+        <div class="sb-item"><strong>${pool.length}</strong>位主播</div>
+        <div class="sb-item"><strong>${sumTotal}</strong>支影片</div>
+        <div class="sb-item ${sumFlagged > 0 ? 'sb-flagged' : ''}"><strong>${sumFlagged}</strong>個疑似問題${sumFlagged === 0 ? ' 🎉' : ''}</div>`;
+
+      document.getElementById('filter-bar').style.display = 'flex';
+      applyViewFilter();
+    }
+
+    function toggleVt(hd) {
+      const body = hd.nextElementSibling;
+      const arr  = hd.querySelector('.vt-arr');
+      if (body.style.display === 'none') {
+        body.style.display = 'block';
+        arr.classList.replace('closed', 'open');
+      } else {
+        body.style.display = 'none';
+        arr.classList.replace('open', 'closed');
+      }
+    }
+
+    function setViewFilter(f, el) {
+      viewFilter = f;
+      document.querySelectorAll('.f-tab').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      applyViewFilter();
+    }
+
+    function applyViewFilter() {
+      document.querySelectorAll('.vt-block').forEach(b => {
+        const flagged = b.dataset.hasFlagged === '1';
+        if (viewFilter === 'all')     b.style.display = '';
+        if (viewFilter === 'flagged') b.style.display = flagged ? '' : 'none';
+        if (viewFilter === 'ok')      b.style.display = flagged ? 'none' : '';
+      });
+    }
+  </script>
+</body>
+</html>

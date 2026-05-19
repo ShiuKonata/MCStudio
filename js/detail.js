@@ -938,7 +938,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyFilters(rawItems) {
       const isMusicGrid = gridId === 'musicclips-grid';
       const isVideoGrid = gridId === 'videoclips-grid';
-      const effectiveTypeKws    = typeKws    ?? (isMusicGrid ? GLOBAL_MUSIC_KEYWORDS : null);
+      // 音樂格：只在「既無 typeKeywords 也無 excludeKeywords」時才套用全域關鍵字
+      // （若已設 excludeKeywords 代表人工定義了分類邊界，不再額外限縮）
+      const effectiveTypeKws    = typeKws    ?? ((isMusicGrid && !excludeKws) ? GLOBAL_MUSIC_KEYWORDS : null);
       const effectiveExcludeKws = excludeKws ?? (isVideoGrid ? GLOBAL_MUSIC_KEYWORDS : null);
       return rawItems.filter(item => {
         const t = item.title.toLowerCase();
