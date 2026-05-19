@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回報問題 | MC組事務所</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .fb-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+    .fb-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #888;
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 36px;
+      transition: color .2s;
+    }
+    .fb-back:hover { color: #ccc; }
+    .fb-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .fb-sub {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 36px;
+    }
+    .fb-card {
+      background: #13131c;
+      border: 1px solid #222230;
+      border-radius: 14px;
+      padding: 32px;
+    }
+    .fb-field { margin-bottom: 22px; }
+    .fb-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+    .fb-req { color: #f87171; margin-left: 3px; }
+    .fb-opt { color: #555; font-weight: 400; margin-left: 6px; font-size: 12px; }
+    .fb-select,
+    .fb-textarea,
+    .fb-input {
+      width: 100%;
+      background: #0d0d13;
+      border: 1px solid #252530;
+      border-radius: 8px;
+      color: #e0e0e0;
+      font-size: 14px;
+      padding: 11px 14px;
+      font-family: inherit;
+      transition: border-color .2s;
+    }
+    .fb-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .fb-textarea {
+      resize: vertical;
+      min-height: 130px;
+      line-height: 1.6;
+    }
+    .fb-select:focus,
+    .fb-textarea:focus,
+    .fb-input:focus {
+      outline: none;
+      border-color: #4a4a68;
+    }
+    .fb-btn {
+      width: 100%;
+      padding: 13px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .2s;
+      margin-top: 6px;
+    }
+    .fb-btn:hover { background: #4338ca; }
+    .fb-btn:disabled { background: #1c1c28; color: #555; cursor: not-allowed; }
+
+    /* 成功畫面 */
+    .fb-success {
+      display: none;
+      text-align: center;
+      padding: 12px 0;
+    }
+    .fb-success-icon {
+      width: 68px;
+      height: 68px;
+      background: #0f2d1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 30px;
+    }
+    .fb-success h2 { font-size: 20px; color: #4ade80; margin-bottom: 8px; }
+    .fb-success p  { color: #666; font-size: 14px; line-height: 1.7; }
+    .fb-home-btn {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 9px 22px;
+      background: #1c1c28;
+      color: #aaa;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 13px;
+      transition: background .2s, color .2s;
+    }
+    .fb-home-btn:hover { background: #252535; color: #ccc; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
+    </div>
+    <div class="nav-sub">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</div>
+  </nav>
+
+  <div class="fb-wrap">
+    <a class="fb-back" href="index.html">← 返回首頁</a>
+    <div class="fb-title">🐞 回報問題 / 提出建議</div>
+    <p class="fb-sub">遇到 Bug 或有想說的？不需要帳號，直接填寫即可</p>
+
+    <div class="fb-card">
+      <!-- 表單 -->
+      <div id="fb-form">
+        <div class="fb-field">
+          <label class="fb-label">問題類型<span class="fb-req">*</span></label>
+          <select class="fb-select" id="fb-type">
+            <option value="">請選擇...</option>
+            <option value="bug">🐛 網站 Bug</option>
+            <option value="data">📝 資料錯誤</option>
+            <option value="suggest">💡 功能建議</option>
+            <option value="other">💬 其他</option>
+          </select>
+        </div>
+        <div class="fb-field">
+          <label class="fb-label">詳細描述<span class="fb-req">*</span></label>
+          <textarea class="fb-textarea" id="fb-content" placeholder="請描述你遇到的問題，或想回報的內容…"></textarea>
+        </div>
+        <div class="fb-field">
+          <label class="fb-label">聯絡方式<span class="fb-opt">選填，方便我們回覆你</span></label>
+          <input class="fb-input" type="text" id="fb-contact" placeholder="Twitter / Discord ID …">
+        </div>
+        <button class="fb-btn" id="fb-submit" onclick="submitFeedback()">送出回報</button>
+      </div>
+
+      <!-- 成功畫面 -->
+      <div class="fb-success" id="fb-success">
+        <div class="fb-success-icon">✅</div>
+        <h2>已收到，謝謝！</h2>
+        <p>我們會盡快查看並處理<br>感謝你花時間回報 🙏</p>
+        <a class="fb-home-btn" href="index.html">返回首頁</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createClient } = supabase;
+    const sb = createClient(
+      'https://ednzqqgnsnycntvmykfb.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkbnpxcWduc255Y250dm15a2ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNjI2NzIsImV4cCI6MjA5NDczODY3Mn0.u5ZP66-3PKHKkE-Oow47_yPqoh5sSjwhXxMogtoHGjw'
+    );
+
+    async function submitFeedback() {
+      const type    = document.getElementById('fb-type').value;
+      const content = document.getElementById('fb-content').value.trim();
+      const contact = document.getElementById('fb-contact').value.trim();
+      const btn     = document.getElementById('fb-submit');
+
+      if (!type)    { alert('請選擇問題類型'); return; }
+      if (!content) { alert('請填寫詳細描述'); return; }
+
+      btn.disabled    = true;
+      btn.textContent = '送出中…';
+
+      const { error } = await sb.from('feedback').insert({
+        type,
+        content,
+        contact: contact || null
+      });
+
+      if (error) {
+        console.error(error);
+        alert('送出失敗，請稍後再試\n' + error.message);
+        btn.disabled    = false;
+        btn.textContent = '送出回報';
+        return;
+      }
+
+      document.getElementById('fb-form').style.display    = 'none';
+      document.getElementById('fb-success').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
