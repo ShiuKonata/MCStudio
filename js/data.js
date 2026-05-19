@@ -1538,6 +1538,7 @@ const vtubers = [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   typeKeywords: ["歌回", "之歌"] },   // 歌回剪輯 & CaKano之歌 系列
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["崎塔", "Chita"], typeKeywords: ["歌切", "cover"] },
     ],
 
     videoClipsChannelIds: [
@@ -1545,7 +1546,7 @@ const vtubers = [
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "Chita", "小心結天團", "派"] },
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["崎塔", "Chita"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["崎塔", "Chita"], excludeKeywords: ["歌切", "cover"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -1974,9 +1975,13 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "米伊", "kekemii", "克克米"], typeKeywords: ["歌切", "cover"] },
+    ],
+
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["克克米伊", "米伊", "kekemii", "克克米", "派"] },
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "米伊", "kekemii", "克克米"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "米伊", "kekemii", "克克米"], excludeKeywords: ["歌切", "cover"] },
     ],
 
     scheduleVideoId:  "q5bBqi8DUc8",
@@ -2100,8 +2105,12 @@ const vtubers = [
       { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動分類
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"],          excludeKeywords: ["演唱會"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動排除
       { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },
     ],
