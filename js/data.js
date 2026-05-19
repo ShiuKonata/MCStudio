@@ -884,8 +884,12 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/酒樂霧子 v1.0.png" },
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["酒樂霧子", "Shuraku"], typeKeywords: ["歌回", "cover"] },
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["酒樂霧子", "Shuraku", "MeloNyX"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["酒樂霧子", "Shuraku", "MeloNyX"], excludeKeywords: ["歌回", "cover"] },
     ],
 
     color: "#C93447"   // 酒樂霧子 代表色（深紅）
