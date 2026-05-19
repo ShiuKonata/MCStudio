@@ -898,6 +898,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["瓦西瓦瓦", "vaswawa"], typeKeywords: ["cover"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",           keywords: ["瓦西瓦瓦", "Vaswawa", "vaswawa", "瓦瓦"] },  // 歌回剪輯（全域音樂關鍵字自動分類）
     ],
 
     scheduleVideoId:  "DvskyppTq-0",
@@ -921,6 +922,7 @@ const vtubers = [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                          excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",   keywords: ["瓦西瓦瓦", "vaswawa", "瓦瓦"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["瓦西瓦瓦", "Vaswawa", "vaswawa", "瓦瓦"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["瓦西瓦瓦", "Vaswawa", "vaswawa", "瓦瓦"] },  // 全域音樂關鍵字自動排除
     ],
 
     color: "#B8FFEC"   // 瓦西瓦瓦 代表色（薄荷綠）
