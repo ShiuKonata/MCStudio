@@ -479,7 +479,7 @@ const vtubers = [
       { id: "4RTxc8acTlY", title: "【Cover】🎵 Wake Up! - 帕蘿妮 Paroniie 【COVER】",                                                                                               date: "2026-03-20" },
       { id: "9njR8G8MLpk", title: "【Cover】威風堂々｜AoiHinamori／帕蘿妮💧Paroniie @Paroniie 【Cover】",                                                                            date: "2026-03-14" },
       { id: "Ck5w-tXkfRQ", title: "【Cover】🎵 想把哥哥追 - 帕蘿妮 Paroniie 【COVER】",                                                                                            date: "2026-03-07" },
-      { id: "Lg9nyNL-AD0", title: "【Cover】🎵 星願 - 帕蘿妮 Paroniie 【Original】",                                                                                                date: "2026-02-24" },
+      { id: "Lg9nyNL-AD0", title: "【原創曲】🎵 星願 - 帕蘿妮 Paroniie",                                                                                                           date: "2026-02-24" },
       { id: "Aud3U7eIn8Y", title: "【Cover】🎵 劍紙三國 - 帕蘿妮 Paroniie 【COVER】#劍紙三國",                                                                                     date: "2026-02-19" },
       { id: "kfy3vMYXe1c", title: "【Cover】🎵 WE ARE EMPIRE《明日方舟：終末地》- 帕蘿妮 Paroniie 【COVER】",                                                                       date: "2026-02-08" },
       { id: "ZnmKBtrog7A", title: "【Cover】🎵 討厭你 I hate you - 帕蘿妮 Paroniie 【COVER】",                                                                                      date: "2026-01-07" },
@@ -940,7 +940,15 @@ const vtubers = [
     tagline: "",
     taglines: [
       { context: "", text: "你們這些白痴" },
-      { context: "", text: "閉嘴啦" }
+      { context: "", text: "閉嘴啦" },
+      { context: "", text: "什麼意思!" },
+      { context: "", text: "為什麼這麼多人TAG我?" },
+      { context: "聽了一年就沒一次是不好的！", text: "這首可能唱不好!所以要原諒我!" },
+      { context: "通常在害羞的時候出現", text: "幹嘛啦!...幹....幹嘛啦!" },
+      { context: "語速不快，哩會念得很清楚", text: "O哩娘" },
+      { context: "雖然這是笑聲但太喜歡了所以私心算一種口頭禪", text: "河河河" },
+      { context: "對🫵", text: "我不排斥當總受" },
+      { context: "", text: "一般般" },
     ],
     description: "最愛你們的！可愛又睿智的！ 小天使꒰ঌᐢ. ̫ .ᐢ໒꒱",
     debut: "2023-12-11",
@@ -1231,7 +1239,8 @@ const vtubers = [
     ],
 
     musicClipsChannelIds: [
-      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko", keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
+      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",  keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",   keywords: ["鯨諾", "whalefall", "alluria"], typeKeywords: ["alluria", "線下"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
@@ -1267,7 +1276,8 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1768274785728172033/1769527111/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "哭啊" }
+      { context: "", text: "哭啊" },
+      { context: "", text: "gogogo" },
     ],
     description: "是個喜歡貓貓迷因&想被巧克力淹沒的黑手黨首領",
     debut: "2024-05-10",
@@ -1299,6 +1309,7 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["魁", "Kai", "這很魁以", "alluria"], typeKeywords: ["alluria", "線下"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
@@ -1358,10 +1369,12 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "mukuru", "蕗live", "alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "alluria", "線下"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "mukuru", "蕗live"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["穆克蕗", "穆總", "Mukuru", "穆", "小心結天團"] },
     ],
 
@@ -1422,6 +1435,7 @@ const vtubers = [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], typeKeywords: ["歌切", "合唱"] },
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "爾菲"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["涅爾菲", "Nyrfier", "爾菲"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["涅爾菲", "Nyrfier", "nyrfier", "爾菲", "涅手涅腳", "alluria"], typeKeywords: ["歌切", "alluria", "線下"] },
     ],
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
@@ -1549,7 +1563,6 @@ const vtubers = [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   typeKeywords: ["歌回", "之歌"] },   // 歌回剪輯 & CaKano之歌 系列
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["崎塔", "Chita"], typeKeywords: ["歌切", "cover"] },
     ],
 
     videoClipsChannelIds: [
@@ -1557,7 +1570,6 @@ const vtubers = [
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "Chita", "小心結天團", "派"] },
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["崎塔", "Chita"], excludeKeywords: ["歌切", "cover"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -1678,6 +1690,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "希洛", "ShiroLeon", "alluria"], typeKeywords: ["alluria", "線下"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
