@@ -178,11 +178,8 @@
     .fb-tab:hover  { background: #f5f5ff; color: #4f46e5; border-color: #b0b0e0; }
     .fb-tab.active { background: #4f46e5; color: #fff; border-color: #4f46e5; }
 
-    /* 回報項目清單 */
-    .fb-items { display: flex; flex-direction: column; gap: 12px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
-    .fb-items::-webkit-scrollbar { width: 4px; }
-    .fb-items::-webkit-scrollbar-track { background: transparent; }
-    .fb-items::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+    /* 回報項目清單（固定 3 筆，不捲動） */
+    .fb-items { display: flex; flex-direction: column; gap: 12px; flex: 1; }
 
     /* 回報卡片 */
     .fb-item {
@@ -321,6 +318,45 @@
       font-size: 13px;
     }
 
+    /* 右欄卡片：固定高度，flex 縱向讓清單自動撐滿 */
+    .fb-browse-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 560px;
+    }
+
+    /* 分頁列 */
+    .fb-pagination {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding-top: 14px;
+      margin-top: 12px;
+      border-top: 1px solid #eef0f8;
+    }
+    .fb-page-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid #d0d5dd;
+      background: #fff;
+      color: #4f46e5;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .18s;
+      font-family: inherit;
+      font-weight: 700;
+    }
+    .fb-page-btn:hover:not(:disabled) { background: #f0f0f8; border-color: #b0b0e0; }
+    .fb-page-btn:disabled { color: #ccc; border-color: #eee; cursor: not-allowed; background: #fafafa; }
+    .fb-page-info {
+      font-size: 13px; color: #666;
+      min-width: 56px; text-align: center;
+      font-weight: 600;
+    }
+
     /* ── RWD ── */
     @media (max-width: 780px) {
       .fb-page {
@@ -329,7 +365,7 @@
         gap: 24px;
       }
       .fb-header { margin-bottom: 4px; }
-      .fb-items  { max-height: 460px; }
+      .fb-browse-card { min-height: 420px; }
     }
   </style>
 </head>
@@ -387,7 +423,7 @@
     </div>
 
     <!-- 右欄：已回報項目 -->
-    <div class="fb-card">
+    <div class="fb-card fb-browse-card">
       <div class="fb-browse-header">
         <div class="fb-card-title" style="margin-bottom:0">📋 已回報項目</div>
         <span class="fb-count" id="fb-count">載入中…</span>
@@ -402,6 +438,13 @@
       <div class="fb-items" id="fb-items">
         <div class="fb-loading">載入中…</div>
       </div>
+
+      <!-- 分頁 -->
+      <div class="fb-pagination" id="fb-pagination">
+        <button class="fb-page-btn" id="fb-prev" onclick="changePage(-1)" title="上一頁">‹</button>
+        <span class="fb-page-info" id="fb-page-info">1 / 1 頁</span>
+        <button class="fb-page-btn" id="fb-next" onclick="changePage(1)" title="下一頁">›</button>
+      </div>
     </div>
 
   </div>
@@ -415,6 +458,8 @@
 
     let allItems = [];
     let currentFilter = 'all';
+    let currentPage   = 0;
+    const ITEMS_PER_PAGE = 3;
 
     const typeMap = {
       bug:     { cls: 'type-bug',     label: '🐛 網站 Bug'  },
@@ -449,8 +494,14 @@
 
     function setFilter(f, el) {
       currentFilter = f;
+      currentPage   = 0;
       document.querySelectorAll('.fb-tab').forEach(t => t.classList.remove('active'));
       el.classList.add('active');
+      renderItems();
+    }
+
+    function changePage(delta) {
+      currentPage += delta;
       renderItems();
     }
 
@@ -458,16 +509,38 @@
 
     function renderItems() {
       const list = document.getElementById('fb-items');
-      const items = currentFilter === 'all'
+      const filtered = currentFilter === 'all'
         ? allItems
         : allItems.filter(i => i.status === currentFilter);
 
+      const total      = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / ITEMS_PER_PAGE));
+      currentPage      = Math.max(0, Math.min(currentPage, totalPages - 1));
+      const items      = filtered.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+
       document.getElementById('fb-count').textContent =
         currentFilter === 'all' ? `共 ${allItems.length} 則` :
-        currentFilter === 'open' ? `待處理 ${items.length} 則` : `已解決 ${items.length} 則`;
+        currentFilter === 'open' ? `待處理 ${filtered.length} 則` : `已解決 ${filtered.length} 則`;
 
-      if (!items.length) {
+      // 分頁列
+      const pag  = document.getElementById('fb-pagination');
+      const prev = document.getElementById('fb-prev');
+      const next = document.getElementById('fb-next');
+      if (total > ITEMS_PER_PAGE) {
+        pag.style.display               = 'flex';
+        prev.disabled                   = currentPage === 0;
+        next.disabled                   = currentPage >= totalPages - 1;
+        document.getElementById('fb-page-info').textContent = `${currentPage + 1} / ${totalPages} 頁`;
+      } else {
+        pag.style.display = 'none';
+      }
+
+      if (!filtered.length) {
         list.innerHTML = '<div class="fb-empty">目前沒有回報 🎉</div>';
+        return;
+      }
+      if (!items.length) {
+        list.innerHTML = '<div class="fb-empty">此頁無資料</div>';
         return;
       }
 
