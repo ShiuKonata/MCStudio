@@ -2282,7 +2282,7 @@ const vtubers = [
     group: "預見娛樂",
     generation: "六期生",
     avatar: "https://pbs.twimg.com/profile_images/2039229710425784320/VOBggSrM_400x400.jpg",
-    coverImage: "https://pbs.twimg.com/profile_banners/1939968445539377152/1760704751/1500x500",
+    coverImage: "https://pbs.twimg.com/profile_banners/1939968445539377152/1779096779/1500x500",
     tagline: "",
     taglines: [
       { context: "", text: "捏" }
