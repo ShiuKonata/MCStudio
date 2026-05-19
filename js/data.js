@@ -1800,7 +1800,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["希洛萊昂", "希洛", "ShiroLeon"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["希洛萊昂", "希洛", "ShiroLeon"], excludeKeywords: ["卡祖笛"] },
     ],
 
     scheduleVideoId:  "TYDgPZbXl34",
@@ -2246,8 +2246,12 @@ const vtubers = [
       { id: "REPLACE_CLIP_3", title: "熱門影片 #3" },
     ],
 
+    musicClipsChannelIds: [
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["珮蕾", "Pele"], typeKeywords: ["cover", "嘉賓"] },
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["珮蕾", "Pele"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["珮蕾", "Pele"],          excludeKeywords: ["cover", "嘉賓"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["珮蕾", "Pele", "ælis"] },
     ],
 
@@ -2318,7 +2322,7 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"], excludeKeywords: ["演唱會"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },
     ],
 
