@@ -811,9 +811,13 @@ const vtubers = [
       "2023": "1872053935",
     },
 
+    musicClipsChannelIds: [
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia"], excludeKeywords: ["精華"] },  // Cover/歌回（排除精華）
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["艾琳妮雅", "Arrynia", "Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比"] },
-      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia"] },  // @narihiko714
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",        keywords: ["艾琳妮雅", "Arrynia", "Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比"] },
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia"], typeKeywords: ["精華"] },  // 只抓精華影片
     ],
 
     color: "#28004D",  // 艾琳妮雅 代表色（深紫）
