@@ -123,11 +123,12 @@
 <main>
   <div class="welcome" id="welcome">
     <h2>🔍 剪輯頻道稽核工具 v2</h2>
-    <p>以<strong>剪輯頻道</strong>為核心，抓取各頻道<strong>全部原始影片</strong>，逐一比對所有主播的設定，找出：</p>
+    <p>以<strong>剪輯頻道</strong>為核心，抓取各頻道<strong>全部原始影片</strong>，逐一比對所有主播的設定。<br>
+       <strong>本工具純屬警告顯示，不會自動修改任何設定，所有修正須手動更新 data.js。</strong></p>
     <ul>
-      <li>🚨 音樂影片放入影片格（歌回/cover 標題在影片格顯示）</li>
-      <li>🚨 音樂影片被全域過濾排除，且該主播無音樂格設定（影片消失）</li>
-      <li>⚠️ 音樂格中無音樂關鍵字的影片（分類存疑）</li>
+      <li>🚨 音樂影片出現在影片格（歌回/cover 標題但設在影片格）</li>
+      <li>🚨 音樂影片被全域過濾排除，且該主播無音樂格設定（影片完全消失）</li>
+      <li>⚠️ 音樂格中無音樂關鍵字的影片（請人工確認是否分類正確）</li>
       <li>🔵 標題含主播名，但此頻道未設定在該主播的剪輯設定中</li>
     </ul>
     <p class="note">⚠️ 每次稽核消耗 YouTube API 配額，結果快取 30 分鐘（重新整理不重抓）</p>
@@ -276,7 +277,7 @@ async function auditOneChannel(chanInfo, vtNameMap) {
         issues.push({level:'flag', msg:`🚨 ${vt.name}【影片格】顯示但含音樂關鍵字「${musicKw}」→ 應移至音樂格`});
         worstLevel = 'flag';
       } else if (included && gridType==='music' && !musicKw) {
-        issues.push({level:'warn', msg:`⚠️ ${vt.name}【音樂格】顯示但無音樂關鍵字 → 分類存疑`});
+        issues.push({level:'warn', msg:`⚠️ ${vt.name}【音樂格】顯示但無音樂關鍵字 → 請人工確認`});
         if (!worstLevel || worstLevel==='info') worstLevel = 'warn';
       } else if (!included && gridType==='video' && musicKw) {
         // 音樂影片被影片格全域排除 → 檢查有沒有音樂格備份
