@@ -281,6 +281,19 @@
       transition: background .2s;
     }
     .btn-edit:hover { background: #252535; }
+    .btn-delete {
+      padding: 7px 16px;
+      background: #2d1515;
+      color: #f87171;
+      border: 1px solid #4a1f1f;
+      border-radius: 7px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s;
+      margin-left: auto;
+    }
+    .btn-delete:hover { background: #3d1c1c; }
 
     .empty-msg {
       text-align: center;
@@ -491,9 +504,11 @@
 
       const actionBtns = done
         ? `<button class="btn-edit"   onclick="editItem('${f.id}')">編輯回覆</button>
-           <button class="btn-reopen" onclick="setStatus('${f.id}','open')">重新開啟</button>`
+           <button class="btn-reopen" onclick="setStatus('${f.id}','open')">重新開啟</button>
+           <button class="btn-delete" onclick="deleteItem('${f.id}')">🗑 刪除</button>`
         : `<button class="btn-save"    onclick="saveReply('${f.id}')">儲存回覆</button>
-           <button class="btn-resolve" onclick="resolve('${f.id}')">✓ 標記解決</button>`;
+           <button class="btn-resolve" onclick="resolve('${f.id}')">✓ 標記解決</button>
+           <button class="btn-delete"  onclick="deleteItem('${f.id}')">🗑 刪除</button>`;
 
       return `
       <div class="fb-item${done ? ' resolved' : ''}" id="item-${f.id}">
@@ -550,6 +565,16 @@
       if (error) { alert('操作失敗：' + error.message); return; }
       const f = allFeedback.find(x => x.id === id);
       if (f) f.status = status;
+      updateStats();
+      renderList();
+    }
+
+    // ── 刪除回報 ──
+    async function deleteItem(id) {
+      if (!confirm('確定要永久刪除這筆回報嗎？此操作無法復原。')) return;
+      const { error } = await sb.from('feedback').delete().eq('id', id);
+      if (error) { alert('刪除失敗：' + error.message); return; }
+      allFeedback = allFeedback.filter(x => x.id !== id);
       updateStats();
       renderList();
     }
