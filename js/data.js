@@ -1719,8 +1719,12 @@ const vtubers = [
     ],
 
 
+    musicClipsChannelIds: [
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508", keywords: ["茶帽瑪緹", "chamamatti", "帽帽"], typeKeywords: ["小年夜"] },
+    ],
+
     videoClipsChannelIds: [
-      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "帽帽"] },
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "帽帽"],          excludeKeywords: ["小年夜"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["茶帽瑪緹", "chamamatti", "帽帽", "ælis"] },
     ],
 
@@ -2322,7 +2326,8 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"], excludeKeywords: ["演唱會"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"],          excludeKeywords: ["演唱會"] },
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },
     ],
 
