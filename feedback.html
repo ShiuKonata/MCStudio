@@ -66,9 +66,9 @@
     /* ══ 兩欄格線 ══ */
     .fb-grid {
       display: grid;
-      grid-template-columns: 350px 1fr;
+      grid-template-columns: 300px 1fr;
       gap: 24px;
-      align-items: start;
+      align-items: stretch;   /* 兩欄同高 */
     }
 
     /* ══ 共用卡片 ══ */
@@ -78,7 +78,11 @@
       border: 1.5px solid #ddeaf5;
       box-shadow: 0 2px 16px rgba(2,119,189,0.08);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
+    /* 左欄：讓表單卡的 body 填滿剩餘高度 */
+    .fb-card > .fb-card-body { flex: 1; }
     .fb-card-head {
       display: flex;
       align-items: center;
@@ -209,9 +213,7 @@
 
     /* ══ 已回報項目 ══ */
     .fb-browse-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 540px;
+      /* 高度由 align-items:stretch 決定，不需要 min-height */
     }
 
     /* 篩選 tabs */
