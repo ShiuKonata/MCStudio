@@ -101,6 +101,11 @@
   <button id="run-btn" onclick="startAudit()">▶ 開始稽核</button>
 </header>
 
+<div id="local-warn" style="display:none;background:#2d1515;border-bottom:2px solid #7f1d1d;padding:10px 20px;font-size:13px;color:#fca5a5;">
+  ⚠️ <strong>請從 GitHub Pages 開啟此工具</strong>，不能直接開啟本機檔案（YouTube API Key 會因 referer null 被擋）。
+  請前往：<a id="pages-link" href="#" target="_blank" style="color:#fbbf24;text-decoration:underline;"></a>
+</div>
+
 <div id="progress-wrap">
   <div id="progress-text">準備中…</div>
   <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
@@ -132,6 +137,21 @@
 
 <script src="js/data.js"></script>
 <script>
+// ── 偵測本機檔案開啟 ──
+(function(){
+  if (location.protocol === 'file:') {
+    const warn = document.getElementById('local-warn');
+    warn.style.display = 'block';
+    // 嘗試推算 GitHub Pages 網址
+    const link = document.getElementById('pages-link');
+    const pagesUrl = 'https://shiukonata.github.io/MCStudio/clip-audit.html';
+    link.href = pagesUrl;
+    link.textContent = pagesUrl;
+    document.getElementById('run-btn').disabled = true;
+    document.getElementById('run-btn').title = '請從 GitHub Pages 開啟';
+  }
+})();
+
 // ── 全域音樂關鍵字（與 detail.js 同步）──
 const MUSIC_KW = [
   'cover','翻唱','清唱','歌回','歌切','原創曲','原創',
