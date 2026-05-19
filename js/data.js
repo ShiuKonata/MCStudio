@@ -525,13 +525,14 @@ const vtubers = [
 
 
     musicClipsChannelIds: [
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛", keywords: ["帕蘿妮", "paroniie"], typeKeywords: ["點歌台", "歌回", "cover"] },
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie"],  typeKeywords: ["點歌台", "歌回", "cover"] },
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["帕蘿妮", "Paroniie"],  excludeKeywords: ["精華"] },  // Cover/歌回（排除精華）
     ],
 
     videoClipsChannelIds: [
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛", keywords: ["帕蘿妮", "paroniie"], excludeKeywords: ["點歌台", "歌回", "cover"] },
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["帕蘿妮", "Paroniie", "Exitus"], excludeKeywords: ["神無月鹿比", "鹿比", "艾琳妮雅"] },
-      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["帕蘿妮", "Paroniie"] },  // @narihiko714
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie"],          excludeKeywords: ["點歌台", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["帕蘿妮", "Paroniie", "Exitus"], excludeKeywords: ["神無月鹿比", "鹿比", "艾琳妮雅"] },
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["帕蘿妮", "Paroniie"],           typeKeywords: ["精華"] },  // 只抓精華影片
     ],
 
     scheduleVideoId:  "3CkoMAZxoec",
