@@ -124,10 +124,27 @@ vtuber-site/
 
 #### 5-A　API 掃描流程（標準，適用所有情況）
 
-**Step 0 — 取得頻道上傳播放清單 ID**
+**⛔ 禁止要求使用者提供 channelId**
+使用者只需提供**頻道連結**（如 `https://www.youtube.com/@MICHAN1231K`）。
+Claude 必須自行用 API 查詢並驗證，原因：
+- 頻道頁面上同時存在影片ID、播放清單ID等大量ID，使用者極易選錯
+- channelId 查詢是 Claude 的責任，不應轉嫁給使用者
+
+**Step 0-A — 從頻道 handle 查詢 channelId**
+```
+GET https://www.googleapis.com/youtube/v3/channels
+  ?part=snippet
+  &forHandle={handle}        ← 從 URL 取出，例：MICHAN1231K
+  &key={ytApiKey}
+  &Referer: https://shiukonata.github.io/MCStudio/
+```
+回傳的 `items[0].id` 即為正確 channelId，`items[0].snippet.title` 用來向使用者確認頻道名稱。
+**必須顯示頻道名稱讓使用者確認，才能繼續掃描。**
+
+**Step 0-B — 取得頻道上傳播放清單 ID**
 ```
 uploadsPlaylistId = "UU" + channelId.slice(2)
-// 例：UCPk2c45wPWSFVgdI7Nry2Xw → UUPk2c45wPWSFVgdI7Nry2Xw
+// 例：UC7KF3UyPn2SFM-3oLApYYSQ → UU7KF3UyPn2SFM-3oLApYYSQ
 ```
 API Key 位於 `js/data.js` 任一 vtuber 的 `ytApiKey` 欄位（全站共用同一把）。
 
