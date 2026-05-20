@@ -1214,7 +1214,7 @@ const vtubers = [
     taglines: [
       { context: "", text: "屁啦！怎麼可能！" },
     ],
-    description: "",
+    description: "來自小動物天團Alluria的陽壽和氣質擔當鯨諾，直播內容主要圍繞着文學和音樂，當然還有玩遊戲啦，但不知道為什麼總是PON PON 的",
     debut: "2024-05-10",
     birthday: "11月13日",
     tags: ["台灣", "預見娛樂", "三期生", "Alluria", "鯨魚", "文學家", "作曲編曲", "電波"],
