@@ -1405,7 +1405,8 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1765762475037966336/1777735064/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "好累喔" }
+      { context: "", text: "好累喔" },
+      { context: "", text: "阿對對對" }
     ],
     description: "曾經是一隻蛇，對，會嘶嘶嘶那種，比看起來更容易害羞，還請各位小心餵食(,,・ω・,,)",
     debut: "2024-05-11",
