@@ -313,7 +313,9 @@ const vtubers = [
     taglines: [
       { context: "", text: "喵好" },
       { context: "", text: "DDだめよ!!DD不可以" },
-      { context: "", text: "我很可愛請給我錢" }
+      { context: "", text: "我很可愛請給我錢" },
+      { context: "", text: "C8" },
+      { context: "", text: "睡啦明天再努力" }
     ],
     description: "大家好，我是懶貓子，我是日本人，初次見面，請多指教，感謝",
     debut: "2021-08-06",
