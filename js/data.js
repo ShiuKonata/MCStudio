@@ -1321,12 +1321,14 @@ const vtubers = [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
       { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["魁", "Kai", "這很魁以", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
+      { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",       keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], excludeKeywords: ["卡祖笛"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["魁", "Kai", "小心結天團"] },
+      { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",       keywords: ["魁", "Kai"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     scheduleVideoId:  "psgIP5rMRTA",
