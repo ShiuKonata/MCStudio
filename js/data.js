@@ -869,6 +869,9 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/2040470338254053376/j6n_yPob_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1669746708853706753/1775321014/1500x500",
     tagline: "",
+    taglines: [
+      { context: "", text: "大概是這樣" },
+    ],
     description: "初めまして！瓦瓦です～～～～～可愛迷人混亂小惡魔天使",
     debut: "2023-12-04",
     birthday: "9月9日",
