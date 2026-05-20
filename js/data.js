@@ -1211,6 +1211,9 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/2056019431940382720/6WdljP_c_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1768216252001198080/1710825714/1500x500",
     tagline: "",
+    taglines: [
+      { context: "", text: "屁啦！怎麼可能！" },
+    ],
     description: "",
     debut: "2024-05-10",
     birthday: "11月13日",
