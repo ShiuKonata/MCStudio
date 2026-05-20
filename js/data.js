@@ -814,7 +814,8 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1676559936602644480/1750936798/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "一句話就是酒，嗯嗯嗯嗯嗯嗯嗯" }
+      { context: "", text: "一句話就是酒，嗯嗯嗯嗯嗯嗯嗯" },
+      { context: "", text: "ㄍㄋㄋㄇㄉㄐㄅ" },
     ],
     description: "一隻喜歡酒的大妖怪！每天都要快樂的喝酒聊天打遊戲🍺",
     debut: "2023-12-07",
