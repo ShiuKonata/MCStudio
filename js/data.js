@@ -1231,7 +1231,6 @@ const vtubers = [
       { label: '鯨諾的大小事', url: 'https://docs.google.com/spreadsheets/d/1Sd96nc7gMum_r51aSD_2yxeaTrTHCmkM9FdhulEBshs/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
       { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/whalefallvtuber/Donate',     class: 'hivebee',    icon: '🐝' },
       { label: '深度會員', url: 'https://www.hivebee.com.tw/whalefallvtuber/Subscribe', class: 'membership', icon: '💎' },
-      { label: '棉花糖',   url: 'https://marshmallow-qa.com/co3akphbww7ctkd',           class: 'marshmallow', icon: '🍬' },
     ],
 
     videos: [
