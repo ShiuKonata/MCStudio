@@ -1019,6 +1019,13 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/2039763954331951104/OlHLWeDM_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1675184947248926720/1761589480/1500x500",
     tagline: "",
+    taglines: [
+      { context: "", text: "HOYO" },
+      { context: "", text: "白癡ㄛ" },
+      { context: "", text: "哪有" },
+      { context: "", text: "你們今天過得好嗎" },
+      { context: "", text: "我去拿個外送，等我回來" },
+    ],
     description: "👆🏻這是一隻只有奶茶跟火鍋能叫得醒的夢魔🧋🍲",
     debut: "2023-12-14",
     birthday: "3月29日",
