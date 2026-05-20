@@ -1675,7 +1675,8 @@ const vtubers = [
     taglines: [
       { context: "", text: "白癡喔！" },
       { context: "", text: "蛤？" },
-      { context: "", text: "怎麼啦小寶貝" }
+      { context: "", text: "怎麼啦小寶貝" },
+      { context: "", text: "吧哺啦！！！" }
     ],
     description: "♔歡迎來到我的國度♔",
     debut: "2024-05-11",
