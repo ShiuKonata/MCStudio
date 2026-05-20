@@ -1241,7 +1241,6 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",  keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",   keywords: ["鯨諾", "whalefall", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
