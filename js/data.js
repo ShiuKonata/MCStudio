@@ -638,8 +638,13 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/神無月鹿比 v2.0.jpg" },
     ],
 
+    musicClipsChannelIds: [
+      { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["哈鹿"], typeKeywords: ["歌回", "合唱"] },
+    ],
+
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["神無月鹿比", "鹿比", "Lubee", "鹿寶", "Exitus"], excludeKeywords: ["帕蘿妮", "艾琳妮雅", "歌回", "cover"] },
+      { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["神無月鹿比精華", "哈鹿精華"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     color: "#F2A8B9"   // 神無月鹿比 代表色（粉紅）
