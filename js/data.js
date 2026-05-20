@@ -905,6 +905,10 @@ const vtubers = [
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",           keywords: ["瓦西瓦瓦", "Vaswawa", "vaswawa", "瓦瓦"] },  // 歌回剪輯（全域音樂關鍵字自動分類）
     ],
 
+    bgmVideoId: "Nc1s7Jbb9WY",           // 背景音樂影片 ID
+    bgmStart:   0,                        // 開始秒數
+    bgmLabel:   "Virtual Life 虛擬人生",  // 播放器顯示的歌名
+
     scheduleVideoId:  "DvskyppTq-0",
     spreadsheetLabel: "瓦瓦的大小事",
     scheduleTitle:    "瓦瓦的行程表",
