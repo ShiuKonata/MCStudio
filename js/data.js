@@ -1390,6 +1390,7 @@ const vtubers = [
       { id: "UCyOGgk-ScfBwkkeej_RQPYw", label: "晨茉",       keywords: ["穆克蕗", "穆總", "Mukuru", "mukuru"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCk1ZS3ZsYNbwXsxaxtJW7Dg", label: "蛋餅_owo",  excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動", "壞女人", "HO YO"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["穆克蕗", "穆總", "Mukuru", "穆", "小心結天團"] },
+      { id: "UCu2mKGlGDS_cQbOIwCGuXSQ", label: "二七ER",    keywords: ["穆克蕗", "穆總", "Mukuru", "mukuru"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     scheduleVideoId:  "fO8nKY_tpzM",
