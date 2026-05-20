@@ -942,7 +942,6 @@ const vtubers = [
       { context: "", text: "你們這些白痴" },
       { context: "", text: "閉嘴啦" },
       { context: "", text: "什麼意思!" },
-      { context: "", text: "為什麼這麼多人TAG我?" },
       { context: "聽了一年就沒一次是不好的！", text: "這首可能唱不好!所以要原諒我!" },
       { context: "通常在害羞的時候出現", text: "幹嘛啦!...幹....幹嘛啦!" },
       { context: "語速不快，哩會念得很清楚", text: "O哩娘" },
