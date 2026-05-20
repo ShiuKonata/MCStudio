@@ -90,6 +90,24 @@ h1, h2, h3, h4, .card-name, .detail-name, .meta-value, .stat-number {
 .nav-links-bar a:hover,
 .nav-links-bar a.active { background: rgba(255,255,255,0.22); color: white; }
 
+/* 語言切換按鈕 */
+.lang-toggle-btn {
+  display: block; padding: 0.55rem 1.1rem;
+  font-size: 0.82rem; font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
+  margin: auto 0.6rem auto 0.4rem;
+  cursor: pointer;
+  font-family: 'Calibri', 'Noto Sans TC', sans-serif;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.lang-toggle-btn:hover { background: rgba(255,255,255,0.22); color: white; }
+body.vtuber-page .lang-toggle-btn { border-color: rgba(255,255,255,0.2); }
+
 /* =============================================
    VTUBER 分頁列（嵌入 navbar 底部）
    ============================================= */

@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <img class="compact-avatar" src="${v.avatar}" alt="${v.name}"
             onerror="this.style.background='var(--sky-bg)'">
           <div class="compact-name">${v.shortName || v.name}</div>
-          <div class="compact-debut">出道 ${v.debut}</div>
+          <div class="compact-debut">${T('card.debut')} ${v.debut}</div>
         </a>
         <div class="compact-links">
           <a href="${v.youtube}" target="_blank" class="compact-link yt"
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             𝕏 Twitter
           </a>
         </div>
-        <a href="vtuber.html?id=${v.id}" class="card-more-btn">✦ 查看詳細介紹</a>
+        <a href="vtuber.html?id=${v.id}" class="card-more-btn">${T('card.viewDetail')}</a>
       </div>
     `;
     return card;
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = `
           <div class="no-results" style="grid-column:1/-1">
             <span class="emoji">🔍</span>
-            找不到相關 Vtuber，試試其他關鍵字吧！
+            ${T('noResults')}
           </div>`;
       } else {
         // 2 欄：左欄前半（最多3個）、右欄後半
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = `
           <div class="no-results">
             <span class="emoji">🔍</span>
-            找不到相關 Vtuber，試試其他關鍵字吧！
+            ${T('noResults')}
           </div>`;
         return;
       }
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (filterBar) {
     const allBtn = document.createElement('button');
     allBtn.className = 'filter-btn active';
-    allBtn.textContent = '全部';
+    allBtn.textContent = T('filter.all');
     allBtn.dataset.gen = 'all';
     filterBar.appendChild(allBtn);
 

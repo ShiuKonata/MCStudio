@@ -29,6 +29,7 @@
   <meta name="twitter:image"       content="https://shiukonata.github.io/MCStudio/images/260315_1200x630.png">
 
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
 </head>
 <body>
 
@@ -37,12 +38,12 @@
     <div class="nav-top">
       <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
     </div>
-    <div class="nav-sub">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site ｜ <strong class="nav-fan-notice">非預見娛樂官方網站</strong></div>
+    <div class="nav-sub"><span data-i18n="nav.subtitle">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</span> ｜ <strong class="nav-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong></div>
     <div class="nav-links-bar">
-      <a href="index.html">🏠 首頁</a>
-      <a href="vtubers.html" class="active">⭐ Vtuber 一覽</a>
-      <a href="merch.html">🛍️ 周邊商品</a>
-      <a href="feedback.html">🐞 回報問題</a>
+      <a href="index.html" data-i18n="nav.home">🏠 首頁</a>
+      <a href="vtubers.html" class="active" data-i18n="nav.vtubers">⭐ Vtuber 一覽</a>
+      <a href="merch.html" data-i18n="nav.merch">🛍️ 周邊商品</a>
+      <a href="feedback.html" data-i18n="nav.feedback">🐞 回報問題</a>
     </div>
   </nav>
 
@@ -50,13 +51,13 @@
   <div class="page-hero">
     <div class="page-hero-inner">
       <div class="page-hero-text">
-        <h1>⭐ Vtuber 一覽</h1>
-        <p>點擊卡片查看每位主播的詳細介紹與相關連結</p>
+        <h1 data-i18n="vtubers.hero.title">⭐ Vtuber 一覽</h1>
+        <p data-i18n="vtubers.hero.subtitle">點擊卡片查看每位主播的詳細介紹與相關連結</p>
       </div>
       <div class="page-hero-search">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" placeholder="搜尋名字、團體或標籤…">
+          <input type="text" id="search-input" placeholder="搜尋名字、團體或標籤…" data-i18n-placeholder="vtubers.search">
         </div>
       </div>
     </div>
@@ -71,8 +72,8 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ 由粉絲用愛製作 ｜ <strong class="footer-fan-notice">非預見娛樂官方網站</strong></p>
-    <p class="footer-source">資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供</p>
+    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ <span data-i18n="footer.madeBy">由粉絲用愛製作</span> ｜ <strong class="footer-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong></p>
+    <p class="footer-source" data-i18n="footer.source">資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供</p>
   </footer>
 
   <script src="js/data.js"></script>

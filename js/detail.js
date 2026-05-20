@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('detail-root').innerHTML = `
       <div style="text-align:center;padding:8rem 2rem;color:white;">
         <p style="font-size:4rem;margin-bottom:1rem;">😢</p>
-        <h2 style="margin-bottom:1rem;">找不到此 Vtuber</h2>
-        <a href="index.html" style="color:var(--vt-main)">← 返回首頁</a>
+        <h2 style="margin-bottom:1rem;">${T('notFound.title')}</h2>
+        <a href="index.html" style="color:var(--vt-main)">${T('notFound.back')}</a>
       </div>`;
     return;
   }
@@ -105,19 +105,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 動態分頁設定（依 vtuber 資料決定顯示哪些分頁）──
   const tabConfig = [
-    { key: 'profile',    label: '🐸 個人介紹',       color: null },
-    ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet',    label: '🎨 三視圖',        color: null }] : []),
-    ...('fanName'  in v ? [{ key: 'trivia',            label: '💡 小知識',        color: '#e65100' }] : []),
-    { key: 'schedule',   label: '📅 行程預覽',         color: '#0277bd' },
-    ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: '📺 直播存檔',    color: '#cc0000' }] : []),
-    ...(v.memberVideos && v.memberVideos.length ? [{ key: 'member', label: '🔒 會員直播',        color: '#8e24aa' }] : []),
-    { key: 'videos',     label: '🎵 原創曲&Cover',      color: '#d32f2f' },
-    ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: '📱 Shorts官方剪輯', color: '#ff6f00' }] :
-        v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: '📱 最新Shorts',    color: '#ff6f00' }] : []),
-    ...(v.newYearWishes ? [{ key: 'wishes', label: '🎍 新年願望', color: '#e91e63' }] : []),
-    ...(v.gallery && v.gallery.length ? [{ key: 'gallery', label: '🖼️ 畫冊', color: '#7b5ea7' }] : []),
-    ...('songStatsGids' in v ? [{ key: 'songstats', label: '🎵 歌曲統計', color: '#c62828' }] : []),
-    ...((v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) || _musicClipsChs.length || _videoClipsChs.length ? [{ key: 'clips', label: '🎬 熱門剪輯推薦', color: '#1565c0' }] : []),
+    { key: 'profile',    label: T('tab.profile'),     color: null },
+    ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet',    label: T('tab.refsheet'),    color: null }] : []),
+    ...('fanName'  in v ? [{ key: 'trivia',            label: T('tab.trivia'),      color: '#e65100' }] : []),
+    { key: 'schedule',   label: T('tab.schedule'),     color: '#0277bd' },
+    ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: T('tab.livestreams'), color: '#cc0000' }] : []),
+    ...(v.memberVideos && v.memberVideos.length ? [{ key: 'member', label: T('tab.member'),      color: '#8e24aa' }] : []),
+    { key: 'videos',     label: T('tab.videos'),       color: '#d32f2f' },
+    ...('youtubeChannelId' in v              ? [{ key: 'ytshorts',   label: T('tab.ytshorts'),   color: '#ff6f00' }] :
+        v.shorts && v.shorts.length          ? [{ key: 'shorts',     label: T('tab.shorts'),     color: '#ff6f00' }] : []),
+    ...(v.newYearWishes ? [{ key: 'wishes', label: T('tab.wishes'), color: '#e91e63' }] : []),
+    ...(v.gallery && v.gallery.length ? [{ key: 'gallery', label: T('tab.gallery'), color: '#7b5ea7' }] : []),
+    ...('songStatsGids' in v ? [{ key: 'songstats', label: T('tab.songstats'), color: '#c62828' }] : []),
+    ...((v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) || _musicClipsChs.length || _videoClipsChs.length ? [{ key: 'clips', label: T('tab.clips'), color: '#1565c0' }] : []),
   ];
 
   // ── 注入頂部分頁列 ─────────────────────────────
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const urlList = s.urls ? s.urls : (s.url ? [s.url] : []);
       const imgHTML = urlList.length
         ? urlList.map(u => `<img class="refsheet-img" src="${u}" alt="${v.name} ${s.version}">`).join('')
-        : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${s.version} 圖片待上傳</p></div>`;
+        : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${T('refsheet.verPending', {ver: s.version})}</p></div>`;
       return `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">${imgHTML}</div>`;
     }).join('');
     const rsInner = sheets.length
@@ -167,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="refsheet-ver-list">${btns}</div>
           <div class="refsheet-display">${panels}</div>
         </div>`
-      : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>三視圖圖片待上傳</p></div>`;
+      : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${T('refsheet.pending')}</p></div>`;
     refSheetHTML = `
     <div id="tab-refsheet" class="tab-panel">
-      <div class="detail-section-title">🎨 三視圖</div>
+      <div class="detail-section-title">${T('tab.refsheet')}</div>
       ${rsInner}
     </div>`;
   }
@@ -181,15 +181,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 粉絲名稱
     let cards = `
       <div class="trivia-card">
-        <div class="trivia-label">👥 粉絲名稱</div>
-        <div class="trivia-value">${v.fanName || '（待填入）'}</div>
+        <div class="trivia-label">${T('trivia.fanName')}</div>
+        <div class="trivia-value">${v.fanName || T('trivia.pending')}</div>
       </div>`;
 
     // 主題標籤（陣列 hashTags 或舊版字串 hashTag）
     if (v.hashTags && v.hashTags.length) {
       cards += `
       <div class="trivia-card trivia-full">
-        <div class="trivia-label"># 主題標籤</div>
+        <div class="trivia-label">${T('trivia.hashtag')}</div>
         <div class="trivia-items">
           ${v.hashTags.map(h => `<span class="trivia-hashtag-pill"><span class="trivia-tag-cat">${h.label}</span>${h.tag}</span>`).join('')}
         </div>
@@ -197,8 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       cards += `
       <div class="trivia-card">
-        <div class="trivia-label"># 主題標籤</div>
-        <div class="trivia-value trivia-hashtag">${v.hashTag || '（待填入）'}</div>
+        <div class="trivia-label">${T('trivia.hashtag')}</div>
+        <div class="trivia-value trivia-hashtag">${v.hashTag || T('trivia.pending')}</div>
       </div>`;
     }
 
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (v.futureGoals && v.futureGoals.length) {
       cards += `
       <div class="trivia-card trivia-full">
-        <div class="trivia-label">🎯 未來目標</div>
+        <div class="trivia-label">${T('trivia.goal')}</div>
         <div class="trivia-goals">
           ${v.futureGoals.map(g => `<div class="trivia-goal-item">✦ ${g}</div>`).join('')}
         </div>
@@ -214,8 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       cards += `
       <div class="trivia-card trivia-full">
-        <div class="trivia-label">🎯 未來目標</div>
-        <div class="trivia-value">${v.futureGoal || '（待填入）'}</div>
+        <div class="trivia-label">${T('trivia.goal')}</div>
+        <div class="trivia-value">${v.futureGoal || T('trivia.pending')}</div>
       </div>`;
     }
 
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     triviaHTML = `
     <div id="tab-trivia" class="tab-panel">
-      <div class="detail-section-title">💡 小知識</div>
+      <div class="detail-section-title">${T('tab.trivia')}</div>
       <div class="trivia-grid">${cards}</div>
     </div>`;
   }
@@ -301,13 +301,13 @@ document.addEventListener('DOMContentLoaded', () => {
           ${v.bgmVideoId ? `
           <!-- BGM 播放器 -->
           <div class="sidebar-bgm">
-            <div class="sbgm-label">🎵 背景音樂</div>
+            <div class="sbgm-label">${T('bgm.label')}</div>
             <div id="sbgm-hidden"></div>
             <div class="sbgm-controls">
               <button class="sbgm-play-btn" id="sbgm-play-btn" title="播放 / 暫停">▶</button>
               <div class="sbgm-info">
                 <div class="sbgm-song">${v.bgmLabel || v.name}</div>
-                <div class="sbgm-status" id="sbgm-status">點擊播放</div>
+                <div class="sbgm-status" id="sbgm-status">${T('bgm.status')}</div>
               </div>
               <button class="sbgm-mute-btn" id="sbgm-mute-btn" title="靜音 / 取消靜音">🔊</button>
             </div>
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 導航區：所有 Vtuber + 上一位 / 下一位 -->
           <div class="sidebar-nav">
-            <a href="vtubers.html" class="sidebar-nav-all">⭐ 所有 Vtuber</a>
+            <a href="vtubers.html" class="sidebar-nav-all">${T('sidebar.allVtubers')}</a>
             <div class="sidebar-nav-arrows">
               <a href="vtuber.html?id=${prev.id}" class="sidebar-nav-btn sidebar-nav-prev" title="${prev.name}">
                 <span class="snav-arrow">‹</span>
@@ -337,40 +337,40 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 個人介紹 -->
         <div id="tab-profile" class="tab-panel active">
           <div class="detail-meta-grid" style="grid-template-columns: repeat(${genTeamName[v.generation] ? 5 : 4}, 1fr)">
-            <div class="meta-card"><div class="meta-label">所屬公司</div><div class="meta-value">${v.group}</div></div>
-            ${genTeamName[v.generation] ? `<div class="meta-card"><div class="meta-label">團體名稱</div><div class="meta-value">${genTeamName[v.generation]}</div></div>` : ''}
-            <div class="meta-card"><div class="meta-label">世代</div><div class="meta-value">${v.generation}</div></div>
-            <div class="meta-card"><div class="meta-label">出道日期</div><div class="meta-value">${v.debut}</div></div>
-            <div class="meta-card"><div class="meta-label">生日</div><div class="meta-value">${v.birthday}</div></div>
+            <div class="meta-card"><div class="meta-label">${T('meta.company')}</div><div class="meta-value">${v.group}</div></div>
+            ${genTeamName[v.generation] ? `<div class="meta-card"><div class="meta-label">${T('meta.team')}</div><div class="meta-value">${genTeamName[v.generation]}</div></div>` : ''}
+            <div class="meta-card"><div class="meta-label">${T('meta.generation')}</div><div class="meta-value">${v.generation}</div></div>
+            <div class="meta-card"><div class="meta-label">${T('meta.debut')}</div><div class="meta-value">${v.debut}</div></div>
+            <div class="meta-card"><div class="meta-label">${T('meta.birthday')}</div><div class="meta-value">${v.birthday}</div></div>
           </div>
 
           <!-- 出道計時器 -->
           <div class="debut-counter">
-            <div class="debut-counter-title">出道</div>
+            <div class="debut-counter-title">${T('debut.title')}</div>
             <div class="debut-counter-display">
               <div class="debut-unit">
                 <span class="debut-num" id="debut-days">--</span>
-                <span class="debut-label">日</span>
+                <span class="debut-label">${T('debut.day')}</span>
               </div>
               <div class="debut-sep">:</div>
               <div class="debut-unit">
                 <span class="debut-num" id="debut-hours">--</span>
-                <span class="debut-label">時</span>
+                <span class="debut-label">${T('debut.hour')}</span>
               </div>
               <div class="debut-sep">:</div>
               <div class="debut-unit">
                 <span class="debut-num" id="debut-minutes">--</span>
-                <span class="debut-label">分</span>
+                <span class="debut-label">${T('debut.min')}</span>
               </div>
               <div class="debut-sep">:</div>
               <div class="debut-unit">
                 <span class="debut-num debut-num-sec" id="debut-seconds">--</span>
-                <span class="debut-label">秒</span>
+                <span class="debut-label">${T('debut.sec')}</span>
               </div>
             </div>
           </div>
 
-          <div class="detail-section-title">標籤</div>
+          <div class="detail-section-title">${T('profile.tags')}</div>
           <div class="detail-tags">
             ${v.tags.map(t => `<span class="tag">${t}</span>`).join('')}
           </div>
@@ -383,13 +383,13 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="profile-duo">
             <div class="profile-about-col">
               <div class="detail-quote">
-                <div class="quote-label">關於 ${v.name}</div>
+                <div class="quote-label">${T('profile.about', {name: v.name})}</div>
                 <p class="profile-about-text">${v.description}</p>
               </div>
             </div>
             <div class="profile-quote-col">
               <div class="detail-quote">
-                <div class="quote-label">口頭禪</div>
+                <div class="quote-label">${T('profile.tagline')}</div>
                 ${(v.taglines && v.taglines.length)
                   ? `<div class="quote-list">
                       ${v.taglines.map(t => `
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>`
                   : v.tagline
                     ? `<div class="quote-text">「${v.tagline}」</div>`
-                    : `<div class="quote-empty">（待新增）</div>`
+                    : `<div class="quote-empty">${T('profile.noTagline')}</div>`
                 }
               </div>
             </div>
@@ -412,11 +412,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <!-- TAB: 原創曲&Cover -->
         <div id="tab-videos" class="tab-panel">
-          <div class="detail-section-title">🎵 原創曲&amp;Cover</div>
+          <div class="detail-section-title">${T('tab.videos')}</div>
           <div class="ls-year-bar" id="videos-filter-bar">
-            <button class="ls-year-btn active" data-vfilter="all">全部</button>
-            <button class="ls-year-btn" data-vfilter="原創曲">🎼 原創曲</button>
-            <button class="ls-year-btn" data-vfilter="Cover">🎤 Cover</button>
+            <button class="ls-year-btn active" data-vfilter="all">${T('videos.all')}</button>
+            <button class="ls-year-btn" data-vfilter="原創曲">${T('videos.original')}</button>
+            <button class="ls-year-btn" data-vfilter="Cover">${T('videos.cover')}</button>
           </div>
           <div class="livestreams-container" id="video-grid"></div>
         </div>
@@ -424,35 +424,35 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 手動 Shorts（無 youtubeChannelId 時使用）-->
         ${!v.youtubeChannelId && v.shorts && v.shorts.length ? `
         <div id="tab-shorts" class="tab-panel">
-          <div class="detail-section-title">📱 最新 Shorts</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">官方剪輯最新前三短片 Shorts，點擊前往 YouTube 觀看</p>
+          <div class="detail-section-title">${T('tab.shorts')}</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">${T('shorts.subtitle')}</p>
           <div class="video-grid shorts-grid" id="shorts-grid"></div>
         </div>` : ''}
 
         <!-- TAB: 自動抓取 Shorts 存檔 -->
         ${v.youtubeChannelId ? `
         <div id="tab-ytshorts" class="tab-panel">
-          <div class="detail-section-title">📱 Shorts 存檔</div>
+          <div class="detail-section-title">${T('tab.ytshorts')}</div>
           <div class="ls-year-bar" id="yts-year-bar">
-            <button class="ls-year-btn active" data-ytsyear="all">全部</button>
+            <button class="ls-year-btn active" data-ytsyear="all">${T('videos.all')}</button>
             ${ytsYearBtns}
           </div>
           <div class="ls-search-bar">
             <span class="ls-search-icon">🔍</span>
-            <input class="ls-search-input" id="yts-search-input" type="text" placeholder="搜尋標題或月份（例：03）" autocomplete="off">
+            <input class="ls-search-input" id="yts-search-input" type="text" placeholder="${T('search.yts')}" autocomplete="off">
             <button class="ls-search-clear" id="yts-search-clear" title="清除">✕</button>
           </div>
           <div class="ls-search-count" id="yts-search-count"></div>
           <div class="livestreams-container" id="yts-container"></div>
           <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
-            <button class="ls-load-more-btn" id="yts-load-more-btn">載入更多</button>
+            <button class="ls-load-more-btn" id="yts-load-more-btn">${T('loadMore')}</button>
           </div>
         </div>` : ''}
 
         <!-- TAB: 新年願望 -->
         ${v.newYearWishes ? `
         <div id="tab-wishes" class="tab-panel">
-          <div class="detail-section-title">🎍 新年願望</div>
+          <div class="detail-section-title">${T('tab.wishes')}</div>
           <div class="ls-year-bar" id="wishes-year-bar">
             <button class="ls-year-btn active" data-wishyear="2026">2026</button>
             <button class="ls-year-btn" data-wishyear="2025">2025</button>
@@ -464,26 +464,26 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 畫冊 -->
         ${v.gallery && v.gallery.length ? `
         <div id="tab-gallery" class="tab-panel">
-          <div class="detail-section-title">🖼️ 畫冊</div>
+          <div class="detail-section-title">${T('tab.gallery')}</div>
           <!-- 會員等級篩選 -->
-          <div class="gallery-filter-label">會員等級</div>
+          <div class="gallery-filter-label">${T('gallery.memberLevel')}</div>
           <div class="ls-year-bar" id="gallery-member-bar">
-            <button class="ls-year-btn active" data-gmember="all">全部</button>
-            <button class="ls-year-btn" data-gmember="深度">💎 深度會員</button>
-            <button class="ls-year-btn" data-gmember="一般">⭐ 一般會員</button>
+            <button class="ls-year-btn active" data-gmember="all">${T('videos.all')}</button>
+            <button class="ls-year-btn" data-gmember="深度">${T('gallery.deep')}</button>
+            <button class="ls-year-btn" data-gmember="一般">${T('gallery.basic')}</button>
           </div>
           <!-- 顏色篩選 -->
-          <div class="gallery-filter-label" style="margin-top:0.6rem">顏色分類</div>
+          <div class="gallery-filter-label" style="margin-top:0.6rem">${T('gallery.colorCat')}</div>
           <div class="ls-year-bar" id="gallery-color-bar">
-            <button class="ls-year-btn active" data-gcolor="all">🎨 全部</button>
-            <button class="ls-year-btn" data-gcolor="red"><span class="gcolor-dot" style="background:#e53935"></span>紅</button>
-            <button class="ls-year-btn" data-gcolor="yellow"><span class="gcolor-dot" style="background:#fdd835"></span>黃</button>
-            <button class="ls-year-btn" data-gcolor="green"><span class="gcolor-dot" style="background:#43a047"></span>綠</button>
-            <button class="ls-year-btn" data-gcolor="blue"><span class="gcolor-dot" style="background:#1e88e5"></span>藍</button>
-            <button class="ls-year-btn" data-gcolor="purple"><span class="gcolor-dot" style="background:#8e24aa"></span>紫</button>
-            <button class="ls-year-btn" data-gcolor="black"><span class="gcolor-dot" style="background:#424242;border:1.5px solid rgba(255,255,255,0.35)"></span>黑</button>
-            <button class="ls-year-btn" data-gcolor="white"><span class="gcolor-dot" style="background:#f0f0f0;border:1.5px solid rgba(255,255,255,0.35)"></span>白</button>
-            <button class="ls-year-btn" data-gcolor="other">其他</button>
+            <button class="ls-year-btn active" data-gcolor="all">${T('gallery.all')}</button>
+            <button class="ls-year-btn" data-gcolor="red"><span class="gcolor-dot" style="background:#e53935"></span>${T('gallery.red')}</button>
+            <button class="ls-year-btn" data-gcolor="yellow"><span class="gcolor-dot" style="background:#fdd835"></span>${T('gallery.yellow')}</button>
+            <button class="ls-year-btn" data-gcolor="green"><span class="gcolor-dot" style="background:#43a047"></span>${T('gallery.green')}</button>
+            <button class="ls-year-btn" data-gcolor="blue"><span class="gcolor-dot" style="background:#1e88e5"></span>${T('gallery.blue')}</button>
+            <button class="ls-year-btn" data-gcolor="purple"><span class="gcolor-dot" style="background:#8e24aa"></span>${T('gallery.purple')}</button>
+            <button class="ls-year-btn" data-gcolor="black"><span class="gcolor-dot" style="background:#424242;border:1.5px solid rgba(255,255,255,0.35)"></span>${T('gallery.black')}</button>
+            <button class="ls-year-btn" data-gcolor="white"><span class="gcolor-dot" style="background:#f0f0f0;border:1.5px solid rgba(255,255,255,0.35)"></span>${T('gallery.white')}</button>
+            <button class="ls-year-btn" data-gcolor="other">${T('gallery.other')}</button>
           </div>
           <div class="gallery-stats" id="gallery-stats"></div>
           <div class="gallery-grid" id="gallery-grid"></div>
@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 歌曲統計 -->
         ${'songStatsGids' in v ? `
         <div id="tab-songstats" class="tab-panel">
-          <div class="detail-section-title">🎵 歌曲統計</div>
+          <div class="detail-section-title">${T('tab.songstats')}</div>
           <div class="ls-year-bar" id="ss-year-bar">
             ${Object.keys(v.songStatsGids).sort((a,b)=>b-a).map((y,i)=>
               `<button class="ls-year-btn${i===0?' active':''}" data-ssyear="${y}">${y}年</button>`
@@ -504,26 +504,26 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- TAB: 熱門剪輯推薦（音樂 + 影片合併） -->
         ${(v.musicClips && v.musicClips.length) || (v.videoClips && v.videoClips.length) || _musicClipsChs.length || _videoClipsChs.length ? `
         <div id="tab-clips" class="tab-panel">
-          <div class="detail-section-title">🎬 熱門剪輯推薦</div>
+          <div class="detail-section-title">${T('tab.clips')}</div>
           <div class="ls-year-bar" id="clips-type-bar">
-            ${(v.musicClips && v.musicClips.length) || _musicClipsChs.length ? `<button class="ls-year-btn active" data-cliptype="music">🎶 熱門音樂剪輯</button>` : ''}
-            ${(v.videoClips && v.videoClips.length) || _videoClipsChs.length ? `<button class="ls-year-btn${!((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' active' : ''}" data-cliptype="video">🎬 熱門影片剪輯</button>` : ''}
+            ${(v.musicClips && v.musicClips.length) || _musicClipsChs.length ? `<button class="ls-year-btn active" data-cliptype="music">${T('clips.music')}</button>` : ''}
+            ${(v.videoClips && v.videoClips.length) || _videoClipsChs.length ? `<button class="ls-year-btn${!((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' active' : ''}" data-cliptype="video">${T('clips.video')}</button>` : ''}
           </div>
           <div id="clips-music-panel"${!((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' style="display:none"' : ''}>
-            <p class="clips-desc">非官方粉絲剪輯熱門音樂，點擊前往 YouTube 觀看</p>
+            <p class="clips-desc">${T('clips.musicDesc')}</p>
             ${_musicClipsChs.length >= 1 ? `<div class="ls-year-bar clips-ch-bar" id="musicclips-ch-bar">
               ${_musicClipsChs.map((ch, i) => {
-                const lbl = (typeof ch === 'object' && ch.label) ? ch.label : ('頻道 ' + (i + 1));
+                const lbl = (typeof ch === 'object' && ch.label) ? ch.label : (T('clips.channel') + (i + 1));
                 return `<button class="ls-year-btn${i === 0 ? ' active' : ''}" data-chidx="${i}">🎞 ${lbl}</button>`;
               }).join('')}
             </div>` : ''}
             <div class="video-grid" id="musicclips-grid"></div>
           </div>
           <div id="clips-video-panel"${((v.musicClips && v.musicClips.length) || _musicClipsChs.length) ? ' style="display:none"' : ''}>
-            <p class="clips-desc">非官方粉絲剪輯熱門影片，點擊前往 YouTube 觀看</p>
+            <p class="clips-desc">${T('clips.videoDesc')}</p>
             ${_videoClipsChs.length >= 1 ? `<div class="ls-year-bar clips-ch-bar" id="videoclips-ch-bar">
               ${_videoClipsChs.map((ch, i) => {
-                const lbl = (typeof ch === 'object' && ch.label) ? ch.label : ('頻道 ' + (i + 1));
+                const lbl = (typeof ch === 'object' && ch.label) ? ch.label : (T('clips.channel') + (i + 1));
                 return `<button class="ls-year-btn${i === 0 ? ' active' : ''}" data-chidx="${i}">🎞 ${lbl}</button>`;
               }).join('')}
             </div>` : ''}
@@ -533,29 +533,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <!-- TAB: 行程預覽 -->
         <div id="tab-schedule" class="tab-panel">
-          <div class="detail-section-title">📅 ${v.scheduleTitle || v.name + '的行程表'}</div>
-          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">每週行程待機室與最新排程</p>
+          <div class="detail-section-title">${v.scheduleTitle || (T('tab.schedule').replace(/^📅 /, '') + ' — ' + v.name)}</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">${T('schedule.subtitle')}</p>
           <div id="schedule-content"></div>
         </div>
 
         ${v.memberVideos && v.memberVideos.length ? `
         <!-- TAB: 會員直播 -->
         <div id="tab-member" class="tab-panel">
-          <div class="detail-section-title">🔒 會員直播</div>
+          <div class="detail-section-title">${T('tab.member')}</div>
           <div class="mem-notice">
             <span class="mem-notice-icon">🔐</span>
-            <span>以下為會員限定直播，需加入頻道會員才能觀看</span>
-            <a href="${v.youtube}/membership" target="_blank" class="mem-join-btn">加入會員 →</a>
+            <span>${T('member.notice')}</span>
+            <a href="${v.youtube}/membership" target="_blank" class="mem-join-btn">${T('member.join')}</a>
           </div>
           <!-- 年份篩選 -->
           <div class="ls-year-bar" id="mem-year-bar">
-            <button class="ls-year-btn active" data-memyear="all">全部</button>
+            <button class="ls-year-btn active" data-memyear="all">${T('videos.all')}</button>
             ${memYearBtns}
           </div>
           <!-- 搜尋列 -->
           <div class="ls-search-bar">
             <span class="ls-search-icon">🔍</span>
-            <input class="ls-search-input" id="mem-search-input" type="text" placeholder="搜尋標題或月份（例：03）" autocomplete="off">
+            <input class="ls-search-input" id="mem-search-input" type="text" placeholder="${T('search.mem')}" autocomplete="off">
             <button class="ls-search-clear" id="mem-search-clear" title="清除">✕</button>
           </div>
           <div class="ls-search-count" id="mem-search-count"></div>
@@ -565,22 +565,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ${v.youtubeChannelId ? `
         <!-- TAB: 直播存檔 -->
         <div id="tab-livestreams" class="tab-panel">
-          <div class="detail-section-title">📺 直播存檔</div>
+          <div class="detail-section-title">${T('tab.livestreams')}</div>
           <!-- 年份篩選 -->
           <div class="ls-year-bar" id="ls-year-bar">
-            <button class="ls-year-btn active" data-year="all">全部</button>
+            <button class="ls-year-btn active" data-year="all">${T('videos.all')}</button>
             ${lsYearBtns}
           </div>
           <!-- 搜尋列 -->
           <div class="ls-search-bar">
             <span class="ls-search-icon">🔍</span>
-            <input class="ls-search-input" id="ls-search-input" type="text" placeholder="搜尋直播標題或月份（例：03）" autocomplete="off">
+            <input class="ls-search-input" id="ls-search-input" type="text" placeholder="${T('search.ls')}" autocomplete="off">
             <button class="ls-search-clear" id="ls-search-clear" title="清除">✕</button>
           </div>
           <div class="ls-search-count" id="ls-search-count"></div>
           <div class="livestreams-container" id="livestreams-container"></div>
           <div class="ls-load-more-wrap" id="ls-load-more-wrap" style="display:none">
-            <button class="ls-load-more-btn" id="ls-load-more-btn">載入更多</button>
+            <button class="ls-load-more-btn" id="ls-load-more-btn">${T('loadMore')}</button>
           </div>
         </div>` : ''}
 
@@ -710,13 +710,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       root.innerHTML = `
         <div class="ss-summary">
-          <span class="ss-date">統計截至 ${stats.date}</span>
-          <span class="ss-num">🎵 總共唱了 <strong>${stats.total}</strong> 首</span>
-          <span class="ss-num">✨ 不重複 <strong>${stats.unique}</strong> 首</span>
+          <span class="ss-date">${T('ss.date', {date: stats.date})}</span>
+          <span class="ss-num">${T('ss.total', {n: stats.total})}</span>
+          <span class="ss-num">${T('ss.unique', {n: stats.unique})}</span>
         </div>
         ${stats.top3.length ? `
         <div class="ss-top3">
-          <div class="ss-top3-title">🏆 演唱最多次</div>
+          <div class="ss-top3-title">${T('ss.top3')}</div>
           ${stats.top3.map((s,i) => `
             <div class="ss-top3-item">
               <span class="ss-medal">${['🥇','🥈','🥉'][i]}</span>
@@ -729,13 +729,13 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="ls-search-bar">
           <span class="ls-search-icon">🔍</span>
-          <input class="ls-search-input" id="ss-search" type="text" placeholder="搜尋歌名…" autocomplete="off">
+          <input class="ls-search-input" id="ss-search" type="text" placeholder="${T('search.song')}" autocomplete="off">
           <button class="ls-search-clear" id="ss-clear" title="清除" style="display:none">✕</button>
         </div>
         <div class="ls-search-count" id="ss-count"></div>
         <div class="ss-table-wrap">
           <table class="ss-table">
-            <thead><tr><th>#</th><th>歌名</th><th>語言</th><th>次數</th></tr></thead>
+            <thead><tr><th>${T('ss.col.no')}</th><th>${T('ss.col.name')}</th><th>${T('ss.col.lang')}</th><th>${T('ss.col.count')}</th></tr></thead>
             <tbody id="ss-tbody"></tbody>
           </table>
         </div>`;
@@ -755,7 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td class="ss-cnt">${s.count > 1 ? `<span class="ss-cnt-badge">×${s.count}</span>` : '1'}</td>
           </tr>`).join('');
         const cntEl = document.getElementById('ss-count');
-        cntEl.textContent = searchQ ? `找到 ${filtered.length} / ${allSongs.filter(s=>s.lang===activeLang).length} 首` : '';
+        cntEl.textContent = searchQ ? T('found.songs', {n: filtered.length, total: allSongs.filter(s=>s.lang===activeLang).length}) : '';
       }
       updateTable();
 
@@ -785,7 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function _fetchAndRender(year) {
       const root = document.getElementById('songstats-root');
       if (!root || !_ssSpreadsheetId) return;
-      root.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
+      root.innerHTML = `<div class="ls-loading"><span class="ls-spin"></span> ${T('loading')}</div>`;
 
       const cacheKey = `songstats_v2_${v.id}_${year}`;
       try {
@@ -806,7 +806,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try { sessionStorage.setItem(cacheKey, JSON.stringify({ data: stats, time: Date.now() })); } catch(e) {}
         _renderSongStats(stats);
       } catch(e) {
-        if (root) root.innerHTML = '<div class="ls-empty">⚠️ 載入失敗，請稍後再試</div>';
+        if (root) root.innerHTML = `<div class="ls-empty">${T('loadFail')}</div>`;
       }
     }
 
@@ -836,7 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
           allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>
       </div>
       <a class="yt-modal-fallback" id="yt-modal-fallback" href="#" target="_blank">
-        ▶ 若無法在此播放，點此前往 YouTube 觀看
+        ${T('ytModal.fallback')}
       </a>
     </div>`;
   document.body.appendChild(ytModal);
@@ -882,7 +882,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
             </div>
             <div class="ls-info">
-              <div class="ls-title">${vid.title || '（無標題）'}</div>
+              <div class="ls-title">${vid.title || T('noTitle')}</div>
               ${vid.date ? '<div class="ls-date">' + vid.date + '</div>' : ''}
             </div>
           </div>`;
@@ -892,7 +892,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="ls-thumb-wrap" style="display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3)">
               <span style="font-size:2.5rem">${placeholderIcon}</span>
             </div>
-            <div class="ls-info"><div class="ls-title" style="opacity:.5">影片待設定</div></div>
+            <div class="ls-info"><div class="ls-title" style="opacity:.5">${T('video.pending')}</div></div>
           </div>`;
       }
     });
@@ -977,7 +977,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Date.now() - time < 30 * 60 * 1000) { _done(applyFilters(data), subTabBtn); return; }
       }
     } catch(e) {}
-    grid.innerHTML = '<div class="ls-loading"><span class="ls-spin"></span> 載入中…</div>';
+    grid.innerHTML = `<div class="ls-loading"><span class="ls-spin"></span> ${T('loading')}</div>`;
     let rawVideos = [];
     try {
       // 逐一抓取所有頻道（多頻道時合併）
@@ -1011,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // 套用本主播的篩選後顯示
       _done(applyFilters(rawVideos), subTabBtn);
     } catch(e) {
-      grid.innerHTML = '<div class="ls-empty">⚠️ 載入失敗，請稍後再試</div>';
+      grid.innerHTML = `<div class="ls-empty">${T('loadFail')}</div>`;
     }
   }
 
@@ -1048,17 +1048,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!wrap) return;
       const list = v.newYearWishes[year] || [];
       if (!list.length) {
-        wrap.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">🎍</span><p>' + year + ' 年願望待新增</p></div>';
+        wrap.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">🎍</span><p>' + T('wishes.pending', {year}) + '</p></div>';
         return;
       }
       wrap.innerHTML = `
         <table class="wishes-table">
           <thead>
             <tr>
-              <th class="wt-no">No.</th>
-              <th class="wt-item">項目</th>
-              <th class="wt-goal">目標</th>
-              <th class="wt-done">是否達成</th>
+              <th class="wt-no">${T('wishes.no')}</th>
+              <th class="wt-item">${T('wishes.item')}</th>
+              <th class="wt-goal">${T('wishes.goal')}</th>
+              <th class="wt-done">${T('wishes.done')}</th>
             </tr>
           </thead>
           <tbody>
@@ -1219,9 +1219,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalOrig    = galleryItems.filter(gi => !/-1\.[^.]+$/.test((gi.src||'').split('/').pop())).length;
         const totalVariant = galleryItems.filter(gi =>  /-1\.[^.]+$/.test((gi.src||'').split('/').pop())).length;
         if (galleryActiveColor === 'all') {
-          statsEl.textContent = '全身圖 共 ' + totalOrig + ' 張';
+          statsEl.textContent = T('gallery.orig', {n: totalOrig});
         } else {
-          statsEl.textContent = '白底圖 ' + visible.length + ' / ' + totalVariant + ' 張';
+          statsEl.textContent = T('gallery.variant', {n: visible.length, total: totalVariant});
         }
       }
 
@@ -1412,16 +1412,16 @@ document.addEventListener('DOMContentLoaded', () => {
     scheduleHTML += `
       <a class="schedule-thumb-link" href="${schedUrl}" target="_blank">
         <div class="schedule-thumb-wrap">
-          <img class="schedule-thumb" src="${schedThumb}" onerror="this.src='${schedThumbFb}'" alt="${v.scheduleTitle || v.name + '的行程表'}">
-          <div class="schedule-thumb-overlay"><div class="schedule-play-btn">▶ 前往行程表影片</div></div>
+          <img class="schedule-thumb" src="${schedThumb}" onerror="this.src='${schedThumbFb}'" alt="${v.scheduleTitle || v.name}">
+          <div class="schedule-thumb-overlay"><div class="schedule-play-btn">${T('schedule.playBtn')}</div></div>
         </div>
       </a>`;
   } else {
-    scheduleHTML += `<div class="schedule-placeholder"><span style="font-size:3rem">📅</span><p>行程待設定</p></div>`;
+    scheduleHTML += `<div class="schedule-placeholder"><span style="font-size:3rem">📅</span><p>${T('schedule.pending')}</p></div>`;
   }
   scheduleHTML += `
     <div class="schedule-links-row">
-      <a href="${v.youtube}" target="_blank" class="detail-link-btn youtube"><span class="link-icon">▶</span> 前往 YouTube 頻道</a>
+      <a href="${v.youtube}" target="_blank" class="detail-link-btn youtube"><span class="link-icon">▶</span> ${T('schedule.toYouTube')}</a>
       <a href="${v.spreadsheet}" target="_blank" class="detail-link-btn sheets"><span class="link-icon">📋</span> ${v.spreadsheetLabel || v.name + '的大小事'}</a>
     </div>`;
   scheduleContent.innerHTML = scheduleHTML;
@@ -1447,7 +1447,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!filtered.length) {
         grid.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>'
-          + (year === 'all' ? '尚無會員直播資料' : year + ' 年尚無資料')
+          + (year === 'all' ? T('member.emptyAll') : T('member.emptyYear', {year}))
           + '</p></div>';
         return;
       }
@@ -1461,10 +1461,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="ls-thumb-wrap">
               <img class="ls-thumb" src="${thumb}" alt="${safeTitle}" loading="lazy">
               <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-              <div class="ls-duration-badge mem-badge">🔒 會員</div>
+              <div class="ls-duration-badge mem-badge">${T('member.badge')}</div>
             </div>
             <div class="ls-info">
-              <div class="ls-title">${item.title || '（無標題）'}</div>
+              <div class="ls-title">${item.title || T('noTitle')}</div>
               ${item.date ? '<div class="ls-date">' + item.date + '</div>' : ''}
             </div>
           </a>`;
@@ -1502,7 +1502,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
       if (countEl) {
         if (q && cards.length > 0) {
-          countEl.textContent = '找到 ' + shown + ' / ' + cards.length + ' 部';
+          countEl.textContent = T('found.videos', {n: shown, total: cards.length});
           countEl.style.display = 'block';
         } else {
           countEl.style.display = 'none';
@@ -1597,7 +1597,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      container.innerHTML = '<div class="ls-loading"><div class="ls-spinner"></div><span>載入中…</span></div>';
+      container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
       if (moreWrap) moreWrap.style.display = 'none';
 
       try {
@@ -1607,7 +1607,7 @@ document.addEventListener('DOMContentLoaded', () => {
           container.innerHTML = '';
           const items = data.items || [];
           if (!items.length) {
-            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>尚無 Shorts 資料</p></div>';
+            container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noShorts')}</p></div>`;
           } else {
             items.forEach(item => renderYtsCard(container, item));
           }
@@ -1630,13 +1630,13 @@ document.addEventListener('DOMContentLoaded', () => {
             pageToken = data.nextPageToken || null;
           } while (pageToken && !done);
           if (totalCount === 0) {
-            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>' + year + ' 年尚無 Shorts</p></div>';
+            container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noShorts.year', {year})}</p></div>`;
           }
           if (moreWrap) moreWrap.style.display = 'none';
           cacheSet(ytsCacheKey, { html: container.innerHTML, nextPageToken: null });
         }
       } catch (err) {
-        container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>API 錯誤：' + err.message + '</p></div>';
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
       }
       ytsLoading = false;
       applyYtsSearch();
@@ -1693,7 +1693,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
       if (countEl) {
         if (q && cards.length > 0) {
-          countEl.textContent = '找到 ' + shown + ' / ' + cards.length + ' 部';
+          countEl.textContent = T('found.videos', {n: shown, total: cards.length});
           countEl.style.display = 'block';
         } else {
           countEl.style.display = 'none';
@@ -1757,7 +1757,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ls-thumb-wrap">
             <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
             <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-            <div class="ls-duration-badge">直播回放</div>
+            <div class="ls-duration-badge">${T('ls.replayBadge')}</div>
           </div>
           <div class="ls-info">
             <div class="ls-title">${snip.title || '（無標題）'}</div>
@@ -1792,7 +1792,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (countEl) countEl.style.display = 'none';
 
       if (!v.ytApiKey) {
-        container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">🔑</span><p>尚未設定 YouTube API 金鑰</p></div>';
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">🔑</span><p>${T('noApiKey')}</p></div>`;
         lsLoading = false;
         return;
       }
@@ -1809,7 +1809,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      container.innerHTML = '<div class="ls-loading"><div class="ls-spinner"></div><span>載入中…</span></div>';
+      container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
       if (moreWrap) moreWrap.style.display = 'none';
 
       try {
@@ -1819,7 +1819,7 @@ document.addEventListener('DOMContentLoaded', () => {
           container.innerHTML = '';
           const items = data.items || [];
           if (!items.length) {
-            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>尚無直播存檔</p></div>';
+            container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noStreams')}</p></div>`;
           } else {
             items.forEach(item => renderLsCard(container, item));
           }
@@ -1842,13 +1842,13 @@ document.addEventListener('DOMContentLoaded', () => {
             pageToken = data.nextPageToken || null;
           } while (pageToken && !done);
           if (totalCount === 0) {
-            container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>' + year + ' 年尚無直播存檔</p></div>';
+            container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noStreams.year', {year})}</p></div>`;
           }
           if (moreWrap) moreWrap.style.display = 'none';
           cacheSet(cacheKey, { html: container.innerHTML, nextPageToken: null });
         }
       } catch (err) {
-        container.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>API 錯誤：' + err.message + '</p></div>';
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
       }
       lsLoading = false;
       applyLsSearch();
@@ -1902,7 +1902,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
       if (countEl) {
         if (q && cards.length > 0) {
-          countEl.textContent = '找到 ' + shown + ' / ' + cards.length + ' 部直播';
+          countEl.textContent = T('found.streams', {n: shown, total: cards.length});
           countEl.style.display = 'block';
         } else {
           countEl.style.display = 'none';
