@@ -1280,6 +1280,8 @@ const vtubers = [
     taglines: [
       { context: "", text: "哭啊" },
       { context: "", text: "gogogo" },
+      { context: "", text: "什麼意思" },
+      { context: "", text: "下次一定" },
     ],
     description: "是個喜歡貓貓迷因&想被巧克力淹沒的黑手黨首領",
     debut: "2024-05-10",
