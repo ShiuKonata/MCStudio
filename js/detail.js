@@ -797,7 +797,9 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch(e) {}
 
       const gid = v.songStatsGids[year];
-      const url = `https://docs.google.com/spreadsheets/d/${_ssSpreadsheetId}/pub?gid=${gid}&single=true&output=csv`;
+      const url = v.songStatsPublishedId
+        ? `https://docs.google.com/spreadsheets/d/e/${v.songStatsPublishedId}/pub?gid=${gid}&single=true&output=csv`
+        : `https://docs.google.com/spreadsheets/d/${_ssSpreadsheetId}/pub?gid=${gid}&single=true&output=csv`;
       try {
         const res = await fetch(url);
         if (!res.ok) throw new Error('HTTP ' + res.status);
