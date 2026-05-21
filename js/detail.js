@@ -1,3 +1,13 @@
+// ── XSS 防護：HTML 跳脫函數 ─────────────────────────────────────────────
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ── 全域音樂剪輯關鍵字（自動分類：標題含其中一個 → 歸為音樂剪輯）────
 const GLOBAL_MUSIC_KEYWORDS = [
   'cover', '翻唱', '清唱', '歌回', '歌切', '原創曲', '原創',
@@ -870,7 +880,7 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach(vid => {
       if (vid.id && !vid.id.startsWith('REPLACE')) {
         const thumbUrl  = vid.thumb || ('https://img.youtube.com/vi/' + vid.id + '/hqdefault.jpg');
-        const safeTitle = (vid.title || '').replace(/'/g, '&#39;');
+        const safeTitle = esc(vid.title || '');
         container.innerHTML += `
           <div class="ls-card" onclick="(function(){
             document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
@@ -880,11 +890,11 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow='hidden';
           })()">
             <div class="ls-thumb-wrap">
-              <img class="ls-thumb" src="${thumbUrl}" alt="${vid.title}" loading="lazy">
+              <img class="ls-thumb" src="${thumbUrl}" alt="${safeTitle}" loading="lazy">
               <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
             </div>
             <div class="ls-info">
-              <div class="ls-title">${vid.title || T('noTitle')}</div>
+              <div class="ls-title">${safeTitle || T('noTitle')}</div>
               ${vid.date ? '<div class="ls-date">' + vid.date + '</div>' : ''}
             </div>
           </div>`;
@@ -1237,7 +1247,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dotStyle   = dotColor ? 'background:' + dotColor : 'opacity:0';
         // 顯示名稱：優先用 title，沒有就用檔案名（去掉副檔名）
         const displayName = item.title || fname.replace(/\.[^.]+$/, '');
-        const safeTitle   = displayName.replace(/"/g, '&quot;');
+        const safeTitle   = esc(displayName);
         // 會員徽章
         const memberBadge = item.member === '深度' ? '💎' : item.member === '一般' ? '⭐' : '';
         return `
@@ -1246,7 +1256,7 @@ document.addEventListener('DOMContentLoaded', () => {
               onerror="this.parentElement.classList.add('gallery-item-error')">
             <div class="gallery-color-dot" style="${dotStyle}"></div>
             ${memberBadge ? `<div class="gallery-member-badge">${memberBadge}</div>` : ''}
-            <div class="gallery-item-label">${displayName}</div>
+            <div class="gallery-item-label">${safeTitle}</div>
           </div>`;
       }).join('');
 
@@ -1457,7 +1467,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.innerHTML = filtered.map(item => {
         const thumb    = item.thumb || ('https://img.youtube.com/vi/' + item.id + '/hqdefault.jpg');
         const ytUrl    = 'https://www.youtube.com/watch?v=' + item.id;
-        const safeTitle = (item.title || '').replace(/"/g, '&quot;');
+        const safeTitle = esc(item.title || '');
         return `
           <a class="ls-card mem-card" href="${ytUrl}" target="_blank" title="${safeTitle}">
             <div class="ls-thumb-wrap">
@@ -1466,7 +1476,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="ls-duration-badge mem-badge">${T('member.badge')}</div>
             </div>
             <div class="ls-info">
-              <div class="ls-title">${item.title || T('noTitle')}</div>
+              <div class="ls-title">${safeTitle || T('noTitle')}</div>
               ${item.date ? '<div class="ls-date">' + item.date + '</div>' : ''}
             </div>
           </a>`;
@@ -1541,7 +1551,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
       const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
-      const title    = (snip.title || '').replace(/'/g, '&#39;');
+      const title    = esc(snip.title || '');
       container.innerHTML += `
         <div class="ls-card" onclick="(function(){
           document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
@@ -1556,7 +1566,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="ls-duration-badge" style="background:rgba(255,111,0,0.9)">Shorts</div>
           </div>
           <div class="ls-info">
-            <div class="ls-title">${snip.title || '（無標題）'}</div>
+            <div class="ls-title">${title || '（無標題）'}</div>
             ${date ? '<div class="ls-date">' + date + '</div>' : ''}
           </div>
         </div>`;
@@ -1747,7 +1757,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
       const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
-      const title    = (snip.title || '').replace(/'/g, '&#39;');
+      const title    = esc(snip.title || '');
       container.innerHTML += `
         <div class="ls-card" onclick="(function(){
           document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
@@ -1762,7 +1772,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="ls-duration-badge">${T('ls.replayBadge')}</div>
           </div>
           <div class="ls-info">
-            <div class="ls-title">${snip.title || '（無標題）'}</div>
+            <div class="ls-title">${title || '（無標題）'}</div>
             ${date ? '<div class="ls-date">' + date + '</div>' : ''}
           </div>
         </div>`;
