@@ -424,12 +424,14 @@ const vtubers = [
       { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ", typeKeywords: ["歌回", "歌枠"] },
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["懶貓子", "Rumi", "懶貓"], typeKeywords: ["演唱會"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["懶貓子", "Rumi懶貓子"] },
+      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",    keywords: ["懶貓子RUMI"], typeKeywords: ["歌回", "演唱"] },
     ],
 
     // 熱門影片精華（直播精華 / 遊戲精華）
     videoClipsChannelIds: [
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["懶貓子", "Rumi", "懶貓"], excludeKeywords: ["演唱會"] },
       { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ", excludeKeywords: ["歌回", "歌枠", "直播"] },  // @narihiko0714
+      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",    keywords: ["懶貓子RUMI"], excludeKeywords: ["歌回", "演唱"] },
     ],
 
     // 歌曲統計（各年度 Google Sheets 統計頁 GID，填了才顯示分頁）
@@ -537,6 +539,7 @@ const vtubers = [
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie"],          excludeKeywords: ["點歌台", "歌回", "cover", "瓦瓦", "Vaswawa"] },
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["帕蘿妮", "Paroniie", "Exitus"], excludeKeywords: ["神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光",   keywords: ["帕蘿妮精華"] },
+      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",  keywords: ["帕蘿妮"] },
     ],
 
     scheduleVideoId:  "3CkoMAZxoec",
@@ -648,6 +651,7 @@ const vtubers = [
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["神無月鹿比", "鹿比", "Lubee", "鹿寶", "Exitus"], excludeKeywords: ["帕蘿妮", "艾琳妮雅", "歌回", "cover"] },
       { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["神無月鹿比精華", "哈鹿精華"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",      keywords: ["神無月鹿比"] },
     ],
 
     color: "#F2A8B9"   // 神無月鹿比 代表色（粉紅）
