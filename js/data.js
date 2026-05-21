@@ -80,6 +80,7 @@ const vtubers = [
       // 孫小毛（UC4nZ-KbmFr21Qt1lN9rmbdQ）：無音樂剪輯，僅在 videoClipsChannelIds 保留精華影片
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達"], typeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的 Cover
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["cover", "歌回"] },             // 混合頻道 → 只抓音樂
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["詩雨蔻達", "ShiuCoda"] },
       { id: "UCh00s3u4osHhNx8BlSZsECg", label: "章魚虛タコ",    keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                             // 全部為 Cover
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                            // Guitar Cover
     ],
@@ -422,6 +423,7 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UC4X7qMrF5_8egxF7IEspAlg", label: "成彦なりひこ", typeKeywords: ["歌回", "歌枠"] },
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["懶貓子", "Rumi", "懶貓"], typeKeywords: ["演唱會"] },
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["懶貓子", "Rumi懶貓子"] },
     ],
 
     // 熱門影片精華（直播精華 / 遊戲精華）
@@ -799,6 +801,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia"], excludeKeywords: ["精華"] },  // Cover/歌回（排除精華）
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["艾琳妮雅", "Arrynia Vaeri"] },
     ],
 
     videoClipsChannelIds: [
@@ -861,6 +864,7 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku"],          typeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子歌回剪輯"] },
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["酒樂霧子", "Shuraku Kiriko"] },
     ],
 
     videoClipsChannelIds: [
@@ -1011,6 +1015,10 @@ const vtubers = [
       "2023": "816298850",
     },
 
+    musicClipsChannelIds: [
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["希妮·亞里絲", "SinnieAris"] },
+    ],
+
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyX"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["希妮亞里絲", "SinnieAris", "sinniearis"] },
@@ -1070,6 +1078,7 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      typeKeywords: ["cover", "歌回", "歌切", "清唱"] },
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "純奈"],            typeKeywords: ["歌回", "唱歌", "cover"] },
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["結月莉莉奈", "Ririna"] },
     ],
 
     // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
@@ -2184,7 +2193,8 @@ const vtubers = [
     ],
 
     musicClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動分類
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動分類
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["睏睏幽昵", "Yawnii"] },
     ],
 
     videoClipsChannelIds: [
