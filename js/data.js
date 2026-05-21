@@ -1674,6 +1674,7 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/茶帽瑪緹 v1.0.jpg" },
     ],
 
+    songStatsPublishedId: "2PACX-1vRFvbUbnCktCj_QjMNi8szeTM_K8pm71coRd2yyjVetGsN-rgMNv9VH-sMYO-TVXiYxDwU6ZI4Qmn6F",
     songStatsGids: {
       "2026": "1217976372",
       "2025": "1583821169",
@@ -2123,6 +2124,7 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/珮蕾 v1.0.jpg" },
     ],
 
+    songStatsPublishedId: "2PACX-1vR3aeWo71SY7CDYdik5DRDUoVHEv4SuSOyiMY8-naejYnceKBuhqsNzSAfRKQRVj8cUzzCCSHhPO5CI",
     songStatsGids: {
       "2026": "1311275024",
       "2025": "1583821169",
@@ -2186,7 +2188,7 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/睏睏幽昵 v1.0.jpg" },
     ],
 
-    songStatsPublishedId: "2PACX-1vTY5OFOY_Hp-M2rhVdBc5YXsQudgnlc8mkotq7i2zPnyf6On3iy8A401A-LgRs0c9vSepJjcf1dF5kR",
+    songStatsPublishedId: "2PACX-1vTY5OFOY_Hp-M2rhVdBc5YXsQudgnlc8mkotq7i2zPnyf60n3iy8A401A-LgRs0c9vSepJjcf1dF5kR",
     songStatsGids: {
       "2026": "1047080886",
       "2025": "1583821169",
