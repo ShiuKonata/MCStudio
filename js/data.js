@@ -1234,6 +1234,8 @@ const vtubers = [
     generation: "三期生",
     avatar: "https://pbs.twimg.com/profile_images/2056019431940382720/6WdljP_c_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1768216252001198080/1710825714/1500x500",
+    bgmVideoId: "ULhzSR_wZ3I",
+    bgmLabel:   "鯨落",
     tagline: "",
     taglines: [
       { context: "", text: "「聲音為你寫信，天空為你傾聽，我是來自海洋的聲音代筆鯨諾。」" },
@@ -1764,6 +1766,8 @@ const vtubers = [
     generation: "四期生",
     avatar: "https://pbs.twimg.com/profile_images/1995498526294609920/tSOMou_Y_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1735595865698607104/1758886688/1500x500",
+    bgmVideoId: "IUT2J3KviC0",
+    bgmLabel:   "狗勾米米大冒險",
     tagline: "",
     taglines: [
       { context: "", text: "艾連是我老公" }
