@@ -106,12 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="compact-debut">${T('card.debut')} ${v.debut}</div>
         </a>
         <div class="compact-links">
-          <a href="${v.youtube}" target="_blank" class="compact-link yt"
+          <a href="${v.youtube}" target="_blank" rel="noopener noreferrer" class="compact-link yt"
             onclick="event.stopPropagation()" title="YouTube">▶</a>
-          <a href="${v.twitter}" target="_blank" class="compact-link tw"
+          <a href="${v.twitter}" target="_blank" rel="noopener noreferrer" class="compact-link tw"
             onclick="event.stopPropagation()" title="Twitter/X">𝕏</a>
           ${v.twitch
-            ? `<a href="${v.twitch}" target="_blank" class="compact-link twitch"
+            ? `<a href="${v.twitch}" target="_blank" rel="noopener noreferrer" class="compact-link twitch"
                 onclick="event.stopPropagation()" title="Twitch">🟣</a>`
             : ''}
         </div>
@@ -146,10 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
           ${tags.map(t => `<span class="tag">${t}</span>`).join('')}
         </div>
         <div class="card-links">
-          <a href="${v.youtube}" target="_blank" class="card-link yt" onclick="event.stopPropagation()">
+          <a href="${v.youtube}" target="_blank" rel="noopener noreferrer" class="card-link yt" onclick="event.stopPropagation()">
             ▶ YouTube
           </a>
-          <a href="${v.twitter}" target="_blank" class="card-link tw" onclick="event.stopPropagation()">
+          <a href="${v.twitter}" target="_blank" rel="noopener noreferrer" class="card-link tw" onclick="event.stopPropagation()">
             𝕏 Twitter
           </a>
         </div>

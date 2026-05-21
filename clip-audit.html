@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🔍 剪輯頻道稽核 v2 — MC組事務所</title>
+  <title>?? ?芾摩?駁?蝔賣 v2 ??MC蝯???</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0b0b10; color: #ccc; font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; font-size: 13px; min-height: 100vh; }
@@ -38,7 +38,7 @@
     .welcome .note { font-size: 11px; color: #3a3a4a; margin-top: 14px; }
     .welcome ul { text-align: left; display: inline-block; margin-top: 12px; line-height: 2; }
 
-    /* ── Channel block ── */
+    /* ?? Channel block ?? */
     .ch-block { background: #13131c; border: 1px solid #1e1e2a; border-radius: 10px; margin-bottom: 12px; overflow: hidden; transition: border-color .2s; }
     .ch-block:hover { border-color: #2a2a3e; }
     .ch-block.all-ok { opacity: .55; }
@@ -63,7 +63,7 @@
 
     .ch-body { border-top: 1px solid #1a1a26; }
 
-    /* ── Video row ── */
+    /* ?? Video row ?? */
     .v-row { display: flex; align-items: flex-start; gap: 8px; padding: 7px 16px; border-bottom: 1px solid #0e0e18; }
     .v-row:last-child { border-bottom: none; }
     .v-row:hover { background: #18182a; }
@@ -94,70 +94,69 @@
 <body>
 
 <header>
-  <span style="font-size:18px">🔍</span>
-  <div class="h-logo">剪輯頻道稽核</div>
-  <div class="h-badge">v2 · 頻道為核心</div>
-  <input id="api-input" type="password" placeholder="YouTube API Key（自動從 data.js 讀取）">
-  <button id="run-btn" onclick="startAudit()">▶ 開始稽核</button>
+  <span style="font-size:18px">??</span>
+  <div class="h-logo">?芾摩?駁?蝔賣</div>
+  <div class="h-badge">v2 繚 ?駁??箸敹?/div>
+  <input id="api-input" type="password" placeholder="YouTube API Key嚗?? data.js 霈??">
+  <button id="run-btn" onclick="startAudit()">????蝔賣</button>
 </header>
 
 <div id="local-warn" style="display:none;background:#2d1515;border-bottom:2px solid #7f1d1d;padding:10px 20px;font-size:13px;color:#fca5a5;">
-  ⚠️ <strong>請從 GitHub Pages 開啟此工具</strong>，不能直接開啟本機檔案（YouTube API Key 會因 referer null 被擋）。
-  請前往：<a id="pages-link" href="#" target="_blank" style="color:#fbbf24;text-decoration:underline;"></a>
+  ?? <strong>隢? GitHub Pages ??甇文極??/strong>嚗??賜?仿??璈?獢?YouTube API Key ?? referer null 鋡急?嚗?  隢?敺嚗?a id="pages-link" href="#" target="_blank" rel="noopener noreferrer" style="color:#fbbf24;text-decoration:underline;"></a>
 </div>
 
 <div id="progress-wrap">
-  <div id="progress-text">準備中…</div>
+  <div id="progress-text">皞?銝凌?/div>
   <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
 </div>
 
 <div id="summary-bar" style="display:none;flex-wrap:wrap;gap:20px;"></div>
 
 <div id="filter-bar" style="display:none;">
-  <span style="font-size:12px;color:#555">顯示：</span>
-  <button class="f-tab active" onclick="setFilter('all',this)">全部</button>
-  <button class="f-tab" onclick="setFilter('flagged',this)">🚨 有問題</button>
-  <button class="f-tab" onclick="setFilter('ok',this)">✓ 無問題</button>
+  <span style="font-size:12px;color:#555">憿舐內嚗?/span>
+  <button class="f-tab active" onclick="setFilter('all',this)">?券</button>
+  <button class="f-tab" onclick="setFilter('flagged',this)">? ??憿?/button>
+  <button class="f-tab" onclick="setFilter('ok',this)">???∪?憿?/button>
 </div>
 
 <main>
   <div class="welcome" id="welcome">
-    <h2>🔍 剪輯頻道稽核工具 v2</h2>
-    <p>以<strong>剪輯頻道</strong>為核心，抓取各頻道<strong>全部原始影片</strong>，逐一比對所有主播的設定。<br>
-       <strong>本工具純屬警告顯示，不會自動修改任何設定，所有修正須手動更新 data.js。</strong></p>
+    <h2>?? ?芾摩?駁?蝔賣撌亙 v2</h2>
+    <p>隞?strong>?芾摩?駁?</strong>?箸敹??????strong>?券??敶梁?</strong>嚗?瘥???蜓?剔?閮剖???br>
+       <strong>?砍極?瑞?撅祈郎?＊蝷綽?銝??芸?靽格隞颱?閮剖?嚗??耨甇?????湔 data.js??/strong></p>
     <ul>
-      <li>🚨 音樂影片出現在影片格（歌回/cover 標題但設在影片格）</li>
-      <li>🚨 音樂影片被全域過濾排除，且該主播無音樂格設定（影片完全消失）</li>
-      <li>⚠️ 音樂格中無音樂關鍵字的影片（請人工確認是否分類正確）</li>
-      <li>🔵 標題含主播名，但此頻道未設定在該主播的剪輯設定中</li>
+      <li>? ?單?敶梁??箇?典蔣?嚗???cover 璅?雿身?典蔣?嚗?/li>
+      <li>? ?單?敶梁?鋡怠??瞈暹??歹?銝府銝餅?⊿璅閮剖?嚗蔣???冽?憭梧?</li>
+      <li>?? ?單??潔葉?⊿璅??萄??蔣??隢犖撌亦Ⅱ隤?血?憿迤蝣綽?</li>
+      <li>? 璅??思蜓?剖?嚗?甇日?閮剖??刻府銝餅?頛航身摰葉</li>
     </ul>
-    <p class="note">⚠️ 每次稽核消耗 YouTube API 配額，結果快取 30 分鐘（重新整理不重抓）</p>
+    <p class="note">?? 瘥活蝔賣瘨?YouTube API ??嚗??翰??30 ??嚗??唳????嚗?/p>
   </div>
   <div id="results"></div>
 </main>
 
 <script src="js/data.js"></script>
 <script>
-// ── 偵測本機檔案開啟 ──
+// ?? ?菜葫?祆?瑼??? ??
 (function(){
   if (location.protocol === 'file:') {
     const warn = document.getElementById('local-warn');
     warn.style.display = 'block';
-    // 嘗試推算 GitHub Pages 網址
+    // ?岫?函? GitHub Pages 蝬脣?
     const link = document.getElementById('pages-link');
     const pagesUrl = 'https://shiukonata.github.io/MCStudio/clip-audit.html';
     link.href = pagesUrl;
     link.textContent = pagesUrl;
     document.getElementById('run-btn').disabled = true;
-    document.getElementById('run-btn').title = '請從 GitHub Pages 開啟';
+    document.getElementById('run-btn').title = '隢? GitHub Pages ??';
   }
 })();
 
-// ── 全域音樂關鍵字（與 detail.js 同步）──
+// ?? ?典??單??摮???detail.js ?郊嚗??
 const MUSIC_KW = [
-  'cover','翻唱','清唱','歌回','歌切','原創曲','原創',
-  '演唱','演唱會','唱歌','歌曲','歌聲','精唱','歌單',
-  '主題曲','mv','ost','卡拉ok','karaoke','深海少女','歌回剪輯',
+  'cover','蝧餃','皜','甇?','甇?','???,'?',
+  '瞍','瞍??,'?望?','甇','甇','蝎曉','甇',
+  '銝駁???,'mv','ost','?⊥?ok','karaoke','瘛望絲撠戊','甇??芾摩',
 ];
 const MUSIC_KW_L = MUSIC_KW.map(k => k.toLowerCase());
 
@@ -172,7 +171,7 @@ function getApiKey() {
   return (vtubers.find(x => x.ytApiKey) || {}).ytApiKey || '';
 }
 
-// ── 判斷 config 是否會 include 這部影片 ──
+// ?? ?斗 config ?臬??include ?敶梁? ??
 function wouldInclude(title, ch, gridType) {
   const t = title.toLowerCase();
   const kws     = ch.keywords       ? ch.keywords.map(k=>k.toLowerCase())       : null;
@@ -186,7 +185,7 @@ function wouldInclude(title, ch, gridType) {
   return true;
 }
 
-// ── 抓頻道影片（帶快取）──
+// ?? ??蔣??撣嗅翰????
 const _cache = {};
 async function fetchCh(id) {
   if (_cache[id]) return _cache[id];
@@ -219,7 +218,7 @@ async function fetchCh(id) {
   return videos;
 }
 
-// ── 建立頻道 Map（去重）──
+// ?? 撱箇??駁? Map嚗????
 function buildChannelMap() {
   const map = new Map();
   for (const v of vtubers) {
@@ -235,14 +234,14 @@ function buildChannelMap() {
   return map;
 }
 
-// ── 建立主播「名字」對照表（用於跨頻道交叉比對）──
+// ?? 撱箇?銝餅??摮??扯”嚗?潸楊?駁?鈭文?瘥?嚗??
 function buildVtNameMap() {
   const map = new Map();
   for (const v of vtubers) {
     const names = [v.name.toLowerCase()];
     if (v.nameEn) names.push(v.nameEn.toLowerCase());
-    // 從各 channel config 的 keywords 補充（排除過於泛用的詞）
-    const GENERIC = new Set(['exitus','直播','精華','shorts','cover','歌回','vtuber','taiwan']);
+    // 敺? channel config ??keywords 鋆?嚗??日??潭??函?閰?
+    const GENERIC = new Set(['exitus','?湔','蝎曇','shorts','cover','甇?','vtuber','taiwan']);
     for (const ch of [...(v.musicClipsChannelIds||[]),...(v.videoClipsChannelIds||[])]) {
       for (const k of (ch.keywords||[])) {
         if (k.length >= 2 && !GENERIC.has(k.toLowerCase())) names.push(k.toLowerCase());
@@ -253,7 +252,7 @@ function buildVtNameMap() {
   return map;
 }
 
-// ── 稽核單一頻道 ──
+// ?? 蝔賣?桐??駁? ??
 async function auditOneChannel(chanInfo, vtNameMap) {
   const raw = await fetchCh(chanInfo.id);
   const configuredVtIds = new Set(chanInfo.configs.map(c=>c.vt.id));
@@ -265,42 +264,41 @@ async function auditOneChannel(chanInfo, vtNameMap) {
     const issues = [];
     let worstLevel = null;
 
-    // 1. 檢查所有已設定的主播×格子
-    for (const cfg of chanInfo.configs) {
+    // 1. 瑼Ｘ??歇閮剖??蜓?倥摮?    for (const cfg of chanInfo.configs) {
       const {vt, gridType, ch} = cfg;
       const kws = ch.keywords ? ch.keywords.map(k=>k.toLowerCase()) : null;
-      if (kws && !kws.some(k=>t.includes(k))) continue; // 不符合關鍵字 → 跳過
+      if (kws && !kws.some(k=>t.includes(k))) continue; // 銝泵???萄? ??頝喲?
 
       const included = wouldInclude(video.title, ch, gridType);
 
       if (included && gridType==='video' && musicKw) {
-        issues.push({level:'flag', msg:`🚨 ${vt.name}【影片格】顯示但含音樂關鍵字「${musicKw}」→ 應移至音樂格`});
+        issues.push({level:'flag', msg:`? ${vt.name}?蔣??＊蝷箔??恍璅??萄???{musicKw}?? ?宏?喲璅`});
         worstLevel = 'flag';
       } else if (included && gridType==='music' && !musicKw) {
-        issues.push({level:'warn', msg:`⚠️ ${vt.name}【音樂格】顯示但無音樂關鍵字 → 請人工確認`});
+        issues.push({level:'warn', msg:`?? ${vt.name}?璅?＊蝷箔??⊿璅??萄? ??隢犖撌亦Ⅱ隤});
         if (!worstLevel || worstLevel==='info') worstLevel = 'warn';
       } else if (!included && gridType==='video' && musicKw) {
-        // 音樂影片被影片格全域排除 → 檢查有沒有音樂格備份
+        // ?單?敶梁?鋡怠蔣??典?? ??瑼Ｘ???璅?遢
         const hasMusicGrid = chanInfo.configs.some(c=>c.vt.id===vt.id && c.gridType==='music');
         if (!hasMusicGrid) {
-          issues.push({level:'flag', msg:`🚨 ${vt.name}【影片格】音樂影片被全域關鍵字排除，且無音樂格設定 → 建議新增音樂格`});
+          issues.push({level:'flag', msg:`? ${vt.name}?蔣??璅蔣?◤?典??摮??歹?銝?單??潸身摰???撱箄降?啣??單??嬋});
           worstLevel = 'flag';
         } else {
-          issues.push({level:'grey', msg:`🔇 ${vt.name}：影片格已排除，音樂格有設定（正確）`});
+          issues.push({level:'grey', msg:`?? ${vt.name}嚗蔣?撌脫??歹??單??潭?閮剖?嚗迤蝣綽?`});
           if (!worstLevel) worstLevel = 'ok';
         }
       } else if (included) {
-        issues.push({level:'ok', msg:`✓ ${vt.name}（${gridType==='music'?'音樂格':'影片格'}）正確顯示`});
+        issues.push({level:'ok', msg:`??${vt.name}嚗?{gridType==='music'?'?單???:'敶梁???}嚗迤蝣粹＊蝷槁});
         if (!worstLevel) worstLevel = 'ok';
       }
-      // else: excluded for valid reason → don't show
+      // else: excluded for valid reason ??don't show
     }
 
-    // 2. 交叉比對：標題含主播名但此頻道未設定在該主播
+    // 2. 鈭文?瘥?嚗?憿銝餅??甇日?閮剖??刻府銝餅
     for (const [vtId, info] of vtNameMap) {
       if (configuredVtIds.has(vtId)) continue;
       if (info.names.some(n=>t.includes(n))) {
-        issues.push({level:'info', msg:`🔵 標題疑似含「${info.vt.name}」，但此頻道未設定在其剪輯頻道中`});
+        issues.push({level:'info', msg:`? 璅??撮?怒?{info.vt.name}??雿迨?駁??芾身摰?嗅頛舫?葉`});
         if (!worstLevel || worstLevel==='ok') worstLevel = 'info';
       }
     }
@@ -314,11 +312,11 @@ async function auditOneChannel(chanInfo, vtNameMap) {
   return {raw, results, issueCount};
 }
 
-// ── 工具 ──
+// ?? 撌亙 ??
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function levelCls(l){ return {flag:'vi-flag',warn:'vi-warn',info:'vi-info',ok:'vi-ok',grey:'vi-grey'}[l]||'vi-grey'; }
 
-// ── 渲染頻道區塊 ──
+// ?? 皜脫??駁??憛???
 function renderChannel(chanInfo, result, container) {
   const {raw, results, issueCount} = result;
   const flagN = results.filter(r=>r.level==='flag').length;
@@ -329,24 +327,23 @@ function renderChannel(chanInfo, result, container) {
   block.className = 'ch-block' + (issueCount===0?' all-ok':'');
   block.dataset.hasFlagged = issueCount>0?'1':'0';
 
-  // Config tags（去重 vt+gridType）
-  const seen = new Set();
+  // Config tags嚗??vt+gridType嚗?  const seen = new Set();
   const tags = chanInfo.configs
     .filter(c=>{ const k=c.vt.id+'_'+c.gridType; return seen.has(k)?false:(seen.add(k),true); })
-    .map(c=>`<span class="ch-tag ct-${c.gridType}">${esc(c.vt.name)} ${c.gridType==='music'?'🎵':'🎬'}</span>`).join('');
+    .map(c=>`<span class="ch-tag ct-${c.gridType}">${esc(c.vt.name)} ${c.gridType==='music'?'?':'?'}</span>`).join('');
 
-  let statsHtml = `<span class="cs-total">${raw.length} 支</span>`;
-  if (flagN) statsHtml += `<span class="cs-flag">🚨 ${flagN}</span>`;
-  if (warnN) statsHtml += `<span class="cs-warn">⚠️ ${warnN}</span>`;
-  if (infoN) statsHtml += `<span class="cs-info">🔵 ${infoN}</span>`;
-  if (!issueCount) statsHtml += `<span class="cs-ok">✓ 無問題</span>`;
+  let statsHtml = `<span class="cs-total">${raw.length} ??/span>`;
+  if (flagN) statsHtml += `<span class="cs-flag">? ${flagN}</span>`;
+  if (warnN) statsHtml += `<span class="cs-warn">?? ${warnN}</span>`;
+  if (infoN) statsHtml += `<span class="cs-info">? ${infoN}</span>`;
+  if (!issueCount) statsHtml += `<span class="cs-ok">???∪?憿?/span>`;
 
   block.innerHTML = `
     <div class="ch-hd" onclick="toggleCh(this)">
       <span class="ch-name">${esc(chanInfo.label)}</span>
       <div class="ch-tags">${tags}</div>
       <div class="ch-stats">${statsHtml}</div>
-      <span class="ch-arr ${issueCount>0?'open':'closed'}">▼</span>
+      <span class="ch-arr ${issueCount>0?'open':'closed'}">??/span>
     </div>
     <div class="ch-body" style="display:${issueCount>0?'block':'none'}"></div>`;
 
@@ -354,14 +351,14 @@ function renderChannel(chanInfo, result, container) {
   const problemVideos = results.filter(r=>r.level!=='ok');
 
   if (!problemVideos.length) {
-    body.innerHTML = `<div class="v-empty">✓ 所有相關影片分類正確</div>`;
+    body.innerHTML = `<div class="v-empty">?????蔣??憿迤蝣?/div>`;
   } else {
     for (const {video, musicKw, issues, level} of problemVideos) {
       const div = document.createElement('div');
       div.className = `v-row lvl-${level}`;
-      const ico = level==='flag'?'🚨':level==='warn'?'⚠️':level==='info'?'🔵':'🔇';
+      const ico = level==='flag'?'?':level==='warn'?'??':level==='info'?'?':'??';
       const issueHtml = issues
-        .filter(i=>i.level!=='ok') // 有問題時只顯示問題，不顯示 ok
+        .filter(i=>i.level!=='ok') // ??憿??芷＊蝷箏?憿?銝＊蝷?ok
         .map(i=>`<div class="vi ${levelCls(i.level)}">${esc(i.msg)}</div>`).join('');
       const okHtml = issues
         .filter(i=>i.level==='ok')
@@ -369,8 +366,8 @@ function renderChannel(chanInfo, result, container) {
       div.innerHTML = `
         <span class="v-ico">${ico}</span>
         <div class="v-body">
-          <div class="v-title"><a href="https://youtu.be/${video.id}" target="_blank">${esc(video.title)}</a></div>
-          <div class="v-meta">${video.date}${musicKw?` · 🎵 含音樂關鍵字「${esc(musicKw)}」`:''}</div>
+          <div class="v-title"><a href="https://youtu.be/${video.id}" target="_blank" rel="noopener noreferrer">${esc(video.title)}</a></div>
+          <div class="v-meta">${video.date}${musicKw?` 繚 ? ?恍璅??萄???{esc(musicKw)}?:''}</div>
           <div class="v-issues">${issueHtml}${okHtml}</div>
         </div>`;
       body.appendChild(div);
@@ -379,7 +376,7 @@ function renderChannel(chanInfo, result, container) {
     if (okCnt>0) {
       const m = document.createElement('div');
       m.className = 'v-more';
-      m.textContent = `…另有 ${okCnt} 支無問題影片（已隱藏）`;
+      m.textContent = `?血??${okCnt} ?舐??敶梁?嚗歇?梯?嚗;
       body.appendChild(m);
     }
   }
@@ -403,17 +400,16 @@ function setFilter(f, el) {
   });
 }
 
-// ── 主流程 ──
+// ?? 銝餅?蝔???
 async function startAudit() {
   document.getElementById('welcome').style.display = 'none';
   document.getElementById('run-btn').disabled = true;
-  document.getElementById('run-btn').textContent = '稽核中…';
+  document.getElementById('run-btn').textContent = '蝔賣銝凌?;
   document.getElementById('progress-wrap').style.display = 'block';
   document.getElementById('summary-bar').style.display = 'none';
   document.getElementById('filter-bar').style.display = 'none';
   document.getElementById('results').innerHTML = '';
-  Object.keys(_cache).forEach(k=>delete _cache[k]); // 清除記憶體快取（保留 sessionStorage）
-
+  Object.keys(_cache).forEach(k=>delete _cache[k]); // 皜閮擃翰??靽? sessionStorage嚗?
   const chanMap  = buildChannelMap();
   const vtNameMap = buildVtNameMap();
   const channels = [...chanMap.values()];
@@ -422,7 +418,7 @@ async function startAudit() {
 
   for (let i=0; i<channels.length; i++) {
     const ch = channels[i];
-    document.getElementById('progress-text').textContent = `正在稽核 ${ch.label}（${i+1}／${channels.length}）`;
+    document.getElementById('progress-text').textContent = `甇?蝔賣 ${ch.label}嚗?{i+1}嚗?{channels.length}嚗;
     document.getElementById('prog-fill').style.width = `${Math.round((i+1)/channels.length*100)}%`;
 
     let result;
@@ -436,7 +432,7 @@ async function startAudit() {
       const block = document.createElement('div');
       block.className = 'ch-block';
       block.dataset.hasFlagged = '0';
-      block.innerHTML = `<div class="ch-hd"><span class="ch-name">${esc(ch.label)}</span><div class="ch-stats"><span style="color:#f87171">⚠️ 抓取失敗：${esc(result.error)}</span></div></div>`;
+      block.innerHTML = `<div class="ch-hd"><span class="ch-name">${esc(ch.label)}</span><div class="ch-stats"><span style="color:#f87171">?? ??憭望?嚗?{esc(result.error)}</span></div></div>`;
       container.appendChild(block);
       continue;
     }
@@ -446,17 +442,17 @@ async function startAudit() {
     renderChannel(ch, result, container);
   }
 
-  document.getElementById('progress-text').textContent = `✅ 稽核完成（${channels.length} 個頻道）`;
+  document.getElementById('progress-text').textContent = `??蝔賣摰?嚗?{channels.length} ???`;
   document.getElementById('prog-fill').style.width = '100%';
   document.getElementById('run-btn').disabled = false;
-  document.getElementById('run-btn').textContent = '▶ 重新稽核';
+  document.getElementById('run-btn').textContent = '???蝔賣';
 
   const sb = document.getElementById('summary-bar');
   sb.style.display = 'flex';
   sb.innerHTML = `
-    <div class="sb-item"><strong>${channels.length}</strong>個頻道</div>
-    <div class="sb-item"><strong>${sumVideos}</strong>支影片</div>
-    <div class="sb-item ${sumIssues>0?'sb-red':''}"><strong>${sumIssues}</strong>個疑似問題${sumIssues===0?' 🎉':''}</div>`;
+    <div class="sb-item"><strong>${channels.length}</strong>???/div>
+    <div class="sb-item"><strong>${sumVideos}</strong>?臬蔣??/div>
+    <div class="sb-item ${sumIssues>0?'sb-red':''}"><strong>${sumIssues}</strong>??隡澆?憿?{sumIssues===0?' ??':''}</div>`;
   document.getElementById('filter-bar').style.display = 'flex';
 }
 </script>
