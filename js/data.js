@@ -1024,6 +1024,8 @@ const vtubers = [
     generation: "二期生",
     avatar: "https://pbs.twimg.com/profile_images/2039763954331951104/OlHLWeDM_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1675184947248926720/1761589480/1500x500",
+    bgmVideoId: "o_8vsVg2z9s",
+    bgmLabel:   "未眠",
     tagline: "",
     taglines: [
       { context: "", text: "HOYO" },
