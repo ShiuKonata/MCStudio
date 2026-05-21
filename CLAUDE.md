@@ -17,6 +17,43 @@
 
 ---
 
+## 🔴 HTML 檔案編碼安全規則（2026-05-21 因亂碼事件新增）
+
+### 背景
+Commit `0efbcdc` 使用 Edit tool 對 HTML 檔案進行批次修改，導致中文字元全部損壞為 PUA 字元（U+E000–U+F8FF）並加入 UTF-8 BOM，網站完全無法顯示。
+
+### 強制規則
+
+**Rule E-1：禁止用 Edit tool 批次修改含中文的 HTML 檔案**
+- ❌ 禁止：對 index.html、vtubers.html、vtuber.html 等含中文的 HTML 使用 Edit tool 進行正則/批次替換
+- ✅ 正確：用 PowerShell 的字串替換（`-replace`）搭配 UTF8NoBOM 儲存
+
+**Rule E-2：寫入 HTML 檔案必須用 UTF-8 without BOM**
+```powershell
+# 正確寫法
+$utf8NoBOM = New-Object System.Text.UTF8Encoding($false)
+$content = [IO.File]::ReadAllText("file.html", [Text.UTF8Encoding]::new($true))
+# 修改 $content ...
+[IO.File]::WriteAllText("file.html", $content, $utf8NoBOM)
+
+# ❌ 錯誤寫法（會加 BOM）
+# Set-Content -Encoding UTF8 ...
+# [IO.File]::WriteAllText("file.html", $content, [Text.Encoding]::UTF8)
+```
+
+**Rule E-3：commit 前 pre-commit hook 會自動檢查**
+- `.git/hooks/pre-commit` 已建立，會檢查 BOM 與 PUA 字元
+- 若出現 ❌ 訊息代表有編碼問題，不能繼續 commit
+- 若 hook 被跳過（--no-verify），代表繞過了保護，**嚴禁使用 --no-verify**
+
+**Rule E-4：發現亂碼時的修復流程**
+1. `git log --oneline -- <file>` 找到最後一個正確的 commit hash
+2. `git checkout <good-hash> -- <file>` 還原
+3. 用 PowerShell 重新套用需要的修改
+4. 用 UTF8NoBOM 儲存後再 commit
+
+---
+
 ## 專案概述
 台灣預見娛樂 Vtuber 粉絲介紹網站，純靜態 HTML + CSS + JS，部署於 GitHub Pages。
 
