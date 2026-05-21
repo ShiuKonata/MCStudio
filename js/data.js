@@ -1614,7 +1614,7 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/崎塔 v1.0.jpg" },
     ],
 
-    songStatsPublishedId: "2PACX-1vQ75k5SD7Ie-T4qiFY69ZHJjw5zpvkuNMlqvLAG1DvgJYfwRavF3exXpeqldJ_7vqP4FozF-zWzXl5W",
+    songStatsPublishedId: "2PACX-1vQ75k5SD7Ie-T4qiFY69ZHJjw5zpvkuNMlqvLAG1DvgJYfwRavF3exXpeqIdJ_7vqP4FozF-zWzXl5W",
     songStatsGids: {
       "2025": "1583821169",
     },
@@ -1993,7 +1993,7 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/諾恪里 v1.0.jpg" },
     ],
 
-    songStatsPublishedId: "2PACX-1vT7RbQBkhS751OdsTcO3TzCtd1RsEeqg5EXfMHsb4S9dmYpWfhmInP4EohsbfVcut6RvDTsS5fWRK44",
+    songStatsPublishedId: "2PACX-1vT7RbQBkhS751OdsTc03TzCtd1RsEeqg5EXfMHsb4S9dmYpWfhmInP4Eohsbfvcut6RvDTsS5fWRK44",
     songStatsGids: {
       "2026": "2008032412",
       "2025": "1583821169",
