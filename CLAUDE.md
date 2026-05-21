@@ -17,6 +17,35 @@
 
 ---
 
+## 💾 備份規則（2026-05-21 新增）
+
+### 備份腳本位置
+`C:\Claude Ai\backup_site.ps1`
+
+### 何時執行備份
+- **大規模修改前**（例如批次新增多個剪輯頻道、改動多個 VTuber 資料）
+- **有疑慮的操作前**（不確定某個修改是否正確時）
+- **使用者要求時**
+
+### 執行方式
+```powershell
+powershell -ExecutionPolicy Bypass -File "C:\Claude Ai\backup_site.ps1"
+```
+
+### 備份內容
+- **git tag**：在 GitHub 上標記為 `backup-YYYY-MM-DD_HHMM`，可隨時還原
+- **本機檔案**：複製 12 個關鍵檔案至 `C:\Claude Ai\備份\backup-YYYY-MM-DD_HHMM\`，保留最近 30 份
+
+### 還原方式
+```powershell
+# 還原單一檔案（最常用）
+git checkout backup-2026-05-21_2304 -- js/data.js
+
+# 或直接從本機備份資料夾複製
+```
+
+---
+
 ## 🔴 HTML 檔案編碼安全規則（2026-05-21 因亂碼事件新增）
 
 ### 背景
