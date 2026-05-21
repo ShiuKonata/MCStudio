@@ -381,11 +381,31 @@
     let allFeedback = [];
     let currentFilter = 'all';
 
+    // ── Session 過期自動踢回登入頁 ──
+    sb.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT' || !session) {
+        document.getElementById('admin-view').style.display = 'none';
+        document.getElementById('login-view').style.display = 'flex';
+        allFeedback = [];
+      }
+    });
+
     // ── 啟動時判斷是否已登入 ──
     (async () => {
       const { data: { session } } = await sb.auth.getSession();
       if (session) showAdmin();
     })();
+
+    // ── 驗證 session（每次敏感操作前呼叫）──
+    async function requireAuth() {
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) {
+        alert('登入已逾時，請重新登入');
+        await sb.auth.signOut();
+        return false;
+      }
+      return true;
+    }
 
     // ── 登入 ──
     async function login() {
@@ -425,6 +445,7 @@
 
     // ── 載入資料 ──
     async function loadFeedback() {
+      if (!await requireAuth()) return;
       const { data, error } = await sb
         .from('feedback')
         .select('*')
@@ -539,6 +560,7 @@
 
     // ── 儲存回覆 ──
     async function saveReply(id) {
+      if (!await requireAuth()) return;
       const txt = document.getElementById('reply-' + id)?.value || '';
       const { error } = await sb.from('feedback').update({ reply: txt }).eq('id', id);
       if (error) { alert('儲存失敗：' + error.message); return; }
@@ -549,6 +571,7 @@
 
     // ── 標記解決（同時儲存回覆） ──
     async function resolve(id) {
+      if (!await requireAuth()) return;
       const txt = document.getElementById('reply-' + id)?.value || '';
       const { error } = await sb.from('feedback')
         .update({ status: 'resolved', reply: txt }).eq('id', id);
@@ -561,6 +584,7 @@
 
     // ── 重新開啟 ──
     async function setStatus(id, status) {
+      if (!await requireAuth()) return;
       const { error } = await sb.from('feedback').update({ status }).eq('id', id);
       if (error) { alert('操作失敗：' + error.message); return; }
       const f = allFeedback.find(x => x.id === id);
@@ -571,6 +595,7 @@
 
     // ── 刪除回報 ──
     async function deleteItem(id) {
+      if (!await requireAuth()) return;
       if (!confirm('確定要永久刪除這筆回報嗎？此操作無法復原。')) return;
       const { error } = await sb.from('feedback').delete().eq('id', id);
       if (error) { alert('刪除失敗：' + error.message); return; }
