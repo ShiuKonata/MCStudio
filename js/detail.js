@@ -956,7 +956,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── 各分頁影片渲染 ────────────────────────────
-  renderVideoCards(v.videos,     'video-grid',      '🎵');
+  // 原創曲&Cover：如果有 youtubeChannelId，則改用自動載入；否則用手動資料
+  if (!v.youtubeChannelId && v.videos) {
+    renderVideoCards(v.videos, 'video-grid', '🎵');
+  }
   renderVideoCards(v.shorts,     'shorts-grid',     '📱');
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
@@ -1149,10 +1152,25 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.classList.add('active');
     const filter = btn.dataset.vfilter;
     document.querySelectorAll('#video-grid .ls-card').forEach(card => {
+      const videoType = card.dataset.videoType;
       const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
-      if (filter === 'all')    card.style.display = '';
-      else if (filter === '原創曲') card.style.display = title.includes('原創') ? '' : 'none';
-      else if (filter === 'Cover')  card.style.display = title.toLowerCase().includes('cover') ? '' : 'none';
+      if (filter === 'all') {
+        card.style.display = '';
+      } else if (filter === '原創曲') {
+        // 優先用 data-video-type，如果沒有則fallback到標題判斷（相容舊的手動影片）
+        if (videoType) {
+          card.style.display = videoType === 'original' ? '' : 'none';
+        } else {
+          card.style.display = title.includes('原創') ? '' : 'none';
+        }
+      } else if (filter === 'Cover') {
+        // 優先用 data-video-type，如果沒有則fallback到標題判斷（相容舊的手動影片）
+        if (videoType) {
+          card.style.display = videoType === 'cover' ? '' : 'none';
+        } else {
+          card.style.display = title.toLowerCase().includes('cover') ? '' : 'none';
+        }
+      }
     });
   });
 
@@ -1837,6 +1855,180 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── 原創曲&Cover 自動分類（YouTube Data API v3 + 排除法）───
+  // 功能：自動抓取頻道全部上傳，排除直播存檔 & Shorts，用 keywords 分類
+  let tryLoadCoverOriginal = null;
+  if (v.youtubeChannelId) {
+    const coLoading = { inProgress: false };
+    const uploadsPlaylistId_CO = 'UU' + v.youtubeChannelId.slice(2);
+
+    async function fetchCoPage(pageToken) {
+      let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
+        + '?part=snippet'
+        + '&playlistId=' + encodeURIComponent(uploadsPlaylistId_CO)
+        + '&maxResults=50'
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+      return await res.json();
+    }
+
+    function parseDurationSecCO(dur) {
+      const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      if (!m) return 0;
+      return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+    }
+
+    async function fetchVideoDetailsCO(videoIds) {
+      if (!videoIds.length) return {};
+      const url = 'https://www.googleapis.com/youtube/v3/videos'
+        + '?part=contentDetails,snippet,liveStreamingDetails'
+        + '&id=' + videoIds.join(',')
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+      const data = await res.json();
+      const map = {};
+      (data.items || []).forEach(item => {
+        map[item.id] = {
+          duration:    parseDurationSecCO(item.contentDetails.duration || 'PT0S'),
+          wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
+        };
+      });
+      return map;
+    }
+
+    function renderCoCard(container, item, videoType) {
+      const snip     = item.snippet;
+      const vid      = snip.resourceId && snip.resourceId.videoId;
+      if (!vid) return;
+      const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
+      const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
+      const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
+      const title    = esc(snip.title || '');
+      container.innerHTML += `
+        <div class="ls-card" data-video-type="${videoType}" onclick="(function(){
+          document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+          document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+          document.getElementById('yt-modal-title').textContent='${title}';
+          document.getElementById('yt-modal').classList.add('open');
+          document.body.style.overflow='hidden';
+        })()">
+          <div class="ls-thumb-wrap">
+            <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+            <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+          </div>
+          <div class="ls-info">
+            <div class="ls-title">${title || '（無標題）'}</div>
+            ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+          </div>
+        </div>`;
+    }
+
+    async function loadCoverOriginal() {
+      if (coLoading.inProgress) return;
+      coLoading.inProgress = true;
+
+      const container = document.getElementById('video-grid');
+      if (!container) { coLoading.inProgress = false; return; }
+
+      container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
+
+      try {
+        const coCacheKey = 'mc_co_' + v.youtubeChannelId;
+        const coCached = cacheGet(coCacheKey);
+        if (coCached) {
+          container.innerHTML = coCached.html;
+          coLoading.inProgress = false;
+          return;
+        }
+
+        container.innerHTML = '';
+        let pageToken = null;
+        let allVideos = [];
+        let unclassified = [];
+
+        // 翻頁抓取所有上傳（不設上限，讓它跑到沒有分頁為止）
+        do {
+          const data = await fetchCoPage(pageToken);
+          if (data.error) {
+            console.error('CO API Error:', data.error.message);
+            throw new Error(data.error.message);
+          }
+
+          const items = data.items || [];
+          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          if (videoIds.length === 0) break;
+
+          const detailMap = await fetchVideoDetailsCO(videoIds);
+          for (const item of items) {
+            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+            if (!vid) continue;
+            const d = detailMap[vid];
+            if (!d) continue;
+            // 排除：直播存檔 & Shorts
+            if (d.wasLive) continue;
+            if (d.duration <= 60) continue;
+            allVideos.push({ item, title: item.snippet.title, date: item.snippet.publishedAt?.slice(0,10) || '' });
+          }
+
+          pageToken = data.nextPageToken || null;
+          if (!pageToken) break;
+        } while (true);
+
+        // 分類邏輯：標題含 "cover" 或 "official"（不分大小寫）
+        const coverKeywords = ['cover'];
+        const officialKeywords = ['official'];
+
+        let coverCount = 0, originalCount = 0;
+
+        for (const item of allVideos) {
+          const titleLower = item.title.toLowerCase();
+          const isCover = coverKeywords.some(kw => titleLower.includes(kw));
+          const isOfficial = officialKeywords.some(kw => titleLower.includes(kw));
+
+          if (isCover) {
+            renderCoCard(container, item.item, 'cover');
+            coverCount++;
+          } else if (isOfficial) {
+            renderCoCard(container, item.item, 'original');
+            originalCount++;
+          } else {
+            // 未分類的影片記錄下來，之後列到 console
+            unclassified.push(item);
+          }
+        }
+
+        // 如果沒有任何分類影片，顯示提示
+        if (coverCount === 0 && originalCount === 0 && unclassified.length === 0) {
+          container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noUploads')}</p></div>`;
+        } else if (coverCount === 0 && originalCount === 0) {
+          // 有未分類但無分類影片
+          container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>無「Cover」或「Official」標籤影片</p></div>`;
+        }
+
+        // 快取結果
+        cacheSet(coCacheKey, { html: container.innerHTML });
+
+        // 將未分類影片列到 console，供手動分類
+        if (unclassified.length > 0) {
+          console.group(`🎵 ${v.name} 未分類影片（共 ${unclassified.length} 部）`);
+          console.log('請根據以下影片判斷是 Cover 還是 Original，回報給開發者：');
+          unclassified.forEach((vitem, idx) => {
+            console.log(`${idx + 1}. [${vitem.date}] ${vitem.title}`);
+          });
+          console.groupEnd();
+        }
+
+        coLoading.inProgress = false;
+      } catch (err) {
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
+        coLoading.inProgress = false;
+      }
+    }
+
+    tryLoadCoverOriginal = function() { loadCoverOriginal(); };
+  }
+
   // ── Shorts 存檔（YouTube Data API v3）───────────
   let tryLoadYtShorts = null;
   if (v.youtubeChannelId) {
@@ -2257,6 +2449,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prevLink) prevLink.href = `vtuber.html?id=${prev.id}&tab=${key}`;
     if (nextLink) nextLink.href = `vtuber.html?id=${next.id}&tab=${key}`;
 
+    // 原創曲&Cover：首次進入分頁時才開始載入
+    if (key === 'videos' && tryLoadCoverOriginal && !window._coLoaded) {
+      window._coLoaded = true;
+      tryLoadCoverOriginal();
+    }
     // 直播存檔：首次進入分頁時才開始載入
     if (key === 'livestreams' && tryLoadLiveStreams && !window._lsLoaded) {
       window._lsLoaded = true;
