@@ -898,6 +898,32 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/酒樂霧子 v1.0.png" },
     ],
 
+    // 小知識
+    fanName: "妖眾",
+    hashTags: [
+      { label: "一般", tag: "#這裡有酒"  },
+      { label: "配信", tag: "#酒鬼夜行"  },
+      { label: "創作", tag: "#霧裏看FA"  },
+      { label: "Meme", tag: "#me霧"      },
+    ],
+    futureGoals: [
+      "接到酒類工商",
+      "跟人類們一起喝酒！",
+      "更了解人類們的文化",
+      "妖眾越來越多，重現百鬼夜行",
+    ],
+    triviaLikes: [
+      { label: "喜歡的東西",   items: ["一句話就是酒"] },
+      { label: "喜歡的動漫",   items: ["Fate Zero", "JOJO", "遊戲人生", "堀與宮村"] },
+      { label: "擅長的",       items: ["乞丐超人", "喝酒", "想要吃什麼"] },
+      { label: "喜歡的音樂",   items: ["RAP", "J-POP", "VOCALOID", "C-POP", "J-ROCK", "INDIE BAND"] },
+    ],
+    triviaHates: [
+      { label: "不擅長",       items: ["恐怖遊戲", "FPS", "辣的", "運動", "找路"] },
+      { label: "討厭的蔬果",   items: ["番茄（非常討厭）"] },
+      { label: "討厭的東西",   items: ["太陽", "草＆土", "昆蟲"] },
+    ],
+
     musicClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku"],          typeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子歌回剪輯"] },
