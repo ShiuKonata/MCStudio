@@ -1219,6 +1219,22 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/結月莉莉奈 v2.0.png" },
     ],
 
+    // 小知識
+    fanName: "眠花",
+    hashTags: [
+      { label: "All",    tag: "#莉莉估奈" },
+      { label: "FanArt", tag: "#來張莉繪" },
+      { label: "Live",   tag: "#純奈日常" },
+    ],
+    triviaLikes: [
+      { label: "擅長的東西", items: ["哄睡", "做夢", "占卜"] },
+      { label: "喜歡的東西", items: ["火鍋", "奶茶", "下雨天", "數字9", "粉色", "睡覺", "毛茸茸的東西"] },
+    ],
+    triviaHates: [
+      { label: "不擅長的東西", items: ["算數", "3C", "路癡"] },
+      { label: "討厭的東西",   items: ["蝸牛", "地震", "巨響"] },
+    ],
+
     songStatsGids: {
       "2026": "576233128",
       "2025": "76355894",
