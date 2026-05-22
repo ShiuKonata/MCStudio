@@ -1985,7 +1985,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!pageToken) break;
         } while (true);
 
-        // 篩選：只顯示含 "cover" 或 "official" 的影片（需要分類）
+        // 篩選：只顯示不含 "cover" 和 "official" 的影片（未分類的）
         const coverKeywords = ['cover'];
         const officialKeywords = ['official'];
 
@@ -1994,8 +1994,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const isCover = coverKeywords.some(kw => titleLower.includes(kw));
           const isOfficial = officialKeywords.some(kw => titleLower.includes(kw));
 
-          // 只顯示含 cover 或 official 的（需要分類）
-          if (isCover || isOfficial) {
+          // 只顯示都不符合的（未分類的）
+          if (!isCover && !isOfficial) {
             renderUnclassCard(container, item);
             unclassifiedCount++;
           }
