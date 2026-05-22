@@ -644,6 +644,23 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/神無月鹿比 v2.0.jpg" },
     ],
 
+    // 小知識
+    fanName: "鹿餅",
+    hashTags: [
+      { label: "Hashtag", tag: "#鹿過人間" },
+      { label: "FanArt",  tag: "#DrawLubee" },
+      { label: "Meme",    tag: "#Meme鹿"   },
+    ],
+    futureGoals: [
+      "希望不工作就會有錢從天上掉下來的遊戲廢鹿",
+    ],
+    triviaLikes: [
+      { label: "最喜歡的食物", items: ["酸菜魚（女神逢人就推）", "燒烤", "麻奶鍋", "蛤蠣", "巧克力", "拉麵", "萬波的冬瓜檸檬"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的食物", items: ["苜蓿芽", "牡蠣", "苦瓜"] },
+    ],
+
     musicClipsChannelIds: [
       { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["哈鹿"], typeKeywords: ["歌回", "合唱"] },
     ],
