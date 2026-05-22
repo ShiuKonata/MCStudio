@@ -444,7 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="ls-year-btn active" data-vfilter="all">${T('videos.all')}</button>
             <button class="ls-year-btn" data-vfilter="原創曲">${T('videos.original')}</button>
             <button class="ls-year-btn" data-vfilter="Cover">${T('videos.cover')}</button>
-            <button class="ls-year-btn" data-vfilter="unclassified" style="display:none">❓ 未分類</button>
           </div>
           <div class="livestreams-container" id="video-grid"></div>
         </div>
@@ -466,6 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="uploads">${T('officialvideos.uploads')}</button>
             <button class="ov-section-btn" data-ovsection="shorts">${T('officialvideos.shorts')}</button>
+            <button class="ov-section-btn" data-ovsection="unclassified" style="display:none">❓ 未分類</button>
           </div>
 
           <!-- 官方上傳影片 section -->
@@ -502,6 +502,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
               <button class="ls-load-more-btn" id="yts-load-more-btn">${T('loadMore')}</button>
             </div>
+          </div>
+
+          <!-- 未分類 section -->
+          <div id="ov-unclassified-section" style="display:none">
+            <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;margin-bottom:0.7rem;font-weight:600;flex-shrink:0">請對以下影片進行分類</p>
+            <div class="livestreams-container" id="ov-unclassified-container"></div>
           </div>
         </div>` : ''}
 
@@ -1171,8 +1177,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           card.style.display = title.includes('【cover】') || title.toLowerCase().includes('cover') ? '' : 'none';
         }
-      } else if (filter === 'unclassified') {
-        card.style.display = videoType === 'unclassified' ? '' : 'none';
       }
     });
   });
@@ -1839,7 +1843,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('input', e => { if (e.target.id === 'ovu-search-input') applyOvuSearch(); });
     document.addEventListener('click', e => { if (e.target.id === 'ovu-search-clear') { document.getElementById('ovu-search-input').value = ''; applyOvuSearch(); } });
 
-    // 大分類切換（官方上傳影片 ↔ 官方Shorts）
+    // 大分類切換（官方上傳影片 ↔ 官方Shorts ↔ 未分類）
     document.addEventListener('click', e => {
       const btn = e.target.closest('.ov-section-btn');
       if (!btn) return;
@@ -1848,27 +1852,33 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       const uploadsEl = document.getElementById('ov-uploads-section');
       const shortsEl  = document.getElementById('ov-shorts-section');
+      const unclassifiedEl = document.getElementById('ov-unclassified-section');
       if (uploadsEl) uploadsEl.style.display = section === 'uploads' ? '' : 'none';
       if (shortsEl)  shortsEl.style.display  = section === 'shorts'  ? '' : 'none';
+      if (unclassifiedEl) unclassifiedEl.style.display = section === 'unclassified' ? '' : 'none';
       // Shorts：首次切換時才觸發載入
       if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
         tryLoadYtShorts();
       }
+      // 未分類：首次切換時才觸發載入
+      if (section === 'unclassified' && tryLoadUnclassified && !window._ovuUnclassifiedLoaded) {
+        window._ovuUnclassifiedLoaded = true;
+        tryLoadUnclassified();
+      }
     });
   }
 
-  // ── 原創曲&Cover 自動分類（YouTube Data API v3 + 排除法）───
-  // 功能：自動抓取頻道全部上傳，排除直播存檔 & Shorts，用 keywords 分類
-  let tryLoadCoverOriginal = null;
+  // ── 官方剪輯：未分類影片（YouTube Data API v3）───
+  // 功能：自動抓取未分類影片（排除直播存檔 & Shorts，且標題不含 cover/official）
+  let tryLoadUnclassified = null;
   if (v.youtubeChannelId) {
-    const coLoading = { inProgress: false };
-    const uploadsPlaylistId_CO = 'UU' + v.youtubeChannelId.slice(2);
+    const uploadsPlaylistId_Unclass = 'UU' + v.youtubeChannelId.slice(2);
 
-    async function fetchCoPage(pageToken) {
+    async function fetchUnclassPage(pageToken) {
       let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
         + '?part=snippet'
-        + '&playlistId=' + encodeURIComponent(uploadsPlaylistId_CO)
+        + '&playlistId=' + encodeURIComponent(uploadsPlaylistId_Unclass)
         + '&maxResults=50'
         + '&key=' + encodeURIComponent(v.ytApiKey);
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
@@ -1876,13 +1886,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return await res.json();
     }
 
-    function parseDurationSecCO(dur) {
+    function parseDurationSecUnclass(dur) {
       const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
       if (!m) return 0;
       return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
     }
 
-    async function fetchVideoDetailsCO(videoIds) {
+    async function fetchVideoDetailsUnclass(videoIds) {
       if (!videoIds.length) return {};
       const url = 'https://www.googleapis.com/youtube/v3/videos'
         + '?part=contentDetails,snippet,liveStreamingDetails'
@@ -1893,35 +1903,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const map = {};
       (data.items || []).forEach(item => {
         map[item.id] = {
-          duration:    parseDurationSecCO(item.contentDetails.duration || 'PT0S'),
+          duration:    parseDurationSecUnclass(item.contentDetails.duration || 'PT0S'),
           wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
         };
       });
       return map;
     }
 
-    function renderCoCard(container, item, videoType) {
+    function renderUnclassCard(container, item) {
       const snip     = item.snippet;
       const vid      = snip.resourceId && snip.resourceId.videoId;
       if (!vid) return;
       const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
       const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
-      const originalTitle = snip.title || '';
-      // 加上分類前綴
-      let displayTitle = originalTitle;
-      let badgeHTML = '';
-      if (videoType === 'cover') {
-        displayTitle = `【Cover】${originalTitle}`;
-      } else if (videoType === 'original') {
-        displayTitle = `【原創】${originalTitle}`;
-      } else if (videoType === 'unclassified') {
-        badgeHTML = '<div class="ls-unclassified-badge">❓ 未分類</div>';
-      }
-      const title    = esc(displayTitle);
-      const cardStyle = videoType === 'unclassified' ? 'opacity:0.85;border:2px dashed rgba(255,255,255,0.3);' : '';
+      const title    = esc(snip.title || '');
       container.innerHTML += `
-        <div class="ls-card" data-video-type="${videoType}" style="${cardStyle}" onclick="(function(){
+        <div class="ls-card" style="opacity:0.85;border:2px dashed rgba(255,255,255,0.3);" onclick="(function(){
           document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
           document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
           document.getElementById('yt-modal-title').textContent='${title}';
@@ -1931,7 +1929,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ls-thumb-wrap">
             <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
             <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-            ${badgeHTML}
+            <div class="ls-unclassified-badge">❓ 未分類</div>
           </div>
           <div class="ls-info">
             <div class="ls-title">${title || '（無標題）'}</div>
@@ -1940,34 +1938,30 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
     }
 
-    async function loadCoverOriginal() {
-      if (coLoading.inProgress) return;
-      coLoading.inProgress = true;
-
-      const container = document.getElementById('video-grid');
-      if (!container) { coLoading.inProgress = false; return; }
+    async function loadUnclassifiedVideos() {
+      const container = document.getElementById('ov-unclassified-container');
+      if (!container) return;
 
       container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
 
       try {
-        const coCacheKey = 'mc_co_' + v.youtubeChannelId;
-        const coCached = cacheGet(coCacheKey);
-        if (coCached) {
-          container.innerHTML = coCached.html;
-          coLoading.inProgress = false;
+        const unclassCacheKey = 'mc_unclass_' + v.youtubeChannelId;
+        const unclassCached = cacheGet(unclassCacheKey);
+        if (unclassCached) {
+          container.innerHTML = unclassCached.html;
           return;
         }
 
         container.innerHTML = '';
         let pageToken = null;
         let allVideos = [];
-        let unclassified = [];
+        let unclassifiedCount = 0;
 
-        // 翻頁抓取所有上傳（不設上限，讓它跑到沒有分頁為止）
+        // 翻頁抓取所有上傳
         do {
-          const data = await fetchCoPage(pageToken);
+          const data = await fetchUnclassPage(pageToken);
           if (data.error) {
-            console.error('CO API Error:', data.error.message);
+            console.error('Unclass API Error:', data.error.message);
             throw new Error(data.error.message);
           }
 
@@ -1975,7 +1969,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
           if (videoIds.length === 0) break;
 
-          const detailMap = await fetchVideoDetailsCO(videoIds);
+          const detailMap = await fetchVideoDetailsUnclass(videoIds);
           for (const item of items) {
             const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
             if (!vid) continue;
@@ -1984,75 +1978,50 @@ document.addEventListener('DOMContentLoaded', () => {
             // 排除：直播存檔 & Shorts
             if (d.wasLive) continue;
             if (d.duration <= 60) continue;
-            allVideos.push({ item, title: item.snippet.title, date: item.snippet.publishedAt?.slice(0,10) || '' });
+            allVideos.push(item);
           }
 
           pageToken = data.nextPageToken || null;
           if (!pageToken) break;
         } while (true);
 
-        // 分類邏輯：標題含 "cover" 或 "official"（不分大小寫）
+        // 篩選：只顯示不含 "cover" 和 "official" 的影片
         const coverKeywords = ['cover'];
         const officialKeywords = ['official'];
 
-        let coverCount = 0, originalCount = 0, unclassifiedCount = 0;
-
         for (const item of allVideos) {
-          const titleLower = item.title.toLowerCase();
+          const titleLower = (item.snippet.title || '').toLowerCase();
           const isCover = coverKeywords.some(kw => titleLower.includes(kw));
           const isOfficial = officialKeywords.some(kw => titleLower.includes(kw));
 
-          if (isCover) {
-            renderCoCard(container, item.item, 'cover');
-            coverCount++;
-          } else if (isOfficial) {
-            renderCoCard(container, item.item, 'original');
-            originalCount++;
-          } else {
-            // 未分類的影片也渲染，但用特殊標記
-            renderCoCard(container, item.item, 'unclassified');
+          // 只顯示未分類的（都不符合）
+          if (!isCover && !isOfficial) {
+            renderUnclassCard(container, item);
             unclassifiedCount++;
-            unclassified.push(item);
           }
         }
 
-        // 如果沒有任何影片，顯示提示
-        if (coverCount === 0 && originalCount === 0 && unclassifiedCount === 0) {
-          container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noUploads')}</p></div>`;
+        // 如果沒有未分類影片，隱藏「未分類」按鈕
+        const unclassBtn = document.querySelector('.ov-section-btn[data-ovsection="unclassified"]');
+        if (unclassBtn) {
+          if (unclassifiedCount > 0) {
+            unclassBtn.style.display = '';
+          } else {
+            unclassBtn.style.display = 'none';
+            container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">✅</span><p>所有影片已分類！</p></div>`;
+          }
         }
 
         // 快取結果
-        cacheSet(coCacheKey, { html: container.innerHTML });
+        cacheSet(unclassCacheKey, { html: container.innerHTML });
 
-        // 更新未分類按鈕的顯示狀態
-        const unclassifiedBtn = document.querySelector('.ls-year-btn[data-vfilter="unclassified"]');
-        if (unclassifiedBtn) {
-          if (unclassifiedCount > 0) {
-            unclassifiedBtn.style.display = '';
-            unclassifiedBtn.textContent = `❓ 未分類 (${unclassifiedCount})`;
-          } else {
-            unclassifiedBtn.style.display = 'none';
-          }
-        }
-
-        // 將未分類影片輸出到 console（供參考）
-        if (unclassified.length > 0) {
-          console.group(`🎵 ${v.name} 未分類影片（共 ${unclassified.length} 部）`);
-          console.log('請在網頁上點擊「未分類」標籤查看，或根據以下列表判斷：');
-          unclassified.forEach((vitem, idx) => {
-            console.log(`${idx + 1}. [${vitem.date}] ${vitem.title}`);
-          });
-          console.groupEnd();
-        }
-
-        coLoading.inProgress = false;
+        console.log(`📋 ${v.name} 未分類影片：${unclassifiedCount} 部（請在網頁上查看並分類）`);
       } catch (err) {
         container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
-        coLoading.inProgress = false;
       }
     }
 
-    tryLoadCoverOriginal = function() { loadCoverOriginal(); };
+    tryLoadUnclassified = function() { loadUnclassifiedVideos(); };
   }
 
   // ── Shorts 存檔（YouTube Data API v3）───────────
@@ -2475,11 +2444,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prevLink) prevLink.href = `vtuber.html?id=${prev.id}&tab=${key}`;
     if (nextLink) nextLink.href = `vtuber.html?id=${next.id}&tab=${key}`;
 
-    // 原創曲&Cover：首次進入分頁時才開始載入
-    if (key === 'videos' && tryLoadCoverOriginal && !window._coLoaded) {
-      window._coLoaded = true;
-      tryLoadCoverOriginal();
-    }
     // 直播存檔：首次進入分頁時才開始載入
     if (key === 'livestreams' && tryLoadLiveStreams && !window._lsLoaded) {
       window._lsLoaded = true;
