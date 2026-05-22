@@ -719,6 +719,22 @@ const vtubers = [
       { version: "Ver 1.0", url: "images/姬城三千華 v1.0.png" },
     ],
 
+    // 小知識
+    fanName: "姬靈鬼",
+    hashTags: [
+      { label: "Hashtag", tag: "#一米幾"    },
+      { label: "Live",    tag: "#見姬行事"  },
+      { label: "Message", tag: "#HiMichi"   },
+      { label: "FanArt",  tag: "#M1chiarT"  },
+      { label: "Meme",    tag: "#MeMe7ka"   },
+    ],
+    triviaLikes: [
+      { label: "喜歡的食物", items: ["炸雞排", "甜", "辣", "火鍋"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的食物", items: ["豆類", "香菜", "青椒"] },
+    ],
+
     songStatsGids: {
       "2026": "873622761",
       "2025": "1816981002",
