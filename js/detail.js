@@ -255,6 +255,20 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
     });
 
+    // 自訂欄位（triviaExtra：icon 選填，items 陣列）
+    const extraList = Array.isArray(v.triviaExtra) ? v.triviaExtra : [];
+    extraList.forEach(extra => {
+      if (!extra.items || !extra.items.length) return;
+      const prefix = extra.icon ? `${extra.icon} ` : '';
+      cards += `
+      <div class="trivia-card">
+        <div class="trivia-label">${prefix}${extra.label}</div>
+        <div class="trivia-items">
+          ${extra.items.map(item => `<span class="trivia-item trivia-extra">${item}</span>`).join('')}
+        </div>
+      </div>`;
+    });
+
     triviaHTML = `
     <div id="tab-trivia" class="tab-panel">
       <div class="detail-section-title">${T('tab.trivia')}</div>

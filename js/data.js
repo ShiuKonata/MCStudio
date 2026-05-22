@@ -971,6 +971,34 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/瓦西瓦瓦 v2.0.png"  },
     ],
 
+    // 小知識
+    fanName: "瓦草",
+    hashTags: [
+      { label: "二創", tag: "#瓦畫了" },
+      { label: "配信", tag: "#瓦開了" },
+      { label: "一般", tag: "#瓦來了" },
+      { label: "迷因", tag: "#吉瓦瓦"  },
+    ],
+    futureGoals: [
+      "一場自己的LIVE",
+      "出一首原創曲",
+      "很多很多的翻唱",
+      "演唱主題曲",
+      "成為宇宙裡一顆閃亮的迷因",
+    ],
+    triviaLikes: [
+      { label: "興趣",       items: ["唱歌", "做善事", "做壞事"] },
+      { label: "喜歡的食物", items: ["茄子", "炸雞", "披薩", "薯條", "薯片", "可樂"] },
+      { label: "喜歡的動漫畫", items: ["東京喰種", "惡魔人Crybaby", "神秘的數字"] },
+    ],
+    triviaHates: [
+      { label: "討厭的動物", items: ["吉娃娃"] },
+      { label: "害怕的東西", items: ["蚯蚓", "蠕蟲", "條狀物??"] },
+    ],
+    triviaExtra: [
+      { label: "瓦瓦有多猛", icon: "💪", items: ["芋頭", "番茄", "茄子", "香菜", "夏威夷披薩", "南瓜", "芹菜", "皮蛋", "臭豆腐"] },
+    ],
+
     songStatsGids: {
       "2026": "1100262502",
       "2025": "911579685",
