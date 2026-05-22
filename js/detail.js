@@ -1580,7 +1580,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── 官方上傳影片（YouTube Data API v3）──────────
-  // 從 UU 上傳清單抓取，排除直播存檔（liveContent!='none'）與 Shorts（duration<=60s）
+  // 從 UU 上傳清單抓取，排除直播存檔（有 liveStreamingDetails.actualStartTime）與 Shorts（duration≤60s）
   let tryLoadOfficialUploads = null;
   if (v.youtubeChannelId) {
     const uploadsPlaylistId = 'UU' + v.youtubeChannelId.slice(2);
@@ -1607,8 +1607,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchVideoDetails(videoIds) {
       if (!videoIds.length) return {};
+      // liveStreamingDetails：有此欄位 = 曾是直播（存檔），無此欄位 = 一般上傳
       const url = 'https://www.googleapis.com/youtube/v3/videos'
-        + '?part=contentDetails,snippet'
+        + '?part=contentDetails,snippet,liveStreamingDetails'
         + '&id=' + videoIds.join(',')
         + '&key=' + encodeURIComponent(v.ytApiKey);
       const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
@@ -1618,6 +1619,7 @@ document.addEventListener('DOMContentLoaded', () => {
         map[item.id] = {
           duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
           liveContent: item.snippet.liveBroadcastContent || 'none',
+          wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
         };
       });
       return map;
@@ -1697,7 +1699,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!vid) continue;
             const d = detailMap[vid];
             if (!d) continue;
-            if (d.liveContent !== 'none') continue;   // 排除直播
+            if (d.wasLive) continue;                   // 排除直播存檔
             if (d.duration <= 60) continue;            // 排除 Shorts
             renderOvuCard(container, item, d.duration);
             count++;
@@ -1726,7 +1728,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!vid) continue;
               const d = detailMap[vid];
               if (!d) continue;
-              if (d.liveContent !== 'none') continue;
+              if (d.wasLive) continue;
               if (d.duration <= 60) continue;
               renderOvuCard(container, item, d.duration);
               totalCount++;
@@ -1764,7 +1766,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!vid) continue;
             const d = detailMap[vid];
             if (!d) continue;
-            if (d.liveContent !== 'none') continue;
+            if (d.wasLive) continue;
             if (d.duration <= 60) continue;
             renderOvuCard(container, item, d.duration);
           }
