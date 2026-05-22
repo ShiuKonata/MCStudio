@@ -444,6 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="ls-year-btn active" data-vfilter="all">${T('videos.all')}</button>
             <button class="ls-year-btn" data-vfilter="原創曲">${T('videos.original')}</button>
             <button class="ls-year-btn" data-vfilter="Cover">${T('videos.cover')}</button>
+            <button class="ls-year-btn" data-vfilter="unclassified" style="display:none">❓ 未分類</button>
           </div>
           <div class="livestreams-container" id="video-grid"></div>
         </div>
@@ -1161,15 +1162,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (videoType) {
           card.style.display = videoType === 'original' ? '' : 'none';
         } else {
-          card.style.display = title.includes('原創') ? '' : 'none';
+          card.style.display = title.includes('【原創】') || title.includes('原創') ? '' : 'none';
         }
       } else if (filter === 'Cover') {
         // 優先用 data-video-type，如果沒有則fallback到標題判斷（相容舊的手動影片）
         if (videoType) {
           card.style.display = videoType === 'cover' ? '' : 'none';
         } else {
-          card.style.display = title.toLowerCase().includes('cover') ? '' : 'none';
+          card.style.display = title.includes('【cover】') || title.toLowerCase().includes('cover') ? '' : 'none';
         }
+      } else if (filter === 'unclassified') {
+        card.style.display = videoType === 'unclassified' ? '' : 'none';
       }
     });
   });
@@ -1904,9 +1907,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
       const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
-      const title    = esc(snip.title || '');
+      const originalTitle = snip.title || '';
+      // 加上分類前綴
+      let displayTitle = originalTitle;
+      let badgeHTML = '';
+      if (videoType === 'cover') {
+        displayTitle = `【Cover】${originalTitle}`;
+      } else if (videoType === 'original') {
+        displayTitle = `【原創】${originalTitle}`;
+      } else if (videoType === 'unclassified') {
+        badgeHTML = '<div class="ls-unclassified-badge">❓ 未分類</div>';
+      }
+      const title    = esc(displayTitle);
+      const cardStyle = videoType === 'unclassified' ? 'opacity:0.85;border:2px dashed rgba(255,255,255,0.3);' : '';
       container.innerHTML += `
-        <div class="ls-card" data-video-type="${videoType}" onclick="(function(){
+        <div class="ls-card" data-video-type="${videoType}" style="${cardStyle}" onclick="(function(){
           document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
           document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
           document.getElementById('yt-modal-title').textContent='${title}';
@@ -1916,6 +1931,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ls-thumb-wrap">
             <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
             <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+            ${badgeHTML}
           </div>
           <div class="ls-info">
             <div class="ls-title">${title || '（無標題）'}</div>
@@ -1979,7 +1995,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const coverKeywords = ['cover'];
         const officialKeywords = ['official'];
 
-        let coverCount = 0, originalCount = 0;
+        let coverCount = 0, originalCount = 0, unclassifiedCount = 0;
 
         for (const item of allVideos) {
           const titleLower = item.title.toLowerCase();
@@ -1993,26 +2009,36 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCoCard(container, item.item, 'original');
             originalCount++;
           } else {
-            // 未分類的影片記錄下來，之後列到 console
+            // 未分類的影片也渲染，但用特殊標記
+            renderCoCard(container, item.item, 'unclassified');
+            unclassifiedCount++;
             unclassified.push(item);
           }
         }
 
-        // 如果沒有任何分類影片，顯示提示
-        if (coverCount === 0 && originalCount === 0 && unclassified.length === 0) {
+        // 如果沒有任何影片，顯示提示
+        if (coverCount === 0 && originalCount === 0 && unclassifiedCount === 0) {
           container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noUploads')}</p></div>`;
-        } else if (coverCount === 0 && originalCount === 0) {
-          // 有未分類但無分類影片
-          container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>無「Cover」或「Official」標籤影片</p></div>`;
         }
 
         // 快取結果
         cacheSet(coCacheKey, { html: container.innerHTML });
 
-        // 將未分類影片列到 console，供手動分類
+        // 更新未分類按鈕的顯示狀態
+        const unclassifiedBtn = document.querySelector('.ls-year-btn[data-vfilter="unclassified"]');
+        if (unclassifiedBtn) {
+          if (unclassifiedCount > 0) {
+            unclassifiedBtn.style.display = '';
+            unclassifiedBtn.textContent = `❓ 未分類 (${unclassifiedCount})`;
+          } else {
+            unclassifiedBtn.style.display = 'none';
+          }
+        }
+
+        // 將未分類影片輸出到 console（供參考）
         if (unclassified.length > 0) {
           console.group(`🎵 ${v.name} 未分類影片（共 ${unclassified.length} 部）`);
-          console.log('請根據以下影片判斷是 Cover 還是 Original，回報給開發者：');
+          console.log('請在網頁上點擊「未分類」標籤查看，或根據以下列表判斷：');
           unclassified.forEach((vitem, idx) => {
             console.log(`${idx + 1}. [${vitem.date}] ${vitem.title}`);
           });
