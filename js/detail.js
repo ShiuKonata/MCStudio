@@ -204,11 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
           ${v.hashTags.map(h => `<span class="trivia-hashtag-pill"><span class="trivia-tag-cat">${h.label}</span>${h.tag}</span>`).join('')}
         </div>
       </div>`;
-    } else {
+    } else if (v.hashTag) {
       cards += `
       <div class="trivia-card">
         <div class="trivia-label">${T('trivia.hashtag')}</div>
-        <div class="trivia-value trivia-hashtag">${v.hashTag || T('trivia.pending')}</div>
+        <div class="trivia-value trivia-hashtag">${v.hashTag}</div>
       </div>`;
     }
 
@@ -221,11 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
           ${v.futureGoals.map(g => `<div class="trivia-goal-item">✦ ${g}</div>`).join('')}
         </div>
       </div>`;
-    } else {
+    } else if (v.futureGoal) {
       cards += `
       <div class="trivia-card trivia-full">
         <div class="trivia-label">${T('trivia.goal')}</div>
-        <div class="trivia-value">${v.futureGoal || T('trivia.pending')}</div>
+        <div class="trivia-value">${v.futureGoal}</div>
       </div>`;
     }
 
