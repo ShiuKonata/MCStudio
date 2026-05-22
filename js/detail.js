@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="uploads">${T('officialvideos.uploads')}</button>
             <button class="ov-section-btn" data-ovsection="shorts">${T('officialvideos.shorts')}</button>
-            <button class="ov-section-btn" data-ovsection="unclassified" style="display:none">❓ 未分類</button>
+            <button class="ov-section-btn" data-ovsection="unclassified">❓ 未分類</button>
           </div>
 
           <!-- 官方上傳影片 section -->
@@ -1985,7 +1985,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!pageToken) break;
         } while (true);
 
-        // 篩選：只顯示不含 "cover" 和 "official" 的影片
+        // 篩選：只顯示含 "cover" 或 "official" 的影片（需要分類）
         const coverKeywords = ['cover'];
         const officialKeywords = ['official'];
 
@@ -1994,22 +1994,16 @@ document.addEventListener('DOMContentLoaded', () => {
           const isCover = coverKeywords.some(kw => titleLower.includes(kw));
           const isOfficial = officialKeywords.some(kw => titleLower.includes(kw));
 
-          // 只顯示未分類的（都不符合）
-          if (!isCover && !isOfficial) {
+          // 只顯示含 cover 或 official 的（需要分類）
+          if (isCover || isOfficial) {
             renderUnclassCard(container, item);
             unclassifiedCount++;
           }
         }
 
-        // 如果沒有未分類影片，隱藏「未分類」按鈕
-        const unclassBtn = document.querySelector('.ov-section-btn[data-ovsection="unclassified"]');
-        if (unclassBtn) {
-          if (unclassifiedCount > 0) {
-            unclassBtn.style.display = '';
-          } else {
-            unclassBtn.style.display = 'none';
-            container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">✅</span><p>所有影片已分類！</p></div>`;
-          }
+        // 如果沒有需要分類的影片
+        if (unclassifiedCount === 0) {
+          container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">✅</span><p>所有影片已分類！</p></div>`;
         }
 
         // 快取結果
