@@ -1099,6 +1099,36 @@ const vtubers = [
       { version: "Ver 2.0", url: "images/希妮亞里絲 v2.0.png" },
     ],
 
+    // 小知識
+    fanName: "紙箱幫",
+    hashTags: [
+      { label: "Live",   tag: "#SinnieLive" },
+      { label: "FanArt", tag: "#SinnieArt"  },
+      { label: "Meme",   tag: "#希錯東西"   },
+    ],
+    futureGoals: [
+      "112000000 訂閱",
+      "唱很多喜歡的歌",
+      "有很多聽眾",
+      "出原創曲",
+      "開演唱會",
+      "把欠魔競的錢還光",
+      "住進信義區豪宅！！！！",
+    ],
+    triviaLikes: [
+      { label: "喜歡的食物",   items: ["茄子"] },
+      { label: "擅長的事",     items: ["唱歌", "畫畫", "可愛", "運用無敵的大腦"] },
+      { label: "喜歡的東西",   items: ["烤肉", "火鍋", "公園", "豪宅"] },
+      { label: "喜歡的音樂",   items: ["VOCALOID", "JPOP"] },
+      { label: "喜歡的創作者", items: ["koyori", "みきと", "YOASOBI", "藤井風"] },
+      { label: "喜歡的ACG",    items: ["JOJO", "假面騎士", "賽馬娘", "馬力歐賽車8"] },
+      { label: "喜歡的吉祥物", items: ["Rilakkuma拉拉熊的茶小熊"] },
+    ],
+    triviaHates: [
+      { label: "不擅長的事",   items: ["數學"] },
+      { label: "不喜歡的東西", items: ["難吃的食物", "世界上所有爬蟲兩棲類"] },
+    ],
+
     songStatsGids: {
       "2026": "217431303",
       "2025": "2006517096",
