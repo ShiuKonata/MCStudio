@@ -1726,6 +1726,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!d) continue;
             if (d.wasLive) continue;                   // 排除直播存檔
             if (d.duration <= 60) continue;            // 排除 Shorts
+            // 排除含有 cover 或 official 關鍵字的影片
+            const titleLower = (item.snippet.title || '').toLowerCase();
+            if (titleLower.includes('cover') || titleLower.includes('official')) continue;
             renderOvuCard(container, item, d.duration);
             count++;
           }
@@ -1755,6 +1758,9 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!d) continue;
               if (d.wasLive) continue;
               if (d.duration <= 60) continue;
+              // 排除含有 cover 或 official 關鍵字的影片
+              const titleLower = (item.snippet.title || '').toLowerCase();
+              if (titleLower.includes('cover') || titleLower.includes('official')) continue;
               renderOvuCard(container, item, d.duration);
               totalCount++;
             }
@@ -1793,6 +1799,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!d) continue;
             if (d.wasLive) continue;
             if (d.duration <= 60) continue;
+            // 排除含有 cover 或 official 關鍵字的影片
+            const titleLower = (item.snippet.title || '').toLowerCase();
+            if (titleLower.includes('cover') || titleLower.includes('official')) continue;
             renderOvuCard(container, item, d.duration);
           }
           ovuNextPageToken = data.nextPageToken || null;
