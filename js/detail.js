@@ -1832,7 +1832,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!d) continue;
             if (d.wasLive) continue;
             if (d.duration <= 60) continue;
-            renderOvuCard(container, item, d.duration);
+            // Step 1: 暫停渲染，所有視頻應該只在未分類區顯示（「載入更多」邏輯）
+            // renderOvuCard(container, item, d.duration);
           }
           ovuNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = ovuNextPageToken ? 'flex' : 'none';
@@ -2259,7 +2260,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const moreWrap  = document.getElementById('yts-load-more-wrap');
         fetchYtsPage(ytsNextPageToken).then(data => {
           if (data.error) { ytsLoading = false; return; }
-          (data.items || []).forEach(item => renderYtsCard(container, item));
+          // Step 1: 暫停渲染，所有視頻應該只在未分類區顯示（「載入更多」邏輯）
+          // (data.items || []).forEach(item => renderYtsCard(container, item));
           ytsNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
           const btn = document.getElementById('yts-load-more-btn');
