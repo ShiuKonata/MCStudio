@@ -1720,19 +1720,7 @@ document.addEventListener('DOMContentLoaded', () => {
         liveVideoIdsFetched = true;
       }
 
-      const uncCacheKey = 'mc_unc_' + v.youtubeChannelId + '_' + year;
-      const uncCached   = cacheGet(uncCacheKey);
-      if (uncCached) {
-        container.innerHTML  = uncCached.html;
-        uncNextPageToken = uncCached.nextPageToken || null;
-        if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
-        uncLoading = false;
-        applyUncSearch();
-        return;
-      }
-
       container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
-      if (moreWrap) moreWrap.style.display = 'none';
 
       try {
         if (year === 'all') {
@@ -1791,10 +1779,8 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
 
-          // 移除分頁：直接隱藏「加載更多」按鈕
+          // 移除分頁
           uncNextPageToken = null;
-          if (moreWrap) moreWrap.style.display = 'none';
-          cacheSet(uncCacheKey, { html: container.innerHTML });
         }
       } catch (err) {
         container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
