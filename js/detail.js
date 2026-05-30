@@ -302,6 +302,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const memYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
     .map(y => `<button class="ls-year-btn" data-memyear="${y}">${y}</button>`)
     .join('');
+  const uncYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
+    .map(y => `<button class="ls-year-btn" data-uncyear="${y}">${y}</button>`)
+    .join('');
 
   // ── 主要 HTML ──────────────────────────────────
   const root = document.getElementById('detail-root');
@@ -461,7 +464,32 @@ document.addEventListener('DOMContentLoaded', () => {
         <div id="tab-officialvideos" class="tab-panel">
           <div class="detail-section-title">${T('tab.officialvideos')}</div>
 
+          <!-- 分類切換 -->
+          <div class="ov-section-bar">
+            <button class="ov-section-btn active" data-ovsection="unclassified">❓ 未分類</button>
+            <button class="ov-section-btn" data-ovsection="shorts">📱 Shorts</button>
+          </div>
+
+          <!-- 未分類區 section -->
+          <div id="ov-unclassified-section">
+            <div class="ls-year-bar" id="unc-year-bar">
+              <button class="ls-year-btn active" data-uncyear="all">${T('videos.all')}</button>
+              ${uncYearBtns}
+            </div>
+            <div class="ls-search-bar">
+              <span class="ls-search-icon">🔍</span>
+              <input class="ls-search-input" id="unc-search-input" type="text" placeholder="${T('search.unc')}" autocomplete="off">
+              <button class="ls-search-clear" id="unc-search-clear" title="清除">✕</button>
+            </div>
+            <div class="ls-search-count" id="unc-search-count"></div>
+            <div class="livestreams-container" id="unc-container"></div>
+            <div class="ls-load-more-wrap" id="unc-load-more-wrap" style="display:none">
+              <button class="ls-load-more-btn" id="unc-load-more-btn">${T('loadMore')}</button>
+            </div>
+          </div>
+
           <!-- 官方 Shorts section -->
+          <div id="ov-shorts-section" style="display:none">
           <div id="ov-shorts-section">
             <div class="ls-year-bar" id="yts-year-bar">
               <button class="ls-year-btn active" data-ytsyear="all">${T('videos.all')}</button>
@@ -1555,6 +1583,261 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── 未分類區（YouTube Data API v3 - 規避直播存檔 + Cover/Original）───
+  let tryLoadUnclassified = null;
+  if (v.youtubeChannelId) {
+    const uploadsPlaylistId = 'UU' + v.youtubeChannelId.slice(2);
+    let uncLoading       = false;
+    let uncCurrentYear   = 'all';
+    let uncNextPageToken = null;
+
+    function parseDurationSec(dur) {
+      const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      if (!m) return 0;
+      return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+    }
+
+    // 從上傳播放清單 API 獲取影片
+    async function fetchUncPage(pageToken) {
+      let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
+        + '?part=snippet'
+        + '&playlistId=' + encodeURIComponent(uploadsPlaylistId)
+        + '&maxResults=50'
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+      return await res.json();
+    }
+
+    // 取得影片詳細資訊（duration、liveContent、wasLive）
+    async function fetchVideoDetails(videoIds) {
+      if (!videoIds.length) return {};
+      const url = 'https://www.googleapis.com/youtube/v3/videos'
+        + '?part=contentDetails,snippet'
+        + '&id=' + videoIds.join(',')
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+      const data = await res.json();
+      const map = {};
+      (data.items || []).forEach(item => {
+        map[item.id] = {
+          duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
+          liveContent: item.snippet.liveBroadcastContent || 'none',
+          wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
+        };
+      });
+      return map;
+    }
+
+    // 檢測是否為 Cover / Original / Official / 原創 標題
+    function isClassified(title) {
+      const titleLower = (title || '').toLowerCase();
+      const hasCover = titleLower.includes('cover') || title.includes('歌ってみた');
+      const hasOriginal = titleLower.includes('original') || title.includes('原創') || titleLower.includes('official');
+      // 優先級：如果同時有 Original 和 Cover，判定為 Original
+      return { hasCover, hasOriginal, isOriginal: hasOriginal };
+    }
+
+    // 渲染未分類影片卡片
+    function renderUncCard(container, item, durationSec) {
+      const snip     = item.snippet;
+      const vid      = snip.resourceId && snip.resourceId.videoId;
+      if (!vid) return;
+      const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
+      const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
+      const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
+      const title    = esc(snip.title || '');
+      const mins     = Math.floor(durationSec / 60);
+      const secs     = durationSec % 60;
+      const durLabel = durationSec > 0 ? `${mins}:${String(secs).padStart(2,'0')}` : '';
+      container.innerHTML += `
+        <div class="ls-card" onclick="(function(){
+          document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+          document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+          document.getElementById('yt-modal-title').textContent='${title}';
+          document.getElementById('yt-modal').classList.add('open');
+          document.body.style.overflow='hidden';
+        })()">
+          <div class="ls-thumb-wrap">
+            <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+            <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+            ${durLabel ? `<div class="ls-duration-badge">${durLabel}</div>` : ''}
+          </div>
+          <div class="ls-info">
+            <div class="ls-title">${title || '（無標題）'}</div>
+            ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+          </div>
+        </div>`;
+    }
+
+    // 加載未分類影片
+    async function loadUnclassifiedYear(year) {
+      if (uncLoading) return;
+      uncLoading = true;
+      uncCurrentYear = year;
+      uncNextPageToken = null;
+
+      const container = document.getElementById('unc-container');
+      const moreWrap  = document.getElementById('unc-load-more-wrap');
+      const countEl   = document.getElementById('unc-search-count');
+      const input     = document.getElementById('unc-search-input');
+      if (!container) { uncLoading = false; return; }
+      if (input)  input.value = '';
+      if (countEl) countEl.style.display = 'none';
+
+      const uncCacheKey = 'mc_unc_' + v.youtubeChannelId + '_' + year;
+      const uncCached   = cacheGet(uncCacheKey);
+      if (uncCached) {
+        container.innerHTML  = uncCached.html;
+        uncNextPageToken = uncCached.nextPageToken || null;
+        if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
+        uncLoading = false;
+        applyUncSearch();
+        return;
+      }
+
+      container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
+      if (moreWrap) moreWrap.style.display = 'none';
+
+      try {
+        if (year === 'all') {
+          const data = await fetchUncPage(null);
+          if (data.error) throw new Error(data.error.message);
+          container.innerHTML = '';
+          const items    = data.items || [];
+          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          const detailMap = await fetchVideoDetails(videoIds);
+          let count = 0;
+          for (const item of items) {
+            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+            if (!vid) continue;
+            const d = detailMap[vid];
+            if (!d) continue;
+            // 【第一層過濾】排除直播存檔
+            if (d.wasLive) continue;
+            // 【第二層過濾】排除 Cover/Original/Official/原創 標題
+            const { hasCover, hasOriginal } = isClassified(item.snippet.title);
+            if (hasCover || hasOriginal) continue;
+            // 剩下的放入未分類區
+            renderUncCard(container, item, d.duration);
+            count++;
+          }
+          if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
+          uncNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
+          cacheSet(uncCacheKey, { html: container.innerHTML, nextPageToken: uncNextPageToken });
+        } else {
+          // 年份模式
+          let pageToken  = null;
+          let totalCount = 0;
+          let done       = false;
+          container.innerHTML = '';
+          do {
+            const data = await fetchUncPage(pageToken);
+            if (data.error) throw new Error(data.error.message);
+            const items    = data.items || [];
+            const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+            const detailMap = await fetchVideoDetails(videoIds);
+            for (const item of items) {
+              const itemYear = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,4) : '';
+              if (itemYear < year) { done = true; break; }
+              if (itemYear !== String(year)) continue;
+              const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+              if (!vid) continue;
+              const d = detailMap[vid];
+              if (!d) continue;
+              if (d.wasLive) continue;
+              const { hasCover, hasOriginal } = isClassified(item.snippet.title);
+              if (hasCover || hasOriginal) continue;
+              renderUncCard(container, item, d.duration);
+              totalCount++;
+            }
+            pageToken = data.nextPageToken || null;
+          } while (pageToken && !done);
+          if (totalCount === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
+          if (moreWrap) moreWrap.style.display = 'none';
+          cacheSet(uncCacheKey, { html: container.innerHTML, nextPageToken: null });
+        }
+      } catch (err) {
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
+      }
+      uncLoading = false;
+      applyUncSearch();
+    }
+
+    tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
+
+    // 「載入更多」（全部模式）
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'unc-load-more-btn') {
+        if (uncLoading || !uncNextPageToken) return;
+        uncLoading = true;
+        e.target.disabled = true;
+        const container = document.getElementById('unc-container');
+        const moreWrap  = document.getElementById('unc-load-more-wrap');
+        fetchUncPage(uncNextPageToken).then(async data => {
+          if (data.error) { uncLoading = false; return; }
+          const items    = data.items || [];
+          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          const detailMap = await fetchVideoDetails(videoIds);
+          for (const item of items) {
+            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+            if (!vid) continue;
+            const d = detailMap[vid];
+            if (!d) continue;
+            if (d.wasLive) continue;
+            const { hasCover, hasOriginal } = isClassified(item.snippet.title);
+            if (hasCover || hasOriginal) continue;
+            renderUncCard(container, item, d.duration);
+          }
+          uncNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
+          const btn = document.getElementById('unc-load-more-btn');
+          if (btn) btn.disabled = false;
+          uncLoading = false;
+          applyUncSearch();
+        });
+      }
+    });
+
+    // 年份切換
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-uncyear]');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn[data-uncyear]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadUnclassifiedYear(btn.dataset.uncyear);
+    });
+
+    // 搜尋篩選
+    function applyUncSearch() {
+      const input    = document.getElementById('unc-search-input');
+      const countEl  = document.getElementById('unc-search-count');
+      const clearBtn = document.getElementById('unc-search-clear');
+      if (!input) return;
+      const q = input.value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#unc-container .ls-card');
+      let shown = 0;
+      cards.forEach(card => {
+        const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
+        const date  = (card.querySelector('.ls-date')?.textContent  || '').toLowerCase();
+        const match = !q || title.includes(q) || date.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
+      if (countEl) {
+        if (q && cards.length > 0) {
+          countEl.textContent = T('found.videos', {n: shown, total: cards.length});
+          countEl.style.display = 'block';
+        } else {
+          countEl.style.display = 'none';
+        }
+      }
+    }
+    document.addEventListener('input', e => { if (e.target.id === 'unc-search-input') applyUncSearch(); });
+    document.addEventListener('click', e => { if (e.target.id === 'unc-search-clear') { document.getElementById('unc-search-input').value = ''; applyUncSearch(); } });
+  }
 
   // ── Shorts 存檔（YouTube Data API v3）───────────
   let tryLoadYtShorts = null;
@@ -1743,6 +2026,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('yts-search-input');
         if (input) { input.value = ''; input.focus(); }
         applyYtsSearch();
+      }
+    });
+
+    // 【分類切換】未分類 ↔ Shorts
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ov-section-btn');
+      if (!btn) return;
+      const section = btn.dataset.ovsection;
+      document.querySelectorAll('.ov-section-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const uncEl = document.getElementById('ov-unclassified-section');
+      const shortsEl  = document.getElementById('ov-shorts-section');
+      if (uncEl) uncEl.style.display = section === 'unclassified' ? '' : 'none';
+      if (shortsEl)  shortsEl.style.display  = section === 'shorts'  ? '' : 'none';
+      // Shorts：首次切換時才觸發載入
+      if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
+        window._ytsLoaded = true;
+        tryLoadYtShorts();
       }
     });
   }
@@ -1981,10 +2282,10 @@ document.addEventListener('DOMContentLoaded', () => {
       window._lsLoaded = true;
       tryLoadLiveStreams(false);
     }
-    // 官方剪輯：首次進入分頁時載入「Shorts」
-    if (key === 'officialvideos' && tryLoadYtShorts && !window._ytsLoaded) {
-      window._ytsLoaded = true;
-      tryLoadYtShorts();
+    // 官方剪輯：首次進入分頁時載入「未分類區」
+    if (key === 'officialvideos' && tryLoadUnclassified && !window._uncLoaded) {
+      window._uncLoaded = true;
+      tryLoadUnclassified();
     }
     // 歌曲統計：首次進入分頁時才開始載入
     if (key === 'songstats' && window._loadSongStats && !window._ssLoaded) {
