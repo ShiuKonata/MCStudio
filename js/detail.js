@@ -1642,25 +1642,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // 取得影片詳細資訊（duration、liveContent、wasLive）
     async function fetchVideoDetails(videoIds) {
       if (!videoIds.length) return {};
-      const url = 'https://www.googleapis.com/youtube/v3/videos'
-        + '?part=contentDetails,snippet,liveStreamingDetails'
-        + '&id=' + videoIds.join(',')
-        + '&key=' + encodeURIComponent(v.ytApiKey);
-      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
-      const data = await res.json();
+
       const map = {};
-      // console.log(`🔵 [fetchVideoDetails] 獲取${videoIds.length}部影片詳情，API回應:`, data);
-      (data.items || []).forEach((item, idx) => {
-        const liveContent = item.snippet.liveBroadcastContent || 'none';
-        const wasLive = !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime);
-        map[item.id] = {
-          duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
-          liveContent: liveContent,
-          wasLive:     wasLive,
-        };
-        // 詳細日誌：顯示所有影片的狀態（已關閉以減少console噪音）
-        // console.log(`🔵 影片${idx+1}: [${liveContent}] wasLive=${wasLive} | ${item.snippet.title}`);
-      });
+      const BATCH_SIZE = 50;  // YouTube API 單次最多 50 個 ID
+
+      // 【分批請求】每次最多 50 個 ID
+      for (let i = 0; i < videoIds.length; i += BATCH_SIZE) {
+        const batch = videoIds.slice(i, i + BATCH_SIZE);
+        const url = 'https://www.googleapis.com/youtube/v3/videos'
+          + '?part=contentDetails,snippet,liveStreamingDetails'
+          + '&id=' + batch.join(',')
+          + '&key=' + encodeURIComponent(v.ytApiKey);
+
+        try {
+          const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+          const data = await res.json();
+
+          if (data.error) {
+            console.error(`❌ [fetchVideoDetails] API 錯誤 (第 ${Math.floor(i/BATCH_SIZE)+1} 批):`, data.error);
+            continue;
+          }
+
+          (data.items || []).forEach((item) => {
+            const liveContent = item.snippet.liveBroadcastContent || 'none';
+            const wasLive = !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime);
+            map[item.id] = {
+              duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
+              liveContent: liveContent,
+              wasLive:     wasLive,
+            };
+          });
+        } catch (err) {
+          console.error(`❌ [fetchVideoDetails] 第 ${Math.floor(i/BATCH_SIZE)+1} 批請求失敗:`, err);
+        }
+      }
+
+      console.log(`✅ [fetchVideoDetails] 分批獲取完成：${videoIds.length} 部影片，共 ${Math.ceil(videoIds.length/BATCH_SIZE)} 批`);
       return map;
     }
 
