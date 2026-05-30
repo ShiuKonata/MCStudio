@@ -2041,7 +2041,7 @@ const vtubers = [
   },
 
   {
-    id: "kokomii",
+    id: "KeKeMii",
     name: "克克米伊",
     nameEn: "KeKeMii",
     group: "預見娛樂",
