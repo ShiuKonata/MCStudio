@@ -2046,7 +2046,7 @@ const vtubers = [
     nameEn: "KeKeMii",
     group: "預見娛樂",
     generation: "五期生",
-    avatar: "https://pbs.twimg.com/profile_images/2057135498200809472/-QFJQgbg_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2052756867378798592/6X8FR751_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1888131663596748800/1745276220/1500x500",
     tagline: "",
     description: "是隻喜歡睡覺的熊!",
@@ -2171,7 +2171,7 @@ const vtubers = [
     nameEn: "Yawnii",
     group: "預見娛樂",
     generation: "六期生",
-    avatar: "https://pbs.twimg.com/profile_images/2039229710425784320/VOBggSrM_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2057135498200809472/-QFJQgbg_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1939968445539377152/1779096779/1500x500",
     tagline: "",
     taglines: [
