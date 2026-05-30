@@ -1727,6 +1727,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ovuLoading = true;
       ovuCurrentYear   = year;
       ovuNextPageToken = null;
+      const container = document.getElementById('ovu-container');
       const moreWrap  = document.getElementById('ovu-load-more-wrap');
       const countEl   = document.getElementById('ovu-search-count');
       const input     = document.getElementById('ovu-search-input');
@@ -2171,6 +2172,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ytsLoading = true;
       ytsCurrentYear   = year;
       ytsNextPageToken = null;
+
+      const container = document.getElementById('yts-container');
       const moreWrap  = document.getElementById('yts-load-more-wrap');
       const countEl   = document.getElementById('yts-search-count');
       const input     = document.getElementById('yts-search-input');
