@@ -1648,7 +1648,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
       const data = await res.json();
       const map = {};
-      console.log(`🔵 [fetchVideoDetails] 獲取${videoIds.length}部影片詳情，API回應:`, data);
+      // console.log(`🔵 [fetchVideoDetails] 獲取${videoIds.length}部影片詳情，API回應:`, data);
       (data.items || []).forEach((item, idx) => {
         const liveContent = item.snippet.liveBroadcastContent || 'none';
         const wasLive = !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime);
@@ -1657,8 +1657,8 @@ document.addEventListener('DOMContentLoaded', () => {
           liveContent: liveContent,
           wasLive:     wasLive,
         };
-        // 詳細日誌：顯示所有影片的狀態
-        console.log(`🔵 影片${idx+1}: [${liveContent}] wasLive=${wasLive} | ${item.snippet.title}`);
+        // 詳細日誌：顯示所有影片的狀態（已關閉以減少console噪音）
+        // console.log(`🔵 影片${idx+1}: [${liveContent}] wasLive=${wasLive} | ${item.snippet.title}`);
       });
       return map;
     }
@@ -1752,20 +1752,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            // 【STEP 1 - 第一層過濾】排除所有直播相關內容
+            // 【STEP 1 - 只排除直播存檔】
             // 使用 UULV 播放列表（直播存檔）來直接排除
             if (liveVideoIds.has(vid)) {
               filteredCount++;
-              console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
+              // console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
               continue;
             }
             // 備用過濾：如果 UULV 播放列表無法使用，用 liveBroadcastContent 和 wasLive
             if (d.liveContent !== 'none') {
               filteredCount++;
-              console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
+              // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
-            // 剩下的放入未分類區
+            // STEP 1 完成：除直播外，所有影片放入未分類區等待 STEP 2 篩選
             renderUncCard(container, item, d.duration);
             count++;
           }
@@ -1805,18 +1805,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            // 【STEP 1 - 排除直播】使用 UULV 播放列表
+            // 【STEP 1 - 只排除直播存檔】使用 UULV 播放列表
             if (liveVideoIds.has(vid)) {
               filteredCount++;
-              console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
+              // console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
               continue;
             }
             // 備用過濾
             if (d.liveContent !== 'none') {
               filteredCount++;
-              console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
+              // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
+            // STEP 1 完成：除直播外，所有影片放入未分類區等待 STEP 2 篩選
             renderUncCard(container, item, d.duration);
           }
           console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部`);
