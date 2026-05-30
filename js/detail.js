@@ -1608,7 +1608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchVideoDetails(videoIds) {
       if (!videoIds.length) return {};
       const url = 'https://www.googleapis.com/youtube/v3/videos'
-        + '?part=contentDetails,snippet'
+        + '?part=contentDetails,snippet,liveStreamingDetails'
         + '&id=' + videoIds.join(',')
         + '&key=' + encodeURIComponent(v.ytApiKey);
       const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
