@@ -1763,7 +1763,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!d) continue;
             if (d.wasLive) continue;                   // 排除直播存檔
             if (d.duration <= 60) continue;            // 排除 Shorts
-            renderOvuCard(container, item, d.duration);
+            // Step 1: 暫停渲染，所有視頻應該只在未分類區顯示
+            // renderOvuCard(container, item, d.duration);
             count++;
           }
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noUploads')}</p></div>`;
@@ -1792,7 +1793,8 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!d) continue;
               if (d.wasLive) continue;
               if (d.duration <= 60) continue;
-              renderOvuCard(container, item, d.duration);
+              // Step 1: 暫停渲染，所有視頻應該只在未分類區顯示
+              // renderOvuCard(container, item, d.duration);
               totalCount++;
             }
             pageToken = data.nextPageToken || null;
@@ -2207,7 +2209,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!items.length) {
             container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noShorts')}</p></div>`;
           } else {
-            items.forEach(item => renderYtsCard(container, item));
+            // Step 1: 暫停渲染，所有視頻應該只在未分類區顯示
+            // items.forEach(item => renderYtsCard(container, item));
           }
           ytsNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
@@ -2223,7 +2226,11 @@ document.addEventListener('DOMContentLoaded', () => {
             for (const item of (data.items || [])) {
               const itemYear = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,4) : '';
               if (itemYear < year) { done = true; break; }
-              if (itemYear === year) { renderYtsCard(container, item); totalCount++; }
+              if (itemYear === year) {
+                // Step 1: 暫停渲染，所有視頻應該只在未分類區顯示
+                // renderYtsCard(container, item);
+                totalCount++;
+              }
             }
             pageToken = data.nextPageToken || null;
           } while (pageToken && !done);
