@@ -1807,7 +1807,7 @@ const vtubers = [
 
   // ── 四期生 ─────────────────────────────────────
   {
-    id: "momowami",
+    id: "BarkBarkPomi",
     name: "百百波美",
     nameEn: "BarkBarkPomi",
     group: "預見娛樂",
