@@ -1924,7 +1924,7 @@ const vtubers = [
   },
 
   {
-    id: "hanetobi",
+    id: "UchiFifi",
     name: "羽芝扉扉",
     nameEn: "Uchi Fifi",
     group: "預見娛樂",
