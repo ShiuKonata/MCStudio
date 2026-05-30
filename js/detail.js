@@ -1737,7 +1737,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ovuCached) {
         container.innerHTML  = ovuCached.html;
         ovuNextPageToken = ovuCached.nextPageToken || null;
-        if (moreWrap) moreWrap.style.display = ovuNextPageToken ? 'flex' : 'none';
+        // 只有當有影片 AND 有更多頁面時，才顯示「載入更多」
+        const hasOvuVideosCached = container.querySelectorAll('.ls-card').length > 0;
+        if (moreWrap) moreWrap.style.display = (hasOvuVideosCached && ovuNextPageToken) ? 'flex' : 'none';
         ovuLoading = false;
         applyOvuSearch();
         return;
@@ -1769,7 +1771,9 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noUploads')}</p></div>`;
           ovuNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = ovuNextPageToken ? 'flex' : 'none';
+          // 只有當有影片 AND 有更多頁面時，才顯示「載入更多」
+          const hasOvuVideos = container.querySelectorAll('.ls-card').length > 0;
+          if (moreWrap) moreWrap.style.display = (hasOvuVideos && ovuNextPageToken) ? 'flex' : 'none';
           cacheSet(ovuCacheKey, { html: container.innerHTML, nextPageToken: ovuNextPageToken });
         } else {
           // 年份模式：翻頁直到該年份全部抓完
@@ -1836,7 +1840,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // renderOvuCard(container, item, d.duration);
           }
           ovuNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = ovuNextPageToken ? 'flex' : 'none';
+          // 只有當有影片 AND 有更多頁面時，才顯示「載入更多」
+          const hasOvuVideos2 = container.querySelectorAll('.ls-card').length > 0;
+          if (moreWrap) moreWrap.style.display = (hasOvuVideos2 && ovuNextPageToken) ? 'flex' : 'none';
           const btn = document.getElementById('ovu-load-more-btn');
           if (btn) btn.disabled = false;
           ovuLoading = false;
@@ -2192,7 +2198,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ytsCached) {
         container.innerHTML = ytsCached.html;
         ytsNextPageToken = ytsCached.nextPageToken || null;
-        if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
+        const hasYtsVideosCached = container.querySelectorAll('.ls-card').length > 0;
+        if (moreWrap) moreWrap.style.display = (hasYtsVideosCached && ytsNextPageToken) ? 'flex' : 'none';
         ytsLoading = false;
         applyYtsSearch();
         return;
@@ -2214,7 +2221,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // items.forEach(item => renderYtsCard(container, item));
           }
           ytsNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
+          // 只有當有影片 AND 有更多頁面時，才顯示「載入更多」
+          const hasYtsVideos = container.querySelectorAll('.ls-card').length > 0;
+          if (moreWrap) moreWrap.style.display = (hasYtsVideos && ytsNextPageToken) ? 'flex' : 'none';
           cacheSet(ytsCacheKey, { html: container.innerHTML, nextPageToken: ytsNextPageToken });
         } else {
           let pageToken  = null;
@@ -2263,7 +2272,9 @@ document.addEventListener('DOMContentLoaded', () => {
           // Step 1: 暫停渲染，所有視頻應該只在未分類區顯示（「載入更多」邏輯）
           // (data.items || []).forEach(item => renderYtsCard(container, item));
           ytsNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
+          // 只有當有影片 AND 有更多頁面時，才顯示「載入更多」
+          const hasYtsVideos2 = container.querySelectorAll('.ls-card').length > 0;
+          if (moreWrap) moreWrap.style.display = (hasYtsVideos2 && ytsNextPageToken) ? 'flex' : 'none';
           const btn = document.getElementById('yts-load-more-btn');
           if (btn) btn.disabled = false;
           ytsLoading = false;
@@ -2569,7 +2580,9 @@ document.addEventListener('DOMContentLoaded', () => {
             items.forEach(item => renderLsCard(container, item));
           }
           lsNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
+          // 只有當有影片 AND 有更多頁面時，才顯示「載入更多」
+          const hasLsVideos = container.querySelectorAll('.ls-card').length > 0;
+          if (moreWrap) moreWrap.style.display = (hasLsVideos && lsNextPageToken) ? 'flex' : 'none';
           cacheSet(cacheKey, { html: container.innerHTML, nextPageToken: lsNextPageToken });
         } else {
           let pageToken  = null;
@@ -2612,7 +2625,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if (data.error) { lsLoading = false; return; }
           (data.items || []).forEach(item => renderLsCard(container, item));
           lsNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = lsNextPageToken ? 'flex' : 'none';
+          // 只有當有影片 AND 有更多頁面時，才顯示「載入更多」
+          const hasLsVideos2 = container.querySelectorAll('.ls-card').length > 0;
+          if (moreWrap) moreWrap.style.display = (hasLsVideos2 && lsNextPageToken) ? 'flex' : 'none';
           const btn = document.getElementById('ls-load-more-btn');
           if (btn) btn.disabled = false;
           lsLoading = false;
