@@ -497,9 +497,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="ls-search-count" id="unc-search-count"></div>
             <div class="livestreams-container" id="unc-container"></div>
-            <div class="ls-load-more-wrap" id="unc-load-more-wrap" style="display:none">
-              <button class="ls-load-more-btn" id="unc-load-more-btn">${T('loadMore')}</button>
-            </div>
           </div>
         </div>` : ''}
 
@@ -1739,18 +1736,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         if (year === 'all') {
-          console.log(`🔵 [loadUnclassifiedYear] 開始API調用...`);
-          const data = await fetchUncPage(null);
-          console.log(`🔵 [loadUnclassifiedYear] API回應:`, data);
-          if (data.error) throw new Error(data.error.message);
+          console.log(`🔵 [loadUnclassifiedYear] 開始一次性加載所有未分類影片...`);
           container.innerHTML = '';
-          const items    = data.items || [];
-          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          let allItems = [];
+          let pageToken = null;
+          let pageCount = 0;
+
+          // 【一次性加載所有頁面】
+          do {
+            const data = await fetchUncPage(pageToken);
+            console.log(`🔵 [loadUnclassifiedYear] 第 ${pageCount + 1} 頁，獲取 ${(data.items || []).length} 部`);
+            if (data.error) throw new Error(data.error.message);
+            allItems.push(...(data.items || []));
+            pageToken = data.nextPageToken || null;
+            pageCount++;
+          } while (pageToken);
+
+          console.log(`📊 未分類區 - 總獲取影片數: ${allItems.length} 部（共 ${pageCount} 頁）`);
+
+          const videoIds = allItems.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
           const detailMap = await fetchVideoDetails(videoIds);
           let count = 0;
           let filteredCount = 0;
-          console.log(`📊 未分類區 - 獲取影片數: ${items.length}`);
-          for (const item of items) {
+
+          for (const item of allItems) {
             const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
             if (!vid) continue;
             const d = detailMap[vid];
@@ -1779,11 +1788,13 @@ document.addEventListener('DOMContentLoaded', () => {
             renderUncCard(container, item, d.duration);
             count++;
           }
-          console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除直播: ${filteredCount} 部`);
+          console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
-          uncNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
-          cacheSet(uncCacheKey, { html: container.innerHTML, nextPageToken: uncNextPageToken });
+
+          // 移除分頁：直接隱藏「加載更多」按鈕
+          uncNextPageToken = null;
+          if (moreWrap) moreWrap.style.display = 'none';
+          cacheSet(uncCacheKey, { html: container.innerHTML });
         }
       } catch (err) {
         container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
@@ -1793,59 +1804,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
-
-    // 「載入更多」（全部模式）
-    document.addEventListener('click', e => {
-      if (e.target && e.target.id === 'unc-load-more-btn') {
-        if (uncLoading || !uncNextPageToken) return;
-        uncLoading = true;
-        e.target.disabled = true;
-        const container = document.getElementById('unc-container');
-        const moreWrap  = document.getElementById('unc-load-more-wrap');
-        fetchUncPage(uncNextPageToken).then(async data => {
-          if (data.error) { uncLoading = false; return; }
-          const items    = data.items || [];
-          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
-          const detailMap = await fetchVideoDetails(videoIds);
-          let filteredCount = 0;
-          console.log(`📄 未分類區 - 加載更多: ${items.length} 部`);
-          for (const item of items) {
-            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
-            if (!vid) continue;
-            const d = detailMap[vid];
-            if (!d) continue;
-            const title = item.snippet.title || '';
-            // 【STEP 1 - 只排除直播存檔】使用 UULV 播放列表
-            if (liveVideoIds.has(vid)) {
-              filteredCount++;
-              // console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
-              continue;
-            }
-            // 備用過濾
-            if (d.liveContent !== 'none') {
-              filteredCount++;
-              // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
-              continue;
-            }
-            // 【STEP 2】排除 v.videos 中已有的影片
-            if (existingVideoIds.has(vid)) {
-              // 已在 v.videos 中（原創曲&Cover 區），不顯示在未分類區
-              filteredCount++;
-              continue;
-            }
-            // STEP 2 完成：未在 v.videos 中的影片放入未分類區
-            renderUncCard(container, item, d.duration);
-          }
-          console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部`);
-          uncNextPageToken = data.nextPageToken || null;
-          if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
-          const btn = document.getElementById('unc-load-more-btn');
-          if (btn) btn.disabled = false;
-          uncLoading = false;
-          applyUncSearch();
-        });
-      }
-    });
 
     // 搜尋篩選
     function applyUncSearch() {
