@@ -490,10 +490,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 未分類區 section -->
           <div id="ov-unclassified-section" style="display:none">
-            <div class="ls-year-bar" id="unc-year-bar">
-              <button class="ls-year-btn active" data-uncyear="all">${T('videos.all')}</button>
-              ${uncYearBtns}
-            </div>
             <div class="ls-search-bar">
               <span class="ls-search-icon">🔍</span>
               <input class="ls-search-input" id="unc-search-input" type="text" placeholder="${T('search.unc')}" autocomplete="off">
@@ -1727,38 +1723,6 @@ document.addEventListener('DOMContentLoaded', () => {
           uncNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
           cacheSet(uncCacheKey, { html: container.innerHTML, nextPageToken: uncNextPageToken });
-        } else {
-          // 年份模式
-          let pageToken  = null;
-          let totalCount = 0;
-          let done       = false;
-          container.innerHTML = '';
-          do {
-            const data = await fetchUncPage(pageToken);
-            if (data.error) throw new Error(data.error.message);
-            const items    = data.items || [];
-            const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
-            const detailMap = await fetchVideoDetails(videoIds);
-            for (const item of items) {
-              const itemYear = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,4) : '';
-              if (itemYear < year) { done = true; break; }
-              if (itemYear !== String(year)) continue;
-              const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
-              if (!vid) continue;
-              const d = detailMap[vid];
-              if (!d) continue;
-              if (d.liveContent !== 'none') continue;
-              if (d.duration <= 60) continue;
-              const { hasCover, hasOriginal } = isClassified(item.snippet.title);
-              if (hasCover || hasOriginal) continue;
-              renderUncCard(container, item, d.duration);
-              totalCount++;
-            }
-            pageToken = data.nextPageToken || null;
-          } while (pageToken && !done);
-          if (totalCount === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
-          if (moreWrap) moreWrap.style.display = 'none';
-          cacheSet(uncCacheKey, { html: container.innerHTML, nextPageToken: null });
         }
       } catch (err) {
         container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
@@ -1801,15 +1765,6 @@ document.addEventListener('DOMContentLoaded', () => {
           applyUncSearch();
         });
       }
-    });
-
-    // 年份切換
-    document.addEventListener('click', e => {
-      const btn = e.target.closest('.ls-year-btn[data-uncyear]');
-      if (!btn) return;
-      document.querySelectorAll('.ls-year-btn[data-uncyear]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      loadUnclassifiedYear(btn.dataset.uncyear);
     });
 
     // 搜尋篩選
