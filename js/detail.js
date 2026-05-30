@@ -1614,12 +1614,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
       const data = await res.json();
       const map = {};
-      (data.items || []).forEach(item => {
+      console.log(`🔵 [fetchVideoDetails] 獲取${videoIds.length}部影片詳情，API回應:`, data);
+      (data.items || []).forEach((item, idx) => {
+        const liveContent = item.snippet.liveBroadcastContent || 'none';
         map[item.id] = {
           duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
-          liveContent: item.snippet.liveBroadcastContent || 'none',
+          liveContent: liveContent,
           wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
         };
+        if (liveContent !== 'none') {
+          console.log(`🔵 [fetchVideoDetails] 影片${idx+1}: [${liveContent}] ${item.snippet.title}`);
+        }
       });
       return map;
     }
