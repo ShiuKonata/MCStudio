@@ -1723,12 +1723,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadOvuYear(year) {
+      // Step 2: 禁用自動加載，等待用戶明確指令開始執行詩雨蔻達規章
+      const container = document.getElementById('ovu-container');
+      if (container) container.innerHTML = '';
+      return;
+
+      // 以下代碼暫時禁用
       if (ovuLoading) return;
       ovuLoading = true;
       ovuCurrentYear   = year;
       ovuNextPageToken = null;
-
-      const container = document.getElementById('ovu-container');
       const moreWrap  = document.getElementById('ovu-load-more-wrap');
       const countEl   = document.getElementById('ovu-search-count');
       const input     = document.getElementById('ovu-search-input');
@@ -2164,12 +2168,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadYtsYear(year) {
+      // Step 2: 禁用自動加載，等待用戶明確指令開始執行詩雨蔻達規章
+      const container = document.getElementById('yts-container');
+      if (container) container.innerHTML = '';
+      return;
+
+      // 以下代碼暫時禁用
       if (ytsLoading) return;
       ytsLoading = true;
       ytsCurrentYear   = year;
       ytsNextPageToken = null;
-
-      const container = document.getElementById('yts-container');
       const moreWrap  = document.getElementById('yts-load-more-wrap');
       const countEl   = document.getElementById('yts-search-count');
       const input     = document.getElementById('yts-search-input');
