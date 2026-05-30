@@ -553,7 +553,7 @@ const vtubers = [
   },
 
   {
-    id: "kannazukilubee",
+    id: "lubee",
     name: "神無月鹿比",
     nameEn: "Kannazuki Lubee",
     group: "預見娛樂",
