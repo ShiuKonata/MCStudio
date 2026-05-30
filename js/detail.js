@@ -1901,6 +1901,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // 功能：自動抓取頻道全部上傳，排除直播存檔 & Shorts，用 keywords 分類
   let tryLoadCoverOriginal = null;
   if (v.youtubeChannelId) {
+    // 清除原創曲&Cover的快取（Step 2：準備重新分類）
+    sessionStorage.removeItem('mc_co_' + v.youtubeChannelId);
+    // 清空頁面上的容器
+    const videoGridContainer = document.getElementById('video-grid');
+    if (videoGridContainer) {
+      videoGridContainer.innerHTML = '';
+    }
+
     const coLoading = { inProgress: false };
     const uploadsPlaylistId_CO = 'UU' + v.youtubeChannelId.slice(2);
 
