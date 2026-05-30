@@ -1706,7 +1706,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            // 【第一層過濾】排除直播存檔
+            // 【第一層過濾】排除所有直播相關內容（upcoming、live、completed）
             if (d.liveContent !== 'none') {
               filteredCount++;
               console.log(`🚫 直播存檔被過濾: [${d.liveContent}] ${title}`);
@@ -1752,7 +1752,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            if (d.liveContent !== 'none') {
+            if (d.liveContent === 'completed') {
               filteredCount++;
               console.log(`🚫 直播存檔被過濾: [${d.liveContent}] ${title}`);
               continue;
