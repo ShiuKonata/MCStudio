@@ -1835,6 +1835,54 @@ document.addEventListener('DOMContentLoaded', () => {
               continue;
             }
 
+            // 【STEP 2】檢測 Cover / Original 影片（所有 Vtuber）
+            // STEP 2 共 5 個關鍵字：
+            // → Cover 區：cover、歌ってみた
+            // → Original 區：Original、Official、原創
+            let isStep2 = false;
+            let step2Type = null;
+
+            // a. 檢測 Cover（含「cover」或「歌ってみた」）
+            if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
+              isStep2 = true;
+              step2Type = 'cover';
+            }
+            // b. 檢測 Original（含「original」或「official」或「原創」）
+            if (titleLower.includes('original') || titleLower.includes('official') || titleLower.includes('原創')) {
+              isStep2 = true;
+              step2Type = 'original';
+            }
+
+            // 【自動分類 STEP 2】如果檢測到 Cover / Original，自動添加到 Cover 區
+            if (isStep2) {
+              const newTitle = '【' + (step2Type === 'cover' ? 'Cover' : 'Original') + '】' + title;
+              const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
+
+              // 添加到 v.videos（内存）
+              v.videos.push({ id: vid, title: newTitle, date: date });
+              existingVideoIds.add(vid);  // 更新已有影片集合
+
+              // 記錄為候選影片
+              step3Candidates.push({
+                id: vid,
+                title: title,
+                date: date,
+                duration: d.duration,
+                type: step2Type,
+                action: '【STEP 2】已自動分類'
+              });
+              console.log(`✅ [STEP 2] 檢測到 ${step2Type} 並自動分類至 Cover 區: ${title}`);
+
+              // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
+              if (!shortsVideoIds.has(vid) && d.duration <= 60) {
+                console.log(`⏱️ [STEP 2] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
+              }
+
+              // 【跳過】不顯示在未分類區（已分類）
+              filteredCount++;
+              continue;
+            }
+
             // 【STEP 3】檢測詩雨蔻達特殊規則（只限詩雨蔻達）
             let isStep3 = false;
             let step3Type = null;
@@ -1852,7 +1900,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             }
 
-            // 【自動分類】如果檢測到 STEP 3，自動添加到 Cover 區
+            // 【自動分類 STEP 3】如果檢測到特殊規則，自動添加到 Cover 區
             if (isStep3) {
               const newTitle = '【Cover】' + title;
               const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
@@ -1868,14 +1916,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 date: date,
                 duration: d.duration,
                 type: step3Type,
-                action: '已添加至 Cover 區'
+                action: '【STEP 3】已自動分類'
               });
               console.log(`✅ [STEP 3] 檢測到 ${step3Type} 並自動分類至 Cover 區: ${title}`);
 
-              // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則添加
+              // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
               if (!shortsVideoIds.has(vid) && d.duration <= 60) {
-                // 注：此處僅記錄，實際添加到 UI 留待用戶操作
-                console.log(`⏱️ [STEP 3] 影片 ≤60秒且不在 Shorts 區，應添加：${title}`);
+                console.log(`⏱️ [STEP 3] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
               }
 
               // 【跳過】不顯示在未分類區（已分類）
@@ -1883,29 +1930,35 @@ document.addEventListener('DOMContentLoaded', () => {
               continue;
             }
 
-            // STEP 2 完成：未在 v.videos 中的影片放入未分類區
+            // STEP 2/3 完成：未被分類的影片放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
           }
           console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
 
-          // 【STEP 3】輸出候選影片與自動分類結果
+          // 【STEP 2/3】輸出候選影片與自動分類結果
           if (step3Candidates.length > 0) {
-            console.log(`\n🎵 【STEP 3】詩雨蔻達特殊規則 - 自動分類結果：${step3Candidates.length} 部影片`);
+            const step2Count = step3Candidates.filter(v => v.action.includes('STEP 2')).length;
+            const step3Count = step3Candidates.filter(v => v.action.includes('STEP 3')).length;
+
+            console.log(`\n🎵 【自動分類結果】共檢測到 ${step3Candidates.length} 部影片`);
+            console.log(`   ├─ STEP 2（Cover/Original）: ${step2Count} 部`);
+            console.log(`   └─ STEP 3（詩雨蔻達特殊規則）: ${step3Count} 部\n`);
+
             console.table(step3Candidates.map(v => ({
               ID: v.id,
               標題: v.title,
               日期: v.date,
               類型: v.type,
               時長: v.duration,
-              狀態: v.action
+              分類: v.action
             })));
 
             // 輸出修改後的 v.videos（供用戶複製到 data.js）
             console.log(`\n📋 修改後的 v.videos（複製以下內容到 data.js 的 videos 陣列）：\n`);
             const videosJson = JSON.stringify(v.videos, null, 2);
             console.log(videosJson);
-            console.log(`\n✅ 共添加 ${step3Candidates.length} 部影片至 Cover 區\n`);
+            console.log(`\n✅ 共添加 ${step3Candidates.length} 部影片至 Cover 區（STEP 2: ${step2Count} + STEP 3: ${step3Count}）\n`);
           }
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
 
