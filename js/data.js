@@ -373,34 +373,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/lanmewko',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "S24248F5QxQ", title: "【Cover】【生日紀念】好想愛這個世界啊/この世界を愛したい 日文ver.【歌ってみた】",                             date: "2025-08-13" },
-      { id: "PRstz7oaMNs", title: "【Cover】【距離生日還有一個月🍰✨】テレパシ - DECO*27【歌ってみた】",                                        date: "2025-07-13" },
-      { id: "4G1RBpF2ySc", title: "【Cover】瞬間ハートビート / 歌ってみた",                                                                    date: "2024-11-17" },
-      { id: "2l3YXy7hKHY", title: "【Cover】【歌ってみた】シカ色デイズ (Shikairo Days) /シカ部 (Deer Club)",                                   date: "2024-08-16" },
-      { id: "gVUi_W9l__Q", title: "【Cover】5ma之歌Challeng💭💞 #5machallenge #shorts",                                                       date: "2024-03-21" },
-      { id: "AVP8tBh9IFo", title: "【Cover】KICK BACK - 米津玄師 -Cover- 1O feat. Rumi/懶貓子,ボスナ",                                        date: "2024-01-16" },
-      { id: "jz-BHXgTf2Q", title: "【Cover】Rabbit - Cover by 杏仁ミルｘRumi懶貓子【歌ってみた】",                                            date: "2023-08-16" },
-      { id: "4pWZQJy7jPY", title: "【Cover】【會員限定Full Ver.】点描の唄 (feat.井上苑子) / Mrs. GREEN APPLE",                                  date: "2023-06-06" },
-      { id: "CaKBHMQUF48", title: "【Cover】ロキ - 涅默Nemesis ft. Rumi懶貓子",                                                               date: "2023-03-30" },
-      { id: "HTnl7qKiqtA", title: "【Cover】magnet / 浠Mizuki X Rumi懶貓子",                                                                  date: "2022-12-24" },
-      { id: "im9eQdSsN6g", title: "【Cover】【雲圖計劃-】OP-EMOCODE 【歌ってみた】",                                                           date: "2022-11-22" },
-      { id: "wSykZzuxAv0", title: "【Cover】【歌ってみた】１・２・３／After the Rain ｜covered by Rumi懶貓子 × 浠Mizuki",                      date: "2022-11-18" },
-      { id: "X1T4tqdlrZQ", title: "【Cover】【3D cover】未知未踏アルスハイル【#Rumi3D】【CC字幕】｜Rumi/懶貓子",                               date: "2022-08-17" },
-      { id: "10TDfSzRnp8", title: "【原創曲】【3Ddance ver.】NON STOP SOUL!!!【#Rumi3D】【CC字幕】｜Rumi/懶貓子",                              date: "2022-08-16" },
-      { id: "ugTNvBA3-So", title: "【原創曲】【3Ddance ver.】笑顔はここにある【#Rumi3D】｜Rumi/懶貓子",                                        date: "2022-08-16" },
-      { id: "1JGLMnfr67c", title: "【Cover】【一周年紀念】愛言葉Ⅳ【歌ってみた】｜covered by Rumi懶貓子",                                      date: "2022-08-06" },
-      { id: "K-6YH5t-HgU", title: "【原創曲】【Original】笑顔はここにある｜Rumi/懶貓子",                                                      date: "2022-06-26" },
-      { id: "F6MUc26j7fE", title: "【Cover】【歌ってみた】バレンタイン・キッス｜covered by Rumi懶貓子",                                        date: "2022-02-14" },
-      { id: "Xfv0OS-M7vM", title: "【Cover】【歌ってみた】告白氣球｜covered by Rumi懶貓子",                                                   date: "2022-01-22" },
-      { id: "lvP5tYintxg", title: "【Cover】【歌ってみた】クリスマスソング｜covered by Rumi懶貓子",                                            date: "2021-12-25" },
-      { id: "8FmVj4FyO5U", title: "【Cover】【歌ってみた】ライオン ｜covered by Rumi懶貓子 × 浠Mizuki",                                       date: "2021-11-20" },
-      { id: "3uclMILBoGY", title: "【Cover】GETCHA! / Rumi懶貓子 × 浠Mizuki 【歌ってみた】",                                                  date: "2021-10-13" },
-      { id: "mXCV8MdAfVE", title: "【Cover】【歌ってみた】忘れたいことばっかだ｜covered by Rumi/懶貓子",                                       date: "2021-09-25" },
-      { id: "HQBR4rTikw4", title: "【Cover】【歌ってみた】熱愛105°C的你 #shorts｜covered by Rumi/懶貓子",                                     date: "2021-08-14" },
-      { id: "0Vq4fWh3RMg", title: "【原創曲】【Original】NON STOP SOUL!!!｜Rumi/懶貓子",                                                      date: "2021-08-01" },
-      { id: "gLNU5_2-Z4w", title: "【Cover】【歌ってみた】愛言葉Ⅲ｜covered by Rumi/懶貓子",                                                   date: "2021-07-18" },
-    ],
+    videos: [],
 
     musicClips: [
       { id: "AujK7aWgRsY", title: "HoneyWorks - 可愛くてごめん | Rumi懶貓子 .Cover 〔中日歌詞〕" },
@@ -513,55 +486,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/paroniie',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "mnAkfuAZOUE", title: "【Cover】🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】",                                                                                              date: "2026-05-01" },
-      { id: "4RTxc8acTlY", title: "【Cover】🎵 Wake Up! - 帕蘿妮 Paroniie 【COVER】",                                                                                               date: "2026-03-20" },
-      { id: "9njR8G8MLpk", title: "【Cover】威風堂々｜AoiHinamori／帕蘿妮💧Paroniie @Paroniie 【Cover】",                                                                            date: "2026-03-14" },
-      { id: "Ck5w-tXkfRQ", title: "【Cover】🎵 想把哥哥追 - 帕蘿妮 Paroniie 【COVER】",                                                                                            date: "2026-03-07" },
-      { id: "Lg9nyNL-AD0", title: "【原創曲】🎵 星願 - 帕蘿妮 Paroniie",                                                                                                           date: "2026-02-24" },
-      { id: "Aud3U7eIn8Y", title: "【Cover】🎵 劍紙三國 - 帕蘿妮 Paroniie 【COVER】#劍紙三國",                                                                                     date: "2026-02-19" },
-      { id: "kfy3vMYXe1c", title: "【Cover】🎵 WE ARE EMPIRE《明日方舟：終末地》- 帕蘿妮 Paroniie 【COVER】",                                                                       date: "2026-02-08" },
-      { id: "ZnmKBtrog7A", title: "【Cover】🎵 討厭你 I hate you - 帕蘿妮 Paroniie 【COVER】",                                                                                      date: "2026-01-07" },
-      { id: "DMhDwAMYmwU", title: "【Cover】[4K] ファンサ／HoneyWorks ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                                        date: "2025-05-04" },
-      { id: "H-iF0WTmOsY", title: "【Cover】[4K] 我喜歡你／洪安妮 ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                                           date: "2025-05-03" },
-      { id: "1jyJWqI9uPE", title: "【Cover】[4K] ちゅ、多様性／ano ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                                           date: "2025-04-27" },
-      { id: "Se6pMxLEBgQ", title: "【Cover】[4K] 夠愛／曾沛慈、東城衞 ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                                       date: "2025-04-26" },
-      { id: "quQN16MTaS8", title: "【Cover】[4K] 玫瑰少年／蔡依林 ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                                           date: "2025-04-20" },
-      { id: "QVhYWdxreiU", title: "【Cover】いけないボーダーライン／ワルキューレ ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                             date: "2025-04-19" },
-      { id: "PpLvIDxOF1s", title: "【Cover】可愛くてごめん／HoneyWorks ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                                       date: "2025-04-13" },
-      { id: "X8Fk54RovZk", title: "【Cover】Stellar Stellar／星街すいせい ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版",                                                                    date: "2025-04-12" },
-      { id: "4rlG9tEt05w", title: "【Cover】Phony / Paroniie cover. / 1.5周年&米豆綠媽咪生日快樂！！！",                                                                           date: "2024-08-30" },
-      { id: "E5ZXb3uVUOc", title: "【Cover】早安大少爺 賴床的話會被扣薪水的哦～ ft. @AoiHinamoriCh 🔹#帕蘿妮 #Paroniie #Cover",                                                   date: "2024-06-04" },
-      { id: "_Gh7pFVVm4g", title: "【Cover】【以心傳心】overdose🔹#帕蘿妮 #Paroniie",                                                                                              date: "2024-05-29" },
-      { id: "H_bYEiL3nCs", title: "【Cover】【以心傳心】Phony🔹#帕蘿妮 #Paroniie",                                                                                                 date: "2024-05-28" },
-      { id: "8-Sq7IxMitw", title: "【Cover】【以心傳心】踊り子🔹#帕蘿妮 #Paroniie",                                                                                                date: "2024-05-26" },
-      { id: "5s-Lub1eGZU", title: "【Cover】【以心傳心】僕が死のうと思ったのは ft. 瓦西瓦瓦、希妮亞里絲、酒樂霧子🔹#帕蘿妮 #Paroniie",                                           date: "2024-05-25" },
-      { id: "JsX_gsL56Eg", title: "【Cover】🎵 我會等「與你一起去看外面世界到底多大和你慢慢周旋」｜#帕蘿妮 💧 #Paroniie #cover.",                                               date: "2024-04-17" },
-      { id: "8EFuagFbsvs", title: "【Cover】🎵 一路生花「我希望許過的願望一路生花也仍感嘆於世界之大」｜帕蘿妮💧Paroniie cover.",                                                date: "2024-04-12" },
-      { id: "LKWhIjwTEik", title: "【Cover】🎵 バラライカ 巴拉萊卡 Balalaika🔹#帕蘿妮 #Paroniie #COVER",                                                                          date: "2024-03-22" },
-      { id: "UInvujUYiX4", title: "【Cover】🎵 斑馬斑馬「我不想去觸碰你傷口的疤」｜帕蘿妮💧Paroniie cover.",                                                                    date: "2024-02-27" },
-      { id: "U35GC8XpGo8", title: "【Cover】一週年紀念暨新春COVER🎵 春風十里「我說所有的酒都不如你」｜帕蘿妮💧Paroniie cover.",                                                date: "2024-02-09" },
-      { id: "RQjK_mf4CBg", title: "【Cover】【🎵以心傳心】強風オールバック ft. 洛可洛斯特、柴崎楓音🔹#帕蘿妮 #Paroniie #cover",                                               date: "2024-01-30" },
-      { id: "uN4n513eONQ", title: "【Cover】【🎵以心傳心】曹操 ft. 洛可洛斯特、柴崎楓音🔹#帕蘿妮 #Paroniie #cover",                                                            date: "2024-01-29" },
-      { id: "ujqFpGj8D0A", title: "【Cover】【🎵以心傳心】專屬天使 ft. 洛可洛斯特、柴崎楓音🔹#帕蘿妮 #Paroniie #cover",                                                        date: "2024-01-28" },
-      { id: "KZY1glbbYoo", title: "【Cover】🎵 強風オールバック🔹#帕蘿妮 #Paroniie cover.",                                                                                        date: "2024-01-23" },
-      { id: "nQw9qTPp1ZA", title: "【Cover】🎵 星光降落「星光降落在你的眼底我也順勢跌進你眼睛」｜帕蘿妮💧Paroniie cover.",                                                    date: "2024-01-12" },
-      { id: "b4bFZP2ieQo", title: "【Cover】🎵 追夢人「看我看一眼吧莫讓紅顏守空枕」｜帕蘿妮💧Paroniie cover.",                                                                date: "2023-12-15" },
-      { id: "gv9mBNcMo_A", title: "【Cover】#以心傳心 🎵人間不值得 ft. 銀河、小金碧碧🔹帕蘿妮 Paroniie cover.",                                                               date: "2023-11-28" },
-      { id: "WGnPzwxtefo", title: "【Cover】#以心傳心 🎵行星 ft. 銀河、小金碧碧🔹帕蘿妮 Paroniie cover.",                                                                      date: "2023-11-27" },
-      { id: "osqomnv6BTQ", title: "【Cover】#以心傳心 🎵萬千花蕊慈母悲哀 ft. 銀河、小金碧碧🔹帕蘿妮 Paroniie cover.",                                                         date: "2023-11-26" },
-      { id: "26tyBgCxG6w", title: "【Cover】🎵 愛如火「你在笑瘋狂的人是我」｜帕蘿妮💧Paroniie cover.",                                                                        date: "2023-11-17" },
-      { id: "zhzdFLYFpek", title: "【Cover】🎵 四季予你「送你每個夢境每次清醒陪伴的長情」｜帕蘿妮💧Paroniie cover.",                                                          date: "2023-10-13" },
-      { id: "5J41hjw0rI8", title: "【Cover】🎵 孤單北半球「少了你的懷抱當暖爐我還不習慣」｜帕蘿妮💧Paroniie cover.",                                                          date: "2023-09-29" },
-      { id: "zgZlHpKaqQc", title: "【Cover】🎵 KING｜帕蘿妮💧Paroniie cover.",                                                                                                     date: "2023-09-01" },
-      { id: "9X80SF27ULw", title: "【Cover】🎵 起風了「我曾難自拔於世界之大也沉溺於其中夢話」｜帕蘿妮💧Paroniie cover.",                                                      date: "2023-07-28" },
-      { id: "MHCZWU_KlY8", title: "【Cover】🎵 晚風告白「我遇見很多人卻只想和你慢慢周旋」｜帕蘿妮💧Paroniie cover.",                                                          date: "2023-07-08" },
-      { id: "tGN4sPmQW9o", title: "【Cover】🎵 本色｜帕蘿妮💧Paroniie cover.",                                                                                                     date: "2023-06-23" },
-      { id: "-pbygS3LcLw", title: "【Cover】🎵 他們說我是沒有用的年輕人｜帕蘿妮💧Paroniie cover.",                                                                               date: "2023-06-02" },
-      { id: "QeWFvm0vwz8", title: "【Cover】🎵 Summertime｜帕蘿妮💧Paroniie cover.",                                                                                                date: "2023-02-18" },
-      { id: "YsTqsdqvxkY", title: "【Cover】🎵 易燃易爆炸｜帕蘿妮💧Paroniie cover.",                                                                                               date: "2023-02-05" },
-      { id: "24Pgn47b148", title: "【Cover】🎵 彈唱練習ONETAKE ✧ 能認出幾首歌呢？｜帕蘿妮💧Paroniie cover.",                                                                    date: "2023-02-01" },
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie"],  typeKeywords: ["點歌台", "歌回", "cover"] },
@@ -663,11 +588,6 @@ const vtubers = [
 
     videos: [],
 
-    videoClips: [
-      { id: "ap2nB-I1vic", title: "鹿餅們沒日沒夜加工出來的寶石，我拍胸脯保證！(拍)【神無月鹿比】【VTuber精華】" },
-
-    ],
-
     scheduleVideoId:  "kc5RN-h_bAs",
     spreadsheetLabel: "鹿比的大小事",
     scheduleTitle:    "鹿比的行程表",
@@ -738,11 +658,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/himegi17ka',               class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     scheduleVideoId:  "tPRVSHoEEeg",
     spreadsheetLabel: "咪奇的大小事",
@@ -816,12 +732,6 @@ const vtubers = [
     ],
 
     videos: [],
-
-    musicClips: [
-      { id: "mkLydHtl-UI", title: "【You Don't Own Me - Grace】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
-      { id: "CfvU9Lp-0IU", title: "【Bad Guy - Billie Eilish】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
-      { id: "RMDjK2wxp-E", title: "【Blank Space - Taylor Swift】🦇🌕Covered by艾琳妮雅·裴利 Arrynia Vaeri" },
-    ],
 
     videoClips: [
       { id: "Mf_2asOpiuw", title: "【能者多勞勇者欣梅爾（？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
@@ -917,11 +827,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/8p8hbwh8tnb77y',          class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     scheduleVideoId:  "CROYjRn86_o",
     spreadsheetLabel: "霧子的大小事",   // 試算表按鈕文字
@@ -1005,11 +911,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/y13sf73hnbn4lz4',              class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["瓦西瓦瓦", "vaswawa"], typeKeywords: ["cover"] },
@@ -1117,11 +1019,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/1hlxorat4xskrkv',       class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     scheduleVideoId:  "vDoOnUBiuW4",
     spreadsheetLabel: "希希的大小事",
@@ -1221,11 +1119,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/s7sy7hnhkxrze7x',   class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
@@ -1312,11 +1206,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/3kkf9wa19fnb675',   class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     scheduleVideoId:  "lLZlENnAYUQ",
     spreadsheetLabel: "可露團長的大小事",
@@ -1376,11 +1266,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdvmp8tskakyxdr',      class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     scheduleVideoId:  "5Sn6bnUbeus",
     spreadsheetLabel: "氣質兔兔的大小事",
@@ -1443,11 +1329,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/whalefallvtuber/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",           keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
@@ -1514,11 +1396,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdco270x5hdimzj', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
@@ -1578,11 +1456,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/oahdwpbhn26xgh5', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
@@ -1647,11 +1521,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/4176c8dv62xp8tj', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     musicClipsChannelIds: [
@@ -1716,11 +1586,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/o8my2qsvfd8q1we', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["量產型", "Fuka22", "貳貳"], typeKeywords: ["cover", "威風堂々", "嘉賓"] },
@@ -1781,11 +1647,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/57v5h7z1m9gxuyk', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
@@ -1847,11 +1709,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/chamamatti/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "帽帽"], typeKeywords: ["小年夜"] },
@@ -1917,11 +1775,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/lcedt6tbm7j9olg', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
@@ -1986,11 +1840,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/yd8135pe2m366q3', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], typeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
@@ -2046,11 +1896,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/cocor0/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["cocor0", "可可", "心 cocor0"], typeKeywords: ["cover"] },
@@ -2113,11 +1959,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/icg1idg6i513ru4', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "扉扉", "fifi", "uchififi"], typeKeywords: ["cover", "嘉賓"] },
@@ -2174,11 +2016,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/vq7fin259ukl3mi', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["諾恪里", "小心結天團"] },
@@ -2231,11 +2069,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/9ir7u6drnzlzo7a', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "米伊", "kekemii", "克克米"], typeKeywords: ["歌切", "cover"] },
@@ -2300,11 +2134,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/pqnlqsethgm3px2', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",         keywords: ["珮蕾", "Pele"],      typeKeywords: ["cover", "嘉賓"] },
@@ -2366,11 +2196,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/Yawnii/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [
-      { id: "REPLACE_VIDEO_1", title: "熱門直播 #1" },
-      { id: "REPLACE_VIDEO_2", title: "熱門直播 #2" },
-      { id: "REPLACE_VIDEO_3", title: "熱門直播 #3" }
-    ],
+    videos: [],
 
     musicClipsChannelIds: [
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動分類
