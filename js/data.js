@@ -2099,7 +2099,7 @@ const vtubers = [
 
   // ── 六期生 ─────────────────────────────────────
   {
-    id: "peirei",
+    id: "Pele",
     name: "珮蕾",
     nameEn: "Pele.",
     group: "預見娛樂",
