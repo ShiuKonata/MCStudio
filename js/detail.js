@@ -1658,12 +1658,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 加載未分類影片
     async function loadUnclassifiedYear(year) {
+      console.log(`🔵 [loadUnclassifiedYear] 開始加載未分類區, year=${year}`);
       if (uncLoading) return;
       uncLoading = true;
       uncCurrentYear = year;
       uncNextPageToken = null;
 
       const container = document.getElementById('unc-container');
+      console.log(`🔵 [loadUnclassifiedYear] container=${container ? '✅存在' : '❌不存在'}`);
       const moreWrap  = document.getElementById('unc-load-more-wrap');
       const countEl   = document.getElementById('unc-search-count');
       const input     = document.getElementById('unc-search-input');
@@ -1687,7 +1689,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         if (year === 'all') {
+          console.log(`🔵 [loadUnclassifiedYear] 開始API調用...`);
           const data = await fetchUncPage(null);
+          console.log(`🔵 [loadUnclassifiedYear] API回應:`, data);
           if (data.error) throw new Error(data.error.message);
           container.innerHTML = '';
           const items    = data.items || [];
