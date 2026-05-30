@@ -1586,6 +1586,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 建立 v.videos 中已有影片的 Set（用於排除）
     const existingVideoIds = new Set(v.videos.map(vid => vid.id));
 
+    // 【新增】Shorts 區影片 ID Set（用於檢查是否已在 Shorts 區）
+    let shortsVideoIds = new Set();
+    let shortsVideoIdsFetched = false;  // 是否已獲取 Shorts 列表
+
     let uncLoading       = false;
     let uncCurrentYear   = 'all';
     let uncNextPageToken = null;
@@ -1594,6 +1598,38 @@ document.addEventListener('DOMContentLoaded', () => {
       const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
       if (!m) return 0;
       return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+    }
+
+    // 【新增】獲取所有 Shorts 影片的 video ID（UUSH 播放列表）
+    async function fetchAllShortsVideos() {
+      const shortsPlaylistId = 'UUSH' + v.youtubeChannelId.slice(2);
+      let pageToken = null;
+      let count = 0;
+      try {
+        do {
+          let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
+            + '?part=snippet'
+            + '&playlistId=' + encodeURIComponent(shortsPlaylistId)
+            + '&maxResults=50'
+            + '&key=' + encodeURIComponent(v.ytApiKey);
+          if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
+          const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+          const data = await res.json();
+          if (data.error) break;
+
+          (data.items || []).forEach(item => {
+            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+            if (vid) {
+              shortsVideoIds.add(vid);
+              count++;
+            }
+          });
+          pageToken = data.nextPageToken || null;
+        } while (pageToken);
+        console.log(`✅ [STEP 2] 獲取 Shorts 影片列表完成：${count} 部影片`);
+      } catch (err) {
+        console.error(`❌ [STEP 2] 獲取 Shorts 影片列表失敗:`, err);
+      }
     }
 
     // 獲取所有直播存檔的 video ID（UULV 播放列表）
@@ -1737,6 +1773,13 @@ document.addEventListener('DOMContentLoaded', () => {
         liveVideoIdsFetched = true;
       }
 
+      // 【STEP 2 準備】第一次加載時，先獲取 Shorts 影片列表
+      if (!shortsVideoIdsFetched) {
+        console.log(`🔵 [STEP 2] 正在獲取 Shorts 影片列表...`);
+        await fetchAllShortsVideos();
+        shortsVideoIdsFetched = true;
+      }
+
       container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
 
       try {
@@ -1793,10 +1836,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // 【STEP 3】檢測詩雨蔻達特殊規則（只限詩雨蔻達）
-            if (v.id === 'shiucoda') {
-              let isStep3 = false;
-              let step3Type = null;
+            let isStep3 = false;
+            let step3Type = null;
 
+            if (v.id === 'shiucoda') {
               // a. 標題含有 demo
               if (titleLower.includes('demo')) {
                 isStep3 = true;
@@ -1807,17 +1850,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 isStep3 = true;
                 step3Type = 'self-sung';
               }
+            }
 
-              if (isStep3) {
-                step3Candidates.push({
-                  id: vid,
-                  title: title,
-                  date: item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '',
-                  duration: d.duration,
-                  type: step3Type
-                });
-                console.log(`📍 [STEP 3] 檢測到 ${step3Type}: ${title}`);
+            // 【自動分類】如果檢測到 STEP 3，自動添加到 Cover 區
+            if (isStep3) {
+              const newTitle = '【Cover】' + title;
+              const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
+
+              // 添加到 v.videos（内存）
+              v.videos.push({ id: vid, title: newTitle, date: date });
+              existingVideoIds.add(vid);  // 更新已有影片集合
+
+              // 記錄為候選影片
+              step3Candidates.push({
+                id: vid,
+                title: title,
+                date: date,
+                duration: d.duration,
+                type: step3Type,
+                action: '已添加至 Cover 區'
+              });
+              console.log(`✅ [STEP 3] 檢測到 ${step3Type} 並自動分類至 Cover 區: ${title}`);
+
+              // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則添加
+              if (!shortsVideoIds.has(vid) && d.duration <= 60) {
+                // 注：此處僅記錄，實際添加到 UI 留待用戶操作
+                console.log(`⏱️ [STEP 3] 影片 ≤60秒且不在 Shorts 區，應添加：${title}`);
               }
+
+              // 【跳過】不顯示在未分類區（已分類）
+              filteredCount++;
+              continue;
             }
 
             // STEP 2 完成：未在 v.videos 中的影片放入未分類區
@@ -1826,17 +1889,23 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
 
-          // 【STEP 3】輸出候選影片
+          // 【STEP 3】輸出候選影片與自動分類結果
           if (step3Candidates.length > 0) {
-            console.log(`\n🎵 【STEP 3】詩雨蔻達特殊規則 - 檢測到 ${step3Candidates.length} 部待分類影片：`);
+            console.log(`\n🎵 【STEP 3】詩雨蔻達特殊規則 - 自動分類結果：${step3Candidates.length} 部影片`);
             console.table(step3Candidates.map(v => ({
               ID: v.id,
               標題: v.title,
               日期: v.date,
               類型: v.type,
-              時長: v.duration
+              時長: v.duration,
+              狀態: v.action
             })));
-            console.log(`\n💡 建議：將以上影片加入 data.js 的 v.videos，並加上【Cover】前綴\n`);
+
+            // 輸出修改後的 v.videos（供用戶複製到 data.js）
+            console.log(`\n📋 修改後的 v.videos（複製以下內容到 data.js 的 videos 陣列）：\n`);
+            const videosJson = JSON.stringify(v.videos, null, 2);
+            console.log(videosJson);
+            console.log(`\n✅ 共添加 ${step3Candidates.length} 部影片至 Cover 區\n`);
           }
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
 
