@@ -2170,7 +2170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         + '&maxResults=50'
         + '&key=' + encodeURIComponent(v.ytApiKey);
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
-      const res = await fetch(url);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
       return await res.json();
     }
 
@@ -2525,7 +2525,7 @@ document.addEventListener('DOMContentLoaded', () => {
         + '&maxResults=50'
         + '&key=' + encodeURIComponent(v.ytApiKey);
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
-      const res = await fetch(url);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
       return await res.json();
     }
 
