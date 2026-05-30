@@ -1624,15 +1624,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return map;
     }
 
-    // 檢測是否為 Cover / Original / Official / 原創 標題
-    function isClassified(title) {
-      const titleLower = (title || '').toLowerCase();
-      const hasCover = titleLower.includes('cover') || title.includes('歌ってみた');
-      const hasOriginal = titleLower.includes('original') || title.includes('原創') || titleLower.includes('official');
-      // 優先級：如果同時有 Original 和 Cover，判定為 Original
-      return { hasCover, hasOriginal, isOriginal: hasOriginal };
-    }
-
     // 渲染未分類影片卡片
     function renderUncCard(container, item, durationSec) {
       const snip     = item.snippet;
@@ -1710,11 +1701,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!d) continue;
             // 【第一層過濾】排除直播存檔
             if (d.liveContent !== 'none') continue;
-            // 【第二層過濾】排除短於等於 60 秒的短片
-            if (d.duration <= 60) continue;
-            // 【第三層過濾】排除 Cover/Original/Official/原創 標題
-            const { hasCover, hasOriginal } = isClassified(item.snippet.title);
-            if (hasCover || hasOriginal) continue;
             // 剩下的放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
@@ -1752,9 +1738,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             if (d.liveContent !== 'none') continue;
-            if (d.duration <= 60) continue;
-            const { hasCover, hasOriginal } = isClassified(item.snippet.title);
-            if (hasCover || hasOriginal) continue;
             renderUncCard(container, item, d.duration);
           }
           uncNextPageToken = data.nextPageToken || null;
