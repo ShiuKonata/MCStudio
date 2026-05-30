@@ -1584,7 +1584,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let liveVideoIdsFetched = false;  // 是否已獲取直播列表
 
     // 建立 v.videos 中已有影片的 Set（用於排除）
-    const existingVideoIds = new Set(v.videos.map(vid => vid.id));
+    // 【重要】保存原始的 existingVideoIds（來自 data.js），用於判斷影片是否已在正確位置
+    const originalExistingVideoIds = new Set(v.videos.map(vid => vid.id));
+    const existingVideoIds = new Set(originalExistingVideoIds);  // 運行時可能會修改
 
     // 【新增】Shorts 區影片 ID Set（用於檢查是否已在 Shorts 區）
     let shortsVideoIds = new Set();
@@ -1853,34 +1855,43 @@ document.addEventListener('DOMContentLoaded', () => {
               step2Type = 'original';
             }
 
-            // 【自動分類 STEP 2】如果檢測到 Cover / Original，自動添加到 Cover 區
+            // 【自動分類 STEP 2】如果檢測到 Cover / Original
             if (isStep2) {
               const newTitle = '【' + (step2Type === 'cover' ? 'Cover' : 'Original') + '】' + title;
               const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
 
-              // 添加到 v.videos（内存）
-              v.videos.push({ id: vid, title: newTitle, date: date });
-              existingVideoIds.add(vid);  // 更新已有影片集合
+              // 【關鍵判斷】檢查這個影片是否已經在 data.js 的 v.videos 中
+              const alreadyInDataJs = originalExistingVideoIds.has(vid);
 
-              // 記錄為候選影片
-              step3Candidates.push({
-                id: vid,
-                title: title,
-                date: date,
-                duration: d.duration,
-                type: step2Type,
-                action: '【STEP 2】已自動分類'
-              });
-              console.log(`✅ [STEP 2] 檢測到 ${step2Type} 並自動分類至 Cover 區: ${title}`);
+              if (alreadyInDataJs) {
+                // ✅ 已經在 data.js 的 v.videos 中，可以從未分類區移除
+                console.log(`✅ [STEP 2] 已在正確位置（data.js），從未分類區移除: ${title}`);
+                filteredCount++;
+                continue;
+              } else {
+                // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
+                // 【暫時】添加到內存 v.videos 和 step3Candidates（供輸出 JSON）
+                v.videos.push({ id: vid, title: newTitle, date: date });
+                existingVideoIds.add(vid);
 
-              // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
-              if (!shortsVideoIds.has(vid) && d.duration <= 60) {
-                console.log(`⏱️ [STEP 2] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
+                step3Candidates.push({
+                  id: vid,
+                  title: title,
+                  date: date,
+                  duration: d.duration,
+                  type: step2Type,
+                  action: '【STEP 2】需添加至 data.js'
+                });
+                console.log(`📍 [STEP 2] 檢測到 ${step2Type}，需添加至 data.js: ${title}`);
+
+                // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
+                if (!shortsVideoIds.has(vid) && d.duration <= 60) {
+                  console.log(`⏱️ [STEP 2] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
+                }
+
+                // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
+                // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
               }
-
-              // 【跳過】不顯示在未分類區（已分類）
-              filteredCount++;
-              continue;
             }
 
             // 【STEP 3】檢測詩雨蔻達特殊規則（只限詩雨蔻達）
@@ -1900,34 +1911,43 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             }
 
-            // 【自動分類 STEP 3】如果檢測到特殊規則，自動添加到 Cover 區
+            // 【自動分類 STEP 3】如果檢測到特殊規則（詩雨蔻達）
             if (isStep3) {
               const newTitle = '【Cover】' + title;
               const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
 
-              // 添加到 v.videos（内存）
-              v.videos.push({ id: vid, title: newTitle, date: date });
-              existingVideoIds.add(vid);  // 更新已有影片集合
+              // 【關鍵判斷】檢查這個影片是否已經在 data.js 的 v.videos 中
+              const alreadyInDataJs = originalExistingVideoIds.has(vid);
 
-              // 記錄為候選影片
-              step3Candidates.push({
-                id: vid,
-                title: title,
-                date: date,
-                duration: d.duration,
-                type: step3Type,
-                action: '【STEP 3】已自動分類'
-              });
-              console.log(`✅ [STEP 3] 檢測到 ${step3Type} 並自動分類至 Cover 區: ${title}`);
+              if (alreadyInDataJs) {
+                // ✅ 已經在 data.js 的 v.videos 中，可以從未分類區移除
+                console.log(`✅ [STEP 3] 已在正確位置（data.js），從未分類區移除: ${title}`);
+                filteredCount++;
+                continue;
+              } else {
+                // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
+                // 【暫時】添加到內存 v.videos 和 step3Candidates（供輸出 JSON）
+                v.videos.push({ id: vid, title: newTitle, date: date });
+                existingVideoIds.add(vid);
 
-              // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
-              if (!shortsVideoIds.has(vid) && d.duration <= 60) {
-                console.log(`⏱️ [STEP 3] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
+                step3Candidates.push({
+                  id: vid,
+                  title: title,
+                  date: date,
+                  duration: d.duration,
+                  type: step3Type,
+                  action: '【STEP 3】需添加至 data.js'
+                });
+                console.log(`📍 [STEP 3] 檢測到 ${step3Type}，需添加至 data.js: ${title}`);
+
+                // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
+                if (!shortsVideoIds.has(vid) && d.duration <= 60) {
+                  console.log(`⏱️ [STEP 3] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
+                }
+
+                // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
+                // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
               }
-
-              // 【跳過】不顯示在未分類區（已分類）
-              filteredCount++;
-              continue;
             }
 
             // STEP 2/3 完成：未被分類的影片放入未分類區
