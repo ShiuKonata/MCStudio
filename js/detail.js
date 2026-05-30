@@ -305,6 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const uncYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
     .map(y => `<button class="ls-year-btn" data-uncyear="${y}">${y}</button>`)
     .join('');
+  const coverYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
+    .map(y => `<button class="ls-year-btn" data-coveryear="${y}">${y}</button>`)
+    .join('');
 
   // ── 主要 HTML ──────────────────────────────────
   const root = document.getElementById('detail-root');
@@ -489,10 +492,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
 
-          <!-- Cover/Original section (STEP 2) -->
+          <!-- Cover/Original section (STEP 2 + STEP 3) -->
           <div id="ov-cover-section" style="display:none">
             <div class="ls-year-bar" id="cover-year-bar">
               <button class="ls-year-btn active" data-coveryear="all">${T('videos.all')}</button>
+              ${coverYearBtns}
             </div>
             <div class="ls-search-bar">
               <span class="ls-search-icon">🔍</span>
@@ -1651,6 +1655,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 【STEP 2】檢測 Cover/Original 並添加到 coverVideos
+    // 【STEP 3】詩雨蔻達特殊規則檢測
     function checkAndAddCoverOfficial(item, duration) {
       const snip = item.snippet;
       const vid = snip.resourceId && snip.resourceId.videoId;
@@ -1662,11 +1667,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const thumb = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
       const thumbUrl = thumb ? thumb.url : (`https://img.youtube.com/vi/${vid}/hqdefault.jpg`);
 
-      // 檢測 Cover 和 Original 關鍵字
+      // 【STEP 2】檢測 Cover 和 Original 關鍵字
       const isCover = titleLower.includes('cover') || titleLower.includes('歌ってみた');
       const isOriginal = titleLower.includes('original') || titleLower.includes('原創');
 
-      if (isCover || isOriginal) {
+      // 【STEP 3】詩雨蔻達特殊規則（只限詩雨蔻達）
+      let isSpecialRule = false;
+      let specialRuleType = null;
+      if (v.id === 'shiucoda') {
+        // a. 標題含有 demo
+        if (titleLower.includes('demo')) {
+          isSpecialRule = true;
+          specialRuleType = 'Demo';
+        }
+        // b. 標題含有自彈自唱
+        if (titleLower.includes('自彈自唱')) {
+          isSpecialRule = true;
+          specialRuleType = 'Self-sung';
+        }
+      }
+
+      // 判斷是否應添加到 Cover 區
+      if (isCover || isOriginal || isSpecialRule) {
         const coverObj = {
           id: vid,
           title: title,
@@ -1674,13 +1696,14 @@ document.addEventListener('DOMContentLoaded', () => {
           thumb: thumbUrl,
           duration: duration,
           isShorts: duration <= 60,
-          type: isCover ? 'Cover' : 'Original'
+          type: isSpecialRule ? specialRuleType : (isCover ? 'Cover' : 'Original')
         };
 
         // 避免重複
         if (!coverVideos.some(v => v.id === vid)) {
           coverVideos.push(coverObj);
-          console.log(`🎵 [STEP 2] 檢測到 ${coverObj.type}: ${title.substring(0, 60)}`);
+          const stepLabel = isSpecialRule ? '【STEP 3】' : '【STEP 2】';
+          console.log(`🎵 ${stepLabel} 檢測到 ${coverObj.type}: ${title.substring(0, 60)}`);
           return true;  // 表示已分類
         }
       }
@@ -1907,6 +1930,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadCover = function() { loadCoverYear(coverCurrentYear); };
+
+    // Cover 搜尋篩選
+    function applyCoverSearch() {
+      const input    = document.getElementById('cover-search-input');
+      const countEl  = document.getElementById('cover-search-count');
+      const clearBtn = document.getElementById('cover-search-clear');
+      if (!input) return;
+      const q = input.value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#cover-container .ls-card');
+      let shown = 0;
+      cards.forEach(card => {
+        const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
+        const match = !q || title.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      if (countEl) {
+        if (shown < cards.length) {
+          countEl.textContent = `搜尋結果: ${shown} / ${cards.length}`;
+          countEl.style.display = 'block';
+        } else {
+          countEl.style.display = 'none';
+        }
+      }
+    }
+
+    document.addEventListener('input', e => {
+      if (e.target && e.target.id === 'cover-search-input') applyCoverSearch();
+    });
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'cover-search-clear') {
+        const input = document.getElementById('cover-search-input');
+        if (input) { input.value = ''; input.focus(); }
+        applyCoverSearch();
+      }
+    });
 
     // 「載入更多」（全部模式）
     document.addEventListener('click', e => {
@@ -2179,6 +2238,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (input) { input.value = ''; input.focus(); }
         applyYtsSearch();
       }
+    });
+
+    // Cover/Original 年份切換
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.ls-year-btn[data-coveryear]');
+      if (!btn) return;
+      document.querySelectorAll('.ls-year-btn[data-coveryear]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadCoverYear(btn.dataset.coveryear);
     });
 
     // 【分類切換】Shorts ↔ Cover/Original ↔ 未分類
