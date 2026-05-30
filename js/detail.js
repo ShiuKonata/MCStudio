@@ -518,10 +518,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 未分類 section -->
           <div id="ov-unclassified-section" style="display:none">
-            <div class="ls-year-bar" id="ov-unclassified-year-bar">
-              <button class="ls-year-btn active" data-ovunclassifiedyear="all">${T('videos.all')}</button>
-              ${ovuYearBtns}
-            </div>
             <div class="ls-search-bar">
               <span class="ls-search-icon">🔍</span>
               <input class="ls-search-input" id="ov-unclassified-search-input" type="text" placeholder="搜尋未分類影片" autocomplete="off">
