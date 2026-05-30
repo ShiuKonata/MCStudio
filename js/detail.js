@@ -444,7 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="ls-year-btn active" data-vfilter="all">${T('videos.all')}</button>
             <button class="ls-year-btn" data-vfilter="原創曲">${T('videos.original')}</button>
             <button class="ls-year-btn" data-vfilter="Cover">${T('videos.cover')}</button>
-            <button class="ls-year-btn" data-vfilter="unclassified" style="display:none">❓ 未分類</button>
           </div>
           <div class="livestreams-container" id="video-grid"></div>
         </div>
@@ -1203,8 +1202,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           card.style.display = title.includes('【cover】') || title.toLowerCase().includes('cover') ? '' : 'none';
         }
-      } else if (filter === 'unclassified') {
-        card.style.display = videoType === 'unclassified' ? '' : 'none';
       }
     });
   });
