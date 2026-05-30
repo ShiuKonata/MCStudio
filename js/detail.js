@@ -305,9 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const uncYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
     .map(y => `<button class="ls-year-btn" data-uncyear="${y}">${y}</button>`)
     .join('');
-  const coverYearBtns = Array.from({length: currentYear - debutYear + 1}, (_, i) => currentYear - i)
-    .map(y => `<button class="ls-year-btn" data-coveryear="${y}">${y}</button>`)
-    .join('');
 
   // ── 主要 HTML ──────────────────────────────────
   const root = document.getElementById('detail-root');
@@ -470,7 +467,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- 分類切換 -->
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="shorts">📱 Shorts</button>
-            <button class="ov-section-btn" data-ovsection="cover">🎵 Cover/Original</button>
             <button class="ov-section-btn" data-ovsection="unclassified">❓ 未分類</button>
           </div>
 
@@ -489,24 +485,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="livestreams-container" id="yts-container"></div>
             <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
               <button class="ls-load-more-btn" id="yts-load-more-btn">${T('loadMore')}</button>
-            </div>
-          </div>
-
-          <!-- Cover/Original section (STEP 2 + STEP 3) -->
-          <div id="ov-cover-section" style="display:none">
-            <div class="ls-year-bar" id="cover-year-bar">
-              <button class="ls-year-btn active" data-coveryear="all">${T('videos.all')}</button>
-              ${coverYearBtns}
-            </div>
-            <div class="ls-search-bar">
-              <span class="ls-search-icon">🔍</span>
-              <input class="ls-search-input" id="cover-search-input" type="text" placeholder="${T('search.cover')}" autocomplete="off">
-              <button class="ls-search-clear" id="cover-search-clear" title="清除">✕</button>
-            </div>
-            <div class="ls-search-count" id="cover-search-count"></div>
-            <div class="livestreams-container" id="cover-container"></div>
-            <div class="ls-load-more-wrap" id="cover-load-more-wrap" style="display:none">
-              <button class="ls-load-more-btn" id="cover-load-more-btn">${T('loadMore')}</button>
             </div>
           </div>
 
@@ -1608,10 +1586,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let liveVideoIds = new Set();  // 存放直播存檔的video ID
     let liveVideoIdsFetched = false;  // 是否已獲取直播列表
 
-    // STEP 2: Cover/Original 存儲
-    let coverVideos = [];  // 存放 Cover/Original 影片
-    let coverLoading = false;
-    let coverCurrentYear = 'all';
+    // 建立 v.videos 中已有影片的 Set（用於排除）
+    const existingVideoIds = new Set(v.videos.map(vid => vid.id));
 
     let uncLoading       = false;
     let uncCurrentYear   = 'all';
@@ -1652,62 +1628,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.error(`❌ [STEP 1] 獲取直播存檔失敗:`, err);
       }
-    }
-
-    // 【STEP 2】檢測 Cover/Original 並添加到 coverVideos
-    // 【STEP 3】詩雨蔻達特殊規則檢測
-    function checkAndAddCoverOfficial(item, duration) {
-      const snip = item.snippet;
-      const vid = snip.resourceId && snip.resourceId.videoId;
-      if (!vid) return;
-
-      const title = snip.title || '';
-      const titleLower = title.toLowerCase();
-      const date = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
-      const thumb = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
-      const thumbUrl = thumb ? thumb.url : (`https://img.youtube.com/vi/${vid}/hqdefault.jpg`);
-
-      // 【STEP 2】檢測 Cover 和 Original 關鍵字
-      const isCover = titleLower.includes('cover') || titleLower.includes('歌ってみた');
-      const isOriginal = titleLower.includes('original') || titleLower.includes('原創');
-
-      // 【STEP 3】詩雨蔻達特殊規則（只限詩雨蔻達）
-      let isSpecialRule = false;
-      let specialRuleType = null;
-      if (v.id === 'shiucoda') {
-        // a. 標題含有 demo
-        if (titleLower.includes('demo')) {
-          isSpecialRule = true;
-          specialRuleType = 'Demo';
-        }
-        // b. 標題含有自彈自唱
-        if (titleLower.includes('自彈自唱')) {
-          isSpecialRule = true;
-          specialRuleType = 'Self-sung';
-        }
-      }
-
-      // 判斷是否應添加到 Cover 區
-      if (isCover || isOriginal || isSpecialRule) {
-        const coverObj = {
-          id: vid,
-          title: title,
-          date: date,
-          thumb: thumbUrl,
-          duration: duration,
-          isShorts: duration <= 60,
-          type: isSpecialRule ? specialRuleType : (isCover ? 'Cover' : 'Original')
-        };
-
-        // 避免重複
-        if (!coverVideos.some(v => v.id === vid)) {
-          coverVideos.push(coverObj);
-          const stepLabel = isSpecialRule ? '【STEP 3】' : '【STEP 2】';
-          console.log(`🎵 ${stepLabel} 檢測到 ${coverObj.type}: ${title.substring(0, 60)}`);
-          return true;  // 表示已分類
-        }
-      }
-      return false;  // 未分類，留在未分類區
     }
 
     // 從上傳播放清單 API 獲取影片
@@ -1849,13 +1769,13 @@ document.addEventListener('DOMContentLoaded', () => {
               // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
-            // 【STEP 2】檢測 Cover/Original
-            const isCoverOfficial = checkAndAddCoverOfficial(item, d.duration);
-            if (isCoverOfficial) {
-              // 已分類到 Cover/Original，不顯示在未分類區
+            // 【STEP 2】排除 v.videos 中已有的影片
+            if (existingVideoIds.has(vid)) {
+              // 已在 v.videos 中（原創曲&Cover 區），不顯示在未分類區
+              filteredCount++;
               continue;
             }
-            // STEP 2 完成：非 Cover/Original 的影片放入未分類區
+            // STEP 2 完成：未在 v.videos 中的影片放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
           }
@@ -1873,99 +1793,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
-
-    // 【STEP 2】載入 Cover/Original 影片
-    let tryLoadCover = null;
-    async function loadCoverYear(year) {
-      if (coverLoading) return;
-      coverLoading = true;
-      coverCurrentYear = year;
-
-      const container = document.getElementById('cover-container');
-      if (!container) { coverLoading = false; return; }
-
-      // 先確保 coverVideos 已填充（通過加載未分類區）
-      if (coverVideos.length === 0) {
-        await loadUnclassifiedYear('all');
-      }
-
-      container.innerHTML = '';
-
-      let filtered = coverVideos;
-      if (year !== 'all') {
-        filtered = coverVideos.filter(v => v.date.startsWith(String(year)));
-      }
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">🎵</span><p>暫無 Cover/Original 影片</p></div>`;
-      } else {
-        filtered.forEach(v => {
-          const thumbUrl = v.thumb || `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
-          const title = (v.title || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-          const date = v.date || '';
-          const shortsMarker = v.isShorts ? ' <span style="font-size:0.7rem;background:#ff6f00;padding:0.2rem 0.5rem;border-radius:4px;color:white;">Shorts</span>' : '';
-
-          container.innerHTML += `
-            <div class="ls-card" onclick="(function(){
-              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0';
-              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${v.id}';
-              document.getElementById('yt-modal-title').textContent='${title}';
-              document.getElementById('yt-modal').classList.add('open');
-              document.body.style.overflow='hidden';
-            })()">
-              <div class="ls-thumb-wrap">
-                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
-                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-              </div>
-              <div class="ls-info">
-                <div class="ls-title">${title || '（無標題）'}${shortsMarker}</div>
-                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
-              </div>
-            </div>`;
-        });
-      }
-
-      console.log(`🎵 Cover/Original 合計：${filtered.length} 部`);
-      coverLoading = false;
-    }
-
-    tryLoadCover = function() { loadCoverYear(coverCurrentYear); };
-
-    // Cover 搜尋篩選
-    function applyCoverSearch() {
-      const input    = document.getElementById('cover-search-input');
-      const countEl  = document.getElementById('cover-search-count');
-      const clearBtn = document.getElementById('cover-search-clear');
-      if (!input) return;
-      const q = input.value.trim().toLowerCase();
-      const cards = document.querySelectorAll('#cover-container .ls-card');
-      let shown = 0;
-      cards.forEach(card => {
-        const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
-        const match = !q || title.includes(q);
-        card.style.display = match ? '' : 'none';
-        if (match) shown++;
-      });
-      if (countEl) {
-        if (shown < cards.length) {
-          countEl.textContent = `搜尋結果: ${shown} / ${cards.length}`;
-          countEl.style.display = 'block';
-        } else {
-          countEl.style.display = 'none';
-        }
-      }
-    }
-
-    document.addEventListener('input', e => {
-      if (e.target && e.target.id === 'cover-search-input') applyCoverSearch();
-    });
-    document.addEventListener('click', e => {
-      if (e.target && e.target.id === 'cover-search-clear') {
-        const input = document.getElementById('cover-search-input');
-        if (input) { input.value = ''; input.focus(); }
-        applyCoverSearch();
-      }
-    });
 
     // 「載入更多」（全部模式）
     document.addEventListener('click', e => {
@@ -2000,16 +1827,16 @@ document.addEventListener('DOMContentLoaded', () => {
               // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
-            // 【STEP 2】檢測 Cover/Original
-            const isCoverOfficial = checkAndAddCoverOfficial(item, d.duration);
-            if (isCoverOfficial) {
-              // 已分類到 Cover/Original，不顯示在未分類區
+            // 【STEP 2】排除 v.videos 中已有的影片
+            if (existingVideoIds.has(vid)) {
+              // 已在 v.videos 中（原創曲&Cover 區），不顯示在未分類區
+              filteredCount++;
               continue;
             }
-            // STEP 2 完成：非 Cover/Original 的影片放入未分類區
+            // STEP 2 完成：未在 v.videos 中的影片放入未分類區
             renderUncCard(container, item, d.duration);
           }
-          console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部，檢測 Cover/Original 完成`);
+          console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部`);
           uncNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
           const btn = document.getElementById('unc-load-more-btn');
@@ -2240,16 +2067,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Cover/Original 年份切換
-    document.addEventListener('click', e => {
-      const btn = e.target.closest('.ls-year-btn[data-coveryear]');
-      if (!btn) return;
-      document.querySelectorAll('.ls-year-btn[data-coveryear]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      loadCoverYear(btn.dataset.coveryear);
-    });
-
-    // 【分類切換】Shorts ↔ Cover/Original ↔ 未分類
+    // 【分類切換】Shorts ↔ 未分類
     document.addEventListener('click', e => {
       const btn = e.target.closest('.ov-section-btn');
       if (!btn) return;
@@ -2258,19 +2076,12 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       const uncEl = document.getElementById('ov-unclassified-section');
       const shortsEl  = document.getElementById('ov-shorts-section');
-      const coverEl = document.getElementById('ov-cover-section');
       if (uncEl) uncEl.style.display = section === 'unclassified' ? '' : 'none';
       if (shortsEl)  shortsEl.style.display  = section === 'shorts'  ? '' : 'none';
-      if (coverEl) coverEl.style.display = section === 'cover' ? '' : 'none';
       // Shorts：首次切換時才觸發載入
       if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
         tryLoadYtShorts();
-      }
-      // Cover/Original：首次切換時才觸發載入
-      if (section === 'cover' && tryLoadCover && !window._coverLoaded) {
-        window._coverLoaded = true;
-        tryLoadCover();
       }
       // 未分類區：首次切換時才觸發載入
       if (section === 'unclassified' && tryLoadUnclassified && !window._uncLoaded) {
