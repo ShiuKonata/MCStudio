@@ -1711,10 +1711,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            // 【第一層過濾】排除所有直播相關內容（upcoming、live、completed）
-            if (d.liveContent !== 'none') {
+            // 【第一層過濾】排除所有直播相關內容
+            // 1. liveBroadcastContent !== 'none'（upcoming、live、completed）
+            // 2. wasLive === true（曾經是直播的存檔）
+            if (d.liveContent !== 'none' || d.wasLive) {
               filteredCount++;
-              console.log(`🚫 直播存檔被過濾: [${d.liveContent}] ${title}`);
+              console.log(`🚫 直播存檔被過濾: [${d.liveContent}] wasLive=${d.wasLive} ${title}`);
               continue;
             }
             // 剩下的放入未分類區
