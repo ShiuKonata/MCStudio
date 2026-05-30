@@ -1995,8 +1995,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadCoverOriginal() {
       // Step 2: 禁用自動加載，等待用戶明確指令開始執行詩雨蔻達規章
-      const container = document.getElementById('video-grid');
-      if (container) container.innerHTML = '';
+      const coContainer = document.getElementById('video-grid');
+      if (coContainer) coContainer.innerHTML = '';
       return;
 
       // 以下代碼暫時禁用，直到用戶開始執行規章
