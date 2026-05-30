@@ -1950,7 +1950,23 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             }
 
-            // STEP 2/3 完成：未被分類的影片放入未分類區
+            // 【STEP 4】檢測 ≤60秒的短片
+            if (d.duration <= 60) {
+              const alreadyInShorts = shortsVideoIds.has(vid);
+
+              if (alreadyInShorts) {
+                // ✅ 已經在 Shorts 區，從未分類區移除
+                console.log(`✅ [STEP 4] 短片已在 Shorts 區，從未分類區移除: ${title}`);
+                filteredCount++;
+                continue;
+              } else {
+                // ❌ 還沒有在 Shorts 區，需要添加
+                console.log(`📍 [STEP 4] 檢測到短片（≤60秒），不在 Shorts 區，應添加: ${title}`);
+                // 暫時保留在未分類區，等待用戶在 STEP 5 手動分類
+              }
+            }
+
+            // STEP 2/3/4 完成：未被分類的影片放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
           }
