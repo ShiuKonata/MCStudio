@@ -466,20 +466,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 分類切換 -->
           <div class="ov-section-bar">
-            <button class="ov-section-btn active" data-ovsection="general">📺 一般影片</button>
-            <button class="ov-section-btn" data-ovsection="shorts">🎬 Shorts</button>
-            <button class="ov-section-btn" data-ovsection="ads">📢 廣告</button>
-            <button class="ov-section-btn" data-ovsection="first">🎙️ 初配信</button>
+            <button class="ov-section-btn active" data-ovsection="shorts">📱 Shorts</button>
             <button class="ov-section-btn" data-ovsection="unclassified">❓ 未分類</button>
           </div>
 
-          <!-- 一般影片 section -->
-          <div id="ov-general-section" style="display:none">
-            <div class="livestreams-container" id="ov-general-container"></div>
-          </div>
-
           <!-- 官方 Shorts section -->
-          <div id="ov-shorts-section" style="display:none">
+          <div id="ov-shorts-section">
             <div class="ls-year-bar" id="yts-year-bar">
               <button class="ls-year-btn active" data-ytsyear="all">${T('videos.all')}</button>
               ${ytsYearBtns}
@@ -496,16 +488,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
 
-          <!-- 廣告 section -->
-          <div id="ov-ads-section" style="display:none">
-            <div class="livestreams-container" id="ov-ads-container"></div>
-          </div>
-
-          <!-- 初配信 section -->
-          <div id="ov-first-section" style="display:none">
-            <div class="livestreams-container" id="ov-first-container"></div>
-          </div>
-
           <!-- 未分類區 section -->
           <div id="ov-unclassified-section" style="display:none">
             <div class="ls-search-bar">
@@ -515,6 +497,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="ls-search-count" id="unc-search-count"></div>
             <div class="livestreams-container" id="unc-container"></div>
+            <div class="ls-load-more-wrap" id="unc-load-more-wrap" style="display:none">
+              <button class="ls-load-more-btn" id="unc-load-more-btn">${T('loadMore')}</button>
+            </div>
           </div>
         </div>` : ''}
 
@@ -1600,21 +1585,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const livePlaylistId = 'UULV' + v.youtubeChannelId.slice(2);  // 直播存檔播放列表
     let liveVideoIds = new Set();  // 存放直播存檔的video ID
     let liveVideoIdsFetched = false;  // 是否已獲取直播列表
-
-    // 建立 v.videos 中已有影片的 Set（用於排除）
-    // 【重要】保存原始的 existingVideoIds（來自 data.js），用於判斷影片是否已在正確位置
-    const originalExistingVideoIds = new Set(v.videos.map(vid => vid.id));
-    const existingVideoIds = new Set(originalExistingVideoIds);  // 運行時可能會修改
-
-    // 【新增】Shorts 區影片 ID Set（用於檢查是否已在 Shorts 區）
-    let shortsVideoIds = new Set();
-    let shortsVideoIdsFetched = false;  // 是否已獲取 Shorts 列表
-
-    // 【新增】廣告、一般影片、初配信容器
-    window._adsVideos = [];      // 廣告影片（自動檢測）
-    window._generalVideos = [];  // 一般影片（STEP 5 手動分類）
-    window._firstVideos = [];    // 初配信（STEP 5 手動分類）
-
     let uncLoading       = false;
     let uncCurrentYear   = 'all';
     let uncNextPageToken = null;
@@ -1623,38 +1593,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
       if (!m) return 0;
       return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
-    }
-
-    // 【新增】獲取所有 Shorts 影片的 video ID（UUSH 播放列表）
-    async function fetchAllShortsVideos() {
-      const shortsPlaylistId = 'UUSH' + v.youtubeChannelId.slice(2);
-      let pageToken = null;
-      let count = 0;
-      try {
-        do {
-          let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
-            + '?part=snippet'
-            + '&playlistId=' + encodeURIComponent(shortsPlaylistId)
-            + '&maxResults=50'
-            + '&key=' + encodeURIComponent(v.ytApiKey);
-          if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
-          const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
-          const data = await res.json();
-          if (data.error) break;
-
-          (data.items || []).forEach(item => {
-            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
-            if (vid) {
-              shortsVideoIds.add(vid);
-              count++;
-            }
-          });
-          pageToken = data.nextPageToken || null;
-        } while (pageToken);
-        console.log(`✅ [STEP 2] 獲取 Shorts 影片列表完成：${count} 部影片`);
-      } catch (err) {
-        console.error(`❌ [STEP 2] 獲取 Shorts 影片列表失敗:`, err);
-      }
     }
 
     // 獲取所有直播存檔的 video ID（UULV 播放列表）
@@ -1703,42 +1641,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 取得影片詳細資訊（duration、liveContent、wasLive）
     async function fetchVideoDetails(videoIds) {
       if (!videoIds.length) return {};
-
+      const url = 'https://www.googleapis.com/youtube/v3/videos'
+        + '?part=contentDetails,snippet,liveStreamingDetails'
+        + '&id=' + videoIds.join(',')
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+      const data = await res.json();
       const map = {};
-      const BATCH_SIZE = 50;  // YouTube API 單次最多 50 個 ID
-
-      // 【分批請求】每次最多 50 個 ID
-      for (let i = 0; i < videoIds.length; i += BATCH_SIZE) {
-        const batch = videoIds.slice(i, i + BATCH_SIZE);
-        const url = 'https://www.googleapis.com/youtube/v3/videos'
-          + '?part=contentDetails,snippet,liveStreamingDetails'
-          + '&id=' + batch.join(',')
-          + '&key=' + encodeURIComponent(v.ytApiKey);
-
-        try {
-          const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
-          const data = await res.json();
-
-          if (data.error) {
-            console.error(`❌ [fetchVideoDetails] API 錯誤 (第 ${Math.floor(i/BATCH_SIZE)+1} 批):`, data.error);
-            continue;
-          }
-
-          (data.items || []).forEach((item) => {
-            const liveContent = item.snippet.liveBroadcastContent || 'none';
-            const wasLive = !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime);
-            map[item.id] = {
-              duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
-              liveContent: liveContent,
-              wasLive:     wasLive,
-            };
-          });
-        } catch (err) {
-          console.error(`❌ [fetchVideoDetails] 第 ${Math.floor(i/BATCH_SIZE)+1} 批請求失敗:`, err);
-        }
-      }
-
-      console.log(`✅ [fetchVideoDetails] 分批獲取完成：${videoIds.length} 部影片，共 ${Math.ceil(videoIds.length/BATCH_SIZE)} 批`);
+      // console.log(`🔵 [fetchVideoDetails] 獲取${videoIds.length}部影片詳情，API回應:`, data);
+      (data.items || []).forEach((item, idx) => {
+        const liveContent = item.snippet.liveBroadcastContent || 'none';
+        const wasLive = !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime);
+        map[item.id] = {
+          duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
+          liveContent: liveContent,
+          wasLive:     wasLive,
+        };
+        // 詳細日誌：顯示所有影片的狀態（已關閉以減少console噪音）
+        // console.log(`🔵 影片${idx+1}: [${liveContent}] wasLive=${wasLive} | ${item.snippet.title}`);
+      });
       return map;
     }
 
@@ -1798,49 +1719,40 @@ document.addEventListener('DOMContentLoaded', () => {
         liveVideoIdsFetched = true;
       }
 
-      // 【STEP 2 準備】第一次加載時，先獲取 Shorts 影片列表
-      if (!shortsVideoIdsFetched) {
-        console.log(`🔵 [STEP 2] 正在獲取 Shorts 影片列表...`);
-        await fetchAllShortsVideos();
-        shortsVideoIdsFetched = true;
+      const uncCacheKey = 'mc_unc_' + v.youtubeChannelId + '_' + year;
+      const uncCached   = cacheGet(uncCacheKey);
+      if (uncCached) {
+        container.innerHTML  = uncCached.html;
+        uncNextPageToken = uncCached.nextPageToken || null;
+        if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
+        uncLoading = false;
+        applyUncSearch();
+        return;
       }
 
       container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
+      if (moreWrap) moreWrap.style.display = 'none';
 
       try {
         if (year === 'all') {
-          console.log(`🔵 [loadUnclassifiedYear] 開始一次性加載所有未分類影片...`);
+          console.log(`🔵 [loadUnclassifiedYear] 開始API調用...`);
+          const data = await fetchUncPage(null);
+          console.log(`🔵 [loadUnclassifiedYear] API回應:`, data);
+          if (data.error) throw new Error(data.error.message);
           container.innerHTML = '';
-          let allItems = [];
-          let pageToken = null;
-          let pageCount = 0;
-
-          // 【一次性加載所有頁面】
-          do {
-            const data = await fetchUncPage(pageToken);
-            console.log(`🔵 [loadUnclassifiedYear] 第 ${pageCount + 1} 頁，獲取 ${(data.items || []).length} 部`);
-            if (data.error) throw new Error(data.error.message);
-            allItems.push(...(data.items || []));
-            pageToken = data.nextPageToken || null;
-            pageCount++;
-          } while (pageToken);
-
-          console.log(`📊 未分類區 - 總獲取影片數: ${allItems.length} 部（共 ${pageCount} 頁）`);
-
-          const videoIds = allItems.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          const items    = data.items || [];
+          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
           const detailMap = await fetchVideoDetails(videoIds);
           let count = 0;
           let filteredCount = 0;
-          let step3Candidates = [];  // 【STEP 3】候選影片
-
-          for (const item of allItems) {
+          console.log(`📊 未分類區 - 獲取影片數: ${items.length}`);
+          for (const item of items) {
             const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
             if (!vid) continue;
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            const titleLower = title.toLowerCase();
-            // 【STEP 1 - 只排除直播存檔】
+            // 【STEP 1 - 第一層過濾】排除所有直播相關內容
             // 使用 UULV 播放列表（直播存檔）來直接排除
             if (liveVideoIds.has(vid)) {
               filteredCount++;
@@ -1853,192 +1765,22 @@ document.addEventListener('DOMContentLoaded', () => {
               // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
-            // 【廣告檢測 - 優先於 STEP 2】標題含「廣告」關鍵字
-            if (title.includes('廣告')) {
-              const adsObj = {
-                id: vid,
-                title: title,
-                date: item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '',
-                thumb: (item.snippet.thumbnails && (item.snippet.thumbnails.high || item.snippet.thumbnails.medium || item.snippet.thumbnails.default))?.url || `https://img.youtube.com/vi/${vid}/hqdefault.jpg`
-              };
-              if (!window._adsVideos.some(v => v.id === vid)) {
-                window._adsVideos.push(adsObj);
-                console.log(`📢 【廣告偵測】檢測到廣告: ${title}`);
-              }
+            // 【排除原創曲和Cover】這些內容已在其他分類中
+            const titleLower = title.toLowerCase();
+            if (titleLower.includes('原創') || titleLower.includes('cover')) {
               filteredCount++;
-              continue;  // 廣告不在未分類區顯示
-            }
-
-            // 【STEP 2】排除 v.videos 中已有的影片
-            if (existingVideoIds.has(vid)) {
-              // 已在 v.videos 中（原創曲&Cover 區），不顯示在未分類區
-              filteredCount++;
+              // console.log(`🚫 排除原創/Cover: ${title}`);
               continue;
             }
-
-            // 【STEP 2】檢測 Cover / Original 影片（所有 Vtuber）
-            // STEP 2 共 5 個關鍵字：
-            // → Cover 區：cover、歌ってみた
-            // → Original 區：Original、Official、原創
-            let isStep2 = false;
-            let step2Type = null;
-
-            // a. 檢測 Cover（含「cover」或「歌ってみた」）
-            if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
-              isStep2 = true;
-              step2Type = 'cover';
-            }
-            // b. 檢測 Original（含「original」或「official」或「原創」）
-            if (titleLower.includes('original') || titleLower.includes('official') || titleLower.includes('原創')) {
-              isStep2 = true;
-              step2Type = 'original';
-            }
-
-            // 【自動分類 STEP 2】如果檢測到 Cover / Original
-            if (isStep2) {
-              const newTitle = '【' + (step2Type === 'cover' ? 'Cover' : 'Original') + '】' + title;
-              const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
-
-              // 【關鍵判斷】檢查這個影片是否已經在 data.js 的 v.videos 中
-              const alreadyInDataJs = originalExistingVideoIds.has(vid);
-
-              if (alreadyInDataJs) {
-                // ✅ 已經在 data.js 的 v.videos 中，可以從未分類區移除
-                console.log(`✅ [STEP 2] 已在正確位置（data.js），從未分類區移除: ${title}`);
-                filteredCount++;
-                continue;
-              } else {
-                // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
-                // 【暫時】添加到內存 v.videos 和 step3Candidates（供輸出 JSON）
-                v.videos.push({ id: vid, title: newTitle, date: date });
-                existingVideoIds.add(vid);
-
-                step3Candidates.push({
-                  id: vid,
-                  title: title,
-                  date: date,
-                  duration: d.duration,
-                  type: step2Type,
-                  action: '【STEP 2】需添加至 data.js'
-                });
-                console.log(`📍 [STEP 2] 檢測到 ${step2Type}，需添加至 data.js: ${title}`);
-
-                // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
-                if (!shortsVideoIds.has(vid) && d.duration <= 60) {
-                  console.log(`⏱️ [STEP 2] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
-                }
-
-                // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
-                // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
-              }
-            }
-
-            // 【STEP 3】檢測詩雨蔻達特殊規則（只限詩雨蔻達）
-            let isStep3 = false;
-            let step3Type = null;
-
-            if (v.id === 'shiucoda') {
-              // a. 標題含有 demo
-              if (titleLower.includes('demo')) {
-                isStep3 = true;
-                step3Type = 'demo';
-              }
-              // b. 標題含有自彈自唱
-              if (titleLower.includes('自彈自唱')) {
-                isStep3 = true;
-                step3Type = 'self-sung';
-              }
-            }
-
-            // 【自動分類 STEP 3】如果檢測到特殊規則（詩雨蔻達）
-            if (isStep3) {
-              const newTitle = '【Cover】' + title;
-              const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
-
-              // 【關鍵判斷】檢查這個影片是否已經在 data.js 的 v.videos 中
-              const alreadyInDataJs = originalExistingVideoIds.has(vid);
-
-              if (alreadyInDataJs) {
-                // ✅ 已經在 data.js 的 v.videos 中，可以從未分類區移除
-                console.log(`✅ [STEP 3] 已在正確位置（data.js），從未分類區移除: ${title}`);
-                filteredCount++;
-                continue;
-              } else {
-                // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
-                // 【暫時】添加到內存 v.videos 和 step3Candidates（供輸出 JSON）
-                v.videos.push({ id: vid, title: newTitle, date: date });
-                existingVideoIds.add(vid);
-
-                step3Candidates.push({
-                  id: vid,
-                  title: title,
-                  date: date,
-                  duration: d.duration,
-                  type: step3Type,
-                  action: '【STEP 3】需添加至 data.js'
-                });
-                console.log(`📍 [STEP 3] 檢測到 ${step3Type}，需添加至 data.js: ${title}`);
-
-                // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
-                if (!shortsVideoIds.has(vid) && d.duration <= 60) {
-                  console.log(`⏱️ [STEP 3] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
-                }
-
-                // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
-                // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
-              }
-            }
-
-            // 【STEP 4】檢測 ≤60秒的短片
-            if (d.duration <= 60) {
-              const alreadyInShorts = shortsVideoIds.has(vid);
-
-              if (alreadyInShorts) {
-                // ✅ 已經在 Shorts 區，從未分類區移除
-                console.log(`✅ [STEP 4] 短片已在 Shorts 區，從未分類區移除: ${title}`);
-                filteredCount++;
-                continue;
-              } else {
-                // ❌ 還沒有在 Shorts 區，需要添加
-                console.log(`📍 [STEP 4] 檢測到短片（≤60秒），不在 Shorts 區，應添加: ${title}`);
-                // 暫時保留在未分類區，等待用戶在 STEP 5 手動分類
-              }
-            }
-
-            // STEP 2/3/4 完成：未被分類的影片放入未分類區
+            // 剩下的放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
           }
-          console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
-
-          // 【STEP 2/3】輸出候選影片與自動分類結果
-          if (step3Candidates.length > 0) {
-            const step2Count = step3Candidates.filter(v => v.action.includes('STEP 2')).length;
-            const step3Count = step3Candidates.filter(v => v.action.includes('STEP 3')).length;
-
-            console.log(`\n🎵 【自動分類結果】共檢測到 ${step3Candidates.length} 部影片`);
-            console.log(`   ├─ STEP 2（Cover/Original）: ${step2Count} 部`);
-            console.log(`   └─ STEP 3（詩雨蔻達特殊規則）: ${step3Count} 部\n`);
-
-            console.table(step3Candidates.map(v => ({
-              ID: v.id,
-              標題: v.title,
-              日期: v.date,
-              類型: v.type,
-              時長: v.duration,
-              分類: v.action
-            })));
-
-            // 輸出修改後的 v.videos（供用戶複製到 data.js）
-            console.log(`\n📋 修改後的 v.videos（複製以下內容到 data.js 的 videos 陣列）：\n`);
-            const videosJson = JSON.stringify(v.videos, null, 2);
-            console.log(videosJson);
-            console.log(`\n✅ 共添加 ${step3Candidates.length} 部影片至 Cover 區（STEP 2: ${step2Count} + STEP 3: ${step3Count}）\n`);
-          }
+          console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除直播: ${filteredCount} 部`);
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
-
-          // 移除分頁
-          uncNextPageToken = null;
+          uncNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
+          cacheSet(uncCacheKey, { html: container.innerHTML, nextPageToken: uncNextPageToken });
         }
       } catch (err) {
         container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
@@ -2049,125 +1791,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
 
-    // 【新增】廣告區加載函數
-    function loadAdsYear() {
-      const container = document.getElementById('ov-ads-container');
-      if (!container) return;
-      container.innerHTML = '';
-
-      if (window._adsVideos && window._adsVideos.length > 0) {
-        window._adsVideos.forEach(vid => {
-          const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
-          const title = esc(vid.title || '');
-          const date = vid.date || '';
-          container.innerHTML += `
-            <div class="ls-card" onclick="(function(){
-              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
-              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
-              document.getElementById('yt-modal-title').textContent='${title}';
-              document.getElementById('yt-modal').classList.add('open');
-              document.body.style.overflow='hidden';
-            })()">
-              <div class="ls-thumb-wrap">
-                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
-                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-              </div>
-              <div class="ls-info">
-                <div class="ls-title">${title || '（無標題）'}</div>
-                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
-              </div>
-            </div>`;
+    // 「載入更多」（全部模式）
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'unc-load-more-btn') {
+        if (uncLoading || !uncNextPageToken) return;
+        uncLoading = true;
+        e.target.disabled = true;
+        const container = document.getElementById('unc-container');
+        const moreWrap  = document.getElementById('unc-load-more-wrap');
+        fetchUncPage(uncNextPageToken).then(async data => {
+          if (data.error) { uncLoading = false; return; }
+          const items    = data.items || [];
+          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          const detailMap = await fetchVideoDetails(videoIds);
+          let filteredCount = 0;
+          console.log(`📄 未分類區 - 加載更多: ${items.length} 部`);
+          for (const item of items) {
+            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+            if (!vid) continue;
+            const d = detailMap[vid];
+            if (!d) continue;
+            const title = item.snippet.title || '';
+            // 【STEP 1 - 排除直播】使用 UULV 播放列表
+            if (liveVideoIds.has(vid)) {
+              filteredCount++;
+              // console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
+              continue;
+            }
+            // 備用過濾
+            if (d.liveContent !== 'none') {
+              filteredCount++;
+              // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
+              continue;
+            }
+            // 【排除原創曲和Cover】
+            const titleLower = title.toLowerCase();
+            if (titleLower.includes('原創') || titleLower.includes('cover')) {
+              filteredCount++;
+              // console.log(`🚫 排除原創/Cover: ${title}`);
+              continue;
+            }
+            renderUncCard(container, item, d.duration);
+          }
+          console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部`);
+          uncNextPageToken = data.nextPageToken || null;
+          if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
+          const btn = document.getElementById('unc-load-more-btn');
+          if (btn) btn.disabled = false;
+          uncLoading = false;
+          applyUncSearch();
         });
-      } else {
-        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📢</span><p>暫無廣告影片</p></div>`;
       }
-
-      // 隱藏廣告區如果沒有影片
-      const section = document.getElementById('ov-ads-section');
-      if (section) {
-        section.style.display = (window._adsVideos && window._adsVideos.length > 0) ? '' : 'none';
-      }
-    }
-
-    // 【新增】一般影片區加載函數（STEP 5 手動分類）
-    function loadGeneralYear() {
-      const container = document.getElementById('ov-general-container');
-      if (!container) return;
-      container.innerHTML = '';
-
-      if (window._generalVideos && window._generalVideos.length > 0) {
-        window._generalVideos.forEach(vid => {
-          const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
-          const title = esc(vid.title || '');
-          const date = vid.date || '';
-          container.innerHTML += `
-            <div class="ls-card" onclick="(function(){
-              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
-              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
-              document.getElementById('yt-modal-title').textContent='${title}';
-              document.getElementById('yt-modal').classList.add('open');
-              document.body.style.overflow='hidden';
-            })()">
-              <div class="ls-thumb-wrap">
-                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
-                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-              </div>
-              <div class="ls-info">
-                <div class="ls-title">${title || '（無標題）'}</div>
-                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
-              </div>
-            </div>`;
-        });
-      } else {
-        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📺</span><p>暫無一般影片</p></div>`;
-      }
-
-      // 隱藏一般影片區如果沒有影片
-      const section = document.getElementById('ov-general-section');
-      if (section) {
-        section.style.display = (window._generalVideos && window._generalVideos.length > 0) ? '' : 'none';
-      }
-    }
-
-    // 【新增】初配信區加載函數（STEP 5 手動分類）
-    function loadFirstYear() {
-      const container = document.getElementById('ov-first-container');
-      if (!container) return;
-      container.innerHTML = '';
-
-      if (window._firstVideos && window._firstVideos.length > 0) {
-        window._firstVideos.forEach(vid => {
-          const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
-          const title = esc(vid.title || '');
-          const date = vid.date || '';
-          container.innerHTML += `
-            <div class="ls-card" onclick="(function(){
-              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
-              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
-              document.getElementById('yt-modal-title').textContent='${title}';
-              document.getElementById('yt-modal').classList.add('open');
-              document.body.style.overflow='hidden';
-            })()">
-              <div class="ls-thumb-wrap">
-                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
-                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-              </div>
-              <div class="ls-info">
-                <div class="ls-title">${title || '（無標題）'}</div>
-                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
-              </div>
-            </div>`;
-        });
-      } else {
-        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">🎙️</span><p>暫無初配信</p></div>`;
-      }
-
-      // 隱藏初配信區如果沒有影片
-      const section = document.getElementById('ov-first-section');
-      if (section) {
-        section.style.display = (window._firstVideos && window._firstVideos.length > 0) ? '' : 'none';
-      }
-    }
+    });
 
     // 搜尋篩選
     function applyUncSearch() {
@@ -2389,34 +2064,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 【分類切換】一般影片 ↔ Shorts ↔ 廣告 ↔ 初配信 ↔ 未分類
+    // 【分類切換】未分類 ↔ Shorts
     document.addEventListener('click', e => {
       const btn = e.target.closest('.ov-section-btn');
       if (!btn) return;
       const section = btn.dataset.ovsection;
       document.querySelectorAll('.ov-section-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      // 隱藏所有section
-      const sections = {
-        general: document.getElementById('ov-general-section'),
-        shorts: document.getElementById('ov-shorts-section'),
-        ads: document.getElementById('ov-ads-section'),
-        first: document.getElementById('ov-first-section'),
-        unclassified: document.getElementById('ov-unclassified-section')
-      };
-
-      Object.values(sections).forEach(el => { if (el) el.style.display = 'none'; });
-
-      // 顯示選定的section
-      if (sections[section]) sections[section].style.display = '';
-
-      // 當切換時加載對應內容
-      if (section === 'unclassified' && tryLoadUnclassified) tryLoadUnclassified();
-      if (section === 'shorts' && tryLoadYtShorts) tryLoadYtShorts();
-      if (section === 'ads') loadAdsYear();
-      if (section === 'general') loadGeneralYear();
-      if (section === 'first') loadFirstYear();
+      const uncEl = document.getElementById('ov-unclassified-section');
+      const shortsEl  = document.getElementById('ov-shorts-section');
+      if (uncEl) uncEl.style.display = section === 'unclassified' ? '' : 'none';
+      if (shortsEl)  shortsEl.style.display  = section === 'shorts'  ? '' : 'none';
       // Shorts：首次切換時才觸發載入
       if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
@@ -2428,21 +2086,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tryLoadUnclassified();
       }
     });
-
-    // 【自動加載】頁面載入完成時自動加載未分類區的篩選
-    // 不需要等待用戶點擊，直接執行 STEP 1-4 的篩選邏輯
-    setTimeout(() => {
-      if (tryLoadUnclassified && !window._uncLoaded) {
-        window._uncLoaded = true;
-        console.log('🔄 頁面加載完成，自動執行 STEP 1-4 篩選...');
-        tryLoadUnclassified();
-      }
-    }, 100);
-
-    // 自動加載廣告區
-    setTimeout(() => {
-      loadAdsYear();
-    }, 200);
   }
 
   // ── 共用快取工具（sessionStorage，30 分鐘過期）──

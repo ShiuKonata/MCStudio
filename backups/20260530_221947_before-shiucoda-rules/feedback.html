@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>回報問題 | MC組事務所</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+
+    /* ══ 頁面容器：垂直置中 ══ */
+    .fb-outer {
+      flex: 1;                      /* 撐滿 navbar 以下至 footer 的空間 */
+      display: flex;
+      align-items: center;          /* 垂直置中 */
+      padding: 32px 32px;
+    }
+    .fb-wrap {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ══ 頁面標題列 ══ */
+    .fb-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .fb-title-left h1 {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--sky-dark);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fb-title-left p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    /* 統計膠囊 */
+    .fb-stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .fb-stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-mid);
+      box-shadow: 0 1px 4px rgba(2,119,189,0.06);
+    }
+    .fb-stat-num { font-size: 1rem; font-weight: 900; }
+    .fb-stat.stat-open   .fb-stat-num { color: #16a34a; }
+    .fb-stat.stat-done   .fb-stat-num { color: #64748b; }
+    .fb-stat.stat-all    .fb-stat-num { color: var(--sky-dark); }
+
+    /* ══ 兩欄格線 ══ */
+    .fb-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      align-items: stretch;   /* 兩欄同高 */
+    }
+
+    /* ══ 共用卡片 ══ */
+    .fb-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1.5px solid #ddeaf5;
+      box-shadow: 0 2px 16px rgba(2,119,189,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    /* 左欄：讓表單卡的 body 填滿剩餘高度 */
+    .fb-card > .fb-card-body { flex: 1; }
+    .fb-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px 13px;
+      background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fd 100%);
+      border-bottom: 1.5px solid #ddeaf5;
+    }
+    .fb-card-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--sky-dark);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .fb-count {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-mid);
+      background: #fff;
+      border: 1.5px solid var(--border);
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+    .fb-card-body { padding: 20px; }
+
+    /* ══ 表單 ══ */
+    .fb-field { margin-bottom: 16px; }
+    .fb-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-mid);
+      margin-bottom: 7px;
+      letter-spacing: 0.02em;
+    }
+    .fb-req { color: #ef4444; margin-left: 2px; }
+
+    /* 類型按鈕格 */
+    .fb-type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+    .fb-type-chip {
+      padding: 8px 10px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border);
+      background: var(--sky-pale);
+      color: var(--text-mid);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .16s;
+      text-align: center;
+    }
+    .fb-type-chip:hover { border-color: var(--sky); background: #d8f0fc; color: var(--sky-dark); }
+    .fb-type-chip.selected {
+      border-color: var(--sky-dark);
+      background: linear-gradient(135deg, var(--sky) 0%, var(--sky-dark) 100%);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(2,119,189,0.25);
+    }
+
+    /* 文字輸入框 */
+    .fb-textarea {
+      width: 100%;
+      background: var(--sky-pale);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-dark);
+      font-size: 13.5px;
+      padding: 10px 13px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.65;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .fb-textarea:focus {
+      outline: none;
+      border-color: var(--sky);
+      box-shadow: 0 0 0 3px rgba(41,182,246,0.14);
+      background: #fff;
+    }
+
+    /* 送出按鈕 */
+    .fb-submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--sky) 0%, var(--sky-dark) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity .18s, transform .15s;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+    .fb-submit-btn:hover    { opacity: 0.87; transform: translateY(-1px); }
+    .fb-submit-btn:disabled { background: #a8c8dc; cursor: not-allowed; transform: none; }
+
+    /* 成功畫面 */
+    .fb-success          { display: none; text-align: center; padding: 18px 0 8px; }
+    .fb-success-icon     { font-size: 50px; margin-bottom: 12px; }
+    .fb-success h2       { font-size: 18px; color: #16a34a; margin-bottom: 6px; font-weight: 800; }
+    .fb-success p        { color: #666; font-size: 13.5px; line-height: 1.7; }
+    .fb-again-btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 20px;
+      background: var(--sky-pale);
+      color: var(--sky-dark);
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      transition: background .16s;
+    }
+    .fb-again-btn:hover { background: #c5e9f8; }
+
+    /* ══ 已回報項目 ══ */
+    .fb-browse-card {
+      /* 高度由 align-items:stretch 決定，不需要 min-height */
+    }
+
+    /* 篩選 tabs */
+    .fb-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 12px 20px 10px;
+      border-bottom: 1.5px solid #eef4fa;
+    }
+    .fb-tab {
+      padding: 4px 15px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--sky-pale);
+      color: var(--text-mid);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .16s;
+    }
+    .fb-tab:hover  { background: #c8e8f8; border-color: var(--sky); }
+    .fb-tab.active { background: var(--sky-dark); color: #fff; border-color: var(--sky-dark); }
+
+    /* 清單 */
+    .fb-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 16px;
+      flex: 1;
+    }
+
+    /* 回報卡片 */
+    .fb-item {
+      border-radius: 11px;
+      border: 1.5px solid #e4ecf5;
+      background: #fafcff;
+      overflow: hidden;
+      transition: box-shadow .18s, border-color .18s;
+    }
+    .fb-item:hover { box-shadow: 0 3px 12px rgba(2,119,189,0.10); border-color: #b8d5ec; }
+    .fb-item.resolved { opacity: .68; }
+
+    /* 卡片頭部 */
+    .fb-item-head {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 13px 7px;
+      background: #f2f7fc;
+      border-bottom: 1px solid #e4ecf5;
+      flex-wrap: wrap;
+    }
+    /* 左側色條 */
+    .type-stripe {
+      width: 4px;
+      border-radius: 2px;
+      align-self: stretch;
+      flex-shrink: 0;
+      margin: -8px 3px -7px -13px;
+    }
+    .stripe-bug     { background: #ef4444; }
+    .stripe-data    { background: #f97316; }
+    .stripe-suggest { background: #3b82f6; }
+    .stripe-other   { background: #94a3b8; }
+
+    .type-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+    }
+    .type-bug     { background: #fef2f2; color: #b91c1c; }
+    .type-data    { background: #fff7ed; color: #c2410c; }
+    .type-suggest { background: #eff6ff; color: #1d4ed8; }
+    .type-other   { background: #f8fafc; color: #64748b; }
+
+    .status-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+    .status-open     { background: #dcfce7; color: #15803d; }
+    .status-resolved { background: #f1f5f9; color: #64748b; }
+
+    .reply-dot {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+    .fb-item-date { font-size: 10.5px; color: #b8c8d8; margin-left: auto; }
+
+    /* 問題區 */
+    .fb-question { padding: 10px 13px 7px; }
+    .fb-q-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-light);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .fb-q-body {
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.68;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+    .fb-expand-btn {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 2px 9px;
+      background: var(--sky-pale);
+      color: var(--sky-dark);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      transition: background .14s;
+    }
+    .fb-expand-btn:hover { background: #bde0f5; }
+
+    /* 官方回覆 */
+    .fb-reply-section {
+      margin: 0 11px 11px;
+      background: linear-gradient(135deg, #ebfaf3 0%, #e4f4ff 100%);
+      border: 1px solid #9ed4bc;
+      border-radius: 9px;
+      padding: 9px 12px;
+    }
+    .fb-r-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: #15803d;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .fb-r-body {
+      font-size: 13px;
+      color: #1a3a2a;
+      line-height: 1.68;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    /* 待回覆 */
+    .fb-pending-reply {
+      margin: 0 11px 11px;
+      background: #f7fafc;
+      border: 1.5px dashed #cddae6;
+      border-radius: 9px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #a8becc;
+      text-align: center;
+    }
+
+    .fb-empty   { text-align: center; padding: 52px 0; color: #aac0cc; font-size: 13.5px; }
+    .fb-loading { text-align: center; padding: 44px 0; color: #aac0cc; font-size: 13px; }
+
+    /* 分頁列 */
+    .fb-pagination {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 20px 16px;
+      border-top: 1.5px solid #eef4fa;
+      margin-top: auto;
+    }
+    .fb-page-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--sky-pale);
+      color: var(--sky-dark);
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .16s;
+      font-family: inherit;
+    }
+    .fb-page-btn:hover:not(:disabled) {
+      background: var(--sky-dark);
+      color: #fff;
+      border-color: var(--sky-dark);
+    }
+    .fb-page-btn:disabled {
+      color: #c0d4e0;
+      border-color: #ddeaf5;
+      background: #f5f9fc;
+      cursor: not-allowed;
+    }
+    .fb-page-info {
+      font-size: 12.5px;
+      color: var(--text-mid);
+      min-width: 60px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* ══ RWD ══ */
+    @media (max-width: 820px) {
+      .fb-grid { grid-template-columns: 1fr; }
+      .fb-browse-card { min-height: 400px; }
+      .fb-title-row { gap: 12px; }
+    }
+    @media (max-width: 520px) {
+      .fb-wrap { padding: 24px 14px 56px; }
+      .fb-stats { gap: 6px; }
+      .fb-stat  { padding: 4px 10px; font-size: 11.5px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
+    </div>
+    <div class="nav-sub"><span data-i18n="nav.subtitle">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</span> ｜ <strong class="nav-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong></div>
+    <div class="nav-links-bar">
+      <a href="index.html" data-i18n="nav.home">🏠 首頁</a>
+      <a href="vtubers.html" data-i18n="nav.vtubers">⭐ Vtuber 一覽</a>
+      <a href="merch.html" data-i18n="nav.merch">🛍️ 周邊商品</a>
+      <a href="feedback.html" class="active" data-i18n="nav.feedback">🐞 回報問題</a>
+    </div>
+  </nav>
+
+  <div class="fb-outer">
+  <div class="fb-wrap">
+
+    <!-- 頁面標題列 -->
+    <div class="fb-title-row">
+      <div class="fb-title-left">
+        <h1>🐞 回報問題 ／ 提出建議</h1>
+        <p>遇到 Bug 或有想說的？不需要帳號，直接填寫即可</p>
+      </div>
+      <div class="fb-stats">
+        <div class="fb-stat stat-all">
+          📋 全部 <span class="fb-stat-num" id="stat-all">–</span>
+        </div>
+        <div class="fb-stat stat-open">
+          ⏳ 待處理 <span class="fb-stat-num" id="stat-open">–</span>
+        </div>
+        <div class="fb-stat stat-done">
+          ✅ 已解決 <span class="fb-stat-num" id="stat-done">–</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主體兩欄 -->
+    <div class="fb-grid">
+
+      <!-- 左欄：表單 -->
+      <div class="fb-card">
+        <div class="fb-card-head">
+          <span class="fb-card-title">📝 提交回報</span>
+        </div>
+        <div class="fb-card-body">
+
+          <div id="fb-form">
+            <div class="fb-field">
+              <label class="fb-label">問題類型<span class="fb-req">*</span></label>
+              <div class="fb-type-grid">
+                <button class="fb-type-chip" data-val="bug"     onclick="selectType(this)">🐛 網站 Bug</button>
+                <button class="fb-type-chip" data-val="data"    onclick="selectType(this)">📝 資料錯誤</button>
+                <button class="fb-type-chip" data-val="suggest" onclick="selectType(this)">💡 功能建議</button>
+                <button class="fb-type-chip" data-val="other"   onclick="selectType(this)">💬 其他</button>
+              </div>
+              <input type="hidden" id="fb-type">
+            </div>
+            <div class="fb-field">
+              <label class="fb-label">詳細描述<span class="fb-req">*</span></label>
+              <textarea class="fb-textarea" id="fb-content" placeholder="請描述你遇到的問題，或想回報的內容…"></textarea>
+            </div>
+            <button class="fb-submit-btn" id="fb-submit" onclick="submitFeedback()">🚀 送出回報</button>
+          </div>
+
+          <div class="fb-success" id="fb-success">
+            <div class="fb-success-icon">✅</div>
+            <h2>已收到，謝謝！</h2>
+            <p>我們會盡快查看並處理<br>感謝你花時間回報 🙏</p>
+            <button class="fb-again-btn" onclick="resetForm()">再回報一則</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 右欄：已回報項目 -->
+      <div class="fb-card fb-browse-card">
+        <div class="fb-card-head">
+          <span class="fb-card-title">📋 已回報項目</span>
+          <span class="fb-count" id="fb-count">載入中…</span>
+        </div>
+
+        <div class="fb-tabs">
+          <button class="fb-tab active" onclick="setFilter('all',this)">全部</button>
+          <button class="fb-tab" onclick="setFilter('open',this)">待處理</button>
+          <button class="fb-tab" onclick="setFilter('resolved',this)">已解決</button>
+        </div>
+
+        <div class="fb-items" id="fb-items">
+          <div class="fb-loading">載入中…</div>
+        </div>
+
+        <div class="fb-pagination" id="fb-pagination">
+          <button class="fb-page-btn" id="fb-prev" onclick="changePage(-1)" title="上一頁">‹</button>
+          <span class="fb-page-info" id="fb-page-info">1 / 1 頁</span>
+          <button class="fb-page-btn" id="fb-next" onclick="changePage(1)" title="下一頁">›</button>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- fb-wrap -->
+  </div><!-- fb-outer -->
+
+  <footer>
+    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ <span data-i18n="footer.madeBy">由粉絲用愛製作</span> ｜ <strong class="footer-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong></p>
+    <p class="footer-source" data-i18n="footer.source">資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供</p>
+  </footer>
+
+  <script>
+    const { createClient } = supabase;
+    const sb = createClient(
+      'https://ednzqqgnsnycntvmykfb.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkbnpxcWduc255Y250dm15a2ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNjI2NzIsImV4cCI6MjA5NDczODY3Mn0.u5ZP66-3PKHKkE-Oow47_yPqoh5sSjwhXxMogtoHGjw'
+    );
+
+    let allItems    = [];
+    let currentFilter = 'all';
+    let currentPage   = 0;
+    const ITEMS_PER_PAGE = 3;
+    const PREVIEW_LEN    = 130;
+
+    const typeMap = {
+      bug:     { cls: 'type-bug',     stripe: 'stripe-bug',     label: '🐛 網站 Bug'  },
+      data:    { cls: 'type-data',    stripe: 'stripe-data',    label: '📝 資料錯誤'  },
+      suggest: { cls: 'type-suggest', stripe: 'stripe-suggest', label: '💡 功能建議'  },
+      other:   { cls: 'type-other',   stripe: 'stripe-other',   label: '💬 其他'      },
+    };
+
+    function fmtDate(iso) {
+      return new Date(iso).toLocaleDateString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit' });
+    }
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ── 類型選擇 ──
+    function selectType(el) {
+      document.querySelectorAll('.fb-type-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('fb-type').value = el.dataset.val;
+    }
+
+    // ── 載入資料 ──
+    async function loadItems() {
+      const { data, error } = await sb
+        .from('feedback')
+        .select('id, type, content, status, reply, created_at')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        document.getElementById('fb-items').innerHTML = '<div class="fb-empty">載入失敗，請稍後再試</div>';
+        document.getElementById('fb-count').textContent = '–';
+        return;
+      }
+      allItems = data || [];
+      updateStats();
+      renderItems();
+    }
+
+    function updateStats() {
+      const open = allItems.filter(i => i.status === 'open').length;
+      const done = allItems.filter(i => i.status === 'resolved').length;
+      document.getElementById('stat-all').textContent  = allItems.length;
+      document.getElementById('stat-open').textContent = open;
+      document.getElementById('stat-done').textContent = done;
+    }
+
+    // ── 篩選 ──
+    function setFilter(f, el) {
+      currentFilter = f;
+      currentPage   = 0;
+      document.querySelectorAll('.fb-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      renderItems();
+    }
+
+    // ── 分頁 ──
+    function changePage(delta) {
+      currentPage += delta;
+      renderItems();
+    }
+
+    // ── 渲染 ──
+    function renderItems() {
+      const list     = document.getElementById('fb-items');
+      const filtered = currentFilter === 'all' ? allItems : allItems.filter(i => i.status === currentFilter);
+      const total      = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / ITEMS_PER_PAGE));
+      currentPage      = Math.max(0, Math.min(currentPage, totalPages - 1));
+      const items      = filtered.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+
+      document.getElementById('fb-count').textContent =
+        currentFilter === 'all'  ? `共 ${total} 則` :
+        currentFilter === 'open' ? `待處理 ${total} 則` : `已解決 ${total} 則`;
+
+      // 分頁
+      const pag = document.getElementById('fb-pagination');
+      if (total > ITEMS_PER_PAGE) {
+        pag.style.display = 'flex';
+        document.getElementById('fb-prev').disabled = currentPage === 0;
+        document.getElementById('fb-next').disabled = currentPage >= totalPages - 1;
+        document.getElementById('fb-page-info').textContent = `${currentPage + 1} / ${totalPages} 頁`;
+      } else {
+        pag.style.display = 'none';
+      }
+
+      if (!filtered.length) { list.innerHTML = '<div class="fb-empty">目前沒有回報 🎉</div>'; return; }
+      if (!items.length)     { list.innerHTML = '<div class="fb-empty">此頁無資料</div>';      return; }
+
+      list.innerHTML = items.map(i => {
+        const t        = typeMap[i.type] || typeMap.other;
+        const done     = i.status === 'resolved';
+        const hasReply = i.reply && i.reply.trim().length > 0;
+        const isLong   = i.content.length > PREVIEW_LEN;
+        const preview  = isLong ? esc(i.content.substring(0, PREVIEW_LEN)) + '…' : esc(i.content);
+        const expandBtn = isLong
+          ? `<br><button class="fb-expand-btn" onclick="toggleExpand('${i.id}')" data-expanded="0">▼ 展開全文</button>`
+          : '';
+        const replyBlock = hasReply
+          ? `<div class="fb-reply-section"><div class="fb-r-label">🐸 官方回覆</div><div class="fb-r-body">${esc(i.reply)}</div></div>`
+          : `<div class="fb-pending-reply">尚未回覆，我們會盡快處理 🙏</div>`;
+
+        return `
+        <div class="fb-item${done ? ' resolved' : ''}" id="fb-item-${i.id}">
+          <div class="fb-item-head">
+            <div class="type-stripe ${t.stripe}"></div>
+            <span class="type-badge ${t.cls}">${t.label}</span>
+            <span class="status-badge ${done ? 'status-resolved' : 'status-open'}">${done ? '✓ 已解決' : '待處理'}</span>
+            ${hasReply ? '<span class="reply-dot">💬 已回覆</span>' : ''}
+            <span class="fb-item-date">${fmtDate(i.created_at)}</span>
+          </div>
+          <div class="fb-question">
+            <div class="fb-q-label">👤 你的問題</div>
+            <div class="fb-q-body" id="qbody-${i.id}">${preview}</div>
+            ${expandBtn}
+          </div>
+          ${replyBlock}
+        </div>`;
+      }).join('');
+    }
+
+    // ── 展開 / 收起 ──
+    function toggleExpand(id) {
+      const item = allItems.find(x => x.id === id);
+      if (!item) return;
+      const body = document.getElementById('qbody-' + id);
+      const btn  = body.nextElementSibling;
+      if (btn.dataset.expanded === '1') {
+        body.textContent     = item.content.substring(0, PREVIEW_LEN) + '…';
+        btn.textContent      = '▼ 展開全文';
+        btn.dataset.expanded = '0';
+      } else {
+        body.textContent     = item.content;
+        btn.textContent      = '▲ 收起';
+        btn.dataset.expanded = '1';
+      }
+    }
+
+    // ── 送出 ──
+    async function submitFeedback() {
+      const type    = document.getElementById('fb-type').value;
+      const content = document.getElementById('fb-content').value.trim();
+      const btn     = document.getElementById('fb-submit');
+      if (!type)    { alert('請選擇問題類型'); return; }
+      if (!content) { alert('請填寫詳細描述'); return; }
+      btn.disabled    = true;
+      btn.textContent = '送出中…';
+      const { error } = await sb.from('feedback').insert({ type, content });
+      if (error) {
+        alert('送出失敗，請稍後再試\n' + error.message);
+        btn.disabled    = false;
+        btn.textContent = '🚀 送出回報';
+        return;
+      }
+      document.getElementById('fb-form').style.display    = 'none';
+      document.getElementById('fb-success').style.display = 'block';
+      loadItems();
+    }
+
+    // ── 再回報 ──
+    function resetForm() {
+      document.querySelectorAll('.fb-type-chip').forEach(c => c.classList.remove('selected'));
+      document.getElementById('fb-type').value    = '';
+      document.getElementById('fb-content').value = '';
+      document.getElementById('fb-success').style.display = 'none';
+      document.getElementById('fb-form').style.display    = 'block';
+      document.getElementById('fb-submit').disabled    = false;
+      document.getElementById('fb-submit').textContent = '🚀 送出回報';
+    }
+
+    loadItems();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vtuber 詳細介紹 — MC組事務所</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>">
+
+  <!-- SEO（靜態 fallback；載入後由 JS 動態替換為各 Vtuber 專屬資訊） -->
+  <meta name="description" content="預見娛樂 Vtuber 個人介紹頁，收錄個人檔案、熱門影片、直播存檔、歌曲統計與更多資訊。">
+  <meta name="author" content="MC組事務所">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph（LINE / Facebook / Discord 分享預覽） -->
+  <meta property="og:type"        content="profile">
+  <meta property="og:site_name"   content="MC組事務所">
+  <meta property="og:url"         content="https://shiukonata.github.io/MCStudio/vtuber.html">
+  <meta property="og:title"       content="Vtuber 介紹 — MC組事務所">
+  <meta property="og:description" content="預見娛樂 Vtuber 個人介紹頁，收錄個人檔案、熱門影片、直播存檔、歌曲統計與更多資訊。">
+  <meta property="og:image"       content="https://shiukonata.github.io/MCStudio/images/260315_1200x630.png">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale"      content="zh_TW">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Vtuber 介紹 — MC組事務所">
+  <meta name="twitter:description" content="預見娛樂 Vtuber 個人介紹頁，收錄個人檔案、熱門影片、直播存檔、歌曲統計與更多資訊。">
+  <meta name="twitter:image"       content="https://shiukonata.github.io/MCStudio/images/260315_1200x630.png">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+</head>
+<body class="vtuber-page">
+
+  <!-- NAVBAR (含 Vtuber 分頁列，由 JS 注入) -->
+  <nav class="navbar" id="main-navbar">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
+    </div>
+    <div class="nav-sub"><span data-i18n="nav.subtitle">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</span> ｜ <strong class="nav-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong></div>
+    <div class="nav-links-bar">
+      <a href="index.html" data-i18n="nav.home">🏠 首頁</a>
+      <a href="vtubers.html" data-i18n="nav.vtubers">⭐ Vtuber 一覽</a>
+      <a href="merch.html" data-i18n="nav.merch">🛍️ 周邊商品</a>
+      <a href="feedback.html" data-i18n="nav.feedback">🐞 回報問題</a>
+    </div>
+    <!-- Vtuber 分頁列（JS 注入） -->
+    <div id="vtuber-tab-bar" class="vtuber-tab-bar"></div>
+  </nav>
+
+  <!-- 主要內容（JS 注入） -->
+  <div id="detail-root"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦ <span data-i18n="footer.madeBy">由粉絲用愛製作</span> ｜ <strong class="footer-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong></p>
+    <p class="footer-source" data-i18n="footer.source">資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+</html>

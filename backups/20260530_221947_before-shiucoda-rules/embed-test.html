@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>嵌入測試</title>
+<style>
+  body { font-family: sans-serif; background: #111; color: #fff; padding: 2rem; }
+  h2 { color: #aaa; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 2rem 0 0.5rem; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+  .item { background: #222; border-radius: 8px; overflow: hidden; }
+  .item iframe { width: 100%; height: 200px; display: block; border: none; }
+  .item p { font-size: 0.78rem; padding: 0.5rem 0.7rem; margin: 0; color: #ccc; }
+  .item .id { font-size: 0.65rem; color: #666; padding: 0 0.7rem 0.5rem; }
+  .hint { font-size: 0.8rem; color: #888; margin-bottom: 1rem; }
+  .legend { display: flex; gap: 1.5rem; font-size: 0.8rem; margin-bottom: 2rem; }
+  .legend span { display: flex; align-items: center; gap: 0.4rem; }
+</style>
+</head>
+<body>
+<h1 style="margin-bottom:0.3rem">YouTube 嵌入測試</h1>
+<p class="hint">✅ 能看到影片 = 開放嵌入 ／ ❌ 顯示黑畫面或錯誤 = 禁止嵌入</p>
+<div class="legend">
+  <span>✅ 可嵌入 → 網站內可直接播放</span>
+  <span>❌ 禁止嵌入 → 只能連結到 YouTube</span>
+</div>
+
+<h2>📱 熱門 Shorts</h2>
+<div class="grid">
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/xir5pgD4460" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>主播拜託別再問這種私人的問題啦!!</p>
+    <div class="id">xir5pgD4460</div>
+  </div>
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/DwMRfwmNblE" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>GL瑟瑟夢境</p>
+    <div class="id">DwMRfwmNblE</div>
+  </div>
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/svaBlko1J0g" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>本格芝麻湯圓派崩潰ㄌ</p>
+    <div class="id">svaBlko1J0g</div>
+  </div>
+</div>
+
+<h2>🎶 熱門音樂推薦</h2>
+<div class="grid">
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/jOaAoIqskpo" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>CODA中文歌回總集篇-2026年3月份</p>
+    <div class="id">jOaAoIqskpo</div>
+  </div>
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/60P3EJa_SVQ" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>CODA中文歌回總集篇-2026年1月份+2月份</p>
+    <div class="id">60P3EJa_SVQ</div>
+  </div>
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/1wYaJopkYQA" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>CODA中文歌回總集篇-2025年12月份</p>
+    <div class="id">1wYaJopkYQA</div>
+  </div>
+</div>
+
+<h2>🎬 熱門影片推薦</h2>
+<div class="grid">
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/6DzGvlWL2CU" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>當統領想給外送員小費時...</p>
+    <div class="id">6DzGvlWL2CU</div>
+  </div>
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/UGFSG4Z4J38" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>今天你要嫁給我 Cover</p>
+    <div class="id">UGFSG4Z4J38</div>
+  </div>
+  <div class="item">
+    <iframe src="https://www.youtube.com/embed/UykHeePVhp0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    <p>當ㄚ統手上拿到槍第一件事居然做的是..?</p>
+    <div class="id">UykHeePVhp0</div>
+  </div>
+</div>
+
+</body>
+</html>

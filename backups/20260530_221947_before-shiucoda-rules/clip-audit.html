@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔍 剪輯頻道稽核 v2 — MC組事務所</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0b0b10; color: #ccc; font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; font-size: 13px; min-height: 100vh; }
+
+    header { background: #111118; border-bottom: 1px solid #1e1e2a; padding: 0 16px; height: 54px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 100; }
+    .h-logo { font-size: 17px; font-weight: 700; color: #fff; white-space: nowrap; }
+    .h-badge { background: #1c1c2e; color: #777; font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid #2a2a3a; white-space: nowrap; }
+    #api-input { flex: 1; max-width: 320px; background: #1a1a28; border: 1px solid #2a2a3a; border-radius: 6px; color: #ccc; padding: 5px 10px; font-size: 12px; font-family: inherit; }
+    #run-btn { padding: 7px 18px; background: #4f46e5; color: #fff; border: none; border-radius: 7px; font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; white-space: nowrap; }
+    #run-btn:hover { background: #4338ca; }
+    #run-btn:disabled { background: #1c1c2e; color: #555; cursor: not-allowed; }
+
+    #progress-wrap { background: #0f0f17; border-bottom: 1px solid #1e1e2a; padding: 10px 20px; display: none; }
+    #progress-text { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .prog-track { background: #1e1e2a; border-radius: 3px; height: 4px; overflow: hidden; }
+    .prog-fill  { height: 100%; background: #4f46e5; transition: width .3s; border-radius: 3px; }
+
+    #summary-bar { background: #0f0f17; border-bottom: 1px solid #1e1e2a; padding: 10px 20px; display: none; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .sb-item { font-size: 12px; color: #777; }
+    .sb-item strong { color: #fff; font-size: 15px; margin-right: 3px; }
+    .sb-red strong  { color: #f87171; }
+
+    #filter-bar { padding: 10px 20px; display: none; gap: 8px; align-items: center; background: #0f0f17; border-bottom: 1px solid #1e1e2a; }
+    .f-tab { padding: 4px 13px; border-radius: 20px; border: 1px solid #222230; background: none; color: #666; font-size: 12px; cursor: pointer; font-family: inherit; transition: all .18s; }
+    .f-tab:hover  { background: #1a1a25; color: #bbb; }
+    .f-tab.active { background: #1e1e2e; color: #a5b4fc; border-color: #3b3b5a; }
+
+    main { max-width: 1060px; margin: 0 auto; padding: 20px; }
+    .welcome { text-align: center; padding: 60px 20px; color: #555; }
+    .welcome h2 { font-size: 17px; color: #888; margin-bottom: 12px; }
+    .welcome p  { font-size: 13px; line-height: 1.9; }
+    .welcome .note { font-size: 11px; color: #3a3a4a; margin-top: 14px; }
+    .welcome ul { text-align: left; display: inline-block; margin-top: 12px; line-height: 2; }
+
+    /* ── Channel block ── */
+    .ch-block { background: #13131c; border: 1px solid #1e1e2a; border-radius: 10px; margin-bottom: 12px; overflow: hidden; transition: border-color .2s; }
+    .ch-block:hover { border-color: #2a2a3e; }
+    .ch-block.all-ok { opacity: .55; }
+    .ch-hd { padding: 11px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; flex-wrap: wrap; }
+    .ch-hd:hover { background: #1a1a26; }
+    .ch-name { font-size: 14px; font-weight: 600; color: #fff; white-space: nowrap; }
+    .ch-tags { display: flex; gap: 5px; flex-wrap: wrap; flex: 1; }
+    .ch-tag { font-size: 10px; padding: 1px 7px; border-radius: 10px; }
+    .ct-music { background: #0f1e30; color: #60a5fa; border: 1px solid #1a3a5a; }
+    .ct-video { background: #0f201a; color: #4ade80; border: 1px solid #1a3a1a; }
+    .ch-stats { display: flex; gap: 10px; align-items: center; font-size: 12px; margin-left: auto; white-space: nowrap; }
+    .cs-total { color: #555; }
+    .cs-ok    { color: #4ade80; }
+    .cs-flag  { color: #f87171; font-weight: 600; }
+    .cs-warn  { color: #fbbf24; }
+    .cs-info  { color: #a5b4fc; }
+    .cs-spin  { color: #555; animation: spin 1s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .ch-arr { color: #444; font-size: 10px; transition: transform .2s; }
+    .ch-arr.open   { transform: rotate(0deg); }
+    .ch-arr.closed { transform: rotate(-90deg); }
+
+    .ch-body { border-top: 1px solid #1a1a26; }
+
+    /* ── Video row ── */
+    .v-row { display: flex; align-items: flex-start; gap: 8px; padding: 7px 16px; border-bottom: 1px solid #0e0e18; }
+    .v-row:last-child { border-bottom: none; }
+    .v-row:hover { background: #18182a; }
+    .v-row.lvl-flag { background: rgba(248,113,113,.05); border-left: 3px solid rgba(248,113,113,.4); }
+    .v-row.lvl-warn { background: rgba(252,211,77,.04);  border-left: 3px solid rgba(252,211,77,.3);  }
+    .v-row.lvl-info { background: rgba(99,102,241,.05);  border-left: 3px solid rgba(99,102,241,.35); }
+    .v-row.lvl-grey { opacity: .45; }
+    .v-ico  { flex-shrink: 0; width: 18px; text-align: center; font-size: 13px; margin-top: 1px; }
+    .v-body { flex: 1; min-width: 0; }
+    .v-title a { color: #bbb; text-decoration: none; font-size: 12px; line-height: 1.5; word-break: break-word; }
+    .v-title a:hover { color: #fff; text-decoration: underline; }
+    .v-row.lvl-flag .v-title a { color: #fca5a5; }
+    .v-row.lvl-warn .v-title a { color: #fcd34d; }
+    .v-row.lvl-info .v-title a { color: #a5b4fc; }
+    .v-meta { font-size: 10px; color: #555; margin-top: 2px; }
+    .v-issues { margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
+    .vi { font-size: 11px; padding: 2px 8px; border-radius: 3px; display: inline-block; width: fit-content; }
+    .vi-flag { color: #f87171; background: rgba(248,113,113,.13); }
+    .vi-warn { color: #fbbf24; background: rgba(252,211,77,.11); }
+    .vi-info { color: #a5b4fc; background: rgba(99,102,241,.13); }
+    .vi-ok   { color: #4ade80; background: rgba(74,222,128,.10); }
+    .vi-grey { color: #666;    background: rgba(120,120,120,.10); }
+
+    .v-empty { padding: 12px 16px; font-size: 12px; color: #4ade80; }
+    .v-more  { padding: 6px 16px; font-size: 11px; color: #444; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span style="font-size:18px">🔍</span>
+  <div class="h-logo">剪輯頻道稽核</div>
+  <div class="h-badge">v2 · 頻道為核心</div>
+  <input id="api-input" type="password" placeholder="YouTube API Key（自動從 data.js 讀取）">
+  <button id="run-btn" onclick="startAudit()">▶ 開始稽核</button>
+</header>
+
+<div id="local-warn" style="display:none;background:#2d1515;border-bottom:2px solid #7f1d1d;padding:10px 20px;font-size:13px;color:#fca5a5;">
+  ⚠️ <strong>請從 GitHub Pages 開啟此工具</strong>，不能直接開啟本機檔案（YouTube API Key 會因 referer null 被擋）。
+  請前往：<a id="pages-link" href="#" target="_blank" rel="noopener noreferrer" style="color:#fbbf24;text-decoration:underline;"></a>
+</div>
+
+<div id="progress-wrap">
+  <div id="progress-text">準備中…</div>
+  <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+</div>
+
+<div id="summary-bar" style="display:none;flex-wrap:wrap;gap:20px;"></div>
+
+<div id="filter-bar" style="display:none;">
+  <span style="font-size:12px;color:#555">顯示：</span>
+  <button class="f-tab active" onclick="setFilter('all',this)">全部</button>
+  <button class="f-tab" onclick="setFilter('flagged',this)">🚨 有問題</button>
+  <button class="f-tab" onclick="setFilter('ok',this)">✓ 無問題</button>
+</div>
+
+<main>
+  <div class="welcome" id="welcome">
+    <h2>🔍 剪輯頻道稽核工具 v2</h2>
+    <p>以<strong>剪輯頻道</strong>為核心，抓取各頻道<strong>全部原始影片</strong>，逐一比對所有主播的設定。<br>
+       <strong>本工具純屬警告顯示，不會自動修改任何設定，所有修正須手動更新 data.js。</strong></p>
+    <ul>
+      <li>🚨 音樂影片出現在影片格（歌回/cover 標題但設在影片格）</li>
+      <li>🚨 音樂影片被全域過濾排除，且該主播無音樂格設定（影片完全消失）</li>
+      <li>⚠️ 音樂格中無音樂關鍵字的影片（請人工確認是否分類正確）</li>
+      <li>🔵 標題含主播名，但此頻道未設定在該主播的剪輯設定中</li>
+    </ul>
+    <p class="note">⚠️ 每次稽核消耗 YouTube API 配額，結果快取 30 分鐘（重新整理不重抓）</p>
+  </div>
+  <div id="results"></div>
+</main>
+
+<script src="js/data.js"></script>
+<script>
+// ── 偵測本機檔案開啟 ──
+(function(){
+  if (location.protocol === 'file:') {
+    const warn = document.getElementById('local-warn');
+    warn.style.display = 'block';
+    // 嘗試推算 GitHub Pages 網址
+    const link = document.getElementById('pages-link');
+    const pagesUrl = 'https://shiukonata.github.io/MCStudio/clip-audit.html';
+    link.href = pagesUrl;
+    link.textContent = pagesUrl;
+    document.getElementById('run-btn').disabled = true;
+    document.getElementById('run-btn').title = '請從 GitHub Pages 開啟';
+  }
+})();
+
+// ── 全域音樂關鍵字（與 detail.js 同步）──
+const MUSIC_KW = [
+  'cover','翻唱','清唱','歌回','歌切','原創曲','原創',
+  '演唱','演唱會','唱歌','歌曲','歌聲','精唱','歌單',
+  '主題曲','mv','ost','卡拉ok','karaoke','深海少女','歌回剪輯',
+];
+const MUSIC_KW_L = MUSIC_KW.map(k => k.toLowerCase());
+
+function isMusicTitle(title) {
+  const t = title.toLowerCase();
+  return MUSIC_KW_L.find(k => t.includes(k)) || null;
+}
+
+function getApiKey() {
+  const v = document.getElementById('api-input').value.trim();
+  if (v) return v;
+  return (vtubers.find(x => x.ytApiKey) || {}).ytApiKey || '';
+}
+
+// ── 判斷 config 是否會 include 這部影片 ──
+function wouldInclude(title, ch, gridType) {
+  const t = title.toLowerCase();
+  const kws     = ch.keywords       ? ch.keywords.map(k=>k.toLowerCase())       : null;
+  const typeKws = ch.typeKeywords   ? ch.typeKeywords.map(k=>k.toLowerCase())   : null;
+  const excKws  = ch.excludeKeywords? ch.excludeKeywords.map(k=>k.toLowerCase()): null;
+  const effType = typeKws ?? ((gridType==='music' && !excKws) ? MUSIC_KW_L : null);
+  const effExcl = excKws  ?? (gridType==='video'  ? MUSIC_KW_L : null);
+  if (kws     && !kws.some(k     => t.includes(k))) return false;
+  if (effType && !effType.some(k => t.includes(k))) return false;
+  if (effExcl &&  effExcl.some(k => t.includes(k))) return false;
+  return true;
+}
+
+// ── 抓頻道影片（帶快取）──
+const _cache = {};
+async function fetchCh(id) {
+  if (_cache[id]) return _cache[id];
+  const ck = 'audit3_' + id;
+  try {
+    const c = sessionStorage.getItem(ck);
+    if (c) { const {d,t} = JSON.parse(c); if (Date.now()-t < 30*60*1000) { _cache[id]=d; return d; } }
+  } catch(e) {}
+
+  const key = getApiKey();
+  const plId = 'UU' + id.slice(2);
+  let videos=[], tok='', pg=0;
+  try {
+    do {
+      const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${plId}&maxResults=50&key=${key}${tok?'&pageToken='+tok:''}`;
+      const res = await fetch(url);
+      if (!res.ok) { const j=await res.json(); throw new Error((j.error||{}).message||res.status); }
+      const json = await res.json();
+      for (const it of (json.items||[])) {
+        const vid = it.snippet?.resourceId?.videoId;
+        if (vid) videos.push({ id:vid, title:it.snippet.title||'', date:(it.snippet.publishedAt||'').slice(0,10) });
+      }
+      tok = json.nextPageToken||''; pg++;
+    } while (tok && pg < 5);
+  } catch(e) { throw e; }
+
+  videos.sort((a,b) => b.date>a.date?1:-1);
+  _cache[id] = videos;
+  try { sessionStorage.setItem(ck, JSON.stringify({d:videos,t:Date.now()})); } catch(e) {}
+  return videos;
+}
+
+// ── 建立頻道 Map（去重）──
+function buildChannelMap() {
+  const map = new Map();
+  for (const v of vtubers) {
+    for (const ch of (v.musicClipsChannelIds||[])) {
+      if (!map.has(ch.id)) map.set(ch.id, {id:ch.id, label:ch.label||ch.id, configs:[]});
+      map.get(ch.id).configs.push({vt:v, gridType:'music', ch});
+    }
+    for (const ch of (v.videoClipsChannelIds||[])) {
+      if (!map.has(ch.id)) map.set(ch.id, {id:ch.id, label:ch.label||ch.id, configs:[]});
+      map.get(ch.id).configs.push({vt:v, gridType:'video', ch});
+    }
+  }
+  return map;
+}
+
+// ── 建立主播「名字」對照表（用於跨頻道交叉比對）──
+function buildVtNameMap() {
+  const map = new Map();
+  for (const v of vtubers) {
+    const names = [v.name.toLowerCase()];
+    if (v.nameEn) names.push(v.nameEn.toLowerCase());
+    // 從各 channel config 的 keywords 補充（排除過於泛用的詞）
+    const GENERIC = new Set(['exitus','直播','精華','shorts','cover','歌回','vtuber','taiwan']);
+    for (const ch of [...(v.musicClipsChannelIds||[]),...(v.videoClipsChannelIds||[])]) {
+      for (const k of (ch.keywords||[])) {
+        if (k.length >= 2 && !GENERIC.has(k.toLowerCase())) names.push(k.toLowerCase());
+      }
+    }
+    map.set(v.id, {vt:v, names:[...new Set(names)]});
+  }
+  return map;
+}
+
+// ── 稽核單一頻道 ──
+async function auditOneChannel(chanInfo, vtNameMap) {
+  const raw = await fetchCh(chanInfo.id);
+  const configuredVtIds = new Set(chanInfo.configs.map(c=>c.vt.id));
+  const results = [];
+
+  for (const video of raw) {
+    const t = video.title.toLowerCase();
+    const musicKw = isMusicTitle(video.title);
+    const issues = [];
+    let worstLevel = null;
+
+    // 1. 檢查所有已設定的主播×格子
+    for (const cfg of chanInfo.configs) {
+      const {vt, gridType, ch} = cfg;
+      const kws = ch.keywords ? ch.keywords.map(k=>k.toLowerCase()) : null;
+      if (kws && !kws.some(k=>t.includes(k))) continue; // 不符合關鍵字 → 跳過
+
+      const included = wouldInclude(video.title, ch, gridType);
+
+      if (included && gridType==='video' && musicKw) {
+        issues.push({level:'flag', msg:`🚨 ${vt.name}【影片格】顯示但含音樂關鍵字「${musicKw}」→ 應移至音樂格`});
+        worstLevel = 'flag';
+      } else if (included && gridType==='music' && !musicKw) {
+        issues.push({level:'warn', msg:`⚠️ ${vt.name}【音樂格】顯示但無音樂關鍵字 → 請人工確認`});
+        if (!worstLevel || worstLevel==='info') worstLevel = 'warn';
+      } else if (!included && gridType==='video' && musicKw) {
+        // 音樂影片被影片格全域排除 → 檢查有沒有音樂格備份
+        const hasMusicGrid = chanInfo.configs.some(c=>c.vt.id===vt.id && c.gridType==='music');
+        if (!hasMusicGrid) {
+          issues.push({level:'flag', msg:`🚨 ${vt.name}【影片格】音樂影片被全域關鍵字排除，且無音樂格設定 → 建議新增音樂格`});
+          worstLevel = 'flag';
+        } else {
+          issues.push({level:'grey', msg:`🔇 ${vt.name}：影片格已排除，音樂格有設定（正確）`});
+          if (!worstLevel) worstLevel = 'ok';
+        }
+      } else if (included) {
+        issues.push({level:'ok', msg:`✓ ${vt.name}（${gridType==='music'?'音樂格':'影片格'}）正確顯示`});
+        if (!worstLevel) worstLevel = 'ok';
+      }
+      // else: excluded for valid reason → don't show
+    }
+
+    // 2. 交叉比對：標題含主播名但此頻道未設定在該主播
+    for (const [vtId, info] of vtNameMap) {
+      if (configuredVtIds.has(vtId)) continue;
+      if (info.names.some(n=>t.includes(n))) {
+        issues.push({level:'info', msg:`🔵 標題疑似含「${info.vt.name}」，但此頻道未設定在其剪輯頻道中`});
+        if (!worstLevel || worstLevel==='ok') worstLevel = 'info';
+      }
+    }
+
+    if (worstLevel !== null) {
+      results.push({video, musicKw, issues, level:worstLevel});
+    }
+  }
+
+  const issueCount = results.filter(r=>r.level==='flag'||r.level==='warn'||r.level==='info').length;
+  return {raw, results, issueCount};
+}
+
+// ── 工具 ──
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function levelCls(l){ return {flag:'vi-flag',warn:'vi-warn',info:'vi-info',ok:'vi-ok',grey:'vi-grey'}[l]||'vi-grey'; }
+
+// ── 渲染頻道區塊 ──
+function renderChannel(chanInfo, result, container) {
+  const {raw, results, issueCount} = result;
+  const flagN = results.filter(r=>r.level==='flag').length;
+  const warnN = results.filter(r=>r.level==='warn').length;
+  const infoN = results.filter(r=>r.level==='info').length;
+
+  const block = document.createElement('div');
+  block.className = 'ch-block' + (issueCount===0?' all-ok':'');
+  block.dataset.hasFlagged = issueCount>0?'1':'0';
+
+  // Config tags（去重 vt+gridType）
+  const seen = new Set();
+  const tags = chanInfo.configs
+    .filter(c=>{ const k=c.vt.id+'_'+c.gridType; return seen.has(k)?false:(seen.add(k),true); })
+    .map(c=>`<span class="ch-tag ct-${c.gridType}">${esc(c.vt.name)} ${c.gridType==='music'?'🎵':'🎬'}</span>`).join('');
+
+  let statsHtml = `<span class="cs-total">${raw.length} 支</span>`;
+  if (flagN) statsHtml += `<span class="cs-flag">🚨 ${flagN}</span>`;
+  if (warnN) statsHtml += `<span class="cs-warn">⚠️ ${warnN}</span>`;
+  if (infoN) statsHtml += `<span class="cs-info">🔵 ${infoN}</span>`;
+  if (!issueCount) statsHtml += `<span class="cs-ok">✓ 無問題</span>`;
+
+  block.innerHTML = `
+    <div class="ch-hd" onclick="toggleCh(this)">
+      <span class="ch-name">${esc(chanInfo.label)}</span>
+      <div class="ch-tags">${tags}</div>
+      <div class="ch-stats">${statsHtml}</div>
+      <span class="ch-arr ${issueCount>0?'open':'closed'}">▼</span>
+    </div>
+    <div class="ch-body" style="display:${issueCount>0?'block':'none'}"></div>`;
+
+  const body = block.querySelector('.ch-body');
+  const problemVideos = results.filter(r=>r.level!=='ok');
+
+  if (!problemVideos.length) {
+    body.innerHTML = `<div class="v-empty">✓ 所有相關影片分類正確</div>`;
+  } else {
+    for (const {video, musicKw, issues, level} of problemVideos) {
+      const div = document.createElement('div');
+      div.className = `v-row lvl-${level}`;
+      const ico = level==='flag'?'🚨':level==='warn'?'⚠️':level==='info'?'🔵':'🔇';
+      const issueHtml = issues
+        .filter(i=>i.level!=='ok') // 有問題時只顯示問題，不顯示 ok
+        .map(i=>`<div class="vi ${levelCls(i.level)}">${esc(i.msg)}</div>`).join('');
+      const okHtml = issues
+        .filter(i=>i.level==='ok')
+        .map(i=>`<div class="vi vi-ok">${esc(i.msg)}</div>`).join('');
+      div.innerHTML = `
+        <span class="v-ico">${ico}</span>
+        <div class="v-body">
+          <div class="v-title"><a href="https://youtu.be/${video.id}" target="_blank" rel="noopener noreferrer">${esc(video.title)}</a></div>
+          <div class="v-meta">${video.date}${musicKw?` · 🎵 含音樂關鍵字「${esc(musicKw)}」`:''}</div>
+          <div class="v-issues">${issueHtml}${okHtml}</div>
+        </div>`;
+      body.appendChild(div);
+    }
+    const okCnt = results.filter(r=>r.level==='ok').length;
+    if (okCnt>0) {
+      const m = document.createElement('div');
+      m.className = 'v-more';
+      m.textContent = `…另有 ${okCnt} 支無問題影片（已隱藏）`;
+      body.appendChild(m);
+    }
+  }
+
+  container.appendChild(block);
+}
+
+function toggleCh(hd) {
+  const body = hd.nextElementSibling;
+  const arr  = hd.querySelector('.ch-arr');
+  if (body.style.display==='none') { body.style.display='block'; arr.classList.replace('closed','open'); }
+  else { body.style.display='none'; arr.classList.replace('open','closed'); }
+}
+
+function setFilter(f, el) {
+  document.querySelectorAll('.f-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.ch-block').forEach(b=>{
+    const hasIssue = b.dataset.hasFlagged==='1';
+    b.style.display = f==='all'?'':(f==='flagged'?( hasIssue?'':'none'):( hasIssue?'none':''));
+  });
+}
+
+// ── 主流程 ──
+async function startAudit() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('run-btn').disabled = true;
+  document.getElementById('run-btn').textContent = '稽核中…';
+  document.getElementById('progress-wrap').style.display = 'block';
+  document.getElementById('summary-bar').style.display = 'none';
+  document.getElementById('filter-bar').style.display = 'none';
+  document.getElementById('results').innerHTML = '';
+  Object.keys(_cache).forEach(k=>delete _cache[k]); // 清除記憶體快取（保留 sessionStorage）
+
+  const chanMap  = buildChannelMap();
+  const vtNameMap = buildVtNameMap();
+  const channels = [...chanMap.values()];
+  const container = document.getElementById('results');
+  let sumVideos=0, sumIssues=0;
+
+  for (let i=0; i<channels.length; i++) {
+    const ch = channels[i];
+    document.getElementById('progress-text').textContent = `正在稽核 ${ch.label}（${i+1}／${channels.length}）`;
+    document.getElementById('prog-fill').style.width = `${Math.round((i+1)/channels.length*100)}%`;
+
+    let result;
+    try {
+      result = await auditOneChannel(ch, vtNameMap);
+    } catch(e) {
+      result = { raw:[], results:[], issueCount:0, error: e.message };
+    }
+
+    if (result.error) {
+      const block = document.createElement('div');
+      block.className = 'ch-block';
+      block.dataset.hasFlagged = '0';
+      block.innerHTML = `<div class="ch-hd"><span class="ch-name">${esc(ch.label)}</span><div class="ch-stats"><span style="color:#f87171">⚠️ 抓取失敗：${esc(result.error)}</span></div></div>`;
+      container.appendChild(block);
+      continue;
+    }
+
+    sumVideos  += result.raw.length;
+    sumIssues  += result.issueCount;
+    renderChannel(ch, result, container);
+  }
+
+  document.getElementById('progress-text').textContent = `✅ 稽核完成（${channels.length} 個頻道）`;
+  document.getElementById('prog-fill').style.width = '100%';
+  document.getElementById('run-btn').disabled = false;
+  document.getElementById('run-btn').textContent = '▶ 重新稽核';
+
+  const sb = document.getElementById('summary-bar');
+  sb.style.display = 'flex';
+  sb.innerHTML = `
+    <div class="sb-item"><strong>${channels.length}</strong>個頻道</div>
+    <div class="sb-item"><strong>${sumVideos}</strong>支影片</div>
+    <div class="sb-item ${sumIssues>0?'sb-red':''}"><strong>${sumIssues}</strong>個疑似問題${sumIssues===0?' 🎉':''}</div>`;
+  document.getElementById('filter-bar').style.display = 'flex';
+}
+</script>
+</body>
+</html>
