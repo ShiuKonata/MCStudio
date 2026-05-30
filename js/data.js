@@ -1869,7 +1869,7 @@ const vtubers = [
   },
 
   {
-    id: "cocoro",
+    id: "cocor0",
     name: "心 cocor0",
     nameEn: "cocor0",
     group: "預見娛樂",
