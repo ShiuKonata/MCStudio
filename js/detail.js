@@ -466,30 +466,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 分類切換 -->
           <div class="ov-section-bar">
-            <button class="ov-section-btn active" data-ovsection="unclassified">❓ 未分類</button>
-            <button class="ov-section-btn" data-ovsection="shorts">📱 Shorts</button>
-          </div>
-
-          <!-- 未分類區 section -->
-          <div id="ov-unclassified-section">
-            <div class="ls-year-bar" id="unc-year-bar">
-              <button class="ls-year-btn active" data-uncyear="all">${T('videos.all')}</button>
-              ${uncYearBtns}
-            </div>
-            <div class="ls-search-bar">
-              <span class="ls-search-icon">🔍</span>
-              <input class="ls-search-input" id="unc-search-input" type="text" placeholder="${T('search.unc')}" autocomplete="off">
-              <button class="ls-search-clear" id="unc-search-clear" title="清除">✕</button>
-            </div>
-            <div class="ls-search-count" id="unc-search-count"></div>
-            <div class="livestreams-container" id="unc-container"></div>
-            <div class="ls-load-more-wrap" id="unc-load-more-wrap" style="display:none">
-              <button class="ls-load-more-btn" id="unc-load-more-btn">${T('loadMore')}</button>
-            </div>
+            <button class="ov-section-btn active" data-ovsection="shorts">📱 Shorts</button>
+            <button class="ov-section-btn" data-ovsection="unclassified">❓ 未分類</button>
           </div>
 
           <!-- 官方 Shorts section -->
-          <div id="ov-shorts-section" style="display:none">
           <div id="ov-shorts-section">
             <div class="ls-year-bar" id="yts-year-bar">
               <button class="ls-year-btn active" data-ytsyear="all">${T('videos.all')}</button>
@@ -504,6 +485,24 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="livestreams-container" id="yts-container"></div>
             <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
               <button class="ls-load-more-btn" id="yts-load-more-btn">${T('loadMore')}</button>
+            </div>
+          </div>
+
+          <!-- 未分類區 section -->
+          <div id="ov-unclassified-section" style="display:none">
+            <div class="ls-year-bar" id="unc-year-bar">
+              <button class="ls-year-btn active" data-uncyear="all">${T('videos.all')}</button>
+              ${uncYearBtns}
+            </div>
+            <div class="ls-search-bar">
+              <span class="ls-search-icon">🔍</span>
+              <input class="ls-search-input" id="unc-search-input" type="text" placeholder="${T('search.unc')}" autocomplete="off">
+              <button class="ls-search-clear" id="unc-search-clear" title="清除">✕</button>
+            </div>
+            <div class="ls-search-count" id="unc-search-count"></div>
+            <div class="livestreams-container" id="unc-container"></div>
+            <div class="ls-load-more-wrap" id="unc-load-more-wrap" style="display:none">
+              <button class="ls-load-more-btn" id="unc-load-more-btn">${T('loadMore')}</button>
             </div>
           </div>
         </div>` : ''}
@@ -2286,10 +2285,10 @@ document.addEventListener('DOMContentLoaded', () => {
       window._lsLoaded = true;
       tryLoadLiveStreams(false);
     }
-    // 官方剪輯：首次進入分頁時載入「未分類區」
-    if (key === 'officialvideos' && tryLoadUnclassified && !window._uncLoaded) {
-      window._uncLoaded = true;
-      tryLoadUnclassified();
+    // 官方剪輯：首次進入分頁時載入「Shorts」
+    if (key === 'officialvideos' && tryLoadYtShorts && !window._ytsLoaded) {
+      window._ytsLoaded = true;
+      tryLoadYtShorts();
     }
     // 歌曲統計：首次進入分頁時才開始載入
     if (key === 'songstats' && window._loadSongStats && !window._ssLoaded) {
