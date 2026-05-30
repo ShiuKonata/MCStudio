@@ -1694,17 +1694,25 @@ document.addEventListener('DOMContentLoaded', () => {
           const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
           const detailMap = await fetchVideoDetails(videoIds);
           let count = 0;
+          let filteredCount = 0;
+          console.log(`📊 未分類區 - 獲取影片數: ${items.length}`);
           for (const item of items) {
             const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
             if (!vid) continue;
             const d = detailMap[vid];
             if (!d) continue;
+            const title = item.snippet.title || '';
             // 【第一層過濾】排除直播存檔
-            if (d.liveContent !== 'none') continue;
+            if (d.liveContent !== 'none') {
+              filteredCount++;
+              console.log(`🚫 直播存檔被過濾: [${d.liveContent}] ${title}`);
+              continue;
+            }
             // 剩下的放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
           }
+          console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除直播: ${filteredCount} 部`);
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
           uncNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
@@ -1732,14 +1740,22 @@ document.addEventListener('DOMContentLoaded', () => {
           const items    = data.items || [];
           const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
           const detailMap = await fetchVideoDetails(videoIds);
+          let filteredCount = 0;
+          console.log(`📄 未分類區 - 加載更多: ${items.length} 部`);
           for (const item of items) {
             const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
             if (!vid) continue;
             const d = detailMap[vid];
             if (!d) continue;
-            if (d.liveContent !== 'none') continue;
+            const title = item.snippet.title || '';
+            if (d.liveContent !== 'none') {
+              filteredCount++;
+              console.log(`🚫 直播存檔被過濾: [${d.liveContent}] ${title}`);
+              continue;
+            }
             renderUncCard(container, item, d.duration);
           }
+          console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部`);
           uncNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
           const btn = document.getElementById('unc-load-more-btn');
