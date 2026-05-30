@@ -1930,6 +1930,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const coLoading = { inProgress: false };
     const uploadsPlaylistId_CO = 'UU' + v.youtubeChannelId.slice(2);
 
+    // 時長解析函數（與官方上傳共用邏輯）
+    function parseDurationSec(dur) {
+      const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      if (!m) return 0;
+      return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+    }
+
     async function fetchCoPage(pageToken) {
       let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
         + '?part=snippet'
@@ -1939,12 +1946,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
       const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
       return await res.json();
-    }
-
-    function parseDurationSecCO(dur) {
-      const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-      if (!m) return 0;
-      return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
     }
 
     async function fetchVideoDetailsCO(videoIds) {
@@ -1958,7 +1959,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const map = {};
       (data.items || []).forEach(item => {
         map[item.id] = {
-          duration:    parseDurationSecCO(item.contentDetails.duration || 'PT0S'),
+          duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
           wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
         };
       });
