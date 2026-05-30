@@ -1763,6 +1763,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const detailMap = await fetchVideoDetails(videoIds);
           let count = 0;
           let filteredCount = 0;
+          let step3Candidates = [];  // 【STEP 3】候選影片
 
           for (const item of allItems) {
             const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
@@ -1770,6 +1771,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
+            const titleLower = title.toLowerCase();
             // 【STEP 1 - 只排除直播存檔】
             // 使用 UULV 播放列表（直播存檔）來直接排除
             if (liveVideoIds.has(vid)) {
@@ -1789,11 +1791,53 @@ document.addEventListener('DOMContentLoaded', () => {
               filteredCount++;
               continue;
             }
+
+            // 【STEP 3】檢測詩雨蔻達特殊規則（只限詩雨蔻達）
+            if (v.id === 'shiucoda') {
+              let isStep3 = false;
+              let step3Type = null;
+
+              // a. 標題含有 demo
+              if (titleLower.includes('demo')) {
+                isStep3 = true;
+                step3Type = 'demo';
+              }
+              // b. 標題含有自彈自唱
+              if (titleLower.includes('自彈自唱')) {
+                isStep3 = true;
+                step3Type = 'self-sung';
+              }
+
+              if (isStep3) {
+                step3Candidates.push({
+                  id: vid,
+                  title: title,
+                  date: item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '',
+                  duration: d.duration,
+                  type: step3Type
+                });
+                console.log(`📍 [STEP 3] 檢測到 ${step3Type}: ${title}`);
+              }
+            }
+
             // STEP 2 完成：未在 v.videos 中的影片放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
           }
           console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
+
+          // 【STEP 3】輸出候選影片
+          if (step3Candidates.length > 0) {
+            console.log(`\n🎵 【STEP 3】詩雨蔻達特殊規則 - 檢測到 ${step3Candidates.length} 部待分類影片：`);
+            console.table(step3Candidates.map(v => ({
+              ID: v.id,
+              標題: v.title,
+              日期: v.date,
+              類型: v.type,
+              時長: v.duration
+            })));
+            console.log(`\n💡 建議：將以上影片加入 data.js 的 v.videos，並加上【Cover】前綴\n`);
+          }
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
 
           // 移除分頁
