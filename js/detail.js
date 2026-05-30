@@ -2004,10 +2004,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadCoverOriginal() {
+      // Step 1 期間：禁用原創曲&Cover的所有功能
+      // 所有視頻應該只在「官方剪輯」底下的「未分類區」顯示
+      const container = document.getElementById('video-grid');
+      if (container) container.innerHTML = '';
+      return;
+
+      // 以下代碼在 Step 2 前暫時禁用
       if (coLoading.inProgress) return;
       coLoading.inProgress = true;
-
-      const container = document.getElementById('video-grid');
       if (!container) { coLoading.inProgress = false; return; }
 
       container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
