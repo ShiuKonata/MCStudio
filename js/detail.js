@@ -1636,6 +1636,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // 從 UU 上傳清單抓取，排除直播存檔（有 liveStreamingDetails.actualStartTime）與 Shorts（duration≤60s）
   let tryLoadOfficialUploads = null;
   if (v.youtubeChannelId) {
+    // 清除官方上傳和官方Shorts的快取（Step 2：準備重新分類）
+    const yearsToCheck = ['all', '2026', '2025', '2024', '2023', '2022', '2021', '2020'];
+    yearsToCheck.forEach(year => {
+      sessionStorage.removeItem('mc_ovu_' + v.youtubeChannelId + '_' + year);
+      sessionStorage.removeItem('mc_yts_' + v.youtubeChannelId + '_' + year);
+    });
+
     const uploadsPlaylistId = 'UU' + v.youtubeChannelId.slice(2);
     let ovuLoading       = false;
     let ovuCurrentYear   = 'all';
