@@ -1080,7 +1080,7 @@ const vtubers = [
   },
 
   {
-    id: "yuzukiririna",
+    id: "ririna",
     name: "結月莉莉奈",
     nameEn: "Ririna",
     group: "預見娛樂",
