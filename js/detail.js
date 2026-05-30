@@ -1617,14 +1617,14 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`🔵 [fetchVideoDetails] 獲取${videoIds.length}部影片詳情，API回應:`, data);
       (data.items || []).forEach((item, idx) => {
         const liveContent = item.snippet.liveBroadcastContent || 'none';
+        const wasLive = !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime);
         map[item.id] = {
           duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
           liveContent: liveContent,
-          wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
+          wasLive:     wasLive,
         };
-        if (liveContent !== 'none') {
-          console.log(`🔵 [fetchVideoDetails] 影片${idx+1}: [${liveContent}] ${item.snippet.title}`);
-        }
+        // 詳細日誌：顯示所有影片的狀態
+        console.log(`🔵 影片${idx+1}: [${liveContent}] wasLive=${wasLive} | ${item.snippet.title}`);
       });
       return map;
     }
