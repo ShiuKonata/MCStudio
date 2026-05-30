@@ -466,6 +466,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="uploads">${T('officialvideos.uploads')}</button>
             <button class="ov-section-btn" data-ovsection="shorts">${T('officialvideos.shorts')}</button>
+            <button class="ov-section-btn" data-ovsection="ads">📺 廣告</button>
+            <button class="ov-section-btn" data-ovsection="unclassified">❓ 未分類</button>
           </div>
 
           <!-- 官方上傳影片 section -->
@@ -502,6 +504,36 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
               <button class="ls-load-more-btn" id="yts-load-more-btn">${T('loadMore')}</button>
             </div>
+          </div>
+
+          <!-- 廣告 section -->
+          <div id="ov-ads-section" style="display:none">
+            <div class="ls-year-bar" id="ov-ads-year-bar">
+              <button class="ls-year-btn active" data-ovadsyear="all">${T('videos.all')}</button>
+              ${ovuYearBtns}
+            </div>
+            <div class="ls-search-bar">
+              <span class="ls-search-icon">🔍</span>
+              <input class="ls-search-input" id="ov-ads-search-input" type="text" placeholder="搜尋廣告影片" autocomplete="off">
+              <button class="ls-search-clear" id="ov-ads-search-clear" title="清除">✕</button>
+            </div>
+            <div class="ls-search-count" id="ov-ads-search-count"></div>
+            <div class="livestreams-container" id="ov-ads-container"></div>
+          </div>
+
+          <!-- 未分類 section -->
+          <div id="ov-unclassified-section" style="display:none">
+            <div class="ls-year-bar" id="ov-unclassified-year-bar">
+              <button class="ls-year-btn active" data-ovunclassifiedyear="all">${T('videos.all')}</button>
+              ${ovuYearBtns}
+            </div>
+            <div class="ls-search-bar">
+              <span class="ls-search-icon">🔍</span>
+              <input class="ls-search-input" id="ov-unclassified-search-input" type="text" placeholder="搜尋未分類影片" autocomplete="off">
+              <button class="ls-search-clear" id="ov-unclassified-search-clear" title="清除">✕</button>
+            </div>
+            <div class="ls-search-count" id="ov-unclassified-search-count"></div>
+            <div class="livestreams-container" id="ov-unclassified-container"></div>
           </div>
         </div>` : ''}
 
