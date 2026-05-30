@@ -1643,6 +1643,12 @@ document.addEventListener('DOMContentLoaded', () => {
       sessionStorage.removeItem('mc_yts_' + v.youtubeChannelId + '_' + year);
     });
 
+    // 清除容器中的所有影片內容
+    const ovuContainer = document.getElementById('ovu-container');
+    if (ovuContainer) ovuContainer.innerHTML = '';
+    const ytsContainer = document.getElementById('yts-container');
+    if (ytsContainer) ytsContainer.innerHTML = '';
+
     const uploadsPlaylistId = 'UU' + v.youtubeChannelId.slice(2);
     let ovuLoading       = false;
     let ovuCurrentYear   = 'all';
