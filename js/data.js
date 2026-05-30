@@ -794,7 +794,7 @@ const vtubers = [
   },
 
   {
-    id: "shurakukiriko",
+    id: "kiriko",
     name: "酒樂霧子",
     nameEn: "Kiriko",
     group: "預見娛樂",
