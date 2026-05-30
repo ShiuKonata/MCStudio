@@ -64,6 +64,18 @@ const vtubers = [
       { id: "-jdQoS_NwCQ", title: "【Cover】走建國路回家但後座少ㄌ泥/詩雨蔻達 | 吉他自彈自唱",                     date: "2023-02-06" },
       { id: "iasDIGQYtBw", title: "【Cover】緑黄色社会-mela! / 詩雨蔻達",                                          date: "2023-01-28" },
       { id: "XHuc832HAfY", title: "【Cover】食虫植物/ 詩雨蔻達 feat.茶浣熊@TanukiiDonCh | 吉他自彈自唱",           date: "2023-01-21" },
+      { id: "rLf7RaQ6Wtk", title: "【Cover】未接來電／莫宰羊💧詩雨蔻達【#自彈自唱 】 #vtuber",                   date: "2024-01-08" },
+      { id: "JNTkmHjzEoI", title: "【Cover】地球儀／米津玄師💧詩雨蔻達【自彈自唱】",                               date: "2023-10-17" },
+      { id: "XJX9emztHaA", title: "【Cover】擁抱💧詩雨蔻達【自彈自唱】",                                           date: "2023-10-03" },
+      { id: "1_l1d8aYPOs", title: "【Cover】貴方の恋人になりたい💧詩雨蔻達【自彈自唱】",                           date: "2023-09-19" },
+      { id: "WPLg85oqyLE", title: "【Cover】たばこ💧詩雨蔻達【自彈自唱】",                                        date: "2023-09-15" },
+      { id: "nq0SIJ_lg38", title: "【Cover】ド屑 💧詩雨蔻達【自彈自唱】",                                         date: "2023-09-12" },
+      { id: "Ej2tkEtePy8", title: "【Cover】comethru /Jeremy Zucker 💧詩雨蔻達【自彈自唱】",                      date: "2023-08-29" },
+      { id: "81caRqdrkLE", title: "【Cover】想和你看五月的晚霞/陳華💧詩雨蔻達【自彈自唱COVER】",                  date: "2023-08-04" },
+      { id: "djDaHxND-Yk", title: "【Cover】星座になれたら/結束バンド💧詩雨蔻達【自彈自唱COVER】",                  date: "2023-07-25" },
+      { id: "zJY2337dyPQ", title: "【Cover】七月半-HOW哥宇宙 💧詩雨蔻達【自彈自唱cover】",                         date: "2023-07-14" },
+      { id: "5__koIwFpsg", title: "【Cover】Aimer-カタオモイ 💧詩雨蔻達【自彈自唱cover】",                        date: "2023-07-11" },
+      { id: "YwuzcuUsjgo", title: "【Cover】Vaundy - 踊り子 💧詩雨蔻達【自彈自唱cover】",                        date: "2023-06-30" },
     ],
 
     // 剪輯頻道設定說明：
