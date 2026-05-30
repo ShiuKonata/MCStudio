@@ -2166,7 +2166,7 @@ const vtubers = [
   },
 
   {
-    id: "konkouyuni",
+    id: "Yawnii",
     name: "睏睏幽昵",
     nameEn: "Yawnii",
     group: "預見娛樂",
