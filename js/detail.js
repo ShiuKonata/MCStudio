@@ -1714,8 +1714,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             // 【第一層過濾】排除直播存檔
-            if (d.wasLive) continue;
-            // 【第二層過濾】排除 Cover/Original/Official/原創 標題
+            if (d.liveContent !== 'none') continue;
+            // 【第二層過濾】排除短於等於 60 秒的短片
+            if (d.duration <= 60) continue;
+            // 【第三層過濾】排除 Cover/Original/Official/原創 標題
             const { hasCover, hasOriginal } = isClassified(item.snippet.title);
             if (hasCover || hasOriginal) continue;
             // 剩下的放入未分類區
@@ -1746,7 +1748,8 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!vid) continue;
               const d = detailMap[vid];
               if (!d) continue;
-              if (d.wasLive) continue;
+              if (d.liveContent !== 'none') continue;
+              if (d.duration <= 60) continue;
               const { hasCover, hasOriginal } = isClassified(item.snippet.title);
               if (hasCover || hasOriginal) continue;
               renderUncCard(container, item, d.duration);
@@ -1785,7 +1788,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!vid) continue;
             const d = detailMap[vid];
             if (!d) continue;
-            if (d.wasLive) continue;
+            if (d.liveContent !== 'none') continue;
+            if (d.duration <= 60) continue;
             const { hasCover, hasOriginal } = isClassified(item.snippet.title);
             if (hasCover || hasOriginal) continue;
             renderUncCard(container, item, d.duration);
