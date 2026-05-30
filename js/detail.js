@@ -1723,12 +1723,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadOvuYear(year) {
-      // Step 2: 禁用自動加載，等待用戶明確指令開始執行詩雨蔻達規章
-      const container = document.getElementById('ovu-container');
-      if (container) container.innerHTML = '';
-      return;
-
-      // 以下代碼暫時禁用
       if (ovuLoading) return;
       ovuLoading = true;
       ovuCurrentYear   = year;
@@ -1888,7 +1882,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('input', e => { if (e.target.id === 'ovu-search-input') applyOvuSearch(); });
     document.addEventListener('click', e => { if (e.target.id === 'ovu-search-clear') { document.getElementById('ovu-search-input').value = ''; applyOvuSearch(); } });
 
-    // 大分類切換（官方上傳影片 ↔ 官方Shorts）
+    // 大分類切換（官方上傳影片 ↔ 官方Shorts ↔ 廣告 ↔ 未分類）
     document.addEventListener('click', e => {
       const btn = e.target.closest('.ov-section-btn');
       if (!btn) return;
@@ -1897,12 +1891,23 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       const uploadsEl = document.getElementById('ov-uploads-section');
       const shortsEl  = document.getElementById('ov-shorts-section');
+      const adsEl     = document.getElementById('ov-ads-section');
+      const unclassifiedEl = document.getElementById('ov-unclassified-section');
       if (uploadsEl) uploadsEl.style.display = section === 'uploads' ? '' : 'none';
       if (shortsEl)  shortsEl.style.display  = section === 'shorts'  ? '' : 'none';
+      if (adsEl)     adsEl.style.display     = section === 'ads'     ? '' : 'none';
+      if (unclassifiedEl) unclassifiedEl.style.display = section === 'unclassified' ? '' : 'none';
+
       // Shorts：首次切換時才觸發載入
       if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
         tryLoadYtShorts();
+      }
+
+      // 未分類：首次切換時才觸發 Step 1 載入
+      if (section === 'unclassified' && tryLoadUnclassifiedStep1 && !window._unclassifiedLoaded) {
+        window._unclassifiedLoaded = true;
+        tryLoadUnclassifiedStep1();
       }
     });
   }
@@ -1998,12 +2003,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadCoverOriginal() {
-      // Step 2: 禁用自動加載，等待用戶明確指令開始執行詩雨蔻達規章
-      const coContainer = document.getElementById('video-grid');
-      if (coContainer) coContainer.innerHTML = '';
-      return;
-
-      // 以下代碼暫時禁用，直到用戶開始執行規章
       if (coLoading.inProgress) return;
       coLoading.inProgress = true;
 
@@ -2168,12 +2167,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadYtsYear(year) {
-      // Step 2: 禁用自動加載，等待用戶明確指令開始執行詩雨蔻達規章
-      const container = document.getElementById('yts-container');
-      if (container) container.innerHTML = '';
-      return;
-
-      // 以下代碼暫時禁用
       if (ytsLoading) return;
       ytsLoading = true;
       ytsCurrentYear   = year;
@@ -2311,6 +2304,144 @@ document.addEventListener('DOMContentLoaded', () => {
         applyYtsSearch();
       }
     });
+  }
+
+  // ── Step 1: 未分類區 - YouTube API 抓取全部影片（排除直播存檔）──
+  let tryLoadUnclassifiedStep1 = null;
+  if (v.youtubeChannelId) {
+    const uploadsPlaylistId_Step1 = 'UU' + v.youtubeChannelId.slice(2);
+    let unclassifiedLoading = false;
+
+    function parseDurationSec_Step1(dur) {
+      const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      if (!m) return 0;
+      return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+    }
+
+    async function fetchStep1Page(pageToken) {
+      let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
+        + '?part=snippet'
+        + '&playlistId=' + encodeURIComponent(uploadsPlaylistId_Step1)
+        + '&maxResults=50'
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+      return await res.json();
+    }
+
+    async function fetchVideoDetailsStep1(videoIds) {
+      if (!videoIds.length) return {};
+      const url = 'https://www.googleapis.com/youtube/v3/videos'
+        + '?part=contentDetails,snippet,liveStreamingDetails'
+        + '&id=' + videoIds.join(',')
+        + '&key=' + encodeURIComponent(v.ytApiKey);
+      const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+      const data = await res.json();
+      const map = {};
+      (data.items || []).forEach(item => {
+        map[item.id] = {
+          duration:    parseDurationSec_Step1(item.contentDetails.duration || 'PT0S'),
+          wasLive:     !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime),
+        };
+      });
+      return map;
+    }
+
+    function renderUnclassifiedCard(container, item, durationSec) {
+      const snip     = item.snippet;
+      const vid      = snip.resourceId && snip.resourceId.videoId;
+      if (!vid) return;
+      const thumb    = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
+      const thumbUrl = thumb ? thumb.url : ('https://img.youtube.com/vi/' + vid + '/hqdefault.jpg');
+      const date     = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
+      const title    = esc(snip.title || '');
+      const mins     = Math.floor(durationSec / 60);
+      const secs     = durationSec % 60;
+      const durLabel = durationSec > 0 ? `${mins}:${String(secs).padStart(2,'0')}` : '';
+      container.innerHTML += `
+        <div class="ls-card" onclick="(function(){
+          document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+          document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+          document.getElementById('yt-modal-title').textContent='${title}';
+          document.getElementById('yt-modal').classList.add('open');
+          document.body.style.overflow='hidden';
+        })()">
+          <div class="ls-thumb-wrap">
+            <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+            <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+            ${durLabel ? `<div class="ls-duration-badge">${durLabel}</div>` : ''}
+            <div class="ls-unclassified-badge">❓ 未分類</div>
+          </div>
+          <div class="ls-info">
+            <div class="ls-title">${title || '（無標題）'}</div>
+            ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+          </div>
+        </div>`;
+    }
+
+    async function loadUnclassifiedStep1() {
+      if (unclassifiedLoading) return;
+      unclassifiedLoading = true;
+
+      const container = document.getElementById('ov-unclassified-container');
+      if (!container) { unclassifiedLoading = false; return; }
+
+      container.innerHTML = `<div class="ls-loading"><div class="ls-spinner"></div><span>${T('loading')}</span></div>`;
+
+      try {
+        let pageToken = null;
+        let allVideos = [];
+
+        // 翻頁抓取所有上傳
+        do {
+          const data = await fetchStep1Page(pageToken);
+          if (data.error) throw new Error(data.error.message);
+
+          const items = data.items || [];
+          const videoIds = items.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          if (videoIds.length === 0) break;
+
+          const detailMap = await fetchVideoDetailsStep1(videoIds);
+          for (const item of items) {
+            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+            if (!vid) continue;
+            const d = detailMap[vid];
+            if (!d) continue;
+            // 排除：直播存檔（但保留 Shorts）
+            if (d.wasLive) continue;
+            allVideos.push({ item, duration: d.duration });
+          }
+
+          pageToken = data.nextPageToken || null;
+          if (!pageToken) break;
+        } while (true);
+
+        // 排序（日期新→舊）
+        allVideos.sort((a, b) => {
+          const dateA = a.item.snippet.publishedAt || '';
+          const dateB = b.item.snippet.publishedAt || '';
+          return dateB.localeCompare(dateA);
+        });
+
+        // 渲染所有影片到未分類區
+        container.innerHTML = '';
+        if (allVideos.length === 0) {
+          container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noUploads')}</p></div>`;
+        } else {
+          allVideos.forEach(({ item, duration }) => {
+            renderUnclassifiedCard(container, item, duration);
+          });
+          console.log(`📝 Step 1 完成：已加載 ${allVideos.length} 部未分類影片到未分類區`);
+        }
+      } catch (err) {
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
+        console.error('Step 1 加載失敗:', err);
+      }
+
+      unclassifiedLoading = false;
+    }
+
+    tryLoadUnclassifiedStep1 = function() { loadUnclassifiedStep1(); };
   }
 
   // ── 共用快取工具（sessionStorage，30 分鐘過期）──
