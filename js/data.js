@@ -1361,7 +1361,7 @@ const vtubers = [
   },
 
   {
-    id: "kaialluria",
+    id: "kai",
     name: "魁 Kai",
     nameEn: "Kai",
     group: "預見娛樂",
