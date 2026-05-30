@@ -467,6 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- 分類切換 -->
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="shorts">📱 Shorts</button>
+            <button class="ov-section-btn" data-ovsection="cover">🎵 Cover/Original</button>
             <button class="ov-section-btn" data-ovsection="unclassified">❓ 未分類</button>
           </div>
 
@@ -485,6 +486,23 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="livestreams-container" id="yts-container"></div>
             <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
               <button class="ls-load-more-btn" id="yts-load-more-btn">${T('loadMore')}</button>
+            </div>
+          </div>
+
+          <!-- Cover/Original section (STEP 2) -->
+          <div id="ov-cover-section" style="display:none">
+            <div class="ls-year-bar" id="cover-year-bar">
+              <button class="ls-year-btn active" data-coveryear="all">${T('videos.all')}</button>
+            </div>
+            <div class="ls-search-bar">
+              <span class="ls-search-icon">🔍</span>
+              <input class="ls-search-input" id="cover-search-input" type="text" placeholder="${T('search.cover')}" autocomplete="off">
+              <button class="ls-search-clear" id="cover-search-clear" title="清除">✕</button>
+            </div>
+            <div class="ls-search-count" id="cover-search-count"></div>
+            <div class="livestreams-container" id="cover-container"></div>
+            <div class="ls-load-more-wrap" id="cover-load-more-wrap" style="display:none">
+              <button class="ls-load-more-btn" id="cover-load-more-btn">${T('loadMore')}</button>
             </div>
           </div>
 
@@ -1585,6 +1603,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const livePlaylistId = 'UULV' + v.youtubeChannelId.slice(2);  // 直播存檔播放列表
     let liveVideoIds = new Set();  // 存放直播存檔的video ID
     let liveVideoIdsFetched = false;  // 是否已獲取直播列表
+
+    // STEP 2: Cover/Original 存儲
+    let coverVideos = [];  // 存放 Cover/Original 影片
+    let coverLoading = false;
+    let coverCurrentYear = 'all';
+
     let uncLoading       = false;
     let uncCurrentYear   = 'all';
     let uncNextPageToken = null;
@@ -1624,6 +1648,43 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.error(`❌ [STEP 1] 獲取直播存檔失敗:`, err);
       }
+    }
+
+    // 【STEP 2】檢測 Cover/Original 並添加到 coverVideos
+    function checkAndAddCoverOfficial(item, duration) {
+      const snip = item.snippet;
+      const vid = snip.resourceId && snip.resourceId.videoId;
+      if (!vid) return;
+
+      const title = snip.title || '';
+      const titleLower = title.toLowerCase();
+      const date = snip.publishedAt ? snip.publishedAt.slice(0,10) : '';
+      const thumb = snip.thumbnails && (snip.thumbnails.high || snip.thumbnails.medium || snip.thumbnails.default);
+      const thumbUrl = thumb ? thumb.url : (`https://img.youtube.com/vi/${vid}/hqdefault.jpg`);
+
+      // 檢測 Cover 和 Original 關鍵字
+      const isCover = titleLower.includes('cover') || titleLower.includes('歌ってみた');
+      const isOriginal = titleLower.includes('original') || titleLower.includes('原創');
+
+      if (isCover || isOriginal) {
+        const coverObj = {
+          id: vid,
+          title: title,
+          date: date,
+          thumb: thumbUrl,
+          duration: duration,
+          isShorts: duration <= 60,
+          type: isCover ? 'Cover' : 'Original'
+        };
+
+        // 避免重複
+        if (!coverVideos.some(v => v.id === vid)) {
+          coverVideos.push(coverObj);
+          console.log(`🎵 [STEP 2] 檢測到 ${coverObj.type}: ${title.substring(0, 60)}`);
+          return true;  // 表示已分類
+        }
+      }
+      return false;  // 未分類，留在未分類區
     }
 
     // 從上傳播放清單 API 獲取影片
@@ -1765,7 +1826,13 @@ document.addEventListener('DOMContentLoaded', () => {
               // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
-            // STEP 1 完成：除直播外，所有影片放入未分類區等待 STEP 2 篩選
+            // 【STEP 2】檢測 Cover/Original
+            const isCoverOfficial = checkAndAddCoverOfficial(item, d.duration);
+            if (isCoverOfficial) {
+              // 已分類到 Cover/Original，不顯示在未分類區
+              continue;
+            }
+            // STEP 2 完成：非 Cover/Original 的影片放入未分類區
             renderUncCard(container, item, d.duration);
             count++;
           }
@@ -1783,6 +1850,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
+
+    // 【STEP 2】載入 Cover/Original 影片
+    let tryLoadCover = null;
+    async function loadCoverYear(year) {
+      if (coverLoading) return;
+      coverLoading = true;
+      coverCurrentYear = year;
+
+      const container = document.getElementById('cover-container');
+      if (!container) { coverLoading = false; return; }
+
+      // 先確保 coverVideos 已填充（通過加載未分類區）
+      if (coverVideos.length === 0) {
+        await loadUnclassifiedYear('all');
+      }
+
+      container.innerHTML = '';
+
+      let filtered = coverVideos;
+      if (year !== 'all') {
+        filtered = coverVideos.filter(v => v.date.startsWith(String(year)));
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">🎵</span><p>暫無 Cover/Original 影片</p></div>`;
+      } else {
+        filtered.forEach(v => {
+          const thumbUrl = v.thumb || `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+          const title = (v.title || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+          const date = v.date || '';
+          const shortsMarker = v.isShorts ? ' <span style="font-size:0.7rem;background:#ff6f00;padding:0.2rem 0.5rem;border-radius:4px;color:white;">Shorts</span>' : '';
+
+          container.innerHTML += `
+            <div class="ls-card" onclick="(function(){
+              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0';
+              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${v.id}';
+              document.getElementById('yt-modal-title').textContent='${title}';
+              document.getElementById('yt-modal').classList.add('open');
+              document.body.style.overflow='hidden';
+            })()">
+              <div class="ls-thumb-wrap">
+                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+              </div>
+              <div class="ls-info">
+                <div class="ls-title">${title || '（無標題）'}${shortsMarker}</div>
+                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+              </div>
+            </div>`;
+        });
+      }
+
+      console.log(`🎵 Cover/Original 合計：${filtered.length} 部`);
+      coverLoading = false;
+    }
+
+    tryLoadCover = function() { loadCoverYear(coverCurrentYear); };
 
     // 「載入更多」（全部模式）
     document.addEventListener('click', e => {
@@ -1817,10 +1941,16 @@ document.addEventListener('DOMContentLoaded', () => {
               // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
-            // STEP 1 完成：除直播外，所有影片放入未分類區等待 STEP 2 篩選
+            // 【STEP 2】檢測 Cover/Original
+            const isCoverOfficial = checkAndAddCoverOfficial(item, d.duration);
+            if (isCoverOfficial) {
+              // 已分類到 Cover/Original，不顯示在未分類區
+              continue;
+            }
+            // STEP 2 完成：非 Cover/Original 的影片放入未分類區
             renderUncCard(container, item, d.duration);
           }
-          console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部`);
+          console.log(`✅ 加載更多 - 排除直播: ${filteredCount} 部，檢測 Cover/Original 完成`);
           uncNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = uncNextPageToken ? 'flex' : 'none';
           const btn = document.getElementById('unc-load-more-btn');
@@ -2051,7 +2181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 【分類切換】未分類 ↔ Shorts
+    // 【分類切換】Shorts ↔ Cover/Original ↔ 未分類
     document.addEventListener('click', e => {
       const btn = e.target.closest('.ov-section-btn');
       if (!btn) return;
@@ -2060,12 +2190,19 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       const uncEl = document.getElementById('ov-unclassified-section');
       const shortsEl  = document.getElementById('ov-shorts-section');
+      const coverEl = document.getElementById('ov-cover-section');
       if (uncEl) uncEl.style.display = section === 'unclassified' ? '' : 'none';
       if (shortsEl)  shortsEl.style.display  = section === 'shorts'  ? '' : 'none';
+      if (coverEl) coverEl.style.display = section === 'cover' ? '' : 'none';
       // Shorts：首次切換時才觸發載入
       if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
         tryLoadYtShorts();
+      }
+      // Cover/Original：首次切換時才觸發載入
+      if (section === 'cover' && tryLoadCover && !window._coverLoaded) {
+        window._coverLoaded = true;
+        tryLoadCover();
       }
       // 未分類區：首次切換時才觸發載入
       if (section === 'unclassified' && tryLoadUnclassified && !window._uncLoaded) {
