@@ -1582,6 +1582,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let tryLoadUnclassified = null;
   if (v.youtubeChannelId) {
     const uploadsPlaylistId = 'UU' + v.youtubeChannelId.slice(2);
+    const livePlaylistId = 'UULV' + v.youtubeChannelId.slice(2);  // 直播存檔播放列表
+    let liveVideoIds = new Set();  // 存放直播存檔的video ID
+    let liveVideoIdsFetched = false;  // 是否已獲取直播列表
     let uncLoading       = false;
     let uncCurrentYear   = 'all';
     let uncNextPageToken = null;
@@ -1590,6 +1593,37 @@ document.addEventListener('DOMContentLoaded', () => {
       const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
       if (!m) return 0;
       return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+    }
+
+    // 獲取所有直播存檔的 video ID（UULV 播放列表）
+    async function fetchAllLiveVideos() {
+      let pageToken = null;
+      let count = 0;
+      try {
+        do {
+          let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
+            + '?part=snippet'
+            + '&playlistId=' + encodeURIComponent(livePlaylistId)
+            + '&maxResults=50'
+            + '&key=' + encodeURIComponent(v.ytApiKey);
+          if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
+          const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+          const data = await res.json();
+          if (data.error) break;
+
+          (data.items || []).forEach(item => {
+            const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+            if (vid) {
+              liveVideoIds.add(vid);
+              count++;
+            }
+          });
+          pageToken = data.nextPageToken || null;
+        } while (pageToken);
+        console.log(`✅ [STEP 1] 獲取直播存檔: ${count} 部`);
+      } catch (err) {
+        console.error(`❌ [STEP 1] 獲取直播存檔失敗:`, err);
+      }
     }
 
     // 從上傳播放清單 API 獲取影片
@@ -1678,6 +1712,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (input)  input.value = '';
       if (countEl) countEl.style.display = 'none';
 
+      // 【STEP 1 準備】第一次加載時，先獲取直播存檔列表
+      if (!liveVideoIdsFetched) {
+        console.log(`🔵 [STEP 1] 正在獲取直播存檔列表...`);
+        await fetchAllLiveVideos();
+        liveVideoIdsFetched = true;
+      }
+
       const uncCacheKey = 'mc_unc_' + v.youtubeChannelId + '_' + year;
       const uncCached   = cacheGet(uncCacheKey);
       if (uncCached) {
@@ -1711,12 +1752,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            // 【第一層過濾】排除所有直播相關內容
-            // 1. liveBroadcastContent !== 'none'（upcoming、live、completed）
-            // 2. wasLive === true（曾經是直播的存檔）
-            if (d.liveContent !== 'none' || d.wasLive) {
+            // 【STEP 1 - 第一層過濾】排除所有直播相關內容
+            // 使用 UULV 播放列表（直播存檔）來直接排除
+            if (liveVideoIds.has(vid)) {
               filteredCount++;
-              console.log(`🚫 直播存檔被過濾: [${d.liveContent}] wasLive=${d.wasLive} ${title}`);
+              console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
+              continue;
+            }
+            // 備用過濾：如果 UULV 播放列表無法使用，用 liveBroadcastContent 和 wasLive
+            if (d.liveContent !== 'none') {
+              filteredCount++;
+              console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
             // 剩下的放入未分類區
@@ -1759,9 +1805,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const d = detailMap[vid];
             if (!d) continue;
             const title = item.snippet.title || '';
-            if (d.liveContent === 'completed') {
+            // 【STEP 1 - 排除直播】使用 UULV 播放列表
+            if (liveVideoIds.has(vid)) {
               filteredCount++;
-              console.log(`🚫 直播存檔被過濾: [${d.liveContent}] ${title}`);
+              console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
+              continue;
+            }
+            // 備用過濾
+            if (d.liveContent !== 'none') {
+              filteredCount++;
+              console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
             renderUncCard(container, item, d.duration);
