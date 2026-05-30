@@ -507,10 +507,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 廣告 section -->
           <div id="ov-ads-section" style="display:none">
-            <div class="ls-year-bar" id="ov-ads-year-bar">
-              <button class="ls-year-btn active" data-ovadsyear="all">${T('videos.all')}</button>
-              ${ovuYearBtns}
-            </div>
             <div class="ls-search-bar">
               <span class="ls-search-icon">🔍</span>
               <input class="ls-search-input" id="ov-ads-search-input" type="text" placeholder="搜尋廣告影片" autocomplete="off">
