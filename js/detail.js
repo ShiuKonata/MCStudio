@@ -1986,6 +1986,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window._ytsLoaded = true;
         tryLoadYtShorts();
       }
+      // 未分類區：首次切換時才觸發載入
+      if (section === 'unclassified' && tryLoadUnclassified && !window._uncLoaded) {
+        window._uncLoaded = true;
+        tryLoadUnclassified();
+      }
     });
   }
 
@@ -2223,10 +2228,16 @@ document.addEventListener('DOMContentLoaded', () => {
       window._lsLoaded = true;
       tryLoadLiveStreams(false);
     }
-    // 官方剪輯：首次進入分頁時載入「Shorts」
-    if (key === 'officialvideos' && tryLoadYtShorts && !window._ytsLoaded) {
-      window._ytsLoaded = true;
-      tryLoadYtShorts();
+    // 官方剪輯：首次進入分頁時載入「Shorts」和「未分類區」
+    if (key === 'officialvideos') {
+      if (tryLoadYtShorts && !window._ytsLoaded) {
+        window._ytsLoaded = true;
+        tryLoadYtShorts();
+      }
+      if (tryLoadUnclassified && !window._uncLoaded) {
+        window._uncLoaded = true;
+        tryLoadUnclassified();
+      }
     }
     // 歌曲統計：首次進入分頁時才開始載入
     if (key === 'songstats' && window._loadSongStats && !window._ssLoaded) {
