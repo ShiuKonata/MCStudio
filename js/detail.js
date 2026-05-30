@@ -2411,18 +2411,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // 顯示選定的section
       if (sections[section]) sections[section].style.display = '';
 
-      // 當切換時加載對應內容
-      if (section === 'unclassified' && tryLoadUnclassified) tryLoadUnclassified();
-      if (section === 'shorts' && tryLoadYtShorts) tryLoadYtShorts();
+      // 當切換時加載對應內容（只在首次時加載，避免重複加載）
       if (section === 'ads') loadAdsYear();
       if (section === 'general') loadGeneralYear();
       if (section === 'first') loadFirstYear();
+
       // Shorts：首次切換時才觸發載入
       if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
         tryLoadYtShorts();
       }
-      // 未分類區：首次切換時才觸發載入
+
+      // 未分類區：首次切換時才觸發載入（已在頁面載入時自動執行，此處只防止重複）
       if (section === 'unclassified' && tryLoadUnclassified && !window._uncLoaded) {
         window._uncLoaded = true;
         tryLoadUnclassified();
