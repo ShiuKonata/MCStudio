@@ -103,10 +103,13 @@ jobs:
             return videos;
           }
 
-          // 函數：用搜尋 API 取得影片（備用方案）
+          // 函數：用搜尋 API 取得影片（備用方案，支持分頁）
           function fetchViaSearchAPI(vId, channelId) {
-            return new Promise((resolve) => {
-              const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&order=date&key=${API_KEY}`;
+            return new Promise(async (resolve) => {
+              const allItems = [];
+              let pageToken = null;
+              let pageCount = 0;
+              const maxPages = 10; // 防止無限迴圈，最多 10 頁
 
               const options = {
                 headers: {
@@ -114,30 +117,51 @@ jobs:
                 }
               };
 
-              https.get(searchUrl, options, (res) => {
-                let data = '';
-                res.on('data', chunk => data += chunk);
-                res.on('end', () => {
-                  try {
-                    const result = JSON.parse(data);
-                    if (result.error) {
-                      console.log(`  └─ 搜尋API亦失敗: ${result.error.message}`);
-                      resolve([]);
-                      return;
-                    }
+              const fetchPage = () => {
+                let searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&order=date&key=${API_KEY}`;
+                if (pageToken) {
+                  searchUrl += `&pageToken=${pageToken}`;
+                }
 
-                    const videos = classifyVideos(vId, result.items);
-                    console.log(`  └─ 搜尋API成功: 找到 ${videos.length} 部影片`);
-                    resolve(videos);
-                  } catch (e) {
-                    console.log(`  └─ 搜尋API解析失敗`);
-                    resolve([]);
-                  }
+                https.get(searchUrl, options, (res) => {
+                  let data = '';
+                  res.on('data', chunk => data += chunk);
+                  res.on('end', () => {
+                    try {
+                      const result = JSON.parse(data);
+                      if (result.error) {
+                        console.log(`  └─ 搜尋API失敗: ${result.error.message}`);
+                        resolve(classifyVideos(vId, allItems));
+                        return;
+                      }
+
+                      if (result.items) {
+                        allItems.push(...result.items);
+                      }
+
+                      pageToken = result.nextPageToken;
+                      pageCount++;
+
+                      // 如果有下一頁且未達上限，繼續取
+                      if (pageToken && pageCount < maxPages) {
+                        fetchPage();
+                      } else {
+                        const videos = classifyVideos(vId, allItems);
+                        console.log(`  └─ 搜尋API成功: 找到 ${videos.length} 部影片 (${pageCount} 頁)`);
+                        resolve(videos);
+                      }
+                    } catch (e) {
+                      console.log(`  └─ 搜尋API解析失敗`);
+                      resolve(classifyVideos(vId, allItems));
+                    }
+                  });
+                }).on('error', (e) => {
+                  console.log(`  └─ 搜尋API網路錯誤`);
+                  resolve(classifyVideos(vId, allItems));
                 });
-              }).on('error', (e) => {
-                console.log(`  └─ 搜尋API網路錯誤`);
-                resolve([]);
-              });
+              };
+
+              fetchPage();
             });
           }
 
