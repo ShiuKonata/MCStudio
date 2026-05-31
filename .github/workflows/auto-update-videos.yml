@@ -103,13 +103,13 @@ jobs:
             return videos;
           }
 
-          // 函數：用搜尋 API 取得影片（備用方案，支持分頁）
+          // 函數：用搜尋 API 取得影片（備用方案，限制為最新影片）
           function fetchViaSearchAPI(vId, channelId) {
             return new Promise(async (resolve) => {
               const allItems = [];
               let pageToken = null;
               let pageCount = 0;
-              const maxPages = 10; // 防止無限迴圈，最多 10 頁
+              const maxPages = 1; // 只取第一頁（最新 10 部），減少配額消耗
 
               const options = {
                 headers: {
@@ -118,7 +118,8 @@ jobs:
               };
 
               const fetchPage = () => {
-                let searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&order=date&key=${API_KEY}`;
+                // 限制 maxResults=10 以減少配額消耗（只抓最新 10 部）
+                let searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=10&order=date&key=${API_KEY}`;
                 if (pageToken) {
                   searchUrl += `&pageToken=${pageToken}`;
                 }
@@ -166,10 +167,11 @@ jobs:
           }
 
           // 函數：抓取並分類影片（優先播放清單 API，備用搜尋 API）
+          // 限制 maxResults=10 以減少配額消耗
           async function fetchAndClassifyVideos(vId, channelId) {
             return new Promise((resolve) => {
               const uploadsId = 'UU' + channelId.substring(2);
-              const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
+              const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=10&key=${API_KEY}`;
 
               const options = {
                 headers: {
