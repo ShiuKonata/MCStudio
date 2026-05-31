@@ -1573,6 +1573,36 @@ const vtubers = [
     "id": "QoI7Dps65ZY",
     "title": "【Cover】【Alluria 兩週年紀念】Binary Vampire /RE:VALE covered by Alluria |",
     "date": "2026-05-10"
+  },
+  {
+    "id": "jNNwAXSZGhI",
+    "title": "【鯨諾Whalefall非官方精華剪輯】座頭鯨詩社 扉扉 成果",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "qH-ZkzpA3eI",
+    "title": "【鯨諾Whalefall非官方精華剪輯】座頭鯨詩社 扉扉 寫詩過程",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "1uBWoQ2aecg",
+    "title": "【鯨諾Whalefall非官方精華剪輯】待機室呢?這人開台15分鐘前還在做封面",
+    "date": "2026-05-25"
+  },
+  {
+    "id": "cRkWlh7b2z8",
+    "title": "【鯨諾Whalefall非官方精華剪輯】不正=斜?斜咖?...小丑!?",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "gn5MSsn86js",
+    "title": "【鯨諾Whalefall非官方精華剪輯】你增加的不是年紀",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "5N7Y1kT3GdQ",
+    "title": "【鯨諾Whalefall非官方精華剪輯】不正是小動物天團",
+    "date": "2026-05-26"
   }
 ],
 
@@ -1583,6 +1613,7 @@ const vtubers = [
       { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????",     keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",           keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UC_jQpk9qoWdvSQ8hqtadkNw", label: "BYA",            keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCufN2OUu-yAKmnkD3gr4aNw", label: "ThunderAttributePantsu", keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
@@ -1650,6 +1681,21 @@ const vtubers = [
     "id": "EMe9ATWaKwU",
     "title": "【Cover】絶対零度 Absolute Zero / なとり - 魁 Kai｜【Cover】",
     "date": "2026-05-30"
+  },
+  {
+    "id": "cRkWlh7b2z8",
+    "title": "【鯨諾Whalefall非官方精華剪輯】不正=斜?斜咖?...小丑!?",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "gn5MSsn86js",
+    "title": "【鯨諾Whalefall非官方精華剪輯】你增加的不是年紀",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "5N7Y1kT3GdQ",
+    "title": "【鯨諾Whalefall非官方精華剪輯】不正是小動物天團",
+    "date": "2026-05-26"
   }
 ],
 
@@ -2324,6 +2370,21 @@ const vtubers = [
     "id": "EMe9ATWaKwU",
     "title": "【Cover】絶対零度 Absolute Zero / なとり - 魁 Kai｜【Cover】",
     "date": "2026-05-30"
+  },
+  {
+    "id": "jNNwAXSZGhI",
+    "title": "【鯨諾Whalefall非官方精華剪輯】座頭鯨詩社 扉扉 成果",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "qH-ZkzpA3eI",
+    "title": "【鯨諾Whalefall非官方精華剪輯】座頭鯨詩社 扉扉 寫詩過程",
+    "date": "2026-05-26"
+  },
+  {
+    "id": "1uBWoQ2aecg",
+    "title": "【鯨諾Whalefall非官方精華剪輯】待機室呢?這人開台15分鐘前還在做封面",
+    "date": "2026-05-25"
   }
 ],
 
