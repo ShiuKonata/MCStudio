@@ -23,15 +23,23 @@ jobs:
           node-version: '18'
 
       - name: 🎯 Run auto-update script
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
           node - <<'SCRIPT'
           const fs = require('fs');
           const https = require('https');
 
-          const API_KEY = process.env.YOUTUBE_API_KEY;
           const dataPath = './js/data.js';
+
+          // 從 data.js 中提取 API 金鑰（就像前端做的一樣）
+          const dataContent = fs.readFileSync(dataPath, 'utf8');
+          const apiKeyMatch = dataContent.match(/ytApiKey:\s*["']([^"']+)["']/);
+          const API_KEY = apiKeyMatch ? apiKeyMatch[1] : null;
+
+          if (!API_KEY) {
+            console.log('❌ 無法從 data.js 中找到 API 金鑰');
+            process.exit(1);
+          }
+          console.log('✅ 已從 data.js 讀取 API 金鑰');
 
           // 26位VTuber ID清單
           const vtuberIds = [
