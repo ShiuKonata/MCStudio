@@ -60,11 +60,39 @@ jobs:
 
           console.log(`✅ 找到 ${Object.keys(vtuberData).length} 位VTuber的頻道ID\n`);
 
-          // 函數：抓取並分類影片
-          async function fetchAndClassifyVideos(vId, channelId) {
+          // 輔助函數：分類影片
+          function classifyVideos(vId, items) {
+            const videos = [];
+            if (!items) return videos;
+
+            items.forEach(item => {
+              const title = item.snippet.title;
+              const vid = item.snippet.resourceId ? item.snippet.resourceId.videoId : item.id?.videoId;
+              const date = item.snippet.publishedAt ? item.snippet.publishedAt.substring(0, 10) : '';
+              if (!vid) return;
+
+              const titleLower = title.toLowerCase();
+              if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
+                videos.push({
+                  id: vid,
+                  title: `【Cover】${title}`,
+                  date: date
+                });
+              } else if (titleLower.includes('original') || titleLower.includes('official') || titleLower.includes('原創')) {
+                videos.push({
+                  id: vid,
+                  title: `【Original】${title}`,
+                  date: date
+                });
+              }
+            });
+            return videos;
+          }
+
+          // 函數：用搜尋 API 取得影片（備用方案）
+          function fetchViaSearchAPI(vId, channelId) {
             return new Promise((resolve) => {
-              const uploadsId = 'UU' + channelId.substring(2);
-              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
+              const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&maxResults=50&order=date&key=${API_KEY}`;
 
               const options = {
                 headers: {
@@ -72,50 +100,74 @@ jobs:
                 }
               };
 
-              https.get(url, options, (res) => {
+              https.get(searchUrl, options, (res) => {
                 let data = '';
                 res.on('data', chunk => data += chunk);
                 res.on('end', () => {
                   try {
                     const result = JSON.parse(data);
                     if (result.error) {
-                      console.log(`❌ ${vId}: API錯誤 - ${result.error.message}`);
+                      console.log(`  └─ 搜尋API亦失敗: ${result.error.message}`);
                       resolve([]);
                       return;
                     }
 
-                    const videos = [];
-                    result.items.forEach(item => {
-                      const title = item.snippet.title;
-                      const vid = item.snippet.resourceId.videoId;
-                      const date = item.snippet.publishedAt.substring(0, 10);
-                      const titleLower = title.toLowerCase();
-
-                      if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
-                        videos.push({
-                          id: vid,
-                          title: `【Cover】${title}`,
-                          date: date
-                        });
-                      } else if (titleLower.includes('original') || titleLower.includes('official') || titleLower.includes('原創')) {
-                        videos.push({
-                          id: vid,
-                          title: `【Original】${title}`,
-                          date: date
-                        });
-                      }
-                    });
-
-                    console.log(`✅ ${vId}: 找到 ${videos.length} 部影片`);
+                    const videos = classifyVideos(vId, result.items);
+                    console.log(`  └─ 搜尋API成功: 找到 ${videos.length} 部影片`);
                     resolve(videos);
                   } catch (e) {
-                    console.log(`❌ ${vId}: 解析失敗`);
+                    console.log(`  └─ 搜尋API解析失敗`);
                     resolve([]);
                   }
                 });
               }).on('error', (e) => {
-                console.log(`❌ ${vId}: 網路錯誤`);
+                console.log(`  └─ 搜尋API網路錯誤`);
                 resolve([]);
+              });
+            });
+          }
+
+          // 函數：抓取並分類影片（優先播放清單 API，備用搜尋 API）
+          async function fetchAndClassifyVideos(vId, channelId) {
+            return new Promise((resolve) => {
+              const uploadsId = 'UU' + channelId.substring(2);
+              const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
+
+              const options = {
+                headers: {
+                  'Referer': 'https://shiukonata.github.io/MCStudio/'
+                }
+              };
+
+              https.get(playlistUrl, options, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', async () => {
+                  try {
+                    const result = JSON.parse(data);
+                    if (result.error) {
+                      console.log(`⚠️ ${vId}: 播放清單API失敗 - ${result.error.message}`);
+                      console.log(`  └─ 嘗試用搜尋API...`);
+                      const videos = await fetchViaSearchAPI(vId, channelId);
+                      resolve(videos);
+                      return;
+                    }
+
+                    const videos = classifyVideos(vId, result.items);
+                    console.log(`✅ ${vId}: 找到 ${videos.length} 部影片`);
+                    resolve(videos);
+                  } catch (e) {
+                    console.log(`⚠️ ${vId}: 播放清單API解析失敗`);
+                    console.log(`  └─ 嘗試用搜尋API...`);
+                    const videos = await fetchViaSearchAPI(vId, channelId);
+                    resolve(videos);
+                  }
+                });
+              }).on('error', async (e) => {
+                console.log(`⚠️ ${vId}: 播放清單API網路錯誤`);
+                console.log(`  └─ 嘗試用搜尋API...`);
+                const videos = await fetchViaSearchAPI(vId, channelId);
+                resolve(videos);
               });
             });
           }
