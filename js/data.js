@@ -116,6 +116,7 @@ const vtubers = [
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["詩雨蔻達", "ShiuCoda"] },
       { id: "UCh00s3u4osHhNx8BlSZsECg", label: "章魚虛タコ",    keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                             // 全部為 Cover
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"] },                                            // Guitar Cover
+      { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????",   keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     // ── 熱門影片精華（直播精華 / Shorts / 遊戲精華）──────────
@@ -1578,6 +1579,10 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",           keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
       { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",          keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????",     keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",           keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC_jQpk9qoWdvSQ8hqtadkNw", label: "BYA",            keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
@@ -1653,6 +1658,8 @@ const vtubers = [
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
       { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["魁", "Kai", "這很魁以", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
       { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",       keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",     keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????", keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
@@ -1806,6 +1813,7 @@ const vtubers = [
       { id: "UCA0M5H7dRqlaR9N9ThQsN7w", label: "水逆え柚希",         keywords: ["涅爾菲", "Nyrfier"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["涅爾菲", "Nyrfier"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCoH17T3JwOGWtwJQxkUtJ0Q", label: "比邻星🐍🍷",          keywords: ["涅爾菲", "Nyrfier"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",        keywords: ["涅爾菲", "Nyrfier"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "nyrfier"], excludeKeywords: ["歌切", "合唱"] },
@@ -2488,6 +2496,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "米伊", "kekemii", "克克米"], typeKeywords: ["歌切", "cover"] },
+      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",     keywords: ["克克米伊", "米伊", "kekemii", "克克米"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
