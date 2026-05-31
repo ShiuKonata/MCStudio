@@ -1701,15 +1701,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 取得影片詳細資訊（duration、liveContent、wasLive）
-    async function fetchVideoDetails(videoIds) {
+    // 支持 localStorage 緩存和限制初始加載數量
+    async function fetchVideoDetails(videoIds, initialOnly = false) {
       if (!videoIds.length) return {};
 
       const map = {};
-      const BATCH_SIZE = 50;  // YouTube API 單次最多 50 個 ID
+      const BATCH_SIZE = 10;  // 改為 10 以減少單次配額消耗
+      const cacheKey = `videoDetails_${v.id}`;
 
-      // 【分批請求】每次最多 50 個 ID
-      for (let i = 0; i < videoIds.length; i += BATCH_SIZE) {
-        const batch = videoIds.slice(i, i + BATCH_SIZE);
+      // 讀取 localStorage 緩存
+      let cachedData = {};
+      try {
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          cachedData = JSON.parse(cached);
+          console.log(`💾 [fetchVideoDetails] 從 localStorage 讀取 ${Object.keys(cachedData).length} 個緩存結果`);
+        }
+      } catch (e) {
+        console.warn('⚠️ [fetchVideoDetails] 讀取 localStorage 失敗');
+      }
+
+      // 分離已緩存和需要新取的 ID
+      const needFetch = videoIds.filter(id => !cachedData[id]);
+      const fromCache = videoIds.filter(id => cachedData[id]);
+
+      // 如果指定 initialOnly，只取前 10 部未緩存的
+      const idsToFetch = initialOnly ? needFetch.slice(0, 10) : needFetch;
+
+      if (idsToFetch.length === 0) {
+        // 全部都在緩存裡
+        console.log(`✅ [fetchVideoDetails] 全部來自緩存：${videoIds.length} 部影片`);
+        return { ...cachedData };
+      }
+
+      // 【分批請求】每次 10 個 ID
+      const newData = {};
+      for (let i = 0; i < idsToFetch.length; i += BATCH_SIZE) {
+        const batch = idsToFetch.slice(i, i + BATCH_SIZE);
         const url = 'https://www.googleapis.com/youtube/v3/videos'
           + '?part=contentDetails,snippet,liveStreamingDetails'
           + '&id=' + batch.join(',')
@@ -1727,7 +1755,7 @@ document.addEventListener('DOMContentLoaded', () => {
           (data.items || []).forEach((item) => {
             const liveContent = item.snippet.liveBroadcastContent || 'none';
             const wasLive = !!(item.liveStreamingDetails && item.liveStreamingDetails.actualStartTime);
-            map[item.id] = {
+            newData[item.id] = {
               duration:    parseDurationSec(item.contentDetails.duration || 'PT0S'),
               liveContent: liveContent,
               wasLive:     wasLive,
@@ -1738,8 +1766,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      console.log(`✅ [fetchVideoDetails] 分批獲取完成：${videoIds.length} 部影片，共 ${Math.ceil(videoIds.length/BATCH_SIZE)} 批`);
-      return map;
+      // 合併緩存和新數據
+      const allData = { ...cachedData, ...newData };
+
+      // 存入 localStorage
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify(allData));
+      } catch (e) {
+        console.warn('⚠️ [fetchVideoDetails] 寫入 localStorage 失敗');
+      }
+
+      console.log(`✅ [fetchVideoDetails] 完成：${fromCache.length} 個緩存 + ${idsToFetch.length} 個新取 = ${videoIds.length} 部影片，共 ${Math.ceil(idsToFetch.length/BATCH_SIZE)} 新批次`);
+      return allData;
     }
 
     // 渲染未分類影片卡片
@@ -1828,7 +1866,16 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(`📊 未分類區 - 總獲取影片數: ${allItems.length} 部（共 ${pageCount} 頁）`);
 
           const videoIds = allItems.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
-          const detailMap = await fetchVideoDetails(videoIds);
+          // 【優化】初始只加載前 50 部的詳情（節省配額）
+          const detailMap = await fetchVideoDetails(videoIds.slice(0, 50), true);
+
+          // 如果超過 50 部，記錄延遲加載的部分
+          if (videoIds.length > 50) {
+            console.log(`⏳ [延遲加載] 還有 ${videoIds.length - 50} 部影片未加載詳情，當用戶滾動時會加載`);
+            // 存入全局變數供延遲加載使用
+            window._remainingVideoIds = videoIds.slice(50);
+            window._remainingDetailMap = detailMap;
+          }
           let count = 0;
           let filteredCount = 0;
           let step3Candidates = [];  // 【STEP 3】候選影片
