@@ -1006,7 +1006,58 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/y13sf73hnbn4lz4',              class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "M7UeZmDZ0CQ",
+    "title": "【Cover】🎵 要愛愛 ♦︎ 帕蘿妮 Paroniie #COVER.",
+    "date": "2026-05-27"
+  },
+  {
+    "id": "mnAkfuAZOUE",
+    "title": "【Cover】🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】",
+    "date": "2026-04-30"
+  },
+  {
+    "id": "U4ecF4GNw1I",
+    "title": "【Cover】🎵 Bunny Girl ♦︎ 帕蘿妮 Paroniie #COVER.",
+    "date": "2026-04-25"
+  },
+  {
+    "id": "vbLvEFNkHGA",
+    "title": "【Cover】🎵 Wake Up ♦︎ 帕蘿妮 #cover.",
+    "date": "2026-03-13"
+  },
+  {
+    "id": "Ck5w-tXkfRQ",
+    "title": "【Cover】🎵 想把哥哥追 - 帕蘿妮 Paroniie 【COVER】",
+    "date": "2026-03-07"
+  },
+  {
+    "id": "SyNuRzFHesU",
+    "title": "【Cover】小綠媽咪生日快樂！！ Phony / Paroniie cover. #shorts",
+    "date": "2024-08-23"
+  },
+  {
+    "id": "E5ZXb3uVUOc",
+    "title": "【Cover】早安大少爺 賴床的話會被扣薪水的哦～ ft. @AoiHinamoriCh  🔹#帕蘿妮 #Paroniie #Cover #잘자요아가씨 #晚安大小姐 #早安大少爺",
+    "date": "2024-06-04"
+  },
+  {
+    "id": "XnFC3EuSHCw",
+    "title": "【Cover】早安 大少爺, 該起床工作蘿～ ft. @AoiHinamoriCh   ( Original: 잘자요 아가씨 )🔹#帕蘿妮 #Paroniie #shorts #cover #잘자요아가씨",
+    "date": "2024-06-03"
+  },
+  {
+    "id": "JsX_gsL56Eg",
+    "title": "【Cover】🎵 我會等「與你一起去看外面世界到底多大和你慢慢周旋」｜#帕蘿妮 💧 #Paroniie  #cover.",
+    "date": "2024-04-17"
+  },
+  {
+    "id": "aI5xOUwT5i4",
+    "title": "【Original】如果是做像這樣的原創曲?🔹#帕蘿妮 #Paroniie #shorts",
+    "date": "2024-04-06"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["瓦西瓦瓦", "vaswawa"], typeKeywords: ["cover"] },
@@ -1394,7 +1445,53 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdvmp8tskakyxdr',      class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "cKfsU7GXpaQ",
+    "title": "【Cover】グレイ - sajou no hana／神無月鹿比【復甦島3 鹿清酒殺青Cover】",
+    "date": "2026-05-21"
+  },
+  {
+    "id": "NSyHg5juxUM",
+    "title": "【Cover】YY - 23.exe／神無月鹿比 × ‪熙歌 @CygnusXDFP × ‪哈瓜 @Jongie × ‪REN @Ren0809 × KSP @KSPKSP【Cover】",
+    "date": "2025-06-30"
+  },
+  {
+    "id": "klyS8sBE5U0",
+    "title": "【Cover】Enemy 中文直譯 - Imagine Dragons x J.I.D／神無月鹿比【Cover】",
+    "date": "2025-05-11"
+  },
+  {
+    "id": "VDj-McWV0JM",
+    "title": "【Cover】刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】",
+    "date": "2025-04-27"
+  },
+  {
+    "id": "LTK6BeCKCtI",
+    "title": "【Cover】I Really Want to Stay At Your House - Rosa Walton／神無月鹿比【Cover】",
+    "date": "2024-10-09"
+  },
+  {
+    "id": "mZYpAfljg0E",
+    "title": "【Original】【神無月鹿比🦌｜官方精華】有一個有點王八的老闆是什麼感受？在這裡也許你能稍微感受到(´;ω;`) w/@LancatOfficial",
+    "date": "2023-06-24"
+  },
+  {
+    "id": "4xkBYXy-oOs",
+    "title": "【Cover】ママ - HoneyWorks／神無月鹿比【Cover】",
+    "date": "2023-05-14"
+  },
+  {
+    "id": "cuJ3gWMaFlE",
+    "title": "【Cover】チューリングラブ／神無月鹿比 × 厄倫蒂兒@EarendelXDFP 【Cover】",
+    "date": "2023-02-14"
+  },
+  {
+    "id": "dVEPJXnfGoQ",
+    "title": "【Cover】ド屑 - なきそ／神無月鹿比【Cover】",
+    "date": "2023-01-20"
+  }
+],
 
     scheduleVideoId:  "5Sn6bnUbeus",
     spreadsheetLabel: "氣質兔兔的大小事",
@@ -1672,7 +1769,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/4176c8dv62xp8tj', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "zigOqYHDOEc",
+    "title": "【Cover】ドゥーマー / 東京真中【姬城三千華 -- 歌ってみた】",
+    "date": "2026-05-21"
+  }
+],
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     musicClipsChannelIds: [
@@ -1809,7 +1912,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/57v5h7z1m9gxuyk', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "vWUbJvfI-c0",
+    "title": "【Original】【偷薪歌回】八萬訂閱了謝謝大家的愛QQ。新衣裝預測&amp;原創曲企劃今日截止~。【瓦西瓦瓦 / Vaswawa】",
+    "date": "2025-11-07"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
@@ -1943,7 +2052,28 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/lcedt6tbm7j9olg', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "1w4rmbfQHdw",
+    "title": "【Original】✧原創曲募資中！✧最後兩小時！募資目標達成感謝！！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-28"
+  },
+  {
+    "id": "C2MhZXznC98",
+    "title": "【Original】✧原創曲募資中！✧倒數兩天！來聊聊天吧！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-27"
+  },
+  {
+    "id": "HGLZY4aLSTw",
+    "title": "【Original】✧陪你上班雜談✧原創曲募資進行中！！！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-16"
+  },
+  {
+    "id": "LImAYv0cJvI",
+    "title": "【Original】✧陪你睡覺歌雜✧原創曲募資進行中！！！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-11"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "希洛", "ShiroLeon"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
@@ -2090,7 +2220,13 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/cocor0/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "DO0YEDmcC54",
+    "title": "【Cover】✧米津玄師 - Flamingo  歌ってみた / Cover by Commander. R & Brother. C✧",
+    "date": "2026-04-05"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["cocor0", "可可", "心 cocor0"], typeKeywords: ["cover"] },
@@ -2153,7 +2289,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/icg1idg6i513ru4', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "EMe9ATWaKwU",
+    "title": "【Cover】絶対零度 Absolute Zero / なとり - 魁 Kai｜【Cover】",
+    "date": "2026-05-30"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "扉扉", "fifi", "uchififi"], typeKeywords: ["cover", "嘉賓"] },
@@ -2385,7 +2527,18 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/pqnlqsethgm3px2', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "6P5dJ9Zg8aM",
+    "title": "【Cover】mosi mosi?／楽音｜量產型猫飼步歌貳貳機 Fuka22【cover】",
+    "date": "2026-05-25"
+  },
+  {
+    "id": "LwaQ2CwZfmE",
+    "title": "【Cover】沒關係，學長的cover我也沒有每一首都聽⋯⋯好啦我有。 ฅ 量產型猫飼步歌貳貳機 Fuka22",
+    "date": "2026-03-29"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",         keywords: ["珮蕾", "Pele"],      typeKeywords: ["cover", "嘉賓"] },
