@@ -51,7 +51,8 @@ jobs:
           // 從data.js中提取VTuber資訊
           const vtuberData = {};
           vtuberIds.forEach(id => {
-            const match = dataContent.match(new RegExp(`id: ["']${id}["'][^}]*?youtubeChannelId: ["']([^"']+)["']`));
+            // 改進的正則：允許更多字符在id和youtubeChannelId之間
+            const match = dataContent.match(new RegExp(`id:\\s*["']${id}["'][\\s\\S]*?youtubeChannelId:\\s*["']([^"']+)["']`, 'm'));
             if (match) {
               vtuberData[id] = { channelId: match[1] };
             }
