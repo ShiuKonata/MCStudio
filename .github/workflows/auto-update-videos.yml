@@ -49,16 +49,33 @@ jobs:
           }
           console.log('✅ 已從 data.js 讀取 API 金鑰\n');
 
-          // 26位VTuber ID清單
-          const vtuberIds = [
-            'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko',
-            'vaswawa', 'sinniearis', 'ririna', 'ekorru', 'wakasaito', 'whalefall',
-            'kai', 'mukuru', 'nyrfier', 'fuka22', 'chita', 'chamamatti',
-            'shiroleon', 'BarkBarkPomi', 'cocor0', 'UchiFifi', 'nokori', 'KeKeMii',
-            'Pele', 'Yawnii'
-          ];
+          // 【輪流更新】根據 UTC 時間決定更新哪一組 VTuber（每次 7 位）
+          const now = new Date();
+          const hourUTC = now.getUTCHours();
 
-          console.log('🚀 開始自動更新VTuber影片...\n');
+          let vtuberIds = [];
+          let currentSegment = 0;
+
+          if (hourUTC >= 0 && hourUTC < 6) {
+            // 【時段 1】UTC 0:00 - 5:59
+            vtuberIds = ['shiucoda', 'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko'];
+            currentSegment = 1;
+          } else if (hourUTC >= 6 && hourUTC < 12) {
+            // 【時段 2】UTC 6:00 - 11:59
+            vtuberIds = ['vaswawa', 'sinniearis', 'ririna', 'ekorru', 'wakasaito', 'whalefall', 'kai'];
+            currentSegment = 2;
+          } else if (hourUTC >= 12 && hourUTC < 18) {
+            // 【時段 3】UTC 12:00 - 17:59
+            vtuberIds = ['mukuru', 'nyrfier', 'shiroleon', 'fuka22', 'BarkBarkPomi', 'cocor0', 'UchiFifi'];
+            currentSegment = 3;
+          } else {
+            // 【時段 4】UTC 18:00 - 23:59
+            vtuberIds = ['chita', 'nokori', 'KeKeMii', 'chamamatti', 'Pele', 'Yawnii'];
+            currentSegment = 4;
+          }
+
+          console.log(`🚀 【輪流更新】時段 ${currentSegment}/4 (UTC ${hourUTC}:00 - ${hourUTC + 6}:00)`);
+          console.log(`   將更新 ${vtuberIds.length} 位 VTuber\n`);
 
           const originalContent = dataContent;
 
