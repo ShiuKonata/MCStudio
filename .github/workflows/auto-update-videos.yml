@@ -229,6 +229,8 @@ jobs:
 
       - name: 📝 Commit and push
         if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Auto-Update Bot"
@@ -237,7 +239,10 @@ jobs:
           # 只有在有改動時才commit
           if ! git diff --quiet --cached; then
             git commit -m "Auto-update: Add new VTuber videos ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-            git push
+
+            # 使用 GITHUB_TOKEN 推送
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+            git push origin main
             echo "✅ 已推送到GitHub"
           else
             echo "⚠️ 沒有改動需要提交"
