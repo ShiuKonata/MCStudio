@@ -198,11 +198,14 @@ jobs:
                 const videosJson = JSON.stringify(videos, null, 2);
 
                 // 替換該VTuber的videos陣列
-                const pattern = new RegExp(`(id: ["']${vId}["'][^}]*?videos: )\\[\\]`, 'sm');
+                // 使用更強大的正則，允許跨越嵌套結構（如taglines陣列）
+                const pattern = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?videos:\\s*)\\[\\]`, 's');
                 if (pattern.test(dataContent)) {
                   dataContent = dataContent.replace(pattern, `$1${videosJson}`);
                   updateCount += videos.length;
                   console.log(`  ✓ 已更新 ${videos.length} 部影片`);
+                } else {
+                  console.log(`  ✗ 未找到 ${vId} 的videos欄位，跳過`);
                 }
               }
 
