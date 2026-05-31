@@ -1,0 +1,180 @@
+name: 🎵 Auto-Update VTuber Videos
+
+on:
+  schedule:
+    # 每6小時執行一次 (UTC 0, 6, 12, 18)
+    - cron: '0 0,6,12,18 * * *'
+  # 允許手動觸發
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: 🎯 Run auto-update script
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          node - <<'SCRIPT'
+          const fs = require('fs');
+          const https = require('https');
+
+          const API_KEY = process.env.YOUTUBE_API_KEY;
+          const dataPath = './js/data.js';
+
+          // 26位VTuber ID清單
+          const vtuberIds = [
+            'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko',
+            'vaswawa', 'sinniearis', 'ririna', 'ekorru', 'wakasaito', 'whalefall',
+            'kai', 'mukuru', 'nyrfier', 'fuka22', 'chita', 'chamamatti',
+            'shiroleon', 'BarkBarkPomi', 'cocor0', 'UchiFifi', 'nokori', 'KeKeMii',
+            'Pele', 'Yawnii'
+          ];
+
+          console.log('🚀 開始自動更新VTuber影片...\n');
+
+          // 讀取data.js
+          let dataContent = fs.readFileSync(dataPath, 'utf8');
+          const originalContent = dataContent;
+
+          // 從data.js中提取VTuber資訊
+          const vtuberData = {};
+          vtuberIds.forEach(id => {
+            const match = dataContent.match(new RegExp(`id: ["']${id}["'][^}]*?youtubeChannelId: ["']([^"']+)["']`));
+            if (match) {
+              vtuberData[id] = { channelId: match[1] };
+            }
+          });
+
+          console.log(`✅ 找到 ${Object.keys(vtuberData).length} 位VTuber的頻道ID\n`);
+
+          // 函數：抓取並分類影片
+          async function fetchAndClassifyVideos(vId, channelId) {
+            return new Promise((resolve) => {
+              const uploadsId = 'UU' + channelId.substring(2);
+              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
+
+              const options = {
+                headers: {
+                  'Referer': 'https://shiukonata.github.io/MCStudio/'
+                }
+              };
+
+              https.get(url, options, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  try {
+                    const result = JSON.parse(data);
+                    if (result.error) {
+                      console.log(`❌ ${vId}: API錯誤 - ${result.error.message}`);
+                      resolve([]);
+                      return;
+                    }
+
+                    const videos = [];
+                    result.items.forEach(item => {
+                      const title = item.snippet.title;
+                      const vid = item.snippet.resourceId.videoId;
+                      const date = item.snippet.publishedAt.substring(0, 10);
+                      const titleLower = title.toLowerCase();
+
+                      if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
+                        videos.push({
+                          id: vid,
+                          title: `【Cover】${title}`,
+                          date: date
+                        });
+                      } else if (titleLower.includes('original') || titleLower.includes('official') || titleLower.includes('原創')) {
+                        videos.push({
+                          id: vid,
+                          title: `【Original】${title}`,
+                          date: date
+                        });
+                      }
+                    });
+
+                    console.log(`✅ ${vId}: 找到 ${videos.length} 部影片`);
+                    resolve(videos);
+                  } catch (e) {
+                    console.log(`❌ ${vId}: 解析失敗`);
+                    resolve([]);
+                  }
+                });
+              }).on('error', (e) => {
+                console.log(`❌ ${vId}: 網路錯誤`);
+                resolve([]);
+              });
+            });
+          }
+
+          // 順序執行（避免API限流）
+          (async () => {
+            let updateCount = 0;
+
+            for (const vId of Object.keys(vtuberData)) {
+              const videos = await fetchAndClassifyVideos(vId, vtuberData[vId].channelId);
+
+              if (videos.length > 0) {
+                // 構建新的videos JSON
+                const videosJson = JSON.stringify(videos, null, 2);
+
+                // 替換該VTuber的videos陣列
+                const pattern = new RegExp(`(id: ["']${vId}["'][^}]*?videos: )\\[\\]`, 'sm');
+                if (pattern.test(dataContent)) {
+                  dataContent = dataContent.replace(pattern, `$1${videosJson}`);
+                  updateCount += videos.length;
+                  console.log(`  ✓ 已更新 ${videos.length} 部影片`);
+                }
+              }
+
+              // 延遲避免API限流
+              await new Promise(r => setTimeout(r, 500));
+            }
+
+            console.log(`\n📊 總計更新: ${updateCount} 部影片\n`);
+
+            // 如果有更新，寫回data.js並commit
+            if (updateCount > 0) {
+              fs.writeFileSync(dataPath, dataContent, 'utf8');
+              console.log('✅ data.js 已更新');
+              process.exit(0);
+            } else {
+              console.log('⚠️ 沒有新影片需要更新');
+              process.exit(0);
+            }
+          })();
+          SCRIPT
+
+      - name: 📝 Commit and push
+        if: always()
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Auto-Update Bot"
+          git add js/data.js
+
+          # 只有在有改動時才commit
+          if ! git diff --quiet --cached; then
+            git commit -m "Auto-update: Add new VTuber videos ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+            git push
+            echo "✅ 已推送到GitHub"
+          else
+            echo "⚠️ 沒有改動需要提交"
+          fi
+
+      - name: 📊 Log summary
+        if: always()
+        run: |
+          echo "====== Auto-Update Complete ======"
+          git log --oneline -5
