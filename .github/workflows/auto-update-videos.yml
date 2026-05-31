@@ -30,24 +30,24 @@ jobs:
 
           const dataPath = './js/data.js';
 
-          // 從 data.js 中提取 API 金鑰
-          let fileContent = '';
+          // 讀取 data.js
+          let dataContent = '';
           try {
-            fileContent = fs.readFileSync(dataPath, 'utf8');
+            dataContent = fs.readFileSync(dataPath, 'utf8');
           } catch (e) {
             console.log('❌ 讀取 data.js 失敗: ' + e.message);
             process.exit(1);
           }
 
-          const apiKeyMatch = fileContent.match(/ytApiKey:\s*["']([^"']+)["']/);
+          // 從 data.js 中提取 API 金鑰
+          const apiKeyMatch = dataContent.match(/ytApiKey:\s*["']([^"']+)["']/);
           const API_KEY = apiKeyMatch ? apiKeyMatch[1] : null;
 
           if (!API_KEY) {
             console.log('❌ 無法從 data.js 中找到 API 金鑰');
-            console.log('   嘗試的 Regex: /ytApiKey:\\s*["\\']([^\\"\\']+ )["\\']/');
             process.exit(1);
           }
-          console.log('✅ 已從 data.js 讀取 API 金鑰 (' + API_KEY.substring(0, 20) + '...)');
+          console.log('✅ 已從 data.js 讀取 API 金鑰\n');
 
           // 26位VTuber ID清單
           const vtuberIds = [
@@ -60,8 +60,6 @@ jobs:
 
           console.log('🚀 開始自動更新VTuber影片...\n');
 
-          // 讀取data.js
-          let dataContent = fs.readFileSync(dataPath, 'utf8');
           const originalContent = dataContent;
 
           // 從data.js中提取VTuber資訊
