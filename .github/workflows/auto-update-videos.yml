@@ -102,10 +102,15 @@ jobs:
 
           console.log(`✅ 找到 ${Object.keys(vtuberData).length} 位VTuber的頻道ID\n`);
 
-          // 輔助函數：分類影片
+          // 輔助函數：分類影片（新結構：covers/originals/officials/unclassified）
           function classifyVideos(vId, items) {
-            const videos = [];
-            if (!items) return videos;
+            const classified = {
+              covers: [],
+              originals: [],
+              officials: [],
+              unclassified: []
+            };
+            if (!items) return classified;
 
             items.forEach(item => {
               const title = item.snippet.title;
@@ -114,21 +119,32 @@ jobs:
               if (!vid) return;
 
               const titleLower = title.toLowerCase();
+
+              // STEP 2-4 自動分類
               if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
-                videos.push({
+                // STEP 2: Cover 檢測
+                classified.covers.push({
                   id: vid,
                   title: `【Cover】${title}`,
                   date: date
                 });
               } else if (titleLower.includes('original') || titleLower.includes('official') || titleLower.includes('原創')) {
-                videos.push({
+                // STEP 2: Original 檢測
+                classified.originals.push({
                   id: vid,
                   title: `【Original】${title}`,
                   date: date
                 });
+              } else {
+                // 未分類影片（等待 STEP 5 手動分配）
+                classified.unclassified.push({
+                  id: vid,
+                  title: title,
+                  date: date
+                });
               }
             });
-            return videos;
+            return classified;
           }
 
           // 函數：用搜尋 API 取得影片（備用方案，限制為最新影片）
@@ -247,17 +263,18 @@ jobs:
             for (const vId of Object.keys(vtuberData)) {
               const videos = await fetchAndClassifyVideos(vId, vtuberData[vId].channelId);
 
-              if (videos.length > 0) {
-                // 構建新的videos JSON
+              // 【新結構】檢查是否有新影片（任何陣列非空）
+              if (videos.covers.length > 0 || videos.originals.length > 0 || videos.unclassified.length > 0) {
+                // 構建新的videos JSON（新結構：{ covers: [], originals: [], officials: [], unclassified: [] }）
                 const videosJson = JSON.stringify(videos, null, 2);
 
-                // 替換該VTuber的videos陣列
-                // 使用更強大的正則，允許跨越嵌套結構（如taglines陣列）
-                const pattern = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?videos:\\s*)\\[\\]`, 's');
+                // 替換該VTuber的videos欄位（相容舊的 [] 和新的 {} 結構）
+                const pattern = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?videos:\\s*)(\\{[\\s\\S]*?\\}|\\[\\])`, 's');
                 if (pattern.test(dataContent)) {
                   dataContent = dataContent.replace(pattern, `$1${videosJson}`);
-                  updateCount += videos.length;
-                  console.log(`  ✓ 已更新 ${videos.length} 部影片`);
+                  const totalCount = videos.covers.length + videos.originals.length + videos.unclassified.length;
+                  updateCount += totalCount;
+                  console.log(`  ✓ 已更新 ${videos.covers.length} Cover + ${videos.originals.length} Original + ${videos.unclassified.length} 未分類`);
                 } else {
                   console.log(`  ✗ 未找到 ${vId} 的videos欄位，跳過`);
                 }

@@ -349,7 +349,11 @@ const vtubers = [
       { context: "", text: "DDだめよ!!DD不可以" },
       { context: "", text: "我很可愛請給我錢" },
       { context: "", text: "C8" },
-      { context: "", text: "睡啦明天再努力" }
+      { context: "", text: "睡啦明天再努力" },
+      { context: "", text: "哩洗勒工三小 (りしれ供さ小)" },
+      { context: "", text: "哩嘎挖惦惦 (りがわ惦惦)" },
+      { context: "", text: "好~可~憐~哪~" },
+      { context: "", text: "蛤？(虫合)" }
     ],
     description: "大家好，我是懶貓子，我是日本人，初次見面，請多指教，感謝",
     debut: "2021-08-06",
@@ -463,7 +467,8 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1603332340482158592/1744906715/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "想想有一隻龍在你的耳邊一直說休息休息休息休息" }
+      { context: "", text: "想想有一隻龍在你的耳邊一直說休息休息休息休息" },
+      { context: "", text: "我不是爐豚" }
     ],
     description: "這裡是帕蘿妮嗷～💧 會唱歌會吃飯會睡覺～🦖✨聽說我的一分鐘只有60秒 🎆 o(*ﾟ▽ﾟ*)o",
     debut: "2023-02-24",
@@ -598,7 +603,10 @@ const vtubers = [
     coverImage: "https://pbs.twimg.com/profile_banners/1585116375894609920/1674036165/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "啊~哈~" }
+      { context: "", text: "啊~哈~" },
+      { context: "", text: "088勒!" },
+      { context: "", text: "幹林德哩!" },
+      { context: "", text: "12點了，我先去餵咪拎了。" }
     ],
     description: "預見所屬 EXITUS - 神無月鹿比 the 浴血地獄のザ‧梅花鹿天使 aka 世紀の開創者",
     debut: "2023-02-27",
@@ -879,6 +887,8 @@ const vtubers = [
     taglines: [
       { context: "", text: "嗯嗯嗯嗯嗯嗯嗯" },
       { context: "", text: "ㄍㄋㄋㄇㄉㄐㄅ" },
+      { context: "", text: "好耶~~" },
+      { context: "", text: "媽耶~" }
     ],
     description: "一隻喜歡酒的大妖怪！每天都要快樂的喝酒聊天打遊戲🍺",
     debut: "2023-12-07",
@@ -983,6 +993,9 @@ const vtubers = [
     tagline: "",
     taglines: [
       { context: "", text: "大概是這樣" },
+      { context: "", text: "好不好" },
+      { context: "", text: "大家早安" },
+      { context: "", text: "瘋狂捉i" }
     ],
     description: "初めまして！瓦瓦です～～～～～可愛迷人混亂小惡魔天使",
     debut: "2023-12-04",
@@ -1672,6 +1685,13 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/2048735497955254272/xggURAvf_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1767153840456077312/1765882602/1500x500",
     tagline: "",
+    taglines: [
+      { context: "", text: "什↗麼→意↘思↗" },
+      { context: "", text: "哭啊" },
+      { context: "", text: "抓抓頭" },
+      { context: "", text: "好麻煩" },
+      { context: "", text: "這可以講嗎？算了沒事" }
+    ],
     description: "想要成為水豚的煉金術師",
     debut: "2024-05-11",
     birthday: "7月10日",
@@ -2029,7 +2049,9 @@ const vtubers = [
       { context: "", text: "白癡喔！" },
       { context: "", text: "蛤？" },
       { context: "", text: "怎麼啦小寶貝" },
-      { context: "", text: "吧哺啦！！！" }
+      { context: "", text: "吧哺啦！！！" },
+      { context: "", text: "這是真的嗎？？" },
+      { context: "", text: "買" }
     ],
     description: "♔歡迎來到我的國度♔",
     debut: "2024-05-11",

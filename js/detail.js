@@ -970,7 +970,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── 各分頁影片渲染 ────────────────────────────
-  renderVideoCards(v.videos,     'video-grid',      '🎵');
+  // 【新結構】分別渲染 covers/originals/officials（相容舊陣列結構）
+  if (Array.isArray(v.videos)) {
+    // 舊結構：v.videos 是陣列
+    renderVideoCards(v.videos, 'video-grid', '🎵');
+  } else if (v.videos && typeof v.videos === 'object') {
+    // 新結構：v.videos 是物件 { covers: [], originals: [], officials: [], unclassified: [] }
+    if (v.videos.covers && v.videos.covers.length > 0) {
+      renderVideoCards(v.videos.covers, 'video-grid', '🎵');
+    }
+    if (v.videos.originals && v.videos.originals.length > 0) {
+      renderVideoCards(v.videos.originals, 'video-grid', '🎵');
+    }
+    if (v.videos.officials && v.videos.officials.length > 0) {
+      renderVideoCards(v.videos.officials, 'video-grid', '🎵');
+    }
+  }
   renderVideoCards(v.shorts,     'shorts-grid',     '📱');
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
   renderVideoCards(v.videoClips, 'videoclips-grid', '🎬');
@@ -1596,6 +1611,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 未分類區（YouTube Data API v3 - 規避直播存檔 + Cover/Original）───
   let tryLoadUnclassified = null;
   if (v.youtubeChannelId) {
+    // 【新結構初始化】如果 v.videos 是舊的陣列結構，轉換為新結構
+    if (Array.isArray(v.videos)) {
+      const oldVideos = v.videos;
+      v.videos = {
+        covers: oldVideos.filter(vid => vid.title.includes('【Cover】')),
+        originals: oldVideos.filter(vid => vid.title.includes('【Original】')),
+        officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
+        unclassified: []
+      };
+      console.log(`🔄 [結構轉換] v.videos 從陣列轉換為新物件結構`);
+    }
+    // 如果已經是新結構，確保所有欄位都存在
+    if (!v.videos.covers) v.videos.covers = [];
+    if (!v.videos.originals) v.videos.originals = [];
+    if (!v.videos.officials) v.videos.officials = [];
+    if (!v.videos.unclassified) v.videos.unclassified = [];
+
     const uploadsPlaylistId = 'UU' + v.youtubeChannelId.slice(2);
     const livePlaylistId = 'UULV' + v.youtubeChannelId.slice(2);  // 直播存檔播放列表
     let liveVideoIds = new Set();  // 存放直播存檔的video ID
@@ -1603,7 +1635,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 建立 v.videos 中已有影片的 Set（用於排除）
     // 【重要】保存原始的 existingVideoIds（來自 data.js），用於判斷影片是否已在正確位置
-    const originalExistingVideoIds = new Set(v.videos.map(vid => vid.id));
+    // 【新結構】相容新的物件結構 { covers: [], originals: [], officials: [], unclassified: [] }
+    let videosArray = [];
+    if (Array.isArray(v.videos)) {
+      // 舊結構：v.videos 是陣列
+      videosArray = v.videos;
+    } else if (v.videos && typeof v.videos === 'object') {
+      // 新結構：v.videos 是物件，合併所有陣列
+      videosArray = [
+        ...(v.videos.covers || []),
+        ...(v.videos.originals || []),
+        ...(v.videos.officials || []),
+        ...(v.videos.unclassified || [])
+      ];
+    }
+    const originalExistingVideoIds = new Set(videosArray.map(vid => vid.id));
     const existingVideoIds = new Set(originalExistingVideoIds);  // 運行時可能會修改
 
     // 【新增】Shorts 區影片 ID Set（用於檢查是否已在 Shorts 區）
@@ -1956,8 +2002,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 continue;
               } else {
                 // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
-                // 【暫時】添加到內存 v.videos 和 step3Candidates（供輸出 JSON）
-                v.videos.push({ id: vid, title: newTitle, date: date });
+                // 【暫時】添加到內存 v.videos 的相應陣列（供輸出 JSON）
+                if (step2Type === 'cover') {
+                  v.videos.covers.push({ id: vid, title: newTitle, date: date });
+                } else if (step2Type === 'original') {
+                  v.videos.originals.push({ id: vid, title: newTitle, date: date });
+                }
                 existingVideoIds.add(vid);
 
                 step3Candidates.push({
@@ -2012,8 +2062,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 continue;
               } else {
                 // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
-                // 【暫時】添加到內存 v.videos 和 step3Candidates（供輸出 JSON）
-                v.videos.push({ id: vid, title: newTitle, date: date });
+                // 【暫時】添加到內存 v.videos 的相應陣列（供輸出 JSON）
+                // STEP 3 所有檢測都標記為 Cover（見上方 newTitle = '【Cover】' + title）
+                v.videos.covers.push({ id: vid, title: newTitle, date: date });
                 existingVideoIds.add(vid);
 
                 step3Candidates.push({
@@ -2077,10 +2128,15 @@ document.addEventListener('DOMContentLoaded', () => {
             })));
 
             // 輸出修改後的 v.videos（供用戶複製到 data.js）
-            console.log(`\n📋 修改後的 v.videos（複製以下內容到 data.js 的 videos 陣列）：\n`);
-            const videosJson = JSON.stringify(v.videos, null, 2);
+            console.log(`\n📋 修改後的 v.videos（複製以下內容到 data.js 的 videos 結構）：\n`);
+            const videosJson = JSON.stringify({
+              covers: v.videos.covers || [],
+              originals: v.videos.originals || [],
+              officials: v.videos.officials || [],
+              unclassified: v.videos.unclassified || []
+            }, null, 2);
             console.log(videosJson);
-            console.log(`\n✅ 共添加 ${step3Candidates.length} 部影片至 Cover 區（STEP 2: ${step2Count} + STEP 3: ${step3Count}）\n`);
+            console.log(`\n✅ 共添加 ${step3Candidates.length} 部影片（STEP 2: ${step2Count} + STEP 3: ${step3Count}）\n`);
           }
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
 
