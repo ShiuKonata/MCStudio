@@ -486,7 +486,43 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/paroniie',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "M7UeZmDZ0CQ",
+    "title": "【Cover】🎵 要愛愛 ♦︎ 帕蘿妮 Paroniie #COVER.",
+    "date": "2026-05-27"
+  },
+  {
+    "id": "mnAkfuAZOUE",
+    "title": "【Cover】🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】",
+    "date": "2026-04-30"
+  },
+  {
+    "id": "U4ecF4GNw1I",
+    "title": "【Cover】🎵 Bunny Girl ♦︎ 帕蘿妮 Paroniie #COVER.",
+    "date": "2026-04-25"
+  },
+  {
+    "id": "vbLvEFNkHGA",
+    "title": "【Cover】🎵 Wake Up ♦︎ 帕���妮 #cover.",
+    "date": "2026-03-13"
+  },
+  {
+    "id": "Ck5w-tXkfRQ",
+    "title": "【Cover】🎵 想把哥哥追 - 帕蘿妮 Paroniie 【COVER】",
+    "date": "2026-03-07"
+  },
+  {
+    "id": "uw57vZqvj7w",
+    "title": "【Cover】想把哥哥追 ♦︎ 帕蘿妮 #cover.",
+    "date": "2026-03-02"
+  },
+  {
+    "id": "kfy3vMYXe1c",
+    "title": "【Cover】🎵 WE ARE EMPIRE《明日方舟：終末地》- 帕蘿妮 Paroniie 【COVER】",
+    "date": "2026-02-08"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie"],  typeKeywords: ["點歌台", "歌回", "cover"] },
@@ -586,7 +622,28 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/kannazukilubee',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "cKfsU7GXpaQ",
+    "title": "【Cover】グレイ - sajou no hana／神無月鹿比【復甦島3 鹿清酒殺青Cover】",
+    "date": "2026-05-21"
+  },
+  {
+    "id": "NSyHg5juxUM",
+    "title": "【Cover】YY - 23.exe／神無月鹿比 × ‪熙歌 @CygnusXDFP × ‪哈瓜 @Jongie × ‪REN @Ren0809 × KSP @KSPKSP【Cover】",
+    "date": "2025-06-30"
+  },
+  {
+    "id": "klyS8sBE5U0",
+    "title": "【Cover】Enemy 中文直譯 - Imagine Dragons x J.I.D／神無月鹿比【Cover】",
+    "date": "2025-05-11"
+  },
+  {
+    "id": "VDj-McWV0JM",
+    "title": "【Cover】刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】",
+    "date": "2025-04-27"
+  }
+],
 
     scheduleVideoId:  "kc5RN-h_bAs",
     spreadsheetLabel: "鹿比的大小事",
@@ -658,7 +715,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/himegi17ka',               class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "zigOqYHDOEc",
+    "title": "【Cover】ドゥーマー / 東京真中【姬城三千華 -- 歌ってみた】",
+    "date": "2026-05-21"
+  }
+],
 
     scheduleVideoId:  "tPRVSHoEEeg",
     spreadsheetLabel: "咪奇的大小事",
@@ -731,7 +794,18 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/arryn1a',                 class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "YQXOIu3YjyU",
+    "title": "【Cover】【失礼しますが、RIP♡ COVER REMIX 2026】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri",
+    "date": "2026-03-13"
+  },
+  {
+    "id": "Rwa1kJORB7Q",
+    "title": "【Cover】【失礼しますが、RIP♡ COVER REMIX 2026】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri #arrynvaer1 #vtuber #twvtuber",
+    "date": "2026-03-06"
+  }
+],
 
     videoClips: [
       { id: "Mf_2asOpiuw", title: "【能者多勞勇者欣梅爾（？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
@@ -827,7 +901,28 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/8p8hbwh8tnb77y',          class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "Gbmcqb0RVgw",
+    "title": "【Cover】【歌ってみた】「聞いてよ最近彼氏がさ、」愚痴り合い - ASOBI同盟 / 酒樂霧子 × 結月莉莉奈",
+    "date": "2026-04-01"
+  },
+  {
+    "id": "0Jrf1Ci79dA",
+    "title": "【Cover】【歌ってみた】化けの花 - なきそ / 酒樂霧子",
+    "date": "2025-06-10"
+  },
+  {
+    "id": "-76kJpzLgYw",
+    "title": "【Cover】【歌ってみた】在加納共和國離婚 - 菲道爾&大穎 / 酒樂霧子 × 結月莉莉奈",
+    "date": "2025-01-01"
+  },
+  {
+    "id": "bSHOhXAAj9w",
+    "title": "【Cover】【歌ってみた】人マニア - 原口沙輔 / 酒樂霧子",
+    "date": "2024-12-07"
+  }
+],
 
     scheduleVideoId:  "CROYjRn86_o",
     spreadsheetLabel: "霧子的大小事",   // 試算表按鈕文字
@@ -1019,7 +1114,28 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/1hlxorat4xskrkv',       class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "1w4rmbfQHdw",
+    "title": "【Original】✧原創曲募資中！✧最後兩小時！募資目標達成感謝！！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-28"
+  },
+  {
+    "id": "C2MhZXznC98",
+    "title": "【Original】✧原創曲募資中！✧倒數兩天！來聊聊天吧！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-27"
+  },
+  {
+    "id": "HGLZY4aLSTw",
+    "title": "【Original】✧陪你上班雜談✧原創曲募資進行中！！！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-16"
+  },
+  {
+    "id": "LImAYv0cJvI",
+    "title": "【Original】✧陪你睡覺歌雜✧原創曲募資進行中！！！||希妮·亞里絲🤍SinnieAris✨",
+    "date": "2026-04-11"
+  }
+],
 
     scheduleVideoId:  "vDoOnUBiuW4",
     spreadsheetLabel: "希希的大小事",
@@ -1119,7 +1235,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/s7sy7hnhkxrze7x',   class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "RTbFm_V7JAo",
+    "title": "【Cover】【愚人節COVER】草莓味/桂香GuiXiang 甜自己一把、放自己一馬🤘｜結月莉莉奈Yuzukiririna",
+    "date": "2026-04-01"
+  }
+],
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
@@ -1206,7 +1328,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/3kkf9wa19fnb675',   class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "DO0YEDmcC54",
+    "title": "【Cover】✧米津玄師 - Flamingo  歌ってみた / Cover by Commander. R & Brother. C✧",
+    "date": "2026-04-05"
+  }
+],
 
     scheduleVideoId:  "lLZlENnAYUQ",
     spreadsheetLabel: "可露團長的大小事",
@@ -1329,7 +1457,13 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/whalefallvtuber/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "QoI7Dps65ZY",
+    "title": "【Cover】【Alluria 兩週年紀念】Binary Vampire /RE:VALE covered by Alluria |",
+    "date": "2026-05-10"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",           keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
@@ -1396,7 +1530,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdco270x5hdimzj', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "EMe9ATWaKwU",
+    "title": "【Cover】絶対零度 Absolute Zero / なとり - 魁 Kai｜【Cover】",
+    "date": "2026-05-30"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
@@ -1456,7 +1596,18 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/oahdwpbhn26xgh5', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "LqLNzQbDiqU",
+    "title": "【Cover】「常夏★スカイスクレイパー」／ChroNoiR 【Mukuru穆克蕗 x Whalefall鯨諾】【COVER】",
+    "date": "2026-04-24"
+  },
+  {
+    "id": "h7tcrRFJLVU",
+    "title": "【Cover】「常夏★スカイスクレイパー」／ChroNoiR 【Mukuru穆克蕗 x Whalefall鯨諾】【COVER】",
+    "date": "2026-04-24"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "穆總", "Mukuru"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
@@ -1586,7 +1737,18 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/o8my2qsvfd8q1we', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "6P5dJ9Zg8aM",
+    "title": "【Cover】mosi mosi?／楽音｜量產型猫飼步歌貳貳機 Fuka22【cover】",
+    "date": "2026-05-25"
+  },
+  {
+    "id": "LwaQ2CwZfmE",
+    "title": "【Cover】沒關係，學長的cover我也沒有每一首都聽⋯⋯好啦我有。 ฅ 量產型猫飼步歌貳貳機 Fuka22",
+    "date": "2026-03-29"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["量產型", "Fuka22", "貳貳"], typeKeywords: ["cover", "威風堂々", "嘉賓"] },
@@ -1709,7 +1871,13 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/chamamatti/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "-6u51DXgHJ0",
+    "title": "【Cover】Wake up! / Cover【茶帽瑪緹 ♠︎ Chamamatti】",
+    "date": "2026-05-20"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "帽帽"], typeKeywords: ["小年夜"] },
@@ -1840,7 +2008,33 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/yd8135pe2m366q3', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "2jqrlgJRZZg",
+    "title": "【Original】【#生日企劃】新原創曲!? 重大發表!! 恐怖箱企劃!! 生日禮物開箱!! 生日大滿貫來啦 給你們一整個超棒ㄉ下午 ✧◝(⁰▿⁰)◜✧ 🛸💨 百百波美 ⌇ BarkBarkPomi",
+    "date": "2026-04-12"
+  },
+  {
+    "id": "IUT2J3KviC0",
+    "title": "【Original】【原創曲 | Original Song】狗勾米米大冒險【Official MV】 🛸💨 百百波美 ⌇ BarkBarkPomi",
+    "date": "2026-04-12"
+  },
+  {
+    "id": "UJjCIrCAdQo",
+    "title": "【Cover】【#生日合唱 Day2】感性之夜，讓多愁善感的我們一起倒數生日!! 還有好聽Cover一直聽 (♡˙︶˙♡) 🎙️ 百百波美 ⌇ BarkBarkPomi",
+    "date": "2026-04-11"
+  },
+  {
+    "id": "uDdSMgaKxcM",
+    "title": "【Cover】【寄り酔いTipsy | 和ぬかWanuka】Cover 🍷 百百波美 ⌇ BarkBarkPomi",
+    "date": "2026-04-11"
+  },
+  {
+    "id": "YV2CET4jgT0",
+    "title": "【Cover】【キャラクターCharacter | 緑黄色社会】Cover ✨ 百百波美 ⌇ BarkBarkPomi",
+    "date": "2026-04-01"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], typeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
@@ -2016,7 +2210,58 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/vq7fin259ukl3mi', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "2zgw-HgrbBE",
+    "title": "【Cover】I'm Alive / 李杰明 W.M.L x 陳忻玥 Vicky Chen【男生雙人翻唱】❆ 諾恪里 x 艾斯珀達 cover",
+    "date": "2026-05-30"
+  },
+  {
+    "id": "twvki3OvPFM",
+    "title": "【Cover】【諾恪里Nokori】#両声類 が 「アイ・アイ・ア / Ado 」全力で歌ってみた #shorts #vtuber #歌ってみた #Ado",
+    "date": "2026-05-09"
+  },
+  {
+    "id": "E_obnKpI9OQ",
+    "title": "【Cover】【CaKano】CH4NGE / Giga ❆ 1st Anniversary (cover) #shorts #vtuber #歌ってみた",
+    "date": "2026-04-19"
+  },
+  {
+    "id": "U8SxZ16wzgw",
+    "title": "【Cover】【CaKano】CH4NGE / Giga ❆ 1st Anniversary (cover)",
+    "date": "2026-04-18"
+  },
+  {
+    "id": "hT4V_i8WkKE",
+    "title": "【Cover】【諾恪里Nokori】#両声類 が「終焉逃避行 / 柊マグネタイト」歌ってみた！#shorts #vtuber #歌ってみた",
+    "date": "2026-03-27"
+  },
+  {
+    "id": "1XKauQLeDiU",
+    "title": "【Cover】【諾恪里Nokori】#両声類 が「乙女解剖 / DECO*27」歌ってみた！#shorts #vtuber #歌ってみた",
+    "date": "2026-03-26"
+  },
+  {
+    "id": "2WGdJprJGvQ",
+    "title": "【Cover】【諾恪里Nokori】#両声類 が「ロストワンの号哭 / Neru」歌ってみた！#shorts #vtuber #歌ってみた",
+    "date": "2026-03-25"
+  },
+  {
+    "id": "2i9RNjbw90o",
+    "title": "【Cover】【諾恪里Nokori】#両声類 が「アスノヨゾラ哨戒班 / Orangestar」+2 Key !? #shorts #vtuber #歌ってみた",
+    "date": "2026-03-24"
+  },
+  {
+    "id": "EKHG4xlKvFA",
+    "title": "【Cover】【諾恪里Nokori】#両声類 が「天ノ弱 / 164」本気で歌ってみた！ #shorts #vtuber #歌ってみた",
+    "date": "2026-03-23"
+  },
+  {
+    "id": "03TwJKvPje4",
+    "title": "【Cover】【諾恪里Nokori】#両声類 世界第一的公主殿下！/ #ワールドイズマイン  #shorts #vtuber #歌ってみた",
+    "date": "2026-02-01"
+  }
+],
 
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["諾恪里", "小心結天團"] },
@@ -2069,7 +2314,13 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/9ir7u6drnzlzo7a', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "A1IM8JblRRw",
+    "title": "【Cover】歡迎合唱哦 ! !  浴火成詩cover - 克克米伊(男聲部分)",
+    "date": "2026-02-14"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "米伊", "kekemii", "克克米"], typeKeywords: ["歌切", "cover"] },
@@ -2196,7 +2447,13 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/Yawnii/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [],
+    videos: [
+  {
+    "id": "Rnv3KUovVas",
+    "title": "【Cover】好玩要玩🗡️#劍紙三國🗡️‼️‼️歌ってみた ⊱⏱︎⊰ Covered by  睏睏幽昵Yawnii",
+    "date": "2026-02-20"
+  }
+],
 
     musicClipsChannelIds: [
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動分類
