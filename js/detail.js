@@ -2001,16 +2001,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   id: vid,
                   title: title,
                   date: date,
-                  duration: d.duration,
                   type: step2Type,
                   action: '【STEP 2】需添加至 data.js'
                 });
                 console.log(`📍 [STEP 2] 檢測到 ${step2Type}，需添加至 data.js: ${title}`);
-
-                // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
-                if (!shortsVideoIds.has(vid) && d.duration <= 60) {
-                  console.log(`⏱️ [STEP 2] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
-                }
 
                 // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
                 // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
@@ -2089,7 +2083,6 @@ document.addEventListener('DOMContentLoaded', () => {
               標題: v.title,
               日期: v.date,
               類型: v.type,
-              時長: v.duration,
               分類: v.action
             })));
 
