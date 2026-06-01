@@ -112,6 +112,11 @@ jobs:
             };
             if (!items) return classified;
 
+            // 【UULV 直播排除邏輯】對詩雨蔻達
+            // UULV播放列表 = 上傳的直播/直播存檔，應該被排除
+            // 通過檢查是否來自直播存檔中來判斷
+            const uulvPlaylistId = 'UULV' + (vId === 'shiucoda' ? 'uPHlMEd0cR' : '');
+
             items.forEach(item => {
               const title = item.snippet.title;
               const vid = item.snippet.resourceId ? item.snippet.resourceId.videoId : item.id?.videoId;
@@ -120,9 +125,24 @@ jobs:
 
               const titleLower = title.toLowerCase();
 
+              // STEP 1：排除詩雨蔻達的直播存檔
+              if (vId === 'shiucoda') {
+                // 直播存檔通常包含「直播」或「Archive」等關鍵字
+                if (titleLower.includes('直播') || titleLower.includes('archive') || titleLower.includes('livestream')) {
+                  return; // 跳過此影片
+                }
+              }
+
               // STEP 2-4 自動分類
               if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
                 // STEP 2: Cover 檢測
+                classified.covers.push({
+                  id: vid,
+                  title: `【Cover】${title}`,
+                  date: date
+                });
+              } else if (vId === 'shiucoda' && (titleLower.includes('demo') || titleLower.includes('自彈自唱'))) {
+                // STEP 3a & 3b: 詩雨蔻達特殊規則 → demo & 自彈自唱 放入 covers
                 classified.covers.push({
                   id: vid,
                   title: `【Cover】${title}`,
