@@ -1933,17 +1933,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!d) continue;
             const title = item.snippet.title || '';
             const titleLower = title.toLowerCase();
-            // 【STEP 1 - 只排除直播存檔】
-            // 使用 UULV 播放列表（直播存檔）來直接排除
+            // 【STEP 0 - 排除 UULV 和 UUSH】
+            // 排除直播存檔（UULV 播放列表）
             if (liveVideoIds.has(vid)) {
               filteredCount++;
-              // console.log(`🚫 STEP 1 - 直播存檔被過濾: ${title}`);
+              console.log(`🚫 [排除UULV] 直播存檔被過濾: ${title}`);
+              continue;
+            }
+            // 排除 Shorts（UUSH 播放列表）
+            if (shortsVideoIds.has(vid)) {
+              filteredCount++;
+              console.log(`🚫 [排除UUSH] Shorts被過濾: ${title}`);
               continue;
             }
             // 備用過濾：如果 UULV 播放列表無法使用，用 liveBroadcastContent 和 wasLive
             if (d.liveContent !== 'none') {
               filteredCount++;
-              // console.log(`🚫 STEP 1 - 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
+              console.log(`🚫 [STEP 1備用] 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
             // 【廣告檢測 - 優先於 STEP 2】標題含「廣告」關鍵字
