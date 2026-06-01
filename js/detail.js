@@ -2058,37 +2058,16 @@ document.addEventListener('DOMContentLoaded', () => {
                   id: vid,
                   title: title,
                   date: date,
-                  duration: d.duration,
                   type: step3Type,
                   action: '【STEP 3】需添加至 data.js'
                 });
                 console.log(`📍 [STEP 3] 檢測到 ${step3Type}，需添加至 data.js: ${title}`);
-
-                // 【檢查 Shorts】如果不在 Shorts 區且 ≤60秒，則記錄
-                if (!shortsVideoIds.has(vid) && d.duration <= 60) {
-                  console.log(`⏱️ [STEP 3] 影片 ≤60秒且不在 Shorts 區，應添加至 Shorts：${title}`);
-                }
 
                 // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
                 // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
               }
             }
 
-            // 【STEP 4】檢測 ≤60秒的短片
-            if (d.duration <= 60) {
-              const alreadyInShorts = shortsVideoIds.has(vid);
-
-              if (alreadyInShorts) {
-                // ✅ 已經在 Shorts 區，從未分類區移除
-                console.log(`✅ [STEP 4] 短片已在 Shorts 區，從未分類區移除: ${title}`);
-                filteredCount++;
-                continue;
-              } else {
-                // ❌ 還沒有在 Shorts 區，需要添加
-                console.log(`📍 [STEP 4] 檢測到短片（≤60秒），不在 Shorts 區，應添加: ${title}`);
-                // 暫時保留在未分類區，等待用戶在 STEP 5 手動分類
-              }
-            }
 
             // STEP 2/3/4 完成：未被分類的影片放入未分類區
             renderUncCard(container, item, 0);  // 不需要詳情，直接顯示
