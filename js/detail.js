@@ -1911,17 +1911,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
           console.log(`📊 未分類區 - 總獲取影片數: ${allItems.length} 部（共 ${pageCount} 頁）`);
 
-          const videoIds = allItems.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
-          // 【優化】初始只加載前 50 部的詳情（節省配額）
-          const detailMap = await fetchVideoDetails(videoIds.slice(0, 50), true);
-
-          // 如果超過 50 部，記錄延遲加載的部分
-          if (videoIds.length > 50) {
-            console.log(`⏳ [延遲加載] 還有 ${videoIds.length - 50} 部影片未加載詳情，當用戶滾動時會加載`);
-            // 存入全局變數供延遲加載使用
-            window._remainingVideoIds = videoIds.slice(50);
-            window._remainingDetailMap = detailMap;
-          }
           let count = 0;
           let filteredCount = 0;
           let step3Candidates = [];  // 【STEP 3】候選影片
@@ -1944,12 +1933,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (shortsVideoIds.has(vid)) {
               filteredCount++;
               console.log(`🚫 [排除UUSH] Shorts被過濾: ${title}`);
-              continue;
-            }
-            // 備用過濾：如果 UULV 播放列表無法使用，用 liveBroadcastContent 和 wasLive
-            if (d.liveContent !== 'none') {
-              filteredCount++;
-              console.log(`🚫 [STEP 1備用] 直播存檔被過濾 (liveContent): [${d.liveContent}] ${title}`);
               continue;
             }
             // 【廣告檢測 - 優先於 STEP 2】標題含「廣告」關鍵字
@@ -2110,7 +2093,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // STEP 2/3/4 完成：未被分類的影片放入未分類區
-            renderUncCard(container, item, d.duration);
+            renderUncCard(container, item, 0);  // 不需要詳情，直接顯示
             count++;
           }
           console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
