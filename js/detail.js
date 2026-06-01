@@ -1918,8 +1918,6 @@ document.addEventListener('DOMContentLoaded', () => {
           for (const item of allItems) {
             const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
             if (!vid) continue;
-            const d = detailMap[vid];
-            if (!d) continue;
             const title = item.snippet.title || '';
             const titleLower = title.toLowerCase();
             // 【STEP 0 - 排除 UULV 和 UUSH】
