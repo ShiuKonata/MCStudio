@@ -1911,6 +1911,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
           console.log(`📊 未分類區 - 總獲取影片數: ${allItems.length} 部（共 ${pageCount} 頁）`);
 
+          // 【新增】獲取所有影片的時長信息（用於 STEP 2/3 的時長判斷）
+          const videoIds = allItems.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
+          const detailMap = await fetchVideoDetails(videoIds, false);  // 獲取所有影片詳情
+          console.log(`✅ [時長獲取] 完成：共 ${Object.keys(detailMap).length} 部影片`);
+
           let count = 0;
           let filteredCount = 0;
           let step3Candidates = [];  // 【STEP 3】候選影片
@@ -1978,6 +1983,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isStep2) {
               const newTitle = '【' + (step2Type === 'cover' ? 'Cover' : 'Original') + '】' + title;
               const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
+              const d = detailMap[vid];
+              const durationSec = d ? parseDurationSec(d.duration) : 0;
 
               // 【關鍵判斷】檢查這個影片是否已經在 data.js 的 v.videos 中
               const alreadyInDataJs = originalExistingVideoIds.has(vid);
@@ -1988,23 +1995,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredCount++;
                 continue;
               } else {
-                // ❌ 還沒有在 data.js 的 v.videos 中，自動添加到內存
-                // 【暫時】添加到內存 v.videos 的相應陣列（供輸出 JSON）
-                if (step2Type === 'cover') {
-                  v.videos.covers.push({ id: vid, title: newTitle, date: date });
-                } else if (step2Type === 'original') {
-                  v.videos.originals.push({ id: vid, title: newTitle, date: date });
+                // ❌ 還沒有在 data.js 的 v.videos 中
+                if (durationSec >= 60) {
+                  // 【新規則】≥60秒 → Cover 區 + 一般影片區
+                  if (step2Type === 'cover') {
+                    v.videos.covers.push({ id: vid, title: newTitle, date: date });
+                    // 同時添加到一般影片區
+                    if (!window._generalVideos.some(v => v.id === vid)) {
+                      window._generalVideos.push({ id: vid, title: newTitle, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
+                    }
+                  } else if (step2Type === 'original') {
+                    v.videos.originals.push({ id: vid, title: newTitle, date: date });
+                    // 同時添加到一般影片區
+                    if (!window._generalVideos.some(v => v.id === vid)) {
+                      window._generalVideos.push({ id: vid, title: newTitle, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
+                    }
+                  }
+                  existingVideoIds.add(vid);
+                  step3Candidates.push({ id: vid, title: title, date: date, type: step2Type, action: '【STEP 2】需添加至 data.js', duration: durationSec });
+                  console.log(`📍 [STEP 2] ✅ ${step2Type}（${durationSec}秒，≥60s）→ Cover + 一般影片區: ${title}`);
+                } else {
+                  // 【新規則】≤60秒 → 只放 Shorts（如果不在 UUSH 中）
+                  if (!shortsVideoIds.has(vid)) {
+                    // 添加到 Shorts
+                    if (!v.videos.shorts) v.videos.shorts = [];
+                    v.videos.shorts.push({ id: vid, title: title, date: date, duration: durationSec });
+                    console.log(`📍 [STEP 2] 🎬 ${step2Type}（${durationSec}秒，≤60s）→ 只放 Shorts: ${title}`);
+                  } else {
+                    console.log(`📍 [STEP 2] ⏭️ ${step2Type}（${durationSec}秒，≤60s）但已在 UUSH，跳過: ${title}`);
+                  }
+                  existingVideoIds.add(vid);
                 }
-                existingVideoIds.add(vid);
-
-                step3Candidates.push({
-                  id: vid,
-                  title: title,
-                  date: date,
-                  type: step2Type,
-                  action: '【STEP 2】需添加至 data.js'
-                });
-                console.log(`📍 [STEP 2] 檢測到 ${step2Type}，已自動分類: ${title}`);
 
                 // 【移除】已分類的影片不在未分類區顯示
                 filteredCount++;
@@ -2033,6 +2054,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isStep3) {
               const newTitle = '【Cover】' + title;
               const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
+              const d = detailMap[vid];
+              const durationSec = d ? parseDurationSec(d.duration) : 0;
 
               // 【關鍵判斷】檢查這個影片是否已經在 data.js 的 v.videos 中
               const alreadyInDataJs = originalExistingVideoIds.has(vid);
@@ -2043,20 +2066,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredCount++;
                 continue;
               } else {
-                // ❌ 還沒有在 data.js 的 v.videos 中，自動添加到內存
-                // 【暫時】添加到內存 v.videos 的相應陣列（供輸出 JSON）
-                // STEP 3 所有檢測都標記為 Cover（見上方 newTitle = '【Cover】' + title）
-                v.videos.covers.push({ id: vid, title: newTitle, date: date });
-                existingVideoIds.add(vid);
-
-                step3Candidates.push({
-                  id: vid,
-                  title: title,
-                  date: date,
-                  type: step3Type,
-                  action: '【STEP 3】需添加至 data.js'
-                });
-                console.log(`📍 [STEP 3] 檢測到 ${step3Type}，已自動分類: ${title}`);
+                // ❌ 還沒有在 data.js 的 v.videos 中
+                if (durationSec >= 60) {
+                  // 【新規則】≥60秒 → Cover 區 + 一般影片區
+                  v.videos.covers.push({ id: vid, title: newTitle, date: date });
+                  // 同時添加到一般影片區
+                  if (!window._generalVideos.some(v => v.id === vid)) {
+                    window._generalVideos.push({ id: vid, title: newTitle, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
+                  }
+                  existingVideoIds.add(vid);
+                  step3Candidates.push({ id: vid, title: title, date: date, type: step3Type, action: '【STEP 3】需添加至 data.js', duration: durationSec });
+                  console.log(`📍 [STEP 3] ✅ ${step3Type}（${durationSec}秒，≥60s）→ Cover + 一般影片區: ${title}`);
+                } else {
+                  // 【新規則】≤60秒 → 只放 Shorts（如果不在 UUSH 中）
+                  if (!shortsVideoIds.has(vid)) {
+                    // 添加到 Shorts
+                    if (!v.videos.shorts) v.videos.shorts = [];
+                    v.videos.shorts.push({ id: vid, title: title, date: date, duration: durationSec });
+                    console.log(`📍 [STEP 3] 🎬 ${step3Type}（${durationSec}秒，≤60s）→ 只放 Shorts: ${title}`);
+                  } else {
+                    console.log(`📍 [STEP 3] ⏭️ ${step3Type}（${durationSec}秒，≤60s）但已在 UUSH，跳過: ${title}`);
+                  }
+                  existingVideoIds.add(vid);
+                }
 
                 // 【移除】已分類的影片不在未分類區顯示
                 filteredCount++;
