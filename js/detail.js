@@ -1988,7 +1988,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredCount++;
                 continue;
               } else {
-                // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
+                // ❌ 還沒有在 data.js 的 v.videos 中，自動添加到內存
                 // 【暫時】添加到內存 v.videos 的相應陣列（供輸出 JSON）
                 if (step2Type === 'cover') {
                   v.videos.covers.push({ id: vid, title: newTitle, date: date });
@@ -2004,10 +2004,11 @@ document.addEventListener('DOMContentLoaded', () => {
                   type: step2Type,
                   action: '【STEP 2】需添加至 data.js'
                 });
-                console.log(`📍 [STEP 2] 檢測到 ${step2Type}，需添加至 data.js: ${title}`);
+                console.log(`📍 [STEP 2] 檢測到 ${step2Type}，已自動分類: ${title}`);
 
-                // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
-                // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
+                // 【移除】已分類的影片不在未分類區顯示
+                filteredCount++;
+                continue;
               }
             }
 
@@ -2042,7 +2043,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredCount++;
                 continue;
               } else {
-                // ❌ 還沒有在 data.js 的 v.videos 中，保留在未分類區
+                // ❌ 還沒有在 data.js 的 v.videos 中，自動添加到內存
                 // 【暫時】添加到內存 v.videos 的相應陣列（供輸出 JSON）
                 // STEP 3 所有檢測都標記為 Cover（見上方 newTitle = '【Cover】' + title）
                 v.videos.covers.push({ id: vid, title: newTitle, date: date });
@@ -2055,10 +2056,11 @@ document.addEventListener('DOMContentLoaded', () => {
                   type: step3Type,
                   action: '【STEP 3】需添加至 data.js'
                 });
-                console.log(`📍 [STEP 3] 檢測到 ${step3Type}，需添加至 data.js: ${title}`);
+                console.log(`📍 [STEP 3] 檢測到 ${step3Type}，已自動分類: ${title}`);
 
-                // 【不移除】保留在未分類區，等待用戶複製 JSON 到 data.js
-                // 用戶刷新後，這個影片會被 originalExistingVideoIds 識別並移除
+                // 【移除】已分類的影片不在未分類區顯示
+                filteredCount++;
+                continue;
               }
             }
 
