@@ -1616,7 +1616,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const oldVideos = v.videos;
       v.videos = {
         covers: oldVideos.filter(vid => vid.title.includes('【Cover】')),
-        originals: oldVideos.filter(vid => vid.title.includes('【Original】')),
+        originals: oldVideos.filter(vid => vid.title.includes('【Original】') || vid.title.includes('【原創】')),
         officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
         unclassified: []
       };
