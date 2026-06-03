@@ -933,6 +933,46 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYTModal(); });
 
   // ── 共用：渲染影片卡片（ls-card 格式，公開影片用 modal）────
+  // 【新增】詩雨蔻達 Cover/Original 時長檢查 - 過濾 ≤60秒的影片
+  async function filterShiucodaVideosByDuration(videos, vtuber) {
+    if (vtuber.id !== 'shiucoda') return videos;  // 只對詩雨蔻達進行過濾
+
+    const API_KEY = vtuber.ytApiKey;
+    const videoIds = videos.map(v => v.id);
+    if (!videoIds.length) return videos;
+
+    // 獲取時長信息
+    const durationMap = {};
+    for (let i = 0; i < videoIds.length; i += 50) {
+      const batch = videoIds.slice(i, i + 50);
+      try {
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batch.join(',')}&key=${API_KEY}`;
+        const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+        const data = await res.json();
+
+        (data.items || []).forEach(item => {
+          const duration = item.contentDetails.duration;
+          const m = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+          const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+          durationMap[item.id] = durationSec;
+        });
+      } catch (e) {
+        console.warn('⚠️ 無法獲取詩雨蔻達影片時長:', e);
+        return videos;  // 獲取失敗時返回原始列表
+      }
+    }
+
+    // 過濾：只保留 ≥60秒的影片
+    const filtered = videos.filter(v => {
+      const durationSec = durationMap[v.id];
+      if (durationSec === undefined) return true;  // 無時長資訊時保留
+      return durationSec >= 60;  // 只保留 ≥60秒
+    });
+
+    console.log(`📊 詩雨蔻達 Cover/Original 過濾完成: ${videos.length} → ${filtered.length} 部`);
+    return filtered;
+  }
+
   function renderVideoCards(items, containerId, placeholderIcon) {
     const container = document.getElementById(containerId);
     if (!container || !items || !items.length) return;
@@ -976,15 +1016,31 @@ document.addEventListener('DOMContentLoaded', () => {
     renderVideoCards(v.videos, 'video-grid', '🎵');
   } else if (v.videos && typeof v.videos === 'object') {
     // 新結構：v.videos 是物件 { covers: [], originals: [], officials: [], unclassified: [] }
-    if (v.videos.covers && v.videos.covers.length > 0) {
-      renderVideoCards(v.videos.covers, 'video-grid', '🎵');
-    }
-    if (v.videos.originals && v.videos.originals.length > 0) {
-      renderVideoCards(v.videos.originals, 'video-grid', '🎵');
-    }
-    if (v.videos.officials && v.videos.officials.length > 0) {
-      renderVideoCards(v.videos.officials, 'video-grid', '🎵');
-    }
+
+    // 【新增】詩雨蔻達時長過濾：異步加載並過濾
+    (async () => {
+      let coversToRender = v.videos.covers || [];
+      let originalsToRender = v.videos.originals || [];
+
+      if (v.id === 'shiucoda' && coversToRender.length > 0) {
+        coversToRender = await filterShiucodaVideosByDuration(coversToRender, v);
+      }
+      if (v.id === 'shiucoda' && originalsToRender.length > 0) {
+        originalsToRender = await filterShiucodaVideosByDuration(originalsToRender, v);
+      }
+
+      if (coversToRender.length > 0) {
+        renderVideoCards(coversToRender, 'video-grid', '🎵');
+      }
+      if (originalsToRender.length > 0) {
+        renderVideoCards(originalsToRender, 'video-grid', '🎵');
+      }
+
+      // Officials 不需要時長過濾
+      if (v.videos.officials && v.videos.officials.length > 0) {
+        renderVideoCards(v.videos.officials, 'video-grid', '🎵');
+      }
+    })();
   }
   renderVideoCards(v.shorts,     'shorts-grid',     '📱');
   renderVideoCards(v.musicClips, 'musicclips-grid', '🎶');
