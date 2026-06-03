@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>詩雨蔻達時長過濾測試</title>
+  <style>
+    body { font-family: 'Arial', sans-serif; padding: 20px; background: #f5f5f5; }
+    h1 { color: #333; }
+    .container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+    .status.loading { background: #e3f2fd; color: #1976d2; }
+    .status.success { background: #e8f5e9; color: #388e3c; }
+    .status.error { background: #ffebee; color: #c62828; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background: #f0f0f0; font-weight: bold; }
+    .cover-count { background: #fff3cd; padding: 10px; border-radius: 4px; margin: 10px 0; }
+    .original-count { background: #d1ecf1; padding: 10px; border-radius: 4px; margin: 10px 0; }
+    button { padding: 10px 20px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin: 10px 0; }
+    button:hover { background: #1565c0; }
+    .console { background: #000; color: #0f0; padding: 15px; border-radius: 4px; font-family: 'Courier New', monospace; max-height: 300px; overflow-y: auto; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎵 詩雨蔻達 Cover/Original 時長過濾測試</h1>
+
+    <div id="status" class="status loading">
+      準備中...加載 data.js
+    </div>
+
+    <button onclick="testFiltering()">▶️ 開始過濾測試</button>
+    <button onclick="clearConsole()">🗑️ 清除日誌</button>
+
+    <div class="cover-count">
+      <strong>📊 Covers 統計</strong><br>
+      <span id="cover-total">總數: 0</span> | <span id="cover-filtered">過濾後: 0</span>
+    </div>
+
+    <div class="original-count">
+      <strong>📊 Originals 統計</strong><br>
+      <span id="original-total">總數: 0</span> | <span id="original-filtered">過濾後: 0</span>
+    </div>
+
+    <table id="results" style="display:none;">
+      <thead>
+        <tr>
+          <th>分類</th>
+          <th>影片 ID</th>
+          <th>標題</th>
+          <th>狀態</th>
+        </tr>
+      </thead>
+      <tbody id="results-body"></tbody>
+    </table>
+
+    <div class="console" id="console"></div>
+  </div>
+
+  <script src="js/data.js"></script>
+
+  <script>
+    // 簡單的日誌收集
+    const logs = [];
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      logs.push('[LOG] ' + args.join(' '));
+      updateConsoleDisplay();
+    };
+
+    console.warn = function(...args) {
+      originalWarn.apply(console, args);
+      logs.push('[WARN] ' + args.join(' '));
+      updateConsoleDisplay();
+    };
+
+    function updateConsoleDisplay() {
+      document.getElementById('console').textContent = logs.join('\n');
+      document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+    }
+
+    function clearConsole() {
+      logs.length = 0;
+      updateConsoleDisplay();
+    }
+
+    // 【複製 filterShiucodaVideosByDuration 函數】
+    async function filterShiucodaVideosByDuration(videos, vtuber) {
+      if (vtuber.id !== 'shiucoda') return videos;
+
+      const API_KEY = vtuber.ytApiKey;
+      const videoIds = videos.map(v => v.id);
+      if (!videoIds.length) return videos;
+
+      console.log(`🔍 開始過濾 ${videos.length} 部影片...`);
+
+      const durationMap = {};
+      for (let i = 0; i < videoIds.length; i += 50) {
+        const batch = videoIds.slice(i, i + 50);
+        console.log(`  📡 API 請求 batch ${Math.floor(i/50)+1}: ${batch.length} 部影片`);
+
+        try {
+          const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batch.join(',')}&key=${API_KEY}`;
+          const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+          const data = await res.json();
+
+          (data.items || []).forEach(item => {
+            const duration = item.contentDetails.duration;
+            const m = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+            const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+            durationMap[item.id] = durationSec;
+          });
+
+          console.log(`  ✅ 成功獲取 ${(data.items || []).length} 部影片時長`);
+        } catch (e) {
+          console.warn('⚠️ 無法獲取詩雨蔻達影片時長:', e.message);
+          return videos;
+        }
+      }
+
+      const filtered = videos.filter(v => {
+        const durationSec = durationMap[v.id];
+        if (durationSec === undefined) return true;
+        return durationSec >= 60;
+      });
+
+      console.log(`📊 詩雨蔻達 Cover/Original 過濾完成: ${videos.length} → ${filtered.length} 部`);
+      return filtered;
+    }
+
+    // 測試函數
+    async function testFiltering() {
+      document.getElementById('status').className = 'status loading';
+      document.getElementById('status').textContent = '⏳ 測試中...請稍候';
+      document.getElementById('results').style.display = 'none';
+
+      logs.length = 0;
+      updateConsoleDisplay();
+
+      try {
+        // 找到詩雨蔻達的數據
+        const shiucoda = vtubers.find(v => v.id === 'shiucoda');
+        if (!shiucoda) {
+          document.getElementById('status').className = 'status error';
+          document.getElementById('status').textContent = '❌ 無法找到詩雨蔻達的數據';
+          return;
+        }
+
+        console.log(`🎵 找到詩雨蔻達，共 ${shiucoda.videos.covers.length} 部 Covers，${shiucoda.videos.originals.length} 部 Originals`);
+
+        // 更新統計
+        document.getElementById('cover-total').textContent = `總數: ${shiucoda.videos.covers.length}`;
+        document.getElementById('original-total').textContent = `總數: ${shiucoda.videos.originals.length}`;
+
+        // 過濾 Covers
+        console.log(`\n🎼 過濾 Covers...`);
+        const filteredCovers = await filterShiucodaVideosByDuration(shiucoda.videos.covers, shiucoda);
+        document.getElementById('cover-filtered').textContent = `過濾後: ${filteredCovers.length}`;
+
+        // 過濾 Originals
+        console.log(`\n🎼 過濾 Originals...`);
+        const filteredOriginals = await filterShiucodaVideosByDuration(shiucoda.videos.originals, shiucoda);
+        document.getElementById('original-filtered').textContent = `過濾後: ${filteredOriginals.length}`;
+
+        // 顯示結果表格
+        const tbody = document.getElementById('results-body');
+        tbody.innerHTML = '';
+
+        shiucoda.videos.covers.forEach(v => {
+          const isFiltered = !filteredCovers.find(fc => fc.id === v.id);
+          const row = tbody.insertRow();
+          row.innerHTML = `
+            <td>Cover</td>
+            <td>${v.id}</td>
+            <td>${v.title.substring(0, 50)}...</td>
+            <td>${isFiltered ? '❌ 被排除' : '✅ 保留'}</td>
+          `;
+          if (isFiltered) row.style.backgroundColor = '#ffebee';
+        });
+
+        shiucoda.videos.originals.forEach(v => {
+          const isFiltered = !filteredOriginals.find(fo => fo.id === v.id);
+          const row = tbody.insertRow();
+          row.innerHTML = `
+            <td>Original</td>
+            <td>${v.id}</td>
+            <td>${v.title.substring(0, 50)}...</td>
+            <td>${isFiltered ? '❌ 被排除' : '✅ 保留'}</td>
+          `;
+          if (isFiltered) row.style.backgroundColor = '#ffebee';
+        });
+
+        document.getElementById('results').style.display = 'table';
+
+        // 最終狀態
+        document.getElementById('status').className = 'status success';
+        document.getElementById('status').textContent = `✅ 測試完成！Covers: ${shiucoda.videos.covers.length} → ${filteredCovers.length} | Originals: ${shiucoda.videos.originals.length} → ${filteredOriginals.length}`;
+
+      } catch (e) {
+        console.warn('❌ 測試發生錯誤:', e.message);
+        document.getElementById('status').className = 'status error';
+        document.getElementById('status').textContent = `❌ 錯誤: ${e.message}`;
+      }
+    }
+
+    // 頁面加載完成後自動提示
+    window.onload = function() {
+      document.getElementById('status').className = 'status success';
+      document.getElementById('status').textContent = '✅ 準備完成！點擊「開始過濾測試」按鈕進行測試';
+    };
+  </script>
+</body>
+</html>
