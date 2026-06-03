@@ -505,8 +505,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="general">📺 一般影片</button>
             <button class="ov-section-btn" data-ovsection="shorts">🎬 Shorts</button>
+            <button class="ov-section-btn" data-ovsection="vlog">🎥 Vlog</button>
             <button class="ov-section-btn" data-ovsection="ads">📢 廣告</button>
             <button class="ov-section-btn" data-ovsection="first">🎙️ 初配信</button>
+            <button class="ov-section-btn" data-ovsection="commerce">🛍️ 工商</button>
             <button class="ov-section-btn" data-ovsection="unclassified">❓ 未分類</button>
           </div>
 
@@ -533,6 +535,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
 
+          <!-- Vlog section -->
+          <div id="ov-vlog-section" style="display:none">
+            <div class="livestreams-container" id="ov-vlog-container"></div>
+          </div>
+
           <!-- 廣告 section -->
           <div id="ov-ads-section" style="display:none">
             <div class="livestreams-container" id="ov-ads-container"></div>
@@ -541,6 +548,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- 初配信 section -->
           <div id="ov-first-section" style="display:none">
             <div class="livestreams-container" id="ov-first-container"></div>
+          </div>
+
+          <!-- 工商 section -->
+          <div id="ov-commerce-section" style="display:none">
+            <div class="livestreams-container" id="ov-commerce-container"></div>
           </div>
 
           <!-- 未分類區 section -->
@@ -1826,6 +1838,18 @@ document.addEventListener('DOMContentLoaded', () => {
       thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
     }));  // 一般影片（來自 data.js）
     window._firstVideos = [];    // 初配信（STEP 5 手動分類）
+    window._vlogVideos = (v.videos.vlog || []).map(vid => ({
+      id: vid.id,
+      title: vid.title,
+      date: vid.date,
+      thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
+    }));  // Vlog（來自 data.js）
+    window._commerceVideos = (v.videos.commerce || []).map(vid => ({
+      id: vid.id,
+      title: vid.title,
+      date: vid.date,
+      thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
+    }));  // 工商（來自 data.js）
 
     let uncLoading       = false;
     let uncCurrentYear   = 'all';
@@ -2401,6 +2425,86 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // 【新增】Vlog 區加載函數
+    function loadVlogYear() {
+      const container = document.getElementById('ov-vlog-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (window._vlogVideos && window._vlogVideos.length > 0) {
+        window._vlogVideos.forEach(vid => {
+          const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+          const title = esc(vid.title || '');
+          const date = vid.date || '';
+          container.innerHTML += `
+            <div class="ls-card" onclick="(function(){
+              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
+              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
+              document.getElementById('yt-modal-title').textContent='${title}';
+              document.getElementById('yt-modal').classList.add('open');
+              document.body.style.overflow='hidden';
+            })()">
+              <div class="ls-thumb-wrap">
+                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+              </div>
+              <div class="ls-info">
+                <div class="ls-title">${title || '（無標題）'}</div>
+                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+              </div>
+            </div>`;
+        });
+      } else {
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">🎥</span><p>暫無 Vlog</p></div>`;
+      }
+
+      // 隱藏 Vlog 區如果沒有影片
+      const section = document.getElementById('ov-vlog-section');
+      if (section) {
+        section.style.display = (window._vlogVideos && window._vlogVideos.length > 0) ? '' : 'none';
+      }
+    }
+
+    // 【新增】工商區加載函數
+    function loadCommerceYear() {
+      const container = document.getElementById('ov-commerce-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (window._commerceVideos && window._commerceVideos.length > 0) {
+        window._commerceVideos.forEach(vid => {
+          const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+          const title = esc(vid.title || '');
+          const date = vid.date || '';
+          container.innerHTML += `
+            <div class="ls-card" onclick="(function(){
+              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
+              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
+              document.getElementById('yt-modal-title').textContent='${title}';
+              document.getElementById('yt-modal').classList.add('open');
+              document.body.style.overflow='hidden';
+            })()">
+              <div class="ls-thumb-wrap">
+                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+              </div>
+              <div class="ls-info">
+                <div class="ls-title">${title || '（無標題）'}</div>
+                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+              </div>
+            </div>`;
+        });
+      } else {
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">🛍️</span><p>暫無工商</p></div>`;
+      }
+
+      // 隱藏工商區如果沒有影片
+      const section = document.getElementById('ov-commerce-section');
+      if (section) {
+        section.style.display = (window._commerceVideos && window._commerceVideos.length > 0) ? '' : 'none';
+      }
+    }
+
     // 搜尋篩選
     function applyUncSearch() {
       const input    = document.getElementById('unc-search-input');
@@ -2633,8 +2737,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const sections = {
         general: document.getElementById('ov-general-section'),
         shorts: document.getElementById('ov-shorts-section'),
+        vlog: document.getElementById('ov-vlog-section'),
         ads: document.getElementById('ov-ads-section'),
         first: document.getElementById('ov-first-section'),
+        commerce: document.getElementById('ov-commerce-section'),
         unclassified: document.getElementById('ov-unclassified-section')
       };
 
@@ -2646,7 +2752,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // 當切換時加載對應內容（只在首次時加載，避免重複加載）
       if (section === 'ads') loadAdsYear();
       if (section === 'general') loadGeneralYear();
+      if (section === 'vlog') loadVlogYear();
       if (section === 'first') loadFirstYear();
+      if (section === 'commerce') loadCommerceYear();
 
       // Shorts：首次切換時才觸發載入
       if (section === 'shorts' && tryLoadYtShorts && !window._ytsLoaded) {
