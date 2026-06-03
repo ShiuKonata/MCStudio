@@ -2639,8 +2639,35 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await fetchYtsPage(null);
           if (data.error) throw new Error(data.error.message);
           container.innerHTML = '';
+
+          // 先添加手動 Shorts
+          if (v.videos.shorts && v.videos.shorts.length > 0) {
+            v.videos.shorts.forEach(vid => {
+              const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+              const title = esc(vid.title || '');
+              const date = vid.date || '';
+              container.innerHTML += `
+                <div class="ls-card" data-vid="${vid.id}" onclick="(function(){
+                  document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
+                  document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
+                  document.getElementById('yt-modal-title').textContent='${title}';
+                  document.getElementById('yt-modal').classList.add('open');
+                  document.body.style.overflow='hidden';
+                })()">
+                  <div class="ls-thumb-wrap">
+                    <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+                    <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+                  </div>
+                  <div class="ls-info">
+                    <div class="ls-title">${title || '（無標題）'}</div>
+                    ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+                  </div>
+                </div>`;
+            });
+          }
+
           const items = data.items || [];
-          if (!items.length) {
+          if (!items.length && (!v.videos.shorts || v.videos.shorts.length === 0)) {
             container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>${T('noShorts')}</p></div>`;
           } else {
             items.forEach(item => renderYtsCard(container, item));
