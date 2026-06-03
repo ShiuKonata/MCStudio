@@ -102,6 +102,11 @@ const vtubers = [
       { id: "Ej2tkEtePy8", title: "【Cover】comethru /Jeremy Zucker 💧詩雨蔻達【自彈自唱】",                      date: "2023-08-29" },
     ],
 
+    // ── 手動分類的原創曲（未分類區分配）──────────────────
+    originals_manual: [
+      { id: "ENI3YCbU468", title: "【3周年紀念】統美眉，知道甚麼比224還好笑嗎💧詩雨蔻達",                   date: "2026-02-26" },
+    ],
+
     // ── 一般影片（官方上傳的綜合內容）──────────────────
     general: [
       { id: "LWMx3NkcsY0", title: "【Original】【官方精華-統領原創曲合輯】(亂)寫歌系vtuber酒後寫得歌都是飽含愛意的，除了..💧詩雨蔻達", date: "2023-09-04" },

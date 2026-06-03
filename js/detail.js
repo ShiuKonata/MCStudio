@@ -93,6 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!v.videos.shorts) v.videos.shorts = [];
   if (!v.videos.general) v.videos.general = v.general || [];  // 支援一般影片分類
 
+  // 添加手動分類的原創曲
+  if (v.originals_manual && v.originals_manual.length > 0) {
+    v.videos.originals = [...(v.videos.originals || []), ...v.originals_manual];
+  }
+
   // ── 多頻道支援：統一轉為陣列（相容舊版單一 channelId 欄位）──
   const _musicClipsChs = v.musicClipsChannelIds
     ? v.musicClipsChannelIds
