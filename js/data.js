@@ -2249,11 +2249,13 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], typeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi"], excludeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["百百波美", "波美", "BarkBarkPomi", "Pomi", "派"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "bSPwY0KHks4",
