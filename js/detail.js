@@ -71,6 +71,22 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // 【優先級最高】立即轉換 videos 結構（在任何渲染前執行）
+  if (Array.isArray(v.videos)) {
+    const oldVideos = v.videos;
+    v.videos = {
+      covers: oldVideos.filter(vid => vid.title.includes('【Cover】')),
+      originals: oldVideos.filter(vid => vid.title.includes('【Original】') || vid.title.includes('【原創】')),
+      officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
+      unclassified: []
+    };
+  }
+  // 確保所有欄位都存在
+  if (!v.videos.covers) v.videos.covers = [];
+  if (!v.videos.originals) v.videos.originals = [];
+  if (!v.videos.officials) v.videos.officials = [];
+  if (!v.videos.unclassified) v.videos.unclassified = [];
+
   // ── 多頻道支援：統一轉為陣列（相容舊版單一 channelId 欄位）──
   const _musicClipsChs = v.musicClipsChannelIds
     ? v.musicClipsChannelIds
@@ -1042,6 +1058,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 【新增】詩雨蔻達時長過濾：異步加載並過濾
     (async () => {
       try {
+        // 【重要】清除容器，防止重複渲染
+        const container = document.getElementById('video-grid');
+        if (container) container.innerHTML = '';
+
         let coversToRender = v.videos.covers || [];
         let originalsToRender = v.videos.originals || [];
 
@@ -1072,6 +1092,7 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(`📊 詩雨蔻達 區域統計 — Cover: ${coversCount} 部 | Original: ${originalsCount} 部 | Officials: ${officialsCount} 部`);
         }
       } catch (err) {
+        console.error('❌ 渲染失敗:', err);
         // 失敗時，直接渲染原始列表
         if (v.videos.covers && v.videos.covers.length > 0) {
           renderVideoCards(v.videos.covers, 'video-grid', '🎵');
