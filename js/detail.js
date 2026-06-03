@@ -98,6 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
     v.videos.originals = [...(v.videos.originals || []), ...v.originals_manual];
   }
 
+  // 添加手動分類的初配信（premiere）
+  if (v.premiere && v.premiere.length > 0) {
+    window._firstVideos = v.premiere.map(vid => ({
+      id: vid.id,
+      title: vid.title,
+      date: vid.date,
+      thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
+    }));
+  }
+
   // ── 多頻道支援：統一轉為陣列（相容舊版單一 channelId 欄位）──
   const _musicClipsChs = v.musicClipsChannelIds
     ? v.musicClipsChannelIds
