@@ -70,7 +70,6 @@ const vtubers = [
       { id: "1_l1d8aYPOs", title: "【Cover】貴方の恋人になりたい💧詩雨蔻達【自彈自唱】",                           date: "2023-09-19" },
       { id: "WPLg85oqyLE", title: "【Cover】たばこ💧詩雨蔻達【自彈自唱】",                                        date: "2023-09-15" },
       { id: "nq0SIJ_lg38", title: "【Cover】ド屑 💧詩雨蔻達【自彈自唱】",                                         date: "2023-09-12" },
-      { id: "LWMx3NkcsY0", title: "【Original】【官方精華-統領原創曲合輯】(亂)寫歌系vtuber酒後寫得歌都是飽含愛意的，除了..💧詩雨蔻達", date: "2023-09-04" },
       { id: "Jb9x6-JYjm0", title: "【Cover】崎山蒼志  / 燈 💧詩雨蔻達  #cover  #咒術迴戰",                          date: "2023-08-25" },
       { id: "re6fWJzJVpg", title: "【Cover】Ditto / NewJeans 💧詩雨蔻達  #cover  #acappella",                      date: "2023-08-18" },
       { id: "THbDUEda15U", title: "【Cover】秒針を噛む / ずっと真夜中でいいのに💧詩雨蔻達【COVER】",               date: "2023-08-11" },
@@ -101,6 +100,11 @@ const vtubers = [
     // ── Shorts（≤60秒的短影片）──────────────────
     shorts: [
       { id: "Ej2tkEtePy8", title: "【Cover】comethru /Jeremy Zucker 💧詩雨蔻達【自彈自唱】",                      date: "2023-08-29" },
+    ],
+
+    // ── 一般影片（官方上傳的綜合內容）──────────────────
+    general: [
+      { id: "LWMx3NkcsY0", title: "【Original】【官方精華-統領原創曲合輯】(亂)寫歌系vtuber酒後寫得歌都是飽含愛意的，除了..💧詩雨蔻達", date: "2023-09-04" },
     ],
 
     // 剪輯頻道設定說明：
