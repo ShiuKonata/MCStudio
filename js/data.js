@@ -1440,6 +1440,11 @@ const vtubers = [
   }
 ],
 
+    // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
+    musicClipsChannelIds: [
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", typeKeywords: ["cover", "歌ってみた"] },
+    ],
+
     scheduleVideoId:  "lLZlENnAYUQ",
     spreadsheetLabel: "可露團長的大小事",
     scheduleTitle:    "可露團長的行程表",
@@ -1455,8 +1460,10 @@ const vtubers = [
       "2023": "870278721",
     },
 
+    // ── 熱門影片精華──────────────────────────────────
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyX"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     color: "#9671B0"   // 依可露 代表色（紫羅蘭）
