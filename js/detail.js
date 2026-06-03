@@ -80,15 +80,17 @@ document.addEventListener('DOMContentLoaded', () => {
       covers: oldVideos.filter(vid => vid.title.includes('【Cover】')),
       originals: oldVideos.filter(vid => vid.title.includes('【Original】') || vid.title.includes('【原創】')),
       officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
-      unclassified: []
+      unclassified: [],
+      shorts: v.shorts || []  // 保留 shorts（如果存在）
     };
-    console.log('[轉換後] covers:', v.videos.covers.length, '| originals:', v.videos.originals.length);
+    console.log('[轉換後] covers:', v.videos.covers.length, '| originals:', v.videos.originals.length, '| shorts:', v.videos.shorts.length);
   }
   // 確保所有欄位都存在
   if (!v.videos.covers) v.videos.covers = [];
   if (!v.videos.originals) v.videos.originals = [];
   if (!v.videos.officials) v.videos.officials = [];
   if (!v.videos.unclassified) v.videos.unclassified = [];
+  if (!v.videos.shorts) v.videos.shorts = [];
 
   // ── 多頻道支援：統一轉為陣列（相容舊版單一 channelId 欄位）──
   const _musicClipsChs = v.musicClipsChannelIds

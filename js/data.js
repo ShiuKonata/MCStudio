@@ -71,7 +71,6 @@ const vtubers = [
       { id: "WPLg85oqyLE", title: "【Cover】たばこ💧詩雨蔻達【自彈自唱】",                                        date: "2023-09-15" },
       { id: "nq0SIJ_lg38", title: "【Cover】ド屑 💧詩雨蔻達【自彈自唱】",                                         date: "2023-09-12" },
       { id: "LWMx3NkcsY0", title: "【Original】【官方精華-統領原創曲合輯】(亂)寫歌系vtuber酒後寫得歌都是飽含愛意的，除了..💧詩雨蔻達", date: "2023-09-04" },
-      { id: "Ej2tkEtePy8", title: "【Cover】comethru /Jeremy Zucker 💧詩雨蔻達【自彈自唱】",                      date: "2023-08-29" },
       { id: "Jb9x6-JYjm0", title: "【Cover】崎山蒼志  / 燈 💧詩雨蔻達  #cover  #咒術迴戰",                          date: "2023-08-25" },
       { id: "re6fWJzJVpg", title: "【Cover】Ditto / NewJeans 💧詩雨蔻達  #cover  #acappella",                      date: "2023-08-18" },
       { id: "THbDUEda15U", title: "【Cover】秒針を噛む / ずっと真夜中でいいのに💧詩雨蔻達【COVER】",               date: "2023-08-11" },
@@ -97,6 +96,11 @@ const vtubers = [
       { id: "iasDIGQYtBw", title: "【Cover】緑黄色社会-mela! / 詩雨蔻達",                                          date: "2023-01-28" },
       { id: "XHuc832HAfY", title: "【Cover】食虫植物/ 詩雨蔻達 feat.茶浣熊@TanukiiDonCh | 吉他自彈自唱",           date: "2023-01-21" },
       { id: "ON2e3Yc7F6Q", title: "【Cover】星期三的康帕內拉-愛迪生 Edison💧詩雨蔻達【cover】",                   date: "2023-02-21" },
+    ],
+
+    // ── Shorts（≤60秒的短影片）──────────────────
+    shorts: [
+      { id: "Ej2tkEtePy8", title: "【Cover】comethru /Jeremy Zucker 💧詩雨蔻達【自彈自唱】",                      date: "2023-08-29" },
     ],
 
     // 剪輯頻道設定說明：
