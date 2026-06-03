@@ -1001,11 +1001,13 @@ const vtubers = [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku"],          typeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子歌回剪輯"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["酒樂霧子", "Shuraku Kiriko"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "MeloNyX"],              excludeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子精華", "酒樂霧子&黑野悠真精華"],        excludeKeywords: ["歌回剪輯"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     color: "#C93447"   // 酒樂霧子 代表色（深紅）
