@@ -933,7 +933,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeYTModal(); });
 
   // ── 共用：渲染影片卡片（ls-card 格式，公開影片用 modal）────
-  // 【新增】詩雨蔻達 Cover/Original 時長檢查 - 過濾 ≤60秒的影片
+  // 【新增】詩雨蔻達 Cover/Original 時長檢查 - 過濾 ≤60秒的影片並移到 Shorts
   async function filterShiucodaVideosByDuration(videos, vtuber) {
     if (vtuber.id !== 'shiucoda') return videos;
 
@@ -969,6 +969,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (durationSec === undefined) return true;
       return durationSec >= 60;
     });
+
+    // 【新增】把 ≤60秒的影片移到 Shorts 區
+    const shorts = videos.filter(v => {
+      const durationSec = durationMap[v.id];
+      if (durationSec === undefined) return false;
+      return durationSec < 60;
+    }).map(v => ({
+      id: v.id,
+      title: v.title,
+      date: v.date,
+      duration: durationMap[v.id]
+    }));
+
+    if (shorts.length > 0) {
+      if (!vtuber.videos.shorts) vtuber.videos.shorts = [];
+      vtuber.videos.shorts.push(...shorts);
+    }
 
     return filtered;
   }
