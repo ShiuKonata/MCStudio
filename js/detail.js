@@ -72,7 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 【優先級最高】立即轉換 videos 結構（在任何渲染前執行）
+  console.log('[初始化] v.videos 類型:', Array.isArray(v.videos) ? '陣列' : typeof v.videos);
   if (Array.isArray(v.videos)) {
+    console.log('[轉換前] covers:', v.videos.filter(v => v.title.includes('【Cover】')).length);
     const oldVideos = v.videos;
     v.videos = {
       covers: oldVideos.filter(vid => vid.title.includes('【Cover】')),
@@ -80,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
       unclassified: []
     };
+    console.log('[轉換後] covers:', v.videos.covers.length, '| originals:', v.videos.originals.length);
   }
   // 確保所有欄位都存在
   if (!v.videos.covers) v.videos.covers = [];
@@ -1058,12 +1061,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 【新增】詩雨蔻達時長過濾：異步加載並過濾
     (async () => {
       try {
+        console.log('[async開始] 進入過濾邏輯');
         // 【重要】清除容器，防止重複渲染
         const container = document.getElementById('video-grid');
-        if (container) container.innerHTML = '';
+        if (container) {
+          console.log('[清除] 容器已清除');
+          container.innerHTML = '';
+        }
 
         let coversToRender = v.videos.covers || [];
         let originalsToRender = v.videos.originals || [];
+        console.log('[過濾前] covers:', coversToRender.length, '| originals:', originalsToRender.length);
 
         if (v.id === 'shiucoda' && coversToRender.length > 0) {
           coversToRender = await filterShiucodaVideosByDuration(coversToRender, v);
