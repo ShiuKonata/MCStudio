@@ -1570,10 +1570,12 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室", keywords: ["若櫻依兔", "WakasaIto", "wakasaito", "Wakasalto"], typeKeywords: ["cover", "guitar"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyX"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "阿酒精華", excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     color: "#AED4E9"   // 若櫻依兔 代表色（霧藍）
