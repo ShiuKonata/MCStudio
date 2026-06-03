@@ -964,28 +964,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 過濾：只保留 ≥60秒的影片
+    // 【說明】≤60秒的影片由 UUSH 播放列表處理，不在此添加以避免重複
     const filtered = videos.filter(v => {
       const durationSec = durationMap[v.id];
       if (durationSec === undefined) return true;
       return durationSec >= 60;
     });
-
-    // 【新增】把 ≤60秒的影片移到 Shorts 區
-    const shorts = videos.filter(v => {
-      const durationSec = durationMap[v.id];
-      if (durationSec === undefined) return false;
-      return durationSec < 60;
-    }).map(v => ({
-      id: v.id,
-      title: v.title,
-      date: v.date,
-      duration: durationMap[v.id]
-    }));
-
-    if (shorts.length > 0) {
-      if (!vtuber.videos.shorts) vtuber.videos.shorts = [];
-      vtuber.videos.shorts.push(...shorts);
-    }
 
     return filtered;
   }
