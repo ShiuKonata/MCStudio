@@ -1817,6 +1817,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let uncNextPageToken = null;
 
     function parseDurationSec(dur) {
+      if (!dur || typeof dur !== 'string') return 0;  // 檢查 dur 是否有效
       const m = dur.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
       if (!m) return 0;
       return (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
@@ -3099,10 +3100,16 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await res.json();
 
           (data.items || []).forEach(item => {
-            const duration = item.contentDetails.duration;
-            const m = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-            const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
-            detailMap[item.id] = { duration, durationSec };
+            try {
+              const duration = item.contentDetails?.duration;
+              if (!duration) return;  // 跳過沒有持續時間的影片
+              const m = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+              if (!m) return;
+              const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+              detailMap[item.id] = { duration, durationSec };
+            } catch (e) {
+              console.error('🔴 Duration parse error:', e);
+            }
           });
         } catch (e) {
           console.error('❌ API 調用失敗:', e);
