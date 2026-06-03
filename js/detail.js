@@ -935,76 +935,41 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 共用：渲染影片卡片（ls-card 格式，公開影片用 modal）────
   // 【新增】詩雨蔻達 Cover/Original 時長檢查 - 過濾 ≤60秒的影片
   async function filterShiucodaVideosByDuration(videos, vtuber) {
-    if (vtuber.id !== 'shiucoda') return videos;  // 只對詩雨蔻達進行過濾
+    if (vtuber.id !== 'shiucoda') return videos;
 
     const API_KEY = vtuber.ytApiKey;
     const videoIds = videos.map(v => v.id);
     if (!videoIds.length) return videos;
 
-    console.log(`🔄 開始獲取 ${videoIds.length} 部影片的時長資訊...`);
-
-    // 獲取時長信息
     const durationMap = {};
-    let successCount = 0;
 
     for (let i = 0; i < videoIds.length; i += 50) {
       const batch = videoIds.slice(i, i + 50);
       try {
         const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batch.join(',')}&key=${API_KEY}`;
-        console.log(`📡 API 請求: ${url.substring(0, 80)}...`);
-
         const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
-
-        if (!res.ok) {
-          console.error(`❌ API 返回 ${res.status}: ${res.statusText}`);
-          continue;
-        }
-
         const data = await res.json();
-
-        if (data.error) {
-          console.error(`❌ API 錯誤: ${data.error.message}`);
-          continue;
-        }
 
         (data.items || []).forEach(item => {
           try {
             const duration = item.contentDetails.duration;
             const m = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-            if (!m) {
-              console.warn(`⚠️ 無法解析時長: ${duration}`);
-              return;
+            if (m) {
+              const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+              durationMap[item.id] = durationSec;
             }
-            const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
-            durationMap[item.id] = durationSec;
-            successCount++;
-            console.log(`  ✓ ${item.id}: ${durationSec}秒`);
-          } catch (e) {
-            console.warn(`⚠️ 解析時長失敗 ${item.id}:`, e);
-          }
+          } catch (e) {}
         });
-      } catch (e) {
-        console.error('❌ API 請求失敗:', e.message);
-      }
+      } catch (e) {}
     }
-
-    console.log(`✅ 成功獲取 ${successCount}/${videoIds.length} 部影片的時長`);
 
     // 過濾：只保留 ≥60秒的影片
     const filtered = videos.filter(v => {
       const durationSec = durationMap[v.id];
-      if (durationSec === undefined) {
-        console.warn(`⚠️ ${v.id} 無時長資訊，保留該影片`);
-        return true;  // 無時長資訊時保留
-      }
-      const keep = durationSec >= 60;
-      if (!keep) {
-        console.log(`🚫 排除 ${v.id}: ${durationSec}秒 ≤ 60秒 → 應在 Shorts 區`);
-      }
-      return keep;  // 只保留 ≥60秒
+      if (durationSec === undefined) return true;
+      return durationSec >= 60;
     });
 
-    console.log(`📊 詩雨蔻達 Cover/Original 過濾完成: ${videos.length} → ${filtered.length} 部`);
     return filtered;
   }
 
@@ -1058,35 +1023,33 @@ document.addEventListener('DOMContentLoaded', () => {
         let coversToRender = v.videos.covers || [];
         let originalsToRender = v.videos.originals || [];
 
-        console.log(`🔍 [${v.id}] 開始檢查時長過濾...`);
-
         if (v.id === 'shiucoda' && coversToRender.length > 0) {
-          console.log(`⏳ Covers 過濾中... (${coversToRender.length} 部)`);
           coversToRender = await filterShiucodaVideosByDuration(coversToRender, v);
-          console.log(`✅ Covers 過濾完成: ${coversToRender.length} 部`);
         }
         if (v.id === 'shiucoda' && originalsToRender.length > 0) {
-          console.log(`⏳ Originals 過濾中... (${originalsToRender.length} 部)`);
           originalsToRender = await filterShiucodaVideosByDuration(originalsToRender, v);
-          console.log(`✅ Originals 過濾完成: ${originalsToRender.length} 部`);
         }
 
         if (coversToRender.length > 0) {
-          console.log(`📋 渲染 Cover 區: ${coversToRender.length} 部`);
           renderVideoCards(coversToRender, 'video-grid', '🎵');
         }
         if (originalsToRender.length > 0) {
-          console.log(`📋 渲染 Original 區: ${originalsToRender.length} 部`);
           renderVideoCards(originalsToRender, 'video-grid', '🎵');
         }
 
         // Officials 不需要時長過濾
         if (v.videos.officials && v.videos.officials.length > 0) {
-          console.log(`📋 渲染 Officials 區: ${v.videos.officials.length} 部`);
           renderVideoCards(v.videos.officials, 'video-grid', '🎵');
         }
+
+        // 只顯示最終結果摘要
+        if (v.id === 'shiucoda') {
+          const coversCount = coversToRender.length;
+          const originalsCount = originalsToRender.length;
+          const officialsCount = (v.videos.officials || []).length;
+          console.log(`📊 詩雨蔻達 區域統計 — Cover: ${coversCount} 部 | Original: ${originalsCount} 部 | Officials: ${officialsCount} 部`);
+        }
       } catch (err) {
-        console.error('❌ 時長過濾出錯:', err);
         // 失敗時，直接渲染原始列表
         if (v.videos.covers && v.videos.covers.length > 0) {
           renderVideoCards(v.videos.covers, 'video-grid', '🎵');
