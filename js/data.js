@@ -1351,8 +1351,8 @@ const vtubers = [
       { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      typeKeywords: ["cover", "歌回", "歌切", "清唱"] },
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "純奈"],            typeKeywords: ["歌回", "唱歌", "cover"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["結月莉莉奈", "Ririna"] },
-    ],
       { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", typeKeywords: ["cover", "歌ってみた"] },
+    ],
 
     // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
     videoClipsChannelIds: [
@@ -1360,8 +1360,8 @@ const vtubers = [
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "純奈"],            excludeKeywords: ["歌回", "唱歌", "cover"] },  // 非歌回片段
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                                 excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",     keywords: ["結月莉莉奈", "ririna", "r1ri999"] },
-    ],
       { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", excludeKeywords: ["cover", "歌ってみた"] },
+    ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
     spreadsheetLabel: "奈奈的大小事",
