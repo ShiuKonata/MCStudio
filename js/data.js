@@ -2197,7 +2197,8 @@ const vtubers = [
     bgmLabel:   "狗勾米米大冒險",
     tagline: "",
     taglines: [
-      { context: "", text: "艾連是我老公" }
+      { context: "", text: "艾連是我老公" },
+      { context: "", text: "好色喔" }
     ],
     description: "\"要不要聽我說兩句廢話呢?\" \"嘻嘻我說完ㄌ\" \"路過此地！屁眼留下來(≖ᴗ≖๑)\"",
     debut: "2024-09-12",
