@@ -1002,14 +1002,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return videos;
     }
 
-    // 過濾：只保留 ≥60秒的影片
+    // 過濾：只保留 >60秒的影片（≤60秒的移至 Shorts）
     // 【說明】≤60秒的影片由 UUSH 播放列表處理，不在此添加以避免重複
     const removed = [];
     const filtered = videos.filter(v => {
       const durationSec = durationMap[v.id];
       // 如果沒有獲取到持續時間，保守起見返回 true（保留影片）
       if (durationSec === undefined) return true;
-      const keep = durationSec >= 60;
+      const keep = durationSec > 60;
       if (!keep) {
         removed.push({ id: v.id, title: v.title, duration: durationSec });
       }
