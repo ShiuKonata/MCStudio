@@ -942,12 +942,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!videoIds.length) return videos;
 
     const durationMap = {};
+    let apiErrorOccurred = false;
+    let successCount = 0;
 
     for (let i = 0; i < videoIds.length; i += 50) {
       const batch = videoIds.slice(i, i + 50);
       try {
         const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${batch.join(',')}&key=${API_KEY}`;
         const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          console.error(`🔴 YouTube API Error (${res.status}):`, errorData);
+          apiErrorOccurred = true;
+          continue;
+        }
+
         const data = await res.json();
 
         (data.items || []).forEach(item => {
@@ -957,16 +967,27 @@ document.addEventListener('DOMContentLoaded', () => {
             if (m) {
               const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
               durationMap[item.id] = durationSec;
+              successCount++;
             }
           } catch (e) {}
         });
-      } catch (e) {}
+      } catch (e) {
+        console.error('🔴 Fetch Error:', e);
+        apiErrorOccurred = true;
+      }
+    }
+
+    // 如果 API 調用失敗或沒有獲取到任何持續時間，返回原始列表（不過濾）
+    if (apiErrorOccurred || successCount === 0) {
+      console.warn(`⚠️ Duration filtering failed (API error: ${apiErrorOccurred}, success: ${successCount}). Returning unfiltered list.`);
+      return videos;
     }
 
     // 過濾：只保留 ≥60秒的影片
     // 【說明】≤60秒的影片由 UUSH 播放列表處理，不在此添加以避免重複
     const filtered = videos.filter(v => {
       const durationSec = durationMap[v.id];
+      // 如果沒有獲取到持續時間，保守起見返回 true（保留影片）
       if (durationSec === undefined) return true;
       return durationSec >= 60;
     });
