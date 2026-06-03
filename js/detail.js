@@ -1823,6 +1823,22 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
     }
     const originalExistingVideoIds = new Set(videosArray.map(vid => vid.id));
+    // 【新增】添加所有手動分類的影片 ID（premiere, general, vlog, commerce 等）
+    if (v.premiere && Array.isArray(v.premiere)) {
+      v.premiere.forEach(vid => originalExistingVideoIds.add(vid.id));
+    }
+    if (v.general && Array.isArray(v.general)) {
+      v.general.forEach(vid => originalExistingVideoIds.add(vid.id));
+    }
+    if (v.videos.vlog && Array.isArray(v.videos.vlog)) {
+      v.videos.vlog.forEach(vid => originalExistingVideoIds.add(vid.id));
+    }
+    if (v.videos.commerce && Array.isArray(v.videos.commerce)) {
+      v.videos.commerce.forEach(vid => originalExistingVideoIds.add(vid.id));
+    }
+    if (v.originals_manual && Array.isArray(v.originals_manual)) {
+      v.originals_manual.forEach(vid => originalExistingVideoIds.add(vid.id));
+    }
     const existingVideoIds = new Set(originalExistingVideoIds);  // 運行時可能會修改
 
     // 【新增】Shorts 區影片 ID Set（用於檢查是否已在 Shorts 區）
