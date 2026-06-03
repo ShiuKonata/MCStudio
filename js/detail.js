@@ -2950,5 +2950,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     };
+
+    // 【調試工具】檢查詗雨蔻達 Cover & Original 影片的時長
+    // 使用方法：在浏览器 F12 控制台執行 checkShiucodaCoverOriginalDuration()
+    window.checkShiucodaCoverOriginalDuration = async function() {
+      const shiucoda = vtubers.find(v => v.id === 'shiucoda');
+      if (!shiucoda) {
+        console.log('❌ 找不到詗雨蔻達');
+        return;
+      }
+
+      // 提取所有 Cover & Original 影片
+      const videosArray = [
+        ...(shiucoda.videos.covers || []),
+        ...(shiucoda.videos.originals || [])
+      ];
+
+      const coverOriginalIds = videosArray.map(v => v.id);
+      console.log(`📊 詗雨蔻達 Cover & Original 影片共 ${coverOriginalIds.length} 部`);
+
+      // 調用 YouTube API 獲取時長
+      const API_KEY = shiucoda.ytApiKey;
+      const detailMap = {};
+
+      for (let i = 0; i < coverOriginalIds.length; i += 50) {
+        const batch = coverOriginalIds.slice(i, i + 50);
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${batch.join(',')}&key=${API_KEY}`;
+
+        try {
+          const res = await fetch(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } });
+          const data = await res.json();
+
+          (data.items || []).forEach(item => {
+            const duration = item.contentDetails.duration;
+            const m = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+            const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
+            detailMap[item.id] = { duration, durationSec };
+          });
+        } catch (e) {
+          console.error('❌ API 調用失敗:', e);
+          return;
+        }
+      }
+
+      // 分析結果
+      const shortVideos = [];
+      const longVideos = [];
+
+      coverOriginalIds.forEach(vid => {
+        const video = videosArray.find(v => v.id === vid);
+        const detail = detailMap[vid];
+
+        if (!detail) {
+          console.warn(`⚠️ 無法獲取 ${vid} 的時長`);
+          return;
+        }
+
+        if (detail.durationSec <= 60) {
+          shortVideos.push({ ...video, durationSec: detail.durationSec });
+        } else {
+          longVideos.push({ ...video, durationSec: detail.durationSec });
+        }
+      });
+
+      // 輸出結果
+      console.log(`\n✅ 檢查完成！\n`);
+      console.log(`📊 ≥60秒（應保留在 Cover/Original 區）: ${longVideos.length} 部`);
+      console.table(longVideos.map(v => ({ ID: v.id, 標題: v.title, 時長: v.durationSec + 's' })));
+
+      console.log(`\n⚠️ ≤60秒（應從 Cover/Original 區移除，只在 Shorts 區）: ${shortVideos.length} 部`);
+      console.table(shortVideos.map(v => ({ ID: v.id, 標題: v.title, 時長: v.durationSec + 's' })));
+
+      // 返回結果供進一步處理
+      return { shortVideos, longVideos };
+    };
   }
 });
