@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!v.videos.originals) v.videos.originals = [];
   if (!v.videos.officials) v.videos.officials = [];
   if (!v.videos.unclassified) v.videos.unclassified = [];
-  if (!v.videos.shorts) v.videos.shorts = [];
+  if (!v.videos.shorts) v.videos.shorts = v.shorts || [];  // 從 v.shorts 複製（如果 v.videos.shorts 不存在）
   if (!v.videos.general) v.videos.general = v.general || [];  // 支援一般影片分類
 
   // 添加手動分類的原創曲
