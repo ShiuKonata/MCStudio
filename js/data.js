@@ -2005,7 +2005,7 @@ const vtubers = [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ",         keywords: ["崎塔", "Chita"], typeKeywords: ["歌切", "歌回", "cover"] },
       { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["崎塔"],           typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "（未命名）", keywords: ["崎塔", "chita"], typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
@@ -2013,7 +2013,7 @@ const vtubers = [
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "Chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "Chita", "小心結天團", "派"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "（未命名）", keywords: ["崎塔", "chita"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -2492,14 +2492,14 @@ const vtubers = [
 
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
     musicClipsChannelIds: [
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "（未命名）", keywords: ["諾恪里", "Nokori"], typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     // ── 熱門影片精華──────────────────────────────────
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["諾恪里", "小心結天團"] },
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["諾恪里", "Nokori"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "（未命名）", keywords: ["諾恪里", "Nokori"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "Od2Sczr6wmw",
