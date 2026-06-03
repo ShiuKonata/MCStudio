@@ -1697,7 +1697,6 @@ document.addEventListener('DOMContentLoaded', () => {
         officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
         unclassified: []
       };
-      console.log(`🔄 [結構轉換] v.videos 從陣列轉換為新物件結構`);
     }
     // 如果已經是新結構，確保所有欄位都存在
     if (!v.videos.covers) v.videos.covers = [];
@@ -1774,7 +1773,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           pageToken = data.nextPageToken || null;
         } while (pageToken);
-        console.log(`✅ [STEP 2] 獲取 Shorts 影片列表完成：${count} 部影片`);
       } catch (err) {
         console.error(`❌ [STEP 2] 獲取 Shorts 影片列表失敗:`, err);
       }
@@ -1805,7 +1803,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           pageToken = data.nextPageToken || null;
         } while (pageToken);
-        console.log(`✅ [STEP 1] 獲取直播存檔: ${count} 部`);
       } catch (err) {
         console.error(`❌ [STEP 1] 獲取直播存檔失敗:`, err);
       }
@@ -1838,7 +1835,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const cached = localStorage.getItem(cacheKey);
         if (cached) {
           cachedData = JSON.parse(cached);
-          console.log(`💾 [fetchVideoDetails] 從 localStorage 讀取 ${Object.keys(cachedData).length} 個緩存結果`);
         }
       } catch (e) {
         console.warn('⚠️ [fetchVideoDetails] 讀取 localStorage 失敗');
@@ -1853,7 +1849,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (idsToFetch.length === 0) {
         // 全部都在緩存裡
-        console.log(`✅ [fetchVideoDetails] 全部來自緩存：${videoIds.length} 部影片`);
         return { ...cachedData };
       }
 
@@ -1899,7 +1894,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('⚠️ [fetchVideoDetails] 寫入 localStorage 失敗');
       }
 
-      console.log(`✅ [fetchVideoDetails] 完成：${fromCache.length} 個緩存 + ${idsToFetch.length} 個新取 = ${videoIds.length} 部影片，共 ${Math.ceil(idsToFetch.length/BATCH_SIZE)} 新批次`);
       return allData;
     }
 
@@ -1937,14 +1931,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 加載未分類影片
     async function loadUnclassifiedYear(year) {
-      console.log(`🔵 [loadUnclassifiedYear] 開始加載未分類區, year=${year}`);
       if (uncLoading) return;
       uncLoading = true;
       uncCurrentYear = year;
       uncNextPageToken = null;
 
       const container = document.getElementById('unc-container');
-      console.log(`🔵 [loadUnclassifiedYear] container=${container ? '✅存在' : '❌不存在'}`);
       const moreWrap  = document.getElementById('unc-load-more-wrap');
       const countEl   = document.getElementById('unc-search-count');
       const input     = document.getElementById('unc-search-input');
@@ -1954,14 +1946,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 【STEP 1 準備】第一次加載時，先獲取直播存檔列表
       if (!liveVideoIdsFetched) {
-        console.log(`🔵 [STEP 1] 正在獲取直播存檔列表...`);
         await fetchAllLiveVideos();
         liveVideoIdsFetched = true;
       }
 
       // 【STEP 2 準備】第一次加載時，先獲取 Shorts 影片列表
       if (!shortsVideoIdsFetched) {
-        console.log(`🔵 [STEP 2] 正在獲取 Shorts 影片列表...`);
         await fetchAllShortsVideos();
         shortsVideoIdsFetched = true;
       }
@@ -1970,7 +1960,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         if (year === 'all') {
-          console.log(`🔵 [loadUnclassifiedYear] 開始一次性加載所有未分類影片...`);
           container.innerHTML = '';
           let allItems = [];
           let pageToken = null;
@@ -1979,19 +1968,16 @@ document.addEventListener('DOMContentLoaded', () => {
           // 【一次性加載所有頁面】
           do {
             const data = await fetchUncPage(pageToken);
-            console.log(`🔵 [loadUnclassifiedYear] 第 ${pageCount + 1} 頁，獲取 ${(data.items || []).length} 部`);
             if (data.error) throw new Error(data.error.message);
             allItems.push(...(data.items || []));
             pageToken = data.nextPageToken || null;
             pageCount++;
           } while (pageToken);
 
-          console.log(`📊 未分類區 - 總獲取影片數: ${allItems.length} 部（共 ${pageCount} 頁）`);
 
           // 【新增】獲取所有影片的時長信息（用於 STEP 2/3 的時長判斷）
           const videoIds = allItems.map(i => i.snippet.resourceId && i.snippet.resourceId.videoId).filter(Boolean);
           const detailMap = await fetchVideoDetails(videoIds, false);  // 獲取所有影片詳情
-          console.log(`✅ [時長獲取] 完成：共 ${Object.keys(detailMap).length} 部影片`);
 
           let count = 0;
           let filteredCount = 0;
@@ -2006,13 +1992,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // 排除直播存檔（UULV 播放列表）
             if (liveVideoIds.has(vid)) {
               filteredCount++;
-              console.log(`🚫 [排除UULV] 直播存檔被過濾: ${title}`);
               continue;
             }
             // 排除 Shorts（UUSH 播放列表）
             if (shortsVideoIds.has(vid)) {
               filteredCount++;
-              console.log(`🚫 [排除UUSH] Shorts被過濾: ${title}`);
               continue;
             }
             // 【廣告檢測 - 優先於 STEP 2】標題含「廣告」關鍵字
@@ -2025,7 +2009,6 @@ document.addEventListener('DOMContentLoaded', () => {
               };
               if (!window._adsVideos.some(v => v.id === vid)) {
                 window._adsVideos.push(adsObj);
-                console.log(`📢 【廣告偵測】檢測到廣告: ${title}`);
               }
               filteredCount++;
               continue;  // 廣告不在未分類區顯示
@@ -2068,7 +2051,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
               if (alreadyInDataJs) {
                 // ✅ 已經在 data.js 的 v.videos 中，可以從未分類區移除
-                console.log(`✅ [STEP 2] 已在正確位置（data.js），從未分類區移除: ${title}`);
                 filteredCount++;
                 continue;
               } else {
@@ -2090,16 +2072,13 @@ document.addEventListener('DOMContentLoaded', () => {
                   }
                   existingVideoIds.add(vid);
                   step3Candidates.push({ id: vid, title: title, date: date, type: step2Type, action: '【STEP 2】需添加至 data.js', duration: durationSec });
-                  console.log(`📍 [STEP 2] ✅ ${step2Type}（${durationSec}秒，≥60s）→ Cover + 一般影片區: ${title}`);
                 } else {
                   // 【新規則】≤60秒 → 只放 Shorts（如果不在 UUSH 中）
                   if (!shortsVideoIds.has(vid)) {
                     // 添加到 Shorts
                     if (!v.videos.shorts) v.videos.shorts = [];
                     v.videos.shorts.push({ id: vid, title: title, date: date, duration: durationSec });
-                    console.log(`📍 [STEP 2] 🎬 ${step2Type}（${durationSec}秒，≤60s）→ 只放 Shorts: ${title}`);
                   } else {
-                    console.log(`📍 [STEP 2] ⏭️ ${step2Type}（${durationSec}秒，≤60s）但已在 UUSH，跳過: ${title}`);
                   }
                   existingVideoIds.add(vid);
                 }
@@ -2139,7 +2118,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
               if (alreadyInDataJs) {
                 // ✅ 已經在 data.js 的 v.videos 中，可以從未分類區移除
-                console.log(`✅ [STEP 3] 已在正確位置（data.js），從未分類區移除: ${title}`);
                 filteredCount++;
                 continue;
               } else {
@@ -2153,16 +2131,13 @@ document.addEventListener('DOMContentLoaded', () => {
                   }
                   existingVideoIds.add(vid);
                   step3Candidates.push({ id: vid, title: title, date: date, type: step3Type, action: '【STEP 3】需添加至 data.js', duration: durationSec });
-                  console.log(`📍 [STEP 3] ✅ ${step3Type}（${durationSec}秒，≥60s）→ Cover + 一般影片區: ${title}`);
                 } else {
                   // 【新規則】≤60秒 → 只放 Shorts（如果不在 UUSH 中）
                   if (!shortsVideoIds.has(vid)) {
                     // 添加到 Shorts
                     if (!v.videos.shorts) v.videos.shorts = [];
                     v.videos.shorts.push({ id: vid, title: title, date: date, duration: durationSec });
-                    console.log(`📍 [STEP 3] 🎬 ${step3Type}（${durationSec}秒，≤60s）→ 只放 Shorts: ${title}`);
                   } else {
-                    console.log(`📍 [STEP 3] ⏭️ ${step3Type}（${durationSec}秒，≤60s）但已在 UUSH，跳過: ${title}`);
                   }
                   existingVideoIds.add(vid);
                 }
@@ -2178,16 +2153,12 @@ document.addEventListener('DOMContentLoaded', () => {
             renderUncCard(container, item, 0);  // 不需要詳情，直接顯示
             count++;
           }
-          console.log(`✅ 未分類區 - 過濾後顯示: ${count} 部, 排除: ${filteredCount} 部`);
 
           // 【STEP 2/3】輸出候選影片與自動分類結果
           if (step3Candidates.length > 0) {
             const step2Count = step3Candidates.filter(v => v.action.includes('STEP 2')).length;
             const step3Count = step3Candidates.filter(v => v.action.includes('STEP 3')).length;
 
-            console.log(`\n🎵 【自動分類結果】共檢測到 ${step3Candidates.length} 部影片`);
-            console.log(`   ├─ STEP 2（Cover/Original）: ${step2Count} 部`);
-            console.log(`   └─ STEP 3（詩雨蔻達特殊規則）: ${step3Count} 部\n`);
 
             console.table(step3Candidates.map(v => ({
               ID: v.id,
@@ -2198,15 +2169,12 @@ document.addEventListener('DOMContentLoaded', () => {
             })));
 
             // 輸出修改後的 v.videos（供用戶複製到 data.js）
-            console.log(`\n📋 修改後的 v.videos（複製以下內容到 data.js 的 videos 結構）：\n`);
             const videosJson = JSON.stringify({
               covers: v.videos.covers || [],
               originals: v.videos.originals || [],
               officials: v.videos.officials || [],
               unclassified: v.videos.unclassified || []
             }, null, 2);
-            console.log(videosJson);
-            console.log(`\n✅ 共添加 ${step3Candidates.length} 部影片（STEP 2: ${step2Count} + STEP 3: ${step3Count}）\n`);
           }
           if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
 
@@ -2607,7 +2575,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       if (tryLoadUnclassified && !window._uncLoaded) {
         window._uncLoaded = true;
-        console.log('🔄 頁面加載完成，自動執行 STEP 1-4 篩選...');
         tryLoadUnclassified();
       }
     }, 100);
@@ -3033,7 +3000,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.checkShiucodaCoverOriginalDuration = async function() {
       const shiucoda = vtubers.find(v => v.id === 'shiucoda');
       if (!shiucoda) {
-        console.log('❌ 找不到詗雨蔻達');
         return;
       }
 
@@ -3044,7 +3010,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
 
       const coverOriginalIds = videosArray.map(v => v.id);
-      console.log(`📊 詗雨蔻達 Cover & Original 影片共 ${coverOriginalIds.length} 部`);
 
       // 調用 YouTube API 獲取時長
       const API_KEY = shiucoda.ytApiKey;
@@ -3091,12 +3056,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // 輸出結果
-      console.log(`\n✅ 檢查完成！\n`);
-      console.log(`📊 ≥60秒（應保留在 Cover/Original 區）: ${longVideos.length} 部`);
-      console.table(longVideos.map(v => ({ ID: v.id, 標題: v.title, 時長: v.durationSec + 's' })));
-
-      console.log(`\n⚠️ ≤60秒（應從 Cover/Original 區移除，只在 Shorts 區）: ${shortVideos.length} 部`);
-      console.table(shortVideos.map(v => ({ ID: v.id, 標題: v.title, 時長: v.durationSec + 's' })));
 
       // 返回結果供進一步處理
       return { shortVideos, longVideos };
