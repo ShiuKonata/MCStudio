@@ -1896,6 +1896,9 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/1992530964615163905/1U7O9j0Q_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1800118433755086848/1718715523/1500x500",
     tagline: "",
+    taglines: [
+      { context: "", text: "好色喔" }
+    ],
     description: "給我罐罐！喵！ฅ^✧ﻌ✧^ฅ 給我貓貓也可以喔！ฅ^ↀﻌↀ^ฅ",
     debut: "2024-09-11",
     birthday: "11月22日",
