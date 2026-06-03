@@ -1837,7 +1837,12 @@ document.addEventListener('DOMContentLoaded', () => {
       date: vid.date,
       thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
     }));  // 一般影片（來自 data.js）
-    window._firstVideos = [];    // 初配信（STEP 5 手動分類）
+    window._firstVideos = (v.premiere || []).map(vid => ({
+      id: vid.id,
+      title: vid.title,
+      date: vid.date,
+      thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
+    }));  // 初配信（來自 data.js）
     window._vlogVideos = (v.videos.vlog || []).map(vid => ({
       id: vid.id,
       title: vid.title,
