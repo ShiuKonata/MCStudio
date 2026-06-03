@@ -1804,7 +1804,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 【新增】廣告、一般影片、初配信容器
     window._adsVideos = [];      // 廣告影片（自動檢測）
-    window._generalVideos = [];  // 一般影片（STEP 5 手動分類）
+    window._generalVideos = (v.videos.general || []).map(vid => ({
+      id: vid.id,
+      title: vid.title,
+      date: vid.date,
+      thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
+    }));  // 一般影片（來自 data.js）
     window._firstVideos = [];    // 初配信（STEP 5 手動分類）
 
     let uncLoading       = false;
