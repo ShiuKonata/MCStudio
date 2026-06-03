@@ -1709,7 +1709,6 @@ const vtubers = [
       { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",       keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",     keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????", keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
@@ -1718,7 +1717,6 @@ const vtubers = [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["魁", "Kai", "小心結天團"] },
       { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",           keywords: ["魁", "Kai"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋", keywords: ["魁", "Kai", "這很魁以"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "psgIP5rMRTA",
@@ -2384,10 +2382,12 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "扉扉", "fifi", "uchififi"], typeKeywords: ["cover", "嘉賓"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["羽芝扉扉", "扉扉"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "扉扉", "fifi", "uchififi"], excludeKeywords: ["cover", "嘉賓"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["羽芝扉扉", "扉扉"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "Vk_0sRnEmp0",
