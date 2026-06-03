@@ -984,14 +984,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         (data.items || []).forEach(item => {
           try {
-            const duration = item.contentDetails.duration;
+            const duration = item.contentDetails?.duration;
+            if (!duration) return;  // 跳過沒有持續時間的影片
             const m = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
             if (m) {
               const durationSec = (parseInt(m[1]||0)*3600) + (parseInt(m[2]||0)*60) + parseInt(m[3]||0);
               durationMap[item.id] = durationSec;
               successCount++;
             }
-          } catch (e) {}
+          } catch (e) {
+            console.error('🔴 Duration parse error:', e);
+          }
         });
       } catch (e) {
         console.error('🔴 Fetch Error:', e);
