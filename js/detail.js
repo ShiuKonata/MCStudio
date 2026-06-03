@@ -982,7 +982,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const thumbUrl  = vid.thumb || ('https://img.youtube.com/vi/' + vid.id + '/hqdefault.jpg');
         const safeTitle = esc(vid.title || '');
         container.innerHTML += `
-          <div class="ls-card" onclick="(function(){
+          <div class="ls-card" data-vid="${vid.id}" onclick="(function(){
             document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
             document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
             document.getElementById('yt-modal-title').textContent='${safeTitle}';
