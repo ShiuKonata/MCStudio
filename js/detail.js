@@ -2995,7 +2995,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // 【調試工具】檢查詗雨蔻達 Cover & Original 影片的時長
+    // 【調試工具】檢查詩雨蔻達 Cover & Original 影片的時長
     // 使用方法：在浏览器 F12 控制台執行 checkShiucodaCoverOriginalDuration()
     window.checkShiucodaCoverOriginalDuration = async function() {
       const shiucoda = vtubers.find(v => v.id === 'shiucoda');
