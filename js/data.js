@@ -151,7 +151,7 @@ const vtubers = [
     // excludeKeywords：標題含任一關鍵字則排除（適合「非 Cover 以外全收」的混合頻道）
     // playlistId     ：UUSH + channelId[2:] = 該頻道 Shorts 專屬清單
     videoClipsChannelIds: [
-      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", excludeKeywords: ["歌回", "cover"] },                           // 非音樂內容（排除歌回 & Cover）
+      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達"], excludeKeywords: ["歌回", "cover"] },                           // 非音樂內容（排除歌回 & Cover）
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"], excludeKeywords: ["cover", "吉他"] },                    // 非 Cover 影片
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"], typeKeywords: ["精華"], excludeKeywords: ["帕蘿妮", "帕帕"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達"], excludeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的精華
@@ -1350,7 +1350,7 @@ const vtubers = [
 
     // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
     videoClipsChannelIds: [
-      { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      excludeKeywords: ["cover", "歌回", "歌切", "清唱"] },  // 全頻道皆結月莉莉奈內容
+      { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      keywords: ["結月莉莉奈", "ririna", "奈奈"], excludeKeywords: ["cover", "歌回", "歌切", "清唱"] },  // 全頻道皆結月莉莉奈內容
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈"],            excludeKeywords: ["歌回", "唱歌", "cover"] },  // 非歌回片段
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                                 excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",     keywords: ["結月莉莉奈", "ririna", "奈奈"] },
@@ -1781,7 +1781,7 @@ const vtubers = [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCyOGgk-ScfBwkkeej_RQPYw", label: "晨茉",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCk1ZS3ZsYNbwXsxaxtJW7Dg", label: "蛋餅_owo",  excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動", "壞女人", "HO YO"] },
+      { id: "UCk1ZS3ZsYNbwXsxaxtJW7Dg", label: "蛋餅_owo",  keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動", "壞女人", "HO YO"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"] },
       { id: "UCu2mKGlGDS_cQbOIwCGuXSQ", label: "二七ER",           keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"],          excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
@@ -2000,7 +2000,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
-      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
+      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   keywords: ["崎塔", "chita"], excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "chita"] },
       { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita"], excludeKeywords: ["cover", "歌ってみた"] },
