@@ -161,9 +161,9 @@ const vtubers = [
     ],
 
     videoClips: [
-      { id: "6DzGvlWL2CU", title: "當統領想給外送員小費時... | 詩雨蔻達 ShiuCoda" },
-      { id: "UGFSG4Z4J38", title: "陶喆、蔡依琳 - 今天你要嫁給我 | 詩雨蔻達 ShiuCoda Cover" },
-      { id: "UykHeePVhp0", title: "當ㄚ統手上拿到槍第一件事居然做的是..?" },
+      { id: "6DzGvlWL2CU", title: "當統領想給外送員小費時... | 詩雨蔻達 ShiuCoda", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"] },
+      { id: "UGFSG4Z4J38", title: "陶喆、蔡依琳 - 今天你要嫁給我 | 詩雨蔻達 ShiuCoda Cover", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"] },
+      { id: "UykHeePVhp0", title: "當ㄚ統手上拿到槍第一件事居然做的是..?", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"] },
     ],
 
     scheduleVideoId:  "cCaZa-NTz0o",
@@ -415,9 +415,9 @@ const vtubers = [
     ],
 
     videoClips: [
-      { id: "gIDiqLbaQCQ", title: "老祖宗保佑我【Rumi/懶貓子】【Vtuber精華】" },
-      { id: "fPeQl568_FE", title: "Rumi的視力有...？！【Rumi/懶貓子】【Vtuber精華】" },
-      { id: "zcMfMI0ZHF0", title: "加班？門都沒有！【Rumi/懶貓子】【Vtuber精華】" },
+      { id: "gIDiqLbaQCQ", title: "老祖宗保佑我【Rumi/懶貓子】【Vtuber精華】", keywords: ["懶貓子", "Rumi"] },
+      { id: "fPeQl568_FE", title: "Rumi的視力有...？！【Rumi/懶貓子】【Vtuber精華】", keywords: ["懶貓子", "Rumi"] },
+      { id: "zcMfMI0ZHF0", title: "加班？門都沒有！【Rumi/懶貓子】【Vtuber精華】", keywords: ["懶貓子", "Rumi"] },
     ],
 
     scheduleVideoId:  "M5f-d9Ic1O4",
@@ -845,9 +845,9 @@ const vtubers = [
 ],
 
     videoClips: [
-      { id: "Mf_2asOpiuw", title: "【能者多勞勇者欣梅爾（？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
-      { id: "cghr3y7M0Eo", title: "【麥當勞蘋果派竟是遊戲中最強武器！?】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
-      { id: "4gINlqMLtcU", title: "【統領竟然想丟冰山到艾琳坐的船前面！？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri" },
+      { id: "Mf_2asOpiuw", title: "【能者多勞勇者欣梅爾（？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri", keywords: ["艾琳妮雅", "Arrynia", "Exitus"] },
+      { id: "cghr3y7M0Eo", title: "【麥當勞蘋果派竟是遊戲中最強武器！?】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri", keywords: ["艾琳妮雅", "Arrynia", "Exitus"] },
+      { id: "4gINlqMLtcU", title: "【統領竟然想丟冰山到艾琳坐的船前面！？】🦇🌕艾琳妮雅·裴利 Arrynia Vaeri", keywords: ["艾琳妮雅", "Arrynia", "Exitus"] },
     ],
 
     scheduleVideoId:  "YewmD63V5r0",
