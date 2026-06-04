@@ -1162,7 +1162,6 @@ const vtubers = [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                          excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",   keywords: ["瓦西瓦瓦", "vaswawa", "瓦瓦"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦"] },
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",         keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦"] },  // 全域音樂關鍵字自動排除
     ],
 
     color: "#B8FFEC"   // 瓦西瓦瓦 代表色（薄荷綠）
@@ -2699,7 +2698,6 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動排除
       { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
     ],
