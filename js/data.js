@@ -151,13 +151,13 @@ const vtubers = [
     // excludeKeywords：標題含任一關鍵字則排除（適合「非 Cover 以外全收」的混合頻道）
     // playlistId     ：UUSH + channelId[2:] = 該頻道 Shorts 專屬清單
     videoClipsChannelIds: [
-      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達"], excludeKeywords: ["歌回", "cover"] },                           // 非音樂內容（排除歌回 & Cover）
+      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "Exitus"], excludeKeywords: ["歌回", "cover"] },                           // 非音樂內容（排除歌回 & Cover）
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"], excludeKeywords: ["cover", "吉他"] },                    // 非 Cover 影片
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"], typeKeywords: ["精華"], excludeKeywords: ["帕蘿妮", "帕帕"] },
-      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達"], excludeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的精華
-      { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華", "直播"] },
+      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達", "Exitus"], excludeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的精華
+      { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達", "Exitus"], typeKeywords: ["精華", "直播"] },
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
-      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda"], excludeKeywords: ["歌回", "cover"] },  // 詩雨蔻達精華片段
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "Exitus"], excludeKeywords: ["歌回", "cover"] },  // 詩雨蔻達精華片段
     ],
 
     videoClips: [
@@ -714,8 +714,8 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["神無月鹿比", "鹿比", "Lubee", "小鹿", "Exitus"], excludeKeywords: ["帕蘿妮", "艾琳妮雅", "歌回", "cover"] },
-      { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["神無月鹿比精華", "哈鹿精華"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",      keywords: ["神無月鹿比"] },
+      { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["神無月鹿比精華", "哈鹿精華", "Exitus"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",      keywords: ["神無月鹿比", "Exitus"] },
     ],
 
     color: "#F2A8B9"   // 神無月鹿比 代表色（粉紅）
@@ -1005,7 +1005,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"],              excludeKeywords: ["歌回", "cover"] },
-      { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子精華", "酒樂霧子&黑野悠真精華"],        excludeKeywords: ["歌回剪輯"] },
+      { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子精華", "酒樂霧子&黑野悠真精華", "MeloNyx"],        excludeKeywords: ["歌回剪輯"] },
     ],
 
     color: "#C93447"   // 酒樂霧子 代表色（深紅）
@@ -1159,7 +1159,7 @@ const vtubers = [
     },
 
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                          excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyx"],                          excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",   keywords: ["瓦西瓦瓦", "vaswawa", "瓦瓦"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦", "MeloNyx"] },
     ],
@@ -1283,7 +1283,7 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyX"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyx"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["希妮亞里絲", "SinnieAris", "希希", "MeloNyx"] },
     ],
 
@@ -1351,7 +1351,7 @@ const vtubers = [
     videoClipsChannelIds: [
       { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"], excludeKeywords: ["cover", "歌回", "歌切", "清唱"] },  // 全頻道皆結月莉莉奈內容
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"],            excludeKeywords: ["歌回", "唱歌", "cover"] },  // 非歌回片段
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                                 excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyx"],                                 excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",     keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"] },
     ],
 
