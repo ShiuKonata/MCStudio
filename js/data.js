@@ -1001,6 +1001,7 @@ const vtubers = [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"],          typeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子歌回剪輯"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
