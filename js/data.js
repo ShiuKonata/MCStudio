@@ -1001,11 +1001,13 @@ const vtubers = [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"],          typeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子歌回剪輯"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"],              excludeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子精華", "酒樂霧子&黑野悠真精華", "MeloNyx"],        excludeKeywords: ["歌回剪輯"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     color: "#C93447"   // 酒樂霧子 代表色（深紅）
@@ -1104,9 +1106,11 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["瓦西瓦瓦", "vaswawa"], typeKeywords: ["cover"] },
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",           keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦", "MeloNyx"] },  // 歌回剪輯（全域音樂關鍵字自動分類）
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦", "MeloNyx"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦", "MeloNyx"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     bgmVideoId: "Nc1s7Jbb9WY",           // 背景音樂影片 ID
@@ -1280,11 +1284,13 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["希妮·亞里絲", "SinnieAris"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["希妮亞里絲", "SinnieAris", "希希", "MeloNyx"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyx"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["希妮亞里絲", "SinnieAris", "希希", "MeloNyx"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["希妮亞里絲", "SinnieAris", "希希", "MeloNyx"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     color: "#FCE8A4"   // 希妮亞里絲 代表色（奶油黃）
@@ -1344,7 +1350,7 @@ const vtubers = [
       { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      typeKeywords: ["cover", "歌回", "歌切", "清唱"] },
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"],            typeKeywords: ["歌回", "唱歌", "cover"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["結月莉莉奈", "Ririna"] },
-      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
@@ -1353,6 +1359,7 @@ const vtubers = [
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"],            excludeKeywords: ["歌回", "唱歌", "cover"] },  // 非歌回片段
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyx"],                                 excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",     keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
@@ -1434,6 +1441,7 @@ const vtubers = [
 
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
     musicClipsChannelIds: [
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["依可露", "Ekorru", "團長", "可露", "MeloNyx"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "lLZlENnAYUQ",
@@ -1454,6 +1462,7 @@ const vtubers = [
     // ── 熱門影片精華──────────────────────────────────
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["依可露", "Ekorru", "團長", "可露", "MeloNyx"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["依可露", "Ekorru", "團長", "可露", "MeloNyx"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     color: "#9671B0"   // 依可露 代表色（紫羅蘭）
@@ -1560,10 +1569,12 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室", keywords: ["若櫻依兔", "WakasaIto", "兔兔", "MeloNyx"], typeKeywords: ["cover", "guitar"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["若櫻依兔", "WakasaIto", "兔兔", "MeloNyx"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["若櫻依兔", "WakasaIto", "兔兔", "MeloNyx"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["若櫻依兔", "WakasaIto", "兔兔", "MeloNyx"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     color: "#AED4E9"   // 若櫻依兔 代表色（霧藍）
@@ -2241,12 +2252,13 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "Pomi", "波美", "音雲漫步"], typeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
-      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["百百波美", "Pomi", "波美", "音雲漫步"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["百百波美", "Pomi", "波美", "音雲漫步"], excludeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["百百波美", "Pomi", "波美", "音雲漫步"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["百百波美", "Pomi", "波美", "音雲漫步"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "bSPwY0KHks4",
