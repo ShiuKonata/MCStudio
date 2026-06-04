@@ -137,7 +137,7 @@ const vtubers = [
     // ── 熱門音樂剪輯（Cover / 歌回）────────────────
     musicClipsChannelIds: [
       { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘", typeKeywords: ["歌回", "cover"] },                                                                       // 歌回總集篇 + Cover
-      { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"], typeKeywords: ["cover", "吉他"] },            // 只抓 Cover
+      { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"], typeKeywords: ["cover", "吉他"] },            // 只抓 Cover
       // 孫小毛（UC4nZ-KbmFr21Qt1lN9rmbdQ）：無音樂剪輯，僅在 videoClipsChannelIds 保留精華影片
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達"], typeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的 Cover
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["cover", "歌回"] },             // 混合頻道 → 只抓音樂
@@ -152,8 +152,8 @@ const vtubers = [
     // playlistId     ：UUSH + channelId[2:] = 該頻道 Shorts 專屬清單
     videoClipsChannelIds: [
       { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達"], excludeKeywords: ["歌回", "cover"] },                           // 非音樂內容（排除歌回 & Cover）
-      { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"], excludeKeywords: ["cover", "吉他"] },                    // 非 Cover 影片
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"], typeKeywords: ["精華"], excludeKeywords: ["帕蘿妮", "帕帕"] },
+      { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"], excludeKeywords: ["cover", "吉他"] },                    // 非 Cover 影片
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"], typeKeywords: ["精華"], excludeKeywords: ["帕蘿妮", "帕帕"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達"], excludeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的精華
       { id: "UCPbbNCUmcCG9wk82O_KElFg", label: "彭彭ぽんぽん",  keywords: ["詩雨蔻達", "shiu coda", "shiucoda", "蔻達"], typeKeywords: ["精華", "直播"] },
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
@@ -161,9 +161,9 @@ const vtubers = [
     ],
 
     videoClips: [
-      { id: "6DzGvlWL2CU", title: "當統領想給外送員小費時... | 詩雨蔻達 ShiuCoda", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"] },
-      { id: "UGFSG4Z4J38", title: "陶喆、蔡依琳 - 今天你要嫁給我 | 詩雨蔻達 ShiuCoda Cover", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"] },
-      { id: "UykHeePVhp0", title: "當ㄚ統手上拿到槍第一件事居然做的是..?", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領"] },
+      { id: "6DzGvlWL2CU", title: "當統領想給外送員小費時... | 詩雨蔻達 ShiuCoda", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"] },
+      { id: "UGFSG4Z4J38", title: "陶喆、蔡依琳 - 今天你要嫁給我 | 詩雨蔻達 ShiuCoda Cover", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"] },
+      { id: "UykHeePVhp0", title: "當ㄚ統手上拿到槍第一件事居然做的是..?", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"] },
     ],
 
     scheduleVideoId:  "cCaZa-NTz0o",
@@ -559,15 +559,15 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie", "帕帕"],  typeKeywords: ["點歌台", "歌回", "cover"] },
-      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["帕蘿妮", "paroniie", "帕帕"],  typeKeywords: ["歌回", "cover"] },
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie", "帕帕", "Exitus"],  typeKeywords: ["點歌台", "歌回", "cover"] },
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["帕蘿妮", "paroniie", "帕帕", "Exitus"],  typeKeywords: ["歌回", "cover"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie", "帕帕"],          excludeKeywords: ["點歌台", "歌回", "cover", "瓦瓦", "Vaswawa"] },
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["帕蘿妮", "paroniie", "帕帕"], excludeKeywords: ["神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
-      { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光",   keywords: ["帕蘿妮", "paroniie", "帕帕"] },
-      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",  keywords: ["帕蘿妮", "paroniie", "帕帕"] },
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",       keywords: ["帕蘿妮", "paroniie", "帕帕", "Exitus"],          excludeKeywords: ["點歌台", "歌回", "cover", "瓦瓦", "Vaswawa"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["帕蘿妮", "paroniie", "帕帕", "Exitus"], excludeKeywords: ["神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
+      { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光",   keywords: ["帕蘿妮", "paroniie", "帕帕", "Exitus"] },
+      { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",  keywords: ["帕蘿妮", "paroniie", "帕帕", "Exitus"] },
     ],
 
     scheduleVideoId:  "3CkoMAZxoec",
@@ -713,7 +713,7 @@ const vtubers = [
     ],
 
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["神無月鹿比", "鹿比", "Lubee", "小鹿"], excludeKeywords: ["帕蘿妮", "艾琳妮雅", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["神無月鹿比", "鹿比", "Lubee", "小鹿", "Exitus"], excludeKeywords: ["帕蘿妮", "艾琳妮雅", "歌回", "cover"] },
       { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["神無月鹿比精華", "哈鹿精華"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UC-1o-O9Vnh6WEMpJVBzIIqg", label: "光ちゃん",      keywords: ["神無月鹿比"] },
     ],
@@ -792,7 +792,7 @@ const vtubers = [
     },
 
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["米幾", "咪七", "MICHI", "咪奇"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["米幾", "咪七", "MICHI", "咪奇", "Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比", "艾琳妮雅", "歌回", "cover"] },
     ],
 
     color: "#D4A8C8"   // 姬城三千華 代表色（薰衣草玫瑰，自動生成）
@@ -891,13 +891,13 @@ const vtubers = [
     },
 
     musicClipsChannelIds: [
-      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia", "艾琳"], excludeKeywords: ["精華"] },  // Cover/歌回（排除精華）
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia", "艾琳", "Exitus"], excludeKeywords: ["精華"] },  // Cover/歌回（排除精華）
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["艾琳妮雅", "Arrynia Vaeri"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",        keywords: ["艾琳妮雅", "Arrynia", "Exitus"], excludeKeywords: ["帕蘿妮", "神無月鹿比", "鹿比", "歌回", "cover"] },
-      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia", "艾琳"], typeKeywords: ["精華"] },  // 只抓精華影片
+      { id: "UCMlvVMgOjH76AwolFgKEP1Q", label: "成彦なりひこ", keywords: ["艾琳妮雅", "Arrynia", "艾琳", "Exitus"], typeKeywords: ["精華"] },  // 只抓精華影片
     ],
 
     color: "#28004D",  // 艾琳妮雅 代表色（深紫）
@@ -998,13 +998,13 @@ const vtubers = [
     ],
 
     musicClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子"],          typeKeywords: ["歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"],          typeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子歌回剪輯"] },
-      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子"] },
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子"],              excludeKeywords: ["歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",     keywords: ["酒樂霧子", "Shuraku", "阿酒", "霧子", "MeloNyx"],              excludeKeywords: ["歌回", "cover"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光", keywords: ["酒樂霧子精華", "酒樂霧子&黑野悠真精華"],        excludeKeywords: ["歌回剪輯"] },
     ],
 
@@ -1103,7 +1103,7 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCHrOyfkspzM82TjnaAoxJmQ", label: "松鴉Jayauspice", keywords: ["瓦西瓦瓦", "vaswawa"], typeKeywords: ["cover"] },
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",           keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦"] },  // 歌回剪輯（全域音樂關鍵字自動分類）
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",           keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦", "MeloNyx"] },  // 歌回剪輯（全域音樂關鍵字自動分類）
     ],
 
     videoClipsChannelIds: [
@@ -1161,7 +1161,7 @@ const vtubers = [
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                          excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",   keywords: ["瓦西瓦瓦", "vaswawa", "瓦瓦"] },
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦"] },
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["瓦西瓦瓦", "Vaswawa", "瓦瓦", "MeloNyx"] },
     ],
 
     color: "#B8FFEC"   // 瓦西瓦瓦 代表色（薄荷綠）
@@ -1284,7 +1284,7 @@ const vtubers = [
 
     videoClipsChannelIds: [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["MeloNyX"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["希妮亞里絲", "SinnieAris", "希希"] },
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",      keywords: ["希妮亞里絲", "SinnieAris", "希希", "MeloNyx"] },
     ],
 
     color: "#FCE8A4"   // 希妮亞里絲 代表色（奶油黃）
@@ -1342,17 +1342,17 @@ const vtubers = [
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
     musicClipsChannelIds: [
       { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      typeKeywords: ["cover", "歌回", "歌切", "清唱"] },
-      { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈"],            typeKeywords: ["歌回", "唱歌", "cover"] },
+      { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"],            typeKeywords: ["歌回", "唱歌", "cover"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["結月莉莉奈", "Ririna"] },
       { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
     videoClipsChannelIds: [
-      { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      keywords: ["結月莉莉奈", "ririna", "奈奈"], excludeKeywords: ["cover", "歌回", "歌切", "清唱"] },  // 全頻道皆結月莉莉奈內容
-      { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈"],            excludeKeywords: ["歌回", "唱歌", "cover"] },  // 非歌回片段
+      { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"], excludeKeywords: ["cover", "歌回", "歌切", "清唱"] },  // 全頻道皆結月莉莉奈內容
+      { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"],            excludeKeywords: ["歌回", "唱歌", "cover"] },  // 非歌回片段
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyX"],                                 excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
-      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",     keywords: ["結月莉莉奈", "ririna", "奈奈"] },
+      { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",     keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"] },
     ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
@@ -1453,7 +1453,7 @@ const vtubers = [
 
     // ── 熱門影片精華──────────────────────────────────
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["依可露", "Ekorru", "團長", "可露"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["依可露", "Ekorru", "團長", "可露", "MeloNyx"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
     ],
 
     color: "#9671B0"   // 依可露 代表色（紫羅蘭）
@@ -1559,11 +1559,11 @@ const vtubers = [
     },
 
     musicClipsChannelIds: [
-      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室", keywords: ["若櫻依兔", "WakasaIto", "兔兔"], typeKeywords: ["cover", "guitar"] },
+      { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室", keywords: ["若櫻依兔", "WakasaIto", "兔兔", "MeloNyx"], typeKeywords: ["cover", "guitar"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["若櫻依兔", "WakasaIto", "兔兔"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
+      { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸", keywords: ["若櫻依兔", "WakasaIto", "兔兔", "MeloNyx"], excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
     ],
 
     color: "#AED4E9"   // 若櫻依兔 代表色（霧藍）
@@ -1613,19 +1613,19 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",           keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
-      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",          keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????",     keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",           keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UC_jQpk9qoWdvSQ8hqtadkNw", label: "BYA",            keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCufN2OUu-yAKmnkD3gr4aNw", label: "ThunderAttributePantsu", keywords: ["鯨諾", "whalefall"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",           keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切"] },  // 歌切彈唱系列
+      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",          keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????",     keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",           keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC_jQpk9qoWdvSQ8hqtadkNw", label: "BYA",            keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCufN2OUu-yAKmnkD3gr4aNw", label: "ThunderAttributePantsu", keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",      keywords: ["鯨諾", "whalefall"], typeKeywords: ["週年", "生日", "應援"] },  // 週年/生日應援企劃
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["鯨諾", "whalefall", "小心結天團", "派"] },
-      { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋",     keywords: ["鯨諾", "whalefall"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",      keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["週年", "生日", "應援"] },  // 週年/生日應援企劃
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["鯨諾", "whalefall", "Alluria", "小心結天團", "派"] },
+      { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋",     keywords: ["鯨諾", "whalefall", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     scheduleVideoId:  "r15JQHl8KL0",
@@ -1691,20 +1691,20 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["魁", "Kai", "這很魁以", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
-      { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",       keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",     keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????", keywords: ["魁", "Kai"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai", "Alluria"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai", "Alluria"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["魁", "Kai", "Alluria", "這很魁以", "國境之南"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
+      { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",       keywords: ["魁", "Kai", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",     keywords: ["魁", "Kai", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish??????", keywords: ["魁", "Kai", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai"], excludeKeywords: ["卡祖笛"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["魁", "Kai", "小心結天團"] },
-      { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",           keywords: ["魁", "Kai"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋", keywords: ["魁", "Kai", "這很魁以"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["魁", "Kai", "Alluria"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["魁", "Kai", "Alluria"], excludeKeywords: ["卡祖笛"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["魁", "Kai", "Alluria", "小心結天團"] },
+      { id: "UCPk2c45wPWSFVgdI7Nry2Xw", label: "槓槓",           keywords: ["魁", "Kai", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋", keywords: ["魁", "Kai", "Alluria", "這很魁以"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     scheduleVideoId:  "psgIP5rMRTA",
@@ -1771,19 +1771,19 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCk1ZS3ZsYNbwXsxaxtJW7Dg", label: "蛋餅_owo",  keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCk1ZS3ZsYNbwXsxaxtJW7Dg", label: "蛋餅_owo",  keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCyOGgk-ScfBwkkeej_RQPYw", label: "晨茉",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCk1ZS3ZsYNbwXsxaxtJW7Dg", label: "蛋餅_owo",  keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動", "壞女人", "HO YO"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"] },
-      { id: "UCu2mKGlGDS_cQbOIwCGuXSQ", label: "二七ER",           keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總"],          excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCyOGgk-ScfBwkkeej_RQPYw", label: "晨茉",       keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCk1ZS3ZsYNbwXsxaxtJW7Dg", label: "蛋餅_owo",  keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動", "壞女人", "HO YO"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"] },
+      { id: "UCu2mKGlGDS_cQbOIwCGuXSQ", label: "二七ER",           keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋", keywords: ["穆克蕗", "Mukuru", "穆穆", "穆總", "Alluria"],          excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     scheduleVideoId:  "fO8nKY_tpzM",
@@ -1843,22 +1843,22 @@ const vtubers = [
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
     musicClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["歌切", "合唱"] },
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["歌切", "線下連動"] },
-      { id: "UCA0M5H7dRqlaR9N9ThQsN7w", label: "水逆え柚希",         keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCoH17T3JwOGWtwJQxkUtJ0Q", label: "比邻星🐍🍷",          keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",        keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "合唱"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["卡祖笛"] },  // 卡祖笛兄弟系列
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "線下連動"] },
+      { id: "UCA0M5H7dRqlaR9N9ThQsN7w", label: "水逆え柚希",         keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCoH17T3JwOGWtwJQxkUtJ0Q", label: "比邻星🐍🍷",          keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",        keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
     videoClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], excludeKeywords: ["歌切", "合唱"] },
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], excludeKeywords: ["卡祖笛"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"] },
-      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCoH17T3JwOGWtwJQxkUtJ0Q", label: "比邻星🐍🍷",          keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["歌切", "合唱"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["卡祖笛"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"] },
+      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCoH17T3JwOGWtwJQxkUtJ0Q", label: "比邻星🐍🍷",          keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     scheduleVideoId:  "fl96oXs9Q1E",
@@ -1922,11 +1922,11 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["量產型", "Fuka22", "貳貳"], typeKeywords: ["cover", "威風堂々", "嘉賓"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["量產型", "Fuka22", "貳貳", "音雲漫步"], typeKeywords: ["cover", "威風堂々", "嘉賓"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["量產型", "Fuka22", "貳貳"], excludeKeywords: ["cover", "威風堂々", "嘉賓"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["量產型", "Fuka22", "貳貳", "音雲漫步"], excludeKeywords: ["cover", "威風堂々", "嘉賓"] },
     ],
 
     scheduleVideoId:  "haBTRQQeUoY",
@@ -1989,20 +1989,20 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], typeKeywords: ["歌切"] },
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["歌切"] },
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   typeKeywords: ["歌回", "之歌"] },   // 歌回剪輯 & CaKano之歌 系列
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "chita"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ",         keywords: ["崎塔", "chita"], typeKeywords: ["歌切", "歌回", "cover"] },
-      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["崎塔", "chita"],           typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita"], typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ",         keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["歌切", "歌回", "cover"] },
+      { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["崎塔", "chita", "CaKano"],           typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita"], excludeKeywords: ["歌切"] },
-      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   keywords: ["崎塔", "chita"], excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
-      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "chita"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "chita"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["歌切"] },
+      { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
+      { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "chita", "CaKano"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -2059,13 +2059,13 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "瑪緹"], typeKeywords: ["小年夜"] },
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "瑪緹", "ælis"], typeKeywords: ["小年夜"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光",   keywords: ["茶帽瑪緹歌回剪輯"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "瑪緹"],          excludeKeywords: ["小年夜"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["茶帽瑪緹", "chamamatti", "瑪緹"] },
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["茶帽瑪緹", "chamamatti", "瑪緹", "ælis"],          excludeKeywords: ["小年夜"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["茶帽瑪緹", "chamamatti", "瑪緹", "ælis"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光",   keywords: ["茶帽瑪緹精華"],                            excludeKeywords: ["歌回剪輯"] },
     ],
 
@@ -2240,13 +2240,13 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "Pomi", "波美"], typeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["百百波美", "Pomi", "波美", "音雲漫步"], typeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
       { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["百百波美", "Pomi", "波美"], excludeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["百百波美", "Pomi", "波美"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",       keywords: ["百百波美", "Pomi", "波美", "音雲漫步"], excludeKeywords: ["cover", "米津玄師", "HoneyWorks", "愛言葉", "歌式"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["百百波美", "Pomi", "波美", "音雲漫步"] },
     ],
 
     scheduleVideoId:  "bSPwY0KHks4",
@@ -2303,11 +2303,11 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["心cocor0", "cocor0", "可可"], typeKeywords: ["cover"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["心cocor0", "cocor0", "可可", "音雲漫步"], typeKeywords: ["cover"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["心cocor0", "cocor0", "可可"], excludeKeywords: ["cover"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["心cocor0", "cocor0", "可可", "音雲漫步"], excludeKeywords: ["cover"] },
     ],
 
     scheduleVideoId:  "q1ls6HmTVwc",
@@ -2372,13 +2372,13 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉"], typeKeywords: ["cover", "嘉賓"] },
-      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉"], typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉", "音雲漫步"], typeKeywords: ["cover", "嘉賓"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉", "音雲漫步"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉"], excludeKeywords: ["cover", "嘉賓"] },
-      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉", "音雲漫步"], excludeKeywords: ["cover", "嘉賓"] },
+      { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["羽芝扉扉", "Uchi Fifi", "扉扉", "音雲漫步"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "Vk_0sRnEmp0",
@@ -2483,14 +2483,14 @@ const vtubers = [
 
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
     musicClipsChannelIds: [
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori"], typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori", "CaKano"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     // ── 熱門影片精華──────────────────────────────────
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["諾恪里", "小心結天團"] },
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["諾恪里", "Nokori"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["諾恪里", "Nokori", "CaKano"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori", "CaKano"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "Od2Sczr6wmw",
@@ -2548,13 +2548,13 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "KeKeMii", "米伊"], typeKeywords: ["歌切", "cover"] },
-      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",     keywords: ["克克米伊", "KeKeMii", "米伊"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"], typeKeywords: ["歌切", "cover"] },
+      { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "??????",     keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["克克米伊", "KeKeMii", "米伊"] },
-      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "KeKeMii", "米伊"], excludeKeywords: ["歌切", "cover"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"] },
+      { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"], excludeKeywords: ["歌切", "cover"] },
     ],
 
     scheduleVideoId:  "q5bBqi8DUc8",
@@ -2625,13 +2625,13 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",         keywords: ["珮蕾", "Pele", "公主", "漢堡"],      typeKeywords: ["cover", "嘉賓"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",         keywords: ["珮蕾", "Pele", "公主", "漢堡", "ælis"],      typeKeywords: ["cover", "嘉賓"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光",     keywords: ["珮蕾歌回剪輯"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",           keywords: ["珮蕾", "Pele", "公主", "漢堡"],                               excludeKeywords: ["cover", "嘉賓"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",     keywords: ["珮蕾", "Pele", "公主", "漢堡"] },
+      { id: "UCUxpbqNNzWup9PZXdLUS8Jw", label: "阿嗚",           keywords: ["珮蕾", "Pele", "公主", "漢堡", "ælis"],                               excludeKeywords: ["cover", "嘉賓"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",     keywords: ["珮蕾", "Pele", "公主", "漢堡", "ælis"] },
       { id: "UC7KF3UyPn2SFM-3oLApYYSQ", label: "ミちゃんmichan", keywords: ["珮蕾精華", "珮蕾Pele"],                        excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UC66CXCqyFbN3wkhw1cDP3yg", label: "茄子阿光",       keywords: ["珮蕾精華", "珮蕾&梅奧奧精華"],                 excludeKeywords: ["歌回剪輯"] },
     ],
@@ -2693,13 +2693,13 @@ const vtubers = [
 ],
 
     musicClipsChannelIds: [
-      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },  // 全域音樂關鍵字自動分類
-      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
+      { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },  // 全域音樂關鍵字自動分類
+      { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王", keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },
     ],
 
     videoClipsChannelIds: [
-      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
-      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["睏睏幽昵", "幽昵", "Yawnii"] },
+      { id: "UCfy_OLAzKrZH-UGBlwndP6A", label: "浮生0508",   keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },
+      { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },
     ],
 
     scheduleVideoId:  "bae5xjjhMsI",
