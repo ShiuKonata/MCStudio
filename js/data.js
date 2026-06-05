@@ -100,6 +100,7 @@ const vtubers = [
     // ── Shorts（≤60秒的短影片）──────────────────
     shorts: [
       { id: "Ej2tkEtePy8", title: "【Cover】comethru /Jeremy Zucker 💧詩雨蔻達【自彈自唱】",                      date: "2023-08-29" },
+      { id: "cRhutR0qGGY", title: "【聖誕佳音XXV/DAY19】聖誕老公公竟是一場騙局??💧詩雨蔻達", date: "2023-12-19" },
     ],
 
     // ── 手動分類的原創曲（未分類區分配）──────────────────
