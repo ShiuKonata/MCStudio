@@ -2830,9 +2830,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 【自動加載】頁面載入完成時自動加載未分類區的篩選
-    // 不需要等待用戶點擊，直接執行 STEP 1-4 的篩選邏輯
+    // 【自動加載】頁面載入完成時自動加載所有官方剪輯區域的內容
+    // 確保官方剪輯分頁首次進入時，一般影片、廣告等區域已被初始化
     setTimeout(() => {
+      // 加載一般影片、廣告、初配信、工商、Vlog
+      console.log('📺 [Auto-init] Loading default sections for officialvideos tab...');
+      loadGeneralYear();
+      loadAdsYear();
+      loadFirstYear();
+      loadCommerceYear();
+      loadVlogYear();
+      console.log('📺 [Auto-init] Default sections loaded');
+
+      // 加載未分類區
       if (tryLoadUnclassified && !window._uncLoaded) {
         window._uncLoaded = true;
         tryLoadUnclassified();
