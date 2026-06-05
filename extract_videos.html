@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>26位VTuber分類結果提取工具</title>
+  <style>
+    body { font-family: monospace; padding: 20px; }
+    textarea { width: 100%; height: 400px; }
+    button { padding: 10px; margin: 5px; }
+    .result { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <h1>🎵 26位VTuber分類結果提取工具</h1>
+  <button onclick="startExtraction()">開始提取所有26位的分類結果</button>
+  <button onclick="clearResults()">清除結果</button>
+  <div id="output" class="result"></div>
+  <textarea id="results" placeholder="提取結果會顯示在這裡..."></textarea>
+
+  <script>
+    const vtuberIds = [
+      'rumi', 'shiukoreon', 'kannazukilubee', 'chita', 'ekorru',
+      'himegin', 'sinneria', 'mylle', 'whalefall',
+      'arf', 'cocoro', 'nokori', 'paroniie', 'momowami',
+      'iars', 'shulaku', 'arrynia', 'chamamatti',
+      'shiuleon', 'chamamatti', 'shurakukiriko',
+      'yuzukiririna', 'kaialluria', 'wakasa',
+      'hanetobi', 'kokomii', 'peirei', 'konkouyuni'
+    ];
+
+    async function startExtraction() {
+      let allResults = [];
+      let output = document.getElementById('output');
+      let textarea = document.getElementById('results');
+      
+      output.innerHTML = '⏳ 開始掃描所有26位VTuber...';
+      textarea.value = '';
+      
+      for (let id of vtuberIds) {
+        output.innerHTML += `<br>🔄 掃描: ${id}...`;
+        // 這裡應該動態載入每個vtuber的頁面並提取console結果
+        // 由於跨域限制，實際需要在MCStudio網站本地執行
+      }
+      
+      output.innerHTML += '<br>✅ 掃描完成！';
+      textarea.value = JSON.stringify(allResults, null, 2);
+    }
+
+    function clearResults() {
+      document.getElementById('results').value = '';
+      document.getElementById('output').innerHTML = '';
+    }
+  </script>
+</body>
+</html>

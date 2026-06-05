@@ -1035,14 +1035,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return videos;
     }
 
-    // 過濾：只保留 >60秒的影片（≤60秒的移至 Shorts）
-    // 【說明】≤60秒的影片由 UUSH 播放列表處理，不在此添加以避免重複
+    // 過濾：只保留 ≥61秒的影片（<61秒的移至 Shorts）
+    // 【說明】<61秒的影片由 UUSH 播放列表處理，不在此添加以避免重複
     const removed = [];
     const filtered = videos.filter(v => {
       const durationSec = durationMap[v.id];
       // 如果沒有獲取到持續時間，保守起見返回 true（保留影片）
       if (durationSec === undefined) return true;
-      const keep = durationSec > 60;
+      const keep = durationSec >= 61;
       if (!keep) {
         removed.push({ id: v.id, title: v.title, duration: durationSec });
       }
@@ -2130,8 +2130,13 @@ document.addEventListener('DOMContentLoaded', () => {
               filteredCount++;
               continue;
             }
-            // 排除 Shorts（UUSH 播放列表）
+            // 排除 Shorts（UUSH 播放列表 或 手動標記 isShorts）
             if (shortsVideoIds.has(vid)) {
+              filteredCount++;
+              continue;
+            }
+            // 檢查手動標記的 Shorts
+            if (v.shorts && v.shorts.some(s => s.id === vid && s.isShorts)) {
               filteredCount++;
               continue;
             }
@@ -2209,12 +2214,12 @@ document.addEventListener('DOMContentLoaded', () => {
                   existingVideoIds.add(vid);
                   step3Candidates.push({ id: vid, title: title, date: date, type: step2Type, action: '【STEP 2】需添加至 data.js', duration: durationSec });
                 } else {
-                  // 【新規則】≤60秒 → 只放 Shorts（如果不在 UUSH 中）
-                  if (!shortsVideoIds.has(vid)) {
+                  // 【新規則】<61秒 → 只放 Shorts（檢查手動標記或 UUSH 播放列表）
+                  const isManualShorts = v.shorts && v.shorts.some(s => s.id === vid && s.isShorts);
+                  if (!shortsVideoIds.has(vid) && !isManualShorts) {
                     // 添加到 Shorts
                     if (!v.videos.shorts) v.videos.shorts = [];
                     v.videos.shorts.push({ id: vid, title: title, date: date, duration: durationSec });
-                  } else {
                   }
                   existingVideoIds.add(vid);
                 }
@@ -2268,12 +2273,12 @@ document.addEventListener('DOMContentLoaded', () => {
                   existingVideoIds.add(vid);
                   step3Candidates.push({ id: vid, title: title, date: date, type: step3Type, action: '【STEP 3】需添加至 data.js', duration: durationSec });
                 } else {
-                  // 【新規則】≤60秒 → 只放 Shorts（如果不在 UUSH 中）
-                  if (!shortsVideoIds.has(vid)) {
+                  // 【新規則】<61秒 → 只放 Shorts（檢查手動標記或 UUSH 播放列表）
+                  const isManualShorts = v.shorts && v.shorts.some(s => s.id === vid && s.isShorts);
+                  if (!shortsVideoIds.has(vid) && !isManualShorts) {
                     // 添加到 Shorts
                     if (!v.videos.shorts) v.videos.shorts = [];
                     v.videos.shorts.push({ id: vid, title: title, date: date, duration: durationSec });
-                  } else {
                   }
                   existingVideoIds.add(vid);
                 }

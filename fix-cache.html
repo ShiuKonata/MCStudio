@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>清除快取</title>
+</head>
+<body>
+    <h1>正在清除 Service Worker 快取...</h1>
+    <script>
+        // 註銷所有 Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                registrations.forEach(reg => {
+                    reg.unregister();
+                    console.log('✓ Service Worker 已註銷');
+                });
+            });
+        }
+        
+        // 清除所有快取
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                names.forEach(name => {
+                    caches.delete(name);
+                    console.log('✓ 快取已清除: ' + name);
+                });
+            });
+        }
+        
+        // 清除 sessionStorage
+        sessionStorage.clear();
+        console.log('✓ sessionStorage 已清除');
+        
+        setTimeout(() => {
+            alert('快取已清除！\n\n現在請：\n1. 重新整理頁面\n2. 按 Ctrl+Shift+F5 硬重新整理\n3. 再次打開帕蘿妮頁面');
+        }, 500);
+    </script>
+</body>
+</html>
