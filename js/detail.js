@@ -92,6 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!v.videos.unclassified) v.videos.unclassified = [];
   if (!v.videos.shorts) v.videos.shorts = v.shorts || [];  // 從 v.shorts 複製（如果 v.videos.shorts 不存在）
   if (!v.videos.general) v.videos.general = v.general || [];  // 支援一般影片分類
+  if (!v.videos.vlog) v.videos.vlog = v.vlog || [];  // 支援 Vlog 分類
+  if (!v.videos.commerce) v.videos.commerce = v.commerce || [];  // 支援工商分類
 
   // 添加手動分類的原創曲
   if (v.originals_manual && v.originals_manual.length > 0) {
