@@ -2662,6 +2662,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <div class="ls-thumb-wrap">
                     <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
                     <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+                    <div class="ls-duration-badge" style="background:rgba(255,111,0,0.9)">Shorts</div>
                   </div>
                   <div class="ls-info">
                     <div class="ls-title">${title || '（無標題）'}</div>
