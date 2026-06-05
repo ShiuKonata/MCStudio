@@ -41,8 +41,6 @@ const vtubers = [
     ],
 
     videos: [
-      { id: "IPJYkvnBd-0", title: "【Cover】【突發歌回】尼也睡不著咪?來這裡試試看(圖奇留檔)💧詩雨蔻達",                   date: "2025-12-23" },
-      { id: "SMftU9oUHAk", title: "【Cover】【吉他歌回剪輯】愛愛愛/方大同💧詩雨蔻達", date: "2025-03-05" },
       { id: "pNYUnZmD0Kg", title: "【Cover】mosi mosi? / 楽音💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-05-28" },
       { id: "V6EGDGnCKUw", title: "【Cover】メロウ / 須田景凪💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-04-18" },
       { id: "66XFn8Gd7hM", title: "【Cover】春泥棒 / ヨルシカ 💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-04-11" },
@@ -89,7 +87,6 @@ const vtubers = [
       { id: "FMsonPeFovw", title: "【Cover】Taylor Swift-The Best Day💧詩雨蔻達【cover】",                        date: "2023-05-06" },
       { id: "pkQOYj6raUQ", title: "【Cover】#花譜 - トウキョウ・シャンディ・ランデヴ💧詩雨蔻達【cover】",           date: "2023-04-24" },
       { id: "p2UkjpvFA3k", title: "【Original】Official髭男dism -ミックスナッツ 💧詩雨蔻達【cover】",               date: "2023-04-14" },
-      { id: "LWMx3NkcsY0", title: "【Original】【官方精華-統領原創曲合輯】(亂)寫歌系vtuber酒後寫得歌都是飽含愛意的，除了..💧詩雨蔻達",   date: "2023-09-04" },
       { id: "dVtyGge6v_s", title: "【Cover】Yoasobi - 海のまにまに💧詩雨蔻達【cover】",                            date: "2023-04-10" },
       { id: "0bg4dYS8Znk", title: "【Cover】跟Ado一起唱!!『 アタシは問題作 』💧詩雨蔻達【cover】",               date: "2023-03-20" },
       { id: "bzMqxkyO3yA", title: "【Cover】メガテラ・ゼロ -この夜に乾杯 💧詩雨蔻達",                              date: "2023-02-25" },
@@ -122,11 +119,15 @@ const vtubers = [
 
     // ── 一般影片（官方上傳的綜合內容）──────────────────
     general: [
+      { id: "IPJYkvnBd-0", title: "【突發歌回】尼也睡不著咪?來這裡試試看(圖奇留檔)💧詩雨蔻達", date: "2025-12-23" },
+      { id: "SMftU9oUHAk", title: "【吉他歌回剪輯】愛愛愛/方大同💧詩雨蔻達", date: "2025-03-05" },
       { id: "62e-Blfl29c", title: "【官方精華-麥塊迷路記】小埃認證大路痴...💧詩雨蔻達 ft. @OumuaXDFP", date: "2023-10-14" },
       { id: "8t6yI60N5M8", title: "【官方精華-最容易被扭蛋騙錢的主播】竟然想把糞OO送給觀眾?!💧詩雨蔻達", date: "2023-10-02" },
       { id: "KGOrZpL_uFk", title: "【官方精華-絕命精神病院】慘叫注意!! 那位愛烙狠話，遇到危險卻是第一個先跑的落跑型大統領💧詩雨蔻達", date: "2023-07-02" },
       { id: "yEXTaPcoHz8", title: "【詩雨蔻達｜官方精華】醉後大統領，那天酒雜發生的事就當作我們的祕密啦", date: "2023-03-30" },
       { id: "OB8yJ_PQ4H4", title: "【詩雨蔻達｜官方精華】早安早安!! 統領車速過快請記得繫好安全帶", date: "2023-03-23" },
+      { id: "EwwBQqdReY4", title: "COllmeDAddy", date: "2023-02-12" },
+      { id: "LWMx3NkcsY0", title: "【Original】【官方精華-統領原創曲合輯】(亂)寫歌系vtuber酒後寫得歌都是飽含愛意的，除了..💧詩雨蔻達", date: "2023-09-04" },
     ],
 
     // ── Vlog（日常生活、vlog 類內容）──────────────────
