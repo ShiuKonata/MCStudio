@@ -2376,10 +2376,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 【新增】一般影片區加載函數（STEP 5 手動分類）
     function loadGeneralYear() {
       const container = document.getElementById('ov-general-container');
-      if (!container) return;
+      if (!container) {
+        console.warn('❌ loadGeneralYear: container not found');
+        return;
+      }
+      console.log('📺 loadGeneralYear called, window._generalVideos:', window._generalVideos?.length || 0);
       container.innerHTML = '';
 
       if (window._generalVideos && window._generalVideos.length > 0) {
+        console.log('📺 Rendering', window._generalVideos.length, 'general videos');
         window._generalVideos.forEach(vid => {
           const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
           const title = esc(vid.title || '');
