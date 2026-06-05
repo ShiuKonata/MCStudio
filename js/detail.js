@@ -2319,7 +2319,16 @@ document.addEventListener('DOMContentLoaded', () => {
               unclassified: v.videos.unclassified || []
             }, null, 2);
           }
-          if (count === 0) container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">❓</span><p>暫無未分類影片</p></div>`;
+          // 【隱藏未分類區】如果沒有待分類影片，隱藏整個區域
+          const uncSection = document.getElementById('ov-unclassified-section');
+          if (count === 0) {
+            container.innerHTML = '';  // 清空容器
+            if (uncSection) uncSection.style.display = 'none';  // 隱藏整個區域
+            console.log('📭 未分類區已隱藏（沒有待分類影片）');
+          } else {
+            if (uncSection) uncSection.style.display = '';  // 顯示區域
+            console.log('❓ 未分類區顯示（有待分類影片：' + count + '部）');
+          }
 
           // 移除分頁
           uncNextPageToken = null;
