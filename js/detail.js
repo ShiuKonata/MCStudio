@@ -3074,7 +3074,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window._lsLoaded = true;
       tryLoadLiveStreams(false);
     }
-    // 官方剪輯：首次進入分頁時載入「Shorts」和「未分類區」
+    // 官方剪輯：首次進入分頁時載入所有區域
     if (key === 'officialvideos') {
       if (tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
@@ -3084,6 +3084,12 @@ document.addEventListener('DOMContentLoaded', () => {
         window._uncLoaded = true;
         tryLoadUnclassified();
       }
+      // 【新增】初始化其他影片區（一般、廣告、初配信、工商、Vlog）以支援第一次點擊時正確顯示
+      loadGeneralYear();
+      loadAdsYear();
+      loadFirstYear();
+      loadCommerceYear();
+      loadVlogYear();
     }
     // 歌曲統計：首次進入分頁時才開始載入
     if (key === 'songstats' && window._loadSongStats && !window._ssLoaded) {
