@@ -2400,6 +2400,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       console.log('📺 loadGeneralYear called, window._generalVideos:', window._generalVideos?.length || 0);
+      console.log('📺 [DEBUG] window._generalVideos 內容:', window._generalVideos);
       container.innerHTML = '';
 
       if (window._generalVideos && window._generalVideos.length > 0) {
