@@ -2199,19 +2199,11 @@ document.addEventListener('DOMContentLoaded', () => {
               } else {
                 // ❌ 還沒有在 data.js 的 v.videos 中
                 if (durationSec >= 60) {
-                  // 【新規則】≥60秒 → Cover 區 + 一般影片區
+                  // 【新規則】≥60秒 → Cover 區 / Original 區（不添加到一般影片區）
                   if (step2Type === 'cover') {
                     v.videos.covers.push({ id: vid, title: newTitle, date: date });
-                    // 同時添加到一般影片區
-                    if (!window._generalVideos.some(v => v.id === vid)) {
-                      window._generalVideos.push({ id: vid, title: newTitle, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
-                    }
                   } else if (step2Type === 'original') {
                     v.videos.originals.push({ id: vid, title: newTitle, date: date });
-                    // 同時添加到一般影片區
-                    if (!window._generalVideos.some(v => v.id === vid)) {
-                      window._generalVideos.push({ id: vid, title: newTitle, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
-                    }
                   }
                   existingVideoIds.add(vid);
                   step3Candidates.push({ id: vid, title: title, date: date, type: step2Type, action: '【STEP 2】需添加至 data.js', duration: durationSec });
@@ -2266,12 +2258,8 @@ document.addEventListener('DOMContentLoaded', () => {
               } else {
                 // ❌ 還沒有在 data.js 的 v.videos 中
                 if (durationSec >= 60) {
-                  // 【新規則】≥60秒 → Cover 區 + 一般影片區
+                  // 【新規則】≥60秒 → Cover 區（不添加到一般影片區）
                   v.videos.covers.push({ id: vid, title: newTitle, date: date });
-                  // 同時添加到一般影片區
-                  if (!window._generalVideos.some(v => v.id === vid)) {
-                    window._generalVideos.push({ id: vid, title: newTitle, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
-                  }
                   existingVideoIds.add(vid);
                   step3Candidates.push({ id: vid, title: title, date: date, type: step3Type, action: '【STEP 3】需添加至 data.js', duration: durationSec });
                 } else {
@@ -2332,6 +2320,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // 移除分頁
           uncNextPageToken = null;
+
+          // 【新增】更新未分類區可見性
+          updateUnclassifiedVisibility();
         }
       } catch (err) {
         container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">⚠️</span><p>${T('apiError', {msg: err.message})}</p></div>`;
@@ -2341,6 +2332,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
+
+    // 【新增】更新未分類區可見性（根據是否有待分類影片）
+    function updateUnclassifiedVisibility() {
+      const uncSection = document.getElementById('ov-unclassified-section');
+      const uncContainer = document.getElementById('unc-container');
+
+      if (!uncSection || !uncContainer) return;
+
+      // 檢查未分類區是否有影片
+      const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
+
+      if (hasUnclassifiedVideos) {
+        uncSection.style.display = '';  // 顯示
+        console.log('✅ 未分類區已顯示（有待分類影片）');
+      } else {
+        uncSection.style.display = 'none';  // 隱藏
+        console.log('📭 未分類區已隱藏（沒有待分類影片）');
+      }
+    }
 
     // 【新增】廣告區加載函數
     function loadAdsYear() {
