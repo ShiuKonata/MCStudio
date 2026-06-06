@@ -2,7 +2,7 @@ name: 🎵 Auto-Update VTuber Videos
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0,6,12,18 * * *'
   workflow_dispatch:
 
 jobs:
@@ -45,8 +45,8 @@ jobs:
           }
 
           const now = new Date();
-          const dayOfYear = Math.floor((now - new Date(now.getUTCFullYear(), 0, 0)) / 86400000);
-          const segmentIndex = dayOfYear % 4;
+          const hourOfDay = now.getUTCHours();
+          const segmentIndex = Math.floor(hourOfDay / 6) % 4;
 
           const segments = [
             { ids: ['shiucoda', 'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko'], name: '時段1' },
