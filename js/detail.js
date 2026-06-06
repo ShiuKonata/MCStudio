@@ -2893,6 +2893,17 @@ document.addEventListener('DOMContentLoaded', () => {
         window._uncLoaded = true;
         tryLoadUnclassified();
       }
+
+      // 【重要】確保未分類區在初始化後被隱藏（如果沒有影片）
+      setTimeout(() => {
+        const uncSection = document.getElementById('ov-unclassified-section');
+        const uncContainer = document.getElementById('unc-container');
+        if (uncSection && uncContainer) {
+          const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
+          uncSection.style.display = hasUnclassifiedVideos ? '' : 'none';
+          console.log(hasUnclassifiedVideos ? '✅ 未分類區已顯示' : '📭 未分類區已隱藏（自動初始化後確認）');
+        }
+      }, 500);
     }, 100);
   }
 
