@@ -2853,6 +2853,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 【自動加載】頁面載入完成時自動加載所有官方剪輯區域的內容
     // 確保官方剪輯分頁首次進入時，一般影片、廣告等區域已被初始化
     setTimeout(() => {
+      console.log('🔧 [CODE VERSION] Auto-init with section hiding - 2026-06-06');
       // 【重要】隱藏所有官方剪輯區內的 section，防止內容混雜
       const ovSections = {
         general: document.getElementById('ov-general-section'),
