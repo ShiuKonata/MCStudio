@@ -2401,7 +2401,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       console.log('📺 loadGeneralYear called, window._generalVideos:', window._generalVideos?.length || 0);
       console.log('📺 [DEBUG] window._generalVideos 內容:', window._generalVideos);
+      console.log('📺 [DEBUG] 清空前容器HTML:', container.innerHTML.substring(0, 100));
       container.innerHTML = '';
+      console.log('📺 [DEBUG] 清空後容器HTML:', container.innerHTML);
 
       if (window._generalVideos && window._generalVideos.length > 0) {
         console.log('📺 Rendering', window._generalVideos.length, 'general videos');
