@@ -2853,6 +2853,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // 【自動加載】頁面載入完成時自動加載所有官方剪輯區域的內容
     // 確保官方剪輯分頁首次進入時，一般影片、廣告等區域已被初始化
     setTimeout(() => {
+      // 【重要】隱藏所有官方剪輯區內的 section，防止內容混雜
+      const ovSections = {
+        general: document.getElementById('ov-general-section'),
+        shorts: document.getElementById('ov-shorts-section'),
+        vlog: document.getElementById('ov-vlog-section'),
+        ads: document.getElementById('ov-ads-section'),
+        first: document.getElementById('ov-first-section'),
+        commerce: document.getElementById('ov-commerce-section'),
+        unclassified: document.getElementById('ov-unclassified-section')
+      };
+      Object.values(ovSections).forEach(el => { if (el) el.style.display = 'none'; });
+
       // 加載一般影片、廣告、初配信、工商、Vlog
       console.log('📺 [Auto-init] Loading default sections for officialvideos tab...');
       loadGeneralYear();
@@ -2862,17 +2874,15 @@ document.addEventListener('DOMContentLoaded', () => {
       loadVlogYear();
       console.log('📺 [Auto-init] Default sections loaded');
 
+      // 【新增】自動初始化時只顯示一般影片區
+      if (ovSections.general) ovSections.general.style.display = '';
+
       // 加載未分類區
       if (tryLoadUnclassified && !window._uncLoaded) {
         window._uncLoaded = true;
         tryLoadUnclassified();
       }
     }, 100);
-
-    // 自動加載廣告區
-    setTimeout(() => {
-      loadAdsYear();
-    }, 200);
   }
 
   // ── 共用快取工具（sessionStorage，30 分鐘過期）──
