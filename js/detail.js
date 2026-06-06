@@ -2877,6 +2877,14 @@ document.addEventListener('DOMContentLoaded', () => {
       loadVlogYear();
       console.log('📺 [Auto-init] Default sections loaded');
 
+      // 【重要】在加載函數執行後，再次隱藏所有非general的section
+      // 因為加載函數會根據各自的影片數量設置display屬性
+      Object.keys(ovSections).forEach(key => {
+        if (key !== 'general' && ovSections[key]) {
+          ovSections[key].style.display = 'none';
+        }
+      });
+
       // 【新增】自動初始化時只顯示一般影片區
       if (ovSections.general) ovSections.general.style.display = '';
 
@@ -3150,6 +3158,14 @@ document.addEventListener('DOMContentLoaded', () => {
       loadFirstYear();
       loadCommerceYear();
       loadVlogYear();
+
+      // 【重要】在加載函數執行後，再次隱藏所有非general的section
+      // 因為加載函數會根據各自的影片數量設置display屬性
+      Object.keys(ovSections).forEach(key => {
+        if (key !== 'general' && ovSections[key]) {
+          ovSections[key].style.display = 'none';
+        }
+      });
 
       // 【新增】首次進入時自動顯示一般影片區
       if (ovSections.general) ovSections.general.style.display = '';
