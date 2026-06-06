@@ -2710,6 +2710,17 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             items.forEach(item => renderYtsCard(container, item));
           }
+
+          // 【新增】按日期排序所有Shorts（最新>最舊）
+          const allCards = Array.from(container.querySelectorAll('.ls-card[data-vid]'));
+          allCards.sort((a, b) => {
+            const dateA = a.querySelector('.ls-date')?.textContent || '';
+            const dateB = b.querySelector('.ls-date')?.textContent || '';
+            return dateB.localeCompare(dateA);  // 字串比較，最新在前
+          });
+          // 重新排列卡片順序
+          allCards.forEach(card => container.appendChild(card));
+
           ytsNextPageToken = data.nextPageToken || null;
           if (moreWrap) moreWrap.style.display = ytsNextPageToken ? 'flex' : 'none';
           cacheSet(ytsCacheKey, { html: container.innerHTML, nextPageToken: ytsNextPageToken });
