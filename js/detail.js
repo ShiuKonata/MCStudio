@@ -3111,6 +3111,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // 官方剪輯：首次進入分頁時載入所有區域
     if (key === 'officialvideos') {
+      // 【重要】隱藏所有官方剪輯區內的 section，防止內容混雜
+      const ovSections = {
+        general: document.getElementById('ov-general-section'),
+        shorts: document.getElementById('ov-shorts-section'),
+        vlog: document.getElementById('ov-vlog-section'),
+        ads: document.getElementById('ov-ads-section'),
+        first: document.getElementById('ov-first-section'),
+        commerce: document.getElementById('ov-commerce-section'),
+        unclassified: document.getElementById('ov-unclassified-section')
+      };
+      Object.values(ovSections).forEach(el => { if (el) el.style.display = 'none'; });
+
       if (tryLoadYtShorts && !window._ytsLoaded) {
         window._ytsLoaded = true;
         tryLoadYtShorts();
@@ -3125,6 +3137,9 @@ document.addEventListener('DOMContentLoaded', () => {
       loadFirstYear();
       loadCommerceYear();
       loadVlogYear();
+
+      // 【新增】首次進入時自動顯示一般影片區
+      if (ovSections.general) ovSections.general.style.display = '';
     }
     // 歌曲統計：首次進入分頁時才開始載入
     if (key === 'songstats' && window._loadSongStats && !window._ssLoaded) {
