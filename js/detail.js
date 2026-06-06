@@ -2337,6 +2337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateUnclassifiedVisibility() {
       const uncSection = document.getElementById('ov-unclassified-section');
       const uncContainer = document.getElementById('unc-container');
+      const uncBtn = document.querySelector('.ov-section-btn[data-ovsection="unclassified"]');
 
       if (!uncSection || !uncContainer) return;
 
@@ -2344,10 +2345,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
 
       if (hasUnclassifiedVideos) {
-        uncSection.style.display = '';  // 顯示
+        uncSection.style.display = '';  // 顯示容器
+        if (uncBtn) uncBtn.style.display = '';  // 顯示按鈕
         console.log('✅ 未分類區已顯示（有待分類影片）');
       } else {
-        uncSection.style.display = 'none';  // 隱藏
+        uncSection.style.display = 'none';  // 隱藏容器
+        if (uncBtn) uncBtn.style.display = 'none';  // 隱藏按鈕
         console.log('📭 未分類區已隱藏（沒有待分類影片）');
       }
     }
@@ -2898,9 +2901,11 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         const uncSection = document.getElementById('ov-unclassified-section');
         const uncContainer = document.getElementById('unc-container');
+        const uncBtn = document.querySelector('.ov-section-btn[data-ovsection="unclassified"]');
         if (uncSection && uncContainer) {
           const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
           uncSection.style.display = hasUnclassifiedVideos ? '' : 'none';
+          if (uncBtn) uncBtn.style.display = hasUnclassifiedVideos ? '' : 'none';
           console.log(hasUnclassifiedVideos ? '✅ 未分類區已顯示' : '📭 未分類區已隱藏（自動初始化後確認）');
         }
       }, 500);
