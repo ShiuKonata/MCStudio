@@ -296,6 +296,8 @@ const vtubers = [
 
     // 會員限定直播（手動填入，id 填 YouTube 影片 ID）
     memberVideos: [
+      { id: "iBstTkj9YQs", title: "【會限】2026勞動節吉他彈唱24小part.1💧詩雨蔻達", date: "2026-05-14" },
+      { id: "eit0_YgfAk4", title: "【會限】2026勞動節吉他彈唱24小part.2💧詩雨蔻達", date: "2026-05-14" },
       { id: "bSATcgUVhpo", title: "桌寵最終版分享!!順便代抽💧詩雨蔻達", date: "2026-05-20" },
       { id: "3wQiTBf7iHk", title: "【會限】練練歌，聊聊(炫耀)會員福利!!💧詩雨蔻達 #CODA報報", date: "2026-03-25" },
       { id: "iawtSS8RxPk", title: "【會限】練歌練吉他，連做最簡單ㄉ事都像在復健💧詩雨蔻達", date: "2026-02-04" },
