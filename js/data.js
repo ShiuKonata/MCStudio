@@ -2121,21 +2121,13 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "ShiroLeon"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "ShiroLeon"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "ShiroLeon", "alluria"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "ShiroLeon"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["希洛萊昂", "ShiroLeon"], excludeKeywords: ["卡祖笛"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "ShiroLeon"], excludeKeywords: ["歌切", "cover", "線下連動"] },
-    ],
-
-    musicClips: [
-      { id: "az1Qf_9sqOQ", title: "【Alluria線下連動非官方粉絲精華】國境之南#alluria #vtuber #這很魁以 #涅手涅腳 #蕗live", keywords: ["希洛萊昂", "ShiroLeon"] },
-    ],
-
-    videoClips: [
-      { id: "TliuGEj-0SM", title: "【非官方粉絲精華】潔牙小天使穆總在線教你刷牙🧚‍♂️🧚‍♂️最佳牙齒保健科教材（？）#alluria #萊覲見 #蕗live #vtuber", keywords: ["希洛萊昂", "ShiroLeon"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "ShiroLeon", "alluria"], excludeKeywords: ["歌切", "cover", "線下連動"] },
     ],
 
     scheduleVideoId:  "TYDgPZbXl34",
