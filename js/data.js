@@ -2121,13 +2121,13 @@ const vtubers = [
 
     musicClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "ShiroLeon"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "ShiroLeon", "alluria"], typeKeywords: ["歌切", "cover", "線下連動"] },  // Alluria 線下連動合唱
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂", keywords: ["希洛萊昂", "ShiroLeon", "alluria"], typeKeywords: ["歌切", "cover", "線下連動"], excludeKeywords: ["鯨諾", "whalefall", "魁kai", "穆克蕗", "mukuru", "涅爾菲", "nyrfier"] },  // Alluria 線下連動合唱
     ],
 
     videoClipsChannelIds: [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["希洛萊昂", "ShiroLeon"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCkWWf4NpdWKjcmab-mcbV3Q", label: "貓mao",      keywords: ["希洛萊昂", "ShiroLeon"], excludeKeywords: ["卡祖笛"] },
-      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂",       keywords: ["希洛萊昂", "ShiroLeon", "alluria"], excludeKeywords: ["歌切", "cover", "線下連動"] },
+      { id: "UCDql68LqPiQmpGH-tq4jI_g", label: "程憂", keywords: ["希洛萊昂", "ShiroLeon", "alluria"], excludeKeywords: ["鯨諾", "whalefall", "魁kai", "穆克蕗", "mukuru", "涅爾菲", "nyrfier"] },
     ],
 
     scheduleVideoId:  "TYDgPZbXl34",
