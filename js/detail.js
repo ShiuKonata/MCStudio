@@ -1849,7 +1849,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 【新增】廣告、一般影片、初配信容器
     window._adsVideos = [];      // 廣告影片（自動檢測）
-    window._generalVideos = (v.videos.general || []).map(vid => ({
+    window._generalVideos = (v.general || []).map(vid => ({
       id: vid.id,
       title: vid.title,
       date: vid.date,
@@ -1861,13 +1861,13 @@ document.addEventListener('DOMContentLoaded', () => {
       date: vid.date,
       thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
     }));  // 初配信（來自 data.js）
-    window._vlogVideos = (v.videos.vlog || []).map(vid => ({
+    window._vlogVideos = (v.vlog || []).map(vid => ({
       id: vid.id,
       title: vid.title,
       date: vid.date,
       thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
     }));  // Vlog（來自 data.js）
-    window._commerceVideos = (v.videos.commerce || []).map(vid => ({
+    window._commerceVideos = (v.commerce || []).map(vid => ({
       id: vid.id,
       title: vid.title,
       date: vid.date,
