@@ -133,6 +133,13 @@ jobs:
               console.log(`📥 ${vId}: 抓取 ${uploadsId}`);
 
               https.get(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } }, (res) => {
+                // 檢查 HTTP 狀態碼
+                if (res.statusCode !== 200) {
+                  console.log(`❌ ${vId}: HTTP ${res.statusCode}`);
+                  resolve({ covers: [], originals: [], unclassified: [] });
+                  return;
+                }
+
                 let data = '';
                 res.on('data', chunk => data += chunk);
                 res.on('end', () => {
@@ -141,18 +148,20 @@ jobs:
 
                     // 檢查 API 錯誤
                     if (result.error) {
-                      console.log(`❌ ${vId}: API 錯誤 - ${result.error.message}`);
+                      const msg = result.error.message || JSON.stringify(result.error);
+                      console.log(`❌ ${vId}: API 錯誤 - ${msg}`);
                       resolve({ covers: [], originals: [], unclassified: [] });
                       return;
                     }
 
                     // 檢查是否有影片資料
-                    if (!result.items) {
-                      console.log(`⚠️ ${vId}: 無影片資料 (items 為 null)`);
+                    if (!result.items || !Array.isArray(result.items)) {
+                      console.log(`⚠️ ${vId}: 無影片資料 (items=${result.items}, pageInfo=${JSON.stringify(result.pageInfo)})`);
                       resolve({ covers: [], originals: [], unclassified: [] });
                       return;
                     }
 
+                    console.log(`  📬 ${vId}: API 返回 ${result.items.length} 部影片`);
                     const videos = classifyVideos(vId, result.items);
                     const total = videos.covers.length + videos.originals.length + videos.unclassified.length;
                     console.log(`✅ ${vId}: 新增 ${total} 部影片\n`);
