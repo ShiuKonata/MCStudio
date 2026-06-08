@@ -45,8 +45,8 @@ console.log(`🔑 API Key: ${API_KEY.substring(0, 10)}...${API_KEY.substring(-10
 const uploadsId = 'UU' + testVTuber.channelId.substring(2);
 console.log(`📚 Uploads Playlist ID: ${uploadsId}\n`);
 
-// 調用 API
-const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
+// 調用 API（優化：只檢測最新 10 部視頻以節省配額）
+const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=10&key=${API_KEY}`;
 
 console.log(`📡 API URL: ${url}\n`);
 console.log('⏳ 正在調用 API...\n');
