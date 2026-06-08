@@ -50,8 +50,19 @@ jobs:
           const vtuberData = {};
           vtuberIds.forEach(id => {
             const match = dataContent.match(new RegExp(`id:\s*["']${id}["'][\s\S]*?youtubeChannelId:\s*["']([^"']+)["']`, 'm'));
-            if (match) vtuberData[id] = { channelId: match[1] };
+            if (match) {
+              vtuberData[id] = { channelId: match[1] };
+              console.log(`✅ 找到 ${id}: ${match[1]}`);
+            } else {
+              console.log(`❌ 找不到 ${id} 的頻道 ID`);
+            }
           });
+
+          if (Object.keys(vtuberData).length === 0) {
+            console.log(`❌ 無法獲取任何 VTuber 的頻道 ID\n`);
+            process.exit(1);
+          }
+          console.log('');
 
           function classifyVideos(vId, items) {
             const covers = [], originals = [], unclassified = [];
@@ -142,26 +153,27 @@ jobs:
             });
           }
 
-          async function fetchVideos(vId, channelId) {
+          function fetchVideos(vId, channelId) {
             return new Promise(async (resolve) => {
-              const baseId = channelId.substring(2);
-              const uploadsId = 'UU' + baseId;
-              const uulvId = 'UULV' + baseId;      // 直播存檔播放列表
-              const uushId = 'UUSH' + baseId;      // Shorts 播放列表
+              try {
+                const baseId = channelId.substring(2);
+                const uploadsId = 'UU' + baseId;
+                const uulvId = 'UULV' + baseId;      // 直播存檔播放列表
+                const uushId = 'UUSH' + baseId;      // Shorts 播放列表
 
-              console.log(`📥 ${vId}: 抓取 ${uploadsId}`);
-              console.log(`  ⊘ 排除清單: ${uulvId} (直播存檔) + ${uushId} (Shorts)`);
+                console.log(`📥 ${vId}: 抓取 ${uploadsId}`);
+                console.log(`  ⊘ 排除清單: ${uulvId} (直播存檔) + ${uushId} (Shorts)`);
 
-              // 先抓取要排除的視頻 ID
-              console.log(`  🔄 讀取 UULV 播放列表...`);
-              const uulvVideos = await fetchPlaylistVideoIds(uulvId);
-              console.log(`  🔄 讀取 UUSH 播放列表...`);
-              const uushVideos = await fetchPlaylistVideoIds(uushId);
-              console.log(`  ⊘ 排除 ${uulvVideos.size} 部直播 + ${uushVideos.size} 部 Shorts\n`);
+                // 先抓取要排除的視頻 ID
+                console.log(`  🔄 讀取 UULV 播放列表...`);
+                const uulvVideos = await fetchPlaylistVideoIds(uulvId);
+                console.log(`  🔄 讀取 UUSH 播放列表...`);
+                const uushVideos = await fetchPlaylistVideoIds(uushId);
+                console.log(`  ⊘ 排除 ${uulvVideos.size} 部直播 + ${uushVideos.size} 部 Shorts\n`);
 
-              const excludeSet = new Set([...uulvVideos, ...uushVideos]);
+                const excludeSet = new Set([...uulvVideos, ...uushVideos]);
 
-              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=10&key=${API_KEY}`;
+                const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=10&key=${API_KEY}`;
 
               https.get(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } }, (res) => {
                 // 檢查 HTTP 狀態碼
@@ -212,6 +224,10 @@ jobs:
                 console.log(`❌ ${vId}: 網路錯誤 - ${err.message}`);
                 resolve({ covers: [], originals: [], unclassified: [] });
               });
+              } catch (err) {
+                console.log(`❌ ${vId}: 致命錯誤 - ${err.message}`);
+                resolve({ covers: [], originals: [], unclassified: [] });
+              }
             });
           }
 
