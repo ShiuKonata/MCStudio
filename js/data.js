@@ -425,8 +425,78 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/lanmewko',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
-    memberVideos: [],
+    videos: [
+    ],
+
+    shorts: [
+    ],
+
+    originals_manual: [
+    ],
+
+    premiere: [
+    ],
+
+    general: [
+      { id: "Xs4s-mcoZ2w", title: "520企劃禮物製作💕Part2【雑談】｜Rumi/懶貓子", date: "2026-06-02" },
+      { id: "ga0aG0aOulw", title: "520企劃禮物製作💕【雑談】｜Rumi/懶貓子", date: "2026-05-31" },
+      { id: "zF7oHytC1HI", title: "【朋友収集】我好少朋友 #３｜Rumi/懶貓子", date: "2026-05-24" },
+      { id: "8fbsKYILNZQ", title: "魔音傳腦！「接下去唱」變調大挑戰⁈🔥【雑談】｜Rumi/懶貓子", date: "2026-05-23" },
+      { id: "G6EXVcKT6ho", title: "【歌枠】大家５２０～～💕💕【KARAOKE】｜Rumi/懶貓子", date: "2026-05-20" },
+      { id: "jR8On4MS5C4", title: "【朋友収集】募集朋友中～！ #２｜Rumi/懶貓子", date: "2026-05-18" },
+      { id: "BIavLd4eJ3k", title: "【朋友収集】開始新生活了～♩ #1｜Rumi/懶貓子", date: "2026-05-14" },
+      { id: "1RMnxlGaExM", title: "懶貓子的正確道歉方式🙇‍♀️｜Rumi/懶貓子", date: "2026-04-29" },
+      { id: "lA1z-OPFM1o", title: "【視聴者参加型雀魂】決鬥日🀄✨✨【飲酒雑談】｜Rumi/懶貓子", date: "2026-04-16" },
+      { id: "K0dwXwCUXcY", title: "【戀愛法庭】今天就在這裡把是非黑白說清楚吧・・♡ ft.@AnninMiru @SuzukazeShitora ｜Rumi/懶貓子", date: "2026-04-04" },
+      { id: "FGTVhiNTSI0", title: "【飲酒雑談🍻】4月已經到來～～～～！！！🌸｜Rumi/懶貓子", date: "2026-04-01" },
+      { id: "4mkCxpMOdkc", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-03-31" },
+      { id: "_PT_ET337Yg", title: "『專屬於你』 愛的拉霸機🍫💕💕｜Rumi/懶貓子", date: "2026-03-29" },
+      { id: "gS9s3nY7ExM", title: "【歌回】春天歌唱會🌸【KARAOKE】｜Rumi/懶貓子", date: "2026-03-28" },
+      { id: "odUronI_4yQ", title: "【ぽこあ寶可夢】和寶可夢一起展開新的慢活生活🌳｜Rumi/懶貓子", date: "2026-03-26" },
+      { id: "KJSysO4Oydk", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-03-24" },
+      { id: "O8rAXPhgB9U", title: "【從零開始集合吧!動物森友會】午安♩作業用BGM請享用💭｜Rumi/懶貓子", date: "2026-03-20" },
+      { id: "YO5ebxS6FjI", title: "【ぽこあ寶可夢】和寶可夢一起展開新的慢活生活🌳｜Rumi/懶貓子", date: "2026-03-20" },
+      { id: "-oqu_KVg47E", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-03-17" },
+      { id: "vvM3WpbBtEM", title: "【ぽこあ寶可夢】和寶可夢一起展開新的慢活生活🌳｜Rumi/懶貓子", date: "2026-03-12" },
+      { id: "E2sZs9WFXy8", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-03-10" },
+      { id: "7Od2yq_HjZA", title: "【ぽこあ寶可夢】和寶可夢一起展開新的慢活生活🌳｜Rumi/懶貓子", date: "2026-03-08" },
+      { id: "XwQlygZVIN0", title: "我回來了！【雑談】｜Rumi/懶貓子", date: "2026-03-07" },
+      { id: "8s5s32wExKU", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-02-24" },
+      { id: "sKNFSN7EfJU", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-02-22" },
+      { id: "4HVUVUag5Zk", title: "【雀魂】第一名耐久！！！！🀄✨✨【視聴者参加型】｜Rumi/懶貓子", date: "2026-02-21" },
+      { id: "zz6WGR6UX60", title: "【雑談】認識台灣新年-過年吃多少？💰｜Rumi/懶貓子", date: "2026-02-19" },
+      { id: "Fw9Qo5Hbu2w", title: "【歌回】新年快樂🧧希望大家今年每天都開開心心✨【KARAOKE】｜Rumi/懶貓子", date: "2026-02-17" },
+      { id: "1y778o-SAFM", title: "就說了是乖乖＞＿＜｜Rumi/懶貓子", date: "2026-02-17" },
+      { id: "vEiHjzhJa-U", title: "【Rumi's Kitchen】限定復活✨情人節巧克力製作🍫💕｜Rumi/懶貓子✨新春紅包活動執行中✨", date: "2026-02-15" },
+      { id: "prvkMIKbXtA", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-02-12" },
+      { id: "8Vkvs1zs8kA", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-02-10" },
+      { id: "-_OMySMMcdQ", title: "【歌回】FF46謝謝大家！悠閒的週末歌回【KARAOKE】｜Rumi/懶貓子", date: "2026-02-08" },
+      { id: "AzLFztyuU10", title: "【從零開始集合吧!動物森友會】夜晚作業用BGM請享用💭🌙｜Rumi/懶貓子", date: "2026-02-04" },
+      { id: "kqMZ4iyC5ho", title: "【FF46即將到來✨】製作明信片！｜Rumi/懶貓子", date: "2026-02-04" },
+      { id: "JfbSyvGw0Y4", title: "【FF46即將到來✨】製作簽名色紙！｜Rumi/懶貓子", date: "2026-01-31" },
+      { id: "Ceg0pakmdhg", title: "你認識多少人?聯想力大考驗✨｜Rumi/懶貓子", date: "2026-01-30" },
+      { id: "JzSTNbgdkPU", title: "【視聴者参加型雀魂】悠閒地玩🀄✨✨【飲酒雑談】｜Rumi/懶貓子", date: "2026-01-23" },
+      { id: "zNihxHKIcyY", title: "【歌回】大多是聊歌曲的雜談【KARAOKE】｜Rumi/懶貓子", date: "2026-01-17" },
+      { id: "z95PAefFkkk", title: "【雀魂】今年第一次的第一名耐久！！！！🀄✨✨【視聴者参加型】｜Rumi/懶貓子", date: "2026-01-15" },
+      { id: "APX0KT8t_O4", title: "【歌回】今年第一次的歌回⛄演唱知名的動漫歌曲🌙【KARAOKE】｜Rumi/懶貓子", date: "2026-01-11" },
+    ],
+
+    vlog: [
+    ],
+
+    commerce: [
+      { id: "Wlg-hcx62DU", title: "【UMIGARI】睡過頭的懲罰遊戲…！如果是魚的話就不可怕了吧…？？？｜Rumi/懶貓子", date: "2026-04-02" },
+      { id: "gpwMOxCuGnQ", title: "【使用條款遊戲】耐心系 VTuber 登場【利用規約に同意したい】｜Rumi/懶貓子", date: "2026-01-18" },
+    ],
+
+    memberVideos: [
+      { id: "aDHY81qXK24", title: "深度會員Spotlight！這個月也謝謝！✨｜Rumi/懶貓子", date: "2026-06-06" },
+      { id: "E9jrmNGJPXI", title: "【歌雑】５月來啦♪日本的黄金週開始了！※存檔僅限會員觀看！【KARAOKE】｜Rumi/懶貓子", date: "2026-05-03" },
+      { id: "brWbDlVUTFU", title: "深度會員Spotlight！這個月也謝謝！✨企劃的最後一天！｜Rumi/懶貓子", date: "2026-05-02" },
+      { id: "zyI290G8bNs", title: "深度會員Spotlight！這個月也謝謝！✨｜Rumi/懶貓子", date: "2026-04-08" },
+      { id: "yXW4MFsrjt0", title: "深度會員Spotlight！+深度会員語音回覆！這個月也謝謝！✨｜Rumi/懶貓子", date: "2026-03-16" },
+      { id: "G-AqP88JFKI", title: "【FF46即將到來✨】FF46商品介紹+深度會員Spotlight！｜Rumi/懶貓子", date: "2026-02-06" },
+    ],
 
     musicClips: [
       { id: "AujK7aWgRsY", title: "HoneyWorks - 可愛くてごめん | Rumi懶貓子 .Cover 〔中日歌詞〕" },
@@ -541,6 +611,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     musicClipsChannelIds: [
@@ -645,6 +721,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     scheduleVideoId:  "kc5RN-h_bAs",
@@ -718,6 +800,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     scheduleVideoId:  "tPRVSHoEEeg",
@@ -792,6 +880,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     videoClips: [
@@ -891,6 +985,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     scheduleVideoId:  "CROYjRn86_o",
@@ -981,6 +1081,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     musicClipsChannelIds: [
@@ -1090,6 +1196,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     scheduleVideoId:  "vDoOnUBiuW4",
@@ -1192,6 +1304,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
@@ -1281,6 +1399,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1352,6 +1476,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1421,6 +1551,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1498,6 +1634,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1572,6 +1714,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1642,6 +1790,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1716,6 +1870,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1782,6 +1942,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1851,6 +2017,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1924,6 +2096,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -1996,6 +2174,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -2058,6 +2242,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -2126,6 +2316,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -2189,6 +2385,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -2254,6 +2456,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -2325,6 +2533,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
@@ -2392,6 +2606,12 @@ const vtubers = [
     ],
 
     videos: [],
+    shorts: [],
+    originals_manual: [],
+    premiere: [],
+    general: [],
+    vlog: [],
+    commerce: [],
     memberVideos: [],
 
     // 小知識
