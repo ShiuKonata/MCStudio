@@ -41,6 +41,7 @@ const vtubers = [
     ],
 
     videos: [
+      { id: "69zB23Pnons", title: "【Cover】『違国日記』OP曲－ソナーレ/TOMOO💧詩雨蔻達【cover】", date: "2026-06-06" },
       { id: "pNYUnZmD0Kg", title: "【Cover】mosi mosi? / 楽音💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-05-28" },
       { id: "V6EGDGnCKUw", title: "【Cover】メロウ / 須田景凪💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-04-18" },
       { id: "66XFn8Gd7hM", title: "【Cover】春泥棒 / ヨルシカ 💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-04-11" },
