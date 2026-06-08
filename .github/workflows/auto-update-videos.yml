@@ -116,12 +116,52 @@ jobs:
             return { covers, originals, unclassified };
           }
 
-          async function fetchVideos(vId, channelId) {
+          async function fetchPlaylistVideoIds(playlistId) {
             return new Promise((resolve) => {
-              const uploadsId = 'UU' + channelId.substring(2);
-              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
+              const videoIds = new Set();
+              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50&key=${API_KEY}`;
+
+              https.get(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } }, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  try {
+                    const result = JSON.parse(data);
+                    if (result.items && Array.isArray(result.items)) {
+                      result.items.forEach(item => {
+                        const vid = item.snippet?.resourceId?.videoId;
+                        if (vid) videoIds.add(vid);
+                      });
+                    }
+                    resolve(videoIds);
+                  } catch (e) {
+                    resolve(videoIds);
+                  }
+                });
+              }).on('error', () => resolve(videoIds));
+            });
+          }
+
+          async function fetchVideos(vId, channelId) {
+            return new Promise(async (resolve) => {
+              const baseId = channelId.substring(2);
+              const uploadsId = 'UU' + baseId;
+              const uulvId = 'UULV' + baseId;      // 直播存檔播放列表
+              const uushId = 'UUSH' + baseId;      // Shorts 播放列表
 
               console.log(`📥 ${vId}: 抓取 ${uploadsId}`);
+              console.log(`  ⊘ 排除清單: ${uulvId} (直播存檔) + ${uushId} (Shorts)`);
+
+              // 先抓取要排除的視頻 ID
+              console.log(`  🔄 讀取 UULV 播放列表...`);
+              const uulvVideos = await fetchPlaylistVideoIds(uulvId);
+              console.log(`  🔄 讀取 UUSH 播放列表...`);
+              const uushVideos = await fetchPlaylistVideoIds(uushId);
+              console.log(`  ⊘ 排除 ${uulvVideos.size} 部直播 + ${uushVideos.size} 部 Shorts\n`);
+
+              const excludeSet = new Set([...uulvVideos, ...uushVideos]);
+
+              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
 
               https.get(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } }, (res) => {
                 // 檢查 HTTP 狀態碼
@@ -147,13 +187,19 @@ jobs:
 
                     // 檢查是否有影片資料
                     if (!result.items || !Array.isArray(result.items)) {
-                      console.log(`⚠️ ${vId}: 無影片資料 (items=${result.items}, pageInfo=${JSON.stringify(result.pageInfo)})`);
+                      console.log(`⚠️ ${vId}: 無影片資料`);
                       resolve({ covers: [], originals: [], unclassified: [] });
                       return;
                     }
 
-                    console.log(`  📬 ${vId}: API 返回 ${result.items.length} 部影片`);
-                    const videos = classifyVideos(vId, result.items);
+                    // 過濾掉 UULV 和 UUSH 中的視頻
+                    const filteredItems = result.items.filter(item => {
+                      const vid = item.snippet?.resourceId?.videoId;
+                      return !excludeSet.has(vid);
+                    });
+
+                    console.log(`  📬 ${vId}: API 返回 ${result.items.length} 部影片，過濾後 ${filteredItems.length} 部`);
+                    const videos = classifyVideos(vId, filteredItems);
                     const total = videos.covers.length + videos.originals.length + videos.unclassified.length;
                     console.log(`✅ ${vId}: 新增 ${total} 部影片\n`);
                     resolve(videos);
