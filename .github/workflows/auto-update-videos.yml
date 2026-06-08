@@ -119,7 +119,7 @@ jobs:
           async function fetchPlaylistVideoIds(playlistId) {
             return new Promise((resolve) => {
               const videoIds = new Set();
-              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50&key=${API_KEY}`;
+              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=10&key=${API_KEY}`;
 
               https.get(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } }, (res) => {
                 let data = '';
@@ -161,7 +161,7 @@ jobs:
 
               const excludeSet = new Set([...uulvVideos, ...uushVideos]);
 
-              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
+              const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=10&key=${API_KEY}`;
 
               https.get(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } }, (res) => {
                 // 檢查 HTTP 狀態碼
