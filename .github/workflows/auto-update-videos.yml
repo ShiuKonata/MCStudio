@@ -44,7 +44,7 @@ jobs:
 
           const now = new Date();
           const hourOfDay = now.getUTCHours();
-          const segmentIndex = 0; // 🔴 強制時段1（手動更新）
+          const segmentIndex = Math.floor(hourOfDay / 6) % 4;
 
           const segments = [
             { ids: ['shiucoda', 'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko'], name: '時段1' },
@@ -64,23 +64,64 @@ jobs:
 
           function classifyVideos(vId, items) {
             const covers = [], originals = [], unclassified = [];
-            if (!items) return { covers, originals, unclassified };
+            if (!items || items.length === 0) {
+              console.log(`  ⚠️  ${vId}: 無影片資料`);
+              return { covers, originals, unclassified };
+            }
 
-            items.forEach(item => {
-              const title = item.snippet.title;
-              const vid = item.snippet.resourceId ? item.snippet.resourceId.videoId : null;
-              if (!vid) return;
-              if (dataContent.includes(`"${vid}"`) || dataContent.includes(`'${vid}'`)) return; // 已存在
-              
+            console.log(`  📊 ${vId}: 掃描 ${items.length} 部影片`);
+            let skipped = 0;
+
+            items.forEach((item, idx) => {
+              const title = item.snippet?.title || '';
+              const vid = item.snippet?.resourceId?.videoId;
+              const date = item.snippet?.publishedAt?.substring(0, 10) || '';
+
+              if (!vid || !date) {
+                console.log(`    ⚠️  [${idx}] 遺漏資料: vid=${vid}, date=${date}, title=${title}`);
+                return;
+              }
+
+              // 檢查是否已存在
+              if (dataContent.includes(`"${vid}"`) || dataContent.includes(`'${vid}'`)) {
+                skipped++;
+                console.log(`    ⊘ [${idx}] ${date} - 已存在: ${title.substring(0, 40)}`);
+                return;
+              }
+
               const tL = title.toLowerCase();
-              if (tL.includes('直播') || tL.includes('archive') || tL.includes('livestream')) return; // STEP 1
-              
-              const date = item.snippet.publishedAt.substring(0, 10);
-              if (tL.includes('cover') || tL.includes('歌ってみた')) covers.push({ id: vid, title: `【Cover】${title}`, date });
-              else if (tL.includes('original') || tL.includes('official') || tL.includes('原創')) originals.push({ id: vid, title: `【Original】${title}`, date });
-              else if (vId === 'shiucoda' && (tL.includes('demo') || tL.includes('自彈自唱'))) covers.push({ id: vid, title: `【Cover】${title}`, date });
-              else unclassified.push({ id: vid, title, date });
+
+              // STEP 1：排除直播
+              if (tL.includes('直播') || tL.includes('archive') || tL.includes('livestream')) {
+                console.log(`    🚫 [${idx}] ${date} - 直播已排除: ${title.substring(0, 40)}`);
+                return;
+              }
+
+              // STEP 2-3：分類
+              let classified = false;
+
+              if (tL.includes('cover') || tL.includes('歌ってみた')) {
+                covers.push({ id: vid, title: `【Cover】${title}`, date });
+                console.log(`    ✅ [${idx}] ${date} - Cover: ${title.substring(0, 40)}`);
+                classified = true;
+              } else if (tL.includes('original') || tL.includes('official') || tL.includes('原創')) {
+                originals.push({ id: vid, title: `【Original】${title}`, date });
+                console.log(`    ✅ [${idx}] ${date} - Original: ${title.substring(0, 40)}`);
+                classified = true;
+              } else if (vId === 'shiucoda' && (tL.includes('demo') || tL.includes('自彈自唱'))) {
+                covers.push({ id: vid, title: `【Cover】${title}`, date });
+                console.log(`    ✅ [${idx}] ${date} - Cover (特殊規則): ${title.substring(0, 40)}`);
+                classified = true;
+              }
+
+              if (!classified) {
+                unclassified.push({ id: vid, title, date });
+                console.log(`    ❓ [${idx}] ${date} - 未分類: ${title.substring(0, 40)}`);
+              }
             });
+
+            const found = covers.length + originals.length + unclassified.length;
+            console.log(`    📈 ${vId}: 新增 ${found} 部, 跳過 ${skipped} 部`);
             return { covers, originals, unclassified };
           }
 
@@ -88,34 +129,66 @@ jobs:
             return new Promise((resolve) => {
               const uploadsId = 'UU' + channelId.substring(2);
               const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
-              
+
+              console.log(`📥 ${vId}: 抓取 ${uploadsId}`);
+
               https.get(url, { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } }, (res) => {
                 let data = '';
                 res.on('data', chunk => data += chunk);
                 res.on('end', () => {
                   try {
                     const result = JSON.parse(data);
-                    const videos = classifyVideos(vId, result.items || []);
+
+                    // 檢查 API 錯誤
+                    if (result.error) {
+                      console.log(`❌ ${vId}: API 錯誤 - ${result.error.message}`);
+                      resolve({ covers: [], originals: [], unclassified: [] });
+                      return;
+                    }
+
+                    // 檢查是否有影片資料
+                    if (!result.items) {
+                      console.log(`⚠️ ${vId}: 無影片資料 (items 為 null)`);
+                      resolve({ covers: [], originals: [], unclassified: [] });
+                      return;
+                    }
+
+                    const videos = classifyVideos(vId, result.items);
                     const total = videos.covers.length + videos.originals.length + videos.unclassified.length;
-                    console.log(`✅ ${vId}: ${total} 部新影片`);
+                    console.log(`✅ ${vId}: 新增 ${total} 部影片\n`);
                     resolve(videos);
                   } catch (e) {
-                    console.log(`⚠️ ${vId}: 失敗`);
+                    console.log(`❌ ${vId}: JSON 解析失敗 - ${e.message}`);
                     resolve({ covers: [], originals: [], unclassified: [] });
                   }
                 });
-              }).on('error', () => resolve({ covers: [], originals: [], unclassified: [] }));
+              }).on('error', (err) => {
+                console.log(`❌ ${vId}: 網路錯誤 - ${err.message}`);
+                resolve({ covers: [], originals: [], unclassified: [] });
+              });
             });
           }
 
           (async () => {
-            let total = 0;
+            console.log('\n════════════════════════════════════════\n');
+            let allCovers = 0, allOriginals = 0, allUnclassified = 0;
+
             for (const vId of Object.keys(vtuberData)) {
               const v = await fetchVideos(vId, vtuberData[vId].channelId);
-              total += v.covers.length + v.originals.length + v.unclassified.length;
+              allCovers += v.covers.length;
+              allOriginals += v.originals.length;
+              allUnclassified += v.unclassified.length;
               await new Promise(r => setTimeout(r, 300));
             }
-            console.log(`\n✅ 掃描完成，發現 ${total} 部新影片（客戶端自動分類）`);
+
+            const total = allCovers + allOriginals + allUnclassified;
+            console.log('\n════════════════════════════════════════');
+            console.log(`📊 掃描統計結果：`);
+            console.log(`  ✅ Cover: ${allCovers} 部`);
+            console.log(`  ✅ Original: ${allOriginals} 部`);
+            console.log(`  ❓ 未分類: ${allUnclassified} 部`);
+            console.log(`  📈 合計: ${total} 部新影片（客戶端自動分類）`);
+            console.log('════════════════════════════════════════\n');
             process.exit(0);
           })();
           SCRIPT
