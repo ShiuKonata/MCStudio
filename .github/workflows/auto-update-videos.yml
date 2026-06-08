@@ -42,19 +42,10 @@ jobs:
             process.exit(1);
           }
 
-          const now = new Date();
-          const hourOfDay = now.getUTCHours();
-          const segmentIndex = Math.floor(hourOfDay / 6) % 4;
-
-          const segments = [
-            { ids: ['shiucoda', 'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko'], name: '時段1' },
-            { ids: ['vaswawa', 'sinniearis', 'ririna', 'ekorru', 'wakasaito', 'whalefall', 'kai'], name: '時段2' },
-            { ids: ['mukuru', 'nyrfier', 'shiroleon', 'fuka22', 'BarkBarkPomi', 'cocor0', 'UchiFifi'], name: '時段3' },
-            { ids: ['chita', 'nokori', 'KeKeMii', 'chamamatti', 'Pele', 'Yawnii'], name: '時段4' }
-          ];
-
-          const vtuberIds = segments[segmentIndex].ids;
-          console.log(`🚀 ${segments[segmentIndex].name} - 掃描 ${vtuberIds.length} 位 VTuber\n`);
+          // ⚠️ 臨時測試模式：只掃描 ShiuCoda（節省 API 配額）
+          // 確認工作正常後改回完整時段邏輯
+          const vtuberIds = ['shiucoda'];
+          console.log(`🔬 測試模式：只掃描 ShiuCoda\n`);
 
           const vtuberData = {};
           vtuberIds.forEach(id => {
