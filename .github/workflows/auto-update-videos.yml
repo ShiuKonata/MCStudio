@@ -43,14 +43,15 @@ jobs:
             process.exit(1);
           }
 
-          // ⚠️ 注意：目前處理所有 VTuber（可根據時段調整以平衡 API 配額）
+          // ⚠️ 注意：目前處理所有有 youtubeChannelId 的 VTuber（可根據時段調整以平衡 API 配額）
+          // ❌ 缺少 youtubeChannelId 的 VTuber（暫無法自動化）：BarkBarkPomi, UchiFifi, Pele, Yawnii
           // 時段分配建議：
           //   時段 1 (06:00-06:59):   shiucoda, paroniie, sinniearis, himegimichika, ririna, chita
-          //   時段 2 (12:00-12:59):   shiroleon, kai, nokori, rumi, vaswawa, arrynia
+          //   時段 2 (12:00-12:59):   shiroleon, kai, nokori, rumi, vaswawa, arrynia, kekemii
           //   時段 3 (18:00-18:59):   lubee, ekorru, fuka22, kiriko, nyrfier, whalefall
           //   時段 4 (00:00-00:59):   mukuru, wakasaito, chamamatti, cocor0
-          const vtuberIds = ['shiucoda', 'paroniie', 'sinniearis', 'himegimichika', 'ririna', 'chita', 'shiroleon', 'kai', 'nokori', 'rumi', 'vaswawa', 'arrynia', 'lubee', 'ekorru', 'fuka22', 'kiriko', 'nyrfier', 'whalefall', 'mukuru', 'wakasaito', 'chamamatti', 'cocor0'];
-          console.log(`📡 掃描模式：全 ${vtuberIds.length} 位 VTuber\n`);
+          const vtuberIds = ['shiucoda', 'paroniie', 'sinniearis', 'himegimichika', 'ririna', 'chita', 'shiroleon', 'kai', 'nokori', 'rumi', 'vaswawa', 'arrynia', 'KeKeMii', 'lubee', 'ekorru', 'fuka22', 'kiriko', 'nyrfier', 'whalefall', 'mukuru', 'wakasaito', 'chamamatti', 'cocor0'];
+          console.log(`📡 掃描模式：全 ${vtuberIds.length} 位 VTuber (共27位)\n`);
 
           const vtuberData = {};
           vtuberIds.forEach(id => {
@@ -205,7 +206,7 @@ jobs:
                 // 檢查 HTTP 狀態碼
                 if (res.statusCode !== 200) {
                   console.log(`❌ ${vId}: HTTP ${res.statusCode}`);
-                  resolve({ covers: [], originals: [], unclassified: [] });
+                  resolve({ videos: [] });
                   return;
                 }
 
@@ -219,14 +220,14 @@ jobs:
                     if (result.error) {
                       const msg = result.error.message || JSON.stringify(result.error);
                       console.log(`❌ ${vId}: API 錯誤 - ${msg}`);
-                      resolve({ covers: [], originals: [], unclassified: [] });
+                      resolve({ videos: [] });
                       return;
                     }
 
                     // 檢查是否有影片資料
                     if (!result.items || !Array.isArray(result.items)) {
                       console.log(`⚠️ ${vId}: 無影片資料`);
-                      resolve({ covers: [], originals: [], unclassified: [] });
+                      resolve({ videos: [] });
                       return;
                     }
 
@@ -243,16 +244,16 @@ jobs:
                     resolve(result_classified);
                   } catch (e) {
                     console.log(`❌ ${vId}: JSON 解析失敗 - ${e.message}`);
-                    resolve({ covers: [], originals: [], unclassified: [] });
+                    resolve({ videos: [] });
                   }
                 });
               }).on('error', (err) => {
                 console.log(`❌ ${vId}: 網路錯誤 - ${err.message}`);
-                resolve({ covers: [], originals: [], unclassified: [] });
+                resolve({ videos: [] });
               });
               } catch (err) {
                 console.log(`❌ ${vId}: 致命錯誤 - ${err.message}`);
-                resolve({ covers: [], originals: [], unclassified: [] });
+                resolve({ videos: [] });
               }
             });
           }
