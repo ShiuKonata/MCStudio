@@ -19,6 +19,7 @@ jobs:
           node-version: '18'
 
       - name: 🎯 Run auto-update script
+        id: update
         run: |
           node - <<'SCRIPT'
           const fs = require('fs');
@@ -318,28 +319,18 @@ jobs:
                 // TODO: 其他 26 位 VTuber 的處理（待實裝）
               }
 
-              // 寫入更新後的 data.js
+              // 寫入更新後的 data.js（只負責寫入，Git 操作由 GitHub Actions 步驟處理）
               if (updateCount > 0) {
                 try {
                   fs.writeFileSync(dataPath, updated, 'utf8');
                   console.log(`✅ data.js 已成功寫入！\n`);
-
-                  // 提交並推送到 GitHub
-                  console.log('📤 正在提交到 GitHub...\n');
-                  const { execSync } = require('child_process');
-
-                  try {
-                    execSync('git config --local user.email "action@github.com"');
-                    execSync('git config --local user.name "Auto-Update Bot"');
-                    execSync('git add js/data.js');
-                    execSync('git commit -m "Auto-update ShiuCoda videos from YouTube API"');
-                    execSync('git push');
-                    console.log('✅ 成功推送到 GitHub！\n');
-                  } catch (gitErr) {
-                    console.log(`❌ Git 操作失敗: ${gitErr.message}\n`);
-                  }
+                  console.log(`📝 檔案更新詳情：`);
+                  console.log(`  - 新增 VTuber: ${Object.keys(allNewVideos).length} 位`);
+                  console.log(`  - 新增視頻總數: ${updateCount} 部`);
+                  console.log(`\n⏭️ 接下來由 GitHub Actions 步驟負責 commit 和 push\n`);
                 } catch (err) {
                   console.log(`❌ 寫入 data.js 失敗: ${err.message}\n`);
+                  process.exit(1);
                 }
               } else {
                 console.log(`\n⚠️ 沒有成功更新任何 VTuber\n`);
@@ -352,15 +343,30 @@ jobs:
           })();
           SCRIPT
 
-      - name: 📝 Commit
-        if: always()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 📋 Check for changes
+        id: check
+        run: |
+          if git diff --quiet js/data.js; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "✅ data.js 無變更"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "✅ data.js 有新變更，準備提交"
+          fi
+
+      - name: 📝 Commit and Push
+        if: steps.check.outputs.has_changes == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Auto-Update Bot"
-          echo "✅ Workflow 執行完成"
+          git add js/data.js
+          git commit -m "Auto-update: Add new ShiuCoda videos from YouTube API"
+          git push
+          echo "✅ 成功推送到 GitHub"
 
       - name: 📊 Summary
         if: always()
-        run: git log --oneline -3
+        run: |
+          echo "🎯 Workflow 執行完成"
+          echo "---"
+          git log --oneline -3
