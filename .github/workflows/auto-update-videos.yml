@@ -323,6 +323,21 @@ jobs:
                 try {
                   fs.writeFileSync(dataPath, updated, 'utf8');
                   console.log(`✅ data.js 已成功寫入！\n`);
+
+                  // 提交並推送到 GitHub
+                  console.log('📤 正在提交到 GitHub...\n');
+                  const { execSync } = require('child_process');
+
+                  try {
+                    execSync('git config --local user.email "action@github.com"');
+                    execSync('git config --local user.name "Auto-Update Bot"');
+                    execSync('git add js/data.js');
+                    execSync('git commit -m "Auto-update ShiuCoda videos from YouTube API"');
+                    execSync('git push');
+                    console.log('✅ 成功推送到 GitHub！\n');
+                  } catch (gitErr) {
+                    console.log(`❌ Git 操作失敗: ${gitErr.message}\n`);
+                  }
                 } catch (err) {
                   console.log(`❌ 寫入 data.js 失敗: ${err.message}\n`);
                 }
