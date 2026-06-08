@@ -279,6 +279,7 @@ jobs:
               console.log('💾 正在更新 data.js...\n');
 
               let updated = dataContent;
+              let updateCount = 0;
 
               for (const vId of Object.keys(allNewVideos)) {
                 const videos = allNewVideos[vId];
@@ -286,26 +287,28 @@ jobs:
                 // ShiuCoda 特殊處理（使用 videos 陣列）
                 if (vId === 'shiucoda') {
                   if (videos.covers.length > 0) {
-                    // 找到 ShiuCoda 的 videos 陣列開始位置
-                    const shiucodaVideosStart = updated.indexOf(`id: "shiucoda"`);
-                    const videosArrayStart = updated.indexOf('videos: [', shiucodaVideosStart);
-                    const insertPos = updated.indexOf('[', videosArrayStart) + 1;
+                    // 用正則表達式找到 ShiuCoda 的 videos 陣列，在 [ 後面插入新視頻
+                    const regex = /(\bid:\s*"shiucoda"[\s\S]*?videos:\s*\[\s*)/;
 
-                    // 構造新視頻的 JSON
-                    const newVideosJson = videos.covers.map(v =>
-                      `\n      { id: "${v.id}", title: "${v.title.replace(/"/g, '\\"')}", date: "${v.date}" },`
-                    ).join('');
+                    // 構造新視頻的 JSON（一次只插入一部）
+                    const v = videos.covers[0];  // 只插入第一部新視頻
+                    const newVideoLine = `\n      { id: "${v.id}", title: "${v.title.replace(/"/g, '\\"')}", date: "${v.date}" },`;
 
-                    updated = updated.substring(0, insertPos) + newVideosJson + updated.substring(insertPos);
+                    updated = updated.replace(regex, `$1${newVideoLine}`);
                     console.log(`  ✅ shiucoda: 添加 ${videos.covers.length} 部 Cover`);
+                    updateCount++;
                   }
                 }
                 // TODO: 其他 26 位 VTuber 的處理（待實裝）
               }
 
               // 寫入更新後的 data.js
-              fs.writeFileSync(dataPath, updated, 'utf8');
-              console.log(`\n✅ data.js 已更新！\n`);
+              if (updateCount > 0) {
+                fs.writeFileSync(dataPath, updated, 'utf8');
+                console.log(`\n✅ data.js 已更新（${updateCount} 個 VTuber）！\n`);
+              } else {
+                console.log(`\n⚠️ 無法更新 data.js - 沒有可更新的 VTuber\n`);
+              }
             } else {
               console.log('📭 沒有新視頻，無需更新 data.js\n');
             }
