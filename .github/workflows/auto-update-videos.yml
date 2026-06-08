@@ -287,16 +287,32 @@ jobs:
                 // ShiuCoda 特殊處理（使用 videos 陣列）
                 if (vId === 'shiucoda') {
                   if (videos.covers.length > 0) {
-                    // 用正則表達式找到 ShiuCoda 的 videos 陣列，在 [ 後面插入新視頻
-                    const regex = /(\bid:\s*"shiucoda"[\s\S]*?videos:\s*\[\s*)/;
+                    // 直接查找並替換：找到 'videos: [' 的下一行
+                    const searchStr = 'id: "shiucoda"';
+                    const videosStr = 'videos: [';
+                    const startIdx = updated.indexOf(searchStr);
 
-                    // 構造新視頻的 JSON（一次只插入一部）
-                    const v = videos.covers[0];  // 只插入第一部新視頻
-                    const newVideoLine = `\n      { id: "${v.id}", title: "${v.title.replace(/"/g, '\\"')}", date: "${v.date}" },`;
+                    if (startIdx !== -1) {
+                      const videosIdx = updated.indexOf(videosStr, startIdx);
+                      const arrayStart = updated.indexOf('[', videosIdx);
 
-                    updated = updated.replace(regex, `$1${newVideoLine}`);
-                    console.log(`  ✅ shiucoda: 添加 ${videos.covers.length} 部 Cover`);
-                    updateCount++;
+                      if (arrayStart !== -1) {
+                        // 在 '[' 後面的換行後插入新視頻
+                        const insertIdx = arrayStart + 1;
+
+                        // 構造新視頻行
+                        const v = videos.covers[0];
+                        const newLine = `\n      { id: "${v.id}", title: "${v.title.replace(/"/g, '\\"')}", date: "${v.date}" },`;
+
+                        updated = updated.substring(0, insertIdx) + newLine + updated.substring(insertIdx);
+                        console.log(`  ✅ shiucoda: 添加 1 部 Cover (ID: ${v.id})`);
+                        updateCount++;
+                      } else {
+                        console.log(`  ❌ shiucoda: 找不到 videos 陣列開始`);
+                      }
+                    } else {
+                      console.log(`  ❌ shiucoda: 找不到 ShiuCoda 的 id`);
+                    }
                   }
                 }
                 // TODO: 其他 26 位 VTuber 的處理（待實裝）
@@ -304,10 +320,14 @@ jobs:
 
               // 寫入更新後的 data.js
               if (updateCount > 0) {
-                fs.writeFileSync(dataPath, updated, 'utf8');
-                console.log(`\n✅ data.js 已更新（${updateCount} 個 VTuber）！\n`);
+                try {
+                  fs.writeFileSync(dataPath, updated, 'utf8');
+                  console.log(`✅ data.js 已成功寫入！\n`);
+                } catch (err) {
+                  console.log(`❌ 寫入 data.js 失敗: ${err.message}\n`);
+                }
               } else {
-                console.log(`\n⚠️ 無法更新 data.js - 沒有可更新的 VTuber\n`);
+                console.log(`\n⚠️ 沒有成功更新任何 VTuber\n`);
               }
             } else {
               console.log('📭 沒有新視頻，無需更新 data.js\n');
