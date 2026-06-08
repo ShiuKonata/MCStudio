@@ -249,12 +249,19 @@ jobs:
           (async () => {
             console.log('\n════════════════════════════════════════\n');
             let allCovers = 0, allOriginals = 0, allUnclassified = 0;
+            const allNewVideos = {};  // 收集所有新視頻
 
             for (const vId of Object.keys(vtuberData)) {
               const v = await fetchVideos(vId, vtuberData[vId].channelId);
               allCovers += v.covers.length;
               allOriginals += v.originals.length;
               allUnclassified += v.unclassified.length;
+
+              // 保存新視頻
+              if (v.covers.length > 0 || v.originals.length > 0 || v.unclassified.length > 0) {
+                allNewVideos[vId] = v;
+              }
+
               await new Promise(r => setTimeout(r, 300));
             }
 
@@ -266,6 +273,48 @@ jobs:
             console.log(`  ❓ 未分類: ${allUnclassified} 部`);
             console.log(`  📈 合計: ${total} 部新影片（客戶端自動分類）`);
             console.log('════════════════════════════════════════\n');
+
+            // 如果有新視頻，自動更新 data.js
+            if (total > 0) {
+              console.log('💾 正在更新 data.js...\n');
+
+              // 更新 data.js
+              let updated = dataContent;
+              for (const vId of Object.keys(allNewVideos)) {
+                const videos = allNewVideos[vId];
+
+                // 更新 covers
+                if (videos.covers.length > 0) {
+                  const coversJson = JSON.stringify(videos.covers, null, 6);
+                  const coversRegex = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?covers:\\s*\\[)[\\s\\S]*?(\\],)`, 'm');
+                  updated = updated.replace(coversRegex, `$1${coversJson}$2`);
+                  console.log(`  ✅ ${vId}: 添加 ${videos.covers.length} 部 Cover`);
+                }
+
+                // 更新 originals
+                if (videos.originals.length > 0) {
+                  const originalsJson = JSON.stringify(videos.originals, null, 6);
+                  const originalsRegex = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?originals:\\s*\\[)[\\s\\S]*?(\\],)`, 'm');
+                  updated = updated.replace(originalsRegex, `$1${originalsJson}$2`);
+                  console.log(`  ✅ ${vId}: 添加 ${videos.originals.length} 部 Original`);
+                }
+
+                // 未分類視頻存放到 unclassified（等待手動分類）
+                if (videos.unclassified.length > 0) {
+                  const unclassifiedJson = JSON.stringify(videos.unclassified, null, 6);
+                  const unclassifiedRegex = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?unclassified:\\s*\\[)[\\s\\S]*?(\\],)`, 'm');
+                  updated = updated.replace(unclassifiedRegex, `$1${unclassifiedJson}$2`);
+                  console.log(`  ⏳ ${vId}: 添加 ${videos.unclassified.length} 部未分類（等待手動分類）`);
+                }
+              }
+
+              // 寫入更新後的 data.js
+              fs.writeFileSync(dataPath, updated, 'utf8');
+              console.log(`\n✅ data.js 已更新！\n`);
+            } else {
+              console.log('📭 沒有新視頻，無需更新 data.js\n');
+            }
+
             process.exit(0);
           })();
           SCRIPT
