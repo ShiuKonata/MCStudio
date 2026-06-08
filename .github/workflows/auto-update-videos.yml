@@ -43,10 +43,14 @@ jobs:
             process.exit(1);
           }
 
-          // ⚠️ 臨時測試模式：只掃描 ShiuCoda（節省 API 配額）
-          // 確認工作正常後改回完整時段邏輯
-          const vtuberIds = ['shiucoda'];
-          console.log(`🔬 測試模式：只掃描 ShiuCoda\n`);
+          // ⚠️ 注意：目前處理所有 VTuber（可根據時段調整以平衡 API 配額）
+          // 時段分配建議：
+          //   時段 1 (06:00-06:59):   shiucoda, paroniie, sinniearis, himegimichika, ririna, chita
+          //   時段 2 (12:00-12:59):   shiroleon, kai, nokori, rumi, vaswawa, arrynia
+          //   時段 3 (18:00-18:59):   lubee, ekorru, fuka22, kiriko, nyrfier, whalefall
+          //   時段 4 (00:00-00:59):   mukuru, wakasaito, chamamatti, cocor0
+          const vtuberIds = ['shiucoda', 'paroniie', 'sinniearis', 'himegimichika', 'ririna', 'chita', 'shiroleon', 'kai', 'nokori', 'rumi', 'vaswawa', 'arrynia', 'lubee', 'ekorru', 'fuka22', 'kiriko', 'nyrfier', 'whalefall', 'mukuru', 'wakasaito', 'chamamatti', 'cocor0'];
+          console.log(`📡 掃描模式：全 ${vtuberIds.length} 位 VTuber\n`);
 
           const vtuberData = {};
           vtuberIds.forEach(id => {
@@ -81,10 +85,10 @@ jobs:
           console.log('');
 
           function classifyVideos(vId, items) {
-            const covers = [], originals = [], unclassified = [];
+            const videos = [];
             if (!items || items.length === 0) {
               console.log(`  ⚠️  ${vId}: 無影片資料`);
-              return { covers, originals, unclassified };
+              return { videos };
             }
 
             console.log(`  📊 ${vId}: 掃描 ${items.length} 部影片`);
@@ -96,7 +100,7 @@ jobs:
               const date = item.snippet?.publishedAt?.substring(0, 10) || '';
 
               if (!vid || !date) {
-                console.log(`    ⚠️  [${idx}] 遺漏資料: vid=${vid}, date=${date}, title=${title}`);
+                console.log(`    ⚠️  [${idx}] 遺漏資料: vid=${vid}, date=${date}`);
                 return;
               }
 
@@ -115,32 +119,38 @@ jobs:
                 return;
               }
 
-              // STEP 2-3：分類
+              // STEP 2-3：分類（所有 VTuber 都用統一邏輯）
               let classified = false;
+              let label = '';
 
               if (tL.includes('cover') || tL.includes('歌ってみた')) {
-                covers.push({ id: vid, title: `【Cover】${title}`, date });
-                console.log(`    ✅ [${idx}] ${date} - Cover: ${title.substring(0, 40)}`);
+                label = '【Cover】';
                 classified = true;
               } else if (tL.includes('original') || tL.includes('official') || tL.includes('原創')) {
-                originals.push({ id: vid, title: `【Original】${title}`, date });
-                console.log(`    ✅ [${idx}] ${date} - Original: ${title.substring(0, 40)}`);
-                classified = true;
-              } else if (vId === 'shiucoda' && (tL.includes('demo') || tL.includes('自彈自唱'))) {
-                covers.push({ id: vid, title: `【Cover】${title}`, date });
-                console.log(`    ✅ [${idx}] ${date} - Cover (特殊規則): ${title.substring(0, 40)}`);
+                label = '【Original】';
                 classified = true;
               }
 
+              // VTuber 特殊規則（STEP 3）
               if (!classified) {
-                unclassified.push({ id: vid, title, date });
+                if (vId === 'shiucoda' && (tL.includes('demo') || tL.includes('自彈自唱'))) {
+                  label = '【Cover】';
+                  classified = true;
+                }
+              }
+
+              if (classified) {
+                videos.push({ id: vid, title: `${label}${title}`, date });
+                console.log(`    ✅ [${idx}] ${date} - ${label}${title.substring(0, 35)}`);
+              } else {
+                videos.push({ id: vid, title, date });
                 console.log(`    ❓ [${idx}] ${date} - 未分類: ${title.substring(0, 40)}`);
               }
             });
 
-            const found = covers.length + originals.length + unclassified.length;
+            const found = videos.length;
             console.log(`    📈 ${vId}: 新增 ${found} 部, 跳過 ${skipped} 部`);
-            return { covers, originals, unclassified };
+            return { videos };
           }
 
           async function fetchPlaylistVideoIds(playlistId) {
@@ -227,10 +237,10 @@ jobs:
                     });
 
                     console.log(`  📬 ${vId}: API 返回 ${result.items.length} 部影片，過濾後 ${filteredItems.length} 部`);
-                    const videos = classifyVideos(vId, filteredItems);
-                    const total = videos.covers.length + videos.originals.length + videos.unclassified.length;
+                    const result_classified = classifyVideos(vId, filteredItems);
+                    const total = result_classified.videos.length;
                     console.log(`✅ ${vId}: 新增 ${total} 部影片\n`);
-                    resolve(videos);
+                    resolve(result_classified);
                   } catch (e) {
                     console.log(`❌ ${vId}: JSON 解析失敗 - ${e.message}`);
                     resolve({ covers: [], originals: [], unclassified: [] });
@@ -249,81 +259,86 @@ jobs:
 
           (async () => {
             console.log('\n════════════════════════════════════════\n');
-            let allCovers = 0, allOriginals = 0, allUnclassified = 0;
+            let totalVideos = 0;
             const allNewVideos = {};  // 收集所有新視頻
+            const vtuberStats = {};   // 記錄每個 VTuber 的統計
 
             for (const vId of Object.keys(vtuberData)) {
               const v = await fetchVideos(vId, vtuberData[vId].channelId);
-              allCovers += v.covers.length;
-              allOriginals += v.originals.length;
-              allUnclassified += v.unclassified.length;
+              const count = v.videos.length;
+              totalVideos += count;
 
               // 保存新視頻
-              if (v.covers.length > 0 || v.originals.length > 0 || v.unclassified.length > 0) {
+              if (count > 0) {
                 allNewVideos[vId] = v;
+                vtuberStats[vId] = count;
               }
 
               await new Promise(r => setTimeout(r, 300));
             }
 
-            const total = allCovers + allOriginals + allUnclassified;
             console.log('\n════════════════════════════════════════');
             console.log(`📊 掃描統計結果：`);
-            console.log(`  ✅ Cover: ${allCovers} 部`);
-            console.log(`  ✅ Original: ${allOriginals} 部`);
-            console.log(`  ❓ 未分類: ${allUnclassified} 部`);
-            console.log(`  📈 合計: ${total} 部新影片（客戶端自動分類）`);
+            console.log(`  📈 合計: ${totalVideos} 部新影片`);
+            if (Object.keys(vtuberStats).length > 0) {
+              console.log(`  📋 VTuber 統計:`);
+              Object.entries(vtuberStats).forEach(([vId, count]) => {
+                console.log(`    - ${vId}: ${count} 部`);
+              });
+            }
             console.log('════════════════════════════════════════\n');
 
             // 如果有新視頻，自動更新 data.js
-            if (total > 0) {
+            if (totalVideos > 0) {
               console.log('💾 正在更新 data.js...\n');
 
               let updated = dataContent;
               let updateCount = 0;
 
               for (const vId of Object.keys(allNewVideos)) {
-                const videos = allNewVideos[vId];
+                const videosData = allNewVideos[vId].videos;
 
-                // ShiuCoda 特殊處理（使用 videos 陣列）
-                if (vId === 'shiucoda') {
-                  if (videos.covers.length > 0) {
-                    // 直接查找並替換：找到 'videos: [' 的下一行
-                    const searchStr = 'id: "shiucoda"';
-                    const videosStr = 'videos: [';
-                    const startIdx = updated.indexOf(searchStr);
+                // 找到該 VTuber 的 videos: [ 位置
+                const searchStr = `id: "${vId}"`;
+                const startIdx = updated.indexOf(searchStr);
 
-                    if (startIdx !== -1) {
-                      const videosIdx = updated.indexOf(videosStr, startIdx);
-                      const arrayStart = updated.indexOf('[', videosIdx);
-
-                      if (arrayStart !== -1) {
-                        // 在 '[' 後面的換行後插入新視頻
-                        const insertIdx = arrayStart + 1;
-
-                        // 構造新視頻行
-                        const v = videos.covers[0];
-                        const newLine = `\n      { id: "${v.id}", title: "${v.title.replace(/"/g, '\\"')}", date: "${v.date}" },`;
-
-                        updated = updated.substring(0, insertIdx) + newLine + updated.substring(insertIdx);
-                        console.log(`  ✅ shiucoda: 添加 1 部 Cover (ID: ${v.id})`);
-                        updateCount++;
-                      } else {
-                        console.log(`  ❌ shiucoda: 找不到 videos 陣列開始`);
-                      }
-                    } else {
-                      console.log(`  ❌ shiucoda: 找不到 ShiuCoda 的 id`);
-                    }
-                  }
+                if (startIdx === -1) {
+                  console.log(`  ❌ ${vId}: 找不到 VTuber id`);
+                  continue;
                 }
-                // TODO: 其他 26 位 VTuber 的處理（待實裝）
+
+                const videosStr = 'videos: [';
+                const videosIdx = updated.indexOf(videosStr, startIdx);
+                const arrayStart = updated.indexOf('[', videosIdx);
+
+                if (arrayStart === -1) {
+                  console.log(`  ❌ ${vId}: 找不到 videos 陣列開始`);
+                  continue;
+                }
+
+                // 在 '[' 後面插入所有新視頻
+                const insertIdx = arrayStart + 1;
+                let insertLines = '';
+                let addedCount = 0;
+
+                videosData.forEach(v => {
+                  const escapedTitle = v.title.replace(/"/g, '\\"');
+                  insertLines += `\n      { id: "${v.id}", title: "${escapedTitle}", date: "${v.date}" },`;
+                  addedCount++;
+                });
+
+                if (addedCount > 0) {
+                  updated = updated.substring(0, insertIdx) + insertLines + updated.substring(insertIdx);
+                  console.log(`  ✅ ${vId}: 添加 ${addedCount} 部影片`);
+                  updateCount += addedCount;
+                }
               }
 
               // 寫入更新後的 data.js（只負責寫入，Git 操作由 GitHub Actions 步驟處理）
               if (updateCount > 0) {
                 try {
                   fs.writeFileSync(dataPath, updated, 'utf8');
-                  console.log(`✅ data.js 已成功寫入！\n`);
+                  console.log(`\n✅ data.js 已成功寫入！\n`);
                   console.log(`📝 檔案更新詳情：`);
                   console.log(`  - 新增 VTuber: ${Object.keys(allNewVideos).length} 位`);
                   console.log(`  - 新增視頻總數: ${updateCount} 部`);
@@ -360,7 +375,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "Auto-Update Bot"
           git add js/data.js
-          git commit -m "Auto-update: Add new ShiuCoda videos from YouTube API"
+          git commit -m "Auto-update: Add new VTuber videos from YouTube API"
           git push
           echo "✅ 成功推送到 GitHub"
 

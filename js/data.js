@@ -424,17 +424,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/lanmewko',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     musicClips: [
@@ -549,17 +539,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/paroniie',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     musicClipsChannelIds: [
@@ -663,17 +643,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/kannazukilubee',            class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     scheduleVideoId:  "kc5RN-h_bAs",
@@ -746,17 +716,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/himegi17ka',               class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     scheduleVideoId:  "tPRVSHoEEeg",
@@ -830,17 +790,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/arryn1a',                 class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     videoClips: [
@@ -939,17 +889,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/8p8hbwh8tnb77y',          class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     scheduleVideoId:  "CROYjRn86_o",
@@ -1039,17 +979,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/y13sf73hnbn4lz4',              class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     musicClipsChannelIds: [
@@ -1158,17 +1088,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/1hlxorat4xskrkv',       class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     scheduleVideoId:  "vDoOnUBiuW4",
@@ -1270,17 +1190,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/s7sy7hnhkxrze7x',   class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
@@ -1369,17 +1279,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/3kkf9wa19fnb675',   class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -1450,17 +1350,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdvmp8tskakyxdr',      class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -1529,17 +1419,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/whalefallvtuber/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -1616,17 +1496,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/xdco270x5hdimzj', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -1700,17 +1570,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/oahdwpbhn26xgh5', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -1780,17 +1640,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/4176c8dv62xp8tj', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -1864,17 +1714,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/o8my2qsvfd8q1we', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -1940,17 +1780,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/57v5h7z1m9gxuyk', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2019,17 +1849,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/chamamatti/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2102,17 +1922,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/lcedt6tbm7j9olg', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2184,17 +1994,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/yd8135pe2m366q3', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2256,17 +2056,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/cocor0/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2334,17 +2124,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/icg1idg6i513ru4', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2407,17 +2187,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/vq7fin259ukl3mi', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2482,17 +2252,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/9ir7u6drnzlzo7a', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2563,17 +2323,7 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/pqnlqsethgm3px2', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2640,17 +2390,7 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/Yawnii/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: {
-      covers: [],
-      originals: [],
-      shorts: [],
-      general: [],
-      premiere: [],
-      vlog: [],
-      ads: [],
-      commerce: [],
-      unclassified: []
-    },
+    videos: [],
     memberVideos: [],
 
     // 小知識
@@ -2714,3 +2454,5 @@ const generationColors = {
   '五期生': ['#10B981', '#059669'],
   '六期生': ['#A855F7', '#9333EA'],
 };
+
+
