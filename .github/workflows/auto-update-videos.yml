@@ -49,14 +49,27 @@ jobs:
 
           const vtuberData = {};
           vtuberIds.forEach(id => {
-            // 更可靠的正則表達式：找到該 VTuber 的物件塊，然後提取 youtubeChannelId
-            const idPattern = new RegExp(`id:\\s*["']${id}["'][^}]*?youtubeChannelId:\\s*["']([^"']+)["']`, 's');
-            const match = dataContent.match(idPattern);
-            if (match) {
-              vtuberData[id] = { channelId: match[1] };
-              console.log(`✅ 找到 ${id}: ${match[1]}`);
+            // 方法 1: 用簡單的字符串搜索定位該 VTuber
+            const idStr = `id: "${id}"`;
+            const idIndex = dataContent.indexOf(idStr);
+
+            if (idIndex === -1) {
+              console.log(`❌ 找不到 ${id} (搜尋: '${idStr}')`);
+              return;
+            }
+
+            // 方法 2: 在該位置之後搜尋 youtubeChannelId
+            const searchStart = idIndex;
+            const searchEnd = searchStart + 3000;  // 往後搜尋 3000 字
+            const searchText = dataContent.substring(searchStart, searchEnd);
+
+            const channelMatch = searchText.match(/youtubeChannelId:\s*["']([^"']+)["']/);
+            if (channelMatch) {
+              vtuberData[id] = { channelId: channelMatch[1] };
+              console.log(`✅ 找到 ${id}: ${channelMatch[1]}`);
             } else {
-              console.log(`❌ 找不到 ${id} 的頻道 ID (dataContent 長度: ${dataContent.length})`);
+              console.log(`❌ 在 ${id} 之後找不到 youtubeChannelId`);
+              console.log(`   搜尋文本: ${searchText.substring(0, 200)}...`);
             }
           });
 
