@@ -441,8 +441,8 @@ const vtubers = [
       { id: "HQBR4rTikw4", title: "【Cover】熱愛105°C的你 💧Rumi/懶貓子【歌ってみた】", date: "2021-08-14" },
       { id: "gLNU5_2-Z4w", title: "【Cover】愛言葉Ⅲ 💧Rumi/懶貓子【歌ってみた】", date: "2021-07-18" },
       { id: "qMWfzUt_Nl8", title: "【Cover】Rumi終於歐了一回 💧Rumi/懶貓子 ft. @LancatOfficial", date: "2023-05-08" },
-      { id: "K-6YH5t-HgU", title: "【Original】笑顔はここにある 💧Rumi/懶貓子", date: "2022-06-26" },
-      { id: "0Vq4fWh3RMg", title: "【Original】NON STOP SOUL!!! 💧Rumi/懶貓子", date: "2021-08-01" },
+      { id: "K-6YH5t-HgU", title: "【原創】【Original】笑顔はここにある 💧Rumi/懶貓子", date: "2022-06-26" },
+      { id: "0Vq4fWh3RMg", title: "【原創】【Original】NON STOP SOUL!!! 💧Rumi/懶貓子", date: "2021-08-01" },
     ],
 
     shorts: [
