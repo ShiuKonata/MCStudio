@@ -44,7 +44,7 @@ jobs:
 
           const now = new Date();
           const hourOfDay = now.getUTCHours();
-          const segmentIndex = Math.floor(hourOfDay / 6) % 4;
+          const segmentIndex = 0; // 🔴 強制時段1（手動更新）
 
           const segments = [
             { ids: ['shiucoda', 'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko'], name: '時段1' },
