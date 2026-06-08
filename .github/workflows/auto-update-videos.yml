@@ -278,34 +278,29 @@ jobs:
             if (total > 0) {
               console.log('💾 正在更新 data.js...\n');
 
-              // 更新 data.js
               let updated = dataContent;
+
               for (const vId of Object.keys(allNewVideos)) {
                 const videos = allNewVideos[vId];
 
-                // 更新 covers
-                if (videos.covers.length > 0) {
-                  const coversJson = JSON.stringify(videos.covers, null, 6);
-                  const coversRegex = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?covers:\\s*\\[)[\\s\\S]*?(\\],)`, 'm');
-                  updated = updated.replace(coversRegex, `$1${coversJson}$2`);
-                  console.log(`  ✅ ${vId}: 添加 ${videos.covers.length} 部 Cover`);
-                }
+                // ShiuCoda 特殊處理（使用 videos 陣列）
+                if (vId === 'shiucoda') {
+                  if (videos.covers.length > 0) {
+                    // 找到 ShiuCoda 的 videos 陣列開始位置
+                    const shiucodaVideosStart = updated.indexOf(`id: "shiucoda"`);
+                    const videosArrayStart = updated.indexOf('videos: [', shiucodaVideosStart);
+                    const insertPos = updated.indexOf('[', videosArrayStart) + 1;
 
-                // 更新 originals
-                if (videos.originals.length > 0) {
-                  const originalsJson = JSON.stringify(videos.originals, null, 6);
-                  const originalsRegex = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?originals:\\s*\\[)[\\s\\S]*?(\\],)`, 'm');
-                  updated = updated.replace(originalsRegex, `$1${originalsJson}$2`);
-                  console.log(`  ✅ ${vId}: 添加 ${videos.originals.length} 部 Original`);
-                }
+                    // 構造新視頻的 JSON
+                    const newVideosJson = videos.covers.map(v =>
+                      `\n      { id: "${v.id}", title: "${v.title.replace(/"/g, '\\"')}", date: "${v.date}" },`
+                    ).join('');
 
-                // 未分類視頻存放到 unclassified（等待手動分類）
-                if (videos.unclassified.length > 0) {
-                  const unclassifiedJson = JSON.stringify(videos.unclassified, null, 6);
-                  const unclassifiedRegex = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?unclassified:\\s*\\[)[\\s\\S]*?(\\],)`, 'm');
-                  updated = updated.replace(unclassifiedRegex, `$1${unclassifiedJson}$2`);
-                  console.log(`  ⏳ ${vId}: 添加 ${videos.unclassified.length} 部未分類（等待手動分類）`);
+                    updated = updated.substring(0, insertPos) + newVideosJson + updated.substring(insertPos);
+                    console.log(`  ✅ shiucoda: 添加 ${videos.covers.length} 部 Cover`);
+                  }
                 }
+                // TODO: 其他 26 位 VTuber 的處理（待實裝）
               }
 
               // 寫入更新後的 data.js
