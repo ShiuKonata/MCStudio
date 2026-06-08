@@ -63,6 +63,116 @@ b.標題含有自彈自唱
 
 ---
 
+## 📋 26位 VTuber 標準化影片分類流程（2026-06-08 新增）
+
+**此流程為制式化標準操作，禁止任何偏離、揣測或創意做法。每位 VTuber 都必須按照以下流程執行，不能修改。**
+
+### 流程概述
+基於詩雨蔻達的完整模板，對每位 VTuber 執行 STEP 1-4 自動分類，計算真正的待分類影片數量。
+
+### 執行步驟（必須按順序執行）
+
+#### 步驟 1：查詢三個播放列表的總影片數（API 查詢，無須分頁）
+使用以下 API 直接查詢，**不需要逐頁分頁獲取**：
+
+```javascript
+// 查詢 UU 播放列表（所有上傳影片）
+const uploadsId = 'UU' + vtuber.youtubeChannelId.slice(2);
+GET https://www.googleapis.com/youtube/v3/playlists
+  ?part=contentDetails
+  &id=${uploadsId}
+  &key=${vtuber.ytApiKey}
+// 取得 items[0].contentDetails.itemCount → 記為 UU_COUNT
+
+// 查詢 UULV 播放列表（直播存檔）
+const liveId = 'UULV' + vtuber.youtubeChannelId.slice(2);
+GET https://www.googleapis.com/youtube/v3/playlists
+  ?part=contentDetails
+  &id=${liveId}
+  &key=${vtuber.ytApiKey}
+// 取得 items[0].contentDetails.itemCount → 記為 UULV_COUNT
+
+// 查詢 UUSH 播放列表（Shorts）
+const shortsId = 'UUSH' + vtuber.youtubeChannelId.slice(2);
+GET https://www.googleapis.com/youtube/v3/playlists
+  ?part=contentDetails
+  &id=${shortsId}
+  &key=${vtuber.ytApiKey}
+// 取得 items[0].contentDetails.itemCount → 記為 UUSH_COUNT
+```
+
+**結果格式：**
+```
+✅ UU播放列表：${UU_COUNT} 部
+✅ UULV播放列表：${UULV_COUNT} 部
+✅ UUSH播放列表：${UUSH_COUNT} 部
+```
+
+#### 步驟 2：計算真正的待分類影片數
+```
+待分類影片數 = UU_COUNT - UULV_COUNT - UUSH_COUNT
+```
+
+**此數字就是未分類區應該顯示的正確影片數，任何偏差都代表 STEP 1 排除邏輯有問題。**
+
+#### 步驟 3：對待分類影片進行 STEP 2-4 分類
+
+**STEP 2：自動檢測關鍵詞**
+- 檢測影片標題是否包含：
+  - `cover` 或 `歌ってみた` → 分類為「Cover」
+  - `Original` 或 `original` 或 `原創` 或 `official` → 分類為「Original」
+
+**STEP 3：應用該 VTuber 的特殊規則**
+- 查詢 data.js 中該 VTuber 是否有特殊規則定義
+- 特殊規則僅適用於該 VTuber，不能套用到其他人
+
+**STEP 4：標記 ≤60 秒的影片為 Shorts**
+- 獲取影片時長
+- 若 ≤60 秒 → 標記為 Shorts，從其他分類中移除
+
+#### 步驟 4：將分類結果寫入 data.js
+
+**結果結構（範例）：**
+```javascript
+{
+  id: "vtuber_id",
+  videos: [
+    // STEP 2-4 自動分類出的 Cover + Original
+    { id: "...", title: "【Cover】...", date: "..." },
+    ...
+  ],
+  shorts: [
+    // STEP 4 標記的 ≤60 秒影片
+    { id: "...", title: "...", date: "...", isShorts: true },
+    ...
+  ],
+  unclassified: [
+    // 無法自動分類的影片，待 STEP 5 手動分類
+    { id: "...", title: "...", date: "..." },
+    ...
+  ],
+  // 其他分類（general、vlog、commerce、premiere 等）
+  // 由用戶在網站上手動執行 STEP 5 後填充
+}
+```
+
+### 禁止事項
+- ❌ 禁止只獲取播放列表的第一頁，必須使用 API 直接查詢 itemCount
+- ❌ 禁止修改計算公式，必須使用：待分類 = UU - UULV - UUSH
+- ❌ 禁止跳過任何步驟
+- ❌ 禁止對 STEP 2-4 進行創意修改
+- ❌ 禁止假設或猜測任何數字，所有數字必須來自 API 查詢
+- ❌ 禁止在對另一位 VTuber 應用此流程時偏離此標準
+
+### 檢查清單（執行前必讀）
+- [ ] 確認已查詢三個播放列表的 itemCount
+- [ ] 確認已計算待分類影片數
+- [ ] 確認已對待分類影片進行 STEP 2-4 分類
+- [ ] 確認已將結果寫入 data.js
+- [ ] 確認未使用任何創意或非標準做法
+
+---
+
 ## 🚨 最高優先規則：剪輯頻道收錄資格（掃描前必讀）
 
 ### Rule 0-A：只收錄預見娛樂 27 位 Vtuber

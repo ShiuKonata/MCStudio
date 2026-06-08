@@ -1890,8 +1890,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const shortsPlaylistId = 'UUSH' + v.youtubeChannelId.slice(2);
       let pageToken = null;
       let count = 0;
+      let pageCount = 0;
       try {
         do {
+          pageCount++;
           let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
             + '?part=snippet'
             + '&playlistId=' + encodeURIComponent(shortsPlaylistId)
@@ -1911,6 +1913,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           pageToken = data.nextPageToken || null;
         } while (pageToken);
+        console.log(`✅ [STEP 1-排除UUSH] 獲取 ${pageCount} 頁，共 ${count} 部 Shorts 影片`);
       } catch (err) {
         console.error(`❌ [STEP 2] 獲取 Shorts 影片列表失敗:`, err);
       }
@@ -1920,8 +1923,10 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchAllLiveVideos() {
       let pageToken = null;
       let count = 0;
+      let pageCount = 0;
       try {
         do {
+          pageCount++;
           let url = 'https://www.googleapis.com/youtube/v3/playlistItems'
             + '?part=snippet'
             + '&playlistId=' + encodeURIComponent(livePlaylistId)
@@ -1941,6 +1946,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           pageToken = data.nextPageToken || null;
         } while (pageToken);
+        console.log(`✅ [STEP 1-排除UULV] 獲取 ${pageCount} 頁，共 ${count} 部直播存檔影片`);
       } catch (err) {
         console.error(`❌ [STEP 1] 獲取直播存檔失敗:`, err);
       }
