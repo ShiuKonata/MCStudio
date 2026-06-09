@@ -25,9 +25,11 @@
 步骤1：YouTube API 获取全部视频 → 排除直播（UULV播放列表）
 
 步骤2：检测未分類區影片的標題，共 5 個關鍵字（不分大小寫）：
-  → 放到【Cover】區：contain「cover」或「歌ってみた」
-  → 放到【Original】區：contain「Original」或「Official」或「原創」
-  若分類後的影片長度小於等於60秒，該影片應在「Shorts 區」和「Cover/Original 區」同時顯示，並在Shorts區上標記
+  → 放到【Cover】區：contain「cover」或「歌ってみた」，需在標題前加上【Cover】前綴
+  → 放到【原創曲】區：contain「Original」或「Official」或「原創」，需在標題前加上【原創】前綴
+  **分類後的影片長度判斷**：
+    a. ≤60秒 → 只放 Shorts，不放 Cover/原創
+    b. ≥60秒 → 放 Cover/原創 + 一般影片區
 
 步驟3：新增詩雨蔻達的特殊規則，針對未分類區的影片標題篩選出底下a跟b規則，這兩個特殊規則都需放到Cover區，若特殊規則篩選出來的影片長度小於等於60秒，該影片應在「Shorts 區」和「Cover/Original 區」同時顯示，並在Shorts區上標記
 a.標題含有demo
