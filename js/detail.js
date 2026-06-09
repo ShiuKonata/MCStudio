@@ -1810,6 +1810,73 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── 未分類區（YouTube Data API v3 - 規避直播存檔 + Cover/Original）───
+
+  // 【新增】初始化未分類視頻到容器的函數定義（必須在調用前定義）
+  function initializeUnclassifiedVideos() {
+    const container = document.getElementById('unc-container');
+    if (!container || !v.videos.unclassified) return;
+
+    container.innerHTML = '';
+    const videos = v.videos.unclassified || [];
+
+    if (videos.length === 0) {
+      container.innerHTML = '<div class="ls-no-key"><p>暫無未分類影片</p></div>';
+      updateUnclassifiedVisibility();
+      return;
+    }
+
+    videos.forEach(video => {
+      const title = esc(video.title || '');
+      const date = video.date || '';
+      const vid = video.id;
+      const thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+
+      container.innerHTML += `
+        <div class="ls-card" onclick="(function(){
+          document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+          document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+          document.getElementById('yt-modal-title').textContent='${title}';
+          document.getElementById('yt-modal').classList.add('open');
+          document.body.style.overflow='hidden';
+        })()">
+          <div class="ls-thumb-wrap">
+            <img class="ls-thumb" src="${thumb}" alt="${title}" loading="lazy">
+            <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+          </div>
+          <div class="ls-info">
+            <div class="ls-title">${title || '（無標題）'}</div>
+            ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+          </div>
+        </div>`;
+    });
+
+    console.log(`✅ 已初始化 ${videos.length} 部未分類影片`);
+    updateUnclassifiedVisibility();
+  }
+
+  // 【新增】更新未分類區可見性（根據是否有待分類影片）
+  function updateUnclassifiedVisibility() {
+    const uncSection = document.getElementById('ov-unclassified-section');
+    const uncContainer = document.getElementById('unc-container');
+    const uncBtn = document.querySelector('.ov-section-btn[data-ovsection="unclassified"]');
+
+    if (!uncSection || !uncContainer) return;
+
+    // 檢查未分類區是否有影片
+    const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
+
+    if (hasUnclassifiedVideos) {
+      // 只控制按鈕的可見性，不控制 section 的顯示/隱藏
+      // section 的顯示/隱藏由點擊事件處理程序控制
+      if (uncBtn) uncBtn.style.display = '';  // 顯示按鈕（讓用戶可以點擊）
+      console.log('✅ 未分類區按鈕已啟用（有待分類影片）');
+    } else {
+      uncSection.style.display = 'none';  // 隱藏 section
+      if (uncBtn) uncBtn.style.display = 'none';  // 隱藏按鈕
+      console.log('📭 未分類區已隱藏（沒有待分類影片）');
+    }
+  }
+
   let tryLoadUnclassified = null;
   if (v.youtubeChannelId) {
     // 【新結構初始化】如果 v.videos 是舊的陣列結構，轉換為新結構
@@ -2384,71 +2451,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
-
-    // 【新增】初始化未分類視頻到容器
-    function initializeUnclassifiedVideos() {
-      const container = document.getElementById('unc-container');
-      if (!container || !v.videos.unclassified) return;
-
-      container.innerHTML = '';
-      const videos = v.videos.unclassified || [];
-
-      if (videos.length === 0) {
-        container.innerHTML = '<div class="ls-no-key"><p>暫無未分類影片</p></div>';
-        return;
-      }
-
-      videos.forEach(video => {
-        const title = esc(video.title || '');
-        const date = video.date || '';
-        const vid = video.id;
-        const thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
-
-        container.innerHTML += `
-          <div class="ls-card" onclick="(function(){
-            document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
-            document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
-            document.getElementById('yt-modal-title').textContent='${title}';
-            document.getElementById('yt-modal').classList.add('open');
-            document.body.style.overflow='hidden';
-          })()">
-            <div class="ls-thumb-wrap">
-              <img class="ls-thumb" src="${thumb}" alt="${title}" loading="lazy">
-              <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
-            </div>
-            <div class="ls-info">
-              <div class="ls-title">${title || '（無標題）'}</div>
-              ${date ? '<div class="ls-date">' + date + '</div>' : ''}
-            </div>
-          </div>`;
-      });
-
-      console.log(`✅ 已初始化 ${videos.length} 部未分類影片`);
-      updateUnclassifiedVisibility();
-    }
-
-    // 【新增】更新未分類區可見性（根據是否有待分類影片）
-    function updateUnclassifiedVisibility() {
-      const uncSection = document.getElementById('ov-unclassified-section');
-      const uncContainer = document.getElementById('unc-container');
-      const uncBtn = document.querySelector('.ov-section-btn[data-ovsection="unclassified"]');
-
-      if (!uncSection || !uncContainer) return;
-
-      // 檢查未分類區是否有影片
-      const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
-
-      if (hasUnclassifiedVideos) {
-        // 只控制按鈕的可見性，不控制 section 的顯示/隱藏
-        // section 的顯示/隱藏由點擊事件處理程序控制
-        if (uncBtn) uncBtn.style.display = '';  // 顯示按鈕（讓用戶可以點擊）
-        console.log('✅ 未分類區按鈕已啟用（有待分類影片）');
-      } else {
-        uncSection.style.display = 'none';  // 隱藏 section
-        if (uncBtn) uncBtn.style.display = 'none';  // 隱藏按鈕
-        console.log('📭 未分類區已隱藏（沒有待分類影片）');
-      }
-    }
 
     // 【新增】廣告區加載函數
     function loadAdsYear() {
