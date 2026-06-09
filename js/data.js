@@ -638,8 +638,14 @@ const vtubers = [
       { id: "V_FX_xN7Nrk", title: "[4K] 伝説 ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版", date: "2025-03-08" },
       { id: "MQq-zqkq0vw", title: "[4K] 新生兒の癒し ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版", date: "2025-03-07" },
       { id: "QJZBcNnQl8w", title: "[4K] 空島 ♦︎ Paroniie 3DLIVE 星宿單曲無字幕版", date: "2025-03-06" },
-      { id: "MJkqLZ0zBKU", title: "🎵 星願 - 帕蘿妮 Paroniie 【Original Demo】", date: "2025-02-07" },
-      { id: "xCPJCQ92oP8", title: "🎵 星願 - 帕蘿妮 Paroniie 【Original Demo 自彈自唱版本】", date: "2025-02-06" }
+      { id: "DhHNlE2mPaU", title: "🎵 故事未完待續 - 帕蘿妮 Paroniie 【COVER】", date: "2025-02-26" },
+      { id: "0v_d6tRIGyc", title: "【帕蘿妮精華】要不要抽卡到把孩子養到大呢❓直播遊戲最容易翻車x我有賭癮嗎❓", date: "2025-02-15" },
+      { id: "nVVtvD6t81E", title: "🎵 光漆 - 帕蘿妮 Paroniie 【COVER】", date: "2025-02-09" },
+      { id: "NeK7MJlqtJE", title: "【帕蘿妮最新直播精華】超不會玩的帕蘿妮與很會玩的美食獵人❓我們的相性如何🐉", date: "2025-01-11" },
+      { id: "jHQVaZT4KOc", title: "【帕蘿妮直播精華】紅色髮圈小姐姐跟帕蘿妮的羞恥Play❓為了對話進度放棄尊嚴💧🐉", date: "2024-12-28" },
+      { id: "UkRsV8DzZVk", title: "帕蘿妮3DLIVE　星宿 獨家放送", date: "2024-12-21" },
+      { id: "R4xo_h8eZSc", title: "【帕蘿妮 x 懶貓子】共鳴/共なる/共に渡る Karaoke版", date: "2024-12-20" },
+      { id: "YuXVmJpFxZs", title: "【帕蘿妮直播精華】你的願望值得被成全嗎❓免費課金小遊戲帕蘿妮玩得超認真🐉", date: "2024-12-14" }
     ],
     shorts: [],
     originals_manual: [],
