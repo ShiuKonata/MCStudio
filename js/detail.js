@@ -2202,6 +2202,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (input)  input.value = '';
       if (countEl) countEl.style.display = 'none';
 
+      // 【重要】檢查 v.videos.unclassified 是否已經有內容（來自 data.js）
+      const hasPreloadedVideos = v.videos.unclassified && v.videos.unclassified.length > 0;
+      if (hasPreloadedVideos) {
+        // 如果已經初始化了未分類視頻，不清空容器，直接返回
+        console.log('✅ 未分類視頻已預先加載（來自 data.js），不需要 API 查詢');
+        uncLoading = false;
+        return;
+      }
+
       // 【STEP 1 準備】第一次加載時，先獲取直播存檔列表
       if (!liveVideoIdsFetched) {
         await fetchAllLiveVideos();
