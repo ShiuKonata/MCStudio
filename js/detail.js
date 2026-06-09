@@ -2351,9 +2351,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
 
       if (hasUnclassifiedVideos) {
-        uncSection.style.display = '';  // 顯示容器
-        if (uncBtn) uncBtn.style.display = '';  // 顯示按鈕
-        console.log('✅ 未分類區已顯示（有待分類影片）');
+        // 【修復】只有當當前選擇的 section 是 unclassified 時，才顯示未分類區
+        // 否則保持隱藏，防止覆蓋其他 section
+        const activeBtn = document.querySelector('.ov-section-btn.active');
+        const isUnclassifiedActive = activeBtn && activeBtn.dataset.ovsection === 'unclassified';
+
+        if (isUnclassifiedActive) {
+          uncSection.style.display = '';  // 顯示容器（只有在點擊時）
+        } else {
+          uncSection.style.display = 'none';  // 始終隱藏（防止混亂）
+        }
+        if (uncBtn) uncBtn.style.display = '';  // 顯示按鈕（讓用戶可以點擊）
+        console.log('✅ 未分類區已準備（有待分類影片，但隱藏直到點擊）');
       } else {
         uncSection.style.display = 'none';  // 隱藏容器
         if (uncBtn) uncBtn.style.display = 'none';  // 隱藏按鈕
