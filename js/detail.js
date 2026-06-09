@@ -2913,11 +2913,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window._uncLoaded = true;
         tryLoadUnclassified();
       }
-
-      // 【重要】確保未分類區在初始化後根據影片數量顯示或隱藏
-      setTimeout(() => {
-        updateUnclassifiedVisibility();
-      }, 500);
+      // 【移除】未分類區的可見性判斷由 loadUnclassifiedYear() 在篩選完成後處理
+      // 不需要在初始化時再次調用 updateUnclassifiedVisibility()
     }, 100);
   }
 
