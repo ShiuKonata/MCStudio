@@ -2908,11 +2908,14 @@ document.addEventListener('DOMContentLoaded', () => {
       // 【新增】自動初始化時只顯示一般影片區
       if (ovSections.general) ovSections.general.style.display = '';
 
-      // 加載未分類區
-      if (tryLoadUnclassified && !window._uncLoaded) {
-        window._uncLoaded = true;
-        tryLoadUnclassified();
-      }
+      // 【修復】延遲加載未分類區（等待其他區域初始化完成）
+      // 防止容器內容混亂渲染 - 在 500ms 後才加載，確保 general 等區域已完全初始化
+      setTimeout(() => {
+        if (tryLoadUnclassified && !window._uncLoaded) {
+          window._uncLoaded = true;
+          tryLoadUnclassified();
+        }
+      }, 500);
       // 【移除】未分類區的可見性判斷由 loadUnclassifiedYear() 在篩選完成後處理
       // 不需要在初始化時再次調用 updateUnclassifiedVisibility()
     }, 100);
