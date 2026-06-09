@@ -2320,8 +2320,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (uncSection) uncSection.style.display = 'none';  // 隱藏整個區域
             console.log('📭 未分類區已隱藏（沒有待分類影片）');
           } else {
-            if (uncSection) uncSection.style.display = '';  // 顯示區域
-            console.log('❓ 未分類區顯示（有待分類影片：' + count + '部）');
+            console.log('❓ 未分類區有待分類影片：' + count + '部');
           }
 
           // 移除分頁
@@ -2351,20 +2350,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const hasUnclassifiedVideos = uncContainer.querySelectorAll('.ls-card').length > 0;
 
       if (hasUnclassifiedVideos) {
-        // 【修復】只有當當前選擇的 section 是 unclassified 時，才顯示未分類區
-        // 否則保持隱藏，防止覆蓋其他 section
-        const activeBtn = document.querySelector('.ov-section-btn.active');
-        const isUnclassifiedActive = activeBtn && activeBtn.dataset.ovsection === 'unclassified';
-
-        if (isUnclassifiedActive) {
-          uncSection.style.display = '';  // 顯示容器（只有在點擊時）
-        } else {
-          uncSection.style.display = 'none';  // 始終隱藏（防止混亂）
-        }
+        // 只控制按鈕的可見性，不控制 section 的顯示/隱藏
+        // section 的顯示/隱藏由點擊事件處理程序控制
         if (uncBtn) uncBtn.style.display = '';  // 顯示按鈕（讓用戶可以點擊）
-        console.log('✅ 未分類區已準備（有待分類影片，但隱藏直到點擊）');
+        console.log('✅ 未分類區按鈕已啟用（有待分類影片）');
       } else {
-        uncSection.style.display = 'none';  // 隱藏容器
+        uncSection.style.display = 'none';  // 隱藏 section
         if (uncBtn) uncBtn.style.display = 'none';  // 隱藏按鈕
         console.log('📭 未分類區已隱藏（沒有待分類影片）');
       }
@@ -2923,10 +2914,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tryLoadUnclassified && !window._uncLoaded) {
           window._uncLoaded = true;
           tryLoadUnclassified();
+
+          // 【重要】加載完成後，確保未分類區保持隱藏（直到用戶點擊）
+          setTimeout(() => {
+            const uncSection = document.getElementById('ov-unclassified-section');
+            if (uncSection) uncSection.style.display = 'none';
+            console.log('📭 [Auto-init] 未分類區已隱藏（初始化完成）');
+          }, 100);
         }
       }, 500);
-      // 【移除】未分類區的可見性判斷由 loadUnclassifiedYear() 在篩選完成後處理
-      // 不需要在初始化時再次調用 updateUnclassifiedVisibility()
     }, 100);
   }
 
