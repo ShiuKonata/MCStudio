@@ -74,13 +74,38 @@ document.addEventListener('DOMContentLoaded', () => {
   // 【優先級最高】立即轉換 videos 結構（在任何渲染前執行）
   console.log('[初始化] v.videos 類型:', Array.isArray(v.videos) ? '陣列' : typeof v.videos);
   if (Array.isArray(v.videos)) {
-    console.log('[轉換前] covers:', v.videos.filter(v => v.title.includes('【Cover】')).length);
     const oldVideos = v.videos;
+    const covers = [];
+    const originals = [];
+    const unclassified = [];
+
+    for (const vid of oldVideos) {
+      const titleLower = vid.title.toLowerCase();
+
+      // 【不區分大小寫】檢查 Cover（cover 或 歌ってみた）
+      if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
+        covers.push(vid);
+      }
+      // 【不區分大小寫】檢查 Original（original 或 official 或 原創）
+      else if (titleLower.includes('original') || titleLower.includes('official') || vid.title.includes('【原創】')) {
+        // 【新增】檢測到【Original】時，在前面加【原創】
+        let newTitle = vid.title;
+        if (titleLower.includes('original') && !vid.title.includes('【原創】')) {
+          newTitle = '【原創】' + vid.title;
+        }
+        originals.push({ ...vid, title: newTitle });
+      }
+      else {
+        unclassified.push(vid);
+      }
+    }
+
+    console.log('[轉換前] covers:', oldVideos.filter(v => v.title.toLowerCase().includes('cover') || v.title.toLowerCase().includes('歌ってみた')).length);
     v.videos = {
-      covers: oldVideos.filter(vid => vid.title.includes('【Cover】')),
-      originals: oldVideos.filter(vid => vid.title.includes('【Original】') || vid.title.includes('【原創】')),
+      covers: covers,
+      originals: originals,
       officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
-      unclassified: [],
+      unclassified: unclassified,
       shorts: v.shorts || []  // 保留 shorts（如果存在）
     };
     console.log('[轉換後] covers:', v.videos.covers.length, '| originals:', v.videos.originals.length, '| shorts:', v.videos.shorts.length);
