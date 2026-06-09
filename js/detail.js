@@ -1815,11 +1815,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // 【新結構初始化】如果 v.videos 是舊的陣列結構，轉換為新結構
     if (Array.isArray(v.videos)) {
       const oldVideos = v.videos;
+      const covers = [];
+      const originals = [];
+      const unclassified = [];
+
+      for (const vid of oldVideos) {
+        const titleLower = vid.title.toLowerCase();
+        if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
+          covers.push(vid);
+        } else if (titleLower.includes('original') || titleLower.includes('official') || vid.title.includes('【原創】')) {
+          let newTitle = vid.title;
+          if (titleLower.includes('original') && !vid.title.includes('【原創】')) {
+            newTitle = '【原創】' + vid.title;
+          }
+          originals.push({ ...vid, title: newTitle });
+        } else {
+          unclassified.push(vid);
+        }
+      }
+
       v.videos = {
-        covers: oldVideos.filter(vid => vid.title.includes('【Cover】')),
-        originals: oldVideos.filter(vid => vid.title.includes('【Original】') || vid.title.includes('【原創】')),
+        covers: covers,
+        originals: originals,
         officials: oldVideos.filter(vid => vid.title.includes('【Official】')),
-        unclassified: []
+        unclassified: unclassified
       };
     }
     // 如果已經是新結構，確保所有欄位都存在
@@ -1827,6 +1846,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!v.videos.originals) v.videos.originals = [];
     if (!v.videos.officials) v.videos.officials = [];
     if (!v.videos.unclassified) v.videos.unclassified = [];
+
+    // 【新增】初始化未分類視頻到容器
+    initializeUnclassifiedVideos();
 
     const uploadsPlaylistId = 'UU' + v.youtubeChannelId.slice(2);
     const livePlaylistId = 'UULV' + v.youtubeChannelId.slice(2);  // 直播存檔播放列表
@@ -2362,6 +2384,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadUnclassified = function() { loadUnclassifiedYear(uncCurrentYear); };
+
+    // 【新增】初始化未分類視頻到容器
+    function initializeUnclassifiedVideos() {
+      const container = document.getElementById('unc-container');
+      if (!container || !v.videos.unclassified) return;
+
+      container.innerHTML = '';
+      const videos = v.videos.unclassified || [];
+
+      if (videos.length === 0) {
+        container.innerHTML = '<div class="ls-no-key"><p>暫無未分類影片</p></div>';
+        return;
+      }
+
+      videos.forEach(video => {
+        const title = esc(video.title || '');
+        const date = video.date || '';
+        const vid = video.id;
+        const thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+
+        container.innerHTML += `
+          <div class="ls-card" onclick="(function(){
+            document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid}?autoplay=1&rel=0';
+            document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid}';
+            document.getElementById('yt-modal-title').textContent='${title}';
+            document.getElementById('yt-modal').classList.add('open');
+            document.body.style.overflow='hidden';
+          })()">
+            <div class="ls-thumb-wrap">
+              <img class="ls-thumb" src="${thumb}" alt="${title}" loading="lazy">
+              <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+            </div>
+            <div class="ls-info">
+              <div class="ls-title">${title || '（無標題）'}</div>
+              ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+            </div>
+          </div>`;
+      });
+
+      console.log(`✅ 已初始化 ${videos.length} 部未分類影片`);
+      updateUnclassifiedVisibility();
+    }
 
     // 【新增】更新未分類區可見性（根據是否有待分類影片）
     function updateUnclassifiedVisibility() {
