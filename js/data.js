@@ -2388,11 +2388,21 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/57v5h7z1m9gxuyk', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+      {id:"xGyZkUevB6c",title:"Saja Boys - Soda Pop / 魁Kai、崎塔Chita、鯨諾Whalefall、穆克蕗Mukuru、涅爾菲Nyrfier (Cover)",date:"2025-10-25"},
+      {id:"zDnT3Q3oyqQ",title:"チェリーポップ / 崎塔CHITA (cover)",date:"2025-10-09"},
+      {id:"0H4eCfJnnwY",title:"アニマル / 崎塔CHITA (cover)",date:"2025-03-21"},
+    ],
     shorts: [],
     originals_manual: [],
-    premiere: [],
-    general: [],
+    premiere: [
+      {id:"zbBNsQ3y2GM",title:"【官方初配信精華】獨特嗓音+超皮行為！連STAFF都頭痛的崎塔出道秘辛！究竟能不能成為一隻貓呢？ (●´ω｀●)ゞ | 崎塔 Chita",date:"2025-04-26"},
+    ],
+    general: [
+      {id:"h50yg0FYzD8",title:"【2026 漫畫博覽會】崎塔 CHITA 之1v1好難抽！🐾",date:"2026-04-14"},
+      {id:"NhXNZysobhk",title:"【2026 漫畫博覽會】崎塔 CHITA 線下見面會：南港展覽館與妳相約！🐾",date:"2026-02-18"},
+      {id:"dluL4fRW_Gc",title:"【冒險日誌】人類們，你們的世界好好玩！d(`･∀･)b | 崎塔 Chita",date:"2025-04-23"},
+    ],
     vlog: [],
     commerce: [],
     memberVideos: [],
