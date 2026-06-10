@@ -1582,15 +1582,7 @@ const vtubers = [
       {id:"TrKOXO9OFDQ",title:"🎤白月光與硃砂痣-大籽｜結月莉莉奈🎀Ririna cover.",date:"2023-11-03"}
     ],
     shorts: [],
-    originals_manual: [
-      {id:"RTbFm_V7JAo",title:"【愚人節COVER】草莓味/桂香GuiXiang 甜自己一把、放自己一馬🤘｜結月莉莉奈Yuzukiririna",date:"2026-04-01"},
-      {id:"v-tP4oF6n20",title:"【二周年紀念cover】Dadi/KIRE ft. Vera Chai｜結月莉莉奈Yuzukiririna ft. @煌Kirali",date:"2025-12-13"},
-      {id:"layFgIuT_FU",title:"破防歌/計畫通行-Cover｜結月莉莉奈Yuzukiririna Ft.薇恩黛娜 @venomdinah_StarryBlock、諾櫻 @ReLiveNoe",date:"2025-03-21"},
-      {id:"NTaQxI6f5H4",title:"半醒 / ChiliChill - Cover｜結月莉莉奈Yuzukiririna",date:"2024-12-14"},
-      {id:"6HS92yAUjoc",title:"好きだから。 - ユイカ / 結月莉莉奈【歌ってみた】",date:"2023-12-01"},
-      {id:"TrKOXO9OFDQ",title:"🎤白月光與硃砂痣-大籽｜結月莉莉奈🎀Ririna cover.",date:"2023-11-03"},
-      {id:"o_8vsVg2z9s",title:"【Original原創曲】未眠｜結月莉莉奈YuzukiRirina",date:"2025-03-28"}
-    ],
+    originals_manual: [],
     premiere: [],
     general: [],
     vlog: [],
