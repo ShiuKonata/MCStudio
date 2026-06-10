@@ -1554,9 +1554,29 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/s7sy7hnhkxrze7x',   class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+      {id:"C4NfTAD_nOY",title:"【明日方舟：終末地】WE ARE EMPIRE/STARSET｜結月莉莉奈Yuzukiririna",date:"2026-02-08"},
+      {id:"gxlLZ8VUwTg",title:"【福利歌曲串燒】威風堂々/老公天下第一/要愛愛｜結月莉莉奈Yuzukiririna",date:"2025-08-16"},
+      {id:"LGPI3qrJDK0",title:"雨夜之緣/原創音聲｜結月莉莉奈Yuzukiririna",date:"2025-03-14"},
+      {id:"evQ47taQJrE",title:"んっあっあっ。/ SLAVE.V-V-R｜結月莉莉奈Yuzukiririna",date:"2025-02-14"},
+      {id:"PnZEySCZW7c",title:"【官方精華】我們找了這麼久...你竟然叫他烈焰ㄐㄐ??? #麥塊精華 #爆言注意 #ft超多人所以沒標",date:"2024-11-16"},
+      {id:"wWIApyIoTpQ",title:"【誕生日紀念商品】眠眠細語CD吊飾試聽版🎀 ｜結月莉莉奈Ririna",date:"2024-03-28"},
+      {id:"OWdceU_uuPc",title:"【結月莉莉奈｜官方精華】好奇怪...怎麼會...這麼暈?!",date:"2023-12-20"},
+      {id:"R4I9cAHYNg8",title:"《桜時》戀愛養成遊戲START ▶ ♥♡♡♡♡",date:"2023-12-12"},
+      {id:"uqpY1-3C4is",title:"什麼?! 太過分惹QQ",date:"2023-12-05"},
+      {id:"kYkG75Mjbi8",title:"哄女友的萬能公式",date:"2023-11-27"},
+      {id:"0JyY0Pbsbsw",title:"噓...這是秘密唷...(ᐢ⸝⸝˙Ⱉ˙⸝⸝)－結月莉莉奈 Ririna🎀",date:"2023-11-14"}
+    ],
     shorts: [],
-    originals_manual: [],
+    originals_manual: [
+      {id:"RTbFm_V7JAo",title:"【愚人節COVER】草莓味/桂香GuiXiang 甜自己一把、放自己一馬🤘｜結月莉莉奈Yuzukiririna",date:"2026-04-01"},
+      {id:"v-tP4oF6n20",title:"【二周年紀念cover】Dadi/KIRE ft. Vera Chai｜結月莉莉奈Yuzukiririna ft. @煌Kirali",date:"2025-12-13"},
+      {id:"layFgIuT_FU",title:"破防歌/計畫通行-Cover｜結月莉莉奈Yuzukiririna Ft.薇恩黛娜 @venomdinah_StarryBlock、諾櫻 @ReLiveNoe",date:"2025-03-21"},
+      {id:"NTaQxI6f5H4",title:"半醒 / ChiliChill - Cover｜結月莉莉奈Yuzukiririna",date:"2024-12-14"},
+      {id:"6HS92yAUjoc",title:"好きだから。 - ユイカ / 結月莉莉奈【歌ってみた】",date:"2023-12-01"},
+      {id:"TrKOXO9OFDQ",title:"🎤白月光與硃砂痣-大籽｜結月莉莉奈🎀Ririna cover.",date:"2023-11-03"},
+      {id:"o_8vsVg2z9s",title:"【Original原創曲】未眠｜結月莉莉奈YuzukiRirina",date:"2025-03-28"}
+    ],
     premiere: [],
     general: [],
     vlog: [],
