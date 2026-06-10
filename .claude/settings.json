@@ -1,5 +1,15 @@
 {
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -Command \"Get-Content 'C:\\Claude Ai\\網站\\MCStudio\\.claude\\rules_inject.md' -Raw\""
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
