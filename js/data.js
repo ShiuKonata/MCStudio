@@ -2644,11 +2644,30 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/yd8135pe2m366q3', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
-    shorts: [],
-    originals_manual: [],
-    premiere: [],
-    general: [],
+    videos: [
+      {id:"uDdSMgaKxcM",title:"【寄り酔いTipsy | 和ぬかWanuka】Cover 🍷 百百波美 ⌇ BarkBarkPomi",date:"2026-04-11"},
+      {id:"YV2CET4jgT0",title:"【キャラクターCharacter | 緑黄色社会】Cover ✨ 百百波美 ⌇ BarkBarkPomi",date:"2026-04-01"},
+      {id:"8synTxKI4Vs",title:"【愛♡スクリ～ム！中文版 | AiScReam】Cover ❤️  @Nekokaifuka22 @cocor0_0303 @uchififi 音雲漫步計畫 ⌇ BarkBarkPomi",date:"2025-12-31"},
+      {id:"UTOzpslzMV8",title:"【뛰어 JUMP | BLACKPINK】Cover ⚜️ 百百波美 ⌇ BarkBarkPomi",date:"2025-07-21"},
+      {id:"IXWLtO5lBL4",title:"【第六感 | Reol】Cover ⚡ 百百波美 ⌇ BarkBarkPomi",date:"2025-04-11"},
+      {id:"ZTZGFTKUduU",title:"【怪獣の花唄 | Vaundy】Cover 💐 百百波美 ⌇ BarkBarkPomi",date:"2024-08-24"},
+      {id:"WcoRVwhVOiU",title:"【宇宙散步 | DECO*27】Cover 🛸 百百波美 ⌇ BarkBarkPomi",date:"2024-08-03"},
+      {id:"Rz5IHkSNgDM",title:"【唱 Show | Ado】Cover 🎙️ 百百波美 ⌇ BarkBarkPomi",date:"2024-07-06"},
+    ],
+    shorts: [
+      {id:"1JqpDh4Na5M",title:"【上車舞】預見娛樂 超大型上車舞神降臨!!! 🛸💨 百百波美 ⌇ BarkBarkPomi",date:"2025-11-16"},
+      {id:"YIZQ1PyVA9A",title:"【原創曲試聽 | Original Song】この冷たい感情は。涙 💧 百百波美 ⌇ BarkBarkPomi",date:"2025-04-12"},
+      {id:"ZYVcoi-H6iM",title:"【初配信🛸 9/12(四) 20:00】𝗖𝗵𝗿𝗼𝗻𝗼𝗻𝗮𝘂𝘁｜百百波美 BarkBarkPomi【音雲漫步計畫】",date:"2024-08-21"},
+    ],
+    originals_manual: [
+      {id:"IUT2J3KviC0",title:"【原創曲 | Original Song】狗勾米米大冒險【Official MV】 🛸💨 百百波美 ⌇ BarkBarkPomi",date:"2026-04-12"},
+    ],
+    premiere: [
+      {id:"KqG04bHCFaU",title:"【官方初配信精華】展現大人魅力的偶像？這...這就是我要的清涼照！？ 🛸💨 百百波美 ⌇ BarkBarkPomi",date:"2024-09-19"},
+    ],
+    general: [
+      {id:"Q9RQmpn9OVY",title:"【一週年特企】音量注意！六福村大冒險，像極了偶像團體的一天…⁉️【音雲漫步計畫】ft. @Nekokaifuka22 @BarkBarkPomi @cocor0_0303 @uchififi​",date:"2025-09-20"},
+    ],
     vlog: [],
     commerce: [],
     memberVideos: [],
