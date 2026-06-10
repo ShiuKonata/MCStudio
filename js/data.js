@@ -1883,7 +1883,7 @@ const vtubers = [
     nameEn: "Whalefall",
     group: "預見娛樂",
     generation: "三期生",
-    avatar: "https://pbs.twimg.com/profile_images/2056019431940382720/6WdljP_c_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2064075801516228608/H0vDY5uC_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1768216252001198080/1710825714/1500x500",
     bgmVideoId: "ULhzSR_wZ3I",
     bgmLabel:   "鯨落",
