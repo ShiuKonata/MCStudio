@@ -2731,11 +2731,28 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/cocor0/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [],
-    shorts: [],
+    videos: [
+      {id:"2Npb6-rX-1E",title:"𝐌𝐢𝐥𝐞𝐭 - 𝐓𝐡𝐞 𝐒𝐭𝐨𝐫𝐲 𝐨𝐟 𝐔𝐬 / 心 𝐜𝐨𝐜𝐨𝐫𝟎 𝐂𝐎𝐕𝐄𝐑【𝐂𝐂中文字幕】",date:"2026-03-03"},
+      {id:"_ywKD3BRFCE",title:"🎵劍紙三國（清新ver.💕） / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥 #劍紙三國",date:"2026-02-16"},
+      {id:"059cl48SJZs",title:"フォニイ phony  / 心 𝗰𝗼𝗰𝗼𝗿𝟬 歌ってみた【CC中文字幕】(無混音)",date:"2025-09-23"},
+      {id:"DF2U3UNYjH4",title:"Bunny Girl  / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥【CC中文字幕】",date:"2025-09-16"},
+      {id:"j2MXlB1gu_I",title:"Radio (Dum Dum) / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥【CC中文字幕】",date:"2025-09-13"},
+      {id:"HLZDqjHI5Xs",title:"佐賀事変 / 音雲漫步計畫 𝗖𝗢𝗩𝗘𝗥 𝗯𝘆 @Nekokaifuka22 , @BarkBarkPomi , @cocor0_0303 , @uchififi​ 【CC中文字幕】",date:"2025-09-06"},
+      {id:"WATf7LdaQJk",title:"風のたより / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥",date:"2025-03-29"},
+      {id:"xRc801WM8NM",title:"心做し 𝗞𝗼𝗸𝗼𝗿𝗼𝗻𝗮𝘀𝗵𝗶 / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥",date:"2024-08-27"},
+      {id:"UYNtP1kPjaM",title:"鬼ノ宴 𝗢𝗻𝗶 𝗡𝗼 𝗨𝘁𝗮𝗴𝗲 / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥",date:"2024-08-06"},
+      {id:"m21ZGrJBYGs",title:"「僕は...」Boku wa / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥",date:"2024-07-09"},
+    ],
+    shorts: [
+      {id:"qYx_Nlwkd0Y",title:"【初配信💜𝟵/𝟭𝟯 (五) 𝟮𝟬:𝟬𝟬】𝟵𝟵.𝟵% 𝗔𝗻𝗱𝗿𝗼𝗶𝗱｜心 𝗰𝗼𝗰𝗼𝗿𝟬【音雲漫步計畫】",date:"2024-08-21"},
+    ],
     originals_manual: [],
-    premiere: [],
-    general: [],
+    premiere: [
+      {id:"LLhY9ChlhGc",title:"【💜初配信精華】全球首見 .ᐟ.ᐟ 99.9%仿生人💜｜心 𝗰𝗼𝗰𝗼𝗿𝟬",date:"2024-09-18"},
+    ],
+    general: [
+      {id:"T3cKgabID2I",title:"【心cocor0精華】我才沒有這麼本 ಠ_ಠ｜OUTLAST 絕命精神病院 2｜心 𝗰𝗼𝗰𝗼𝗿𝟬",date:"2025-02-19"},
+    ],
     vlog: [],
     commerce: [],
     memberVideos: [],
