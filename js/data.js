@@ -1452,14 +1452,7 @@ const vtubers = [
       {id:"J_CbTkqdF0E",title:"✧78.88億人都震驚了！這首歌居然這麼好哭！✧希妮·亞里絲🤍SinnieAris✨",date:"2023-12-06"},
       {id:"p0e_9G_24CI",title:"✧独りんぼエンヴィー / cover by 希妮·亞里絲🤍SinnieAris✨",date:"2023-11-28"},
       {id:"PIIxw5XwdNg",title:"【歌ってみた】Guiano - 風🌀希妮·亞里絲 / SinnieAris",date:"2023-11-26"},
-      {id:"cyiD0E-WZeA",title:"✧ダーリン / cover by 希妮·亞里絲🤍SinnieAris✨",date:"2023-11-02"},
-      {id:"C_xGd5vLPUg",title:"✧希妮·亞里絲官方精華✧什麼？！辣個傳說中的男人居然真實存在...？！？！希妮·亞里絲🤍SinnieAris✨",date:"2024-06-19"},
-      {id:"-qaSpGjEIjk",title:"✧希妮·亞里絲官方精華✧讓人沉\"倫\"的絕世佳人！希妮·亞里絲🤍SinnieAris✨",date:"2024-04-28"},
-      {id:"5NWOV2MTddE",title:"✧希妮·亞里絲官方精華✧歌勢翻車的事能說是翻車麼？！？！希妮·亞里絲🤍SinnieAris✨",date:"2024-02-25"},
-      {id:"cWPgUVNJUOc",title:"✧希妮·亞里絲官方精華✧當老闆娘在鏡頭前亮相，這手笑...太絕了！希妮·亞里絲🤍SinnieAris✨",date:"2024-02-18"},
-      {id:"Y8sI4Xvf_5Q",title:"✧希妮·亞里絲官方精華✧到底是什麼時候開始變成大媽的？！希妮·亞里絲🤍SinnieAris✨",date:"2024-02-04"},
-      {id:"nJP2KnBXLKc",title:"✧希妮·亞里絲官方精華✧吃得出來已婚婦女的智慧和老練！希妮·亞里絲🤍SinnieAris✨",date:"2023-12-15"},
-      {id:"J_CbTkqdF0E",title:"✧78.88億人都震驚了！這首歌居然這麼好哭！✧希妮·亞里絲🤍SinnieAris✨",date:"2023-12-06"}
+      {id:"cyiD0E-WZeA",title:"✧ダーリン / cover by 希妮·亞里絲🤍SinnieAris✨",date:"2023-11-02"}
     ],
     shorts: [],
     originals_manual: [
