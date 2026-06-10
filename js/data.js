@@ -1146,8 +1146,7 @@ const vtubers = [
       { id: "bSHOhXAAj9w", title: "【歌ってみた】人マニア - 原口沙輔 / 酒樂霧子", date: "2024-12-07" },
       { id: "Dh3WibJswFo", title: "【歌ってみた】酒が飲めるぞ - 怒髪天（short ver.） / 酒樂霧子", date: "2023-12-05" },
       { id: "NMHByYskJWc", title: "【歌ってみた】寄り酔い - 和ぬか / 酒樂霧子", date: "2023-11-22" },
-      { id: "me_twUmyufU", title: "【歌ってみた】酔いどれ知らず - Kanaria / 酒樂霧子", date: "2023-11-01" },
-      { id: "wtRG8mMeWSU", title: "魔競最終面試，BOSS竟然這麼說.... feat. @LancatOfficial", date: "2023-11-10" }
+      { id: "me_twUmyufU", title: "【歌ってみた】酔いどれ知らず - Kanaria / 酒樂霧子", date: "2023-11-01" }
     ],
     premiere: [],
     general: [],
