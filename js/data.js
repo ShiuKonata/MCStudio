@@ -2924,7 +2924,27 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "*(米米)",
+    hashTags: [
+      { label: "LiveTag", tag: "#宇宙屁眼開通中" },
+      { label: "Tag",     tag: "#美日任務"       },
+      { label: "Fanart",  tag: "#百佬繪"         },
+      { label: "Meme",    tag: "#美當安餒"       },
+      { label: "R18",     tag: "#波美有H"        },
+    ],
+    futureGoals: [
+      "收集一兆兆個屁眼解除屁眼詛咒",
+      "辦演唱會!",
+      "每天開屁眼派對嗨到天亮",
+    ],
+    triviaLikes: [
+      { label: "擅長",         items: ["唱歌", "寫歌", "設計"] },
+      { label: "喜好",         items: ["穿搭（童裝超時尚穿搭）", "裸睡"] },
+      { label: "最喜歡的作品", items: ["進擊的巨人!!!and more.."] },
+    ],
+    triviaHates: [
+      { label: "不擅長", items: ["刷牙", "打字打正雀"] },
+    ],
 
 
     musicClipsChannelIds: [
@@ -3010,7 +3030,29 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "牙牙",
+    hashTags: [
+      { label: "FA",   tag: "#塗塗可可"   },
+      { label: "剪輯", tag: "#可可出乃玩" },
+      { label: "分享", tag: "#心哥請看"   },
+      { label: "R18",  tag: "#co以瑟瑟"  },
+    ],
+    futureGoals: [
+      "唱很多很多歌給大家聽",
+      "認識新朋友一起玩遊戲、做企劃",
+      "初配信收到1,000個讚讚",
+      "辦一場演唱會",
+    ],
+    triviaExtra: [
+      { label: "未來會在地球做哪些事情", items: ["各種療癒的陪伴！", "地球人類觀察報告", "遠大的交朋友計畫"] },
+    ],
+    triviaLikes: [
+      { label: "喜歡的東西", items: ["肉!!很多的肉!!", "軟綿綿的東西", "甜點（棉被、抱枕、棉花糖、奶蓋、舒芙蕾）"] },
+      { label: "喜歡的口味", items: ["草莓", "巧克力"] },
+    ],
+    triviaHates: [
+      { label: "討厭的事情", items: ["靜電", "過敏", "出門"] },
+    ],
 
 
     musicClipsChannelIds: [
@@ -3109,7 +3151,27 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "扉芝粉",
+    hashTags: [
+      { label: "Live（通用/直播相關）", tag: "#扉出來啦"   },
+      { label: "Fan art",              tag: "#扉常想畫"   },
+      { label: "迷因",                 tag: "#扉常迷因"   },
+      { label: "R18",                  tag: "#想入扉扉"   },
+    ],
+    futureGoals: [
+      "希望大家可以按讚直播",
+      "目標銀盾",
+      "3D LIVE演唱會!",
+      "讓大家得扉扉成癮症",
+    ],
+    triviaLikes: [
+      { label: "喜歡的東西",   items: ["辣 - 49.5%", "心理學、占卜 - 14.85%", "ACG、KPOP - 11.88%", "芋頭火鍋 - 11.88%", "臭臭的東西 - 11.88%"] },
+      { label: "之後想做的事情", items: ["歌回", "ASMR", "各種企劃和雜談", "一點點的遊戲"] },
+    ],
+    triviaHates: [
+      { label: "討厭的東西", items: ["蟲蟲"] },
+      { label: "不擅長",     items: ["對齊"] },
+    ],
 
 
     musicClipsChannelIds: [
