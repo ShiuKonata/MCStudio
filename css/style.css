@@ -33,7 +33,7 @@
    RESET & BASE — Calibri 字體
    ============================================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   /* Calibri 處理英數，Noto Sans TC 處理中文 */
   font-family: 'Calibri', 'Noto Sans TC', 'Segoe UI', sans-serif;
@@ -1881,6 +1881,7 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
    ============================================= */
 .wishes-table-wrap {
   overflow-x: auto;
+  max-width: 100%;
 }
 .wishes-table {
   width: 100%;
@@ -1994,6 +1995,8 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   .sidebar-card { padding: 1rem; }
   .detail-avatar { width: 80px; height: 80px; }
   .sidebar-social-btn { width: 36px; height: 36px; font-size: 0.9rem; }
+  /* 修正A：畫冊 2 欄（480px 以下避免格子過小） */
+  .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 /* ── 畫冊（Gallery）────────────────────────────────── */
