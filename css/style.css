@@ -1974,6 +1974,26 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   /* 手機：單欄 */
   .vtuber-grid { grid-template-columns: 1fr; }
   .gen-tree { grid-template-columns: 1fr; }
+  /* 修正1：導覽列橫向捲動（防止換行）＋調整 nav-height */
+  :root { --nav-height: 96px; }
+  .nav-links-bar { overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
+  .nav-links-bar a { flex-shrink: 0; }
+  /* 修正2：Vtuber 分頁列橫向捲動 */
+  .vtuber-tab-bar { overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
+  .vtab-btn { flex-shrink: 0; }
+  /* 修正3：官方剪輯子分頁列橫向捲動 */
+  .ls-year-bar { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+  .ls-year-btn { flex-shrink: 0; }
+  /* 修正4：世代篩選按鈕橫向捲動 */
+  .filter-bar { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .filter-btn { flex-shrink: 0; }
+}
+@media (max-width: 480px) {
+  /* 修正5：手機版側欄更緊湊 */
+  .vtuber-sidebar { padding: 1rem; }
+  .sidebar-card { padding: 1rem; }
+  .detail-avatar { width: 80px; height: 80px; }
+  .sidebar-social-btn { width: 36px; height: 36px; font-size: 0.9rem; }
 }
 
 /* ── 畫冊（Gallery）────────────────────────────────── */
