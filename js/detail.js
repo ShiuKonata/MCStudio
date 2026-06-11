@@ -259,6 +259,18 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="trivia-value">${v.fanName || T('trivia.pending')}</div>
       </div>`;
 
+    // 代表色
+    if (v.color) {
+      cards += `
+      <div class="trivia-card">
+        <div class="trivia-label">代表色</div>
+        <div class="trivia-value" style="display:flex;align-items:center;gap:8px;">
+          <span style="display:inline-block;width:22px;height:22px;border-radius:4px;background:${v.color};border:1px solid rgba(0,0,0,0.15);flex-shrink:0;"></span>
+          ${v.color}
+        </div>
+      </div>`;
+    }
+
     // 主題標籤（陣列 hashTags 或舊版字串 hashTag）
     if (v.hashTags && v.hashTags.length) {
       cards += `
