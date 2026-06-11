@@ -1992,7 +1992,30 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "星燭",
+    hashTags: [
+      { label: "Live Tag",  tag: "#才鯨新聞"  },
+      { label: "Fan Art",   tag: "#鯨點藝術"  },
+      { label: "Meme",      tag: "#指點迷鯨"  },
+      { label: "NSFW",      tag: "#煽鯨伴夜"  },
+      { label: "分享詩作",  tag: "#詩書舞鯨"  },
+      { label: "周邊分享",  tag: "#千鯨不換"  },
+    ],
+    futureGoals: [
+      "看到大家名字後面有🌙🐋",
+      "出一首原創曲",
+      "出版鯨諾回憶錄",
+      "成為大家的友人M",
+    ],
+    triviaLikes: [
+      { label: "喜歡的東西", items: ["可愛小動物"] },
+      { label: "喜歡的食物", items: ["壽司", "拉麵"] },
+      { label: "特殊技能",   items: ["狗語者"] },
+      { label: "技能",       items: ["吉他彈唱", "鋼琴彈唱", "作曲編曲", "文學相關填詞"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的事情", items: ["尖銳的氣氛", "打賭"] },
+    ],
 
 
     musicClipsChannelIds: [
