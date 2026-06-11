@@ -1,11 +1,11 @@
 // ── MC組事務所 生日彈窗 ──────────────────────────────────────────
-// 當天有成員生日時，進站自動跳出慶祝彈窗（每個 session 只顯示一次）
+// 當天有成員生日時，進站自動跳出慶祝彈窗（當天首次跨頁面只顯示一次）
 (function () {
   'use strict';
 
-  // ── session 防重複 ─────────────────────────────────────────────
+  // ── 當天防重複（localStorage 跨頁面共用）────────────────────────
   const SESSION_KEY = 'mc_bday_' + new Date().toISOString().slice(0, 10);
-  if (sessionStorage.getItem(SESSION_KEY)) return;
+  if (localStorage.getItem(SESSION_KEY)) return;
 
   // ── 備用生日資料（當 data.js 未載入時使用）─────────────────────
   const FALLBACK = [
@@ -138,7 +138,7 @@
 
   // ── 彈窗建立 ───────────────────────────────────────────────────
   function showPopup(celebrants) {
-    sessionStorage.setItem(SESSION_KEY, '1');
+    localStorage.setItem(SESSION_KEY, '1');
 
     const isSingle = celebrants.length === 1;
     const avatarsHTML = celebrants.map(v => `
@@ -206,7 +206,7 @@
         </div>
 
         <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap">
-          <a id="_mcBdayCelebBtn" href="birthday.html" style="
+          <a id="_mcBdayCelebBtn" href="${celebrants[0].twitter || 'birthday.html'}" ${celebrants[0].twitter ? 'target="_blank" rel="noopener noreferrer"' : ''} style="
             background:linear-gradient(135deg,#f06292 0%,#ce93d8 100%);
             color:white;text-decoration:none;
             padding:0.65rem 1.6rem;border-radius:50px;
