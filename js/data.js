@@ -2465,7 +2465,8 @@ const vtubers = [
     scheduleTitle:    "崎塔的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/崎塔 v1.0.jpg" },
+      { version: "Ver 1.0",        url: "images/崎塔 v1.0.jpg"     },
+      { version: "粉絲形象 塔塔醬", url: "images/崎塔_塔塔醬.jpg"  },
     ],
 
     songStatsPublishedId: "2PACX-1vQ75k5SD7Ie-T4qiFY69ZHJjw5zpvkuNMlqvLAG1DvgJYfwRavF3exXpeqIdJ_7vqP4FozF-zWzXl5W",
@@ -3004,7 +3005,8 @@ const vtubers = [
     scheduleTitle:    "諾諾的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/諾恪里 v1.0.jpg" },
+      { version: "Ver 1.0",          url: "images/諾恪里 v1.0.jpg"      },
+      { version: "粉絲形象 諾米糰子", url: "images/諾恪里_諾米糰子.jpg" },
     ],
 
     songStatsPublishedId: "2PACX-1vT7RbQBkhS751OdsTc03TzCtd1RsEeqg5EXfMHsb4S9dmYpWfhmInP4Eohsbfvcut6RvDTsS5fWRK44",
@@ -3083,7 +3085,8 @@ const vtubers = [
     scheduleTitle:    "米伊的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/克克米伊 v1.0.jpg" },
+      { version: "Ver 1.0",       url: "images/克克米伊 v1.0.jpg"  },
+      { version: "粉絲形象 嘎米", url: "images/克克米伊_嘎米.jpg" },
     ],
 
     songStatsPublishedId: "2PACX-1vRqKlgOc4TjZWtHw6syOQR1BiHSj-Lab61begqI1ZAxvLaaWtA1OA208eHJPeqbf6EEnnEkcXQR1D_j",
