@@ -286,7 +286,7 @@ const vtubers = [
     ],
     triviaLikes: [
       { label: "喜歡的樂團", items: ["擊沉女孩", "海豚刑警", "午夜乒乓", "甜約翰", "美秀集團", "芒果醬"] },
-      { label: "喜歡的歌手", items: ["Vaundy", "acane", "163", "李浩偉"] },
+      { label: "喜歡的歌手", items: ["Vaundy", "acane", "163", "李浩偉", "陳嫺靜", "陳綺貞"] },
       { label: "喜歡的顏色", items: ["紫丁香色"] },
       { label: "喜歡的食物", items: ["Fun Tower日式可麗餅", "舒芙蕾", "酸辣湯", "薄荷巧克力冰淇淋", "橘子"] },
     ],
