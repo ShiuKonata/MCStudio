@@ -1825,7 +1825,7 @@ const vtubers = [
     description: "一隻容易失眠的小兔子🌸喜歡的東西是唱歌、寵物莓咪和草莓🍓",
     debut: "2023-12-21",
     birthday: "10月1日",
-    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "兔子", "歌勢", "草莓"],
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx", "兔子", "歌勢", "PON", "氣質(?)"],
 
     // 社群連結
     youtube: "https://www.youtube.com/@WakasaIto",
