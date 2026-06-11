@@ -2517,7 +2517,7 @@ const vtubers = [
 
     // 焦焦小知識
     jiaojiao: {
-      photo: "https://docs.google.com/u/0/sheets-images-rt/ADAzV4Sn2CyBV_SrnWkwaE_jEWrR-E1ph0u3vTRENhNt_C0lqch0JTHGsOlVgGM3Ym466X7gPqB-DsfdzWfj6taSqfhwrWaSRvPZZppy3cO-oWE8kYkD7z67iqEHojQdwDInXh7t5WKnGca21pRh7Sdr=s2048",
+      photo: "images/貳貳_焦焦.png",
       basicInfo: [
         { label: "種族", value: "全宇宙最可愛的卯咪" },
         { label: "年齡", value: "6歲成 =>7歲" },
