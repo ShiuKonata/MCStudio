@@ -160,6 +160,7 @@
       #_mcBdayCard { animation: _mcSlideUp 0.5s ease 0.1s both; }
       #_mcBdayCake { animation: _mcCakeBob 1.8s ease-in-out infinite; display:inline-block; }
       #_mcBdayCelebBtn:hover { transform:scale(1.06) !important; }
+      #_mcBdayLater { color: #ffffff !important; }
     `;
 
     const overlay = document.createElement('div');
@@ -220,7 +221,7 @@
             color:#ffffff;
             padding:0.65rem 1.2rem;border-radius:50px;
             cursor:pointer;font-size:0.83rem;font-weight:600;
-          ">之後再說</button>
+          ">主播生日快樂</button>
         </div>
       </div>`;
 
