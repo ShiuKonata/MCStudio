@@ -1595,6 +1595,7 @@ const vtubers = [
       { id: "UCShwcxuYAe6SYCaLNIAr-rg", label: "darkshine bear",                                                      typeKeywords: ["cover", "歌回", "歌切", "清唱"] },
       { id: "UCQXIlyKiz39A2IAxYJOCXkw", label: "LoveRirina",   keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"],            typeKeywords: ["歌回", "唱歌", "cover"] },
       { id: "UCkdXbWulRmheqfVmV7WjaFQ", label: "台灣香蕉王",   keywords: ["結月莉莉奈", "Ririna"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月",   keywords: ["結月莉莉奈", "ririna", "奈奈"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     // ── 熱門影片精華（遊玩實況 / RP 系列）──────────
@@ -1604,6 +1605,7 @@ const vtubers = [
       { id: "UCv9MXWx8AW5BZ07OPJyf7jg", label: "鬧欸",         keywords: ["MeloNyx"],                                 excludeKeywords: ["酒樂霧子", "Shuraku", "歌回", "cover"] },
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",     keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"] },
       { id: "UCBdIlFj6vWDxU_m-PyM3aPQ", label: "bikaxu", keywords: ["結月莉莉奈", "ririna", "奈奈", "MeloNyx"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月",   keywords: ["結月莉莉奈", "ririna", "奈奈"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "ZgrFrLOQwwo",
@@ -2237,6 +2239,7 @@ const vtubers = [
       { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCoH17T3JwOGWtwJQxkUtJ0Q", label: "比邻星🐍🍷",          keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",        keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月",   keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], typeKeywords: ["cover", "歌ってみた"] },
     ],
     videoClipsChannelIds: [
       { id: "UC4BENWXih6K8ETLMOQglk8Q", label: "海默ッ",     keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["歌切", "合唱"] },
@@ -2245,6 +2248,7 @@ const vtubers = [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"] },
       { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCoH17T3JwOGWtwJQxkUtJ0Q", label: "比邻星🐍🍷",          keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月",   keywords: ["涅爾菲", "Nyrfier", "菲菲", "爾菲"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "fl96oXs9Q1E",
@@ -3036,11 +3040,13 @@ const vtubers = [
     musicClipsChannelIds: [
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"], typeKeywords: ["歌切", "cover"] },
       { id: "UCbNA4tD_skq8CQF2aMTx9cA", label: "月芊",     keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["克克米伊", "KeKeMii", "米伊"], typeKeywords: ["cover", "歌ってみた"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"] },
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["克克米伊", "KeKeMii", "米伊", "CaKano"], excludeKeywords: ["歌切", "cover"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["克克米伊", "KeKeMii", "米伊"], excludeKeywords: ["cover", "歌ってみた"] },
     ],
 
     scheduleVideoId:  "q5bBqi8DUc8",
