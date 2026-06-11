@@ -2415,6 +2415,7 @@ const vtubers = [
     spreadsheet: "https://docs.google.com/spreadsheets/d/1psY9WxG-Sdajms-s8oJ7LoEy0i6n6Jp6fiqlNz9jEYQ/edit?gid=130416740#gid=130416740",
     overrideLinks: [
       { label: '崎塔的大小事', url: 'https://docs.google.com/spreadsheets/d/1psY9WxG-Sdajms-s8oJ7LoEy0i6n6Jp6fiqlNz9jEYQ/edit?gid=130416740#gid=130416740', class: 'sheets', icon: '📋' },
+      { label: '歌曲統計 : 2026年', url: 'https://docs.google.com/spreadsheets/d/1psY9WxG-Sdajms-s8oJ7LoEy0i6n6Jp6fiqlNz9jEYQ/edit?gid=1190833420#gid=1190833420', class: 'sheets', icon: '🎵' },
       { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/chita/Donate',     class: 'hivebee',    icon: '🐝' },
       { label: '深度會員', url: 'https://www.hivebee.com.tw/chita/Subscribe', class: 'membership', icon: '💎' },
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/57v5h7z1m9gxuyk', class: 'marshmallow', icon: '🍬' },
