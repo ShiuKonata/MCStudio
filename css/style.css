@@ -1949,8 +1949,8 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   .vtuber-sidebar { height: auto; padding: 1.5rem; flex-direction: row; align-items: center; }
   .sidebar-card { flex-direction: column; align-items: center; flex: none; width: 100%; }
   .sidebar-back-btn { margin-top: 1rem; }
-  .vtuber-content { height: auto; overflow: visible; padding: 1.5rem; }
-  .tab-panel.active { flex: none; overflow-y: visible; }
+  .vtuber-content { height: auto; overflow: visible; padding: 1.5rem; min-width: 0; }
+  .tab-panel.active { flex: none; overflow-y: visible; min-width: 0; }
   .detail-quote { flex: none; }
   #schedule-content { flex: none; }
   .schedule-thumb-link { flex: none; }
