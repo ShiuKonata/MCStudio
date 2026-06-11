@@ -2942,7 +2942,8 @@ const vtubers = [
     scheduleTitle:    "波美的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/百百波美 v1.0.jpg" },
+      { version: "Ver 1.0",       url: "images/百百波美 v1.0.jpg"  },
+      { version: "粉絲形象 米米", url: "images/百百波美_米米.png" },
     ],
 
     songStatsGids: {
