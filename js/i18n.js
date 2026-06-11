@@ -16,6 +16,7 @@
       'nav.fanNotice': '非預見娛樂官方網站',
       'nav.home':     '🏠 首頁',
       'nav.vtubers':  '⭐ Vtuber 一覽',
+      'nav.birthday': '🎂 生日月曆',
       'nav.merch':    '🛍️ 周邊商品',
       'nav.feedback': '🐞 回報問題',
       // Footer
@@ -182,6 +183,7 @@
       'nav.fanNotice': '予見エンターテインメント非公式サイト',
       'nav.home':     '🏠 ホーム',
       'nav.vtubers':  '⭐ Vtuber一覧',
+      'nav.birthday': '🎂 誕生日カレンダー',
       'nav.merch':    '🛍️ グッズ',
       'nav.feedback': '🐞 バグ報告',
       // Footer

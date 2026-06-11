@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎂 預見Vtuber 們的生日 — MC組事務所</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>">
+  <meta name="description" content="預見娛樂旗下所有 Vtuber 的生日月曆，以及距離下一位生日的即時倒數計時。">
+  <meta name="author" content="MC組事務所">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+  <style>
+    /* ── 倒數計時區 ─────────────────────────────────── */
+    .bday-countdown-wrap {
+      background: linear-gradient(135deg, #f06292 0%, #f48fb1 40%, #ce93d8 100%);
+      padding: 2rem 1.5rem 2.2rem;
+      text-align: center;
+      margin-top: var(--nav-height);
+    }
+    .bday-countdown-label {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.92);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .bday-countdown-subject {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+    .bday-countdown-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .bday-countdown-name {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .bday-countdown-date {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.88);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .bday-timer {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .bday-timer-unit {
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.45);
+      border-radius: 14px;
+      padding: 0.8rem 1.2rem;
+      min-width: 76px;
+      text-align: center;
+    }
+    .bday-timer-num {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .bday-timer-lbl {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.88);
+      font-weight: 700;
+      margin-top: 0.25rem;
+      letter-spacing: 0.05em;
+    }
+    .bday-today-banner {
+      display: inline-block;
+      background: rgba(255,255,255,0.28);
+      border: 2px solid rgba(255,255,255,0.8);
+      border-radius: 50px;
+      padding: 0.65rem 2.2rem;
+      color: white;
+      font-size: 1.15rem;
+      font-weight: 900;
+      animation: bdPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes bdPulse {
+      0%, 100% { transform: scale(1);    opacity: 1;    }
+      50%       { transform: scale(1.04); opacity: 0.92; }
+    }
+
+    /* ── 月曆區 ──────────────────────────────────────── */
+    .bday-section {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2.5rem;
+    }
+    .bday-section-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text-dark);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 3px solid var(--sky);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .bday-calendar-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .bday-calendar {
+      display: flex;
+      gap: 0;
+      min-width: max-content;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .bday-month-col {
+      flex: 0 0 148px;
+      width: 148px;
+      border-right: 1.5px solid var(--border);
+    }
+    .bday-month-col:last-child { border-right: none; }
+    .bday-month-header {
+      background: linear-gradient(135deg, var(--sky-dark) 0%, var(--sky-mid) 100%);
+      color: white;
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 0.55rem 0.5rem;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+    .bday-month-header.is-current {
+      background: linear-gradient(135deg, #d63a6e 0%, #f06292 100%);
+    }
+    .bday-cards {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: #fafbfc;
+      min-height: 50px;
+    }
+    .bday-empty {
+      color: var(--text-light);
+      font-size: 0.78rem;
+      text-align: center;
+      padding: 0.8rem 0;
+    }
+
+    /* ── 個人卡片 ─────────────────────────────────────── */
+    .bday-card {
+      background: white;
+      border: 1.5px solid #e8edf3;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .bday-card:hover {
+      box-shadow: 0 4px 18px rgba(0,0,0,0.11);
+      transform: translateY(-2px);
+      border-color: var(--sky);
+    }
+    .bday-card.is-today {
+      border-color: #f06292;
+      box-shadow: 0 0 0 2px rgba(240,98,146,0.28);
+    }
+    .bday-card.is-today .bday-card-top {
+      background: linear-gradient(135deg, #fff0f5 0%, #fde8f0 100%);
+    }
+    .bday-card-top {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.5rem;
+    }
+    .bday-card-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid #e0ecf8;
+    }
+    .bday-card-info { flex: 1; min-width: 0; }
+    .bday-card-name {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+    .bday-card-bday {
+      font-size: 0.68rem;
+      color: #e0356a;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .bday-card-debut {
+      font-size: 0.63rem;
+      color: var(--text-light);
+      margin-top: 1px;
+    }
+    .bday-card-links {
+      display: flex;
+      border-top: 1px solid #eef1f5;
+    }
+    .bday-link {
+      flex: 1;
+      padding: 0.26rem 0;
+      text-align: center;
+      font-size: 0.63rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .bday-link + .bday-link { border-left: 1px solid #eef1f5; }
+    .bday-link.yt  { color: #cc0000; }
+    .bday-link.yt:hover  { background: rgba(204,0,0,0.07); }
+    .bday-link.tw  { color: #6441a5; }
+    .bday-link.tw:hover  { background: rgba(100,65,165,0.07); }
+    .bday-link.fb  { color: #1877f2; }
+    .bday-link.fb:hover  { background: rgba(24,119,242,0.07); }
+
+    /* ── RWD ─────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .bday-countdown-wrap { padding: 1.5rem 1rem 1.8rem; }
+      .bday-timer-num  { font-size: 1.6rem; }
+      .bday-timer-unit { min-width: 60px; padding: 0.6rem 0.8rem; }
+      .bday-month-col  { flex: 0 0 120px; width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">🐸 MC組事務所 🍃</a>
+    </div>
+    <div class="nav-sub">
+      <span data-i18n="nav.subtitle">虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site</span> ｜
+      <strong class="nav-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong>
+    </div>
+    <div class="nav-links-bar">
+      <a href="index.html" data-i18n="nav.home">🏠 首頁</a>
+      <a href="vtubers.html" data-i18n="nav.vtubers">⭐ Vtuber 一覽</a>
+      <a href="birthday.html" class="active" data-i18n="nav.birthday">🎂 生日月曆</a>
+      <a href="merch.html" data-i18n="nav.merch">🛍️ 周邊商品</a>
+      <a href="feedback.html" data-i18n="nav.feedback">🐞 回報問題</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero" style="margin-top: var(--nav-height);">
+    <div class="page-hero-inner">
+      <div class="page-hero-text">
+        <h1>🎂 預見Vtuber 們的生日</h1>
+        <p>每位成員的生日月曆，以及距離下一位生日的即時倒數計時</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="bday-countdown-wrap">
+    <div class="bday-countdown-label" id="cd-label">載入中…</div>
+    <div class="bday-countdown-subject" id="cd-subject"></div>
+    <div id="cd-timer"></div>
+  </div>
+
+  <!-- BIRTHDAY CALENDAR -->
+  <div class="bday-section">
+    <div class="bday-section-title">📅 生日月曆</div>
+    <div class="bday-calendar-wrap">
+      <div class="bday-calendar" id="bday-cal"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>🐸 MC組事務所 🍃</span> ✦
+      <span data-i18n="footer.madeBy">由粉絲用愛製作</span> ｜
+      <strong class="footer-fan-notice" data-i18n="nav.fanNotice">非預見娛樂官方網站</strong>
+    </p>
+    <p class="footer-source" data-i18n="footer.source">
+      資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供
+    </p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    const MONTHS = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+
+    function parseBd(str) {
+      if (!str) return null;
+      const m = str.match(/(\d+)月(\d+)日/);
+      return m ? { month: +m[1], day: +m[2] } : null;
+    }
+
+    function nextBdDate(month, day) {
+      const now  = new Date();
+      const y    = now.getFullYear();
+      const today = new Date(y, now.getMonth(), now.getDate());
+      let d = new Date(y, month - 1, day);
+      if (d < today) d = new Date(y + 1, month - 1, day);
+      return d;
+    }
+
+    function isToday(month, day) {
+      const n = new Date();
+      return n.getMonth() + 1 === month && n.getDate() === day;
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    // ── 倒數計時 ──────────────────────────────────────
+    let cdTarget = null, cdVtuber = null;
+
+    function tickCountdown() {
+      if (!cdTarget || !cdVtuber) return;
+      const v  = cdVtuber;
+      const bd = parseBd(v.birthday);
+      const label   = document.getElementById('cd-label');
+      const subject = document.getElementById('cd-subject');
+      const timer   = document.getElementById('cd-timer');
+
+      subject.innerHTML = `
+        <img class="bday-countdown-avatar" src="${v.avatar}" alt="${v.name}">
+        <div>
+          <div class="bday-countdown-name">${v.name}</div>
+          <div class="bday-countdown-date">${v.birthday}</div>
+        </div>`;
+
+      if (isToday(bd.month, bd.day)) {
+        label.textContent = '🎉 今天是這位成員的生日！';
+        timer.innerHTML   = `<div class="bday-today-banner">🎂 生日快樂！Happy Birthday！🎂</div>`;
+        return;
+      }
+
+      const diff  = cdTarget - new Date();
+      if (diff <= 0) { location.reload(); return; }
+
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000)  / 60000);
+      const secs  = Math.floor((diff % 60000)    / 1000);
+
+      label.textContent = `距離下一位成員的生日還有`;
+      timer.innerHTML = `
+        <div class="bday-timer">
+          <div class="bday-timer-unit">
+            <div class="bday-timer-num">${days}</div>
+            <div class="bday-timer-lbl">天</div>
+          </div>
+          <div class="bday-timer-unit">
+            <div class="bday-timer-num">${pad(hours)}</div>
+            <div class="bday-timer-lbl">時</div>
+          </div>
+          <div class="bday-timer-unit">
+            <div class="bday-timer-num">${pad(mins)}</div>
+            <div class="bday-timer-lbl">分</div>
+          </div>
+          <div class="bday-timer-unit">
+            <div class="bday-timer-num">${pad(secs)}</div>
+            <div class="bday-timer-lbl">秒</div>
+          </div>
+        </div>`;
+    }
+
+    // ── 月曆建立 ──────────────────────────────────────
+    function buildCalendar(list) {
+      const nowMonth = new Date().getMonth() + 1;
+      const byMonth  = Array.from({ length: 12 }, () => []);
+
+      for (const v of list) {
+        const bd = parseBd(v.birthday);
+        if (!bd) continue;
+        byMonth[bd.month - 1].push({ v, bd });
+      }
+      for (const arr of byMonth) arr.sort((a, b) => a.bd.day - b.bd.day);
+
+      const cal = document.getElementById('bday-cal');
+      for (let m = 0; m < 12; m++) {
+        const col = document.createElement('div');
+        col.className = 'bday-month-col';
+
+        const hdr = document.createElement('div');
+        hdr.className = 'bday-month-header' + ((m + 1) === nowMonth ? ' is-current' : '');
+        hdr.textContent = MONTHS[m];
+        col.appendChild(hdr);
+
+        const cards = document.createElement('div');
+        cards.className = 'bday-cards';
+
+        if (byMonth[m].length === 0) {
+          cards.innerHTML = '<div class="bday-empty">—</div>';
+        } else {
+          for (const { v, bd } of byMonth[m]) {
+            const today = isToday(bd.month, bd.day);
+            const card  = document.createElement('div');
+            card.className = 'bday-card' + (today ? ' is-today' : '');
+            card.addEventListener('click', () => { window.location.href = `vtuber.html?id=${v.id}`; });
+
+            let links = '';
+            if (v.youtube) links += `<a class="bday-link yt" href="${v.youtube}" target="_blank" rel="noopener" onclick="event.stopPropagation()">YouTube</a>`;
+            if (v.twitch)  links += `<a class="bday-link tw" href="${v.twitch}"  target="_blank" rel="noopener" onclick="event.stopPropagation()">Twitch</a>`;
+
+            card.innerHTML = `
+              <div class="bday-card-top">
+                <img class="bday-card-avatar" src="${v.avatar}" alt="${v.name}" loading="lazy">
+                <div class="bday-card-info">
+                  <div class="bday-card-name">${v.name}</div>
+                  <div class="bday-card-bday">🎂 ${v.birthday}</div>
+                  <div class="bday-card-debut">初配信 ${v.debut || '—'}</div>
+                </div>
+              </div>
+              ${links ? `<div class="bday-card-links">${links}</div>` : ''}`;
+
+            cards.appendChild(card);
+          }
+        }
+        col.appendChild(cards);
+        cal.appendChild(col);
+      }
+    }
+
+    // ── 找最近生日 ────────────────────────────────────
+    function findNext(list) {
+      let best = null, bestDate = null;
+      for (const v of list) {
+        const bd = parseBd(v.birthday);
+        if (!bd) continue;
+        const d = nextBdDate(bd.month, bd.day);
+        if (!bestDate || d < bestDate) { best = v; bestDate = d; }
+      }
+      return { vtuber: best, date: bestDate };
+    }
+
+    // ── 啟動 ─────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof vtubers === 'undefined' || !vtubers.length) return;
+      buildCalendar(vtubers);
+      const { vtuber, date } = findNext(vtubers);
+      cdVtuber = vtuber;
+      cdTarget = date;
+      tickCountdown();
+      setInterval(tickCountdown, 1000);
+    });
+  </script>
+</body>
+</html>
