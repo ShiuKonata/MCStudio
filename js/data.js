@@ -2115,7 +2115,33 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "Poppy",
+    hashTags: [
+      { label: "萬能",  tag: "#這很魁以"  },
+      { label: "繪圖",  tag: "#魁以fafa"  },
+      { label: "NFSW",  tag: "#魁以瑟澀"  },
+      { label: "周邊",  tag: "#Kai動了"   },
+      { label: "迷因",  tag: "#開Kai玩笑" },
+      { label: "娃娃",  tag: "#AlluriKA"  },
+      { label: "性轉",  tag: "#魅寶要寵"  },
+    ],
+    futureGoals: [
+      "讓所有人類都加入血狼組",
+      "吃遍全世界的巧克力",
+      "創造1000萬個迷因",
+      "不要回顧初配信",
+      "我還沒有想到這",
+    ],
+    triviaLikes: [
+      { label: "擅長",     items: ["游泳", "尊包友", "吃"] },
+      { label: "喜歡的食物", items: ["巧克力", "化工荔枝", "軟芭樂", "百香果", "哈密瓜", "小黃瓜", "茄子", "食物組合", "玫瑰普洱+搖果樂(無糖)"] },
+      { label: "喜歡的ACG", items: ["家庭教師", "海賊王", "我英", "新楓之谷", "DBD", "星穹鐵道"] },
+      { label: "超想嚕",   items: ["卯咪", "水獺", "兔子", "狐狸", "狗勾", "狐獴", "倉鼠", "迷你豬", "小羊", "懶猴", "小貓熊", "黑紫色挑染的水豚", "綿羊", "兔孫", "綠紅色相間的蛇", "猴子", "豪豬", "松鼠", "藍色大鯨魚", "老虎", "熊貓", "浣熊", "北極熊", "狼獾", "雪豹", "孔雀", "全白的獅子", "棕熊", "海豹", "猞猁", "鹿", "企鵝", "袋熊", "狼", "羊駝", "台灣黑熊", "ㄓㄌ"] },
+    ],
+    triviaHates: [
+      { label: "不擅長",     items: ["示弱", "怕冷", "吃很多"] },
+      { label: "不喜歡的食物", items: ["所有的蔬菜", "所有的菇類"] },
+    ],
 
 
     musicClipsChannelIds: [
@@ -2203,7 +2229,30 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "穆浴球",
+    hashTags: [
+      { label: "Hashtag Live",   tag: "#蕗Live"  },
+      { label: "Creation 創作",  tag: "#克畫"    },
+      { label: "Meme",           tag: "#咩蕗"    },
+      { label: "Call 呼叫",      tag: "#穆Call"  },
+      { label: "Goods 周邊",     tag: "#積穆"    },
+      { label: "NSFW",           tag: "#不可穆"  },
+      { label: "幻想封面",       tag: "#朝思穆享" },
+      { label: "回顧、訂閱慶祝", tag: "#時光穆蕗" },
+    ],
+    futureGoals: [
+      "生活電台",
+      "神祕學學習",
+      "日文教學",
+    ],
+    triviaLikes: [
+      { label: "興趣",     items: ["唱歌", "旅遊", "拍照＆蒐集鍊金術材料"] },
+      { label: "喜歡的歌手", items: ["KOKIA", "Annabel"] },
+      { label: "喜歡的事情", items: ["床", "泡澡", "水豚", "炸四季豆&青椒&九層塔", "辛香料（蒜頭、香菜(鍋)、辣）"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的事情", items: ["飲料加料", "蚊子", "苦瓜", "三色豆"] },
+    ],
 
 
     musicClipsChannelIds: [
@@ -2314,7 +2363,26 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "菲鼠",
+    hashTags: [
+      { label: "LiveTag",  tag: "#與蛇共舞"   },
+      { label: "FanArt",   tag: "#畫蛇不添足" },
+      { label: "Meme",     tag: "#涅手涅腳"   },
+      { label: "NSFW",     tag: "#你要不要吃禁果" },
+      { label: "周邊",     tag: "#菲賣品"     },
+    ],
+    futureGoals: [
+      "建立自信",
+      "交到更多朋友",
+      "創造更多回憶",
+      "用聲音陪伴大家",
+    ],
+    triviaLikes: [
+      { label: "喜歡的食物", items: ["生魚片"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的食物", items: ["小黃瓜", "大部分的蔬菜", "動物的肝"] },
+    ],
 
 
     // 剪輯頻道（動態抓取，參考詩雨蔻達版本）
@@ -2425,7 +2493,57 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "貳徒",
+    hashTags: [
+      { label: "LiveTag",     tag: "#步期貳遇" },
+      { label: "FanArt",      tag: "#咪圖之飯" },
+      { label: "萬用+Meme",   tag: "#迷咪冒卯" },
+      { label: "NSFW",        tag: "#面紅貳赤" },
+    ],
+    futureGoals: [
+      "買很多很多好吃的古代食物",
+      "帶回去給卯咪主子們",
+      "傳教",
+    ],
+    triviaLikes: [
+      { label: "興趣", items: ["吸貓", "嗆人"] },
+      { label: "功能", items: ["照顧貓咪", "唱歌", "彈吉他", "偷懶"] },
+      { label: "語言", items: ["中文", "貓貓語", "英文", "日文"] },
+      { label: "喜歡的東西", items: ["貓咪", "動物", "甜甜的零食"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的東西", items: ["欺負動物的人", "泥狀的食物"] },
+    ],
+
+    // 焦焦小知識
+    jiaojiao: {
+      photo: "https://docs.google.com/u/0/sheets-images-rt/ADAzV4Sn2CyBV_SrnWkwaE_jEWrR-E1ph0u3vTRENhNt_C0lqch0JTHGsOlVgGM3Ym466X7gPqB-DsfdzWfj6taSqfhwrWaSRvPZZppy3cO-oWE8kYkD7z67iqEHojQdwDInXh7t5WKnGca21pRh7Sdr=s2048",
+      basicInfo: [
+        { label: "種族", value: "全宇宙最可愛的卯咪" },
+        { label: "年齡", value: "6歲成 =>7歲" },
+        { label: "瞳色", value: "Light cyan" },
+        { label: "毛色", value: "Light Gray/Graite Gray" },
+        { label: "興趣", value: "品嘗美食、睡覺" },
+        { label: "專長", value: "鑑賞音樂" },
+      ],
+      pairs: [
+        { likeLabel: "喜歡",           like: "超好吃肉泥、各種零食",                                                                                           dislikeLabel: "討厭",             dislike: "加水的罐頭、很大的聲音" },
+        { likeLabel: "喜歡的食物類型", like: "絲狀的雞肉、很香的魚、新鮮的罐頭",                                                                               dislikeLabel: "不喜歡的食物類型", dislike: "不夠多水的泥狀罐頭、雞肉牛肉罐頭、吃過兩次的罐頭" },
+        { likeLabel: "喜歡的點心品牌", like: "嗶○館、CIXX、PuXXna、Axxxa",                                                                                    dislikeLabel: "不喜歡的點心品牌", dislike: "目前沒有" },
+        { likeLabel: "喜歡的音樂類型", like: "柔和的純樂器音樂",                                                                                               dislikeLabel: "不喜歡的音樂類型", dislike: "很吵的人唱很吵的歌" },
+        { likeLabel: "喜歡的味道",     like: "柴魚片、小魚乾、深海魚肉、雞肉、羊肉、外面的花草味",                                                             dislikeLabel: "不喜歡的味道",     dislike: "涼涼刺鼻的味道" },
+        { likeLabel: "喜歡的觸感",     like: "毛毛、軟軟、滑滑、粗粗的抓第一名",                                                                               dislikeLabel: "不喜歡的觸感",     dislike: "冰冰、濕濕、黏黏" },
+        { likeLabel: "喜歡做的事",     like: "在窗戶裡面看外面的動物為了生活努力奮鬥的樣樣、看電視、把所有人身上都沾滿自己的味道、把所有東西都佔為己有、當世界之王", dislikeLabel: "不喜歡做的事",     dislike: "出門" },
+        { likeLabel: "喜歡喝的水",     like: "大水盆裡面的水、乾淨的水、22洗澡的時候身上的水",                                                                 dislikeLabel: "不喜歡喝的水",     dislike: "杯子裡的水、碗裡的水、不乾淨的水" },
+        { likeLabel: "喜歡的玩具",     like: "第一隻小老鼠娃娃、小小的丟到地上會有聲音的球、自己老做的毛球、羽毛",                                               dislikeLabel: "不喜歡的玩具",     dislike: "除了小老鼠娃娃以外玩遍很多次的玩具" },
+        { likeLabel: "喜歡睡的地方",   like: "紙箱、地上或沙發上的任何布的上面、亂亂的棉被上",                                                                 dislikeLabel: "不喜歡睡的地方",   dislike: "專門買的貓窩" },
+        { likeLabel: "喜歡的生物",     like: "小鳥、蝴蝶",                                                                                                    dislikeLabel: "不喜歡的生物",     dislike: "過於熱情的動物、跑到地盤來的陌生貓" },
+        { likeLabel: "喜歡的顏色",     like: "自己身上的顏色",                                                                                                 dislikeLabel: "不喜歡的顏色",     dislike: "沒有" },
+        { likeLabel: "喜歡的電視節目", like: "小鳥吃種子",                                                                                                    dislikeLabel: "不喜歡的電視節目", dislike: "很多人講話很大聲很吵的那種、或是唱得很難聽的歌唱節目" },
+        { likeLabel: "喜歡被摸的地方", like: "下巴、耳朵前面、從脖子後面開始一路摸到到尾巴",                                                                   dislikeLabel: "不喜歡被摸的地方", dislike: "因人而異" },
+      ],
+      special: "小小耳朵、小小鼻子、小小嘴巴、團團亮亮眼睛、小小小手手、QQ肉球、澎澎尾巴、超好握抱毛、超好摸小肚肚、澎澎的臉頰、毛毛不同顏色的分界",
+    },
 
 
     musicClipsChannelIds: [
@@ -2692,7 +2810,23 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "拿拿",
+    hashTags: [
+      { label: "Livetag",  tag: "#萊覲見"      },
+      { label: "Fanart",   tag: "#希飯art"      },
+      { label: "Memetag",  tag: "#希的meme帽帽" },
+      { label: "Fanname",  tag: "#拿拿"         },
+      { label: "粉絲剪輯", tag: "#希有精華"     },
+      { label: "周邊展示", tag: "#天天開希"     },
+    ],
+    futureGoals: [
+      "養嘎",
+    ],
+    triviaLikes: [
+      { label: "喜歡的角色",        items: ["八乙女樂(快急死希爸、假面騎士)"] },
+      { label: "喜歡的ACG",         items: ["反逆的魯魯修", "黑之契約者", "彈丸論破", "Fate/stay night"] },
+      { label: "阿嘎喜歡的動畫",    items: ["Bebefinn", "可愛巧虎島", "狗狗汪汪隊", "來自深淵(?)"] },
+    ],
 
 
     musicClipsChannelIds: [

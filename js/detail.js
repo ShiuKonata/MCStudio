@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { key: 'profile',    label: T('tab.profile'),     color: null },
     ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet',    label: T('tab.refsheet'),    color: null }] : []),
     ...('fanName'  in v ? [{ key: 'trivia',            label: T('tab.trivia'),      color: '#e65100' }] : []),
+    ...('jiaojiao' in v ? [{ key: 'jiaojiao',          label: '焦焦小知識',           color: '#00bcd4' }] : []),
     { key: 'schedule',   label: T('tab.schedule'),     color: '#0277bd' },
     ...('youtubeChannelId' in v ? [{ key: 'livestreams', label: T('tab.livestreams'), color: '#cc0000' }] : []),
     ...(v.memberVideos && v.memberVideos.length ? [{ key: 'member', label: T('tab.member'),      color: '#8e24aa' }] : []),
@@ -352,6 +353,40 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>`;
   }
 
+  // ── 焦焦小知識 HTML ────────────────────────────
+  let jiaojiaoHTML = '';
+  if ('jiaojiao' in v) {
+    const jj = v.jiaojiao;
+    const basicRows = (jj.basicInfo || []).map(r =>
+      `<tr><td class="jiaojiao-basic-label">${r.label}</td><td>${r.value}</td></tr>`
+    ).join('');
+    const pairRows = (jj.pairs || []).map(p =>
+      `<tr>
+        <td class="jiaojiao-like-label">💚 ${p.likeLabel}</td>
+        <td>${p.like}</td>
+        <td class="jiaojiao-dislike-label">🚫 ${p.dislikeLabel}</td>
+        <td>${p.dislike}</td>
+      </tr>`
+    ).join('');
+    const specialHTML = jj.special
+      ? `<div class="jiaojiao-special"><span class="jiaojiao-special-label">最可愛的部位</span>${jj.special}</div>`
+      : '';
+    jiaojiaoHTML = `
+    <div id="tab-jiaojiao" class="tab-panel">
+      <div class="detail-section-title">焦焦小知識</div>
+      <div class="jiaojiao-layout">
+        <div class="jiaojiao-photo">
+          <img src="${jj.photo}" alt="焦焦" loading="lazy">
+        </div>
+        <div class="jiaojiao-info">
+          <table class="jiaojiao-table"><tbody>${basicRows}</tbody></table>
+          <table class="jiaojiao-pairs-table"><tbody>${pairRows}</tbody></table>
+          ${specialHTML}
+        </div>
+      </div>
+    </div>`;
+  }
+
   // ── 相關連結 HTML ──────────────────────────────
   const linksHTML = (v.overrideLinks && v.overrideLinks.length)
     ? v.overrideLinks
@@ -515,6 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ${refSheetHTML}
         ${triviaHTML}
+        ${jiaojiaoHTML}
 
         <!-- TAB: 原創曲&Cover -->
         <div id="tab-videos" class="tab-panel">
