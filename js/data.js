@@ -3108,7 +3108,7 @@ const vtubers = [
     generation: "六期生",
     avatar: "https://pbs.twimg.com/profile_images/2011801229165559809/gqkdH927_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1933073377113354240/1760704308/1500x500",
-    tagline: "",
+    tagline: "幹幹幹",
     taglines: [
       { context: "", text: "我接喔" },
       { context: "", text: "你白目嗎?" },
