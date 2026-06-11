@@ -2417,7 +2417,7 @@ const vtubers = [
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ",         keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["歌切", "歌回", "cover"] },
       { id: "UCPZVkm7COU8x-oxxVBBv6iA", label: "半夜依舊燦爛的陽光", keywords: ["崎塔", "chita", "CaKano"],           typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita", "CaKano"], typeKeywords: ["cover", "歌ってみた"], excludeKeywords: ["諾恪里", "Nokori"] },
     ],
 
     videoClipsChannelIds: [
@@ -2425,7 +2425,7 @@ const vtubers = [
       { id: "UCitmNfWNIMaIOXt8G5T1BNQ", label: "檸檬兮兮",   keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["歌回", "之歌"] },  // 非音樂的非官方精華
       { id: "UCuq11vOzrVqirACayTyRMHg", label: "月桂葉香包", keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["合唱", "歌切", "歌回", "songlist", "兒歌", "cover"] },
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["崎塔", "chita", "CaKano"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["崎塔", "chita", "CaKano"], excludeKeywords: ["cover", "歌ってみた", "諾恪里", "Nokori"] },
     ],
 
     scheduleVideoId:  "JAzDEWJN8LM",
@@ -2473,10 +2473,15 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/chamamatti/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [],
+    videos: [
+      {id:"-6u51DXgHJ0",title:"Wake up! / Cover【茶帽瑪緹 ♠︎ Chamamatti】",date:"2026-05-20"},
+      {id:"P2MMHQLBj4Y",title:"リードコントロール / Cover【茶帽瑪緹 ♠︎ Chamamatti】",date:"2025-10-24"},
+    ],
     shorts: [],
     originals_manual: [],
-    premiere: [],
+    premiere: [
+      {id:"XtUVGafqII8",title:"【官方精華】嘴比人先瘋，用甜點堆出來的美麗精神狀態【初配信精華】｜茶帽瑪緹 ♠︎ Chamamatti",date:"2025-12-18"},
+    ],
     general: [],
     vlog: [],
     commerce: [],
@@ -2926,11 +2931,21 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/vq7fin259ukl3mi', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+      {id:"2zgw-HgrbBE",title:"I'm Alive / 李杰明 W.M.L x 陳忻玥 Vicky Chen【男生雙人翻唱】❆ 諾恪里 x 艾斯珀達 cover",date:"2026-05-30"},
+      {id:"U8SxZ16wzgw",title:"【CaKano】CH4NGE / Giga ❆ 1st Anniversary (cover)",date:"2026-04-18"},
+      {id:"71ctx3MjPXs",title:"【歌ってみた】IRIS OUT / 米津玄師 ❆ 諾恪里Nokori (cover)",date:"2025-11-10"},
+      {id:"v38OftyVtlM",title:"【1人2役】プロポーズ / 内緒のピアス ❆ 諾恪里Nokori (cover)",date:"2025-10-19"},
+      {id:"47KrXrkTHHg",title:"ACTOR / 友成空【歌ってみた】❆ 諾恪里Nokori cover",date:"2025-03-21"},
+    ],
     shorts: [],
     originals_manual: [],
-    premiere: [],
-    general: [],
+    premiere: [
+      {id:"uY9FgGHIaP0",title:"【官方初配信精華】奇蹟?魔法? 擅長繪畫與變聲的年下狐狐? | ❆ 諾恪里Nokori",date:"2025-04-25"},
+    ],
+    general: [
+      {id:"F8vW0q6uRa4",title:"【前導故事】本子危險！在小黃書尋求魔法是否搞錯了什麼? (｡• ω•｡)つ—☆ • * ｡ | ❆ 諾恪里Nokori",date:"2025-04-24"},
+    ],
     vlog: [],
     commerce: [],
     memberVideos: [],
@@ -2941,14 +2956,14 @@ const vtubers = [
 
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
     musicClipsChannelIds: [
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori", "CaKano"], typeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori", "CaKano"], typeKeywords: ["cover", "歌ってみた"], excludeKeywords: ["崎塔", "chita"] },
     ],
 
     // ── 熱門影片精華──────────────────────────────────
     videoClipsChannelIds: [
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini",  keywords: ["諾恪里", "小心結天團"] },
       { id: "UCMjxlxGJXiWyiSYcgYdvpMg", label: "miiyaミイヤ", keywords: ["諾恪里", "Nokori", "CaKano"] },
-      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori", "CaKano"], excludeKeywords: ["cover", "歌ってみた"] },
+      { id: "UCEGbez6s8Y8P_5julxNh7jA", label: "Ariel 月", keywords: ["諾恪里", "Nokori", "CaKano"], excludeKeywords: ["cover", "歌ってみた", "崎塔", "chita"] },
     ],
 
     scheduleVideoId:  "Od2Sczr6wmw",
@@ -2997,11 +3012,19 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/9ir7u6drnzlzo7a', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+      {id:"A1IM8JblRRw",title:"歡迎合唱哦 ! !  浴火成詩cover - 克克米伊(男聲部分)",date:"2026-02-14"},
+      {id:"TuHDyBq42EM",title:"最後一頁 - Cover 【克克米伊】",date:"2025-03-21"},
+    ],
     shorts: [],
     originals_manual: [],
-    premiere: [],
-    general: [],
+    premiere: [
+      {id:"z2x0Gyq3abE",title:"【初配信精華】關於我失控的那一天... | 克克米伊",date:"2025-04-26"},
+    ],
+    general: [
+      {id:"TANQE07SDDo",title:"【twitch存檔】繼續看大家的TAG ! #2 (耐久接續",date:"2025-12-05"},
+      {id:"pdqnwfb5zR0",title:"【被迫離家】人類世界真的有好多好吃的ʕ•́ ᴥ •̀ ʔ | 克克米伊",date:"2025-04-23"},
+    ],
     vlog: [],
     commerce: [],
     memberVideos: [],
@@ -3074,11 +3097,18 @@ const vtubers = [
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/pqnlqsethgm3px2', class: 'marshmallow', icon: '🍬' },
     ],
 
-    videos: [],
+    videos: [
+      {id:"NqrevkrJOoc",title:"【 我愛你-上海蟹 】cover / 珮蕾pele",date:"2026-02-14"},
+      {id:"Nu1FICbgoPw",title:"【ワールドイズマイン/世界第一的公主殿下 】cover / 珮蕾pele",date:"2025-10-25"},
+    ],
     shorts: [],
     originals_manual: [],
     premiere: [],
-    general: [],
+    general: [
+      {id:"Uykcm_BF12Y",title:"【官方精華】要是我在異世界變成這樣，你們還會愛我嗎 #萬物皆可蟹",date:"2026-05-18"},
+      {id:"Ic-v5r-eDPc",title:"［夢之形］這是我最後一次說『最後一把』...真的。",date:"2026-03-28"},
+      {id:"RtCc_0E2Zs0",title:"【官方精華 】就是你，跟我簽訂契約吧 ~ ♪  / 珮蕾pele",date:"2025-12-20"},
+    ],
     vlog: [],
     commerce: [],
     memberVideos: [],
@@ -3147,10 +3177,15 @@ const vtubers = [
       { label: '深度會員', url: 'https://www.hivebee.com.tw/Yawnii/Subscribe', class: 'membership', icon: '💎' },
     ],
 
-    videos: [],
+    videos: [
+      {id:"Rnv3KUovVas",title:"好玩要玩🗡️#劍紙三國🗡️‼️‼️歌ってみた ⊱⏱︎⊰ Covered by  睏睏幽昵Yawnii",date:"2026-02-20"},
+      {id:"FgIqS44Flgo",title:"【ラビットホール/DECO*27 】歌ってみた  ⊱⏱︎⊰  Covered by 【睏睏幽昵Yawnii】",date:"2025-10-26"},
+    ],
     shorts: [],
     originals_manual: [],
-    premiere: [],
+    premiere: [
+      {id:"qr-3cM1NtJU",title:"【#初配信精華】♣️傳令官登場！♣️不過怎麼好像呆呆的......嗎？ ⊱⏱︎⊰ 睏睏幽昵Yawnii",date:"2025-12-19"},
+    ],
     general: [],
     vlog: [],
     commerce: [],
