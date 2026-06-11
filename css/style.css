@@ -1974,7 +1974,10 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   .compact-avatar { width: 38px; height: 38px; }
   /* 手機：單欄 */
   .vtuber-grid { grid-template-columns: 1fr; }
-  .gen-tree { grid-template-columns: 1fr; }
+  .gen-tree { grid-template-columns: 1fr; width: 100%; }
+  .gen-col { min-width: 0; width: 100%; }
+  .gen-section { min-width: 0; max-width: 100%; }
+  .gen-section-cards { -webkit-overflow-scrolling: touch; }
   /* 修正1：導覽列橫向捲動（防止換行）＋調整 nav-height */
   :root { --nav-height: 96px; }
   .nav-links-bar { overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
