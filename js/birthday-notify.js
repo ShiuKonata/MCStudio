@@ -150,7 +150,7 @@
         <span style="font-size:${isSingle ? 1.05 : 0.9}rem;font-weight:900;color:#fff;
           text-shadow:0 1px 4px rgba(0,0,0,0.4);max-width:120px;
           overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${v.name}</span>
-        <span style="font-size:0.8rem;color:rgba(255,255,255,0.82);font-weight:600">${v.birthday}</span>
+        <span style="font-size:0.8rem;color:#ffffff;font-weight:600">${v.birthday}</span>
       </div>`).join('');
 
     const css = `
@@ -197,7 +197,7 @@
         <h2 style="color:#feca57;font-size:1.2rem;font-weight:900;margin:0 0 0.3rem;letter-spacing:0.02em">
           🎉 今天是特別的日子！
         </h2>
-        <p style="color:rgba(255,255,255,0.65);font-size:0.83rem;margin:0 0 1.4rem">
+        <p style="color:#ffffff;font-size:0.83rem;margin:0 0 1.4rem">
           以下成員今天生日，快一起去慶祝吧！
         </p>
 
@@ -217,7 +217,7 @@
           <button id="_mcBdayLater" style="
             background:rgba(255,255,255,0.08);
             border:1px solid rgba(255,255,255,0.22);
-            color:rgba(255,255,255,0.65);
+            color:#ffffff;
             padding:0.65rem 1.2rem;border-radius:50px;
             cursor:pointer;font-size:0.83rem;font-weight:600;
           ">之後再說</button>
