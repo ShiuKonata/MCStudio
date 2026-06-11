@@ -1169,6 +1169,7 @@ const vtubers = [
 
     refSheets: [
       { version: "Ver 1.0", url: "images/酒樂霧子 v1.0.png" },
+      { version: "Ver 2.0", url: "images/酒樂霧子 v2.0.jpg" },
     ],
 
     // 小知識
@@ -1332,9 +1333,10 @@ const vtubers = [
     scheduleTitle:    "瓦瓦的行程表",
 
     refSheets: [
-      { version: "3D 版本", url: "images/瓦西瓦瓦 3D版本.jpg" },
-      { version: "Ver 1.0", url: "images/瓦西瓦瓦 v1.0.png"  },
-      { version: "Ver 2.0", url: "images/瓦西瓦瓦 v2.0.png"  },
+      { version: "3D 版本",        url:  "images/瓦西瓦瓦 3D版本.jpg" },
+      { version: "Ver 1.0",        url:  "images/瓦西瓦瓦 v1.0.png"   },
+      { version: "Ver 2.0",        url:  "images/瓦西瓦瓦 v2.0.png"   },
+      { version: "粉絲形象 瓦草",  urls: ["images/瓦西瓦瓦_瓦草.jpg", "images/瓦西瓦瓦_瓦草_1.jpg"] },
     ],
 
     // 小知識
@@ -1467,8 +1469,9 @@ const vtubers = [
     scheduleTitle:    "希希的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/希妮亞里絲 v1.0.png" },
-      { version: "Ver 2.0", url: "images/希妮亞里絲 v2.0.png" },
+      { version: "Ver 1.0",  url: "images/希妮亞里絲 v1.0.png"   },
+      { version: "Ver 2.0",  url: "images/希妮亞里絲 v2.0.png"   },
+      { version: "3D 版本",  url: "images/希妮亞里絲 3D版本.jpg" },
     ],
 
     // 小知識
@@ -1840,7 +1843,9 @@ const vtubers = [
     scheduleTitle:    "氣質兔兔的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/若櫻依兔 v1.0.png" },
+      { version: "Ver 1.0",        url: "images/若櫻依兔 v1.0.png"     },
+      { version: "粉絲形象 芝麻糬", url: "images/若櫻依兔_芝麻糬.jpg" },
+      { version: "粉絲形象 櫻花糬", url: "images/若櫻依兔_櫻花糬.jpg" },
     ],
 
     songStatsGids: {
@@ -1967,8 +1972,9 @@ const vtubers = [
     scheduleTitle:    "鯨諾的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/鯨諾 v1.0.jpg" },
-      { version: "Ver 2.0", url: "images/鯨諾 v2.0.jpg" },
+      { version: "Ver 1.0",       url: "images/鯨諾 v1.0.jpg"   },
+      { version: "Ver 2.0",       url: "images/鯨諾 v2.0.jpg"   },
+      { version: "粉絲形象 星燭", url: "images/鯨諾_星燭.jpg"   },
     ],
 
     songStatsGids: {
@@ -2072,6 +2078,14 @@ const vtubers = [
       "2024": "1583821169",
     },
 
+    // 三視圖
+    refSheets: [
+      { version: "Ver 1.0",       url: "images/魁kai v1.0.jpg"    },
+      { version: "Ver 2.0",       url: "images/魁kai v2.0.jpg"    },
+      { version: "魅Mei",          url: "images/魁kai_魅Mei.jpg"   },
+      { version: "粉絲形象Poppy", url: "images/魁kai_Poppy.jpg"   },
+    ],
+
     color: "#8B0000"   // 魁 Kai 代表色（深紅）
   },
 
@@ -2150,6 +2164,13 @@ const vtubers = [
       "2025": "1796269030",
       "2024": "1583821169",
     },
+
+    // 三視圖
+    refSheets: [
+      { version: "Ver 1.0",        url: "images/穆克蕗 v1.0.jpg"      },
+      { version: "Ver 2.0",        url: "images/穆克蕗 v2.0.jpg"      },
+      { version: "粉絲形象 穆浴球", url: "images/穆克蕗_穆浴球.jpg"   },
+    ],
 
     color: "#DCC5E0"   // 穆克蕗 代表色（淡紫）
   },
@@ -2260,6 +2281,13 @@ const vtubers = [
       "2025": "125957373",
       "2024": "1583821169",
     },
+
+    // 三視圖
+    refSheets: [
+      { version: "Ver 1.0",       url: "images/涅爾菲 v1.0.jpg"    },
+      { version: "Ver 2.0",       url: "images/涅爾菲 v2.0.jpg"    },
+      { version: "粉絲形象 菲鼠", url: "images/涅爾菲_菲鼠.jpg"   },
+    ],
 
     color: "#008B8B"   // 涅爾菲 代表色（暗青）
   },
@@ -2614,8 +2642,9 @@ const vtubers = [
     scheduleTitle:    "希洛的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", urls: ["images/希洛萊昂 v1.0.jpg", "images/希洛萊昂 v1.0-1.jpg"] },
-      { version: "Ver 2.0", url: "images/希洛萊昂 v2.0.jpg" },
+      { version: "Ver 1.0",       urls: ["images/希洛萊昂 v1.0.jpg", "images/希洛萊昂 v1.0-1.jpg"] },
+      { version: "Ver 2.0",       url:  "images/希洛萊昂 v2.0.jpg"  },
+      { version: "粉絲形象 拿拿", url:  "images/希洛萊昂_拿拿.jpg"  },
     ],
 
     songStatsGids: {
