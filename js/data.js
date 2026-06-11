@@ -1861,7 +1861,25 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "櫻花糬",
+    hashTags: [
+      { label: "日常TAG",     tag: "#依起分享" },
+      { label: "二創TAG",     tag: "#依起畫畫" },
+      { label: "實況&剪輯TAG", tag: "#依起玩"   },
+    ],
+    triviaLikes: [
+      { label: "最愛",       items: ["凪誠士郎"] },
+      { label: "專長",       items: ["唱歌", "用媽媽的洗髮精調製煉金藥水", "蓋基地台"] },
+      { label: "喜歡的食物", items: ["拉麵", "泰式料理", "川菜", "日式料理", "鬆餅", "櫻花糬", "北極熊"] },
+      { label: "愛好",       items: ["喜歡穿裙子(不穿褲子)", "關押黑兔"] },
+      { label: "喜歡的ACG",  items: ["魔法少女奈葉", "死神"] },
+      { label: "喜歡的音樂", items: ["BBGGMM", "聽海"] },
+      { label: "男神偶像",   items: ["吉沢 亮"] },
+      { label: "被動技能",   items: ["爆言之力（50%機率爆言）", "海王之力(認識的人80%會被兔兔認為是寶、老婆、老公)"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的東西", items: ["數學", "鬼怪", "血腥", "恐怖"] },
+    ],
 
 
     scheduleVideoId:  "5Sn6bnUbeus",
