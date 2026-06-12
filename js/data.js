@@ -3236,6 +3236,11 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/2045739065392476160/7v9ySc-G_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/2032034853131337735/1773318142/1500x500",
     tagline: "",
+    taglines: [
+      { context: "", text: "你又沒有教我" },
+      { context: "", text: "我哪有" },
+      { context: "", text: "你今天有開心嗎" }
+    ],
     description: "在熬夜、焦慮與奶茶之間，選擇成為魔法少女ฅ •ﻌ•♡",
     debut: "2025-04-19",
     birthday: "6月21日",
@@ -3276,7 +3281,34 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "諾米糰子",
+    hashTags: [
+      { label: "LIVE", tag: "#看這里" },
+      { label: "ALL",  tag: "#里里叩叩" },
+      { label: "ART",  tag: "#畫給里" },
+      { label: "MEME", tag: "#恪了什麼" },
+      { label: "18+",  tag: "#恪以瑟瑟" },
+      { label: "FOOD", tag: "#來一恪" },
+    ],
+    futureGoals: [
+      "在人類世界生存（養活自己）",
+      "結交很多新朋友！",
+      "喜歡自己",
+      "最重要是成為!!馬猴燒酒!!",
+    ],
+    triviaLikes: [
+      { label: "喜歡的食物", items: ["章魚燒", "鰻魚飯", "拉麵", "珍珠奶茶", "香蕉", "鳳梨"] },
+      { label: "喜歡的角色", items: ["咖醬"] },
+      { label: "喜歡的面容", items: ["金黃髮"] },
+      { label: "喜歡的歌手", items: ["Ado"] },
+      { label: "喜歡的唱見", items: ["ふぉるて", "DAZBEE（還有很多）"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的味道", items: ["最討厭：紅蘿蔔、茄子", "勉強接受：芋頭、苦瓜、三色豆、香菜、魚"] },
+    ],
+    triviaExtra: [
+      { label: "注意事項", items: ["不能吃辣", "蝦子過敏"] },
+    ],
 
 
     // ── 熱門音樂剪輯（歌回 / 唱歌）──────────────────
@@ -3318,6 +3350,13 @@ const vtubers = [
     avatar: "https://pbs.twimg.com/profile_images/2052756867378798592/6X8FR751_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1888131663596748800/1745276220/1500x500",
     tagline: "",
+    taglines: [
+      { context: "初配信", text: "度、BANG" },
+      { context: "", text: "事實" },
+      { context: "", text: "能懂能懂" },
+      { context: "爆言或想歪時", text: "阿密豆腐" },
+      { context: "", text: "心中有菩薩，看什麼都是菩薩" }
+    ],
     description: "是隻喜歡睡覺的熊!",
     debut: "2025-04-20",
     birthday: "7月5日",
@@ -3385,6 +3424,31 @@ const vtubers = [
       "2026": "1841739730",
       "2025": "1583821169",
     },
+
+    // 小知識
+    fanName: "嘎米Gummy",
+    hashTags: [
+      { label: "萬能", tag: "#萬中選伊" },
+      { label: "繪圖", tag: "#畫伊畫 #再畫伊畫" },
+      { label: "剪輯", tag: "#剪伊剪" },
+      { label: "迷因", tag: "#克克米因" },
+      { label: "周邊", tag: "#課課米伊" },
+      { label: "18+",  tag: "#伊哭走" },
+    ],
+    futureGoals: [
+      "☐ 兩年內達到十萬訂閱！",
+      "☐ 能被逞法遊戲逞罰",
+      "☐ 征服全世界",
+      "☐ 娶一個鹽酥雞攤回家",
+      "☑ 初配信的按讚超過1000",
+    ],
+    triviaLikes: [
+      { label: "喜歡的食物", items: ["鹽酥雞", "薯條", "章魚燒"] },
+      { label: "喜歡的屬性", items: ["白髮角色"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的食物", items: ["龍蝦", "鮑魚", "帝王蟹", "香菇", "木耳", "秋葵", "勾芡", "蛞蝓", "<s>伊比利豬</s>", "<s>黑鮪魚中腹</s>", "<s>A5和牛</s>"] },
+    ],
 
     color: "#FFCB55"   // 克克米伊 代表色（蜂蜜黃）
   },
