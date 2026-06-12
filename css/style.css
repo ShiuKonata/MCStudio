@@ -1335,9 +1335,9 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
 }
 .refsheet-imgs-row .refsheet-img {
   flex: 1;
-  width: 0;
   min-width: 0;
-  max-height: 70vh;
+  max-width: none;
+  max-height: 60vh;
   margin: 0;
 }
 .refsheet-placeholder {
