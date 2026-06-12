@@ -2751,7 +2751,8 @@ const vtubers = [
     scheduleTitle:    "瑪緹的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/茶帽瑪緹 v1.0.jpg" },
+      { version: "Ver 1.0",          url: "images/茶帽瑪緹 v1.0.jpg" },
+      { version: "粉絲形象 警察杯杯", url: "images/茶帽瑪緹_警察杯杯.jpg" },
     ],
 
     songStatsPublishedId: "2PACX-1vRFvbUbnCktCj_QjMNi8szeTM_K8pm71coRd2yyjVetGsN-rgMNv9VH-sMYO-TVXiYxDwU6ZI4Qmn6F",
@@ -3527,7 +3528,8 @@ const vtubers = [
     scheduleTitle:    "公主的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/珮蕾 v1.0.jpg" },
+      { version: "Ver 1.0",        url: "images/珮蕾 v1.0.jpg" },
+      { version: "粉絲形象 珮偶",   url: "images/珮蕾_珮偶.jpg" },
     ],
 
     songStatsPublishedId: "2PACX-1vR3aeWo71SY7CDYdik5DRDUoVHEv4SuSOyiMY8-naejYnceKBuhqsNzSAfRKQRVj8cUzzCCSHhPO5CI",
@@ -3606,7 +3608,8 @@ const vtubers = [
     scheduleTitle:    "幽昵的行程表",
 
     refSheets: [
-      { version: "Ver 1.0", url: "images/睏睏幽昵 v1.0.jpg" },
+      { version: "Ver 1.0",        url:  "images/睏睏幽昵 v1.0.jpg" },
+      { version: "粉絲形象 歐昵醬", urls: ["images/睏睏幽昵_歐昵醬.jpg", "images/睏睏幽昵_歐昵醬_1.jpg", "images/睏睏幽昵_歐昵醬_2.jpg"] },
     ],
 
     songStatsPublishedId: "2PACX-1vTY5OFOY_Hp-M2rhVdBc5YXsQudgnlc8mkotq7i2zPnyf60n3iy8A401A-LgRs0c9vSepJjcf1dF5kR",
