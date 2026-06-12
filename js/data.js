@@ -1096,7 +1096,7 @@ const vtubers = [
     nameEn: "Kiriko",
     group: "預見娛樂",
     generation: "二期生",
-    avatar: "https://pbs.twimg.com/profile_images/2039773906706534400/RTy0EGZQ_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2064722256811655168/t1q77w95.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1676559936602644480/1750936798/1500x500",
     tagline: "",
     taglines: [
@@ -3094,7 +3094,8 @@ const vtubers = [
       { context: "", text: "北七" },
       { context: "", text: "好想工作" },
       { context: "", text: "發瘋" },
-      { context: "", text: "吃答辯吧" }
+      { context: "", text: "吃答辯吧" },
+      { context: "", text: "蛤？" }
     ],
     description: "有網路的地方就會有扉扉",
     debut: "2024-09-14",
