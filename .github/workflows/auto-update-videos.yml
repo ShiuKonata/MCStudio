@@ -48,7 +48,10 @@ jobs:
           console.log('✅ 已從 data.js 讀取 API 金鑰\n');
 
           const now = new Date();
-          const dayOfYear = Math.floor((now - new Date(now.getUTCFullYear(), 0, 0)) / 86400000);
+          const utcYear = now.getUTCFullYear();
+          const yearStart = Date.UTC(utcYear, 0, 0);
+          const todayUTC = Date.UTC(utcYear, now.getUTCMonth(), now.getUTCDate());
+          const dayOfYear = Math.floor((todayUTC - yearStart) / 86400000);
           const segmentIndex = dayOfYear % 4;
 
           let vtuberIds = [];
@@ -372,35 +375,19 @@ jobs:
           // ──【FIXED】──輔助函數：從 data.js 中提取現有影片 ID──
           function extractExistingVideoIds(vId) {
             const existingIds = new Set();
-
-            // 搜尋該 VTuber 的 videos 欄位
-            const match = dataContent.match(new RegExp(`id:\\s*["']${vId}["'][\\s\\S]*?videos:\\s*(\\{[\\s\\S]*?\\}|\\[[\\s\\S]*?\\])`, 's'));
-            if (!match || !match[1]) return existingIds;
-
-            try {
-              const videoData = JSON.parse(match[1]);
-
-              // 舊結構（陣列）
-              if (Array.isArray(videoData)) {
-                videoData.forEach(v => {
-                  if (v.id) existingIds.add(v.id);
-                });
-              }
-              // 新結構（物件）
-              else if (typeof videoData === 'object') {
-                const sections = ['covers', 'originals', 'officials', 'shorts', 'unclassified'];
-                sections.forEach(section => {
-                  if (Array.isArray(videoData[section])) {
-                    videoData[section].forEach(v => {
-                      if (v.id) existingIds.add(v.id);
-                    });
-                  }
-                });
-              }
-            } catch (e) {
-              console.log(`  ⚠️ 無法解析 ${vId} 的 videos 欄位`);
+            const escaped = vId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            // 找到該 VTuber 的區段（從 id:"vId" 到下一個頂層 { id: 或陣列結尾）
+            const sectionMatch = dataContent.match(
+              new RegExp(`id:\\s*["']${escaped}["'][\\s\\S]*?(?=\\n  \\{\\n    id:|\\n\\];)`)
+            );
+            if (!sectionMatch) return existingIds;
+            const section = sectionMatch[0];
+            // 用 regex 提取所有 {id:"..."} 格式的影片 ID
+            const idPattern = /\{id:\s*["']([^"']+)["']/g;
+            let m;
+            while ((m = idPattern.exec(section)) !== null) {
+              existingIds.add(m[1]);
             }
-
             return existingIds;
           }
 
@@ -430,52 +417,39 @@ jobs:
                 || newVideos.unclassified.length > 0;
 
               if (hasNewVideos) {
-                // 讀取現有的 videos 結構並追加新影片
-                const pattern = new RegExp(`(id:\\s*["']${vId}["'][\\s\\S]*?videos:\\s*)(\\{[\\s\\S]*?\\}|\\[[\\s\\S]*?\\])`, 's');
-                const videoMatch = dataContent.match(pattern);
+                const escaped = vId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                let addedCount = 0;
 
-                if (videoMatch && videoMatch[2]) {
-                  try {
-                    const existingVideos = JSON.parse(videoMatch[2]);
-
-                    let mergedVideos;
-                    // 舊結構轉新結構
-                    if (Array.isArray(existingVideos)) {
-                      mergedVideos = {
-                        covers: existingVideos.filter(v => v.title.includes('【Cover】')),
-                        originals: existingVideos.filter(v => v.title.includes('【Original】')),
-                        officials: existingVideos.filter(v => v.title.includes('【Official】')),
-                        shorts: [],
-                        unclassified: []
-                      };
-                    } else {
-                      mergedVideos = { ...existingVideos };
-                      // 確保所有欄位存在
-                      if (!mergedVideos.covers) mergedVideos.covers = [];
-                      if (!mergedVideos.originals) mergedVideos.originals = [];
-                      if (!mergedVideos.officials) mergedVideos.officials = [];
-                      if (!mergedVideos.shorts) mergedVideos.shorts = [];
-                      if (!mergedVideos.unclassified) mergedVideos.unclassified = [];
-                    }
-
-                    // 合併新影片
-                    mergedVideos.covers.push(...newVideos.covers);
-                    mergedVideos.originals.push(...newVideos.originals);
-                    mergedVideos.officials.push(...newVideos.officials);
-                    mergedVideos.shorts.push(...newVideos.shorts);
-                    mergedVideos.unclassified.push(...newVideos.unclassified);
-
-                    const mergedJson = JSON.stringify(mergedVideos, null, 2);
-                    dataContent = dataContent.replace(pattern, `$1${mergedJson}`);
-
-                    const totalCount = newVideos.covers.length + newVideos.originals.length + newVideos.officials.length + newVideos.shorts.length + newVideos.unclassified.length;
-                    updateCount += totalCount;
-                    console.log(`  ✓ 已添加 ${newVideos.covers.length} Cover + ${newVideos.originals.length} Original + ${newVideos.officials.length} Official + ${newVideos.shorts.length} Shorts + ${newVideos.unclassified.length} 未分類`);
-                  } catch (e) {
-                    console.log(`  ✗ 合併失敗: ${e.message}`);
+                // covers + originals → 插入 videos: [...] 陣列開頭
+                const newVideoItems = [...newVideos.covers, ...newVideos.originals];
+                if (newVideoItems.length > 0) {
+                  const entries = newVideoItems.map(v =>
+                    `      {id:"${v.id}",title:"${v.title}",date:"${v.date}"}`
+                  ).join(',\n') + ',';
+                  const pat = new RegExp(`(id:\\s*["']${escaped}["'][\\s\\S]*?videos:\\s*\\[)`);
+                  if (pat.test(dataContent)) {
+                    dataContent = dataContent.replace(pat, `$1\n${entries}`);
+                    addedCount += newVideoItems.length;
                   }
+                }
+
+                // shorts → 插入 shorts: [...] 陣列開頭
+                if (newVideos.shorts.length > 0) {
+                  const entries = newVideos.shorts.map(v =>
+                    `      {id:"${v.id}",title:"${v.title}",date:"${v.date}"}`
+                  ).join(',\n') + ',';
+                  const pat = new RegExp(`(id:\\s*["']${escaped}["'][\\s\\S]*?shorts:\\s*\\[)`);
+                  if (pat.test(dataContent)) {
+                    dataContent = dataContent.replace(pat, `$1\n${entries}`);
+                    addedCount += newVideos.shorts.length;
+                  }
+                }
+
+                if (addedCount > 0) {
+                  updateCount += addedCount;
+                  console.log(`  ✓ 已添加 ${newVideos.covers.length} Cover + ${newVideos.originals.length} Original + ${newVideos.shorts.length} Shorts`);
                 } else {
-                  console.log(`  ✗ 未找到 ${vId} 的videos欄位，跳過`);
+                  console.log(`  ✗ 未找到 ${vId} 的陣列欄位，跳過`);
                 }
               } else {
                 console.log(`  ⊘ 無新影片需要更新`);
