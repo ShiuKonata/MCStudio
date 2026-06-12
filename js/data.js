@@ -2582,7 +2582,10 @@ const vtubers = [
     tagline: "",
     taglines: [
       { context: "遊戲時", text: "我是個波貝、打那是什麼勾巴" },
-      { context: "轉盤時", text: "屁啦屁啦屁啦、不可能不可能不可能" }
+      { context: "轉盤時", text: "屁啦屁啦屁啦、不可能不可能不可能" },
+      { context: "", text: "tell me why🎶" },
+      { context: "", text: "What do you mean？" },
+      { context: "", text: "歐買勾抖" }
     ],
     description: "想成為貓的豹　(⁰▿⁰)",
     debut: "2025-04-18",
@@ -2625,7 +2628,29 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "塔塔醬",
+    hashTags: [
+      { label: "一般",   tag: "#塔塔出沒中" },
+      { label: "FanArt", tag: "#畫崎塔"     },
+      { label: "Live",   tag: "#塔塔招財中" },
+      { label: "Meme",   tag: "#崎崎怪怪"   },
+      { label: "R18",    tag: "#塔咩得斯"   },
+      { label: "周邊",   tag: "#堆積成塔"   },
+    ],
+    futureGoals: [
+      "健健康康的直播到65歲",
+      "開3D Live演唱會",
+      "想跟各國Vtuber一起玩遊戲",
+    ],
+    triviaLikes: [
+      { label: "喜歡的角色類型", items: ["帥氣大叔", "大姊姊", "蘿莉"] },
+      { label: "喜歡的食物",     items: ["鮭魚壽司", "生魚片", "咖啡", "茶", "酒"] },
+      { label: "喜歡的IP",       items: ["焦焦（貳貳學姐的貓）", "Restia", "土王"] },
+    ],
+    triviaHates: [
+      { label: "不喜歡的味道", items: ["小黃瓜", "便當店的茄子"] },
+      { label: "討厭的事物",   items: ["肉被烤焦", "烤魚先烤肉那一面"] },
+    ],
 
 
     musicClipsChannelIds: [
