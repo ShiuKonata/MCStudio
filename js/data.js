@@ -2732,7 +2732,29 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "警茶杯杯",
+    hashTags: [
+      { label: "FanArt",  tag: "#緹筆一繪" },
+      { label: "LiveTag", tag: "#瑪布停緹" },
+      { label: "迷因TAG", tag: "#迷迷帽帽" },
+      { label: "笑話TAG", tag: "#笑帽江湖" },
+    ],
+    futureGoals: [
+      "初配信的讚超過1000",
+      "APEX→鑽石→大師",
+      "接到飲料工商合作",
+      "讓仙境開滿紅色鮮花",
+    ],
+    triviaLikes: [
+      { label: "興趣", items: ["唱歌", "照顧花朵", "睡到自然醒", "收集Pocky盒子", "享受好吃的東西（義大利麵、菇類、高麗菜、花椰菜、薯餅、芋頭、Pocky、蒙布朗、水蓮、豆腐、豆皮、路寶檸檬梳打糖、烏龍麵、海帶）"] },
+      { label: "喜歡的事情", items: ["吸水銀", "暴龍", "無糖茶（伯爵茶、蜜香紅茶、水果茶、烏龍茶、鐵觀音）", "諧音梗", "閃亮亮的工具", "烏龍麵"] },
+    ],
+    triviaHates: [
+      { label: "挑食", items: ["香菜", "芹菜", "胡蘿蔔", "白蘿蔔", "波菜", "龍鬚菜", "韭菜", "青江菜", "白菜", "芥藍菜", "節瓜", "三色豆", "葡萄乾", "黑橄欖", "白木耳", "薑類", "苜蓿芽", "南瓜", "茄子", "青椒", "甜椒", "秋葵", "苦瓜", "冬瓜", "雪裡紅", "大黃瓜", "鳳梨", "柿子"] },
+    ],
+    triviaExtra: [
+      { label: "擅長", items: ["JO樓梯（樓梯踩空）", "數學", "把手上的東西冰進冰箱", "繞口令"] },
+    ],
 
 
     musicClipsChannelIds: [
@@ -3508,7 +3530,28 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
+    fanName: "珮偶",
+    hashTags: [
+      { label: "Live tag", tag: "#珮對成功" },
+      { label: "Fanart",   tag: "#珮色盤" },
+    ],
+    futureGoals: [
+      "佔領全世界，把大家都變成我的奴隸",
+      "初配信達到1314個Like",
+      "成為恐怖遊戲大師",
+      "辦一場屬於我的演唱會",
+    ],
+    triviaLikes: [
+      { label: "喜歡", items: ["錢", "恐怖遊戲", "會發出聲音的玩具（嗶嗶聲、木魚、摩托車、警報器）"] },
+      { label: "喜歡的飲料", items: ["法芙娜可可鮮奶"] },
+      { label: "喜歡的巧克力、蛋糕", items: ["明治阿波羅巧克力", "義美葡萄QQ糖巧克球", "提拉米蘇蛋糕"] },
+    ],
+    triviaHates: [
+      { label: "討厭的", items: ["忤逆我的人", "芋頭（溶入火鍋內的除外）", "數學"] },
+    ],
+    triviaExtra: [
+      { label: "害怕的事情", items: ["看牙醫（公主：........只是不喜歡）"] },
+    ],
 
 
     musicClipsChannelIds: [
@@ -3587,11 +3630,27 @@ const vtubers = [
     memberVideos: [],
 
     // 小知識
-    fanName: "",
-
-
-    // 小知識
-    fanName: "",
+    fanName: "歐昵醬",
+    hashTags: [
+      { label: "Hashtag",  tag: "#昵聽我說" },
+      { label: "Live tag", tag: "#昵有一封信" },
+      { label: "Fanart",   tag: "#幽點藝思" },
+      { label: "Meme",     tag: "#YA昵" },
+    ],
+    futureGoals: [
+      "明後年可以「50000」訂閱",
+      "唱歌時可以不要再緊張",
+      "嘗試自己寫歌",
+      "學會唱韓文歌",
+    ],
+    triviaLikes: [
+      { label: "興趣",       items: ["唱歌", "畫畫"] },
+      { label: "喜歡的遊戲", items: ["NieR", "APEX", "恐怖遊戲"] },
+      { label: "喜歡的東西", items: ["喝茶", "紅蘿蔔", "巧克力", "貓", "睡覺"] },
+    ],
+    triviaExtra: [
+      { label: "不擅長的東西", items: ["做選擇", "很冷的天氣", "分辨實話跟假話"] },
+    ],
 
     musicClipsChannelIds: [
       { id: "UCRqjJ9jxXdvIGdwPrtp8O0w", label: "小恩",       keywords: ["睏睏幽昵", "幽昵", "Yawnii", "ælis"] },  // 全域音樂關鍵字自動分類
