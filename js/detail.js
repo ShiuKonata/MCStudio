@@ -233,7 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // 支援單張 url 或多張 urls（上下排列）
       const urlList = s.urls ? s.urls : (s.url ? [s.url] : []);
       const imgHTML = urlList.length
-        ? urlList.map(u => `<img class="refsheet-img" src="${u}" alt="${v.name} ${s.version}">`).join('')
+        ? (s.layout === 'row'
+            ? `<div class="refsheet-imgs-row">${urlList.map(u => `<img class="refsheet-img" src="${u}" alt="${v.name} ${s.version}">`).join('')}</div>`
+            : urlList.map(u => `<img class="refsheet-img" src="${u}" alt="${v.name} ${s.version}">`).join(''))
         : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${T('refsheet.verPending', {ver: s.version})}</p></div>`;
       return `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">${imgHTML}</div>`;
     }).join('');

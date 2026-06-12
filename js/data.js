@@ -3609,7 +3609,7 @@ const vtubers = [
 
     refSheets: [
       { version: "Ver 1.0",        url:  "images/睏睏幽昵 v1.0.jpg" },
-      { version: "粉絲形象 歐昵醬", urls: ["images/睏睏幽昵_歐昵醬.jpg", "images/睏睏幽昵_歐昵醬_1.jpg", "images/睏睏幽昵_歐昵醬_2.jpg"] },
+      { version: "粉絲形象 歐昵醬", urls: ["images/睏睏幽昵_歐昵醬.jpg", "images/睏睏幽昵_歐昵醬_1.jpg", "images/睏睏幽昵_歐昵醬_2.jpg"], layout: "row" },
     ],
 
     songStatsPublishedId: "2PACX-1vTY5OFOY_Hp-M2rhVdBc5YXsQudgnlc8mkotq7i2zPnyf60n3iy8A401A-LgRs0c9vSepJjcf1dF5kR",
