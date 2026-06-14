@@ -1972,8 +1972,6 @@ const vtubers = [
       {id:"h_O2c9U7FhQ",title:"【官方初配信精華】唱歌寫作編曲樣樣行，卻是個古靈精怪電波男？ | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-05-17"},
     ],
     general: [
-      {id:"bFUWQQZwEkI",title:"【2026元宵詩謎】元宵詩謎之七 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-02-28"},
-      {id:"0vNCKx7FDwg",title:"【2026元宵詩謎】元宵詩謎之三 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-02-24"},
       {id:"xV1JZRTMu8I",title:"【遊戲精華】蛇骨婆｜武士刀與忍者刀｜無傷 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-02-20"},
       {id:"3xlDpBIDNf8",title:"Alluria 1.5 Anniversary: The Secret Agent  | Whalefall Route",date:"2025-11-09"},
       {id:"v-12akLei6s",title:"【情境影片】超煩男友Remake | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-06-14"},
@@ -1987,7 +1985,12 @@ const vtubers = [
       {id:"e2SYXTHXy3U",title:"【BGM】片尾Ending　餘波 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-05-14"},
       {id:"cNrjZpU7lQ0",title:"【Alluria】魔競娛樂首批VTuber男團宣傳PV｜@Kai_Alluria @MukuruCh @Nyrfier @shiro_leon",date:"2024-04-02"},
     ],
-    vlog: [],
+    yuanxiao: [
+      {id:"bFUWQQZwEkI",title:"【2026元宵詩謎】元宵詩謎之七 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-02-28"},
+      {id:"0vNCKx7FDwg",title:"【2026元宵詩謎】元宵詩謎之三 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-02-24"},
+    ],
+    yuanxiaoLabel: "元宵企劃",
+    yuanxiaoKeywords: ["元宵"],
     commerce: [],
     memberVideos: [],
 
@@ -2025,13 +2028,14 @@ const vtubers = [
       { id: "UCZuULhCMI94q4FgmedxEoSw", label: "Fish🌙🐋",     keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UCda9779QCmk1OwyZo7UM4uw", label: "yuan",           keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
       { id: "UC_jQpk9qoWdvSQ8hqtadkNw", label: "BYA",            keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
-      { id: "UCufN2OUu-yAKmnkD3gr4aNw", label: "ThunderAttributePantsu", keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCufN2OUu-yAKmnkD3gr4aNw", label: "ThunderAttributePantsu", keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["歌", "cover", "合唱", "線下連動", "即興", "rap", "哼"] },
     ],
 
     videoClipsChannelIds: [
       { id: "UC7jtBvX42r_mga2HUUmoznA", label: "teiko",      keywords: ["鯨諾", "whalefall", "Alluria"], typeKeywords: ["週年", "生日", "應援"] },  // 週年/生日應援企劃
       { id: "UCbZrLw_Lmq062fhqdsShr5w", label: "妮妮子nini", keywords: ["鯨諾", "whalefall", "Alluria", "小心結天團", "派"] },
       { id: "UCST8y6kG6QQyAnRwLv8cv_A", label: "羽feather🌙🐋",     keywords: ["鯨諾", "whalefall", "Alluria"], excludeKeywords: ["歌切", "cover", "歌回", "合唱", "線下連動"] },
+      { id: "UCufN2OUu-yAKmnkD3gr4aNw", label: "ThunderAttributePantsu", keywords: ["鯨諾", "whalefall", "Alluria"], excludeKeywords: ["歌", "cover", "合唱", "線下連動", "即興", "rap", "哼"] },
     ],
 
     scheduleVideoId:  "r15JQHl8KL0",

@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!v.videos.unclassified) v.videos.unclassified = [];
   if (!v.videos.shorts) v.videos.shorts = v.shorts || [];  // 從 v.shorts 複製（如果 v.videos.shorts 不存在）
   if (!v.videos.general) v.videos.general = v.general || [];  // 支援一般影片分類
-  if (!v.videos.vlog) v.videos.vlog = v.vlog || [];  // 支援 Vlog 分類
+  if (!v.videos.vlog) v.videos.vlog = v.yuanxiao || v.vlog || [];  // 支援 Vlog / 元宵企劃 分類
   if (!v.videos.commerce) v.videos.commerce = v.commerce || [];  // 支援工商分類
 
   // 添加手動分類的原創曲
@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="general">📺 一般影片</button>
             <button class="ov-section-btn" data-ovsection="shorts">🎬 Shorts</button>
-            <button class="ov-section-btn" data-ovsection="vlog">🎥 Vlog</button>
+            <button class="ov-section-btn" data-ovsection="vlog">🎥 ${v.yuanxiaoLabel || 'Vlog'}</button>
             <button class="ov-section-btn" data-ovsection="ads">📢 廣告</button>
             <button class="ov-section-btn" data-ovsection="first">🎙️ 初配信</button>
             <button class="ov-section-btn" data-ovsection="commerce">🛍️ 工商</button>
@@ -2025,7 +2025,7 @@ document.addEventListener('DOMContentLoaded', () => {
       date: vid.date,
       thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
     }));  // 初配信（來自 data.js）
-    window._vlogVideos = (v.vlog || []).map(vid => ({
+    window._vlogVideos = (v.yuanxiao || v.vlog || []).map(vid => ({
       id: vid.id,
       title: vid.title,
       date: vid.date,
@@ -2420,16 +2420,37 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             }
 
-            // 【自動分類 STEP 3】如果檢測到特殊規則（詩雨蔻達）
+            // 【STEP 3】鯨諾元宵企劃特殊規則（只限鯨諾）
+            if (v.yuanxiaoKeywords && v.yuanxiaoKeywords.length > 0) {
+              if (v.yuanxiaoKeywords.some(kw => title.includes(kw))) {
+                isStep3 = true;
+                step3Type = 'yuanxiao';
+              }
+            }
+
+            // 【自動分類 STEP 3】如果檢測到特殊規則
             if (isStep3) {
-              const newTitle = '【Cover】' + title;
               const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
+              const alreadyInDataJs = originalExistingVideoIds.has(vid);
+
+              // 鯨諾元宵企劃處理
+              if (step3Type === 'yuanxiao') {
+                if (!alreadyInDataJs) {
+                  window._vlogVideos = window._vlogVideos || [];
+                  window._vlogVideos.push({ id: vid, title: title, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
+                  existingVideoIds.add(vid);
+                  step3Candidates.push({ id: vid, title: title, date: date, type: 'yuanxiao', action: '【STEP 3】鯨諾元宵企劃 - 需添加至 data.js', duration: 0 });
+                }
+                filteredCount++;
+                continue;
+              }
+
+              // 詩雨蔻達 STEP 3 處理
+              const newTitle = '【Cover】' + title;
               const d = detailMap[vid];
               const durationSec = d ? parseDurationSec(d.duration) : 0;
 
               // 【關鍵判斷】檢查這個影片是否已經在 data.js 的 v.videos 中
-              const alreadyInDataJs = originalExistingVideoIds.has(vid);
-
               if (alreadyInDataJs) {
                 // ✅ 已經在 data.js 的 v.videos 中，可以從未分類區移除
                 filteredCount++;
