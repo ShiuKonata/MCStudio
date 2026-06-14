@@ -1431,7 +1431,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#video-grid .ls-card').forEach(card => {
       const title = (card.querySelector('.ls-title')?.textContent || '').toLowerCase();
       if (filter === 'all')    card.style.display = '';
-      else if (filter === '原創曲') card.style.display = title.includes('原創') ? '' : 'none';
+      else if (filter === '原創曲') card.style.display = (title.includes('原創') || title.includes('original')) ? '' : 'none';
       else if (filter === 'Cover')  card.style.display = title.toLowerCase().includes('cover') ? '' : 'none';
     });
   });
