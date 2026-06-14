@@ -2814,7 +2814,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // ── 讀快取 ──────────────────────────────────
       const ytsCacheKey = 'mc_yts_' + v.youtubeChannelId + '_' + year;
-      const ytsCached   = cacheGet(ytsCacheKey);
+      const ytsCached   = cacheGet(ytsCacheKey, year === 'all' ? CACHE_TTL_ALL : CACHE_TTL);
       if (ytsCached) {
         container.innerHTML = ytsCached.html;
         ytsNextPageToken = ytsCached.nextPageToken || null;
@@ -3077,13 +3077,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── 共用快取工具（sessionStorage，30 分鐘過期）──
-  const CACHE_TTL = 30 * 60 * 1000;
-  function cacheGet(key) {
+  const CACHE_TTL     = 30 * 60 * 1000;  // 30 分鐘（年份標籤）
+  const CACHE_TTL_ALL =  5 * 60 * 1000;  //  5 分鐘（UULV/UUSH 全部標籤）
+  function cacheGet(key, ttl = CACHE_TTL) {
     try {
       const raw = sessionStorage.getItem(key);
       if (!raw) return null;
       const obj = JSON.parse(raw);
-      if (Date.now() - obj.ts > CACHE_TTL) { sessionStorage.removeItem(key); return null; }
+      if (Date.now() - obj.ts > ttl) { sessionStorage.removeItem(key); return null; }
       return obj;
     } catch(e) { return null; }
   }
@@ -3162,7 +3163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // ── 讀快取 ──────────────────────────────────
       const cacheKey = 'mc_ls_' + v.youtubeChannelId + '_' + year;
-      const cached   = cacheGet(cacheKey);
+      const cached   = cacheGet(cacheKey, year === 'all' ? CACHE_TTL_ALL : CACHE_TTL);
       if (cached) {
         container.innerHTML = cached.html;
         lsNextPageToken = cached.nextPageToken || null;

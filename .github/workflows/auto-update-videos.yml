@@ -3,7 +3,7 @@ name: 🎵 Auto-Update VTuber Videos
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: '0 */6 * * *'   # 每6小時（啟用時取消注釋）
+  #   - cron: '0 */6 * * *'   # 每6小時自動執行（啟用時取消注釋）
 
 jobs:
   update:
@@ -48,11 +48,7 @@ jobs:
           console.log('✅ 已從 data.js 讀取 API 金鑰\n');
 
           const now = new Date();
-          const utcYear = now.getUTCFullYear();
-          const yearStart = Date.UTC(utcYear, 0, 0);
-          const todayUTC = Date.UTC(utcYear, now.getUTCMonth(), now.getUTCDate());
-          const dayOfYear = Math.floor((todayUTC - yearStart) / 86400000);
-          const segmentIndex = dayOfYear % 4;
+          const segmentIndex = Math.floor(now.getUTCHours() / 6);
 
           let vtuberIds = [];
           let currentSegment = 0;
