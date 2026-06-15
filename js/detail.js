@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!v.videos.shorts) v.videos.shorts = v.shorts || [];  // 從 v.shorts 複製（如果 v.videos.shorts 不存在）
   if (!v.videos.general) v.videos.general = v.general || [];  // 支援一般影片分類
   if (!v.videos.vlog) v.videos.vlog = v.yuanxiao || v.vlog || [];  // 支援 Vlog / 元宵企劃 分類
+  if (!v.videos.originalShorts) v.videos.originalShorts = v.originalShorts || [];  // 支援原創曲Shorts分類
   if (!v.videos.commerce) v.videos.commerce = v.commerce || [];  // 支援工商分類
 
   // 添加手動分類的原創曲
@@ -582,6 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="general">📺 一般影片</button>
             <button class="ov-section-btn" data-ovsection="shorts">🎬 Shorts</button>
+            <button class="ov-section-btn" data-ovsection="originalshorts">🎵 原創曲Shorts</button>
             <button class="ov-section-btn" data-ovsection="vlog">🎥 ${v.yuanxiaoLabel || 'Vlog'}</button>
             <button class="ov-section-btn" data-ovsection="ads">📢 廣告</button>
             <button class="ov-section-btn" data-ovsection="first">🎙️ 初配信</button>
@@ -610,6 +612,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="ls-load-more-wrap" id="yts-load-more-wrap" style="display:none">
               <button class="ls-load-more-btn" id="yts-load-more-btn">${T('loadMore')}</button>
             </div>
+          </div>
+
+          <!-- 原創曲Shorts section -->
+          <div id="ov-originalshorts-section" style="display:none">
+            <div class="livestreams-container" id="ov-originalshorts-container"></div>
           </div>
 
           <!-- Vlog section -->
@@ -2031,6 +2038,12 @@ document.addEventListener('DOMContentLoaded', () => {
       date: vid.date,
       thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
     }));  // Vlog（來自 data.js）
+    window._originalShortsVideos = (v.originalShorts || []).map(vid => ({
+      id: vid.id,
+      title: vid.title,
+      date: vid.date,
+      thumb: `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`
+    }));  // 原創曲Shorts（來自 data.js）
     window._commerceVideos = (v.commerce || []).map(vid => ({
       id: vid.id,
       title: vid.title,
@@ -2660,6 +2673,46 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // 【新增】原創曲Shorts 區加載函數
+    function loadOriginalShortsYear() {
+      const container = document.getElementById('ov-originalshorts-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (window._originalShortsVideos && window._originalShortsVideos.length > 0) {
+        window._originalShortsVideos.forEach(vid => {
+          const thumbUrl = vid.thumb || `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+          const title = esc(vid.title || '');
+          const date = vid.date || '';
+          container.innerHTML += `
+            <div class="ls-card" onclick="(function(){
+              document.getElementById('yt-modal-iframe').src='https://www.youtube.com/embed/${vid.id}?autoplay=1&rel=0';
+              document.getElementById('yt-modal-fallback').href='https://www.youtube.com/watch?v=${vid.id}';
+              document.getElementById('yt-modal-title').textContent='${title}';
+              document.getElementById('yt-modal').classList.add('open');
+              document.body.style.overflow='hidden';
+            })()">
+              <div class="ls-thumb-wrap">
+                <img class="ls-thumb" src="${thumbUrl}" alt="${title}" loading="lazy">
+                <div class="ls-play-overlay"><div class="ls-play-btn">▶</div></div>
+              </div>
+              <div class="ls-info">
+                <div class="ls-title">${title || '（無標題）'}</div>
+                ${date ? '<div class="ls-date">' + date + '</div>' : ''}
+              </div>
+            </div>`;
+        });
+      } else {
+        container.innerHTML = `<div class="ls-no-key"><span style="font-size:2.5rem">🎵</span><p>暫無原創曲Shorts</p></div>`;
+      }
+
+      // 有影片才顯示，否則隱藏
+      const section = document.getElementById('ov-originalshorts-section');
+      if (section) {
+        section.style.display = (window._originalShortsVideos && window._originalShortsVideos.length > 0) ? '' : 'none';
+      }
+    }
+
     // 【新增】Vlog 區加載函數
     function loadVlogYear() {
       const container = document.getElementById('ov-vlog-container');
@@ -3011,6 +3064,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const sections = {
         general: document.getElementById('ov-general-section'),
         shorts: document.getElementById('ov-shorts-section'),
+        originalshorts: document.getElementById('ov-originalshorts-section'),
         vlog: document.getElementById('ov-vlog-section'),
         ads: document.getElementById('ov-ads-section'),
         first: document.getElementById('ov-first-section'),
@@ -3027,6 +3081,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (section === 'ads') loadAdsYear();
       if (section === 'general') loadGeneralYear();
       if (section === 'vlog') loadVlogYear();
+      if (section === 'originalshorts') loadOriginalShortsYear();
       if (section === 'first') loadFirstYear();
       if (section === 'commerce') loadCommerceYear();
 
@@ -3051,6 +3106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const ovSections = {
         general: document.getElementById('ov-general-section'),
         shorts: document.getElementById('ov-shorts-section'),
+        originalshorts: document.getElementById('ov-originalshorts-section'),
         vlog: document.getElementById('ov-vlog-section'),
         ads: document.getElementById('ov-ads-section'),
         first: document.getElementById('ov-first-section'),
@@ -3059,13 +3115,14 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       Object.values(ovSections).forEach(el => { if (el) el.style.display = 'none'; });
 
-      // 加載一般影片、廣告、初配信、工商、Vlog
+      // 加載一般影片、廣告、初配信、工商、Vlog、原創曲Shorts
       console.log('📺 [Auto-init] Loading default sections for officialvideos tab...');
       loadGeneralYear();
       loadAdsYear();
       loadFirstYear();
       loadCommerceYear();
       loadVlogYear();
+      loadOriginalShortsYear();
       console.log('📺 [Auto-init] Default sections loaded');
 
       // 【重要】在加載函數執行後，再次隱藏所有非general的section
