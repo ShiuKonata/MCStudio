@@ -2476,13 +2476,11 @@ const vtubers = [
       {id:"9aG-anVkWic",title:"ニア／夏代孝明｜量產型猫飼步歌貳貳機 Fuka22【Cover】",date:"2024-08-04"},
       {id:"vFhf_-jyTzM",title:"晚餐歌／tuki.｜量產型猫飼步歌貳貳機 Fuka22【自彈自唱 Cover】",date:"2024-07-07"},
     ],
-    shorts: [
-      {id:"9PdcpJCs5dA",title:"【企劃】2025元宵詩謎！｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2025-02-17"},
-      {id:"McLgqzqofrQ",title:"【初配信🐱9/11 (三) 20:00】Robot Cat｜量產型猫飼步歌貳貳機【音雲漫步計畫】",date:"2024-08-21"},
-    ],
+    shorts: [],
     originals_manual: [],
     premiere: [
       {id:"ZZTY2ZRdXkw",title:"【官方初配信精華】貳貳超可愛教主登場！竟在初配信公然吸X！？｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2024-09-16"},
+      {id:"McLgqzqofrQ",title:"【初配信🐱9/11 (三) 20:00】Robot Cat｜量產型猫飼步歌貳貳機【音雲漫步計畫】",date:"2024-08-21"},
     ],
     general: [
       {id:"nbuwPPuXePo",title:"〖#直播存檔〗5/4勞動節24hr加班接力之轉盤之神贈與撒嬌叫老公雜談｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2025-05-05"},
@@ -2490,6 +2488,7 @@ const vtubers = [
       {id:"E0OlD8YiZlo",title:"〖#以心傳心〗逆光／孫燕姿 ft. @uchififi @cocor0_0303 @BarkBarkPomi ⁨｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2025-04-06"},
       {id:"Nr2cyRUw4xg",title:"〖#以心傳心〗Ref:rain／Aimer ft. @BarkBarkPomi @uchififi @cocor0_0303 ｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2025-04-05"},
       {id:"Go2e8wpE7ic",title:"〖#以心傳心〗Mela!／緑黄色社会 ft. @cocor0_0303 @BarkBarkPomi @uchififi ｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2025-04-04"},
+      {id:"9PdcpJCs5dA",title:"【企劃】2025元宵詩謎！｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2025-02-17"},
     ],
     vlog: [],
     commerce: [],
@@ -2835,9 +2834,7 @@ const vtubers = [
       {id:"Xz_BeaCUaZ4",title:"【歌ってみた】泡沫の夜／希洛萊昂 【Cover】",date:"2024-04-26"},
       {id:"P7rG4PrZIIY",title:"【歌ってみた】KING ／希洛萊昂 【Cover】",date:"2024-04-06"},
     ],
-    shorts: [
-      {id:"H_tYYxKvaCE",title:"【嘎吼】慶祝嘎嘎1歲生日！！對拿拿們的感謝小短片！【希洛萊昂】",date:"2024-07-19"},
-    ],
+    shorts: [],
     originals_manual: [],
     premiere: [],
     general: [
@@ -2852,6 +2849,7 @@ const vtubers = [
       {id:"LIyyZ71X6Cc",title:"【1106】戰神#2 亞洲家長管小孩範本的冒險之旅【希洛萊昂 Shiro Leon】",date:"2024-11-10"},
       {id:"MdApZ4y-Zeg",title:"【1030】戰神啟痛！這麼父慈子孝感人熱淚的遊戲怎麼現在才玩？【希洛萊昂 Shiro Leon】",date:"2024-11-10"},
       {id:"io4_KBAe7xs",title:"「【PalWorld】第二據點重建　讓帕魯王國持續偉大！【希洛萊昂 Shiro Leon】#萊覲見 #初見歓迎」",date:"2024-10-20"},
+      {id:"H_tYYxKvaCE",title:"【嘎吼】慶祝嘎嘎1歲生日！！對拿拿們的感謝小短片！【希洛萊昂】",date:"2024-07-19"},
       {id:"zpLvUYygMew",title:"【官方精華】瘋狂推廣IDOLiSH7 的那個男人【希洛萊昂】",date:"2024-06-17"},
       {id:"8oPSlLpht-Y",title:"【輕聲希語】哄睡故事－小王子全集　床邊故事無雜談廣告【希洛萊昂】",date:"2024-06-02"},
       {id:"UuCshPMGSbo",title:"【官方精華】國王？爸爸？用著最平穩的聲音說著最驚人的話？【希洛萊昂】",date:"2024-05-20"},
@@ -2956,18 +2954,17 @@ const vtubers = [
       {id:"WcoRVwhVOiU",title:"【宇宙散步 | DECO*27】Cover 🛸 百百波美 ⌇ BarkBarkPomi",date:"2024-08-03"},
       {id:"Rz5IHkSNgDM",title:"【唱 Show | Ado】Cover 🎙️ 百百波美 ⌇ BarkBarkPomi",date:"2024-07-06"},
     ],
-    shorts: [
-      {id:"1JqpDh4Na5M",title:"【上車舞】預見娛樂 超大型上車舞神降臨!!! 🛸💨 百百波美 ⌇ BarkBarkPomi",date:"2025-11-16"},
-      {id:"YIZQ1PyVA9A",title:"【原創曲試聽 | Original Song】この冷たい感情は。涙 💧 百百波美 ⌇ BarkBarkPomi",date:"2025-04-12"},
-      {id:"ZYVcoi-H6iM",title:"【初配信🛸 9/12(四) 20:00】𝗖𝗵𝗿𝗼𝗻𝗼𝗻𝗮𝘂𝘁｜百百波美 BarkBarkPomi【音雲漫步計畫】",date:"2024-08-21"},
-    ],
+    shorts: [],
     originals_manual: [
       {id:"IUT2J3KviC0",title:"【原創曲 | Original Song】狗勾米米大冒險【Official MV】 🛸💨 百百波美 ⌇ BarkBarkPomi",date:"2026-04-12"},
+      {id:"YIZQ1PyVA9A",title:"【原創曲試聽 | Original Song】この冷たい感情は。涙 💧 百百波美 ⌇ BarkBarkPomi",date:"2025-04-12"},
     ],
     premiere: [
       {id:"KqG04bHCFaU",title:"【官方初配信精華】展現大人魅力的偶像？這...這就是我要的清涼照！？ 🛸💨 百百波美 ⌇ BarkBarkPomi",date:"2024-09-19"},
+      {id:"ZYVcoi-H6iM",title:"【初配信🛸 9/12(四) 20:00】𝗖𝗵𝗿𝗼𝗻𝗼𝗻𝗮𝘂𝘁｜百百波美 BarkBarkPomi【音雲漫步計畫】",date:"2024-08-21"},
     ],
     general: [
+      {id:"1JqpDh4Na5M",title:"【上車舞】預見娛樂 超大型上車舞神降臨!!! 🛸💨 百百波美 ⌇ BarkBarkPomi",date:"2025-11-16"},
       {id:"Q9RQmpn9OVY",title:"【一週年特企】音量注意！六福村大冒險，像極了偶像團體的一天…⁉️【音雲漫步計畫】ft. @Nekokaifuka22 @BarkBarkPomi @cocor0_0303 @uchififi​",date:"2025-09-20"},
     ],
     vlog: [],
@@ -3066,12 +3063,11 @@ const vtubers = [
       {id:"UYNtP1kPjaM",title:"鬼ノ宴 𝗢𝗻𝗶 𝗡𝗼 𝗨𝘁𝗮𝗴𝗲 / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥",date:"2024-08-06"},
       {id:"m21ZGrJBYGs",title:"「僕は...」Boku wa / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥",date:"2024-07-09"},
     ],
-    shorts: [
-      {id:"qYx_Nlwkd0Y",title:"【初配信💜𝟵/𝟭𝟯 (五) 𝟮𝟬:𝟬𝟬】𝟵𝟵.𝟵% 𝗔𝗻𝗱𝗿𝗼𝗶𝗱｜心 𝗰𝗼𝗰𝗼𝗿𝟬【音雲漫步計畫】",date:"2024-08-21"},
-    ],
+    shorts: [],
     originals_manual: [],
     premiere: [
       {id:"LLhY9ChlhGc",title:"【💜初配信精華】全球首見 .ᐟ.ᐟ 99.9%仿生人💜｜心 𝗰𝗼𝗰𝗼𝗿𝟬",date:"2024-09-18"},
+      {id:"qYx_Nlwkd0Y",title:"【初配信💜𝟵/𝟭𝟯 (五) 𝟮𝟬:𝟬𝟬】𝟵𝟵.𝟵% 𝗔𝗻𝗱𝗿𝗼𝗶𝗱｜心 𝗰𝗼𝗰𝗼𝗿𝟬【音雲漫步計畫】",date:"2024-08-21"},
     ],
     general: [
       {id:"T3cKgabID2I",title:"【心cocor0精華】我才沒有這麼本 ಠ_ಠ｜OUTLAST 絕命精神病院 2｜心 𝗰𝗼𝗰𝗼𝗿𝟬",date:"2025-02-19"},
@@ -3178,12 +3174,11 @@ const vtubers = [
       {id:"Y4khLXkJ1W4",title:"【歌ってみた/Cover】心予報／Eve【羽芝扉扉 Uchi Fifi】",date:"2024-08-05"},
       {id:"OitEWgR4lPE",title:"【歌ってみた/Cover】人間不值得／黃詩扶【羽芝扉扉 Uchi Fifi】",date:"2024-07-08"},
     ],
-    shorts: [
-      {id:"5kNCGnPuaIA",title:"【初配信💕9/14(六) 20:00】Signal Fairy｜羽芝扉扉【音雲漫步計畫】",date:"2024-08-21"},
-    ],
+    shorts: [],
     originals_manual: [],
     premiere: [
       {id:"xCUlxTJh9nI",title:"【官方初配信精華】正宗白衣天使教你治療DD症♡同場佳映ASMR XXX福利?!【羽芝扉扉 Uchi Fifi】",date:"2024-09-19"},
+      {id:"5kNCGnPuaIA",title:"【初配信💕9/14(六) 20:00】Signal Fairy｜羽芝扉扉【音雲漫步計畫】",date:"2024-08-21"},
     ],
     general: [
       {id:"2iGHMeviPDk",title:"【ASMR中文音聲】那一夜的水族館之戀♡ ｜耳かき/水族音/囁き/親吻【羽芝扉扉 Uchi Fifi】",date:"2026-05-29"},
