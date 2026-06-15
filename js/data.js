@@ -1952,10 +1952,7 @@ const vtubers = [
       {id:"QSeCdKTh2Q8",title:"【COVER】PRETENDER | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-04-19"},
       {id:"I4wMbqNgUM0",title:"【中文填詞】【COVER】推遲償還　モラトリアム | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-04-02"},
     ],
-    shorts: [
-      {id:"wPIospFGtiE",title:"【預告】鯨諾宇宙公關店 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-11-09"},
-      {id:"nkXGcZgc0dU",title:"【Alluria】魔競娛樂首批VTuber男團宣傳Teaser｜@Kai_Alluria @Nyrfier @MukuruCh @shiro_leon",date:"2024-03-29"},
-    ],
+    shorts: [],
     originals_manual: [
       {id:"ULhzSR_wZ3I",title:"【Original】鯨落 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-12-24"},
       {id:"fheAwQNYosk",title:"【原創曲】鯨落 demo | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-05-08"},
@@ -1967,6 +1964,7 @@ const vtubers = [
     general: [
       {id:"xV1JZRTMu8I",title:"【遊戲精華】蛇骨婆｜武士刀與忍者刀｜無傷 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-02-20"},
       {id:"3xlDpBIDNf8",title:"Alluria 1.5 Anniversary: The Secret Agent  | Whalefall Route",date:"2025-11-09"},
+      {id:"wPIospFGtiE",title:"【預告】鯨諾宇宙公關店 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-11-09"},
       {id:"v-12akLei6s",title:"【情境影片】超煩男友Remake | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-06-14"},
       {id:"aAgw9dvEstg",title:"【惡搞影片】預見盃恐鬼症採訪特輯 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-05-16"},
       {id:"h73DzXZwrL0",title:"【2025春節劇場】帥哥年獸新春祝福 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-01-30"},
@@ -1977,6 +1975,7 @@ const vtubers = [
       {id:"NmGBLz1CUjI",title:"「【遊戲】抗拒帕魯，了解帕魯，成為帕魯，帕魯玩帕魯的第一集～ | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾」",date:"2024-08-13"},
       {id:"e2SYXTHXy3U",title:"【BGM】片尾Ending　餘波 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-05-14"},
       {id:"cNrjZpU7lQ0",title:"【Alluria】魔競娛樂首批VTuber男團宣傳PV｜@Kai_Alluria @MukuruCh @Nyrfier @shiro_leon",date:"2024-04-02"},
+      {id:"nkXGcZgc0dU",title:"【Alluria】魔競娛樂首批VTuber男團宣傳Teaser｜@Kai_Alluria @Nyrfier @MukuruCh @shiro_leon",date:"2024-03-29"},
     ],
     yuanxiao: [
       {id:"4UE3eVYRGrM",title:"【2026元宵詩謎】元宵詩謎之九 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-03-02"},
