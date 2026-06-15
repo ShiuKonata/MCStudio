@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="ov-section-bar">
             <button class="ov-section-btn active" data-ovsection="general">📺 一般影片</button>
             <button class="ov-section-btn" data-ovsection="shorts">🎬 Shorts</button>
-            <button class="ov-section-btn" data-ovsection="originalshorts">🎵 原創曲Shorts</button>
+            ${v.originalShorts && v.originalShorts.length > 0 ? '<button class="ov-section-btn" data-ovsection="originalshorts">🎵 原創曲Shorts</button>' : ''}
             <button class="ov-section-btn" data-ovsection="vlog">🎥 ${v.yuanxiaoLabel || 'Vlog'}</button>
             <button class="ov-section-btn" data-ovsection="ads">📢 廣告</button>
             <button class="ov-section-btn" data-ovsection="first">🎙️ 初配信</button>
