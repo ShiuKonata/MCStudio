@@ -2441,6 +2441,14 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             }
 
+            // 【STEP 3】懶貓子一般影片特殊規則（只限懶貓子）
+            if (v.generalKeywords && v.generalKeywords.length > 0) {
+              if (v.generalKeywords.some(kw => title.includes(kw))) {
+                isStep3 = true;
+                step3Type = 'generalKeyword';
+              }
+            }
+
             // 【自動分類 STEP 3】如果檢測到特殊規則
             if (isStep3) {
               const date = item.snippet.publishedAt ? item.snippet.publishedAt.slice(0,10) : '';
@@ -2453,6 +2461,18 @@ document.addEventListener('DOMContentLoaded', () => {
                   window._vlogVideos.push({ id: vid, title: title, date: date, thumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg` });
                   existingVideoIds.add(vid);
                   step3Candidates.push({ id: vid, title: title, date: date, type: 'yuanxiao', action: '【STEP 3】鯨諾元宵企劃 - 需添加至 data.js', duration: 0 });
+                }
+                filteredCount++;
+                continue;
+              }
+
+              // 懶貓子一般影片特殊規則處理
+              if (step3Type === 'generalKeyword') {
+                if (!alreadyInDataJs) {
+                  v.videos.general = v.videos.general || [];
+                  v.videos.general.push({ id: vid, title: title, date: date });
+                  existingVideoIds.add(vid);
+                  step3Candidates.push({ id: vid, title: title, date: date, type: 'generalKeyword', action: '【STEP 3】懶貓子一般影片 - 需添加至 data.js', duration: 0 });
                 }
                 filteredCount++;
                 continue;
