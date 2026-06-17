@@ -499,6 +499,7 @@ const vtubers = [
     ],
 
     commerce: [
+      {id:"f0c7gzeTYtg",title:"RUMI怪盜出動！帶你搶先進入《女神異聞錄：夜幕魅影》異世界🖤｜Rumi/懶貓子",date:"2024-03-25"},
       {id:"mGscJY290t4",title:"【崩壞：星穹鐵道】夢裡什麼都有~匹諾康尼真的太有趣！可是Rumi被徹底無視！｜Rumi/懶貓子",date:"2024-02-13"},
       {id:"zYFYR2MN8AM",title:"【女神異聞錄：夜幕魅影】RUMI怪盜來挑戰P5X大BOSS｜Rumi/懶貓子",date:"2024-02-06"},
       {id:"HhNlYsU3miA",title:"【戀與深空】依存注意⚠️讓Ｒｕｍｉ帶你認識超現實戀愛遊戲！內含遊戲小技巧✨｜Rumi/懶貓子",date:"2024-01-31"},
