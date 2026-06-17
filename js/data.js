@@ -499,6 +499,17 @@ const vtubers = [
     ],
 
     commerce: [
+      {id:"mGscJY290t4",title:"【崩壞：星穹鐵道】夢裡什麼都有~匹諾康尼真的太有趣！可是Rumi被徹底無視！｜Rumi/懶貓子",date:"2024-02-13"},
+      {id:"zYFYR2MN8AM",title:"【女神異聞錄：夜幕魅影】RUMI怪盜來挑戰P5X大BOSS｜Rumi/懶貓子",date:"2024-02-06"},
+      {id:"HhNlYsU3miA",title:"【戀與深空】依存注意⚠️讓Ｒｕｍｉ帶你認識超現實戀愛遊戲！內含遊戲小技巧✨｜Rumi/懶貓子",date:"2024-01-31"},
+      {id:"WcTBkIK4tRo",title:"【原神】抽娜維婭差點又瘋了一隻貓，謝謝Rumily以火力支援軍備！｜Rumi/懶貓子",date:"2023-12-28"},
+      {id:"xa38LgLICvo",title:"重返未來：1999｜ㄌㄌ警報，我的聊天室太興奮了吧！！｜Rumi/懶貓子",date:"2023-10-10"},
+      {id:"bRd962ZwdqA",title:"塵白禁域｜貓貓臉黑黑？ 為什麼開大的時候敵人都不見了！？｜Rumi/懶貓子",date:"2023-08-09"},
+      {id:"KD1VwPDCVjw",title:"《塵白禁域》我...我只是手滑啦？Rumi偷偷抽卡，結果BO鼠說了什麼，讓Rumi直接傻眼？？｜Rumi/懶貓子",date:"2023-06-16"},
+      {id:"0YdU-eUWXCs",title:"幻塔｜ 噢拉噢拉噢拉！看我的Ｎｅｋｏ重拳！Ｒｕｍｉ真的在實況中做ＯＯ了！！ ｜Rumi/懶貓子",date:"2023-01-04"},
+      {id:"mrr7kM6DSPw",title:"幻塔｜課金是免費的！！為了新的晚禮服又瘋了一隻貓！？｜Rumi/懶貓子",date:"2022-10-06"},
+      {id:"fJNeykHBO0U",title:"幻塔｜潛入BO鼠的帳號，用BO鼠的錢錢，挑戰80抽內送觀眾禮物！｜人工島版本更新｜Rumi/懶貓子",date:"2022-09-28"},
+      {id:"-3CU5nBXUww",title:"少女迴戰 ｜Rumi初體驗! 美少女貼貼就好香阿! ｜Rumi/懶貓子",date:"2022-05-07"},
     ],
 
     memberVideos: [
