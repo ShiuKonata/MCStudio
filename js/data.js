@@ -1146,7 +1146,7 @@ const vtubers = [
     nameEn: "Kiriko",
     group: "預見娛樂",
     generation: "二期生",
-    avatar: "https://pbs.twimg.com/profile_images/2064722256811655168/t1q77w95.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2066207105552707584/nMvleidr_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1676559936602644480/1750936798/1500x500",
     tagline: "",
     taglines: [
