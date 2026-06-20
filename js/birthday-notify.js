@@ -127,7 +127,7 @@
         if (p.life <= 0) particles.splice(i, 1);
       }
 
-      if (rockets.length || particles.length) raf = requestAnimationFrame(tick);
+      if (rockets.length || particles.length || launches === 0) raf = requestAnimationFrame(tick);
       else ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
