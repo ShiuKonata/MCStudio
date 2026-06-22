@@ -51,8 +51,40 @@
     return n.getMonth() + 1 === bd.month && n.getDate() === bd.day;
   }
 
+  // ── 大蛋糕登場 ─────────────────────────────────────────────────
+  function showBigCake(overlay) {
+    const wrap = document.createElement('div');
+    wrap.id = '_mcBdayCakeFinal';
+    Object.assign(wrap.style, {
+      position:'fixed', inset:'0', zIndex:'100000',
+      display:'flex', flexDirection:'column',
+      alignItems:'center', justifyContent:'center',
+      pointerEvents:'none'
+    });
+    wrap.innerHTML = `
+      <style>
+        @keyframes _mcCakePopIn {
+          0%   { transform:scale(0) rotate(-12deg); opacity:0; }
+          60%  { transform:scale(1.25) rotate(6deg); opacity:1; }
+          80%  { transform:scale(0.93) rotate(-3deg); }
+          100% { transform:scale(1) rotate(0deg); opacity:1; }
+        }
+        @keyframes _mcCakeFadeOut { to { opacity:0; transform:scale(0.85); } }
+        #_mcBdayCakeBigEmoji { animation: _mcCakePopIn 0.75s cubic-bezier(0.34,1.56,0.64,1) both; }
+      </style>
+      <div id="_mcBdayCakeBigEmoji" style="text-align:center">
+        <div style="font-size:9rem;line-height:1;filter:drop-shadow(0 0 40px rgba(254,202,87,0.9)) drop-shadow(0 8px 20px rgba(0,0,0,0.5))">🎂</div>
+        <div style="color:#feca57;font-size:2rem;font-weight:900;margin-top:0.8rem;text-shadow:0 2px 16px rgba(0,0,0,0.6);letter-spacing:0.05em">生日快樂！🎉</div>
+      </div>`;
+    overlay.appendChild(wrap);
+    setTimeout(() => {
+      wrap.style.animation = '_mcCakeFadeOut 0.7s ease forwards';
+      setTimeout(() => wrap.remove(), 700);
+    }, 3000);
+  }
+
   // ── 煙火動畫 ───────────────────────────────────────────────────
-  function launchFireworks(canvas) {
+  function launchFireworks(canvas, onComplete) {
     const ctx = canvas.getContext('2d');
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -128,7 +160,7 @@
       }
 
       if (rockets.length || particles.length || launches < MAX) raf = requestAnimationFrame(tick);
-      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      else { ctx.clearRect(0, 0, canvas.width, canvas.height); if (onComplete) onComplete(); }
     }
 
     setTimeout(fire, 200);
@@ -227,7 +259,7 @@
 
     document.body.appendChild(overlay);
 
-    launchFireworks(overlay.querySelector('#_mcBdayCanvas'));
+    launchFireworks(overlay.querySelector('#_mcBdayCanvas'), () => showBigCake(overlay));
 
     function close() {
       overlay.style.opacity = '0';
