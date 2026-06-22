@@ -1328,7 +1328,17 @@ const vtubers = [
       {id:"5vyjoRe5-2c",title:"ㅍ_ㅍ (上) / 瓦西瓦瓦 Vaswawa",date:"2023-11-16"},
       {id:"ukILBS9CEl8",title:"《MeloNyx》魔競娛樂新人VTuber團體宣傳PV @SinnieAris @r1ri999 @WakasaIto @ekorru @ShurakuKiriko @EnominyaAndiCh",date:"2023-10-31"}
     ],
-    shorts: [],
+    shorts: [
+      {id:"1yO0hNoDMjc",title:"你發瘋啦!!! #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼 #",date:"2026-06-22"},
+      {id:"evtgBCzktig",title:""拔"北 #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼 #",date:"2026-06-08"},
+      {id:"VzcS1SJCAbU",title:"沒錢請代跳老師只好自己... PLATONIC GIRL #星鳴rasonanceofstars #踊ってみた #dance #3d  #瓦西瓦瓦 #vaswawa #vtuber",date:"2026-05-25"},
+      {id:"7PFlzEx2ytQ",title:"國!士!無!雙! #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼",date:"2026-05-18"},
+      {id:"RnnIg6EBAa0",title:"真的沒有請代跳!! プロミスザスター #星鳴rasonanceofstars #踊ってみた #dance #3d  #瓦西瓦瓦 #vaswawa #vtuber",date:"2026-05-04"},
+      {id:"LxxHJ5K0rtk",title:"��再看哪裡!? #3d  #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼",date:"2026-04-22"},
+      {id:"kX9fXx9XDlc",title:"行走的O頭 #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼",date:"2026-04-20"},
+      {id:"A9Vg5U5FE_k",title:"3D化當然是要!!! #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼",date:"2026-04-15"},
+      {id:"nr0W_KEswzI",title:"同竿共苦 #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼",date:"2026-04-13"},
+      {id:"rYMGMKYo_X8",title:"本当に申し訳ございません！！！ #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼",date:"2026-04-08"},],
     originals_manual: [
       {id:"T5p8Unu-iIQ",title:"【星鳴 Resonance Of Stars】3D演出精華 愛情的騙子我問你 ft.二期生MeloNyx 瓦西瓦瓦  Vaswawa Cover 歌ってみた",date:"2026-06-08"},
       {id:"JrplUDEpkPY",title:"【ヨルシカ】千鳥 永德路在呼喚我【瓦西瓦瓦 / Vaswawa Cover 歌ってみた】",date:"2026-06-01"},
@@ -1506,7 +1516,17 @@ const vtubers = [
       {id:"PIIxw5XwdNg",title:"【歌ってみた】Guiano - 風🌀希妮·亞里絲 / SinnieAris",date:"2023-11-26"},
       {id:"cyiD0E-WZeA",title:"✧ダーリン / cover by 希妮·亞里絲🤍SinnieAris✨",date:"2023-11-02"}
     ],
-    shorts: [],
+    shorts: [
+      {id:"nQIUhvyPGMI",title:"✧0代跳！我自己跳了ムーンライト！ ✧希妮·亞里絲🤍SinnieAris✨ #踊ってみた #星街すいせい",date:"2026-06-12"},
+      {id:"EWxCg8QlSj4",title:"✧欣慰的可露麻麻✧希妮·亞里絲🤍SinnieAris✨",date:"2026-06-10"},
+      {id:"GfRvF6BUAw8",title:"✧同人女愛的是✧希妮·亞里絲🤍SinnieAris✨",date:"2026-06-09"},
+      {id:"O4RLcvx3Eiw",title:"✧希貳股金價好吃✧希妮·亞里絲🤍SinnieAris✨",date:"2026-06-08"},
+      {id:"D2biScBArZ8",title:"✧這裡是群聊！不是9@y俱樂部！✧希妮·亞里絲🤍SinnieAris✨",date:"2026-06-07"},
+      {id:"Wi5VGTTEJeg",title:"✧涅��菲在到處亂摸！✧希妮·亞里絲🤍SinnieAris✨",date:"2026-06-06"},
+      {id:"ygLZHbDqX6o",title:"✧你跟我說這是好麻吉？✧希妮·亞里絲🤍SinnieAris✨",date:"2026-06-05"},
+      {id:"ADghf2BDXF0",title:"【5/29 3D live Ad infinitum】今鋪大檸樂！ ||希妮·亞里絲🤍SinnieAris✨",date:"2026-05-26"},
+      {id:"VJJZWz7hS9Q",title:"【5/29 3D live Ad infinitum】#目撃テト31世 ||希妮·亞里絲🤍SinnieAris✨",date:"2026-05-22"},
+      {id:"UFmMGEF7aZg",title:"【5/29 3D live Ad infinitum】✧如果有人開車途中想切你的��樂✧希妮·亞里絲🤍SinnieAris✨",date:"2026-05-15"},],
     originals_manual: [],
     premiere: [],
     general: [],
@@ -1615,6 +1635,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"xvN0HTvoqOQ",title:"【Cover】ビビデバ/星街彗星 【結月莉莉奈】 #vtuber #shorts #dancecover",date:"2026-06-17"},
       {id:"RTbFm_V7JAo",title:"【愚人節COVER】草莓味/桂香GuiXiang 甜自己一把、放自己一馬🤘｜結月莉莉奈Yuzukiririna",date:"2026-04-01"},
       {id:"C4NfTAD_nOY",title:"【明日方舟：終末地】WE ARE EMPIRE/STARSET｜結月莉莉奈Yuzukiririna",date:"2026-02-08"},
       {id:"v-tP4oF6n20",title:"【二周年紀念cover】Dadi/KIRE ft. Vera Chai｜結月莉莉奈Yuzukiririna ft. @煌Kirali",date:"2025-12-13"},
@@ -1634,7 +1655,8 @@ const vtubers = [
       {id:"0JyY0Pbsbsw",title:"噓...這是秘密唷...(ᐢ⸝⸝˙Ⱉ˙⸝⸝)－結月莉莉奈 Ririna🎀",date:"2023-11-14"},
       {id:"TrKOXO9OFDQ",title:"🎤白月光與硃砂痣-大籽｜結月莉莉奈🎀Ririna cover.",date:"2023-11-03"}
     ],
-    shorts: [],
+    shorts: [
+      {id:"BYpbGNO5hiY",title:"【防暈手環���帶了就不癢了 真的！ #vtuber #預見娛樂 #結月莉莉奈 #shorts #short",date:"2026-04-08"},],
     originals_manual: [],
     premiere: [],
     general: [],
@@ -2149,7 +2171,9 @@ const vtubers = [
       {id:"symqMoTU2-0",title:"Overdose / なとり - 魁 Kai｜【Cover】",date:"2024-10-28"},
       {id:"afnmPQCtNhs",title:"マフィア(Mafia) - 魁 Kai｜【Cover】",date:"2024-04-05"},
     ],
-    shorts: [],
+    shorts: [
+      {id:"k_KJ3_QRPp4",title:"4/26 魅寶將穿上新的衣服跟大家見面",date:"2026-04-20"},
+      {id:"zc0bZQ-XFW4",title:"5MA之歌 - 做人真的不要亂立旗",date:"2026-04-01"},],
     originals_manual: [],
     premiere: [
       {id:"fEHhlj-6re0",title:"【魁Kai精華】現場模仿烏薩奇！？究竟是霸氣擔當還是中二屁孩？【5/10 - 初配信】",date:"2024-05-16"},
