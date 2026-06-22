@@ -1330,7 +1330,7 @@ const vtubers = [
     ],
     shorts: [
       {id:"1yO0hNoDMjc",title:"你發瘋啦!!! #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼 #",date:"2026-06-22"},
-      {id:"evtgBCzktig",title:""拔"北 #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼 #",date:"2026-06-08"},
+      {id:"evtgBCzktig",title:"\"拔\"北 #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼 #",date:"2026-06-08"},
       {id:"VzcS1SJCAbU",title:"沒錢請代跳老師只好自己... PLATONIC GIRL #星鳴rasonanceofstars #踊ってみた #dance #3d  #瓦西瓦瓦 #vaswawa #vtuber",date:"2026-05-25"},
       {id:"7PFlzEx2ytQ",title:"國!士!無!雙! #瓦西瓦瓦 #vaswawa #vtuber #雜談 #雜談之鬼",date:"2026-05-18"},
       {id:"RnnIg6EBAa0",title:"真的沒有請代跳!! プロミスザスター #星鳴rasonanceofstars #踊ってみた #dance #3d  #瓦西瓦瓦 #vaswawa #vtuber",date:"2026-05-04"},
