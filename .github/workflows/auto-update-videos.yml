@@ -459,10 +459,16 @@ jobs:
 
             console.log(`\n📊 總計新增: ${updateCount} 部影片\n`);
 
-            // 如果有更新，寫回data.js並commit
+            // 如果有更新，語法驗證後寫回data.js並commit
             if (updateCount > 0) {
+              try {
+                new (require('vm').Script)(dataContent);
+              } catch (e) {
+                console.log('❌ data.js 語法驗證失敗，中止寫入: ' + e.message);
+                process.exit(1);
+              }
               fs.writeFileSync(dataPath, dataContent, 'utf8');
-              console.log('✅ data.js 已更新');
+              console.log('✅ data.js 語法驗證通過並已更新');
               process.exit(0);
             } else {
               console.log('⚠️ 沒有新影片需要更新');
@@ -472,7 +478,7 @@ jobs:
           SCRIPT
 
       - name: 📝 Commit and push
-        if: always()
+        if: success()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
