@@ -419,9 +419,10 @@ jobs:
                 // covers + originals → 插入 videos: [...] 陣列開頭
                 const newVideoItems = [...newVideos.covers, ...newVideos.originals];
                 if (newVideoItems.length > 0) {
-                  const entries = newVideoItems.map(v =>
-                    `      {id:"${v.id}",title:"${v.title}",date:"${v.date}"}`
-                  ).join(',\n') + ',';
+                  const entries = newVideoItems.map(v => {
+                    const safeTitle = v.title.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\r?\n/g, ' ');
+                    return `      {id:"${v.id}",title:"${safeTitle}",date:"${v.date}"}`;
+                  }).join(',\n') + ',';
                   const pat = new RegExp(`(id:\\s*["']${escaped}["'][\\s\\S]*?videos:\\s*\\[)`);
                   if (pat.test(dataContent)) {
                     dataContent = dataContent.replace(pat, `$1\n${entries}`);
@@ -431,9 +432,10 @@ jobs:
 
                 // shorts → 插入 shorts: [...] 陣列開頭
                 if (newVideos.shorts.length > 0) {
-                  const entries = newVideos.shorts.map(v =>
-                    `      {id:"${v.id}",title:"${v.title}",date:"${v.date}"}`
-                  ).join(',\n') + ',';
+                  const entries = newVideos.shorts.map(v => {
+                    const safeTitle = v.title.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\r?\n/g, ' ');
+                    return `      {id:"${v.id}",title:"${safeTitle}",date:"${v.date}"}`;
+                  }).join(',\n') + ',';
                   const pat = new RegExp(`(id:\\s*["']${escaped}["'][\\s\\S]*?shorts:\\s*\\[)`);
                   if (pat.test(dataContent)) {
                     dataContent = dataContent.replace(pat, `$1\n${entries}`);
