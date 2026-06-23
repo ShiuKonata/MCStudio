@@ -41,6 +41,11 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"pNYUnZmD0Kg",title:"【Cover】mosi mosi? / 楽音💧詩雨蔻達 #弾き語り #歌ってみた",date:"2026-05-28"},
+      {id:"V6EGDGnCKUw",title:"【Cover】メロウ / 須田景凪💧詩雨蔻達 #弾き語り #歌ってみた",date:"2026-04-18"},
+      {id:"66XFn8Gd7hM",title:"【Cover】春泥棒 / ヨルシカ 💧詩雨蔻達 #弾き語り #歌ってみた",date:"2026-04-11"},
+      {id:"G013vVCI0Og",title:"【Cover】千鳥 / ヨルシカ 💧詩雨蔻達 #弾き語り #歌ってみた",date:"2026-03-21"},
+      {id:"4FtuQiEefSo",title:"【Cover】月が綺麗ねと言われたい！／柿崎ユウタ💧詩雨蔻達#弾き語り #歌ってみた",date:"2026-03-14"},
       { id: "69zB23Pnons", title: "【Cover】『違国日記』OP曲－ソナーレ/TOMOO💧詩雨蔻達【cover】", date: "2026-06-06" },
       { id: "pNYUnZmD0Kg", title: "【Cover】mosi mosi? / 楽音💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-05-28" },
       { id: "V6EGDGnCKUw", title: "【Cover】メロウ / 須田景凪💧詩雨蔻達 #弾き語り #歌ってみた",                   date: "2026-04-18" },
@@ -100,6 +105,7 @@ const vtubers = [
 
     // ── Shorts（<61秒的短影片）──────────────────
     shorts: [
+      {id:"nPQJzBkel0g",title:"人生中最絕望的事💧詩雨蔻達",date:"2026-06-02"},
       { id: "Ej2tkEtePy8", title: "【Cover】comethru /Jeremy Zucker 💧詩雨蔻達【自彈自唱】",                      date: "2023-08-29", isShorts: true },
       { id: "cRhutR0qGGY", title: "【聖誕佳音XXV/DAY19】聖誕老公公竟是一場騙局??💧詩雨蔻達", date: "2023-12-19", isShorts: true },
     ],
@@ -446,6 +452,8 @@ const vtubers = [
     ],
 
     shorts: [
+      {id:"1RMnxlGaExM",title:"懶貓子的正確道歉方式🙇‍♀️｜Rumi/懶貓子",date:"2026-04-29"},
+      {id:"1y778o-SAFM",title:"就說了是乖乖＞＿＜｜Rumi/懶貓子",date:"2026-02-17"},
     ],
 
     originals_manual: [
@@ -629,6 +637,20 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"O3Jdj78bzF0",title:"【Cover】🎵 老公天下第一 - 帕蘿妮 Paroniie 【COVER】",date:"2026-06-20"},
+      {id:"gdPgrk5_RmQ",title:"【Cover】🎵 老公天下第一 ♦︎ 帕蘿妮 Paroniie #COVER.",date:"2026-06-09"},
+      {id:"Da2ssmX8ZjQ",title:"【Cover】🎵 要愛愛 - 帕蘿妮 Paroniie 【COVER】",date:"2026-06-06"},
+      {id:"M7UeZmDZ0CQ",title:"【Cover】🎵 要愛��� ♦︎ 帕蘿妮 Paroniie #COVER.",date:"2026-05-27"},
+      {id:"mnAkfuAZOUE",title:"【Cover】🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】",date:"2026-04-30"},
+      {id:"U4ecF4GNw1I",title:"【Cover】🎵 Bunny Girl ♦︎ 帕蘿妮 Paroniie #COVER.",date:"2026-04-25"},
+      {id:"4RTxc8acTlY",title:"【Cover】🎵 Wake Up! - 帕蘿妮 Paroniie 【COVER】",date:"2026-03-19"},
+      {id:"vbLvEFNkHGA",title:"【Cover】🎵 Wake Up ♦︎ 帕蘿妮 #cover.",date:"2026-03-13"},
+      {id:"VpWhLVF0YKc",title:"【Cover】威風堂々🎵 帕蘿妮 Paroniie、AoiHinamori ♦︎ #cover #shorts.",date:"2026-03-12"},
+      {id:"Ck5w-tXkfRQ",title:"【Cover】🎵 想把哥哥追 - 帕蘿妮 Paroniie 【COVER】",date:"2026-03-07"},
+      {id:"uw57vZqvj7w",title:"【Cover】想把哥哥追 ♦︎ 帕蘿妮 #cover.",date:"2026-03-02"},
+      {id:"Aud3U7eIn8Y",title:"【Cover】🎵 劍紙三國 - 帕蘿妮 Paroniie 【COVER】 #劍紙三國",date:"2026-02-19"},
+      {id:"ZnmKBtrog7A",title:"【Cover】🎵 討厭你 I hate you - 帕蘿妮 Paroniie 【COVER】",date:"2026-01-07"},
+      {id:"Lg9nyNL-AD0",title:"【Original】🎵 星願 - 帕蘿妮 Paroniie 【Original】",date:"2026-02-24"},
       { id: "Da2ssmX8ZjQ", title: "🎵 要愛愛 - 帕蘿妮 Paroniie 【COVER】", date: "2026-06-06" },
       { id: "jltULZpkneQ", title: "【帕蘿妮精華】萬物皆可蟹x讓人著迷的Roguelike新遊戲x我找到了超強進化路線...嗎?!", date: "2026-05-21" },
       { id: "mnAkfuAZOUE", title: "🎵 Bunny Girl - 帕蘿妮 Paroniie 【COVER】", date: "2026-04-30" },
@@ -691,7 +713,21 @@ const vtubers = [
       { id: "YGBbknckFV0", title: "👻 🎵 ghost choir｜帕蘿妮💧Paroniie cover.", date: "2023-01-29" },
       { id: "L45AX6zldZY", title: "帕蘿妮 🧪 初配信預告嗷～我想要加一點這個！再加一點那個！🎆", date: "2023-01-17" }
     ],
-    shorts: [],
+    shorts: [
+      {id:"kQUtRi1x4r0",title:"我的天 這個貓我想摸想摸想摸 ♦︎ #火炬之光 #shorts.",date:"2026-01-15"},
+      {id:"oX-JcQHIrCg",title:"虛空我老熟了！ ♦︎ #apex #shorts.",date:"2025-11-08"},
+      {id:"68-a4gyrUws",title:"泡泡車好安全...嗎?! ♦︎ #apex #shorts.",date:"2025-11-02"},
+      {id:"ooksqhFKIgA",title:"我是變幻我有放大我也會跳舞 ♦︎ #apex #shorts.",date:"2025-11-01"},
+      {id:"5nRCpk2xhws",title:"帕蘿妮開車一定... ♦︎ #APEX #shorts.",date:"2025-10-26"},
+      {id:"XCRoRHareUc",title:"歐買溝斗這是EVA-0 ♦︎ #APEX #shorts.",date:"2025-10-25"},
+      {id:"GSkTTqCExAs",title:"我只是想強化但我怎麼奶油手啦 ♦︎ #APEX #shorts.",date:"2025-10-24"},
+      {id:"RX33UFR5Qbc",title:"我是帥氣...帥一半的腳滑帕蘿妮QQ ♦︎ #REPO #short.",date:"2025-10-14"},
+      {id:"urb9-CkkiWk",title:"前人的智慧，真的要聽嗎？！ ♦︎ #eldenring",date:"2025-10-10"},
+      {id:"zLhSMGi_U90",title:"我也拿過那個酷酷的擊殺王了 ♦︎ #APEX #shorts.",date:"2025-10-05"},
+      {id:"VQpYzOW4Epg",title:"這裡的一鍵三連 ♦︎ #shorts.",date:"2025-10-04"},
+      {id:"eVnlKiyb9_Y",title:"喝酒誤事 ♦︎ #shorts.",date:"2025-09-30"},
+      {id:"ZEodtgXwVhI",title:"如何氣死老父親 ♦︎ #APEX #shorts.",date:"2025-09-29"},
+      {id:"AM2LlfyiNfI",title:"改完靈敏度之後非常好跟槍 ♦︎ #APEX",date:"2025-09-28"},],
     originals_manual: [],
     premiere: [],
     general: [],
@@ -801,6 +837,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"VDj-McWV0JM",title:"【Cover】刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】",date:"2025-04-27"},
       { id: "IClW1jRLoM0", title: "【神無月鹿比🦌｜官方精華】Starsavior裡有這麼多UU是可以的嗎！居然還爆衣！！", date: "2026-06-05" },
       { id: "cKfsU7GXpaQ", title: "グレイ - sajou no hana／神無月鹿比【復甦島3 鹿清酒殺青Cover】", date: "2026-05-21" },
       { id: "_O4A4wOId40", title: "【神無月鹿比🦌｜官方精華】在明日方舟：終末地裡尋找咕咕嘎嘎！清波寨怎麼哪裡都好看", date: "2026-03-19" },
@@ -840,7 +877,40 @@ const vtubers = [
       { id: "dVEPJXnfGoQ", title: "ド屑 - なきそ／神無月鹿比【Cover】", date: "2023-01-20" },
       { id: "MPZwklQ0YfM", title: "神無月鹿比🦌 玩著遊戲唱著歌突然就初配信預告了", date: "2023-01-18" }
     ],
-    shorts: [],
+    shorts: [
+      {id:"wIhLxCHLJbU",title:"【神無月鹿比🦌｜官方精華】伊瑟SS4全新賽季超多好康！超鏈者們準備回歸啦～！",date:"2026-04-06"},
+      {id:"3BjMFLT4m4w",title:"【神無月鹿比🦌｜官方精華】真的不是我丟下去的我一直在努力往上拉你們仔細看",date:"2026-02-25"},
+      {id:"54ZBljwgLbI",title:"【神無月鹿比🦌｜官方精華】這裡的人講話都好直白",date:"2026-02-22"},
+      {id:"-Rhc1L_wtWY",title:"【神無月鹿比🦌｜官方精華】我要在蛋仔派對裡種出超大竹子",date:"2026-02-19"},
+      {id:"jWDRDhXCFJ4",title:"【神無月鹿比🦌｜官方精華】不要每次隨便講都隨便信好不好",date:"2026-02-18"},
+      {id:"Qa0edhenIrU",title:"【神無月鹿比🦌｜官方精華】以上言論不代表本台立場",date:"2026-02-15"},
+      {id:"qlCzf-Qs2Is",title:"【神無月鹿比🦌｜官方精華】嘴砲ㄉKING IS ME",date:"2026-02-11"},
+      {id:"ofEKw52WbZQ",title:"【神無月鹿比🦌｜官方精華】YT是我的根我的本我愛YT我愛圖奇",date:"2026-02-08"},
+      {id:"5YnSDsXahHM",title:"【神無月鹿比🦌｜官方精華】聊天室真的好老喔",date:"2026-02-04"},
+      {id:"6frPCYPl840",title:"【神無月鹿比🦌｜官方精華】在主打慢經營遊戲裡搞高效海釣團是否搞錯了什麼",date:"2026-02-01"},
+      {id:"zvieEmaMPd8",title:"【神無月鹿比🦌｜官方精華】我是大森元貴的狗Dogege",date:"2026-01-28"},
+      {id:"OHrkybH3JlY",title:"【神無月鹿比🦌｜官方精華】按錯要說狗咩咩",date:"2026-01-25"},
+      {id:"L9rnGZ3BJB4",title:"【神無月鹿比🦌｜官方精華】這個機器人講話有個FLOW",date:"2025-12-24"},
+      {id:"WXVEQTH2Clc",title:"【神無月鹿比🦌｜官方精華】哪一個是羊",date:"2025-12-16"},
+      {id:"BhwuIXM3lDU",title:"【神無月鹿比🦌｜官方精華】為什麼隨便亂配音也可以剛好對上啦",date:"2025-12-10"},
+      {id:"lox-MsOcw5Y",title:"【神無月鹿比🦌｜官方精華】我吹著冷氣吃著炸雞看大家汗流浹背",date:"2025-12-03"},
+      {id:"4xRZzme41UQ",title:"【神無月鹿比🦌｜官方精華】為什麼他唸可以我就不行",date:"2025-11-26"},
+      {id:"Qk1E9nkQf50",title:"【神無月鹿比🦌｜官方精華】唸咒語就好好唸不要唸這些奇奇怪怪的",date:"2025-11-19"},
+      {id:"Fb9Xi6fWsz8",title:"【神無月鹿比🦌｜官方精華】為啥我的二選一長這樣",date:"2025-11-12"},
+      {id:"xpCYl2X5x0A",title:"【神無月鹿比🦌｜官方精華】這就是南部物價嗎…",date:"2025-11-05"},
+      {id:"TlBWMNQ9O08",title:"【神無月鹿比🦌｜官方精華】有這等運氣為什麼我不去刮刮刮樂",date:"2025-08-06"},
+      {id:"qId2NDl326Y",title:"【神無月鹿比🦌｜官方精華】要營業我還是可以營業的好嗎",date:"2025-08-03"},
+      {id:"Ui_KIwatquA",title:"【神無月鹿比🦌｜官方精華】誰！誰是賠錢貨！",date:"2025-07-30"},
+      {id:"ZH1NfjTmwck",title:"【神無月鹿比🦌｜官方精華】男性飾品大多都會選銀色（但鹿餅好像不是男性）",date:"2025-07-23"},
+      {id:"zVK1pZzsA5o",title:"【神無月鹿比🦌｜官方精華】這個哏到底可以消費幾次",date:"2025-07-20"},
+      {id:"HLcix3B_VMc",title:"【神無月鹿比🦌｜官方精華】還是這裡轉型去當房仲了",date:"2025-07-16"},
+      {id:"chde0GyENxs",title:"【神無月鹿比🦌｜官方精華】從小感受偷吃的背德感",date:"2025-07-09"},
+      {id:"U9QxXDKtqLY",title:"【神無月鹿比🦌｜官方精華】台灣地理知識受到考驗",date:"2025-03-30"},
+      {id:"redNZQ2js8c",title:"【神無月鹿比🦌｜官方精華】跨年要看買狗的話要從幾點開始看",date:"2025-03-29"},
+      {id:"RkSPBySeM8s",title:"【神無月鹿比🦌｜官方精華】第一次在戀愛遊戲裡看到超級直球女主",date:"2025-03-28"},
+      {id:"p2kbCsg8MQ8",title:"【神無月鹿比🦌｜官方精華】這個幻想三國誌玩起來怎麼怪怪的",date:"2025-03-27"},
+      {id:"V-3d3C4wrNA",title:"【神無月鹿比🦌｜官方精華】他們說我是會做白日夢的年輕人",date:"2025-02-09"},
+      {id:"HMAjthLT7Ss",title:"【神無月鹿比🦌｜官方精華】當鹿鹿開始看起撒嬌教學幹片",date:"2025-01-19"},],
     originals_manual: [
       { id: "cKfsU7GXpaQ", title: "【Cover】グレイ - sajou no hana／神無月鹿比【復甦島3 鹿清酒殺青Cover】", date: "2026-05-21" },
       { id: "NSyHg5juxUM", title: "【Cover】YY - 23.exe／神無月鹿比 × ‪熙歌 @CygnusXDFP × ‪哈瓜 @Jongie × ‪REN @Ren0809 × KSP @KSPKSP【Cover】", date: "2025-06-30" },
@@ -952,7 +1022,12 @@ const vtubers = [
       { id: "6WoKAIlx3eE", title: "姬城小故事 — — — 第一話 【啾啾！啾～】", date: "2023-01-30" },
       { id: "Kw27GNWjuDo", title: "🔖姬城三千華💼   初配信預告 -- 誒？！要開始上課了？！？？！", date: "2023-01-19" }
     ],
-    shorts: [],
+    shorts: [
+      {id:"05e-z13JQNA",title:"【姬城三千華】從來都沒有人跟我說過這樣的話... #vtuber",date:"2026-04-28"},
+      {id:"eyLueNQF8n0",title:"【姬城三千華】狠起來連自己人都吃！ #vtuber",date:"2026-04-24"},
+      {id:"RS5uBZ0fUYg",title:"【姬城三千華】初老現象就是連站起來都會眼前一黑....",date:"2026-04-16"},
+      {id:"vLZxslTDzqQ",title:"【姬城三千華】原神廚力測試 #vtuber #原神",date:"2026-04-14"},
+      {id:"aU8evVEaypI",title:"【姬城三千華】15公分不夠長...30公分才好玩！ #vtuber #台v",date:"2026-04-01"},],
     originals_manual: [
       { id: "zigOqYHDOEc", title: "【Cover】ドゥーマー / 東京真中【姬城三千華 -- 歌ってみた】", date: "2026-05-21" },
       { id: "GmvkH4Cfht8", title: "【Cover】みきとP / 少女レイ【姬城三千華 -- 歌ってみた】", date: "2025-09-14" },
@@ -1196,7 +1271,26 @@ const vtubers = [
       { id: "wtRG8mMeWSU", title: "魔競最終面試，BOSS竟然這麼說.... feat. @LancatOfficial", date: "2023-11-10" },
       { id: "OiC5xmBzLDU", title: "BABOBIBOBA", date: "2023-11-03" }
     ],
-    shorts: [],
+    shorts: [
+      {id:"51HcB7A8eFo",title:"【酒樂霧子 | 官方精華】完、全、穿、模 #shorts",date:"2026-06-15"},
+      {id:"IC-vPkoLB4I",title:"【沖繩幫的一天】Vtuber如何出門旅遊，蛤Vtuber真的會出門嗎？？ @Vaswawa @SinnieAris @r1ri999 @ekorru  #shorts",date:"2026-03-11"},
+      {id:"amF-oqsPBDk",title:"��全部都是我的聲音】恭喜發財 -  劉德華 / 酒樂霧子",date:"2026-01-25"},
+      {id:"1Sm_KcKBa2Y",title:"【星穹鐵道 - 貨幣戰爭】青雀：「我在貨幣戰爭開鋼彈，你也一起來嗎？」 #星穹鐵道 #貨幣戰爭 #shorts #honkaistarrail",date:"2025-11-21"},
+      {id:"ecexKg2PXqo",title:"【酒樂霧子 | 官方精華】試圖捕獲古龍種 ft.悠真、貓康、猫夜凜 #shorts",date:"2025-10-05"},
+      {id:"9F9b2iHzwsM",title:"【酒樂霧子 | 官方精華】正常作用力大師 #shorts",date:"2025-03-23"},
+      {id:"iFI9UFy0tXA",title:"【酒樂霧子 | 官方精華】誰玩UNO會帶半副牌打遊戲 ft.悠真、貓康、猫夜凜 #shorts",date:"2025-01-31"},
+      {id:"-C72Nk2AWPo",title:"【酒樂霧子 | 官方精華】看來防呆還不夠完善 #shorts",date:"2025-01-29"},
+      {id:"k8wx3TzqoAk",title:"【酒樂霧子 | 官方精華】危險死亡小角落 ft.阿氷、奶哥 #shorts",date:"2025-01-28"},
+      {id:"IXGvHNihbcM",title:"【酒樂霧子 | 官方精華】我以為埋在裡面就會變化石欸 ft.���真 #shorts",date:"2025-01-26"},
+      {id:"SGND2sr5b0M",title:"【酒樂霧子 | 官方精華】我開的店不許有負評 #shorts",date:"2025-01-14"},
+      {id:"9FR6RPo3Ns8",title:"【酒樂霧子 | 官方精華】當個不頂嘴的好菜兵 ft.悠真 #shorts",date:"2025-01-12"},
+      {id:"yvqRpO29pao",title:"【酒樂霧子 | 官方精華】這隻龍怎麼可以一打又打再打啊 #shorts",date:"2024-12-03"},
+      {id:"5rWF6hDexgY",title:"【酒樂霧子 | 官方精華】開車本當上手 ft.悠真、貓康、猫夜凜 #shorts",date:"2024-11-26"},
+      {id:"j5pNtSen650",title:"【酒樂霧子 | 官方精華】有一種知道叫做.. ft.猫夜凜、悠真、貓康 #shorts",date:"2024-11-19"},
+      {id:"GUUHQ5TNWbA",title:"【酒樂霧子 | 官方精華】貓又的力量太強大了 #shorts",date:"2024-11-16"},
+      {id:"kc7vTOTJQhE",title:"【酒樂霧子 | 官方精華】來代班還��犧牲色相 ft.瓦瓦、莉莉奈 #shorts",date:"2024-11-04"},
+      {id:"cvqAVVDPxwo",title:"【酒樂霧子 | 官方精華】你是我的 專屬坐騎 ft.莉莉奈 #shorts",date:"2024-10-31"},
+      {id:"NYN6rg3jM_w",title:"【酒樂霧子 | 官方精華】對聊天室嘲諷點滿 #shorts",date:"2024-10-29"},],
     originals_manual: [
       { id: "6hIGWxBXw9Y", title: "【歌ってみた】レクイエム - Kanaria / 酒樂霧子 × ？？？？", date: "2026-06-08" },
       { id: "Gbmcqb0RVgw", title: "【歌ってみた】「聞いてよ最近彼氏がさ、」愚痴り合い - ASOBI同盟 / 酒樂霧子 × 結月莉莉奈", date: "2026-04-01" },
