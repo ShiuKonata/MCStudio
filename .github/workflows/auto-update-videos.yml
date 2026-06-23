@@ -159,7 +159,7 @@ jobs:
           }
 
           // ──【FIXED】──輔助函數：分類影片（完整五步邏輯）──
-          function classifyVideos(vId, items, videoDetails) {
+          function classifyVideos(vId, items, videoDetails, uushIds = new Set()) {
             const classified = {
               covers: [],
               originals: [],
@@ -178,11 +178,12 @@ jobs:
               const titleLower = title.toLowerCase();
               const detail = videoDetails[vid] || { duration: 0, liveContent: 'none', wasLive: false };
 
-              // ═══ STEP 1：排除直播存檔（使用官方 API 標誌）═══
-              // ✅ 使用官方標誌 isLiveContent 和 wasLive
+              // ═══ STEP 1：排除 UULV（直播存檔）和 UUSH（Shorts）═══
               if (detail.liveContent !== 'none' || detail.wasLive) {
-                // console.log(`🚫 [STEP 1] 直播存檔被過濾: [liveContent=${detail.liveContent}, wasLive=${detail.wasLive}] ${title}`);
-                return; // 跳過此影片
+                return; // 跳過直播存檔
+              }
+              if (uushIds.has(vid)) {
+                return; // 跳過 Shorts（已由 UUSH 播放列表自動處理）
               }
 
               // ═══ STEP 2：檢測 Cover / Original / Official ═══
@@ -314,10 +315,50 @@ jobs:
             });
           }
 
+          // 輔助函數：抓取播放列表的所有影片 ID（處理分頁）
+          function fetchPlaylistIds(playlistId) {
+            return new Promise((resolve) => {
+              const ids = new Set();
+              const options = { headers: { 'Referer': 'https://shiukonata.github.io/MCStudio/' } };
+
+              const fetchPage = (pageToken) => {
+                let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50&key=${API_KEY}`;
+                if (pageToken) url += `&pageToken=${pageToken}`;
+                https.get(url, options, (res) => {
+                  let data = '';
+                  res.on('data', chunk => data += chunk);
+                  res.on('end', () => {
+                    try {
+                      const result = JSON.parse(data);
+                      (result.items || []).forEach(item => {
+                        const vid = item.snippet.resourceId && item.snippet.resourceId.videoId;
+                        if (vid) ids.add(vid);
+                      });
+                      if (result.nextPageToken) {
+                        fetchPage(result.nextPageToken);
+                      } else {
+                        resolve(ids);
+                      }
+                    } catch (e) {
+                      resolve(ids);
+                    }
+                  });
+                }).on('error', () => resolve(ids));
+              };
+              fetchPage(null);
+            });
+          }
+
           // ──【FIXED】──函數：抓取並分類影片（完整五步）──
           async function fetchAndClassifyVideos(vId, channelId) {
+            const uploadsId = 'UU' + channelId.substring(2);
+            const shortsId  = 'UUSH' + channelId.substring(2);
+
+            // 先抓 UUSH ID Set（Step 1 需要排除）
+            const uushIds = await fetchPlaylistIds(shortsId);
+            console.log(`  📋 ${vId}: UUSH 共 ${uushIds.size} 部 Shorts（將在 Step 1 排除）`);
+
             return new Promise((resolve) => {
-              const uploadsId = 'UU' + channelId.substring(2);
               const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=50&key=${API_KEY}`;
 
               const options = {
@@ -348,7 +389,7 @@ jobs:
                     console.log(`  📋 ${vId}: 獲取 ${videoIds.length} 部影片的詳情...`);
                     const videoDetails = await fetchVideoDetails(videoIds);
 
-                    const videos = classifyVideos(vId, result.items, videoDetails);
+                    const videos = classifyVideos(vId, result.items, videoDetails, uushIds);
                     const totalCount = videos.covers.length + videos.originals.length + videos.shorts.length + videos.unclassified.length;
                     console.log(`✅ ${vId}: 找到 ${videos.covers.length} Cover + ${videos.originals.length} Original + ${videos.shorts.length} Shorts + ${videos.unclassified.length} 未分類（共 ${totalCount} 部）`);
                     resolve(videos);
@@ -379,7 +420,7 @@ jobs:
             if (!sectionMatch) return existingIds;
             const section = sectionMatch[0];
             // 用 regex 提取所有 {id:"..."} 格式的影片 ID
-            const idPattern = /\{id:\s*["']([^"']+)["']/g;
+            const idPattern = /\{\s*id:\s*["']([^"']+)["']/g;
             let m;
             while ((m = idPattern.exec(section)) !== null) {
               existingIds.add(m[1]);
