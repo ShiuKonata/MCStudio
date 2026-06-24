@@ -2225,7 +2225,7 @@ const vtubers = [
     group: "預見娛樂",
     generation: "三期生",
     avatar: "https://pbs.twimg.com/profile_images/2060718199705088000/2gEl6-Rk_400x400.jpg",
-    coverImage: "https://pbs.twimg.com/profile_banners/1768274785728172033/1769527111/1500x500",
+    coverImage: "https://pbs.twimg.com/profile_banners/1768274785728172033/1780250437/1500x500",
     tagline: "",
     taglines: [
       { context: "", text: "哭啊" },
