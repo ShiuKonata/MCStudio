@@ -2008,14 +2008,15 @@ const vtubers = [
     videos: [
       {id:"neVTNTFQLNg",title:"【歌ってみた】Ayase - シネマ｜1.5周年紀念Cover✨Cover by 若櫻依兔 WakasaIto & 涅爾菲Nyrfier",date:"2025-06-21"},
       {id:"6lvVQTjVnns",title:"【歌ってみた】Aimer - LAST STARDUST｜一周年紀念Cover🌸Cover by 若櫻依兔 WakasaIto",date:"2024-12-21"},
-      {id:"xm1jI5ntbDY",title:"初配信精華🌸咦!?忘記開MIC!我BGM呢!!",date:"2024-01-03"},
       {id:"HIkd72idfdE",title:"【歌ってみた】Myuk - 愛の唄🌸Cover by 若櫻依兔",date:"2023-12-09"},
       {id:"8W5qQ3uj-6w",title:"【歌ってみた】Guiano - 花🌸Cover by 若櫻依兔",date:"2023-11-24"},
       {id:"wphrykVkR2Y",title:"【歌ってみた】Aimer - カタオモイ🌸Cover by 若櫻依兔",date:"2023-11-05"}
     ],
     shorts: [],
     originals_manual: [],
-    premiere: [],
+    premiere: [
+      {id:"xm1jI5ntbDY",title:"初配信精華🌸咦!?忘記開MIC!我BGM呢!!",date:"2024-01-03"},
+    ],
     general: [],
     vlog: [],
     commerce: [],
