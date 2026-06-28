@@ -2604,6 +2604,7 @@ const vtubers = [
       { version: "Ver 1.0",       url: "images/涅爾菲 v1.0.jpg"    },
       { version: "Ver 2.0",       url: "images/涅爾菲 v2.0.jpg"    },
       { version: "粉絲形象 菲鼠", url: "images/涅爾菲_菲鼠.jpg"   },
+      { version: "涅爾妃",        url: "images/涅爾菲_涅爾妃.jpg"  },
     ],
 
     color: "#008B8B"   // 涅爾菲 代表色（暗青）
