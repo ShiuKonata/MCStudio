@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>管理後台 | MC組事務所</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -317,10 +316,6 @@
       <h1>🔧 管理後台</h1>
       <p>MC組事務所 · 問題回報管理</p>
       <div class="lf-field">
-        <label class="lf-label">Email</label>
-        <input class="lf-input" type="email" id="lf-email" placeholder="admin@example.com" autocomplete="email">
-      </div>
-      <div class="lf-field">
         <label class="lf-label">密碼</label>
         <input class="lf-input" type="password" id="lf-password" placeholder="••••••••" autocomplete="current-password"
           onkeydown="if(event.key==='Enter') login()">
@@ -372,97 +367,65 @@
   </div>
 
   <script>
-    const { createClient } = supabase;
-    const sb = createClient(
-      'https://ednzqqgnsnycntvmykfb.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkbnpxcWduc255Y250dm15a2ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNjI2NzIsImV4cCI6MjA5NDczODY3Mn0.u5ZP66-3PKHKkE-Oow47_yPqoh5sSjwhXxMogtoHGjw'
-    );
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7LEEufgBX3dItTeAIz1o5PIGX-GzdpdZ4Q_EqMOxw4rfZYo1bIMjQbLwPxUiQ3ny-/exec';
+    const ADMIN_HASH = '67445936719bc62c27d88b3e418174571f363f347082370ce8e38d6e5894e5d3';
 
-    let allFeedback = [];
+    let allFeedback   = [];
     let currentFilter = 'all';
 
-    // ── Session 過期自動踢回登入頁 ──
-    sb.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT' || !session) {
-        document.getElementById('admin-view').style.display = 'none';
-        document.getElementById('login-view').style.display = 'flex';
-        allFeedback = [];
-      }
-    });
-
-    // ── 啟動時判斷是否已登入 ──
-    (async () => {
-      const { data: { session } } = await sb.auth.getSession();
-      if (session) showAdmin();
-    })();
-
-    // ── 驗證 session（每次敏感操作前呼叫）──
-    async function requireAuth() {
-      const { data: { session } } = await sb.auth.getSession();
-      if (!session) {
-        alert('登入已逾時，請重新登入');
-        await sb.auth.signOut();
-        return false;
-      }
-      return true;
+    async function hashPwd(pwd) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
     }
 
-    // ── 登入 ──
+    (function() {
+      if (sessionStorage.getItem('mc-admin') === '1') showAdmin();
+    })();
+
     async function login() {
-      const email    = document.getElementById('lf-email').value.trim();
       const password = document.getElementById('lf-password').value;
       const btn      = document.getElementById('lf-btn');
       const errEl    = document.getElementById('lf-err');
-
       errEl.textContent = '';
       btn.disabled      = true;
-      btn.textContent   = '登入中…';
-
-      const { error } = await sb.auth.signInWithPassword({ email, password });
-
-      if (error) {
-        errEl.textContent = '帳號或密碼錯誤';
+      btn.textContent   = '驗證中…';
+      const hash = await hashPwd(password);
+      if (hash === ADMIN_HASH) {
+        sessionStorage.setItem('mc-admin', '1');
+        showAdmin();
+      } else {
+        errEl.textContent = '密碼錯誤';
         btn.disabled      = false;
         btn.textContent   = '登入';
-        return;
       }
-      showAdmin();
     }
 
-    // ── 登出 ──
-    async function logout() {
-      await sb.auth.signOut();
+    function logout() {
+      sessionStorage.removeItem('mc-admin');
       document.getElementById('admin-view').style.display = 'none';
       document.getElementById('login-view').style.display = 'flex';
+      allFeedback = [];
     }
 
-    // ── 顯示後台 ──
     function showAdmin() {
       document.getElementById('login-view').style.display = 'none';
       document.getElementById('admin-view').style.display = 'block';
       loadFeedback();
     }
 
-    // ── 載入資料 ──
     async function loadFeedback() {
-      if (!await requireAuth()) return;
-      const { data, error } = await sb
-        .from('feedback')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
+      try {
+        const res  = await fetch(SCRIPT_URL + '?action=read');
+        const data = await res.json();
+        allFeedback = data.data || [];
+        updateStats();
+        renderList();
+      } catch(e) {
         document.getElementById('fb-list').innerHTML =
-          '<div class="empty-msg">載入失敗：' + error.message + '</div>';
-        return;
+          '<div class="empty-msg">載入失敗：' + e.message + '</div>';
       }
-
-      allFeedback = data || [];
-      updateStats();
-      renderList();
     }
 
-    // ── 統計 ──
     function updateStats() {
       const open     = allFeedback.filter(f => f.status === 'open').length;
       const resolved = allFeedback.filter(f => f.status === 'resolved').length;
@@ -471,7 +434,6 @@
       document.getElementById('stat-done').textContent  = resolved;
     }
 
-    // ── 篩選 tab ──
     function setFilter(f, el) {
       currentFilter = f;
       document.querySelectorAll('.ad-tab').forEach(t => t.classList.remove('active'));
@@ -479,37 +441,31 @@
       renderList();
     }
 
-    // ── 渲染清單 ──
     function renderList() {
-      const list = document.getElementById('fb-list');
+      const list  = document.getElementById('fb-list');
       const items = currentFilter === 'all'
         ? allFeedback
         : allFeedback.filter(f => f.status === currentFilter);
-
       if (!items.length) {
         list.innerHTML = '<div class="empty-msg">沒有符合條件的回報 🎉</div>';
         return;
       }
-
       list.innerHTML = items.map(f => itemHTML(f)).join('');
     }
 
-    // ── 類型對照 ──
     const typeMap = {
-      bug:     { cls: 'type-bug',     label: '🐛 網站 Bug'   },
-      data:    { cls: 'type-data',    label: '📝 資料錯誤'   },
-      suggest: { cls: 'type-suggest', label: '💡 功能建議'   },
-      other:   { cls: 'type-other',   label: '💬 其他'       },
+      bug:     { cls: 'type-bug',     label: '🐛 網站 Bug'  },
+      data:    { cls: 'type-data',    label: '📝 資料錯誤'  },
+      suggest: { cls: 'type-suggest', label: '💡 功能建議'  },
+      other:   { cls: 'type-other',   label: '💬 其他'      },
     };
 
-    // ── 格式化日期 ──
     function fmtDate(iso) {
       const d = new Date(iso);
       return d.toLocaleDateString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit' })
            + ' ' + d.toLocaleTimeString('zh-TW', { hour:'2-digit', minute:'2-digit' });
     }
 
-    // ── 產生卡片 HTML ──
     function itemHTML(f) {
       const t    = typeMap[f.type] || typeMap.other;
       const done = f.status === 'resolved';
@@ -522,7 +478,6 @@
              <div class="fb-reply-label">回覆 / 備註</div>
              <textarea class="fb-reply-input" id="reply-${f.id}" placeholder="輸入回覆或內部備註…">${esc(f.reply || '')}</textarea>
            </div>`;
-
       const actionBtns = done
         ? `<button class="btn-edit"   onclick="editItem('${f.id}')">編輯回覆</button>
            <button class="btn-reopen" onclick="setStatus('${f.id}','open')">重新開啟</button>
@@ -530,7 +485,6 @@
         : `<button class="btn-save"    onclick="saveReply('${f.id}')">儲存回覆</button>
            <button class="btn-resolve" onclick="resolve('${f.id}')">✓ 標記解決</button>
            <button class="btn-delete"  onclick="deleteItem('${f.id}')">🗑 刪除</button>`;
-
       return `
       <div class="fb-item${done ? ' resolved' : ''}" id="item-${f.id}">
         <div class="fb-item-top">
@@ -539,13 +493,11 @@
           <span class="fb-date">${fmtDate(f.created_at)}</span>
         </div>
         <div class="fb-content">${esc(f.content)}</div>
-        ${f.contact ? `<div class="fb-contact">聯絡方式：<span>${esc(f.contact)}</span></div>` : ''}
         ${replySection}
         <div class="fb-actions">${actionBtns}</div>
       </div>`;
     }
 
-    // ── 跳出編輯模式（已解決 → 可再編輯） ──
     function editItem(id) {
       const f = allFeedback.find(x => x.id === id);
       if (!f) return;
@@ -558,59 +510,47 @@
         <button class="btn-resolve" onclick="resolve('${id}')">✓ 標記解決</button>`;
     }
 
-    // ── 儲存回覆 ──
     async function saveReply(id) {
-      if (!await requireAuth()) return;
-      const txt = document.getElementById('reply-' + id)?.value || '';
-      const { error } = await sb.from('feedback').update({ reply: txt }).eq('id', id);
-      if (error) { alert('儲存失敗：' + error.message); return; }
+      const txt    = document.getElementById('reply-' + id)?.value || '';
+      const params = new URLSearchParams({ action: 'update', id, reply: txt });
+      await fetch(SCRIPT_URL + '?' + params);
       const f = allFeedback.find(x => x.id === id);
       if (f) f.reply = txt;
       alert('已儲存');
     }
 
-    // ── 標記解決（同時儲存回覆） ──
     async function resolve(id) {
-      if (!await requireAuth()) return;
-      const txt = document.getElementById('reply-' + id)?.value || '';
-      const { error } = await sb.from('feedback')
-        .update({ status: 'resolved', reply: txt }).eq('id', id);
-      if (error) { alert('操作失敗：' + error.message); return; }
+      const txt    = document.getElementById('reply-' + id)?.value || '';
+      const params = new URLSearchParams({ action: 'update', id, status: 'resolved', reply: txt });
+      await fetch(SCRIPT_URL + '?' + params);
       const f = allFeedback.find(x => x.id === id);
       if (f) { f.status = 'resolved'; f.reply = txt; }
       updateStats();
       renderList();
     }
 
-    // ── 重新開啟 ──
     async function setStatus(id, status) {
-      if (!await requireAuth()) return;
-      const { error } = await sb.from('feedback').update({ status }).eq('id', id);
-      if (error) { alert('操作失敗：' + error.message); return; }
+      const params = new URLSearchParams({ action: 'update', id, status });
+      await fetch(SCRIPT_URL + '?' + params);
       const f = allFeedback.find(x => x.id === id);
       if (f) f.status = status;
       updateStats();
       renderList();
     }
 
-    // ── 刪除回報 ──
     async function deleteItem(id) {
-      if (!await requireAuth()) return;
       if (!confirm('確定要永久刪除這筆回報嗎？此操作無法復原。')) return;
-      const { error } = await sb.from('feedback').delete().eq('id', id);
-      if (error) { alert('刪除失敗：' + error.message); return; }
+      const params = new URLSearchParams({ action: 'delete', id });
+      await fetch(SCRIPT_URL + '?' + params);
       allFeedback = allFeedback.filter(x => x.id !== id);
       updateStats();
       renderList();
     }
 
-    // ── HTML 跳脫 ──
     function esc(s) {
       return String(s)
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;');
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
   </script>
 

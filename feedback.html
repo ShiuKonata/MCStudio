@@ -7,7 +7,6 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/i18n.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
 
     /* ══ 頁面容器：垂直置中 ══ */
@@ -555,13 +554,9 @@
   </footer>
 
   <script>
-    const { createClient } = supabase;
-    const sb = createClient(
-      'https://ednzqqgnsnycntvmykfb.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkbnpxcWduc255Y250dm15a2ZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNjI2NzIsImV4cCI6MjA5NDczODY3Mn0.u5ZP66-3PKHKkE-Oow47_yPqoh5sSjwhXxMogtoHGjw'
-    );
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7LEEufgBX3dItTeAIz1o5PIGX-GzdpdZ4Q_EqMOxw4rfZYo1bIMjQbLwPxUiQ3ny-/exec';
 
-    let allItems    = [];
+    let allItems      = [];
     let currentFilter = 'all';
     let currentPage   = 0;
     const ITEMS_PER_PAGE = 3;
@@ -581,28 +576,23 @@
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     }
 
-    // ── 類型選擇 ──
     function selectType(el) {
       document.querySelectorAll('.fb-type-chip').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       document.getElementById('fb-type').value = el.dataset.val;
     }
 
-    // ── 載入資料 ──
     async function loadItems() {
-      const { data, error } = await sb
-        .from('feedback')
-        .select('id, type, content, status, reply, created_at')
-        .order('created_at', { ascending: false });
-
-      if (error) {
+      try {
+        const res = await fetch(SCRIPT_URL + '?action=read');
+        const data = await res.json();
+        allItems = data.data || [];
+        updateStats();
+        renderItems();
+      } catch(e) {
         document.getElementById('fb-items').innerHTML = '<div class="fb-empty">載入失敗，請稍後再試</div>';
         document.getElementById('fb-count').textContent = '–';
-        return;
       }
-      allItems = data || [];
-      updateStats();
-      renderItems();
     }
 
     function updateStats() {
@@ -613,7 +603,6 @@
       document.getElementById('stat-done').textContent = done;
     }
 
-    // ── 篩選 ──
     function setFilter(f, el) {
       currentFilter = f;
       currentPage   = 0;
@@ -622,16 +611,14 @@
       renderItems();
     }
 
-    // ── 分頁 ──
     function changePage(delta) {
       currentPage += delta;
       renderItems();
     }
 
-    // ── 渲染 ──
     function renderItems() {
-      const list     = document.getElementById('fb-items');
-      const filtered = currentFilter === 'all' ? allItems : allItems.filter(i => i.status === currentFilter);
+      const list       = document.getElementById('fb-items');
+      const filtered   = currentFilter === 'all' ? allItems : allItems.filter(i => i.status === currentFilter);
       const total      = filtered.length;
       const totalPages = Math.max(1, Math.ceil(total / ITEMS_PER_PAGE));
       currentPage      = Math.max(0, Math.min(currentPage, totalPages - 1));
@@ -641,7 +628,6 @@
         currentFilter === 'all'  ? `共 ${total} 則` :
         currentFilter === 'open' ? `待處理 ${total} 則` : `已解決 ${total} 則`;
 
-      // 分頁
       const pag = document.getElementById('fb-pagination');
       if (total > ITEMS_PER_PAGE) {
         pag.style.display = 'flex';
@@ -658,7 +644,7 @@
       list.innerHTML = items.map(i => {
         const t        = typeMap[i.type] || typeMap.other;
         const done     = i.status === 'resolved';
-        const hasReply = i.reply && i.reply.trim().length > 0;
+        const hasReply = i.reply && String(i.reply).trim().length > 0;
         const isLong   = i.content.length > PREVIEW_LEN;
         const preview  = isLong ? esc(i.content.substring(0, PREVIEW_LEN)) + '…' : esc(i.content);
         const expandBtn = isLong
@@ -687,7 +673,6 @@
       }).join('');
     }
 
-    // ── 展開 / 收起 ──
     function toggleExpand(id) {
       const item = allItems.find(x => x.id === id);
       if (!item) return;
@@ -704,7 +689,6 @@
       }
     }
 
-    // ── 送出 ──
     async function submitFeedback() {
       const type    = document.getElementById('fb-type').value;
       const content = document.getElementById('fb-content').value.trim();
@@ -713,19 +697,21 @@
       if (!content) { alert('請填寫詳細描述'); return; }
       btn.disabled    = true;
       btn.textContent = '送出中…';
-      const { error } = await sb.from('feedback').insert({ type, content });
-      if (error) {
-        alert('送出失敗，請稍後再試\n' + error.message);
+      try {
+        const params = new URLSearchParams({ action: 'insert', type, content });
+        const res  = await fetch(SCRIPT_URL + '?' + params);
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || '送出失敗');
+        document.getElementById('fb-form').style.display    = 'none';
+        document.getElementById('fb-success').style.display = 'block';
+        loadItems();
+      } catch(e) {
+        alert('送出失敗，請稍後再試\n' + e.message);
         btn.disabled    = false;
         btn.textContent = '🚀 送出回報';
-        return;
       }
-      document.getElementById('fb-form').style.display    = 'none';
-      document.getElementById('fb-success').style.display = 'block';
-      loadItems();
     }
 
-    // ── 再回報 ──
     function resetForm() {
       document.querySelectorAll('.fb-type-chip').forEach(c => c.classList.remove('selected'));
       document.getElementById('fb-type').value    = '';
