@@ -2109,6 +2109,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"e2PPZIsVdq4",title:"【Original】【原創BGM】躍動沙灘 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-07-12"},
       {id:"QoI7Dps65ZY",title:"【Alluria 兩週年紀念】Binary Vampire /RE:VALE covered by Alluria |",date:"2026-05-10"},
       {id:"gWYj7Y_b6b4",title:"【cover】旋律と結晶- TENBLANK  | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-09-19"},
       {id:"QSeCdKTh2Q8",title:"【COVER】PRETENDER | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-04-19"},
