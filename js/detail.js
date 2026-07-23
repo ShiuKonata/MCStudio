@@ -3235,7 +3235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         + '&maxResults=50'
         + '&key=' + encodeURIComponent(v.ytApiKey);
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: 'no-store' });
       return await res.json();
     }
 
@@ -3317,6 +3317,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tryLoadLiveStreams = function() { loadYear(lsCurrentYear); };
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && tryLoadLiveStreams) tryLoadLiveStreams();
+    });
 
     document.addEventListener('click', e => {
       if (e.target && e.target.id === 'ls-load-more-btn') {
