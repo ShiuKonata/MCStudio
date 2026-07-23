@@ -2361,7 +2361,7 @@ const vtubers = [
     nameEn: "Mukuru",
     group: "預見娛樂",
     generation: "三期生",
-    avatar: "https://pbs.twimg.com/profile_images/2048735497955254272/xggURAvf_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2077367254149480448/9MPEaF44_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1767153840456077312/1765882602/1500x500",
     tagline: "",
     taglines: [
@@ -2369,7 +2369,7 @@ const vtubers = [
       { context: "", text: "哭啊" },
       { context: "", text: "抓抓頭" },
       { context: "", text: "好麻煩" },
-      { context: "", text: "這可以講嗎？算了沒事" }
+      { context: "", text: "這可以講嗎？算了沒事" },
     ],
     description: "想要成為水豚的煉金術師",
     debut: "2024-05-11",
