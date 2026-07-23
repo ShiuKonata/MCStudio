@@ -604,12 +604,12 @@ const vtubers = [
     nameEn: "Paroniie",
     group: "預見娛樂",
     generation: "一期生",
-    avatar: "https://pbs.twimg.com/profile_images/1951138431612100608/9TNlSfqW_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2072949382341877761/fbM5LeR1_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1603332340482158592/1744906715/1500x500",
     tagline: "",
     taglines: [
       { context: "", text: "想想有一隻龍在你的耳邊一直說休息休息休息休息" },
-      { context: "", text: "我不是爐豚" }
+      { context: "", text: "我不是爐豚" },
     ],
     description: "這裡是帕蘿妮嗷～💧 會唱歌會吃飯會睡覺～🦖✨聽說我的一分鐘只有60秒 🎆 o(*ﾟ▽ﾟ*)o",
     debut: "2023-02-24",
