@@ -3881,11 +3881,11 @@ const vtubers = [
     nameEn: "Yawnii",
     group: "預見娛樂",
     generation: "六期生",
-    avatar: "https://pbs.twimg.com/profile_images/2057135498200809472/-QFJQgbg_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2077330400565981184/acRbn1Hu_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1939968445539377152/1779096779/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "捏" }
+      { context: "", text: "捏" },
     ],
     description: "📜 您好呀，我是幽昵，來自仙境深處的傳令官……！",
     debut: "2025-11-30",
