@@ -2080,7 +2080,7 @@ const vtubers = [
     nameEn: "Whalefall",
     group: "預見娛樂",
     generation: "三期生",
-    avatar: "https://pbs.twimg.com/profile_images/2064075801516228608/H0vDY5uC_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2077270011299958784/pcSDVVRz_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1768216252001198080/1710825714/1500x500",
     bgmVideoId: "ULhzSR_wZ3I",
     bgmLabel:   "鯨落",
@@ -2090,7 +2090,11 @@ const vtubers = [
       { context: "", text: "「我是你的聲音代筆鯨諾，大家拜拜。」" },
       { context: "", text: "「我很抱歉，但我不會改。」" },
     ],
-    description: "來自海洋的聲音代筆\n與音樂和文字結下不解之緣，使用聲音為人寫信。\n是浪漫的諧星及滑稽的藝術家。\n擅長自彈自唱、寫作與編曲，\n電波系、也喜歡諧音梗，在溫柔與搞笑間自由切換。",
+    description: "來自海洋的聲音代筆
+與音樂和文字結下不解之緣，使用聲音為人寫信。
+是浪漫的諧星及滑稽的藝術家。
+擅長自彈自唱、寫作與編曲，
+電波系、也喜歡諧音梗，在溫柔與搞笑間自由切換。",
     debut: "2024-05-10",
     birthday: "11月13日",
     tags: ["台灣", "預見娛樂", "三期生", "Alluria", "鯨魚", "文學家", "作曲編曲", "電波"],
