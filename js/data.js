@@ -3507,13 +3507,13 @@ const vtubers = [
     nameEn: "Nokori",
     group: "預見娛樂",
     generation: "五期生",
-    avatar: "https://pbs.twimg.com/profile_images/2045739065392476160/7v9ySc-G_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2077380130465538048/hmZxQXpJ_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/2032034853131337735/1773318142/1500x500",
     tagline: "",
     taglines: [
       { context: "", text: "你又沒有教我" },
       { context: "", text: "我哪有" },
-      { context: "", text: "你今天有開心嗎" }
+      { context: "", text: "你今天有開心嗎" },
     ],
     description: "在熬夜、焦慮與奶茶之間，選擇成為魔法少女ฅ •ﻌ•♡",
     debut: "2025-04-19",
