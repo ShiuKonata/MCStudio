@@ -3197,6 +3197,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let lsCurrentYear   = 'all';
     let lsNextPageToken = null;
 
+    // 每次頁面載入時清除此 VTuber 的直播存檔快取，確保顯示最新資料
+    Object.keys(sessionStorage).forEach(key => {
+      if (key.startsWith('mc_ls_' + v.youtubeChannelId)) sessionStorage.removeItem(key);
+    });
+
     // 直播專屬播放清單：UULV + channelId 去掉 UC
     const lsPlaylistId = 'UULV' + v.youtubeChannelId.slice(2);
 
