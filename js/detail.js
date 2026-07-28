@@ -3238,7 +3238,8 @@ document.addEventListener('DOMContentLoaded', () => {
         + '?part=snippet'
         + '&playlistId=' + encodeURIComponent(lsPlaylistId)
         + '&maxResults=50'
-        + '&key=' + encodeURIComponent(v.ytApiKey);
+        + '&key=' + encodeURIComponent(v.ytApiKey)
+        + '&_=' + Date.now();
       if (pageToken) url += '&pageToken=' + encodeURIComponent(pageToken);
       const res = await fetch(url, { cache: 'no-store' });
       return await res.json();
