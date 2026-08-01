@@ -3777,6 +3777,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"OeCZXT1FNTg",title:"【Cover】【 落淚 】cover / 珮蕾pele",date:"2026-08-01"},
       {id:"NqrevkrJOoc",title:"【 我愛你-上海蟹 】cover / 珮蕾pele",date:"2026-02-14"},
       {id:"Nu1FICbgoPw",title:"【ワールドイズマイン/世界第一的公主殿下 】cover / 珮蕾pele",date:"2025-10-25"},
     ],
