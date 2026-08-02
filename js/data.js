@@ -1976,13 +1976,13 @@ const vtubers = [
     nameEn: "WakasaIto",
     group: "預見娛樂",
     generation: "二期生",
-    avatar: "https://pbs.twimg.com/profile_images/1936436065180549120/T_EPkPr6_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2081389178538041344/efcBxFLc_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1669648295508201474/1734874910/1500x500",
     tagline: "",
     taglines: [
       { context: "", text: "我是氣質的偶像" },
       { context: "", text: "我不是夣女" },
-      { context: "", text: "我跟凪是真實存在的" }
+      { context: "", text: "我跟凪是真實存在的" },
     ],
     description: "一隻容易失眠的小兔子🌸喜歡的東西是唱歌、寵物莓咪和草莓🍓",
     debut: "2023-12-21",
