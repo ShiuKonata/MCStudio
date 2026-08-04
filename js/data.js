@@ -3747,14 +3747,14 @@ const vtubers = [
     group: "預見娛樂",
     generation: "六期生",
     avatar: "https://pbs.twimg.com/profile_images/2011801229165559809/gqkdH927_400x400.jpg",
-    coverImage: "https://pbs.twimg.com/profile_banners/1933073377113354240/1780237225/1500x500",
+    coverImage: "https://pbs.twimg.com/profile_banners/1933073377113354240/1785287489/1500x500",
     tagline: "幹幹幹",
     taglines: [
       { context: "", text: "我接喔" },
       { context: "", text: "你白目嗎?" },
       { context: "", text: "挖喜公主ㄟ" },
       { context: "", text: "挖喜v吐爸ㄟ" },
-      { context: "", text: "這是真的嗎?" }
+      { context: "", text: "這是真的嗎?" },
     ],
     description: "「來自賭場的世界第一公主大人」(不容許任何質疑)",
     debut: "2025-11-29",
