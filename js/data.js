@@ -2116,7 +2116,8 @@ const vtubers = [
       {id:"QSeCdKTh2Q8",title:"【COVER】PRETENDER | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-04-19"},
       {id:"I4wMbqNgUM0",title:"【中文填詞】【COVER】推遲償還　モラトリアム | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2024-04-02"},
     ],
-    shorts: [],
+    shorts: [
+      {id:"DPefcCOddaY",title:"【節目預告】新詩x聲音演出，才子詩詠佳人戲，七夕節目即將到來！ | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-08-08"},],
     originals_manual: [
       {id:"ULhzSR_wZ3I",title:"【Original】鯨落 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-12-24"},
       {id:"fheAwQNYosk",title:"【原創曲】鯨落 demo | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2025-05-08"},
