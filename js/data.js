@@ -2895,7 +2895,7 @@ const vtubers = [
     nameEn: "chamamatti",
     group: "預見娛樂",
     generation: "六期生",
-    avatar: "https://pbs.twimg.com/profile_images/2077039526523084801/43DS36A8_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2086141159194447872/WXnsJ3Si_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1938167133592268800/1772707441/1500x500",
     tagline: "",
     description: "「請坐吧，無論你今天過得如何，都能在這裡稍稍歇息一下。」",
