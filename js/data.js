@@ -2227,7 +2227,7 @@ const vtubers = [
     nameEn: "Kai",
     group: "預見娛樂",
     generation: "三期生",
-    avatar: "https://pbs.twimg.com/profile_images/2077023644786761728/Myd9Q3u__400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2083593963827859456/O0KhECfh_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1768274785728172033/1780250437/1500x500",
     tagline: "",
     taglines: [
