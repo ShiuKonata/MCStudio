@@ -1360,14 +1360,14 @@ const vtubers = [
     nameEn: "Vaswawa",
     group: "預見娛樂",
     generation: "二期生",
-    avatar: "https://pbs.twimg.com/profile_images/2040470338254053376/j6n_yPob_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2087173423785230337/YNZpqaVM_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1669746708853706753/1775321014/1500x500",
     tagline: "",
     taglines: [
       { context: "", text: "大概是這樣" },
       { context: "", text: "好不好" },
       { context: "", text: "大家早安" },
-      { context: "", text: "瘋狂捉i" }
+      { context: "", text: "瘋狂捉i" },
     ],
     description: "初めまして！瓦瓦です～～～～～可愛迷人混亂小惡魔天使",
     debut: "2023-12-04",
