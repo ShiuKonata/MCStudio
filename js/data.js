@@ -3373,7 +3373,7 @@ const vtubers = [
     nameEn: "Uchi Fifi",
     group: "預見娛樂",
     generation: "四期生",
-    avatar: "https://pbs.twimg.com/profile_images/2039510641430663168/4xpOGnRl_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2087181573489836033/3HKqkf4x_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1800777319789019136/1718174532/1500x500",
     tagline: "",
     taglines: [
@@ -3382,7 +3382,7 @@ const vtubers = [
       { context: "", text: "好想工作" },
       { context: "", text: "發瘋" },
       { context: "", text: "吃答辯吧" },
-      { context: "", text: "蛤？" }
+      { context: "", text: "蛤？" },
     ],
     description: "有網路的地方就會有扉扉",
     debut: "2024-09-14",
