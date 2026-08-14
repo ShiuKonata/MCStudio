@@ -3504,7 +3504,7 @@ const vtubers = [
     nameEn: "Nokori",
     group: "預見娛樂",
     generation: "五期生",
-    avatar: "https://pbs.twimg.com/profile_images/2077380130465538048/hmZxQXpJ_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2085373154957176832/7XsxXjDL_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/2032034853131337735/1773318142/1500x500",
     tagline: "",
     taglines: [
