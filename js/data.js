@@ -1540,7 +1540,7 @@ const vtubers = [
     nameEn: "Sinnie Aris",
     group: "預見娛樂",
     generation: "二期生",
-    avatar: "https://pbs.twimg.com/profile_images/2047990430235799552/8hLQvduO_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2087172823014117376/A0Hm5iQJ_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1669708581632114689/1777113944/1500x500",
     tagline: "",
     taglines: [
