@@ -833,6 +833,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"gdIhuBk-M6I",title:"【Cover】Folktale - Mrs. Green Apple／神無月鹿比【Cover】",date:"2026-08-14"},
       {id:"VDj-McWV0JM",title:"【Cover】刀ピークリスマスのテーマソング2023 - ピーナッツくん／神無月鹿比【Cover】",date:"2025-04-27"},
       { id: "IClW1jRLoM0", title: "【神無月鹿比🦌｜官方精華】Starsavior裡有這麼多UU是可以的嗎！居然還爆衣！！", date: "2026-06-05" },
       { id: "cKfsU7GXpaQ", title: "グレイ - sajou no hana／神無月鹿比【復甦島3 鹿清酒殺青Cover】", date: "2026-05-21" },
