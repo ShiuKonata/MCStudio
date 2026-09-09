@@ -3416,6 +3416,7 @@ const vtubers = [
       {id:"OitEWgR4lPE",title:"【歌ってみた/Cover】人間不值得／黃詩扶【羽芝扉扉 Uchi Fifi】",date:"2024-07-08"},
     ],
     shorts: [
+      {id:"w4zASlKRd8o",title:"難道每個人都很會吹嗎？【羽芝扉扉 Uchi Fifi】",date:"2026-09-06"},
       {id:"fkFJ7nWdyAk",title:"怎麼這麼失控?我們只是在按摩【羽芝扉扉 Uchi Fifi】",date:"2026-06-06"},
       {id:"EAPFmHfTpgs",title:"這就是偶像嗎?【羽芝扉扉 Uchi Fifi】",date:"2026-05-30"},
       {id:"zUKvw9h_roA",title:"我跟珮蕾的第一印象???【羽芝扉扉 Uchi Fifi】",date:"2026-05-25"},
