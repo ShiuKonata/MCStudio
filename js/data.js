@@ -3535,6 +3535,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"XwFuLYziz0Q",title:"【Cover】ROSE / HANA ❆ 7人で歌ってみた【Cover】#台V #両声類",date:"2026-09-05"},
       {id:"malfIjv3DE8",title:"【Cover】火炎 - 女王蜂 / 諾恪里Nokori cover【歌ってみた】#両声類 #vtuber",date:"2026-06-22"},
       {id:"uqEFPyCqUIE",title:"【Cover】【男生雙人翻唱】 I'm Alive / 李杰明 W.M.L x 陳忻玥 Vicky Chen ❆ 諾恪里 x 艾斯珀達 cover",date:"2026-05-31"},
       {id:"twvki3OvPFM",title:"【Cover】【諾恪里Nokori】#両声類 が 「アイ・アイ・ア / Ado 」全力で歌ってみた #shorts #vtuber #歌ってみた #Ado",date:"2026-05-09"},
@@ -3551,6 +3552,7 @@ const vtubers = [
       {id:"47KrXrkTHHg",title:"ACTOR / 友成空【歌ってみた】❆ 諾恪里Nokori cover",date:"2025-03-21"},
     ],
     shorts: [
+      {id:"kGdfcV4k6Xc",title:"機票訂好心情就嗚呼！30秒東京Vlog~🦊#東京 #tokyo #vlog",date:"2026-09-07"},
       {id:"uNcfMa5al8Y",title:"【諾恪里Nokori】你是在狗叫什麼辣？| #汪汪大作戰 #狗叫遊戲 #shorts #vtuber #CaKano #諾恪里 #BowwowBattle",date:"2026-05-15"},
       {id:"_4Gl_sFJRAo",title:"【アカペラ】アイ・アイ・ア  #Shorts #兩聲類",date:"2026-05-12"},],
     originals_manual: [],
@@ -3785,6 +3787,8 @@ const vtubers = [
       {id:"Nu1FICbgoPw",title:"【ワールドイズマイン/世界第一的公主殿下 】cover / 珮蕾pele",date:"2025-10-25"},
     ],
     shorts: [
+      {id:"lLk7otiY0BM",title:"沒想到我的粉絲裡有男娘 ? ! / 珮蕾pele",date:"2026-09-07"},
+      {id:"aqIDrENWixs",title:"我們可能是鱷魔盃最吵的一隊 ft.idoce、烟花蹦蹦蹦 / 珮蕾pele",date:"2026-09-05"},
       {id:"GiwlOc_Eo1I",title:"後室能有多恐怖 ? ft.幻月 / 珮蕾pele",date:"2026-06-22"},
       {id:"2N4nhvD-dQk",title:"躲貓貓的高手!...應該啦... #心動小鎮 #躲貓貓 / 珮蕾pele",date:"2026-06-19"},
       {id:"BVRo5waUigE",title:"什麼？！我讓學姊發道歉文 #心動小鎮 #躲貓貓 / 珮蕾pele",date:"2026-06-16"},
