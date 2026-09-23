@@ -3385,7 +3385,7 @@ const vtubers = [
       { context: "", text: "吃答辯吧" },
       { context: "", text: "蛤？" },
     ],
-    description: "有網路的地方就會有扉扉",
+    description: "預見娛樂唯一清楚優雅文靜氣質偶像\n有網路的地方就會有扉扉",
     debut: "2024-09-14",
     birthday: "1月14日",
     tags: ["台灣", "預見娛樂", "四期生", "音雲漫步"],
