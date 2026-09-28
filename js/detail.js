@@ -512,6 +512,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="debut-label">${T('debut.sec')}</span>
               </div>
             </div>
+            ${v.graduated && v.graduatedDate ? `
+            <div class="debut-counter-title" style="margin-top:0.6rem;font-size:inherit">
+              出道日 : ${v.debut.replace(/-/g, '/')} → ${v.graduatedDate.replace(/-/g, '/')}
+            </div>` : ''}
           </div>
 
           <div class="detail-section-title">${T('profile.tags')}</div>

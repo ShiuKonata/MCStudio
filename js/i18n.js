@@ -24,7 +24,7 @@
       'graduated.hero.title':    '🎓 畢業生',
       'graduated.hero.subtitle': '感謝每一位曾經努力著發光發熱在舞台上賣力的演出與熱情，恭喜你們畢業了',
       'graduated.empty':         '目前沒有畢業生資料',
-      'graduated.activeTime':    '活動時間',
+      'graduated.activeTime':    '舞台上發光發熱的日子',
       // Footer
       'footer.madeBy':  '由粉絲用愛製作',
       'footer.source':  '資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供',
@@ -197,7 +197,7 @@
       'graduated.hero.title':    '🎓 卒業生',
       'graduated.hero.subtitle': 'これまで一緒にいてくれた全てのメンバーへ感謝',
       'graduated.empty':         '卒業生のデータはまだありません',
-      'graduated.activeTime':    '活動期間',
+      'graduated.activeTime':    '舞台で輝き続けた日々',
       // Footer
       'footer.madeBy':  'ファンが愛情を込めて制作',
       'footer.source':  '情報・画像出典：予見エンターテインメント公式サイト・公式公開画像より。一部ネット上の公開情報、一部画像はレイジャ（BOSS）提供。',
