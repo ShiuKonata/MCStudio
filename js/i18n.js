@@ -22,7 +22,7 @@
       'nav.feedback':  '🐞 回報問題',
       // graduated.html hero
       'graduated.hero.title':    '🎓 畢業生',
-      'graduated.hero.subtitle': '感謝每一位曾經陪伴我們的成員',
+      'graduated.hero.subtitle': '感謝每一位曾經努力著發光發熱在舞台上賣力的演出與熱情，恭喜你們畢業了',
       'graduated.empty':         '目前沒有畢業生資料',
       'graduated.activeTime':    '活動時間',
       // Footer
