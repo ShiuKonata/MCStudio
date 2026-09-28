@@ -3140,6 +3140,9 @@ const vtubers = [
     ],
     description: "\"要不要聽我說兩句廢話呢?\" \"嘻嘻我說完ㄌ\" \"路過此地！屁眼留下來(≖ᴗ≖๑)\"",
     debut: "2024-09-12",
+    graduated: true,
+    graduatedDate: "2026-09-29",
+    graduatedTime: "22:00:00",
     birthday: "4月12日",
     tags: ["台灣", "預見娛樂", "四期生", "音雲漫步", "廢話", "搞笑"],
 

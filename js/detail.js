@@ -490,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 出道計時器 -->
           <div class="debut-counter">
-            <div class="debut-counter-title">${T('debut.title')}</div>
+            <div class="debut-counter-title">${v.graduated ? T('graduated.activeTime') : T('debut.title')}</div>
             <div class="debut-counter-display">
               <div class="debut-unit">
                 <span class="debut-num" id="debut-days">--</span>
@@ -3482,15 +3482,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const [yr, mo, dy] = v.debut.split('-').map(Number);
     const debutDate = new Date(yr, mo - 1, dy, 0, 0, 0);
 
-    function updateDebutCounter() {
-      const diff = Date.now() - debutDate.getTime();
+    const pad = n => String(n).padStart(2, '0');
+
+    function setCounterDisplay(diff) {
       if (diff < 0) return;
       const totalSec = Math.floor(diff / 1000);
       const days    = Math.floor(totalSec / 86400);
       const hours   = Math.floor((totalSec % 86400) / 3600);
       const minutes = Math.floor((totalSec % 3600) / 60);
       const seconds = totalSec % 60;
-      const pad = n => String(n).padStart(2, '0');
       const dEl = document.getElementById('debut-days');
       const hEl = document.getElementById('debut-hours');
       const mEl = document.getElementById('debut-minutes');
@@ -3500,8 +3500,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (mEl) mEl.textContent = pad(minutes);
       if (sEl) sEl.textContent = pad(seconds);
     }
-    updateDebutCounter();
-    setInterval(updateDebutCounter, 1000);
+
+    if (v.graduated && v.graduatedDate) {
+      // 畢業生：凍結在畢業最後一秒
+      const [gyr, gmo, gdy] = v.graduatedDate.split('-').map(Number);
+      let gradDate;
+      if (v.graduatedTime) {
+        const [gh, gmin, gsec] = v.graduatedTime.split(':').map(Number);
+        gradDate = new Date(gyr, gmo - 1, gdy, gh, gmin, gsec);
+      } else {
+        gradDate = new Date(gyr, gmo - 1, gdy, 0, 0, 0);
+      }
+      setCounterDisplay(gradDate.getTime() - debutDate.getTime());
+    } else {
+      // 在職成員：每秒更新
+      function updateDebutCounter() {
+        setCounterDisplay(Date.now() - debutDate.getTime());
+      }
+      updateDebutCounter();
+      setInterval(updateDebutCounter, 1000);
+    }
   }
 
   // 讀取網址中的 tab 參數，預設為 profile
