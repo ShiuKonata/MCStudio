@@ -14,11 +14,16 @@
       // Navbar
       'nav.subtitle': '虛擬 YouTuber 介紹站 ✦ Virtual YouTuber Fan Site',
       'nav.fanNotice': '非預見娛樂官方網站',
-      'nav.home':     '🏠 首頁',
-      'nav.vtubers':  '⭐ Vtuber 一覽',
-      'nav.birthday': '🎂 生日月曆',
-      'nav.merch':    '🛍️ 周邊商品',
-      'nav.feedback': '🐞 回報問題',
+      'nav.home':      '🏠 首頁',
+      'nav.vtubers':   '⭐ Vtuber 一覽',
+      'nav.graduated': '🎓 畢業生',
+      'nav.birthday':  '🎂 生日月曆',
+      'nav.merch':     '🛍️ 周邊商品',
+      'nav.feedback':  '🐞 回報問題',
+      // graduated.html hero
+      'graduated.hero.title':    '🎓 畢業生',
+      'graduated.hero.subtitle': '感謝每一位曾經陪伴我們的成員',
+      'graduated.empty':         '目前沒有畢業生資料',
       // Footer
       'footer.madeBy':  '由粉絲用愛製作',
       'footer.source':  '資料來源與圖源：資訊來自預見娛樂官方網站資訊與官方公開圖庫，部分來自網路公開資訊，部分公開圖源則由懶貓（BOSS）提供',
@@ -181,11 +186,16 @@
       // Navbar
       'nav.subtitle': 'バーチャルYouTuber紹介サイト ✦ Virtual YouTuber Fan Site',
       'nav.fanNotice': '予見エンターテインメント非公式サイト',
-      'nav.home':     '🏠 ホーム',
-      'nav.vtubers':  '⭐ Vtuber一覧',
-      'nav.birthday': '🎂 誕生日カレンダー',
-      'nav.merch':    '🛍️ グッズ',
-      'nav.feedback': '🐞 バグ報告',
+      'nav.home':      '🏠 ホーム',
+      'nav.vtubers':   '⭐ Vtuber一覧',
+      'nav.graduated': '🎓 卒業生',
+      'nav.birthday':  '🎂 誕生日カレンダー',
+      'nav.merch':     '🛍️ グッズ',
+      'nav.feedback':  '🐞 バグ報告',
+      // graduated.html hero
+      'graduated.hero.title':    '🎓 卒業生',
+      'graduated.hero.subtitle': 'これまで一緒にいてくれた全てのメンバーへ感謝',
+      'graduated.empty':         '卒業生のデータはまだありません',
       // Footer
       'footer.madeBy':  'ファンが愛情を込めて制作',
       'footer.source':  '情報・画像出典：予見エンターテインメント公式サイト・公式公開画像より。一部ネット上の公開情報、一部画像はレイジャ（BOSS）提供。',

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 統計數字（優先執行，防止後續程式崩潰影響）─
   const statCount = document.getElementById('stat-count');
-  if (statCount) statCount.textContent = vtubers.length;
+  if (statCount) statCount.textContent = vtubers.filter(v => !v.graduated).length;
 
   // ── 中間統計：世代團體名稱自動輪播 ──────────────
   const carouselName = document.getElementById('stat-carousel-name');
@@ -168,11 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.className = 'gen-tree';
 
       const matched = vtubers.filter(v =>
-        !q ||
-        v.name.toLowerCase().includes(q) ||
-        v.nameEn.toLowerCase().includes(q) ||
-        v.group.toLowerCase().includes(q) ||
-        v.tags.some(t => t.toLowerCase().includes(q))
+        !v.graduated && (
+          !q ||
+          v.name.toLowerCase().includes(q) ||
+          v.nameEn.toLowerCase().includes(q) ||
+          v.group.toLowerCase().includes(q) ||
+          v.tags.some(t => t.toLowerCase().includes(q))
+        )
       );
 
       // 只保留有成員的世代
@@ -217,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const filtered = vtubers
         .filter(v => {
+          if (v.graduated) return false;
           const matchGen = v.generation === activeFilter;
           const matchSearch = !q ||
             v.name.toLowerCase().includes(q) ||
