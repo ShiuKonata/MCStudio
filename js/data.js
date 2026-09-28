@@ -3131,8 +3131,8 @@ const vtubers = [
     generation: "四期生",
     avatar: "https://pbs.twimg.com/profile_images/1995498526294609920/tSOMou_Y_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1735595865698607104/1758886688/1500x500",
-    bgmVideoId: "IUT2J3KviC0",
-    bgmLabel:   "狗勾米米大冒險",
+    bgmVideoId: "PnBfl6oKw_w",
+    bgmLabel:   "この冷たい感情は。涙",
     tagline: "",
     taglines: [
       { context: "", text: "艾連是我老公" },
