@@ -55,6 +55,7 @@
       'card.viewDetail':'✦ 查看詳細介紹',
       'noResults':      '找不到相關 Vtuber，試試其他關鍵字吧！',
       // detail.js — tab 標籤
+      'tab.graduationMessage': '💌 給粉絲的話',
       'tab.profile':     '🐸 個人介紹',
       'tab.refsheet':    '🎨 三視圖',
       'tab.trivia':      '💡 小知識',
@@ -228,6 +229,7 @@
       'card.viewDetail':'✦ 詳細を見る',
       'noResults':      '該当するVtuberが見つかりません。他のキーワードをお試しください。',
       // detail.js — tab 標籤
+      'tab.graduationMessage': '💌 ファンへのメッセージ',
       'tab.profile':     '🐸 プロフィール',
       'tab.refsheet':    '🎨 三面図',
       'tab.trivia':      '💡 トリビア',

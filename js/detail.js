@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 動態分頁設定（依 vtuber 資料決定顯示哪些分頁）──
   const tabConfig = [
+    ...(v.graduationMessage ? [{ key: 'graduation-message', label: T('tab.graduationMessage'), color: v.color || '#888' }] : []),
     { key: 'profile',    label: T('tab.profile'),     color: null },
     ...('refSheets' in v || 'refSheet' in v ? [{ key: 'refsheet',    label: T('tab.refsheet'),    color: null }] : []),
     ...('fanName'  in v ? [{ key: 'trivia',            label: T('tab.trivia'),      color: '#e65100' }] : []),
@@ -477,6 +478,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <!-- ===== 右側：分頁內容 ===== -->
       <main class="vtuber-content">
+
+        <!-- TAB: 給粉絲的話 -->
+        ${v.graduationMessage ? `
+        <div id="tab-graduation-message" class="tab-panel">
+          <div class="detail-section-title">${T('tab.graduationMessage')}</div>
+          <div style="text-align:center;padding:1rem 0">
+            ${v.graduationMessage.img
+              ? `<img src="${v.graduationMessage.img}" alt="給粉絲的話" style="max-width:100%;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.18)">`
+              : `<p style="color:var(--text-muted)">圖片尚未上傳</p>`}
+          </div>
+        </div>` : ''}
 
         <!-- TAB: 個人介紹 -->
         <div id="tab-profile" class="tab-panel active">

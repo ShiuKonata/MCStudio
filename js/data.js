@@ -3248,6 +3248,8 @@ const vtubers = [
       "2024": "1583821169",
     },
 
+    graduationMessage: { img: "images/百百波美_給粉絲的話.jpg" },
+
     color: "#D03869"   // 百百波美 代表色（玫紅）
   },
 
