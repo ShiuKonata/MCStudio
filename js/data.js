@@ -2621,11 +2621,11 @@ const vtubers = [
     nameEn: "Fuka22",
     group: "預見娛樂",
     generation: "四期生",
-    avatar: "https://pbs.twimg.com/profile_images/1992530964615163905/1U7O9j0Q_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2097376496168079360/Lb7Izr0R_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1800118433755086848/1718715523/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "好色喔" }
+      { context: "", text: "好色喔" },
     ],
     description: "給我罐罐！喵！ฅ^✧ﻌ✧^ฅ 給我貓貓也可以喔！ฅ^ↀﻌↀ^ฅ",
     debut: "2024-09-11",
