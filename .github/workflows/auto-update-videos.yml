@@ -3,6 +3,8 @@ name: 🎵 Auto-Update VTuber Videos
 on:
   workflow_dispatch:
   schedule:
+    - cron: '0 0,6,12,18 * * *'   # 每6小時（UTC 0/6/12/18點）
+  schedule:
     - cron: '0 */6 * * *'   # 每6小時自動執行
 
 jobs:
