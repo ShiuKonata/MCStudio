@@ -3142,7 +3142,7 @@ const vtubers = [
     debut: "2024-09-12",
     graduated: true,
     graduatedDate: "2026-09-29",
-    graduatedTime: "22:00:00",
+    graduatedTime: "21:38:37",
     birthday: "4月12日",
     tags: ["台灣", "預見娛樂", "四期生", "音雲漫步", "廢話", "搞笑"],
 
