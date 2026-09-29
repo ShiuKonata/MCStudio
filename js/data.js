@@ -1361,7 +1361,7 @@ const vtubers = [
     nameEn: "Vaswawa",
     group: "預見娛樂",
     generation: "二期生",
-    avatar: "https://pbs.twimg.com/profile_images/2087173423785230337/YNZpqaVM_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2097663263693762560/ba43Ncxw_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1669746708853706753/1775321014/1500x500",
     tagline: "",
     taglines: [
