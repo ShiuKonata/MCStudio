@@ -2866,6 +2866,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let ytsCurrentYear   = 'all';
     let ytsNextPageToken = null;
 
+    // 每次頁面載入時清除此 VTuber 的 Shorts 快取，確保顯示最新資料
+    Object.keys(sessionStorage).forEach(key => {
+      if (key.startsWith('mc_yts_' + v.youtubeChannelId)) sessionStorage.removeItem(key);
+    });
+
     // Shorts 專屬播放清單 ID：UUSH + channelId 去掉前兩字 UC
     const shortsPlaylistId = 'UUSH' + v.youtubeChannelId.slice(2);
 
