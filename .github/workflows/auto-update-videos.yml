@@ -47,36 +47,14 @@ jobs:
           }
           console.log('✅ 已從 data.js 讀取 API 金鑰\n');
 
-          const now = new Date();
-          const segmentIndex = Math.floor(now.getUTCHours() / 6);
-
-          let vtuberIds = [];
-          let currentSegment = 0;
-
-          const segments = [
-            {
-              ids: ['shiucoda', 'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko'],
-              name: '時段1（一期+零期+二期前）'
-            },
-            {
-              ids: ['vaswawa', 'sinniearis', 'ririna', 'ekorru', 'wakasaito', 'whalefall', 'kai'],
-              name: '時段2（二期後+三期前）'
-            },
-            {
-              ids: ['mukuru', 'nyrfier', 'shiroleon', 'fuka22', 'BarkBarkPomi', 'cocor0', 'UchiFifi'],
-              name: '時段3（三期後+四期）'
-            },
-            {
-              ids: ['chita', 'nokori', 'KeKeMii', 'chamamatti', 'Pele', 'Yawnii'],
-              name: '時段4（五期+六期）'
-            }
+          const vtuberIds = [
+            'shiucoda', 'rumi', 'paroniie', 'lubee', 'himegimichika', 'arrynia', 'kiriko',
+            'vaswawa', 'sinniearis', 'ririna', 'ekorru', 'wakasaito', 'whalefall', 'kai',
+            'mukuru', 'nyrfier', 'shiroleon', 'fuka22', 'BarkBarkPomi', 'cocor0', 'UchiFifi',
+            'chita', 'nokori', 'KeKeMii', 'chamamatti', 'Pele', 'Yawnii'
           ];
 
-          vtuberIds = segments[segmentIndex].ids;
-          currentSegment = segmentIndex + 1;
-
-          console.log(`🚀 【每日輪流更新】${segments[segmentIndex].name}`);
-          console.log(`   今天更新 ${vtuberIds.length} 位 VTuber\n`);
+          console.log(`🚀 【每6小時全員更新】共 ${vtuberIds.length} 位 VTuber\n`);
 
           const originalContent = dataContent;
 
