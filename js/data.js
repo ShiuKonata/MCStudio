@@ -214,7 +214,7 @@ const vtubers = [
     // excludeKeywords：標題含任一關鍵字則排除（適合「非 Cover 以外全收」的混合頻道）
     // playlistId     ：UUSH + channelId[2:] = 該頻道 Shorts 專屬清單
     videoClipsChannelIds: [
-      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "Exitus"], excludeKeywords: ["歌回", "cover"] },                           // 非音樂內容（排除歌回 & Cover）
+      { id: "UCsjWfH2QUTGlrFSurA5oj2w", label: "Konata閆娘",   playlistId: "UUSHsjWfH2QUTGlrFSurA5oj2w", excludeKeywords: ["歌回", "cover"] },                                                                                        // 專屬蔻達頻道，不需人名過濾，新 Shorts 自動收錄
       { id: "UCzqYJKopN_nYJBr7ep93jTA", label: "閃電流氓",      keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"], excludeKeywords: ["cover", "吉他"] },                    // 非 Cover 影片
       { id: "UC4nZ-KbmFr21Qt1lN9rmbdQ", label: "孫小毛",        keywords: ["詩雨蔻達", "coda", "shiucoda", "蔻達", "阿統", "統領", "Exitus"], typeKeywords: ["精華"], excludeKeywords: ["帕蘿妮", "帕帕"] },
       { id: "UCpc15B6xb8OagNa7LScMOBg", label: "椪呱實驗室",    keywords: ["詩雨蔻達", "ShiuCoda", "shiucoda", "蔻達", "Exitus"], excludeKeywords: ["cover", "guitar"] },  // 只抓詩雨蔻達的精華

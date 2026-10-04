@@ -144,6 +144,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ? v.videoClipsChannelIds
     : (v.videoClipsChannelId ? [v.videoClipsChannelId] : []);
 
+  // 每次頁面載入時清除此 VTuber 的剪輯頻道快取，確保顯示最新影片
+  // （與 UUSH / UULV 的清除邏輯一致，避免 sessionStorage 跨次存取導致新影片不出現）
+  Object.keys(sessionStorage).forEach(key => {
+    if (key.startsWith('clips_ch_raw_v2_')) sessionStorage.removeItem(key);
+  });
+
   document.title = `${v.name} — MC組事務所`;
 
   // ── 動態更新 OG / Twitter Card meta（讓 LINE 等平台抓到正確的 Vtuber 資訊）──
@@ -1288,8 +1294,10 @@ document.addEventListener('DOMContentLoaded', () => {
       (i === 0 && typeof chEntry === 'object' && chEntry.playlistId)
         ? chEntry.playlistId : 'UU' + id.slice(2)
     );
-    // 快取原始資料（不含篩選），以所有頻道 ID 排序後組合為 key
-    const cacheKey = `clips_ch_raw_v2_${[...channelIds].sort().join('_')}`;
+    // 快取原始資料（不含篩選），以實際拉取的播放清單 ID 組合為 key
+    // 使用 uploadsIds 而非 channelIds，避免同一頻道的 UU（全上傳）和 UUSH（Shorts）
+    // 共用同一個 cache key 而導致資料互相污染
+    const cacheKey = `clips_ch_raw_v2_${[...uploadsIds].sort().join('_')}`;
 
     // 於顯示時套用各主播自己的關鍵字篩選
     // 若未設定 typeKeywords / excludeKeywords，則自動套用全域音樂關鍵字：
