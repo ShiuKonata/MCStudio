@@ -3102,9 +3102,10 @@ const vtubers = [
 
     // 三視圖
     refSheets: [
-      { version: "Ver 1.0",        url: "images/穆克蕗 v1.0.jpg"      },
-      { version: "Ver 2.0",        url: "images/穆克蕗 v2.0.jpg"      },
-      { version: "粉絲形象 穆浴球", url: "images/穆克蕗_穆浴球.jpg"   },
+      { version: "Ver 1.0", url: "images/穆克蕗 v1.0.jpg" },
+      { version: "Ver 2.0", url: "images/穆克蕗 v2.0.jpg" },
+      { version: "粉絲形象 穆浴球", url: "images/穆克蕗_穆浴球.jpg" },
+      { version: "Ver 3.0", url: "images/穆克蕗 Ver 3.0.jpg" },
     ],
 
     color: "#DCC5E0"   // 穆克蕗 代表色（淡紫）
