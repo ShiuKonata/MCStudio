@@ -1811,7 +1811,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!item.id || item.id.startsWith('REPLACE')) return false;
         if (year === 'all') return true;
         return item.date && item.date.startsWith(year);
-      });
+      }).sort((a, b) => (b.date > a.date ? 1 : b.date < a.date ? -1 : 0));
 
       if (!filtered.length) {
         grid.innerHTML = '<div class="ls-no-key"><span style="font-size:2.5rem">📭</span><p>'
