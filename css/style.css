@@ -1397,6 +1397,39 @@ body.vtuber-page footer .footer-source { margin-top: 0.3rem; }
   gap: 1.5rem;
 }
 
+/* 同版本多張圖切換 */
+.refsheet-img-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+  align-self: flex-start;
+}
+.refsheet-img-btn {
+  padding: 0.28rem 0.85rem;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.refsheet-img-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.2);
+}
+.refsheet-img-btn.active {
+  background: var(--vt-pale);
+  border-color: var(--vt-main);
+  color: var(--vt-main);
+}
+.refsheet-img-frames { width: 100%; }
+
 /* =============================================
    小知識 TAB
    ============================================= */

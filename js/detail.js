@@ -240,10 +240,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const panels = sheets.map((s, i) => {
       // 支援單張 url 或多張 urls（上下排列）
       const urlList = s.urls ? s.urls : (s.url ? [s.url] : []);
+      const _cn = ['一','二','三','四','五','六','七','八','九','十'];
       const imgHTML = urlList.length
-        ? (s.layout === 'row'
-            ? `<div class="refsheet-imgs-row">${urlList.map(u => `<img class="refsheet-img" src="${u}" alt="${v.name} ${s.version}">`).join('')}</div>`
-            : urlList.map(u => `<img class="refsheet-img" src="${u}" alt="${v.name} ${s.version}">`).join(''))
+        ? (urlList.length > 1
+            ? `<div class="refsheet-img-nav">${urlList.map((u, j) =>
+                `<button class="refsheet-img-btn${j === 0 ? ' active' : ''}" data-rsidx="${i}" data-imgidx="${j}">第${_cn[j] || j + 1}張</button>`
+              ).join('')}</div><div class="refsheet-img-frames">${urlList.map((u, j) =>
+                `<img class="refsheet-img" data-rsidx="${i}" data-imgidx="${j}" src="${u}" alt="${v.name} ${s.version}"${j > 0 ? ' style="display:none"' : ''}>`
+              ).join('')}</div>`
+            : `<img class="refsheet-img" src="${urlList[0]}" alt="${v.name} ${s.version}">`)
         : `<div class="refsheet-placeholder"><span style="font-size:3rem">🎨</span><p>${T('refsheet.verPending', {ver: s.version})}</p></div>`;
       return `<div class="refsheet-ver-panel${i === 0 ? ' active' : ''}" data-rsidx="${i}">${imgHTML}</div>`;
     }).join('');
@@ -821,6 +826,18 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       const panel = document.querySelector(`.refsheet-ver-panel[data-rsidx="${idx}"]`);
       if (panel) panel.classList.add('active');
+    });
+  });
+
+  // ── 三視圖圖片切換（同版本多張）──────────────────────
+  document.querySelectorAll('.refsheet-img-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ri = btn.dataset.rsidx, ii = btn.dataset.imgidx;
+      document.querySelectorAll(`.refsheet-img-btn[data-rsidx="${ri}"]`).forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`.refsheet-img[data-rsidx="${ri}"]`).forEach(img => { img.style.display = 'none'; });
+      btn.classList.add('active');
+      const img = document.querySelector(`.refsheet-img[data-rsidx="${ri}"][data-imgidx="${ii}"]`);
+      if (img) img.style.display = '';
     });
   });
 
