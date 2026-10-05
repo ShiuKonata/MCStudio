@@ -343,9 +343,11 @@ const vtubers = [
 
     // 會員限定直播（手動填入，id 填 YouTube 影片 ID）
     memberVideos: [
+      { id: "K3hGFRRqmxc", title: "【會限】小聊一下FF~💧詩雨蔻達", date: "2026/08/31" },
+      { id: "tbG-dD-2JiI", title: "【會限拼拼圖】好久沒有跟大家一起拼拼圖啦!!💧詩雨蔻達", date: "2026-07-08" },
+      { id: "bSATcgUVhpo", title: "桌寵最終版分享!!順便代抽💧詩雨蔻達", date: "2026-05-20" },
       { id: "iBstTkj9YQs", title: "【會限】2026勞動節吉他彈唱24小part.1💧詩雨蔻達", date: "2026-05-14" },
       { id: "eit0_YgfAk4", title: "【會限】2026勞動節吉他彈唱24小part.2💧詩雨蔻達", date: "2026-05-14" },
-      { id: "bSATcgUVhpo", title: "桌寵最終版分享!!順便代抽💧詩雨蔻達", date: "2026-05-20" },
       { id: "3wQiTBf7iHk", title: "【會限】練練歌，聊聊(炫耀)會員福利!!💧詩雨蔻達 #CODA報報", date: "2026-03-25" },
       { id: "iawtSS8RxPk", title: "【會限】練歌練吉他，連做最簡單ㄉ事都像在復健💧詩雨蔻達", date: "2026-02-04" },
       { id: "2SfBMMaMLWY", title: "【會限】初次練歌台，絕對不是因為被逼到牆角ㄌ💧詩雨蔻達", date: "2025-11-25" },
@@ -383,7 +385,6 @@ const vtubers = [
       { id: "dDvl71efDfw", title: "【會限歌回】秘呱之歌搶先聽❤💧詩雨蔻達", date: "2023-04-29" },
       { id: "uZAWa35SEvE", title: "【會限】見證秘呱之歌的誕生過程(絕對沒有請AI幫我寫) 💧詩雨蔻達", date: "2023-04-07" },
       { id: "iARUXWRvT0g", title: "【會限】 Gartic Phone!! 一起來畫畫傳話啦!!!💧詩雨蔻達", date: "2023-03-21" },
-      { id: "tbG-dD-2JiI", title: "【會限拼拼圖】好久沒有跟大家一起拼拼圖啦!!💧詩雨蔻達", date: "2026-07-08" },
     ],
 
     // 新年願望（每年填入項目、目標、是否達成）
