@@ -3146,6 +3146,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"YrLanFF-AE8",title:"【Cover】⚕︎？？？ / ？？？ - Cover【涅爾菲 Nyrfier】",date:"2026-10-10"},
       {id:"R7MoB2sMCDE",title:"⚕︎偽顏 / yama - Cover【涅爾菲 Nyrfier】",date:"2025-11-11"},
       {id:"6sQZBOrzcLw",title:"⚕︎東京フラッシュ / Vaundy - Cover【涅爾菲 Nyrfier】",date:"2025-10-11"},
       {id:"gJSfN512xX8",title:"【Alluria一周年紀念】ONE NIGHT/Full Throttle4【Cover】",date:"2025-05-10"},
