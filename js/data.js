@@ -5047,6 +5047,76 @@ const vtubers = [
     },
 
     color: "#D5DFEF"   // 睏睏幽昵 代表色（霧藍灰）
+  },
+
+  // ── 畢業生 ──────────────────────────────────────────
+
+  {
+    id: "rikaros",
+    name: "利卡洛斯",
+    nameEn: "Rikaros",
+    group: "預見娛樂",
+    generation: "一期生",
+    avatar: "",
+    coverImage: "",
+    tagline: "",
+    description: "",
+    debut: "2023-02-28",
+    graduated: true,
+    graduatedDate: "2024-12-07",
+    graduatedTime: "20:58:17",
+    birthday: "",
+    tags: ["台灣", "預見娛樂", "一期生", "Exitus"],
+
+    youtube: "",
+    youtubeChannelId: "",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
+    twitter: "",
+    spreadsheet: "",
+    spreadsheetLabel: "利卡洛斯的大小事",
+    scheduleTitle: "利卡洛斯的行程表",
+    scheduleVideoId: "",
+
+    videos: [
+      {id:"REPLACE_VIDEO_1",title:"",date:""},
+    ],
+    shorts: [],
+
+    color: "#888888"
+  },
+
+  {
+    id: "aimiaoandi",
+    name: "愛喵Andi",
+    nameEn: "Andi",
+    group: "預見娛樂",
+    generation: "二期生",
+    avatar: "",
+    coverImage: "",
+    tagline: "",
+    description: "",
+    debut: "2023-12-25",
+    graduated: true,
+    graduatedDate: "2025-07-18",
+    graduatedTime: "20:58:17",
+    birthday: "",
+    tags: ["台灣", "預見娛樂", "二期生", "MeloNyx"],
+
+    youtube: "",
+    youtubeChannelId: "",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
+    twitter: "",
+    spreadsheet: "",
+    spreadsheetLabel: "愛喵Andi的大小事",
+    scheduleTitle: "愛喵Andi的行程表",
+    scheduleVideoId: "",
+
+    videos: [
+      {id:"REPLACE_VIDEO_1",title:"",date:""},
+    ],
+    shorts: [],
+
+    color: "#888888"
   }
 ];
 
