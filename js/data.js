@@ -5088,24 +5088,24 @@ const vtubers = [
   {
     id: "aimiaoandi",
     name: "愛喵Andi",
-    nameEn: "Andi",
+    nameEn: "Neko Andi",
     group: "預見娛樂",
     generation: "二期生",
-    avatar: "",
-    coverImage: "",
+    avatar: "https://pbs.twimg.com/profile_images/1933857327112704000/_xdGE0O9_400x400.jpg",
+    coverImage: "https://pbs.twimg.com/profile_banners/1637469462327689217/1746635984/1500x500",
     tagline: "",
-    description: "",
+    description: "在世間人們被陰鬱的黑色蝴蝶籠罩時，\n貓咪Andi與能夠治癒人心的魔法生物Mewchi簽約後，得到了人類的外表。",
     debut: "2023-12-25",
     graduated: true,
     graduatedDate: "2025-07-18",
     graduatedTime: "20:58:17",
-    birthday: "",
+    birthday: "11-29",
     tags: ["台灣", "預見娛樂", "二期生", "MeloNyx"],
 
-    youtube: "",
+    youtube: "https://www.youtube.com/channel/UCYIzqbVP6FLZr4Kteo5gJrA",
     youtubeChannelId: "",
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
-    twitter: "",
+    twitter: "https://x.com/EnominyaAndi",
     spreadsheet: "",
     spreadsheetLabel: "愛喵Andi的大小事",
     scheduleTitle: "愛喵Andi的行程表",
@@ -5116,7 +5116,7 @@ const vtubers = [
     ],
     shorts: [],
 
-    color: "#888888"
+    color: "#DDB6B5"
   }
 ];
 
