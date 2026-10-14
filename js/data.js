@@ -5054,24 +5054,24 @@ const vtubers = [
   {
     id: "rikaros",
     name: "利卡洛斯",
-    nameEn: "Rikaros",
+    nameEn: "LiKaRuZ",
     group: "預見娛樂",
     generation: "一期生",
-    avatar: "",
-    coverImage: "",
+    avatar: "https://pbs.twimg.com/profile_images/1659873499031437312/vhV-R71X_400x400.jpg",
+    coverImage: "https://pbs.twimg.com/profile_banners/1582915621792407552/1684579689/1500x500",
     tagline: "",
-    description: "",
+    description: "被懶貓無情gank之後囚禁起來的翼人 我很自由 我很自由",
     debut: "2023-02-28",
     graduated: true,
     graduatedDate: "2024-12-07",
     graduatedTime: "20:58:17",
-    birthday: "",
+    birthday: "9/10",
     tags: ["台灣", "預見娛樂", "一期生", "Exitus"],
 
-    youtube: "",
+    youtube: "https://www.youtube.com/@L1KaRuZ",
     youtubeChannelId: "",
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
-    twitter: "",
+    twitter: "https://x.com/L1KaRuZ",
     spreadsheet: "",
     spreadsheetLabel: "利卡洛斯的大小事",
     scheduleTitle: "利卡洛斯的行程表",
@@ -5082,7 +5082,7 @@ const vtubers = [
     ],
     shorts: [],
 
-    color: "#888888"
+    color: "#895CE0"
   },
 
   {
