@@ -5072,10 +5072,16 @@ const vtubers = [
     youtubeChannelId: "UCWEOI4TNvZQh-SDcdMrifyg",
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/L1KaRuZ",
+    twitch: "#",
+    facebook: "#",
+    instagram: "#",
     spreadsheet: "",
     spreadsheetLabel: "利卡洛斯的大小事",
     scheduleTitle: "利卡洛斯的行程表",
     scheduleVideoId: "",
+    overrideLinks: [
+      { label: '利卡洛斯的大小事', url: '#', class: 'sheets', icon: '📋' },
+    ],
 
     videos: [
       {id:"REPLACE_VIDEO_1",title:"",date:""},
@@ -5106,10 +5112,16 @@ const vtubers = [
     youtubeChannelId: "UCYIzqbVP6FLZr4Kteo5gJrA",
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     twitter: "https://x.com/EnominyaAndi",
+    twitch: "#",
+    facebook: "#",
+    instagram: "#",
     spreadsheet: "",
     spreadsheetLabel: "愛喵Andi的大小事",
     scheduleTitle: "愛喵Andi的行程表",
     scheduleVideoId: "",
+    overrideLinks: [
+      { label: '愛喵Andi的大小事', url: '#', class: 'sheets', icon: '📋' },
+    ],
 
     videos: [
       {id:"REPLACE_VIDEO_1",title:"",date:""},

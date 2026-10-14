@@ -860,6 +860,9 @@ body.vtuber-page .nav-links-bar a.active { background: rgba(255,255,255,0.15); }
 .sidebar-social-btn.twitch { background: #9146ff; color: white; }
 .sidebar-social-btn.fb     { background: #1877f2; color: white; }
 .sidebar-social-btn.ig     { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: white; }
+/* 連結佔位（url="#"）：顯示但不可點擊 */
+.sidebar-social-btn[href="#"] { opacity: 0.25; pointer-events: none; filter: grayscale(0.4); }
+.detail-link-btn[href="#"]    { opacity: 0.30; pointer-events: none; }
 .sidebar-back-btn {
   display: block; width: 100%;
   padding: 0.6rem; border-radius: 12px;
