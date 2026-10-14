@@ -5080,7 +5080,10 @@ const vtubers = [
     scheduleTitle: "利卡洛斯的行程表",
     scheduleVideoId: "",
     overrideLinks: [
-      { label: '利卡洛斯的大小事', url: '#', class: 'sheets', icon: '📋' },
+      { label: '利卡洛斯的大小事', url: '#', class: 'sheets',     icon: '📋' },
+      { label: 'HiveBee',        url: '#', class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員',        url: '#', class: 'membership', icon: '💎' },
+      { label: '棉花糖',          url: '#', class: 'marshmallow',icon: '🍬' },
     ],
 
     videos: [
@@ -5120,7 +5123,10 @@ const vtubers = [
     scheduleTitle: "愛喵Andi的行程表",
     scheduleVideoId: "",
     overrideLinks: [
-      { label: '愛喵Andi的大小事', url: '#', class: 'sheets', icon: '📋' },
+      { label: '愛喵Andi的大小事', url: '#', class: 'sheets',     icon: '📋' },
+      { label: 'HiveBee',         url: '#', class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員',         url: '#', class: 'membership', icon: '💎' },
+      { label: '棉花糖',           url: '#', class: 'marshmallow',icon: '🍬' },
     ],
 
     videos: [
