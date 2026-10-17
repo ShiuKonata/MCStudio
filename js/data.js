@@ -3530,6 +3530,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"GNQAJ4NWJjk",title:"【Original】再兩分鐘 Two Minutes More / 崎塔Chita 【Official Music Video】 原版伴奏 KTV伴唱",date:"2026-10-17"},
       {id:"cRgXhfhxqiA",title:"【Original】再兩分鐘 Two Minutes More / 崎塔Chita 【Official Music Video】",date:"2026-09-20"},
       {id:"xGyZkUevB6c",title:"Saja Boys - Soda Pop / 魁Kai、崎塔Chita、鯨諾Whalefall、穆克蕗Mukuru、涅爾菲Nyrfier (Cover)",date:"2025-10-25"},
       {id:"zDnT3Q3oyqQ",title:"チェリーポップ / 崎塔CHITA (cover)",date:"2025-10-09"},
