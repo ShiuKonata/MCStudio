@@ -4489,6 +4489,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"EVs_ssYiN6o",title:"【Cover】セレナーデ / なとり ❆ 諾恪里Nokori (cover)",date:"2026-10-18"},
       {id:"sLloyrUEZyM",title:"【Cover】ROSE / HANA ❆ 7人で歌ってみた【Cover】",date:"2026-09-04"},
       {id:"reFyvzjLtdA",title:"【Cover】【鬼月中文翻唱】창귀 (倀鬼) / CHANGGWI (안예은 AHN YEEUN ) ❆ 諾恪里Nokori cover | Chinese version",date:"2026-08-17"},
       {id:"ay0a9Y_RmSI",title:"【Cover】火炎 - 女王蜂 / 諾恪里Nokori cover【歌ってみた】",date:"2026-06-21"},
