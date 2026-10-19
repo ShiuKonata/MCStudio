@@ -2405,8 +2405,7 @@ const vtubers = [
 
     refSheets: [
       { version: "Ver 1.0", url: "images/依可露 v1.0.png" },
-      { version: "Ver 2.0", url: "images/依可露 Ver 2.0.jpeg" },
-      { version: "Ver 2.0_1", url: "images/依可露 Ver 2.0_1.jpg" },
+      { version: "Ver 2.0", urls: ["images/依可露 Ver 2.0.jpeg", "images/依可露 Ver 2.0_1.jpg"], layout: "row" },
     ],
 
     songStatsGids: {
