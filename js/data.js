@@ -3506,6 +3506,8 @@ const vtubers = [
     taglines: [
       { context: "遊戲時", text: "我是個波貝、打那是什麼勾巴" },
       { context: "轉盤時", text: "屁啦屁啦屁啦、不可能不可能不可能" },
+      { context: "恐遊時", text: "隨便你吧" },
+      { context: "一般時候", text: "早安我的朋友" },
       { context: "", text: "tell me why🎶" },
       { context: "", text: "What do you mean？" },
       { context: "", text: "歐買勾抖" }
