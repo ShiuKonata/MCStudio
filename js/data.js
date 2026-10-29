@@ -4326,6 +4326,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"V9GzJAmrpdo",title:"【Cover】【歌ってみた/Cover】I'm Your Treasure Box/宝鐘マリン【羽芝扉扉 Uchi Fifi】",date:"2026-10-29"},
       {id:"Ci5HabhQB_g",title:"【歌ってみた/Cover】旦那様とのラブラブ・ラブソング/釘宮理惠【羽芝扉扉 Uchi Fifi】",date:"2026-03-12"},
       {id:"35apHWg7RbY",title:"【歌ってみた/Cover】昭陽/祖婭納惜X三無【羽芝扉扉 Uchi Fifi】",date:"2025-10-05"},
       {id:"ylMfcJHAFig",title:"【Cover】HUNTRIX - How It's Done(KPop Demon Hunters) ft. @BarkBarkPomi 【羽芝扉扉 Uchi Fifi】",date:"2025-07-07"},
