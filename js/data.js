@@ -1891,6 +1891,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"5XYkKjsobsE",title:"【Cover】✧『？？？？』/cover by 希妮·亞里絲🤍SinnieAris✨",date:"2026-11-01"},
       {id:"cxGwCl0fPY8",title:"✧『愛Dee』/cover by 希妮·亞里絲🤍SinnieAris✨ ft. @Arrynia",date:"2026-06-04"},
       {id:"a03jgfMCy60",title:"ᦠ 希妮·亞里絲 3D LIVE《Ad infinitum 剎那即永恆》ᦠ【Trailer】",date:"2026-04-25"},
       {id:"9CAR_x6aLTk",title:"✧ニホンノミカタ －ネバダカラキマシタ－/出演 by鷲和環&魁&涅爾菲&希哥·啞鈴斯💪Brother C🏋️‍♀️",date:"2026-04-01"},
