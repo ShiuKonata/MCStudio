@@ -4176,6 +4176,7 @@ const vtubers = [
       {id:"m21ZGrJBYGs",title:"「僕は...」Boku wa / 心 𝗰𝗼𝗰𝗼𝗿𝟬 𝗖𝗢𝗩𝗘𝗥",date:"2024-07-09"},
     ],
     shorts: [
+      {id:"3UY11tTzRF0",title:"【💜心可可 新衣裝 2.0】𝟮𝟬𝟮𝟲/��𝟭/𝟬𝟲 𝟮𝟬:𝟬𝟬 正式公開",date:"2026-11-02"},
       {id:"WiAlu_lgzK4",title:"🫣惡魔蛇男 你今晚的噩夢🐍 #超自然行動組 #shorts #精華 #心cocor0 #vtuber #預見娛樂 #台V #好笑 #搞笑 #laugh #恐怖 #REPO #lethalcompany",date:"2026-08-27"},
       {id:"rioMXAlfnKc",title:"😳大叔終於來找我了😍 #醫起救世界 #鼠裡逃生 #心cocor0 #心可可 #vtuber #預見娛樂 #shorts #搞笑 #好笑 #有趣 #聊天 #cocor0 #台V #抽卡",date:"2026-08-03"},
       {id:"9oQtuwVH-Gg",title:"😵‍💫撞爛兔😵‍💫 #apex #apexlegends #抽卡 #遊戲精華 #台灣vtuber #shorts #搞笑 #心cocor0 #vtuber #預見娛樂 #cocor0",date:"2026-07-29"},
