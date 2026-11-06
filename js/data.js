@@ -728,6 +728,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"RN3QFwO9f60",title:"【Cover】🎵 家後 - 帕蘿妮 Paroniie 【COVER】",date:"2026-11-06"},
       {id:"XXEFcA_O06g",title:"【Cover】🎵 小蠻腰 - 帕蘿妮 Paroniie 【COVER】",date:"2026-10-25"},
       {id:"-c7vfzcyO_A",title:"【Cover】🎵 過去を喰らう - 帕蘿妮 Paroniie 【COVER】",date:"2026-08-01"},
       {id:"O3Jdj78bzF0",title:"【Cover】🎵 老公天下第一 - 帕蘿妮 Paroniie 【COVER】",date:"2026-06-20"},
