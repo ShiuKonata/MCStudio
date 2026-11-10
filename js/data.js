@@ -2812,6 +2812,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"u7MS3ic_3os",title:"【Cover】??? / ??? - Alluria｜【Cover】",date:"2026-11-10"},
       {id:"EMe9ATWaKwU",title:"絶対零度 Absolute Zero / なとり - 魁 Kai｜【Cover】",date:"2026-05-30"},
       {id:"u46Vc2nbYAo",title:"女孩 / 韋禮安 - 魁 Kai x 克克米伊 KeKeMii｜【Cover】",date:"2025-08-29"},
       {id:"lyagz4xw1cM",title:"Bunny Girl / AKASAKI - 魁 Kai｜【Cover】",date:"2025-02-01"},
@@ -2992,6 +2993,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"3Z7tptZ8Gys",title:"【Cover】【穆克蕗】哈士奇寶寶 Cover｜原唱・製作：詩雨蔻達【3D歡樂SONg】#穆克蕗 #哈士奇寶寶 #詩雨蔻達",date:"2026-11-10"},
       {id:"yVpYm6IGG2E",title:"【Cover】アイスドロップ／aqu3ra 【Mukuru穆克蕗 】【COVER】",date:"2026-09-11"},
       {id:"MbyQe5WhkRE",title:"【Cover】「空奏列車」／OrangeStar 【Mukuru穆克蕗 】【COVER】",date:"2026-07-09"},
       {id:"LqLNzQbDiqU",title:"【Cover】「常夏★スカイスクレイパー」／ChroNoiR 【Mukuru穆克蕗 x Whalefall鯨諾】【COVER】",date:"2026-04-24"},],
