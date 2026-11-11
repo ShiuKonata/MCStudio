@@ -213,6 +213,25 @@
     .denom-btn:disabled{opacity:.35;cursor:not-allowed}
     .denom-btn.burned-denom::after{content:'✓';position:absolute;top:2px;right:4px;font-size:.55rem;color:var(--accent);opacity:.7}
 
+    /* ── 罐頭塔 ── */
+    .can-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.7rem}
+    .can-tower{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+    .can-row{display:flex;gap:3px;justify-content:center}
+    .can{display:flex;flex-direction:column;align-items:center;width:26px}
+    .can-cap{width:26px;height:6px;background:linear-gradient(to bottom,#d4c88a,#a89c50);border-radius:50%;border:1px solid #8a7a30;margin-bottom:-2px;position:relative;z-index:2}
+    .can-body{width:24px;height:30px;background:linear-gradient(to right,#8a6a10,#c8a228 30%,#e8c040 50%,#c8a228 70%,#8a6a10);border-radius:2px;display:flex;align-items:center;justify-content:center;border:1px solid #6a5010;position:relative;overflow:hidden}
+    .can-body::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,.12)}
+    .can-body::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(0,0,0,.18)}
+    .can-txt{font-size:4.5px;color:rgba(60,30,0,.85);font-family:var(--font-d);letter-spacing:.5px;text-align:center;line-height:1.2;font-weight:900;position:relative;z-index:1}
+    .can-base{width:72px;height:5px;background:linear-gradient(to bottom,#5a4010,#3a2808);border-radius:1px;margin-top:1px}
+    .can-total{font-size:.72rem;color:var(--accent);font-variant-numeric:tabular-nums}
+    .can-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
+    .can-btn:hover:not(:disabled){background:rgba(185,196,104,.24)} .can-btn:disabled{opacity:.38;cursor:not-allowed}
+    @keyframes canDrop{0%{transform:translateY(-18px);opacity:0}60%{transform:translateY(3px)}100%{transform:translateY(0);opacity:1}}
+    .can-row.just-added .can:last-child{animation:canDrop .35s ease-out}
+
+    .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface-2);border:1px solid var(--accent);color:var(--text);font-size:.82rem;padding:.7rem 1.4rem;z-index:200;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;text-align:center;max-width:320px;line-height:1.6}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     .site-footer{text-align:center;padding:1.4rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--text-faint);background:rgba(9,12,6,.45);backdrop-filter:blur(6px)}
     .site-footer a{color:var(--text-faint);text-decoration:none} .site-footer a:hover{color:var(--text-muted)}
 
@@ -224,6 +243,7 @@
 <body>
 
 <div id="stars"></div>
+<div class="toast" id="toast"></div>
 
 <div class="modal-overlay" id="modal" onclick="closeModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
@@ -358,6 +378,26 @@
           <button class="denom-btn" id="denom-100" onclick="burnPaper(100)">$100</button>
           <button class="denom-btn" id="denom-500" onclick="burnPaper(500)">$500</button>
         </div>
+      </div>
+      <div class="can-card">
+        <div class="card-title">罐頭塔</div>
+        <div class="can-tower" id="can-tower">
+          <div class="can-row" id="can-r3">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+          </div>
+          <div class="can-row" id="can-r2">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+          </div>
+          <div class="can-row" id="can-r1">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+          </div>
+          <div class="can-base"></div>
+        </div>
+        <div class="can-total">已供奉 <span id="cnt-can">…</span> 罐</div>
+        <button class="can-btn" id="btn-can" onclick="doneCan()">供奉罐頭</button>
       </div>
     </div>
     <!-- 原有：供奉 + 擲筊 -->
@@ -671,6 +711,7 @@ async function burnPaper(amount){
       document.getElementById('cnt-paper').textContent=d.total.toLocaleString();
       sessionStorage.setItem(key,'1');
       btn.classList.add('burned-denom');
+      showToast('🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉');
     }else{btn.disabled=false;}
   }catch(e){btn.disabled=false;}
 }
@@ -692,9 +733,62 @@ async function loadPaperTotal(){
   });
 }
 
+let toastTimer;
+function showToast(msg, duration=4000){
+  const t=document.getElementById('toast');
+  t.innerHTML=msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'), duration);
+}
+
+function canHTML(){return`<div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>`;}
+async function doneCan(){
+  if(sessionStorage.getItem('sc_offered_can'))return;
+  const btn=document.getElementById('btn-can');
+  btn.disabled=true;
+  try{
+    const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'offer',type:'can'}));
+    const d=await r.json();
+    if(d.success){
+      document.getElementById('cnt-can').textContent=d.count;
+      sessionStorage.setItem('sc_offered_can','1');
+      btn.title='本次已供奉';
+      // 動態加一罐到塔上
+      const rows=['can-r1','can-r2','can-r3','can-r4'];
+      for(const id of rows){
+        let row=document.getElementById(id);
+        if(!row){
+          row=document.createElement('div');
+          row.className='can-row'; row.id=id;
+          document.getElementById('can-tower').insertBefore(row,document.getElementById('can-r1').previousSibling||document.getElementById('can-r1'));
+        }
+        const maxCans={'can-r1':3,'can-r2':2,'can-r3':1,'can-r4':2}[id]||3;
+        if(row.children.length<maxCans){
+          row.classList.add('just-added');
+          row.insertAdjacentHTML('beforeend',canHTML());
+          setTimeout(()=>row.classList.remove('just-added'),400);
+          break;
+        }
+      }
+    }else{btn.disabled=false;}
+  }catch(e){btn.disabled=false;}
+}
+async function loadCanCount(){
+  try{
+    const r=await fetch(SCRIPT_URL+'?action=getOffers');
+    const d=await r.json();
+    if(d.success&&d.data) document.getElementById('cnt-can').textContent=d.data.can||0;
+  }catch(e){}
+  if(sessionStorage.getItem('sc_offered_can')){
+    const b=document.getElementById('btn-can');
+    if(b){b.disabled=true;b.title='本次已供奉';}
+  }
+}
+
 loadMessages();
 loadOfferCounts();
 loadPaperTotal();
+loadCanCount();
 initVisitCount();
 </script>
 </body>
