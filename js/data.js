@@ -41,7 +41,7 @@ const vtubers = [
       { label: 'HiveBee',  url: 'https://www.hivebee.com.tw/ShiuCoda/Donate',     class: 'hivebee',    icon: '🐝' },
       { label: '深度會員', url: 'https://www.hivebee.com.tw/ShiuCoda/Subscribe', class: 'membership', icon: '💎' },
       { label: '棉花糖',   url: 'https://marshmallow-qa.com/sh1uc0da',           class: 'marshmallow', icon: '🍬' },
-      { label: '追思紀念頁', url: 'https://claude.ai/artifact/RTRLVUifrFqpov2bSU13B4', class: 'memorial',    icon: '🕯️' },
+      { label: '追思紀念頁', url: 'https://shiukonata.github.io/MCStudio/追思會/shiucoda.html', class: 'memorial',    icon: '🕯️' },
     ],
 
     videos: [
