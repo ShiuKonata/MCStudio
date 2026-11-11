@@ -992,6 +992,7 @@ body.vtuber-page .tag { background: rgba(255,255,255,0.85); border-color: rgba(2
 .detail-link-btn.hivebee    { background: #f59e0b; color: white; box-shadow: 0 4px 16px rgba(245,158,11,0.4); }
 .detail-link-btn.membership { background: linear-gradient(135deg,#7c3aed,#a78bfa); color: white; box-shadow: 0 4px 16px rgba(124,58,237,0.4); }
 .detail-link-btn.marshmallow{ background: linear-gradient(135deg,#ec4899,#f9a8d4); color: white; box-shadow: 0 4px 16px rgba(236,72,153,0.4); }
+.detail-link-btn.memorial   { background: linear-gradient(135deg,#3a4a2a,#5c6e3a); color: #c8d47a; box-shadow: 0 4px 16px rgba(90,110,50,0.45); border: 1px solid rgba(185,196,104,0.35); }
 .link-icon { font-size: 1.2rem; }
 
 /* Quote — 填滿剩餘空間，讓個人介紹頁延伸至底部 */
