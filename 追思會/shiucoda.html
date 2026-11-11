@@ -682,18 +682,23 @@ const qianSfx=new Audio('qian-sfx.mp3');
 let drawing=false;
 function drawFortune(){
   if(drawing)return; drawing=true;
-  qianSfx.currentTime=0; qianSfx.play().catch(()=>{});
   const wrap=document.getElementById('qian-wrap');
   wrap.classList.add('shaking');
-  setTimeout(()=>{
+  const f=FORTUNES[Math.floor(Math.random()*FORTUNES.length)];
+  let sfxDone=false, minDone=false;
+  function tryShow(){
+    if(!sfxDone||!minDone)return;
     wrap.classList.remove('shaking');
-    const f=FORTUNES[Math.floor(Math.random()*FORTUNES.length)];
     document.getElementById('fortune-result').innerHTML=
       `<div class="fortune-num">第${f.num}籤</div>`+
       `<div class="fortune-level ${f.cls}">${f.level}</div>`+
       `<div class="fortune-text">${esc(f.text)}</div>`;
     drawing=false;
-  },750);
+  }
+  setTimeout(()=>{minDone=true;tryShow();},750);
+  qianSfx.currentTime=0;
+  qianSfx.addEventListener('ended',()=>{sfxDone=true;tryShow();},{once:true});
+  qianSfx.play().catch(()=>{sfxDone=true;tryShow();});
 }
 
 async function burnPaper(amount){
