@@ -701,9 +701,10 @@ function drawFortune(){
     drawing=false;
   }
   setTimeout(()=>{minDone=true;tryShow();},750);
+  bgMusic.volume=0.1;
   qianSfx.currentTime=0;
-  qianSfx.addEventListener('ended',()=>{sfxDone=true;tryShow();},{once:true});
-  qianSfx.play().catch(()=>{sfxDone=true;tryShow();});
+  qianSfx.addEventListener('ended',()=>{bgMusic.volume=0.25;sfxDone=true;tryShow();},{once:true});
+  qianSfx.play().catch(()=>{bgMusic.volume=0.25;sfxDone=true;tryShow();});
 }
 
 async function burnPaper(amount){
