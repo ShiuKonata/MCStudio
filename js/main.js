@@ -1,3 +1,13 @@
+function isGraduated(v) {
+  if (v.graduated) return true;
+  if (!v.graduatedDate || v.noAutoGraduate) return false;
+  const [yr, mo, dy] = v.graduatedDate.split('-').map(Number);
+  const gradTime = v.graduatedTime
+    ? (() => { const [h,m,s] = v.graduatedTime.split(':').map(Number); return new Date(yr,mo-1,dy,h,m,s); })()
+    : new Date(yr, mo-1, dy, 23, 59, 59);
+  return Date.now() >= gradTime.getTime();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Nav 高度 ─────────────────────────────────
@@ -27,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── 統計數字（優先執行，防止後續程式崩潰影響）─
   const statCount = document.getElementById('stat-count');
-  if (statCount) statCount.textContent = vtubers.filter(v => !v.graduated).length;
+  if (statCount) statCount.textContent = vtubers.filter(v => !isGraduated(v)).length;
 
   // ── 中間統計：世代團體名稱自動輪播 ──────────────
   const carouselName = document.getElementById('stat-carousel-name');
@@ -168,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.className = 'gen-tree';
 
       const matched = vtubers.filter(v =>
-        !v.graduated && (
+        !isGraduated(v) && (
           !q ||
           v.name.toLowerCase().includes(q) ||
           v.nameEn.toLowerCase().includes(q) ||
@@ -219,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const filtered = vtubers
         .filter(v => {
-          if (v.graduated) return false;
+          if (isGraduated(v)) return false;
           const matchGen = v.generation === activeFilter;
           const matchSearch = !q ||
             v.name.toLowerCase().includes(q) ||

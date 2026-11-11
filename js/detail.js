@@ -1,3 +1,14 @@
+// ── 畢業判斷（支援自動日期判斷 + noAutoGraduate 例外）────────────────────
+function isGraduated(v) {
+  if (v.graduated) return true;
+  if (!v.graduatedDate || v.noAutoGraduate) return false;
+  const [yr, mo, dy] = v.graduatedDate.split('-').map(Number);
+  const gradTime = v.graduatedTime
+    ? (() => { const [h,m,s] = v.graduatedTime.split(':').map(Number); return new Date(yr,mo-1,dy,h,m,s); })()
+    : new Date(yr, mo-1, dy, 23, 59, 59);
+  return Date.now() >= gradTime.getTime();
+}
+
 // ── XSS 防護：HTML 跳脫函數 ─────────────────────────────────────────────
 function esc(s) {
   return String(s == null ? '' : s)
@@ -513,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 出道計時器 -->
           <div class="debut-counter">
-            <div class="debut-counter-title">${v.graduated ? T('graduated.activeTime') : T('debut.title')}</div>
+            <div class="debut-counter-title">${isGraduated(v) ? T('graduated.activeTime') : T('debut.title')}</div>
             <div class="debut-counter-display">
               <div class="debut-unit">
                 <span class="debut-num" id="debut-days">--</span>
@@ -535,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="debut-label">${T('debut.sec')}</span>
               </div>
             </div>
-            ${v.graduated && v.graduatedDate ? `
+            ${isGraduated(v) && v.graduatedDate ? `
             <div class="debut-counter-title" style="margin-top:0.6rem;font-size:inherit">
               出道日 : ${v.debut.replace(/-/g, '/')} → ${v.graduatedDate.replace(/-/g, '/')}
             </div>` : ''}
@@ -3520,7 +3531,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (sEl) sEl.textContent = pad(seconds);
     }
 
-    if (v.graduated && v.graduatedDate) {
+    if (isGraduated(v) && v.graduatedDate) {
       // 畢業生：凍結在畢業最後一秒
       const [gyr, gmo, gdy] = v.graduatedDate.split('-').map(Number);
       let gradDate;

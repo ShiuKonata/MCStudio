@@ -17,6 +17,9 @@ const vtubers = [
     ],
     description: "我是即將成為大統領的精靈CODA°(╭╮)° 跟隨我吧…嘿嘿✐☡",
     debut: "2023-02-25",
+    graduatedDate: "2026-12-25",
+    graduatedTime: "22:00:00",
+    noAutoGraduate: true,
     birthday: "6月6日",
     tags: ["台灣", "預見娛樂", "一期生", "Exitus", "歌勢", "吉他彈唱", "傲嬌可愛", "188cm"],
 
@@ -709,6 +712,8 @@ const vtubers = [
     ],
     description: "這裡是帕蘿妮嗷～💧 會唱歌會吃飯會睡覺～🦖✨聽說我的一分鐘只有60秒 🎆 o(*ﾟ▽ﾟ*)o",
     debut: "2023-02-24",
+    graduatedDate: "2026-12-18",
+    graduatedTime: "22:00:00",
     birthday: "4月17日",
     tags: ["台灣", "預見娛樂", "一期生", "Exitus", "龍", "歌勢", "吃肉肉", "亮金金"],
 
@@ -941,6 +946,8 @@ const vtubers = [
     ],
     description: "預見所屬 EXITUS - 神無月鹿比 the 浴血地獄のザ‧梅花鹿天使 aka 世紀の開創者",
     debut: "2023-02-27",
+    graduatedDate: "2026-12-13",
+    graduatedTime: "22:00:00",
     birthday: "10月22日",
     tags: ["台灣", "預見娛樂", "一期生", "Exitus", "廢鹿", "遊戲勢", "鹿女神", "攻略少女"],
 
@@ -1120,6 +1127,8 @@ const vtubers = [
     tagline: "",
     description: "世界第一超級無敵可愛奇美拉 § 高中生",
     debut: "2023-03-04",
+    graduatedDate: "2026-12-27",
+    graduatedTime: "22:00:00",
     birthday: "5月20日",
     tags: ["台灣", "預見娛樂", "一期生", "Exitus", "奇美拉", "高中生", "青春無敵"],
 
