@@ -35,8 +35,11 @@
 
     .site-header { text-align:center; padding:2.5rem 1rem 1.4rem; border-bottom:1px solid var(--border); background:rgba(9,12,6,0.45); backdrop-filter:blur(6px); }
     .days-label { font-size:.78rem; color:var(--text-muted); letter-spacing:.18em; }
-    .days-num { display:block; font-family:var(--font-d); font-weight:900; font-size:2.6rem; line-height:1; color:var(--accent); font-variant-numeric:tabular-nums; }
-    .days-unit { font-size:.78rem; color:var(--text-faint); letter-spacing:.15em; }
+    .countdown-row { display:flex; align-items:flex-end; justify-content:center; gap:.6rem; margin:.3rem 0; flex-wrap:wrap; }
+    .cd-unit { display:flex; flex-direction:column; align-items:center; gap:.1rem; }
+    .cd-num { font-family:var(--font-d); font-weight:900; font-size:2.4rem; line-height:1; color:var(--accent); font-variant-numeric:tabular-nums; min-width:2ch; text-align:center; }
+    .cd-lbl { font-size:.68rem; color:var(--text-faint); letter-spacing:.15em; }
+    .cd-sep { font-family:var(--font-d); font-size:2rem; color:var(--accent); line-height:1; opacity:.5; padding-bottom:.15rem; }
     .page-title { font-family:var(--font-d); font-weight:400; font-size:1.3rem; color:var(--text); margin-top:.4rem; line-height:1.65; max-width:700px; margin-left:auto; margin-right:auto; }
     .page-subtitle { font-size:.78rem; color:var(--text-faint); letter-spacing:.2em; margin-top:.35rem; }
     .visitor-row { display:flex; align-items:center; justify-content:center; gap:1.5rem; margin-top:.7rem; flex-wrap:wrap; }
@@ -233,9 +236,16 @@
 
 <header class="site-header">
   <div>
-    <span class="days-label" id="days-label">距離那天，還有</span>
-    <span class="days-num" id="days-num">?</span>
-    <span class="days-unit">天</span>
+    <div class="days-label" id="days-label">距離那天，還有</div>
+    <div class="countdown-row">
+      <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">天</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">時</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">分</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">秒</span></div>
+    </div>
   </div>
   <h1 class="page-title">謝謝女兒 詩雨蔻達 發光了3年10個月共1399天，帶來了最精采最燦爛的演出，妳是呱民們最亮麗的偶像</h1>
   <p class="page-subtitle">詩雨蔻達　ShiuCoda</p>
@@ -397,16 +407,34 @@
 const GRAD_DATE  = new Date(2026, 11, 25, 22, 0, 0);
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHMXbqi-1eerx-hq_yzKwLYhjJnR3TKTt0fhclvEJPsVCQc0Pn_vWLduKtL8BC2brEDQ/exec';
 
-(() => {
-  const diff = Date.now() - GRAD_DATE.getTime();
-  if (diff < 0) {
+function updateCountdown(){
+  const diff = GRAD_DATE.getTime() - Date.now();
+  const pad = n => String(Math.abs(n)).padStart(2,'0');
+  if(diff > 0){
     document.getElementById('days-label').textContent = '距離那天，還有';
-    document.getElementById('days-num').textContent = Math.ceil(-diff / 86400000);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
   } else {
     document.getElementById('days-label').textContent = '距離那天，已經過了';
-    document.getElementById('days-num').textContent = Math.floor(diff / 86400000);
+    const abs = Math.abs(diff);
+    const d = Math.floor(abs / 86400000);
+    const h = Math.floor((abs % 86400000) / 3600000);
+    const m = Math.floor((abs % 3600000) / 60000);
+    const s = Math.floor((abs % 60000) / 1000);
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
   }
-})();
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
 const sc = document.getElementById('stars');
 for (let i = 0; i < 45; i++) {
