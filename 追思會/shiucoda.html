@@ -39,6 +39,9 @@
     .days-unit { font-size:.78rem; color:var(--text-faint); letter-spacing:.15em; }
     .page-title { font-family:var(--font-d); font-weight:400; font-size:1.3rem; color:var(--text); margin-top:.4rem; line-height:1.65; max-width:700px; margin-left:auto; margin-right:auto; }
     .page-subtitle { font-size:.78rem; color:var(--text-faint); letter-spacing:.2em; margin-top:.35rem; }
+    .visitor-row { display:flex; align-items:center; justify-content:center; gap:1.5rem; margin-top:.7rem; flex-wrap:wrap; }
+    .visit-stat { font-size:.74rem; color:var(--text-muted); letter-spacing:.1em; }
+    .visit-stat span { color:var(--accent); font-variant-numeric:tabular-nums; font-weight:600; }
 
     .main {
       width:100%; padding:2rem 2rem 2.5rem;
@@ -183,6 +186,12 @@
   </div>
   <h1 class="page-title">謝謝女兒 詩雨蔻達 發光了3年10個月共1399天，帶來了最精采最燦爛的演出，妳是呱民們最亮麗的偶像</h1>
   <p class="page-subtitle">詩雨蔻達　ShiuCoda</p>
+  <div class="visitor-row">
+    <span class="visit-stat">來訪粉絲 <span id="stat-visitor">…</span> 人</span>
+    <span class="visit-stat">🪔 上香 <span id="stat-incense2">…</span> 次</span>
+    <span class="visit-stat">💐 獻花 <span id="stat-flower2">…</span> 次</span>
+    <span class="visit-stat">🍊 獻果 <span id="stat-fruit2">…</span> 次</span>
+  </div>
 </header>
 
 <main>
@@ -419,27 +428,56 @@ function showRandomMsg(){
 }
 function closeModal(){document.getElementById('modal').classList.remove('open');}
 
+function updateOfferStats(data){
+  if(!data)return;
+  ['incense','flower','fruit'].forEach(t=>{
+    const v=(data[t]||0)+' 次';
+    document.getElementById('cnt-'+t).textContent=v;
+    const s2=document.getElementById('stat-'+t+'2'); if(s2)s2.textContent=data[t]||0;
+  });
+  const sv=document.getElementById('stat-visitor'); if(sv&&data.visitor!=null)sv.textContent=data.visitor;
+}
+
 async function loadOfferCounts(){
   try{
     const r=await fetch(SCRIPT_URL+'?action=getOffers');
     const d=await r.json();
-    if(d.success&&d.data){
-      document.getElementById('cnt-incense').textContent=(d.data.incense||0)+' 次';
-      document.getElementById('cnt-flower').textContent=(d.data.flower||0)+' 次';
-      document.getElementById('cnt-fruit').textContent=(d.data.fruit||0)+' 次';
-    }
+    if(d.success&&d.data) updateOfferStats(d.data);
   }catch(e){['cnt-incense','cnt-flower','cnt-fruit'].forEach(id=>document.getElementById(id).textContent='–');}
 }
 
+async function initVisitCount(){
+  if(!sessionStorage.getItem('sc_visited')){
+    sessionStorage.setItem('sc_visited','1');
+    try{
+      const r=await fetch(SCRIPT_URL+'?action=visit');
+      const d=await r.json();
+      if(d.success){const sv=document.getElementById('stat-visitor');if(sv)sv.textContent=d.count;}
+    }catch(e){}
+  }
+  // restore disabled state for offerings already done this session
+  ['incense','flower','fruit'].forEach(t=>{
+    if(sessionStorage.getItem('sc_offered_'+t)){
+      const btn=document.getElementById('btn-'+t);
+      if(btn){btn.disabled=true;btn.title='本次已供奉';}
+    }
+  });
+}
+
 async function doOffer(type){
+  if(sessionStorage.getItem('sc_offered_'+type))return;
   const btn=document.getElementById('btn-'+type), cnt=document.getElementById('cnt-'+type);
   btn.disabled=true;
   try{
     const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'offer',type}));
     const d=await r.json();
-    if(d.success){cnt.textContent=d.count+' 次';cnt.style.color='#fff';setTimeout(()=>{cnt.style.color=''},500);}
-  }catch(e){}
-  setTimeout(()=>{btn.disabled=false},2000);
+    if(d.success){
+      cnt.textContent=d.count+' 次'; cnt.style.color='#fff'; setTimeout(()=>{cnt.style.color=''},500);
+      const s2=document.getElementById('stat-'+type+'2'); if(s2)s2.textContent=d.count;
+      sessionStorage.setItem('sc_offered_'+type,'1');
+      btn.title='本次已供奉';
+    }else{btn.disabled=false;}
+  }catch(e){btn.disabled=false;}
 }
 
 const JR={
@@ -465,6 +503,7 @@ function throwJiao(){
 
 loadMessages();
 loadOfferCounts();
+initVisitCount();
 </script>
 </body>
 </html>
