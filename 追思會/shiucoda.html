@@ -163,7 +163,7 @@
 
     /* ── 右側整體包裝 ── */
     .right-area{display:flex;gap:1rem;align-items:start;justify-self:end}
-    .new-cards{display:flex;flex-direction:column;gap:1rem;width:190px}
+    .new-cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:400px}
 
     /* ── 抽籤 ── */
     .fortune-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
@@ -347,6 +347,7 @@
     <div class="right-area">
     <!-- 新功能：抽籤 + 燒金紙 -->
     <div class="new-cards">
+      <div></div><!-- 留白 -->
       <div class="fortune-card">
         <div class="card-title">抽籤</div>
         <div class="qian-wrap" id="qian-wrap" onclick="drawFortune()">
@@ -359,46 +360,44 @@
         </div>
         <button class="fortune-btn" onclick="drawFortune()">抽籤</button>
       </div>
-      <div style="display:flex;gap:.7rem;align-items:flex-start">
-        <div class="can-card">
-          <div class="card-title">罐頭塔</div>
-          <div class="can-tower" id="can-tower">
-            <div class="can-row" id="can-r3">
-              <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
-            </div>
-            <div class="can-row" id="can-r2">
-              <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
-              <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
-            </div>
-            <div class="can-row" id="can-r1">
-              <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
-              <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
-              <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
-            </div>
-            <div class="can-base"></div>
+      <div class="can-card">
+        <div class="card-title">罐頭塔</div>
+        <div class="can-tower" id="can-tower">
+          <div class="can-row" id="can-r3">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
           </div>
-          <div class="can-total">已供奉 <span id="cnt-can">…</span> 罐</div>
-          <button class="can-btn" id="btn-can" onclick="doneCan()">供奉罐頭</button>
+          <div class="can-row" id="can-r2">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+          </div>
+          <div class="can-row" id="can-r1">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>
+          </div>
+          <div class="can-base"></div>
         </div>
-        <div class="paper-card">
-          <div class="card-title">燒金紙</div>
-          <div class="paper-wrap" id="paper-wrap" onclick="burnPaper()">
-            <div class="paper-layer"></div>
-            <div class="paper-layer"></div>
-            <div class="paper-layer"></div>
-            <div class="flame-wrap" id="flame-wrap">
-              <div class="f-flame"></div><div class="f-flame"></div>
-              <div class="f-flame"></div><div class="f-flame"></div><div class="f-flame"></div>
-            </div>
+        <div class="can-total">已供奉 <span id="cnt-can">…</span> 罐</div>
+        <button class="can-btn" id="btn-can" onclick="doneCan()">供奉罐頭</button>
+      </div>
+      <div class="paper-card">
+        <div class="card-title">燒金紙</div>
+        <div class="paper-wrap" id="paper-wrap" onclick="burnPaper()">
+          <div class="paper-layer"></div>
+          <div class="paper-layer"></div>
+          <div class="paper-layer"></div>
+          <div class="flame-wrap" id="flame-wrap">
+            <div class="f-flame"></div><div class="f-flame"></div>
+            <div class="f-flame"></div><div class="f-flame"></div><div class="f-flame"></div>
           </div>
-          <div class="paper-total-lbl">累計燒化</div>
-          <div class="paper-total-num">$<span id="cnt-paper">…</span> 元</div>
-          <div class="denom-grid">
-            <button class="denom-btn" id="denom-10"  onclick="burnPaper(10)">$10</button>
-            <button class="denom-btn" id="denom-50"  onclick="burnPaper(50)">$50</button>
-            <button class="denom-btn" id="denom-100" onclick="burnPaper(100)">$100</button>
-            <button class="denom-btn" id="denom-500" onclick="burnPaper(500)">$500</button>
-          </div>
+        </div>
+        <div class="paper-total-lbl">累計燒化</div>
+        <div class="paper-total-num">$<span id="cnt-paper">…</span> 元</div>
+        <div class="denom-grid">
+          <button class="denom-btn" id="denom-10"  onclick="burnPaper(10)">$10</button>
+          <button class="denom-btn" id="denom-50"  onclick="burnPaper(50)">$50</button>
+          <button class="denom-btn" id="denom-100" onclick="burnPaper(100)">$100</button>
+          <button class="denom-btn" id="denom-500" onclick="burnPaper(500)">$500</button>
         </div>
       </div>
     </div>
