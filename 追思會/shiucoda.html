@@ -678,9 +678,11 @@ const FORTUNES=[
   {num:'十四', level:'凶',   cls:'fl-low', text:'最近要小心喔——凶又不是死，振作！呱民不許輕易認輸，聽到了嗎'},
   {num:'十五', level:'大凶', cls:'fl-low', text:'大凶！……嘿嘿，恭喜你成功抽到最難抽的，你的手氣真是…獨特。大統領保佑你✐☡'},
 ];
+const qianSfx=new Audio('qian-sfx.mp3');
 let drawing=false;
 function drawFortune(){
   if(drawing)return; drawing=true;
+  qianSfx.currentTime=0; qianSfx.play().catch(()=>{});
   const wrap=document.getElementById('qian-wrap');
   wrap.classList.add('shaking');
   setTimeout(()=>{
