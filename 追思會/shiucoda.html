@@ -188,7 +188,11 @@
     .fortune-result{text-align:center;min-height:60px;display:flex;flex-direction:column;align-items:center;gap:.25rem}
     .fortune-num{font-family:var(--font-d);font-size:1rem;color:var(--accent);font-weight:900}
     .fortune-level{font-size:.7rem;letter-spacing:.12em;padding:.15rem .5rem;border:1px solid currentColor;border-radius:2px}
-    .fl-top{color:#f5d060} .fl-mid{color:#a8b878} .fl-low{color:#7a8870}
+    .fl-top{color:#f5d060}      /* 頂級吉運：金 */
+    .fl-good{color:#a8c86a}     /* 常規吉運：綠 */
+    .fl-mixed{color:#e0a040}    /* 混合難測：橘 */
+    .fl-reverse{color:#8ab4e8}  /* 先苦後甘：藍 */
+    .fl-low{color:#c07070}      /* 純凶：紅 */
     .fortune-text{font-size:.76rem;color:#a8b878;line-height:1.65;margin-top:.2rem}
     .fortune-hint{font-size:.7rem;color:var(--text-faint);font-style:italic}
     .fortune-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
@@ -669,21 +673,30 @@ function throwJiao(){
 }
 
 const FORTUNES=[
-  {num:'一',   level:'大吉', cls:'fl-top', text:'哇你運氣真好！……算了應該只是碰巧啦。嘿嘿✐☡ 跟緊大統領就對了！'},
-  {num:'二',   level:'大吉', cls:'fl-top', text:'大吉！但別得意太早，這不代表你可以偷懶喔——快去努力！嘿嘿'},
-  {num:'三',   level:'中吉', cls:'fl-top', text:'還不錯嘛，有進步！雖然跟大統領比還差很遠就是了……繼續加油'},
-  {num:'四',   level:'中吉', cls:'fl-top', text:'近期有好消息喔！……雖然我也不知道是什麼就是了，呱民自己去找'},
-  {num:'五',   level:'中吉', cls:'fl-top', text:'貴人就在你旁邊，快去謝謝他們，別傻站著發呆——嘿嘿'},
-  {num:'六',   level:'小吉', cls:'fl-mid', text:'還行還行，不上不下的，跟你平常的表現一樣——嘿嘿，別打我'},
-  {num:'七',   level:'小吉', cls:'fl-mid', text:'有在進步！就是進步得有點慢……像蝸牛。但蝸牛也會到的啦，加油'},
-  {num:'八',   level:'吉',   cls:'fl-mid', text:'平平穩穩的……聽起來很無聊？穩定就是一種幸福啦，呱民要懂得珍惜'},
-  {num:'九',   level:'吉',   cls:'fl-mid', text:'答案已在你心裡，你卻一直問別人——問籤幹嘛！問自己啦，笨'},
-  {num:'十',   level:'吉',   cls:'fl-mid', text:'你比你自己想的還強，只是你不知道而已。真是的，呱民要有自信！'},
-  {num:'十一', level:'末吉', cls:'fl-low', text:'就……還好啦。要小心一點，但也別太緊張，大統領說沒事就沒事'},
-  {num:'十二', level:'末吉', cls:'fl-low', text:'低潮期嗎？正常啦，大統領也有狀態不好的時候……才怪，我一直很強'},
-  {num:'十三', level:'凶',   cls:'fl-low', text:'哎呀抽到凶了……嘿嘿，別怕！大統領說：跌倒了就爬起來，沒什麼大不了'},
-  {num:'十四', level:'凶',   cls:'fl-low', text:'最近要小心喔——凶又不是死，振作！呱民不許輕易認輸，聽到了嗎'},
-  {num:'十五', level:'大凶', cls:'fl-low', text:'大凶！……嘿嘿，恭喜你成功抽到最難抽的，你的手氣真是…獨特。大統領保佑你✐☡'},
+  /* ── 頂級吉運 ── */
+  {num:'一',   level:'大大吉',       cls:'fl-top', text:'大大吉！！這是最頂的！……等等，你是不是作弊了？這種運氣也太離譜了吧，嘿嘿✐☡ 大統領都嫉妒你了！'},
+  {num:'二',   level:'大吉',         cls:'fl-top', text:'哇你運氣真好！……算了應該只是碰巧啦。嘿嘿✐☡ 跟緊大統領就對了！'},
+  {num:'三',   level:'向大吉',       cls:'fl-top', text:'向大吉——正在往大吉的路上！有進步嘛，繼續努力！……但還沒到大吉就別得意，大統領在看著你✐☡'},
+  {num:'四',   level:'末大吉',       cls:'fl-top', text:'末大吉！差一點點就是大吉了……像你平常做事一樣，總是差那麼一步。加油！嘿嘿別生氣'},
+  /* ── 常規吉運 ── */
+  {num:'五',   level:'吉凶末分末大吉', cls:'fl-good', text:'吉凶末分末大吉……這名字念起來大統領自己都嫌麻煩。總之就是有點好、有點不確定，注意一下就好✐☡'},
+  {num:'六',   level:'吉',           cls:'fl-good', text:'平平穩穩的……聽起來很無聊？穩定就是一種幸福啦，呱民要懂得珍惜'},
+  {num:'七',   level:'中吉',         cls:'fl-good', text:'還不錯嘛，有進步！雖然跟大統領比還差很遠就是了……繼續加油'},
+  {num:'八',   level:'小吉',         cls:'fl-good', text:'還行還行，不上不下的，跟你平常的表現一樣——嘿嘿，別打我'},
+  {num:'九',   level:'後吉',         cls:'fl-good', text:'後吉！現在可能沒感覺，但後來會越來越好的。大統領說：要有耐心！……雖然我自己沒什麼耐心就是了，嘿嘿✐☡'},
+  {num:'十',   level:'末吉',         cls:'fl-good', text:'末吉……就是剛剛好及格的吉運。就像考了60分——有過就好啦，別太挑剔！'},
+  /* ── 混合難測 ── */
+  {num:'十一', level:'吉凶不分末吉', cls:'fl-mixed', text:'吉凶不分末吉……說真的大統領自己也搞不清楚這是好是壞。總之小心一點，但也別太緊張？嘿嘿✐☡'},
+  {num:'十二', level:'吉凶相交末吉', cls:'fl-mixed', text:'吉凶相交末吉——好壞事會交替出現的意思。有好有壞才叫人生嘛！大統領覺得這樣挺刺激的……對你來說✐☡'},
+  {num:'十三', level:'吉凶相半',     cls:'fl-mixed', text:'吉凶相半！好的一半、壞的一半——所以看你自己怎麼選嘍？大統領說選我就是選好的那一半，嘿嘿✐☡'},
+  {num:'十四', level:'吉凶相央',     cls:'fl-mixed', text:'吉凶相央……正正好好在中間，這個籤最難解釋了。大統領也只能說：看情況吧，呱民自己多注意✐☡'},
+  /* ── 先苦後甘 ── */
+  {num:'十五', level:'小凶後吉',     cls:'fl-reverse', text:'小凶後吉！先有一點點不順，但之後會好的——就像大統領有時候嘴硬，其實心裡是在為你好啦……才怪，嘿嘿✐☡'},
+  {num:'十六', level:'凶後吉',       cls:'fl-reverse', text:'凶後吉！先壞後好——這種劇情最爽了！低谷之後就是高峰，呱民要撐住！大統領說你可以的✐☡'},
+  {num:'十七', level:'凶後大吉',     cls:'fl-reverse', text:'凶後大吉！！最戲劇性的逆轉——先跌到谷底，再飛上天！大統領最喜歡這種主角光環劇情了，你就是故事的主角✐☡'},
+  /* ── 純凶 ── */
+  {num:'十八', level:'凶',           cls:'fl-low', text:'哎呀抽到凶了……嘿嘿，別怕！大統領說：跌倒了就爬起來，沒什麼大不了'},
+  {num:'十九', level:'大凶',         cls:'fl-low', text:'大凶！……嘿嘿，恭喜你成功抽到最難抽的，你的手氣真是…獨特。大統領保佑你✐☡'},
 ];
 const bgMusic=new Audio('bg-music.mp3');
 bgMusic.loop=true; bgMusic.volume=0.25;
