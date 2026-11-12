@@ -242,6 +242,27 @@
     @keyframes canDrop{0%{transform:translateY(-18px);opacity:0}60%{transform:translateY(3px)}100%{transform:translateY(0);opacity:1}}
     .can-row.just-added .can:last-child{animation:canDrop .35s ease-out}
 
+    /* ── 喝水咕嚕嚕 ── */
+    .water-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1rem 1.4rem;display:flex;flex-direction:row;align-items:center;gap:1.4rem;grid-column:1/-1}
+    .water-glass-wrap{position:relative;width:54px;height:68px;cursor:pointer;flex-shrink:0}
+    .water-glass{position:absolute;bottom:0;left:5px;width:44px;height:60px;border:2px solid rgba(160,210,255,.55);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;background:rgba(20,45,70,.4);transition:transform .2s ease-out;transform-origin:bottom center}
+    .water-glass-rim{position:absolute;top:0;left:3px;width:48px;height:3px;background:rgba(180,225,255,.45);border-radius:2px 2px 0 0}
+    .water-body{position:absolute;bottom:0;left:0;right:0;height:62%;background:linear-gradient(to top,rgba(60,140,210,.6),rgba(120,195,250,.35))}
+    .water-wave{position:absolute;top:-5px;left:-60%;width:220%;height:10px;background:rgba(160,215,255,.45);border-radius:50%;animation:wwave 2.4s linear infinite}
+    .water-wave2{animation-delay:-1.2s;opacity:.55;animation-duration:3s}
+    @keyframes wwave{0%{transform:translateX(0)}100%{transform:translateX(45%)}}
+    .water-glass.gulping{animation:gulp .55s ease-in-out forwards}
+    @keyframes gulp{0%{transform:rotate(0)}35%{transform:rotate(-38deg)}75%{transform:rotate(-32deg)}100%{transform:rotate(0)}}
+    .water-bubble{position:absolute;border-radius:50%;background:rgba(170,220,255,.55);pointer-events:none;animation:wbub .65s ease-out forwards}
+    @keyframes wbub{0%{opacity:.85;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-28px) scale(.2)}}
+    .water-info{flex:1;display:flex;flex-direction:column;gap:.6rem}
+    .water-info .card-title{text-align:left;margin:0}
+    .water-total{font-size:.8rem;color:var(--accent);font-variant-numeric:tabular-nums}
+    .water-hint{font-size:.7rem;color:var(--text-faint);line-height:1.5}
+    .water-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.82rem;padding:.45rem 1rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
+    .water-btn:hover:not(:disabled){background:rgba(185,196,104,.24)}
+    .water-btn:disabled{opacity:.4;cursor:not-allowed}
+
     .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface-2);border:1px solid var(--accent);color:var(--text);font-size:.82rem;padding:.7rem 1.4rem;z-index:200;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;text-align:center;max-width:320px;line-height:1.6}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     .site-footer{text-align:center;padding:1.4rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--text-faint);background:rgba(9,12,6,.45);backdrop-filter:blur(6px)}
@@ -411,6 +432,24 @@
           <button class="denom-btn" id="denom-50"  onclick="burnPaper(50)">$50</button>
           <button class="denom-btn" id="denom-100" onclick="burnPaper(100)">$100</button>
           <button class="denom-btn" id="denom-500" onclick="burnPaper(500)">$500</button>
+        </div>
+      </div>
+      <!-- 喝水咕嚕嚕 -->
+      <div class="water-card">
+        <div class="water-glass-wrap" onclick="drinkWater()">
+          <div class="water-glass-rim"></div>
+          <div class="water-glass" id="water-glass">
+            <div class="water-body">
+              <div class="water-wave"></div>
+              <div class="water-wave water-wave2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="water-info">
+          <div class="card-title">喝水咕嚕嚕</div>
+          <div class="water-hint">記得喝水，呱民要顧好自己🐸</div>
+          <div class="water-total">已喝 <span id="cnt-water">…</span> 杯水</div>
+          <button class="water-btn" id="btn-water" onclick="drinkWater()">咕嚕嚕！</button>
         </div>
       </div>
     </div>
@@ -706,6 +745,7 @@ let bgStarted=false;
 document.addEventListener('click',()=>{if(!bgStarted){bgStarted=true;bgMusic.play().catch(()=>{});}},{once:true});
 
 const qianSfx=new Audio('qian-sfx.mp3');
+const waterSfx=new Audio('water-sfx.mp3');
 let drawing=false;
 function drawFortune(){
   if(drawing)return; drawing=true;
@@ -821,10 +861,50 @@ async function loadCanCount(){
   }
 }
 
+let waterLocked=false;
+async function drinkWater(){
+  if(waterLocked)return; waterLocked=true;
+  // 音效（壓低背景音樂）
+  if(bgStarted){bgMusic.volume=0.1;}
+  waterSfx.currentTime=0;
+  waterSfx.play().catch(()=>{});
+  waterSfx.addEventListener('ended',()=>{bgMusic.volume=0.25;},{once:true});
+  // 杯子傾倒動畫
+  const glass=document.getElementById('water-glass');
+  glass.classList.add('gulping');
+  // 水泡粒子
+  const wrap=document.querySelector('.water-glass-wrap');
+  for(let i=0;i<5;i++){
+    const b=document.createElement('div'); b.className='water-bubble';
+    const sz=3+Math.random()*5;
+    b.style.cssText=`width:${sz}px;height:${sz}px;left:${10+Math.random()*30}px;bottom:${32+Math.random()*18}px;animation-delay:${i*.07}s`;
+    wrap.appendChild(b); setTimeout(()=>b.remove(),750);
+  }
+  setTimeout(()=>glass.classList.remove('gulping'),600);
+  // API
+  try{
+    const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'offer',type:'water'}));
+    const d=await r.json();
+    if(d.success){
+      const c=document.getElementById('cnt-water');
+      c.textContent=d.count; c.style.color='#fff'; setTimeout(()=>{c.style.color=''},500);
+    }
+  }catch(e){}
+  setTimeout(()=>{waterLocked=false;},800);
+}
+async function loadWaterCount(){
+  try{
+    const r=await fetch(SCRIPT_URL+'?action=getOffers');
+    const d=await r.json();
+    if(d.success&&d.data) document.getElementById('cnt-water').textContent=d.data.water||0;
+  }catch(e){}
+}
+
 loadMessages();
 loadOfferCounts();
 loadPaperTotal();
 loadCanCount();
+loadWaterCount();
 initVisitCount();
 </script>
 </body>
