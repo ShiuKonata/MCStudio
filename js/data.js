@@ -4956,10 +4956,10 @@ const vtubers = [
     group: "預見娛樂",
     generation: "六期生",
     avatar: "https://pbs.twimg.com/profile_images/2087187364016009216/YiKzunCl_400x400.jpg",
-    coverImage: "https://pbs.twimg.com/profile_banners/1939968445539377152/1779096779/1500x500",
+    coverImage: "https://pbs.twimg.com/profile_banners/1939968445539377152/1790923709/1500x500",
     tagline: "",
     taglines: [
-      { context: "", text: "捏" },
+      { context: "", text: "" },
     ],
     description: "📜 您好呀，我是幽昵，來自仙境深處的傳令官……！",
     debut: "2025-11-30",
