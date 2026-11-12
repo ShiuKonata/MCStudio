@@ -173,7 +173,8 @@
     .new-cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:400px}
 
     /* ── 抽籤 ── */
-    .fortune-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+    .fortune-card,.qian-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+    .fortune-result-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.2rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center}
     .qian-wrap{position:relative;width:52px;height:80px;cursor:pointer;user-select:none}
     .qian-tong{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:48px;height:52px;background:linear-gradient(to right,#7a5a10,#c8a228 40%,#e8c040 50%,#c8a228 60%,#7a5a10);border-radius:4px 4px 2px 2px;border:2px solid #5a3e08;box-shadow:0 3px 10px rgba(0,0,0,.55),inset 0 2px 4px rgba(255,220,100,.2)}
     .qian-tong::after{content:'籤';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:.6rem;color:rgba(255,220,80,.7);letter-spacing:.05em}
@@ -185,15 +186,15 @@
     .q-stick:nth-child(5){height:60px;top:0;left:28px;transform:rotate(4deg)}
     @keyframes qshake{0%{transform:rotate(0)}15%{transform:rotate(-12deg)}30%{transform:rotate(10deg)}45%{transform:rotate(-8deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-4deg)}90%{transform:rotate(2deg)}100%{transform:rotate(0)}}
     .qian-wrap.shaking{animation:qshake .7s ease-in-out}
-    .fortune-result{text-align:center;min-height:60px;display:flex;flex-direction:column;align-items:center;gap:.25rem}
-    .fortune-num{font-family:var(--font-d);font-size:1rem;color:var(--accent);font-weight:900}
+    .fortune-result{text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;gap:.4rem;width:100%}
+    .fortune-num{font-family:var(--font-d);font-size:1.3rem;color:var(--accent);font-weight:900}
     .fortune-level{font-size:.7rem;letter-spacing:.12em;padding:.15rem .5rem;border:1px solid currentColor;border-radius:2px}
     .fl-top{color:#f5d060}      /* 頂級吉運：金 */
     .fl-good{color:#a8c86a}     /* 常規吉運：綠 */
     .fl-mixed{color:#e0a040}    /* 混合難測：橘 */
     .fl-reverse{color:#8ab4e8}  /* 先苦後甘：藍 */
     .fl-low{color:#c07070}      /* 純凶：紅 */
-    .fortune-text{font-size:.76rem;color:#a8b878;line-height:1.65;margin-top:.2rem}
+    .fortune-text{font-size:.88rem;color:#a8b878;line-height:1.75;margin-top:.3rem}
     .fortune-hint{font-size:.7rem;color:var(--text-faint);font-style:italic}
     .fortune-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
     .fortune-btn:hover{background:rgba(185,196,104,.24)}
@@ -358,18 +359,19 @@
     <div class="right-area">
     <!-- 新功能：抽籤 + 燒金紙 -->
     <div class="new-cards">
-      <div></div><!-- 留白 -->
-      <div class="fortune-card">
+      <div class="qian-card">
         <div class="card-title">抽籤</div>
         <div class="qian-wrap" id="qian-wrap" onclick="drawFortune()">
           <div class="q-stick"></div><div class="q-stick"></div>
           <div class="q-stick"></div><div class="q-stick"></div><div class="q-stick"></div>
           <div class="qian-tong"></div>
         </div>
+        <button class="fortune-btn" onclick="drawFortune()">抽籤</button>
+      </div>
+      <div class="fortune-result-card">
         <div class="fortune-result" id="fortune-result">
           <div class="fortune-hint">搖一搖籤筒抽籤</div>
         </div>
-        <button class="fortune-btn" onclick="drawFortune()">抽籤</button>
       </div>
       <div class="can-card">
         <div class="card-title">罐頭塔</div>
