@@ -712,6 +712,11 @@ function throwJiao(){
   },1050);
 }
 
+const bgMusic=new Audio('himegimichika-bg.mp3');
+bgMusic.loop=true; bgMusic.volume=0.25;
+let bgStarted=false;
+document.addEventListener('click',()=>{if(!bgStarted){bgStarted=true;bgMusic.play().catch(()=>{});}},{once:true});
+
 const FORTUNES=[
   /* ── 頂級吉運 ── */
   {num:'一',   level:'大大吉',       cls:'fl-top', text:'大大吉！！這是最頂的！……等等，你是不是作弊了？這種運氣也太離譜了吧，是不是把咪奇的可愛都拿走了！？🍬'},
