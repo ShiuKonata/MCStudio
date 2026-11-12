@@ -134,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 添加手動分類的原創曲
   if (v.originals_manual && v.originals_manual.length > 0) {
-    v.videos.originals = [...(v.videos.originals || []), ...v.originals_manual];
+    v.videos.originals = [...(v.videos.originals || []), ...v.originals_manual]
+      .sort((a, b) => (b.date > a.date ? 1 : b.date < a.date ? -1 : 0));
   }
 
   // 添加手動分類的初配信（premiere）
@@ -1260,37 +1261,25 @@ document.addEventListener('DOMContentLoaded', () => {
           originalsToRender = await filterShiucodaVideosByDuration(originalsToRender, v);
         }
 
-        if (coversToRender.length > 0) {
-          renderVideoCards(coversToRender, 'video-grid', '🎵');
-        }
-        if (originalsToRender.length > 0) {
-          renderVideoCards(originalsToRender, 'video-grid', '🎵');
-        }
-
-        // Officials 不需要時長過濾
-        if (v.videos.officials && v.videos.officials.length > 0) {
-          renderVideoCards(v.videos.officials, 'video-grid', '🎵');
-        }
+        // 合併後按日期新→舊排序，讓「全部」模式下跨 Cover/Original 也是時間序
+        const officials = v.videos.officials || [];
+        const merged = [...coversToRender, ...originalsToRender, ...officials]
+          .sort((a, b) => (b.date > a.date ? 1 : b.date < a.date ? -1 : 0));
+        renderVideoCards(merged, 'video-grid', '🎵');
 
         // 只顯示最終結果摘要
         if (v.id === 'shiucoda') {
-          const coversCount = coversToRender.length;
-          const originalsCount = originalsToRender.length;
-          const officialsCount = (v.videos.officials || []).length;
-          console.log(`📊 詩雨蔻達 區域統計 — Cover: ${coversCount} 部 | Original: ${originalsCount} 部 | Officials: ${officialsCount} 部`);
+          console.log(`📊 詩雨蔻達 區域統計 — Cover: ${coversToRender.length} 部 | Original: ${originalsToRender.length} 部 | Officials: ${officials.length} 部`);
         }
       } catch (err) {
         console.error('❌ 渲染失敗:', err);
-        // 失敗時，直接渲染原始列表
-        if (v.videos.covers && v.videos.covers.length > 0) {
-          renderVideoCards(v.videos.covers, 'video-grid', '🎵');
-        }
-        if (v.videos.originals && v.videos.originals.length > 0) {
-          renderVideoCards(v.videos.originals, 'video-grid', '🎵');
-        }
-        if (v.videos.officials && v.videos.officials.length > 0) {
-          renderVideoCards(v.videos.officials, 'video-grid', '🎵');
-        }
+        // 失敗時，直接合併渲染
+        const fallback = [
+          ...(v.videos.covers || []),
+          ...(v.videos.originals || []),
+          ...(v.videos.officials || [])
+        ].sort((a, b) => (b.date > a.date ? 1 : b.date < a.date ? -1 : 0));
+        renderVideoCards(fallback, 'video-grid', '🎵');
       }
     })();
   }

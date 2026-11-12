@@ -96,11 +96,11 @@ const vtubers = [
       { id: "dVtyGge6v_s", title: "【Cover】Yoasobi - 海のまにまに💧詩雨蔻達【cover】",                            date: "2023-04-10" },
       { id: "0bg4dYS8Znk", title: "【Cover】跟Ado一起唱!!『 アタシは問題作 』💧詩雨蔻達【cover】",               date: "2023-03-20" },
       { id: "bzMqxkyO3yA", title: "【Cover】メガテラ・ゼロ -この夜に乾杯 💧詩雨蔻達",                              date: "2023-02-25" },
+      { id: "ON2e3Yc7F6Q", title: "【Cover】星期三的康帕內拉-愛迪生 Edison💧詩雨蔻達【cover】",                   date: "2023-02-21" },
       { id: "gMWt1w67ZFE", title: "【Cover】Memories/詩雨蔻達 | 吉他自彈自唱",                                     date: "2023-02-15" },
       { id: "-jdQoS_NwCQ", title: "【Cover】走建國路回家但後座少ㄌ泥/詩雨蔻達 | 吉他自彈自唱",                     date: "2023-02-06" },
       { id: "iasDIGQYtBw", title: "【Cover】緑黄色社会-mela! / 詩雨蔻達",                                          date: "2023-01-28" },
       { id: "XHuc832HAfY", title: "【Cover】食虫植物/ 詩雨蔻達 feat.茶浣熊@TanukiiDonCh | 吉他自彈自唱",           date: "2023-01-21" },
-      { id: "ON2e3Yc7F6Q", title: "【Cover】星期三的康帕內拉-愛迪生 Edison💧詩雨蔻達【cover】",                   date: "2023-02-21" },
     ],
 
     // ── Shorts（<61秒的短影片）──────────────────
