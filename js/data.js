@@ -4155,7 +4155,7 @@ const vtubers = [
     nameEn: "cocor0",
     group: "預見娛樂",
     generation: "四期生",
-    avatar: "https://pbs.twimg.com/profile_images/1803285070645796864/dqPN0I-3_400x400.jpg",
+    avatar: "https://pbs.twimg.com/profile_images/2118734468634890240/EIUUt316_400x400.jpg",
     coverImage: "https://pbs.twimg.com/profile_banners/1800430912188084224/1718093197/1500x500",
     tagline: "",
     description: "博士都叫我可可, 大家也叫我可可就好 🉑",
