@@ -648,6 +648,7 @@ function updateOfferStats(data){
     const s2=document.getElementById('stat-'+t+'2'); if(s2)s2.textContent=data[t]||0;
   });
   const cw=document.getElementById('cnt-water'); if(cw)cw.textContent=data.water||0;
+  const cp=document.getElementById('cnt-paper'); if(cp)cp.textContent=(data.paper_amount||0).toLocaleString();
   const sv=document.getElementById('stat-visitor'); if(sv&&data.visitor!=null)sv.textContent=data.visitor;
 }
 
