@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (titleLower.includes('cover') || titleLower.includes('歌ってみた')) {
         covers.push(vid);
       }
-      // 【不區分大小寫】檢查 Original（original 或 official 或 原創）
-      else if (titleLower.includes('original') || titleLower.includes('official') || vid.title.includes('【原創】')) {
+      // 【不區分大小寫】檢查 Original（original 或 【official 或 原創；避免誤判 @帳號名內的 official）
+      else if (titleLower.includes('original') || titleLower.includes('【official') || vid.title.includes('【原創】')) {
         // 【新增】檢測到【Original】時，在前面加【原創】
         let newTitle = vid.title;
         if (titleLower.includes('original') && !vid.title.includes('【原創】')) {
