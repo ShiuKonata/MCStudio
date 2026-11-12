@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>姬城三千華 追思紀念</title>
+  <meta property="og:title" content="姬城三千華 追思紀念">
+  <meta property="og:description" content="我們摯愛的姬城三千華，於西元2026年12月27日，悄悄的離開直播間。留下我們永恆的咪奇與感恩。">
+  <meta property="og:image" content="https://shiukonata.github.io/MCStudio/%E8%BF%BD%E6%80%9D%E6%9C%83/himegimichika-preview.jpg">
+  <meta property="og:url" content="https://shiukonata.github.io/MCStudio/%E8%BF%BD%E6%80%9D%E6%9C%83/himegimichika.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://shiukonata.github.io/MCStudio/%E8%BF%BD%E6%80%9D%E6%9C%83/himegimichika-preview.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0810;
+      --surface: rgba(18,12,24,0.88);
+      --surface-2: rgba(28,18,36,0.80);
+      --border: rgba(68,36,80,0.9);
+      --accent: #D4A8C8;
+      --accent-dim: rgba(212,168,200,0.14);
+      --accent-glow: rgba(212,168,200,0.38);
+      --text: #f8edf5;
+      --text-muted: #9a7a90;
+      --text-faint: #5a3850;
+      --font-d: 'Noto Serif TC','思源宋體',serif;
+      --font-b: 'Noto Sans TC',sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); }
+    body {
+      background-image: url('himegimichika-bg.jpg');
+      background-size: cover; background-position: center top; background-attachment: fixed;
+      color: var(--text); font-family: var(--font-b); min-height: 100vh;
+    }
+    body::before { content:''; position:fixed; inset:0; background:rgba(12,8,16,0.78); z-index:0; pointer-events:none; }
+    #stars { position:fixed; inset:0; pointer-events:none; z-index:0; }
+    .star { position:absolute; border-radius:50%; background:var(--accent); opacity:0; animation:twinkle var(--d,3s) var(--dl,0s) ease-in-out infinite alternate; }
+    @keyframes twinkle { 0%{opacity:0} 50%{opacity:var(--mo,.2)} 100%{opacity:.04} }
+    header, main, footer { position:relative; z-index:1; }
+
+    .site-header { text-align:center; padding:2.5rem 1rem 1.4rem; border-bottom:1px solid var(--border); background:rgba(12,8,16,0.45); backdrop-filter:blur(6px); }
+    .days-label { font-size:.78rem; color:var(--text-muted); letter-spacing:.18em; }
+    .countdown-row { display:flex; align-items:flex-end; justify-content:center; gap:.6rem; margin:.3rem 0; flex-wrap:wrap; }
+    .cd-unit { display:flex; flex-direction:column; align-items:center; gap:.1rem; }
+    .cd-num { font-family:var(--font-d); font-weight:900; font-size:2.4rem; line-height:1; color:var(--accent); font-variant-numeric:tabular-nums; min-width:2ch; text-align:center; }
+    .cd-lbl { font-size:.68rem; color:var(--text-faint); letter-spacing:.15em; }
+    .cd-sep { font-family:var(--font-d); font-size:2rem; color:var(--accent); line-height:1; opacity:.5; padding-bottom:.15rem; }
+    .page-title { font-family:var(--font-d); font-weight:400; font-size:1.3rem; color:var(--text); margin-top:.4rem; line-height:1.65; max-width:700px; margin-left:auto; margin-right:auto; padding:0 1rem; box-sizing:border-box; }
+    .page-subtitle { font-size:.78rem; color:var(--text-faint); letter-spacing:.2em; margin-top:.35rem; }
+    .visitor-row { display:flex; align-items:center; justify-content:center; gap:1.5rem; margin-top:.7rem; flex-wrap:wrap; }
+    .visit-stat { font-size:.74rem; color:var(--text-muted); letter-spacing:.1em; }
+    .visit-stat span { color:var(--accent); font-variant-numeric:tabular-nums; font-weight:600; }
+
+    .main {
+      width:100%; padding:2rem 2rem 2.5rem;
+      display:grid; grid-template-columns:1fr 250px 1fr; gap:1.6rem; align-items:start;
+    }
+
+    /* ── 左：留言板 ── */
+    .gb-panel { display:flex; flex-direction:column; background:var(--surface); backdrop-filter:blur(6px); border:1px solid var(--border); max-width:560px; }
+    .gb-head { padding:1rem 1.3rem .8rem; border-bottom:1px solid var(--border); display:flex; align-items:baseline; justify-content:space-between; }
+    .gb-title { font-family:var(--font-d); font-size:1rem; color:var(--text-muted); letter-spacing:.18em; }
+    .gb-counter { font-size:.72rem; color:var(--text-faint); font-variant-numeric:tabular-nums; }
+
+    .gb-carousel { flex:1; position:relative; overflow:hidden; min-height:420px; display:flex; align-items:stretch; }
+    .carousel-track { width:100%; display:flex; align-items:center; justify-content:center; }
+    .c-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:36px; height:60px; background:rgba(12,8,16,.65); border:1px solid var(--border); color:var(--text-muted); font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s,color .15s,border-color .15s; user-select:none; }
+    .c-nav:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent); }
+    .c-nav:disabled { opacity:.2; cursor:not-allowed; }
+    .c-prev{left:0} .c-next{right:0}
+
+    .msg-slide { width:100%; padding:2.5rem 3.8rem; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:420px; transition:opacity .22s ease; }
+    .msg-slide.fading{opacity:0}
+    .slide-quote-mark { font-family:var(--font-d); font-size:3rem; line-height:1; color:var(--accent); opacity:.18; margin-bottom:.2rem; user-select:none; }
+    .slide-text { font-size:1rem; color:var(--text); line-height:1.85; white-space:pre-wrap; word-break:break-word; max-height:260px; overflow-y:auto; }
+    .slide-text::-webkit-scrollbar{width:2px} .slide-text::-webkit-scrollbar-thumb{background:var(--border)}
+    .slide-sep { width:32px; height:1px; background:var(--border); margin:1rem auto; }
+    .slide-name { font-size:.88rem; color:var(--accent); letter-spacing:.08em; }
+    .slide-time { font-size:.72rem; color:var(--text-faint); margin-top:.2rem; font-variant-numeric:tabular-nums; }
+    .slide-empty { width:100%; display:flex; align-items:center; justify-content:center; min-height:420px; color:var(--text-faint); font-size:.84rem; font-style:italic; }
+
+    .carousel-dots { display:flex; gap:.38rem; justify-content:center; align-items:center; padding:.7rem 1rem; border-top:1px solid var(--border); flex-wrap:wrap; min-height:34px; }
+    .dot { width:6px; height:6px; border-radius:50%; background:var(--border); transition:background .2s,transform .2s; cursor:pointer; flex-shrink:0; }
+    .dot.active { background:var(--accent); transform:scale(1.35); }
+
+    .write-form { border-top:1px solid var(--border); padding:0 1.3rem; max-height:0; overflow:hidden; transition:max-height .3s ease,padding .3s ease; background:rgba(28,18,36,.5); }
+    .write-form.open { max-height:280px; padding:1rem 1.3rem; }
+    .f-row { display:flex; flex-direction:column; gap:.25rem; margin-bottom:.6rem; }
+    .f-label { font-size:.72rem; color:var(--text-muted); letter-spacing:.1em; }
+    .f-input, .f-area { background:var(--surface-2); border:1px solid var(--border); color:var(--text); font-family:var(--font-b); font-size:.86rem; padding:.5rem .65rem; outline:none; transition:border-color .15s; }
+    .f-input:focus, .f-area:focus { border-color:var(--accent); }
+    .f-area { resize:vertical; min-height:68px; line-height:1.6; }
+    .f-actions { display:flex; align-items:center; justify-content:space-between; gap:.5rem; flex-wrap:wrap; }
+    .f-status { font-size:.72rem; color:var(--text-muted); }
+    .f-btn { background:var(--accent-dim); border:1px solid var(--accent); color:var(--accent); font-family:var(--font-b); font-size:.8rem; padding:.42rem 1.1rem; cursor:pointer; letter-spacing:.1em; transition:background .15s; }
+    .f-btn:hover{background:rgba(212,168,200,.24)} .f-btn:disabled{opacity:.38;cursor:not-allowed}
+    .f-cancel { background:transparent; border:1px solid var(--border); color:var(--text-muted); font-family:var(--font-b); font-size:.78rem; padding:.4rem .9rem; cursor:pointer; transition:border-color .15s,color .15s; }
+    .f-cancel:hover{border-color:var(--text-muted);color:var(--text)}
+    .gb-foot { border-top:1px solid var(--border); padding:.8rem 1.3rem; display:flex; align-items:center; justify-content:flex-end; }
+    .write-btn { display:flex; align-items:center; gap:.4rem; background:var(--accent-dim); border:1px solid var(--accent); color:var(--accent); font-family:var(--font-b); font-size:.82rem; padding:.45rem 1.1rem; cursor:pointer; letter-spacing:.1em; transition:background .15s; }
+    .write-btn:hover{background:rgba(212,168,200,.24)}
+
+    /* ── 中：立繪 ── */
+    .portrait-panel { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+    .portrait-frame { width:210px; height:268px; border:1px solid var(--border); background:var(--surface); backdrop-filter:blur(4px); position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; }
+    .portrait-frame:hover .portrait-hint{opacity:1} .portrait-frame:hover .portrait-img{filter:brightness(.75)}
+    .portrait-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top; transition:filter .25s; }
+    .portrait-hint { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); font-size:.7rem; color:var(--accent); letter-spacing:.2em; opacity:0; transition:opacity .25s; text-shadow:0 0 8px rgba(212,168,200,.6); z-index:2; pointer-events:none; }
+    .c { position:absolute; width:18px; height:18px; border-color:var(--accent); border-style:solid; opacity:.55; z-index:2; }
+    .tl{top:8px;left:8px;border-width:2px 0 0 2px} .tr{top:8px;right:8px;border-width:2px 2px 0 0}
+    .bl{bottom:8px;left:8px;border-width:0 0 2px 2px} .br{bottom:8px;right:8px;border-width:0 2px 2px 0}
+    .portrait-frame::after { content:''; position:absolute; inset:20px; z-index:2; border:1px solid var(--accent); opacity:0; animation:pulse 3.5s ease-in-out infinite; pointer-events:none; }
+    @keyframes pulse{0%,100%{opacity:0;transform:scale(1)}50%{opacity:.12;transform:scale(1.03)}}
+    .vt-name{font-family:var(--font-d);font-size:1.75rem;font-weight:900}
+    .vt-name-en{font-size:.82rem;color:#d4a8c8;letter-spacing:.22em}
+    .vt-desc{font-size:.8rem;color:#c090a8;text-align:center;line-height:1.75;border-top:1px solid var(--border);padding-top:.9rem;width:100%}
+
+    .incense{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+    .sticks{display:flex;gap:10px;align-items:flex-end;height:66px;margin-bottom:-14px;position:relative;z-index:3}
+    .stick{width:4px;background:#884a68;border-radius:2px 2px 1px 1px;position:relative}
+    .stick:nth-child(1){height:50px}.stick:nth-child(2){height:66px}.stick:nth-child(3){height:46px}
+    .stick::before{content:'';position:absolute;top:0;left:0;right:0;height:7px;background:linear-gradient(to bottom,#cc10a0,#8b2068);border-radius:2px 2px 0 0}
+    .flame{position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:7px;height:11px;background:var(--accent);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:flicker 1.6s ease-in-out infinite alternate;box-shadow:0 0 7px var(--accent-glow)}
+    .stick:nth-child(1) .flame{animation-delay:.25s}.stick:nth-child(3) .flame{animation-delay:.5s}
+    .smoke{position:absolute;top:-20px;left:50%;width:2px;height:18px;background:linear-gradient(to top,rgba(212,168,200,.25),transparent);transform:translateX(-50%);animation:rise 2.2s ease-out infinite}
+    .stick:nth-child(1) .smoke{animation-delay:.6s}.stick:nth-child(3) .smoke{animation-delay:1.1s}
+    @keyframes flicker{0%{transform:translateX(-50%) scaleX(1) scaleY(1);opacity:.9}100%{transform:translateX(-50%) scaleX(.65) scaleY(1.25);opacity:.65}}
+    @keyframes rise{0%{opacity:.35;transform:translateX(-50%) scaleX(1)}100%{opacity:0;transform:translateX(calc(-50% + 5px)) scaleX(.4) translateY(-8px)}}
+    .burner{display:flex;flex-direction:column;align-items:center}
+    .burner-rim{width:64px;height:16px;background:radial-gradient(ellipse at 50% 60%,#e8e4d6,#c8c4b2 55%,#a09c8a 100%);border-radius:50%;border:3px solid #4a2210;position:relative;z-index:2;box-shadow:inset 0 3px 5px rgba(0,0,0,.35),0 1px 0 #2e1408}
+    .burner-body{width:80px;height:60px;background:radial-gradient(ellipse 50% 45% at 30% 25%,rgba(120,70,30,.55),transparent 50%),radial-gradient(ellipse 85% 85% at 50% 48%,#7a3c18,#4a2010 55%,#2e1208 100%);border-radius:50% 50% 46% 46%/44% 44% 56% 56%;border:3px solid #3a1c08;border-top:none;position:relative;margin-top:-4px;box-shadow:0 4px 14px rgba(0,0,0,.65),inset 0 -6px 10px rgba(0,0,0,.4)}
+    .burner-body::after{content:'';position:absolute;bottom:-11px;left:50%;width:10px;height:13px;margin-left:-5px;background:#3a1c08;border-radius:2px 2px 5px 5px;box-shadow:-24px 0 0 #3a1c08,24px 0 0 #3a1c08}
+    .incense-lbl{font-size:.7rem;color:#9a7a88;letter-spacing:.18em;margin-top:14px}
+
+    /* ── 右：供奉 + 擲筊 ── */
+    .right-panel{display:flex;flex-direction:column;gap:1.2rem;max-width:320px;justify-self:end}
+    .offerings-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem 1rem}
+    .card-title{font-family:var(--font-d);font-size:.9rem;color:var(--text-muted);letter-spacing:.2em;margin-bottom:.9rem;text-align:center}
+    .offerings{display:flex;gap:.5rem}
+    .offer-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:.22rem;background:var(--surface-2);border:1px solid var(--border);padding:.7rem .3rem;cursor:pointer;font-family:var(--font-b);transition:background .15s,border-color .15s,transform .1s;color:var(--text)}
+    .offer-btn:hover{background:var(--accent-dim);border-color:var(--accent)} .offer-btn:active{transform:scale(.95)} .offer-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+    .offer-icon{font-size:1.4rem} .offer-label{font-size:.68rem;color:var(--text-muted);letter-spacing:.08em} .offer-count{font-size:.72rem;color:var(--accent);font-variant-numeric:tabular-nums;transition:color .3s}
+
+    .jiao-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.5rem 1.3rem 1.3rem;display:flex;flex-direction:column;align-items:center;gap:1.1rem}
+    .jiao-title{font-family:var(--font-d);font-size:1.1rem;color:var(--text-muted);letter-spacing:.22em}
+    .jiao-hint{font-size:.78rem;color:var(--text-faint);letter-spacing:.08em;text-align:center}
+    .jiao-wrap{display:flex;gap:2.5rem;align-items:flex-end;justify-content:center;height:140px;overflow:visible}
+    .jiao{width:52px;height:96px;display:inline-block;position:relative}
+    .jiao.dome{border-radius:52px 6px 6px 52px;background:radial-gradient(ellipse 50% 48% at 22% 46%,rgba(245,185,130,.65),transparent 52%),radial-gradient(ellipse 90% 95% at 45% 50%,#cc7838,#8b3818 55%,#5a1e08 100%);box-shadow:-5px 5px 18px rgba(0,0,0,.7),inset 2px 0 5px rgba(255,160,80,.15)}
+    .jiao.flat{border-radius:6px 52px 52px 6px;background:linear-gradient(165deg,#a85828,#8b3818 25%,#cc7838 50%,#7a2e14 75%,#5a1e08 100%);box-shadow:5px 5px 18px rgba(0,0,0,.7),inset -2px 0 5px rgba(0,0,0,.2)}
+    @keyframes jthrow{0%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-60px) rotate(270deg)}55%{transform:translateY(-80px) rotate(630deg)}80%{transform:translateY(-12px) rotate(960deg)}92%{transform:translateY(7px) rotate(1020deg)}100%{transform:translateY(0) rotate(1080deg)}}
+    .jiao.ta{animation:jthrow 1s cubic-bezier(.22,.61,.36,1) forwards}
+    .jiao-result-box{min-height:3.5rem;display:flex;flex-direction:column;align-items:center;gap:.35rem;text-align:center}
+    .jr-type{font-family:var(--font-d);font-size:1.25rem;font-weight:900}
+    .jr-holy{color:var(--accent)} .jr-yin{color:#7a6a8a} .jr-xiao{color:#c4a865}
+    .jr-msg{font-size:.84rem;color:var(--text-muted);font-style:italic}
+    .jiao-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.88rem;padding:.55rem 2rem;cursor:pointer;letter-spacing:.15em;transition:background .15s}
+    .jiao-btn:hover{background:rgba(212,168,200,.24)} .jiao-btn:disabled{opacity:.38;cursor:not-allowed}
+
+    .modal-overlay{position:fixed;inset:0;z-index:100;background:rgba(12,8,16,.72);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center}
+    .modal-overlay.open{display:flex}
+    .modal-box{background:var(--surface-2);border:1px solid var(--accent);max-width:420px;width:90%;padding:2rem 1.6rem 1.6rem;text-align:center}
+    .modal-deco{font-size:.7rem;color:var(--accent);letter-spacing:.3em;margin-bottom:.8rem;opacity:.7}
+    .modal-quote{font-family:var(--font-d);font-size:1.08rem;color:var(--text);line-height:1.8;margin-bottom:.8rem}
+    .modal-attr{font-size:.78rem;color:var(--text-muted);margin-bottom:1.2rem}
+    .modal-close{background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-b);font-size:.8rem;padding:.4rem 1.2rem;cursor:pointer;transition:border-color .15s,color .15s}
+    .modal-close:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* ── 右側整體包裝 ── */
+    .right-area{display:flex;gap:1rem;align-items:start;justify-self:end}
+    .new-cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:400px}
+
+    /* ── 抽籤 ── */
+    .fortune-card,.qian-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+    .fortune-result-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.2rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .qian-wrap{position:relative;width:52px;height:80px;cursor:pointer;user-select:none}
+    .qian-tong{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:48px;height:52px;background:linear-gradient(to right,#7a5a10,#c8a228 40%,#e8c040 50%,#c8a228 60%,#7a5a10);border-radius:4px 4px 2px 2px;border:2px solid #5a3e08;box-shadow:0 3px 10px rgba(0,0,0,.55),inset 0 2px 4px rgba(255,220,100,.2)}
+    .qian-tong::after{content:'籤';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:.6rem;color:rgba(255,220,80,.7);letter-spacing:.05em}
+    .q-stick{position:absolute;width:4px;border-radius:2px 2px 1px 1px;background:linear-gradient(to bottom,#d4b060,#8a6020);box-shadow:1px 0 2px rgba(0,0,0,.3)}
+    .q-stick:nth-child(1){height:62px;top:0;left:10px;transform:rotate(-8deg)}
+    .q-stick:nth-child(2){height:72px;top:0;left:22px;transform:rotate(0deg)}
+    .q-stick:nth-child(3){height:58px;top:0;left:34px;transform:rotate(6deg)}
+    .q-stick:nth-child(4){height:66px;top:0;left:16px;transform:rotate(-3deg)}
+    .q-stick:nth-child(5){height:60px;top:0;left:28px;transform:rotate(4deg)}
+    @keyframes qshake{0%{transform:rotate(0)}15%{transform:rotate(-12deg)}30%{transform:rotate(10deg)}45%{transform:rotate(-8deg)}60%{transform:rotate(6deg)}75%{transform:rotate(-4deg)}90%{transform:rotate(2deg)}100%{transform:rotate(0)}}
+    .qian-wrap.shaking{animation:qshake .7s ease-in-out}
+    .fortune-result{text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;gap:.4rem;width:100%}
+    .fortune-num{font-family:var(--font-d);font-size:1.3rem;color:var(--accent);font-weight:900}
+    .fortune-level{font-size:.7rem;letter-spacing:.12em;padding:.15rem .5rem;border:1px solid currentColor;border-radius:2px}
+    .fl-top{color:#f5d060}
+    .fl-good{color:#D4A8C8}
+    .fl-mixed{color:#e0a040}
+    .fl-reverse{color:#8ab4e8}
+    .fl-low{color:#c07070}
+    .fortune-text{font-size:.88rem;color:#c0a0d8;line-height:1.75;margin-top:.3rem}
+    .fortune-hint{font-size:.7rem;color:var(--text-faint);font-style:italic}
+    .fortune-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
+    .fortune-btn:hover{background:rgba(212,168,200,.24)}
+
+    /* ── 燒金紙 ── */
+    .paper-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+    .paper-wrap{position:relative;width:72px;height:58px;cursor:pointer}
+    .paper-layer{position:absolute;border-radius:3px;border:1px solid #7a5208}
+    .paper-layer:nth-child(1){width:60px;height:44px;bottom:0;left:6px;background:linear-gradient(135deg,#c8900a,#e8b020,#c07008);transform:rotate(-4deg)}
+    .paper-layer:nth-child(2){width:60px;height:44px;bottom:4px;left:5px;background:linear-gradient(135deg,#b88010,#d8a018,#b07008);transform:rotate(-1deg)}
+    .paper-layer:nth-child(3){width:60px;height:44px;bottom:8px;left:4px;background:linear-gradient(135deg,#c8a020,#e8c030,#b89010)}
+    .paper-layer::after{content:'壽';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.9rem;color:rgba(180,100,10,.6);font-family:var(--font-d)}
+    .flame-wrap{position:absolute;bottom:0;left:0;right:0;height:100%;pointer-events:none;opacity:0;transition:opacity .3s}
+    .flame-wrap.burning{opacity:1}
+    .f-flame{position:absolute;bottom:0;border-radius:50% 50% 20% 20%;animation:fburn 1s ease-in-out infinite alternate}
+    .f-flame:nth-child(1){width:16px;height:28px;left:8px;background:linear-gradient(to top,#ff6600,#ffaa00,rgba(255,220,0,.4));animation-delay:0s}
+    .f-flame:nth-child(2){width:20px;height:36px;left:22px;background:linear-gradient(to top,#ff4400,#ff8800,rgba(255,180,0,.3));animation-delay:.15s}
+    .f-flame:nth-child(3){width:14px;height:24px;left:40px;background:linear-gradient(to top,#ff6600,#ffcc00,rgba(255,200,0,.3));animation-delay:.08s}
+    .f-flame:nth-child(4){width:18px;height:32px;left:12px;background:linear-gradient(to top,#ff3300,#ff7700,rgba(255,150,0,.2));animation-delay:.22s}
+    .f-flame:nth-child(5){width:22px;height:40px;left:28px;background:linear-gradient(to top,#ff5500,#ffaa00,rgba(255,230,0,.2));animation-delay:.05s}
+    @keyframes fburn{0%{transform:scaleX(1) scaleY(1) rotate(-2deg);opacity:.9}100%{transform:scaleX(.7) scaleY(1.3) rotate(3deg);opacity:.6}}
+    .paper-wrap.burned .paper-layer{filter:brightness(.3) sepia(1);transition:filter 1.2s}
+    .paper-total-lbl{font-size:.7rem;color:var(--text-muted);letter-spacing:.08em}
+    .paper-total-num{font-size:1.1rem;color:var(--accent);font-variant-numeric:tabular-nums;font-weight:700}
+    .denom-grid{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;width:100%}
+    .denom-btn{background:var(--surface-2);border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-b);font-size:.8rem;padding:.42rem .3rem;cursor:pointer;transition:background .15s,border-color .15s,color .15s;text-align:center;position:relative}
+    .denom-btn:hover:not(:disabled){background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+    .denom-btn:disabled{opacity:.35;cursor:not-allowed}
+    .denom-btn.burned-denom::after{content:'✓';position:absolute;top:2px;right:4px;font-size:.55rem;color:var(--accent);opacity:.7}
+
+    /* ── 罐頭塔 ── */
+    .can-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.7rem}
+    .can-tower{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+    .can-row{display:flex;gap:3px;justify-content:center}
+    .can{display:flex;flex-direction:column;align-items:center;width:26px}
+    .can-cap{width:26px;height:6px;background:linear-gradient(to bottom,#d4c88a,#a89c50);border-radius:50%;border:1px solid #8a7a30;margin-bottom:-2px;position:relative;z-index:2}
+    .can-body{width:24px;height:30px;background:linear-gradient(to right,#8a6a10,#c8a228 30%,#e8c040 50%,#c8a228 70%,#8a6a10);border-radius:2px;display:flex;align-items:center;justify-content:center;border:1px solid #6a5010;position:relative;overflow:hidden}
+    .can-body::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,.12)}
+    .can-body::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(0,0,0,.18)}
+    .can-txt{font-size:4.5px;color:rgba(60,30,0,.85);font-family:var(--font-d);letter-spacing:.5px;text-align:center;line-height:1.2;font-weight:900;position:relative;z-index:1}
+    .can-base{width:72px;height:5px;background:linear-gradient(to bottom,#5a4010,#3a2808);border-radius:1px;margin-top:1px}
+    .can-total{font-size:.72rem;color:var(--accent);font-variant-numeric:tabular-nums}
+    .can-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
+    .can-btn:hover:not(:disabled){background:rgba(212,168,200,.24)} .can-btn:disabled{opacity:.38;cursor:not-allowed}
+    @keyframes canDrop{0%{transform:translateY(-18px);opacity:0}60%{transform:translateY(3px)}100%{transform:translateY(0);opacity:1}}
+    .can-row.just-added .can:last-child{animation:canDrop .35s ease-out}
+
+    /* ── 喝水咕嚕嚕 ── */
+    .water-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1rem 1.4rem;display:flex;flex-direction:row;align-items:center;gap:1.4rem;grid-column:1/-1}
+    .water-glass-wrap{position:relative;width:54px;height:68px;cursor:pointer;flex-shrink:0}
+    .water-glass{position:absolute;bottom:0;left:5px;width:44px;height:60px;border:2px solid rgba(212,168,200,.55);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;background:rgba(50,20,40,.4);transition:transform .2s ease-out;transform-origin:bottom center}
+    .water-glass-rim{position:absolute;top:0;left:3px;width:48px;height:3px;background:rgba(220,185,210,.45);border-radius:2px 2px 0 0}
+    .water-body{position:absolute;bottom:0;left:0;right:0;height:62%;background:linear-gradient(to top,rgba(190,100,150,.6),rgba(220,160,190,.35))}
+    .water-wave{position:absolute;top:-5px;left:-60%;width:220%;height:10px;background:rgba(212,168,200,.45);border-radius:50%;animation:wwave 2.4s linear infinite}
+    .water-wave2{animation-delay:-1.2s;opacity:.55;animation-duration:3s}
+    @keyframes wwave{0%{transform:translateX(0)}100%{transform:translateX(45%)}}
+    .water-glass.gulping{animation:gulp .55s ease-in-out forwards}
+    @keyframes gulp{0%{transform:rotate(0)}35%{transform:rotate(-38deg)}75%{transform:rotate(-32deg)}100%{transform:rotate(0)}}
+    .water-bubble{position:absolute;border-radius:50%;background:rgba(220,185,210,.55);pointer-events:none;animation:wbub .65s ease-out forwards}
+    @keyframes wbub{0%{opacity:.85;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-28px) scale(.2)}}
+    .water-info{flex:1;display:flex;flex-direction:column;gap:.6rem}
+    .water-info .card-title{text-align:left;margin:0}
+    .water-total{font-size:.8rem;color:var(--accent);font-variant-numeric:tabular-nums}
+    .water-hint{font-size:.7rem;color:var(--text-faint);line-height:1.5}
+    .water-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.82rem;padding:.45rem 1rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
+    .water-btn:hover:not(:disabled){background:rgba(212,168,200,.24)}
+    .water-btn:disabled{opacity:.4;cursor:not-allowed}
+
+    .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface-2);border:1px solid var(--accent);color:var(--text);font-size:.82rem;padding:.7rem 1.4rem;z-index:200;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;text-align:center;max-width:320px;line-height:1.6}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .site-footer{text-align:center;padding:1.4rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--text-faint);background:rgba(12,8,16,.45);backdrop-filter:blur(6px)}
+    .site-footer a{color:var(--text-faint);text-decoration:none} .site-footer a:hover{color:var(--text-muted)}
+
+    @media(max-width:1100px){.right-area{flex-direction:column}.new-cards{width:100%}}
+    @media(max-width:900px){.main{grid-template-columns:1fr 1fr}.gb-panel{grid-column:1/-1}.portrait-panel{grid-column:1}.right-area{grid-column:2;justify-self:start}.right-panel{max-width:none}.new-cards{width:100%}}
+    @media(max-width:580px){.main{grid-template-columns:1fr}.gb-panel,.portrait-panel,.right-area{grid-column:1;max-width:none;justify-self:auto}}
+  </style>
+</head>
+<body>
+
+<div id="stars"></div>
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="modal" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-deco">✦ 咪奇想說 ✦</div>
+    <div class="modal-quote" id="modal-quote"></div>
+    <div class="modal-attr"  id="modal-attr"></div>
+    <button class="modal-close" onclick="closeModal()">關閉</button>
+  </div>
+</div>
+
+<header class="site-header">
+  <div>
+    <div class="days-label" id="days-label">距離那天，還有</div>
+    <div class="countdown-row">
+      <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">天</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">時</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">分</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">秒</span></div>
+    </div>
+  </div>
+  <h1 class="page-title">我們摯愛的姬城三千華，於西元2026年12月27日，悄悄的離開姬城三千華的直播間，我們痛徹心扉，就僅僅一眨眼的時間，天人永隔。咪奇安祥的走完了主播的旅程，她彷彿在沉睡中做了一個美夢，夢醒了，留下陪伴我們成長過程中的點點滴滴，留下我們永恆的咪奇與感恩。</h1>
+  <p class="page-subtitle">姬城三千華　Himegi Michika</p>
+  <div class="visitor-row">
+    <span class="visit-stat">來訪姬靈鬼 <span id="stat-visitor">…</span> 人</span>
+    <span class="visit-stat">🪔 上香 <span id="stat-incense2">…</span> 次</span>
+    <span class="visit-stat">💐 獻花 <span id="stat-flower2">…</span> 次</span>
+    <span class="visit-stat">🍊 獻果 <span id="stat-fruit2">…</span> 次</span>
+  </div>
+</header>
+
+<main>
+  <div class="main">
+
+    <!-- 左：留言板 -->
+    <div class="gb-panel">
+      <div class="gb-head">
+        <span class="gb-title">給咪奇的話</span>
+        <span class="gb-counter" id="gb-counter"></span>
+      </div>
+      <div class="gb-carousel" id="gb-carousel">
+        <button class="c-nav c-prev" id="c-prev" onclick="navSlide(-1)">&#8249;</button>
+        <div class="carousel-track" id="carousel-track">
+          <div class="slide-empty" id="slide-empty">留言載入中…</div>
+        </div>
+        <button class="c-nav c-next" id="c-next" onclick="navSlide(1)">&#8250;</button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <div class="write-form" id="write-form">
+        <div class="f-row">
+          <label class="f-label" for="f-name">你的名字（選填）</label>
+          <input class="f-input" id="f-name" type="text" placeholder="匿名粉絲" maxlength="30">
+        </div>
+        <div class="f-row">
+          <label class="f-label" for="f-text">留一句話給咪奇</label>
+          <textarea class="f-area" id="f-text" placeholder="謝謝妳帶來的一切…" maxlength="300"></textarea>
+        </div>
+        <div class="f-actions">
+          <span class="f-status" id="f-status"></span>
+          <div style="display:flex;gap:.5rem">
+            <button class="f-cancel" onclick="toggleForm(false)">取消</button>
+            <button class="f-btn" id="f-btn" onclick="submitMsg()">送出留言</button>
+          </div>
+        </div>
+      </div>
+      <div class="gb-foot">
+        <button class="write-btn" id="write-toggle" onclick="toggleForm()">
+          <span style="font-size:1rem;line-height:1">＋</span> 寫下一句話
+        </button>
+      </div>
+    </div>
+
+    <!-- 中：立繪 + 香爐 -->
+    <div class="portrait-panel">
+      <div class="portrait-frame" onclick="showRandomMsg()" title="點我看粉絲的留言">
+        <span class="c tl"></span><span class="c tr"></span>
+        <span class="c bl"></span><span class="c br"></span>
+        <img src="himegimichika-portrait.png" class="portrait-img" alt="姬城三千華" onerror="this.src='https://pbs.twimg.com/profile_images/1845639618013904896/CqahvjNX_400x400.jpg'">
+        <div class="portrait-hint">🕯️ 點我</div>
+      </div>
+      <div class="vt-name">姬城三千華</div>
+      <div class="vt-name-en">Himegi Michika</div>
+      <p class="vt-desc">世界第一超級無敵可愛奇美拉<br>高中生 · 咪奇🍬</p>
+      <div class="incense">
+        <div class="sticks">
+          <div class="stick"><div class="flame"></div><div class="smoke"></div></div>
+          <div class="stick"><div class="flame"></div><div class="smoke"></div></div>
+          <div class="stick"><div class="flame"></div><div class="smoke"></div></div>
+        </div>
+        <div class="burner">
+          <div class="burner-rim"></div>
+          <div class="burner-body"></div>
+        </div>
+        <span class="incense-lbl">無盡的思念</span>
+      </div>
+    </div>
+
+    <!-- 右：抽籤 + 燒金紙 + 供奉 + 擲筊 -->
+    <div class="right-area">
+    <!-- 新功能：抽籤 + 燒金紙 -->
+    <div class="new-cards">
+      <div class="qian-card">
+        <div class="card-title">抽籤</div>
+        <div class="qian-wrap" id="qian-wrap" onclick="drawFortune()">
+          <div class="q-stick"></div><div class="q-stick"></div>
+          <div class="q-stick"></div><div class="q-stick"></div><div class="q-stick"></div>
+          <div class="qian-tong"></div>
+        </div>
+        <button class="fortune-btn" onclick="drawFortune()">抽籤</button>
+      </div>
+      <div class="fortune-result-card">
+        <div class="fortune-result" id="fortune-result">
+          <div class="fortune-hint">搖一搖籤筒抽籤</div>
+        </div>
+      </div>
+      <div class="can-card">
+        <div class="card-title">罐頭塔</div>
+        <div class="can-tower" id="can-tower">
+          <div class="can-row" id="can-r3">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>
+          </div>
+          <div class="can-row" id="can-r2">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>
+          </div>
+          <div class="can-row" id="can-r1">
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>
+            <div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>
+          </div>
+          <div class="can-base"></div>
+        </div>
+        <div class="can-total">已供奉 <span id="cnt-can">…</span> 罐</div>
+        <button class="can-btn" id="btn-can" onclick="doneCan()">供奉罐頭</button>
+      </div>
+      <div class="paper-card">
+        <div class="card-title">燒金紙</div>
+        <div class="paper-wrap" id="paper-wrap" onclick="burnPaper()">
+          <div class="paper-layer"></div>
+          <div class="paper-layer"></div>
+          <div class="paper-layer"></div>
+          <div class="flame-wrap" id="flame-wrap">
+            <div class="f-flame"></div><div class="f-flame"></div>
+            <div class="f-flame"></div><div class="f-flame"></div><div class="f-flame"></div>
+          </div>
+        </div>
+        <div class="paper-total-lbl">累計燒化</div>
+        <div class="paper-total-num">$<span id="cnt-paper">…</span> 元</div>
+        <div class="denom-grid">
+          <button class="denom-btn" id="denom-10"  onclick="burnPaper(10)">$10</button>
+          <button class="denom-btn" id="denom-50"  onclick="burnPaper(50)">$50</button>
+          <button class="denom-btn" id="denom-100" onclick="burnPaper(100)">$100</button>
+          <button class="denom-btn" id="denom-500" onclick="burnPaper(500)">$500</button>
+        </div>
+      </div>
+      <!-- 喝水咕嚕嚕 -->
+      <div class="water-card">
+        <div class="water-glass-wrap" onclick="drinkWater()">
+          <div class="water-glass-rim"></div>
+          <div class="water-glass" id="water-glass">
+            <div class="water-body">
+              <div class="water-wave"></div>
+              <div class="water-wave water-wave2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="water-info">
+          <div class="card-title">喝水咕嚕嚕</div>
+          <div class="water-hint">記得喝水，姬靈鬼要顧好自己🍬</div>
+          <div class="water-total">已喝 <span id="cnt-water">…</span> 杯水</div>
+          <button class="water-btn" id="btn-water" onclick="drinkWater()">咕嚕嚕！</button>
+        </div>
+      </div>
+    </div>
+    <!-- 原有：供奉 + 擲筊 -->
+    <div class="right-panel">
+      <div class="offerings-card">
+        <div class="card-title">供奉</div>
+        <div class="offerings">
+          <button class="offer-btn" id="btn-incense" onclick="doOffer('incense')">
+            <span class="offer-icon">🪔</span><span class="offer-label">插香</span>
+            <span class="offer-count" id="cnt-incense">…</span>
+          </button>
+          <button class="offer-btn" id="btn-flower" onclick="doOffer('flower')">
+            <span class="offer-icon">💐</span><span class="offer-label">獻花</span>
+            <span class="offer-count" id="cnt-flower">…</span>
+          </button>
+          <button class="offer-btn" id="btn-fruit" onclick="doOffer('fruit')">
+            <span class="offer-icon">🍊</span><span class="offer-label">獻果</span>
+            <span class="offer-count" id="cnt-fruit">…</span>
+          </button>
+        </div>
+      </div>
+      <div class="jiao-card">
+        <div class="jiao-title">擲筊</div>
+        <div class="jiao-hint">心中默念想問的話<br>點擊擲筊</div>
+        <div class="jiao-wrap">
+          <div class="jiao dome" id="j1"></div>
+          <div class="jiao flat" id="j2"></div>
+        </div>
+        <div class="jiao-result-box" id="jr">
+          <div class="jr-msg">準備好了，就擲一次筊吧。</div>
+        </div>
+        <button class="jiao-btn" id="jiao-btn" onclick="throwJiao()">擲筊</button>
+      </div>
+    </div>
+    </div><!-- /right-area -->
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <a href="../vtuber.html?id=himegimichika">← 回到姬城三千華的主頁</a>
+  &nbsp;·&nbsp;
+  <a href="../index.html">MC組事務所</a>
+</footer>
+
+<script>
+const GRAD_DATE  = new Date(2026, 11, 27, 22, 0, 0);
+// TODO: 請替換為姬城三千華專用的 GAS URL（需另建新試算表並部署）
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHMXbqi-1eerx-hq_yzKwLYhjJnR3TKTt0fhclvEJPsVCQc0Pn_vWLduKtL8BC2brEDQ/exec';
+
+function updateCountdown(){
+  const diff = GRAD_DATE.getTime() - Date.now();
+  const pad = n => String(Math.abs(n)).padStart(2,'0');
+  if(diff > 0){
+    document.getElementById('days-label').textContent = '距離那天，還有';
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
+  } else {
+    document.getElementById('days-label').textContent = '距離那天，已經過了';
+    const abs = Math.abs(diff);
+    const d = Math.floor(abs / 86400000);
+    const h = Math.floor((abs % 86400000) / 3600000);
+    const m = Math.floor((abs % 3600000) / 60000);
+    const s = Math.floor((abs % 60000) / 1000);
+    document.getElementById('cd-d').textContent = d;
+    document.getElementById('cd-h').textContent = pad(h);
+    document.getElementById('cd-m').textContent = pad(m);
+    document.getElementById('cd-s').textContent = pad(s);
+  }
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+const sc = document.getElementById('stars');
+for (let i = 0; i < 45; i++) {
+  const s = document.createElement('div'); s.className = 'star';
+  const sz = 1 + Math.random() * 2;
+  Object.assign(s.style, {left:Math.random()*100+'%', top:Math.random()*100+'%', width:sz+'px', height:sz+'px'});
+  s.style.setProperty('--d',  (2+Math.random()*4)+'s');
+  s.style.setProperty('--dl', (Math.random()*5)+'s');
+  s.style.setProperty('--mo', (.08+Math.random()*.25).toFixed(2));
+  sc.appendChild(s);
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function fmt(ts){
+  if(!ts)return '';
+  const d=new Date(ts);
+  return d.toLocaleDateString('zh-TW',{year:'numeric',month:'2-digit',day:'2-digit'})+' '+d.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
+}
+
+let allMessages=[], currentSlide=0;
+const MAX_DOTS=12;
+
+function renderCarousel(msgs){
+  allMessages=msgs||[];
+  const dots=document.getElementById('carousel-dots'), counter=document.getElementById('gb-counter');
+  if(!allMessages.length){
+    document.getElementById('carousel-track').innerHTML='<div class="slide-empty">還沒有留言，第一個留言給咪奇吧。</div>';
+    dots.innerHTML=''; counter.textContent=''; return;
+  }
+  currentSlide=Math.min(currentSlide,allMessages.length-1);
+  dots.innerHTML='';
+  if(allMessages.length<=MAX_DOTS){
+    allMessages.forEach((_,i)=>{
+      const d=document.createElement('div');
+      d.className='dot'+(i===currentSlide?' active':'');
+      d.onclick=()=>goSlide(i); dots.appendChild(d);
+    });
+  }
+  showSlideContent(currentSlide,false);
+}
+
+function showSlideContent(index,animate){
+  const track=document.getElementById('carousel-track'), m=allMessages[index];
+  const doRender=()=>{
+    track.innerHTML=`<div class="msg-slide" id="active-slide">
+      <div class="slide-quote-mark">"</div>
+      <div class="slide-text">${esc(m.text)}</div>
+      <div class="slide-sep"></div>
+      <div class="slide-name">— ${esc(m.name||'匿名粉絲')}</div>
+      <div class="slide-time">${fmt(m.timestamp)}</div>
+    </div>`;
+  };
+  if(animate){const ex=document.getElementById('active-slide'); if(ex){ex.classList.add('fading');setTimeout(doRender,220);}else doRender();}
+  else doRender();
+  document.getElementById('gb-counter').textContent=(index+1)+' / '+allMessages.length;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===index));
+}
+
+function goSlide(index){currentSlide=(index+allMessages.length)%allMessages.length;showSlideContent(currentSlide,true);}
+function navSlide(dir){if(!allMessages.length)return;goSlide(currentSlide+dir);}
+
+document.getElementById('gb-carousel').addEventListener('touchstart',e=>{window._tx=e.touches[0].clientX},{passive:true});
+document.getElementById('gb-carousel').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-window._tx;if(Math.abs(dx)>40)navSlide(dx<0?1:-1);},{passive:true});
+
+async function loadMessages(){
+  try{
+    const r=await fetch(SCRIPT_URL+'?action=read');
+    const d=await r.json();
+    if(d.success)renderCarousel(d.data);else renderCarousel([]);
+  }catch(e){
+    document.getElementById('carousel-track').innerHTML='<div class="slide-empty">留言載入失敗，請稍後再試。</div>';
+  }
+}
+
+let formOpen=false;
+function toggleForm(force){
+  formOpen=force!==undefined?force:!formOpen;
+  document.getElementById('write-form').classList.toggle('open',formOpen);
+  const btn=document.getElementById('write-toggle');
+  btn.innerHTML=formOpen?'<span style="font-size:1rem;line-height:1">✕</span> 取消':'<span style="font-size:1rem;line-height:1">＋</span> 寫下一句話';
+  if(formOpen)setTimeout(()=>document.getElementById('f-text').focus(),320);
+}
+
+async function submitMsg(){
+  const name=document.getElementById('f-name').value.trim()||'匿名粉絲';
+  const text=document.getElementById('f-text').value.trim();
+  const st=document.getElementById('f-status'), btn=document.getElementById('f-btn');
+  if(!text){st.textContent='請輸入留言內容';return;}
+  btn.disabled=true; st.textContent='送出中…';
+  try{
+    const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'insert',name,text}));
+    const d=await r.json();
+    if(!d.success)throw new Error();
+    document.getElementById('f-text').value='';
+    st.textContent='✓ 已送出'; setTimeout(()=>{st.textContent=''},3000);
+    toggleForm(false);
+    await loadMessages();
+    goSlide(allMessages.length-1);
+  }catch(e){st.textContent='送出失敗，請稍後再試';}
+  btn.disabled=false;
+}
+
+function showRandomMsg(){
+  const defs=[{text:'謝謝妳帶來的一切…',name:null},{text:'最可愛的奇美拉永遠在我們心中🍬',name:null},{text:'世界第一超級無敵可愛咪奇！',name:null}];
+  const pool=allMessages.length?allMessages:defs;
+  const m=pool[Math.floor(Math.random()*pool.length)];
+  document.getElementById('modal-quote').textContent='「'+(m.text||'')+'」';
+  document.getElementById('modal-attr').textContent=m.name?'— '+m.name:'— 姬靈鬼的話';
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+
+function updateOfferStats(data){
+  if(!data)return;
+  ['incense','flower','fruit'].forEach(t=>{
+    const v=(data[t]||0)+' 次';
+    document.getElementById('cnt-'+t).textContent=v;
+    const s2=document.getElementById('stat-'+t+'2'); if(s2)s2.textContent=data[t]||0;
+  });
+  const sv=document.getElementById('stat-visitor'); if(sv&&data.visitor!=null)sv.textContent=data.visitor;
+}
+
+async function loadOfferCounts(){
+  try{
+    const r=await fetch(SCRIPT_URL+'?action=getOffers');
+    const d=await r.json();
+    if(d.success&&d.data) updateOfferStats(d.data);
+  }catch(e){['cnt-incense','cnt-flower','cnt-fruit'].forEach(id=>document.getElementById(id).textContent='–');}
+}
+
+async function initVisitCount(){
+  if(!sessionStorage.getItem('hm_visited')){
+    sessionStorage.setItem('hm_visited','1');
+    try{
+      const r=await fetch(SCRIPT_URL+'?action=visit');
+      const d=await r.json();
+      if(d.success){const sv=document.getElementById('stat-visitor');if(sv)sv.textContent=d.count;}
+    }catch(e){}
+  }
+  ['incense','flower','fruit'].forEach(t=>{
+    if(sessionStorage.getItem('hm_offered_'+t)){
+      const btn=document.getElementById('btn-'+t);
+      if(btn){btn.disabled=true;btn.title='本次已供奉';}
+    }
+  });
+}
+
+async function doOffer(type){
+  if(sessionStorage.getItem('hm_offered_'+type))return;
+  const btn=document.getElementById('btn-'+type), cnt=document.getElementById('cnt-'+type);
+  btn.disabled=true;
+  try{
+    const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'offer',type}));
+    const d=await r.json();
+    if(d.success){
+      cnt.textContent=d.count+' 次'; cnt.style.color='#fff'; setTimeout(()=>{cnt.style.color=''},500);
+      const s2=document.getElementById('stat-'+type+'2'); if(s2)s2.textContent=d.count;
+      sessionStorage.setItem('hm_offered_'+type,'1');
+      btn.title='本次已供奉';
+    }else{btn.disabled=false;}
+  }catch(e){btn.disabled=false;}
+}
+
+const JR={
+  holy:{type:'聖筊',cls:'jr-holy',msgs:['咪奇點頭啦！趕快行動🍬','咪奇說可以！跟隨咪奇吧🍬','咪奇同意！放心去做吧🍬']},
+  yin: {type:'陰筊',cls:'jr-yin', msgs:['咪奇搖頭搖頭…（再想想吧🍬）','嗯…咪奇不同意🍬','不行不行，姬靈鬼再想想🍬']},
+  xiao:{type:'笑筊',cls:'jr-xiao',msgs:['再問一次吧…（咪奇在偷笑🍬）','再大聲點聽不到？...（不講出來怎麼知道🍬）','咪奇覺得要不再試試看？...（叫ㄋ試就試🍬）']}
+};
+let throwing=false;
+function throwJiao(){
+  if(throwing)return; throwing=true;
+  const btn=document.getElementById('jiao-btn'),j1=document.getElementById('j1'),j2=document.getElementById('j2'),jr=document.getElementById('jr');
+  btn.disabled=true; jr.innerHTML='';
+  const roll=Math.random(); let key,d1,d2;
+  if(roll<0.5){key='holy';d1=true;d2=false;}else if(roll<0.75){key='yin';d1=false;d2=false;}else{key='xiao';d1=true;d2=true;}
+  j1.className='jiao ta'; j2.className='jiao ta';
+  setTimeout(()=>{
+    j1.className='jiao '+(d1?'dome':'flat'); j2.className='jiao '+(d2?'dome':'flat');
+    const r=JR[key],msg=r.msgs[Math.floor(Math.random()*r.msgs.length)];
+    jr.innerHTML='<div class="jr-type '+r.cls+'">'+r.type+'</div><div class="jr-msg">'+esc(msg)+'</div>';
+    btn.disabled=false; throwing=false;
+  },1050);
+}
+
+const FORTUNES=[
+  /* ── 頂級吉運 ── */
+  {num:'一',   level:'大大吉',       cls:'fl-top', text:'大大吉！！這是最頂的！……等等，你是不是作弊了？這種運氣也太離譜了吧，是不是把咪奇的可愛都拿走了！？🍬'},
+  {num:'二',   level:'大吉',         cls:'fl-top', text:'哇你運氣真好！……算了應該只是碰巧啦。咪奇覺得只是碰巧啦🍬'},
+  {num:'三',   level:'向大吉',       cls:'fl-top', text:'向大吉——正在往大吉的路上！有進步嘛，繼續努力！……但還沒到大吉就別得意，咪奇會盯著你🍬'},
+  {num:'四',   level:'末大吉',       cls:'fl-top', text:'末大吉！差一點點就是大吉了……像你平常做事一樣，總是差那麼一步。姬靈鬼好好加油！🍬'},
+  /* ── 常規吉運 ── */
+  {num:'五',   level:'吉凶末分末大吉', cls:'fl-good', text:'吉凶末分末大吉……這名字念起來咪奇自己都嫌麻煩。總之就是有點好、有點不確定，注意一下就好🍬'},
+  {num:'六',   level:'吉',           cls:'fl-good', text:'平平穩穩的……聽起來很無聊？穩定就是一種幸福啦，姬靈鬼要懂得珍惜🍬'},
+  {num:'七',   level:'中吉',         cls:'fl-good', text:'還不錯嘛，有進步！雖然跟最可愛的奇美拉比還差很遠就是了……繼續加油🍬'},
+  {num:'八',   level:'小吉',         cls:'fl-good', text:'還行還行，不上不下的，跟你平常的表現一樣🍬'},
+  {num:'九',   level:'後吉',         cls:'fl-good', text:'後吉！現在可能沒感覺，但後來會越來越好的。咪奇說：要有耐心！……雖然我自己沒什麼耐心就是了🍬'},
+  {num:'十',   level:'末吉',         cls:'fl-good', text:'末吉……就是剛剛好及格的吉運。就像考了60分——有過就好啦，別太挑剔！🍬'},
+  /* ── 混合難測 ── */
+  {num:'十一', level:'吉凶不分末吉', cls:'fl-mixed', text:'吉凶不分末吉……說真的咪奇自己也搞不清楚這是好是壞。總之小心一點，但也別太緊張？嘿嘿🍬'},
+  {num:'十二', level:'吉凶相交末吉', cls:'fl-mixed', text:'吉凶相交末吉——好壞事會交替出現的意思。有好有壞才叫人生嘛！咪奇覺得這樣挺刺激的……對你來說🍬'},
+  {num:'十三', level:'吉凶相半',     cls:'fl-mixed', text:'吉凶相半！好的一半、壞的一半——所以看你自己怎麼選嘍？咪奇說要選就是選好的那一半，嘿嘿🍬'},
+  {num:'十四', level:'吉凶相央',     cls:'fl-mixed', text:'吉凶相央……正正好好在中間，這個籤最難解釋了。咪奇也只能說：看情況吧，姬靈鬼自己多注意🍬'},
+  /* ── 先苦後甘 ── */
+  {num:'十五', level:'小凶後吉',     cls:'fl-reverse', text:'小凶後吉！先有一點點不順，但之後會好的——就像咪奇有時候嘴硬，其實心裡是在為你好啦……才怪(吐)🍬'},
+  {num:'十六', level:'凶後吉',       cls:'fl-reverse', text:'凶後吉！先壞後好——這種劇情最爽了！低谷之後就是高峰，姬靈鬼要撐住！咪奇說你可以的🍬'},
+  {num:'十七', level:'凶後大吉',     cls:'fl-reverse', text:'凶後大吉！！最戲劇性的逆轉——先跌到谷底，再飛上天！咪奇最喜歡這種主角光環劇情了，你就是故事的主角🍬'},
+  /* ── 純凶 ── */
+  {num:'十八', level:'凶',           cls:'fl-low', text:'哎呀抽到凶了……嘿嘿，別怕！咪奇跟ㄋ說：跌倒了就爬起來，沒什麼大不了🍬'},
+  {num:'十九', level:'大凶',         cls:'fl-low', text:'大凶！……嘿嘿，恭喜你成功抽到最難抽的，你的手氣真是…獨特。咪奇保佑你快點轉運吧🍬'},
+];
+
+let drawing=false;
+function drawFortune(){
+  if(drawing)return; drawing=true;
+  const wrap=document.getElementById('qian-wrap');
+  wrap.classList.add('shaking');
+  const f=FORTUNES[Math.floor(Math.random()*FORTUNES.length)];
+  setTimeout(()=>{
+    wrap.classList.remove('shaking');
+    document.getElementById('fortune-result').innerHTML=
+      `<div class="fortune-num">第${f.num}籤</div>`+
+      `<div class="fortune-level ${f.cls}">${f.level}</div>`+
+      `<div class="fortune-text">${esc(f.text)}</div>`;
+    drawing=false;
+  }, 750);
+}
+
+async function burnPaper(amount){
+  const key='hm_paper_'+amount;
+  if(sessionStorage.getItem(key))return;
+  const btn=document.getElementById('denom-'+amount);
+  const wrap=document.getElementById('paper-wrap');
+  const flame=document.getElementById('flame-wrap');
+  btn.disabled=true;
+  flame.classList.add('burning');
+  wrap.classList.remove('burned');
+  setTimeout(()=>wrap.classList.add('burned'),400);
+  setTimeout(()=>flame.classList.remove('burning'),2200);
+  try{
+    const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'burnpaper',amount}));
+    const d=await r.json();
+    if(d.success){
+      document.getElementById('cnt-paper').textContent=d.total.toLocaleString();
+      sessionStorage.setItem(key,'1');
+      btn.classList.add('burned-denom');
+      showToast('🕯️ 想再給咪奇現金嗎？<br>請重新開啟頁面，才能再次供奉');
+    }else{btn.disabled=false;}
+  }catch(e){btn.disabled=false;}
+}
+
+async function loadPaperTotal(){
+  try{
+    const r=await fetch(SCRIPT_URL+'?action=getOffers');
+    const d=await r.json();
+    if(d.success&&d.data){
+      document.getElementById('cnt-paper').textContent=(d.data.paper_amount||0).toLocaleString();
+    }
+  }catch(e){}
+  [10,50,100,500].forEach(a=>{
+    if(sessionStorage.getItem('hm_paper_'+a)){
+      const b=document.getElementById('denom-'+a);
+      if(b){b.disabled=true;b.classList.add('burned-denom');}
+    }
+  });
+}
+
+let toastTimer;
+function showToast(msg, duration=4000){
+  const t=document.getElementById('toast');
+  t.innerHTML=msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'), duration);
+}
+
+function canHTML(){return`<div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>`;}
+async function doneCan(){
+  if(sessionStorage.getItem('hm_offered_can'))return;
+  const btn=document.getElementById('btn-can');
+  btn.disabled=true;
+  try{
+    const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'offer',type:'can'}));
+    const d=await r.json();
+    if(d.success){
+      document.getElementById('cnt-can').textContent=d.count;
+      sessionStorage.setItem('hm_offered_can','1');
+      btn.title='本次已供奉';
+      const rows=['can-r1','can-r2','can-r3','can-r4'];
+      for(const id of rows){
+        let row=document.getElementById(id);
+        if(!row){
+          row=document.createElement('div');
+          row.className='can-row'; row.id=id;
+          document.getElementById('can-tower').insertBefore(row,document.getElementById('can-r1').previousSibling||document.getElementById('can-r1'));
+        }
+        const maxCans={'can-r1':3,'can-r2':2,'can-r3':1,'can-r4':2}[id]||3;
+        if(row.children.length<maxCans){
+          row.classList.add('just-added');
+          row.insertAdjacentHTML('beforeend',canHTML());
+          setTimeout(()=>row.classList.remove('just-added'),400);
+          break;
+        }
+      }
+    }else{btn.disabled=false;}
+  }catch(e){btn.disabled=false;}
+}
+async function loadCanCount(){
+  try{
+    const r=await fetch(SCRIPT_URL+'?action=getOffers');
+    const d=await r.json();
+    if(d.success&&d.data) document.getElementById('cnt-can').textContent=d.data.can||0;
+  }catch(e){}
+  if(sessionStorage.getItem('hm_offered_can')){
+    const b=document.getElementById('btn-can');
+    if(b){b.disabled=true;b.title='本次已供奉';}
+  }
+}
+
+let waterLocked=false;
+async function drinkWater(){
+  if(waterLocked)return; waterLocked=true;
+  const glass=document.getElementById('water-glass');
+  glass.classList.add('gulping');
+  const wrap=document.querySelector('.water-glass-wrap');
+  for(let i=0;i<5;i++){
+    const b=document.createElement('div'); b.className='water-bubble';
+    const sz=3+Math.random()*5;
+    b.style.cssText=`width:${sz}px;height:${sz}px;left:${10+Math.random()*30}px;bottom:${32+Math.random()*18}px;animation-delay:${i*.07}s`;
+    wrap.appendChild(b); setTimeout(()=>b.remove(),750);
+  }
+  setTimeout(()=>glass.classList.remove('gulping'),600);
+  try{
+    const r=await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'offer',type:'water'}));
+    const d=await r.json();
+    if(d.success){
+      const c=document.getElementById('cnt-water');
+      c.textContent=d.count; c.style.color='#fff'; setTimeout(()=>{c.style.color=''},500);
+    }
+  }catch(e){}
+  setTimeout(()=>{waterLocked=false;},800);
+}
+async function loadWaterCount(){
+  try{
+    const r=await fetch(SCRIPT_URL+'?action=getOffers');
+    const d=await r.json();
+    if(d.success&&d.data) document.getElementById('cnt-water').textContent=d.data.water||0;
+  }catch(e){}
+}
+
+loadMessages();
+loadOfferCounts();
+loadPaperTotal();
+loadCanCount();
+loadWaterCount();
+initVisitCount();
+</script>
+</body>
+</html>
