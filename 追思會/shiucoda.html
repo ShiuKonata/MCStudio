@@ -198,6 +198,18 @@
     .fortune-hint{font-size:.7rem;color:var(--text-faint);font-style:italic}
     .fortune-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
     .fortune-btn:hover{background:rgba(185,196,104,.24)}
+    .fortune-hint-btn{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-size:.6rem;font-weight:700;cursor:default;position:relative;vertical-align:middle;margin-left:.35rem;flex-shrink:0}
+    .fortune-hint-btn:hover .fortune-hint-popup{display:block}
+    .fortune-hint-popup{display:none;position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.55rem .7rem;width:210px;z-index:200;text-align:left;white-space:normal;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+    .fortune-hint-popup::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--border)}
+    .fh-row{display:flex;flex-wrap:wrap;gap:.2rem .3rem;margin-bottom:.28rem}
+    .fh-row:last-child{margin-bottom:0}
+    .fh-tag{font-size:.62rem;padding:.08rem .28rem;border-radius:3px;line-height:1.5}
+    .fh-tag.fl-top{background:rgba(245,208,96,.1);border:1px solid rgba(245,208,96,.35)}
+    .fh-tag.fl-good{background:rgba(168,200,106,.1);border:1px solid rgba(168,200,106,.35)}
+    .fh-tag.fl-mixed{background:rgba(224,160,64,.1);border:1px solid rgba(224,160,64,.35)}
+    .fh-tag.fl-reverse{background:rgba(138,180,232,.1);border:1px solid rgba(138,180,232,.35)}
+    .fh-tag.fl-low{background:rgba(192,112,112,.1);border:1px solid rgba(192,112,112,.35)}
 
     /* ── 燒金紙 ── */
     .paper-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.8rem}
@@ -381,7 +393,13 @@
     <!-- 新功能：抽籤 + 燒金紙 -->
     <div class="new-cards">
       <div class="qian-card">
-        <div class="card-title">抽籤</div>
+        <div class="card-title" style="display:flex;align-items:center;justify-content:center">抽籤<span class="fortune-hint-btn">！<div class="fortune-hint-popup">
+            <div class="fh-row"><span class="fh-tag fl-top">大大吉</span><span class="fh-tag fl-top">大吉</span><span class="fh-tag fl-top">向大吉</span><span class="fh-tag fl-top">末大吉</span></div>
+            <div class="fh-row"><span class="fh-tag fl-good">吉凶末分末大吉</span><span class="fh-tag fl-good">吉</span><span class="fh-tag fl-good">中吉</span><span class="fh-tag fl-good">小吉</span><span class="fh-tag fl-good">後吉</span><span class="fh-tag fl-good">末吉</span></div>
+            <div class="fh-row"><span class="fh-tag fl-mixed">吉凶不分末吉</span><span class="fh-tag fl-mixed">吉凶相交末吉</span><span class="fh-tag fl-mixed">吉凶相半</span><span class="fh-tag fl-mixed">吉凶相央</span></div>
+            <div class="fh-row"><span class="fh-tag fl-reverse">小凶後吉</span><span class="fh-tag fl-reverse">凶後吉</span><span class="fh-tag fl-reverse">凶後大吉</span></div>
+            <div class="fh-row"><span class="fh-tag fl-low">凶</span><span class="fh-tag fl-low">大凶</span></div>
+          </div></span></div>
         <div class="qian-wrap" id="qian-wrap" onclick="drawFortune()">
           <div class="q-stick"></div><div class="q-stick"></div>
           <div class="q-stick"></div><div class="q-stick"></div><div class="q-stick"></div>
