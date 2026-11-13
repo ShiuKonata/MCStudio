@@ -812,8 +812,10 @@ async function burnPaper(amount){
       document.getElementById('cnt-paper').textContent=d.total.toLocaleString();
       sessionStorage.setItem(key,'1');
       btn.classList.add('burned-denom');
-      document.getElementById('paper-gif-cover').classList.add('shown');
-      showToast('🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉');
+      if([10,50,100,500].every(a=>sessionStorage.getItem('sc_paper_'+a))){
+        document.getElementById('paper-gif-cover').classList.add('shown');
+        showToast('🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉');
+      }
     }else{btn.disabled=false;}
   }catch(e){btn.disabled=false;}
 }
