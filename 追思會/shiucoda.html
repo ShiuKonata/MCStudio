@@ -281,6 +281,8 @@
 
     .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface-2);border:1px solid var(--accent);color:var(--text);font-size:.82rem;padding:.7rem 1.4rem;z-index:200;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;text-align:center;max-width:320px;line-height:1.6}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .paper-msg{display:none;text-align:center;padding:.65rem 1rem;font-size:.76rem;color:var(--text-muted);line-height:1.7;border-top:1px solid var(--border)}
+    .paper-msg.show{display:block}
     .site-footer{text-align:center;padding:1.4rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--text-faint);background:rgba(9,12,6,.45);backdrop-filter:blur(6px)}
     .site-footer a{color:var(--text-faint);text-decoration:none} .site-footer a:hover{color:var(--text-muted)}
 
@@ -513,6 +515,7 @@
   </div>
 </main>
 
+<div class="paper-msg" id="paper-msg">🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉</div>
 <footer class="site-footer">
   <a href="../vtuber.html?id=shiucoda">← 回到詩雨蔻達的主頁</a>
   &nbsp;·&nbsp;
@@ -814,9 +817,7 @@ async function burnPaper(amount){
       btn.classList.add('burned-denom');
       if([10,50,100,500].every(a=>sessionStorage.getItem('sc_paper_'+a))){
         document.getElementById('paper-gif-cover').classList.add('shown');
-        const t=document.getElementById('toast');
-        t.innerHTML='🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉';
-        t.classList.add('show');
+        document.getElementById('paper-msg').classList.add('show');
       }
     }else{btn.disabled=false;}
   }catch(e){btn.disabled=false;}
