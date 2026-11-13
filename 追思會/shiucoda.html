@@ -723,7 +723,7 @@ const JR={
   yin: {type:'陰筊',cls:'jr-yin', msgs:['阿統搖頭搖頭…（ㄋ真爛🐸）','嗯…阿統不同意🐸','不行不行，呱呱再想想🐸']},
   xiao:{type:'笑筊',cls:'jr-xiao',msgs:['再問一次吧…（阿統在偷笑🐸）','再大聲點聽不到？...（不講出來窩怎麼知道🐸）','阿統覺得要不再試試看？...（叫ㄋ試就試🐸）']}
 };
-let throwing=false;
+let throwing=false, gotHolyJiao=false;
 function throwJiao(){
   if(throwing)return; throwing=true;
   const btn=document.getElementById('jiao-btn'),j1=document.getElementById('j1'),j2=document.getElementById('j2'),jr=document.getElementById('jr');
@@ -735,6 +735,7 @@ function throwJiao(){
     j1.className='jiao '+(d1?'dome':'flat'); j2.className='jiao '+(d2?'dome':'flat');
     const r=JR[key],msg=r.msgs[Math.floor(Math.random()*r.msgs.length)];
     jr.innerHTML='<div class="jr-type '+r.cls+'">'+r.type+'</div><div class="jr-msg">'+esc(msg)+'</div>';
+    if(key==='holy') gotHolyJiao=true;
     btn.disabled=false; throwing=false;
   },1050);
 }
@@ -774,6 +775,7 @@ const qianSfx=new Audio('qian-sfx.mp3');
 const waterSfx=new Audio('water-sfx.mp3');
 let drawing=false;
 function drawFortune(){
+  if(!gotHolyJiao){showToast('請先擲筊詢問詩雨土地公要許願的項目，獲得聖筊一次就能抽籤');return;}
   if(drawing)return; drawing=true;
   const wrap=document.getElementById('qian-wrap');
   wrap.classList.add('shaking');
