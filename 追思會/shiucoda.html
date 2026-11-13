@@ -236,6 +236,12 @@
     .denom-btn:hover:not(:disabled){background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
     .denom-btn:disabled{opacity:.35;cursor:not-allowed}
     .denom-btn.burned-denom::after{content:'✓';position:absolute;top:2px;right:4px;font-size:.55rem;color:var(--accent);opacity:.7}
+    .paper-modal-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);align-items:center;justify-content:center}
+    .paper-modal-overlay.show{display:flex}
+    .paper-modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.75rem;width:min(200px,82vw);text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+    .paper-modal img{width:100%;border-radius:8px;display:block}
+    .paper-modal-msg{font-size:.68rem;color:var(--text-muted);margin-top:.5rem;line-height:1.6}
+    .paper-modal-close{margin-top:.55rem;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-size:.68rem;padding:.28rem .85rem;border-radius:6px;cursor:pointer;font-family:var(--font-b)}
 
     /* ── 罐頭塔 ── */
     .can-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.7rem}
@@ -251,8 +257,8 @@
     .can-total{font-size:.72rem;color:var(--accent);font-variant-numeric:tabular-nums}
     .can-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
     .can-btn:hover:not(:disabled){background:rgba(185,196,104,.24)} .can-btn:disabled{opacity:.38;cursor:not-allowed}
-    @keyframes canDrop{0%{transform:translateY(-18px);opacity:0}60%{transform:translateY(3px)}100%{transform:translateY(0);opacity:1}}
-    .can-row.just-added .can:last-child{animation:canDrop .35s ease-out}
+    @keyframes canBounce{0%,100%{transform:scale(1)}30%{transform:scale(1.05)}70%{transform:scale(.97)}}
+    .can-tower.donated{animation:canBounce .45s ease}
 
     /* ── 喝水咕嚕嚕 ── */
     .water-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1rem 1.4rem;display:flex;flex-direction:row;align-items:center;gap:1.4rem;grid-column:1/-1}
@@ -289,6 +295,13 @@
 
 <div id="stars"></div>
 <div class="toast" id="toast"></div>
+<div class="paper-modal-overlay" id="paper-modal-overlay" onclick="closePaperModal(event)">
+  <div class="paper-modal">
+    <img src="paper-thanks.gif" alt="">
+    <div class="paper-modal-msg">🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉</div>
+    <button class="paper-modal-close" onclick="closePaperModal()">知道了</button>
+  </div>
+</div>
 
 <div class="modal-overlay" id="modal" onclick="closeModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
@@ -807,7 +820,7 @@ async function burnPaper(amount){
       document.getElementById('cnt-paper').textContent=d.total.toLocaleString();
       sessionStorage.setItem(key,'1');
       btn.classList.add('burned-denom');
-      showToast('🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉');
+      showPaperModal();
     }else{btn.disabled=false;}
   }catch(e){btn.disabled=false;}
 }
@@ -829,6 +842,14 @@ async function loadPaperTotal(){
   });
 }
 
+function showPaperModal(){
+  document.getElementById('paper-modal-overlay').classList.add('show');
+}
+function closePaperModal(e){
+  if(!e||e.target===document.getElementById('paper-modal-overlay'))
+    document.getElementById('paper-modal-overlay').classList.remove('show');
+}
+
 let toastTimer;
 function showToast(msg, duration=4000){
   const t=document.getElementById('toast');
@@ -837,7 +858,6 @@ function showToast(msg, duration=4000){
   toastTimer=setTimeout(()=>t.classList.remove('show'), duration);
 }
 
-function canHTML(){return`<div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">施予<br>阿統</div></div></div>`;}
 async function doneCan(){
   if(sessionStorage.getItem('sc_offered_can'))return;
   const btn=document.getElementById('btn-can');
@@ -849,23 +869,9 @@ async function doneCan(){
       document.getElementById('cnt-can').textContent=d.count;
       sessionStorage.setItem('sc_offered_can','1');
       btn.title='本次已供奉';
-      // 動態加一罐到塔上
-      const rows=['can-r1','can-r2','can-r3','can-r4'];
-      for(const id of rows){
-        let row=document.getElementById(id);
-        if(!row){
-          row=document.createElement('div');
-          row.className='can-row'; row.id=id;
-          document.getElementById('can-tower').insertBefore(row,document.getElementById('can-r1').previousSibling||document.getElementById('can-r1'));
-        }
-        const maxCans={'can-r1':3,'can-r2':2,'can-r3':1,'can-r4':2}[id]||3;
-        if(row.children.length<maxCans){
-          row.classList.add('just-added');
-          row.insertAdjacentHTML('beforeend',canHTML());
-          setTimeout(()=>row.classList.remove('just-added'),400);
-          break;
-        }
-      }
+      const tower=document.getElementById('can-tower');
+      tower.classList.add('donated');
+      setTimeout(()=>tower.classList.remove('donated'),450);
     }else{btn.disabled=false;}
   }catch(e){btn.disabled=false;}
 }

@@ -251,8 +251,8 @@
     .can-total{font-size:.72rem;color:var(--accent);font-variant-numeric:tabular-nums}
     .can-btn{background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-b);font-size:.78rem;padding:.4rem .9rem;cursor:pointer;letter-spacing:.12em;transition:background .15s;width:100%}
     .can-btn:hover:not(:disabled){background:rgba(212,168,200,.24)} .can-btn:disabled{opacity:.38;cursor:not-allowed}
-    @keyframes canDrop{0%{transform:translateY(-18px);opacity:0}60%{transform:translateY(3px)}100%{transform:translateY(0);opacity:1}}
-    .can-row.just-added .can:last-child{animation:canDrop .35s ease-out}
+    @keyframes canBounce{0%,100%{transform:scale(1)}30%{transform:scale(1.05)}70%{transform:scale(.97)}}
+    .can-tower.donated{animation:canBounce .45s ease}
 
     /* ── 喝水咕嚕嚕 ── */
     .water-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1rem 1.4rem;display:flex;flex-direction:row;align-items:center;gap:1.4rem;grid-column:1/-1}
@@ -827,7 +827,6 @@ function showToast(msg, duration=4000){
   toastTimer=setTimeout(()=>t.classList.remove('show'), duration);
 }
 
-function canHTML(){return`<div class="can"><div class="can-cap"></div><div class="can-body"><div class="can-txt">姬城<br>三千華</div></div></div>`;}
 async function doneCan(){
   if(sessionStorage.getItem('hm_offered_can'))return;
   const btn=document.getElementById('btn-can');
@@ -839,22 +838,9 @@ async function doneCan(){
       document.getElementById('cnt-can').textContent=d.count;
       sessionStorage.setItem('hm_offered_can','1');
       btn.title='本次已供奉';
-      const rows=['can-r1','can-r2','can-r3','can-r4'];
-      for(const id of rows){
-        let row=document.getElementById(id);
-        if(!row){
-          row=document.createElement('div');
-          row.className='can-row'; row.id=id;
-          document.getElementById('can-tower').insertBefore(row,document.getElementById('can-r1').previousSibling||document.getElementById('can-r1'));
-        }
-        const maxCans={'can-r1':3,'can-r2':2,'can-r3':1,'can-r4':2}[id]||3;
-        if(row.children.length<maxCans){
-          row.classList.add('just-added');
-          row.insertAdjacentHTML('beforeend',canHTML());
-          setTimeout(()=>row.classList.remove('just-added'),400);
-          break;
-        }
-      }
+      const tower=document.getElementById('can-tower');
+      tower.classList.add('donated');
+      setTimeout(()=>tower.classList.remove('donated'),450);
     }else{btn.disabled=false;}
   }catch(e){btn.disabled=false;}
 }
