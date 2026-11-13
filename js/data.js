@@ -2624,6 +2624,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"2Vo8lfr7D7E",title:"【Cover】AiNA THE END / On The Way 革命道中 鯨諾Cover | #whalefall #鯨諾",date:"2026-11-12"},
       {id:"Xbc85GBo3CE",title:"【Cover】海鳴り/ katawara Cover  -【 鯨諾&穆克蕗】",date:"2026-10-21"},
       {id:"e2PPZIsVdq4",title:"【Original】【原創BGM】躍動沙灘 | 🌙鯨諾whalefall🐋 | #whalefall #鯨諾",date:"2026-07-12"},
       {id:"QoI7Dps65ZY",title:"【Alluria 兩週年紀念】Binary Vampire /RE:VALE covered by Alluria |",date:"2026-05-10"},
@@ -3717,6 +3718,7 @@ const vtubers = [
       {id:"P2MMHQLBj4Y",title:"リードコントロール / Cover【茶帽瑪緹 ♠︎ Chamamatti】",date:"2025-10-24"},
     ],
     shorts: [
+      {id:"aCbN7Az1WrM",title:"【茶帽瑪緹精華】槍法不夠，音量來湊｜茶帽瑪緹 ♠︎ Chamamatti #vtuber #茶帽瑪緹 #三角洲行動",date:"2026-11-12"},
       {id:"SMwmJ23jxPU",title:"和我一起跳支舞嗎 #5machallenge #茶帽瑪緹 #vtuber",date:"2026-09-30"},
       {id:"A5k4cB4tN3s",title:"【茶帽瑪緹精華】遇事不決 先叫出來威嚇再說｜茶帽瑪緹 ♠︎ Chamamatti #vtuber #茶帽瑪緹 #鬼武者 #onimushawayofthesword",date:"2026-09-21"},
       {id:"9E6cSXyOO2Y",title:"【茶帽瑪緹精華】鑫鑫腸！你這樣偏曖昧了｜茶帽瑪緹 ♠︎ Chamamatti #vtuber #茶帽瑪緹 #鬼武者 #onimushawayofthesword",date:"2026-09-20"},
