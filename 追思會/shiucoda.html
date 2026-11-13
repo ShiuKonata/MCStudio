@@ -236,12 +236,10 @@
     .denom-btn:hover:not(:disabled){background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
     .denom-btn:disabled{opacity:.35;cursor:not-allowed}
     .denom-btn.burned-denom::after{content:'✓';position:absolute;top:2px;right:4px;font-size:.55rem;color:var(--accent);opacity:.7}
-    .paper-modal-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);align-items:center;justify-content:center}
-    .paper-modal-overlay.show{display:flex}
-    .paper-modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.75rem;width:min(200px,82vw);text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.5)}
-    .paper-modal img{width:100%;border-radius:8px;display:block}
-    .paper-modal-msg{font-size:.68rem;color:var(--text-muted);margin-top:.5rem;line-height:1.6}
-    .paper-modal-close{margin-top:.55rem;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);font-size:.68rem;padding:.28rem .85rem;border-radius:6px;cursor:pointer;font-family:var(--font-b)}
+    .paper-card{position:relative}
+    .paper-gif-cover{display:none;position:absolute;inset:0;z-index:10;border-radius:inherit;background:var(--surface);align-items:center;justify-content:center}
+    .paper-gif-cover.shown{display:flex}
+    .paper-gif-cover img{width:100%;max-width:160px;border-radius:8px;display:block}
 
     /* ── 罐頭塔 ── */
     .can-card{background:var(--surface);backdrop-filter:blur(4px);border:1px solid var(--border);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.7rem}
@@ -295,13 +293,6 @@
 
 <div id="stars"></div>
 <div class="toast" id="toast"></div>
-<div class="paper-modal-overlay" id="paper-modal-overlay" onclick="closePaperModal(event)">
-  <div class="paper-modal">
-    <img src="paper-thanks.gif" alt="">
-    <div class="paper-modal-msg">🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉</div>
-    <button class="paper-modal-close" onclick="closePaperModal()">知道了</button>
-  </div>
-</div>
 
 <div class="modal-overlay" id="modal" onclick="closeModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
@@ -446,6 +437,7 @@
         <button class="can-btn" id="btn-can" onclick="doneCan()">供奉罐頭</button>
       </div>
       <div class="paper-card">
+        <div class="paper-gif-cover" id="paper-gif-cover"><img src="paper-thanks.gif" alt=""></div>
         <div class="card-title">燒金紙</div>
         <div class="paper-wrap" id="paper-wrap" onclick="burnPaper()">
           <div class="paper-layer"></div>
@@ -820,7 +812,8 @@ async function burnPaper(amount){
       document.getElementById('cnt-paper').textContent=d.total.toLocaleString();
       sessionStorage.setItem(key,'1');
       btn.classList.add('burned-denom');
-      showPaperModal();
+      document.getElementById('paper-gif-cover').classList.add('shown');
+      showToast('🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉');
     }else{btn.disabled=false;}
   }catch(e){btn.disabled=false;}
 }
@@ -840,14 +833,6 @@ async function loadPaperTotal(){
       if(b){b.disabled=true;b.classList.add('burned-denom');}
     }
   });
-}
-
-function showPaperModal(){
-  document.getElementById('paper-modal-overlay').classList.add('show');
-}
-function closePaperModal(e){
-  if(!e||e.target===document.getElementById('paper-modal-overlay'))
-    document.getElementById('paper-modal-overlay').classList.remove('show');
 }
 
 let toastTimer;
