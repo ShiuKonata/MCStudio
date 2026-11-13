@@ -788,6 +788,7 @@ function drawFortune(){
       `<div class="fortune-num">第${f.num}籤</div>`+
       `<div class="fortune-level ${f.cls}">${f.level}</div>`+
       `<div class="fortune-text">${esc(f.text)}</div>`;
+    gotHolyJiao=false;
     drawing=false;
   }
   setTimeout(()=>{minDone=true;tryShow();},750);
