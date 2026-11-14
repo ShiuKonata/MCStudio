@@ -290,7 +290,11 @@
     .timeline-section{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(4px);min-height:260px;max-width:560px;display:flex;flex-direction:column}
     .timeline-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
     .timeline-bg video{width:100%;height:100%;object-fit:cover;opacity:.15}
-    .timeline-header{padding:.65rem 1.4rem;border-bottom:1px solid var(--border);font-family:var(--font-d);font-size:.75rem;color:var(--accent);letter-spacing:.28em;position:relative;z-index:1}
+    .timeline-header{padding:.65rem 1.4rem;border-bottom:1px solid var(--border);font-family:var(--font-d);font-size:.75rem;color:var(--accent);letter-spacing:.28em;position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+    .tl-years{display:flex;gap:.3rem;flex-shrink:0}
+    .tl-yr{background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-b);font-size:.65rem;padding:.2rem .5rem;cursor:pointer;letter-spacing:.05em;transition:background .15s,border-color .15s,color .15s}
+    .tl-yr:hover{border-color:var(--accent);color:var(--accent)}
+    .tl-yr.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
     .timeline-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;position:relative;z-index:1;padding:1.1rem 1.6rem 1rem;gap:0;scrollbar-width:thin;scrollbar-color:var(--accent-dim) transparent;align-items:flex-start;margin-top:auto}
     .timeline-track::-webkit-scrollbar{height:5px}
     .timeline-track::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
@@ -388,7 +392,15 @@
     <!-- 人生時間軸 -->
     <div class="timeline-section">
       <div class="timeline-bg" id="timeline-bg"><video autoplay loop muted playsinline src="女兒的背景_1.mp4"></video></div>
-      <div class="timeline-header">✦ 詩雨蔻達的人生足跡 ✦</div>
+      <div class="timeline-header">
+        <span>✦ 詩雨蔻達的人生足跡 ✦</span>
+        <div class="tl-years">
+          <button class="tl-yr" onclick="jumpToYear(2023)">2023</button>
+          <button class="tl-yr" onclick="jumpToYear(2024)">2024</button>
+          <button class="tl-yr" onclick="jumpToYear(2025)">2025</button>
+          <button class="tl-yr" onclick="jumpToYear(2026)">2026</button>
+        </div>
+      </div>
       <div class="timeline-track" id="timeline-track">
         <div class="t-item"><div class="t-dot"></div><div class="t-date">2022 / 11 / 28</div><div class="t-title">悄悄出現在人間</div><div class="t-desc"></div></div>
         <div class="t-item"><div class="t-dot"></div><div class="t-date">2023 / 01 / 17</div><div class="t-title">MC組開始製作詩雨蔻達的大小事履歷</div><div class="t-desc"></div></div>
@@ -648,6 +660,16 @@ function showSlideContent(index,animate){
 
 function goSlide(index){currentSlide=(index+allMessages.length)%allMessages.length;showSlideContent(currentSlide,true);}
 function navSlide(dir){if(!allMessages.length)return;goSlide(currentSlide+dir);}
+
+function jumpToYear(year){
+  const track=document.getElementById('timeline-track');
+  track.querySelectorAll('.t-item').forEach(item=>{
+    const y=parseInt(item.querySelector('.t-date').textContent);
+    item.style.display=(y===year)?'':'none';
+  });
+  document.querySelectorAll('.tl-yr').forEach(b=>b.classList.toggle('active',parseInt(b.textContent)===year));
+  track.scrollTo({left:0,behavior:'smooth'});
+}
 
 document.getElementById('gb-carousel').addEventListener('touchstart',e=>{window._tx=e.touches[0].clientX},{passive:true});
 document.getElementById('gb-carousel').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-window._tx;if(Math.abs(dx)>40)navSlide(dx<0?1:-1);},{passive:true});
