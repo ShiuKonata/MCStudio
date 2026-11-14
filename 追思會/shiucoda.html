@@ -301,8 +301,8 @@
     .t-desc{font-size:.68rem;color:var(--text-muted);line-height:1.65}
 
     @media(max-width:1100px){.right-area{flex-direction:column}.new-cards{width:100%}}
-    @media(max-width:900px){.main{grid-template-columns:1fr 1fr}.gb-panel{grid-column:1/-1}.portrait-panel{grid-column:1}.right-area{grid-column:2;justify-self:start}.right-panel{max-width:none}.new-cards{width:100%}}
-    @media(max-width:580px){.main{grid-template-columns:1fr}.gb-panel,.portrait-panel,.right-area{grid-column:1;max-width:none;justify-self:auto}}
+    @media(max-width:900px){.main{grid-template-columns:1fr 1fr}.left-col{grid-column:1/-1}.gb-panel{grid-column:1/-1}.portrait-panel{grid-column:1}.right-area{grid-column:2;justify-self:start}.right-panel{max-width:none}.new-cards{width:100%}}
+    @media(max-width:580px){.main{grid-template-columns:1fr}.left-col,.gb-panel,.portrait-panel,.right-area{grid-column:1;max-width:none;justify-self:auto}}
   </style>
 </head>
 <body>
@@ -382,21 +382,23 @@
           <span style="font-size:1rem;line-height:1">＋</span> 寫下一句話
         </button>
       </div>
-      <!-- 人生時間軸 -->
-      <div class="timeline-section">
-        <div class="timeline-bg" id="timeline-bg"></div>
-        <div class="timeline-header">✦ 詩雨蔻達的人生足跡 ✦</div>
-        <div class="timeline-track" id="timeline-track">
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2021 / 01 / 01</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2021 / 06 / 15</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2022 / 03 / 01</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2022 / 09 / 20</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2023 / 04 / 08</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2023 / 11 / 11</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2024 / 07 / 03</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-          <div class="t-item"><div class="t-dot"></div><div class="t-date">2026 / 11 / 11</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
-        </div>
+    </div><!-- /gb-panel -->
+
+    <!-- 人生時間軸 -->
+    <div class="timeline-section">
+      <div class="timeline-bg" id="timeline-bg"></div>
+      <div class="timeline-header">✦ 詩雨蔻達的人生足跡 ✦</div>
+      <div class="timeline-track" id="timeline-track">
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2021 / 01 / 01</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2021 / 06 / 15</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2022 / 03 / 01</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2022 / 09 / 20</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2023 / 04 / 08</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2023 / 11 / 11</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2024 / 07 / 03</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2026 / 11 / 11</div><div class="t-title">重大事蹟標題</div><div class="t-desc">這裡填入事件的簡短描述，可以寫幾句話記錄這個時刻的意義。</div></div>
       </div>
+    </div>
     </div><!-- /left-col -->
 
     <!-- 中：立繪 + 香爐 -->
