@@ -64,14 +64,14 @@
     .gb-title { font-family:var(--font-d); font-size:1rem; color:var(--text-muted); letter-spacing:.18em; }
     .gb-counter { font-size:.72rem; color:var(--text-faint); font-variant-numeric:tabular-nums; }
 
-    .gb-carousel { flex:1; position:relative; overflow:hidden; min-height:380px; display:flex; align-items:stretch; }
+    .gb-carousel { flex:1; position:relative; overflow:hidden; min-height:360px; display:flex; align-items:stretch; }
     .carousel-track { width:100%; display:flex; align-items:center; justify-content:center; }
     .c-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:36px; height:60px; background:rgba(9,12,6,.65); border:1px solid var(--border); color:var(--text-muted); font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s,color .15s,border-color .15s; user-select:none; }
     .c-nav:hover { background:var(--accent-dim); border-color:var(--accent); color:var(--accent); }
     .c-nav:disabled { opacity:.2; cursor:not-allowed; }
     .c-prev{left:0} .c-next{right:0}
 
-    .msg-slide { width:100%; padding:2.5rem 3.8rem; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:380px; transition:opacity .22s ease; }
+    .msg-slide { width:100%; padding:2.5rem 3.8rem; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:360px; transition:opacity .22s ease; }
     .msg-slide.fading{opacity:0}
     .slide-quote-mark { font-family:var(--font-d); font-size:3rem; line-height:1; color:var(--accent); opacity:.18; margin-bottom:.2rem; user-select:none; }
     .slide-text { font-size:1rem; color:var(--text); line-height:1.85; white-space:pre-wrap; word-break:break-word; max-height:260px; overflow-y:auto; }
@@ -79,7 +79,7 @@
     .slide-sep { width:32px; height:1px; background:var(--border); margin:1rem auto; }
     .slide-name { font-size:.88rem; color:var(--accent); letter-spacing:.08em; }
     .slide-time { font-size:.72rem; color:var(--text-faint); margin-top:.2rem; font-variant-numeric:tabular-nums; }
-    .slide-empty { width:100%; display:flex; align-items:center; justify-content:center; min-height:380px; color:var(--text-faint); font-size:.84rem; font-style:italic; }
+    .slide-empty { width:100%; display:flex; align-items:center; justify-content:center; min-height:360px; color:var(--text-faint); font-size:.84rem; font-style:italic; }
 
     .carousel-dots { display:flex; gap:.38rem; justify-content:center; align-items:center; padding:.7rem 1rem; border-top:1px solid var(--border); flex-wrap:wrap; min-height:34px; }
     .dot { width:6px; height:6px; border-radius:50%; background:var(--border); transition:background .2s,transform .2s; cursor:pointer; flex-shrink:0; }
@@ -287,7 +287,7 @@
 
     /* ── 人生時間軸 ── */
     .left-col{display:flex;flex-direction:column;gap:1rem;min-width:0}
-    .timeline-section{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(4px);min-height:240px;max-width:560px}
+    .timeline-section{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(4px);min-height:260px;max-width:560px}
     .timeline-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
     .timeline-bg video{width:100%;height:100%;object-fit:cover;opacity:.15}
     .timeline-header{padding:.65rem 1.4rem;border-bottom:1px solid var(--border);font-family:var(--font-d);font-size:.75rem;color:var(--accent);letter-spacing:.28em;position:relative;z-index:1}
