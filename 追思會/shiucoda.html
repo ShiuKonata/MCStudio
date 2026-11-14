@@ -702,7 +702,8 @@ function jumpToYear(year){
   const track=document.getElementById('timeline-track');
   track.querySelectorAll('.t-item').forEach(item=>{
     const y=parseInt(item.querySelector('.t-date').textContent);
-    item.style.display=(y===year)?'':'none';
+    const show=(y===year)||(year===2023&&y===2022);
+    item.style.display=show?'':'none';
   });
   document.querySelectorAll('.tl-yr').forEach(b=>b.classList.toggle('active',parseInt(b.textContent)===year));
   track.scrollTo({left:0,behavior:'smooth'});
