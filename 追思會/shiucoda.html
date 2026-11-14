@@ -287,11 +287,11 @@
 
     /* ── 人生時間軸 ── */
     .left-col{display:flex;flex-direction:column;gap:1rem;min-width:0}
-    .timeline-section{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(4px);min-height:260px;max-width:560px}
+    .timeline-section{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(4px);min-height:260px;max-width:560px;display:flex;flex-direction:column}
     .timeline-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
     .timeline-bg video{width:100%;height:100%;object-fit:cover;opacity:.15}
     .timeline-header{padding:.65rem 1.4rem;border-bottom:1px solid var(--border);font-family:var(--font-d);font-size:.75rem;color:var(--accent);letter-spacing:.28em;position:relative;z-index:1}
-    .timeline-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;position:relative;z-index:1;padding:1.1rem 1.6rem 1rem;gap:0;scrollbar-width:thin;scrollbar-color:var(--accent-dim) transparent;align-items:flex-start}
+    .timeline-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;position:relative;z-index:1;padding:1.1rem 1.6rem 1rem;gap:0;scrollbar-width:thin;scrollbar-color:var(--accent-dim) transparent;align-items:flex-start;margin-top:auto}
     .timeline-track::-webkit-scrollbar{height:5px}
     .timeline-track::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
     .t-item{flex:0 0 210px;padding-right:1.6rem;padding-left:1.4rem;position:relative}
