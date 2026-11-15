@@ -581,6 +581,7 @@
         <div class="t-item"><div class="t-dot"></div><div class="t-date">2026 / 11 / 10</div><div class="t-title">重大告知</div><div class="t-desc">大統領宣布在人間界的最後行程，對最愛的呱民們：謝謝大家陪伴、喜歡著、愛著我原本的樣子。</div></div>
         <div class="t-item"><div class="t-dot"></div><div class="t-date">2026 / 11 / 10</div><div class="t-title">走建國路回家但畢業少了你</div><div class="t-desc">與最初第一首自彈自唱相呼應，開頭的後座少ㄌ你，到最後的畢業少了你</div></div>
         <div class="t-item"><div class="t-dot"></div><div class="t-date">2026 / 11 / 11</div><div class="t-title">第三首寫給艾琳的情歌</div><div class="t-desc">未命名</div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-date">2026 / 11 / 15</div><div class="t-title">詩雨國發布交換日記</div><div class="t-desc">今天的雨聲，大家寫給 CODA 的公開日記</div></div>
         <div class="t-item"><div class="t-dot"></div><div class="t-date">2026 / 12 / 25</div><div class="t-title">畢業典禮</div><div class="t-desc">在人間的最後一天，大統領要去下個旅程了，呱民們會好想妳</div></div>
       </div>
     </div>
@@ -629,6 +630,7 @@
           <div class="qian-tong"></div>
         </div>
         <button class="fortune-btn" onclick="drawFortune()">抽籤</button>
+        <div style="text-align:center;font-size:.7rem;color:var(--text-muted);margin-top:.3rem;letter-spacing:.05em">會有語音</div>
       </div>
       <div class="fortune-result-card">
         <div class="fortune-result" id="fortune-result">
@@ -691,7 +693,10 @@
           <div class="card-title">喝水咕嚕嚕</div>
           <div class="water-hint">記得喝水，呱民要顧好自己🐸</div>
           <div class="water-total">已喝 <span id="cnt-water">…</span> 杯水</div>
-          <button class="water-btn" id="btn-water" onclick="drinkWater()">咕嚕嚕！</button>
+          <div style="display:flex;align-items:center;gap:.5rem">
+            <button class="water-btn" id="btn-water" onclick="drinkWater()" style="width:auto;flex:1">咕嚕嚕！</button>
+            <span style="font-size:.7rem;color:var(--text-muted);white-space:nowrap;letter-spacing:.05em">會有語音</span>
+          </div>
         </div>
       </div>
     </div>
