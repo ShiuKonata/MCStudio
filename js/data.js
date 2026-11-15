@@ -29,6 +29,7 @@ const vtubers = [
     twitch:    "https://www.twitch.tv/sh1uc0da",
     facebook:  "https://www.facebook.com/SHIUCODA/",
     instagram: "https://www.instagram.com/shiucoda/",
+    diary:     "https://sh1uc0da.github.io/shiu-diary/%E8%A9%A9%E9%9B%A8%E5%9C%8B%E6%97%A5%E8%A8%98.html",
     spreadsheet: "https://docs.google.com/spreadsheets/d/1hC-VJ2lyGj_uBfgybDi4ycdmQlxera42o1rNtdFXdH0/edit?gid=130416740#gid=130416740",
 
     // YouTube 頻道 ID（直播存檔用）
