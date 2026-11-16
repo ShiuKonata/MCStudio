@@ -1233,20 +1233,25 @@ initVisitCount();
 
 /* ══ 綁籤牆 ══ */
 (function(){
-  const LS_K='slip_kyou', LS_D='slip_daikyou';
-  const LS_NK='slip_names_kyou', LS_ND='slip_names_daikyou';
-  let cntK=parseInt(localStorage.getItem(LS_K)||'0');
-  let cntD=parseInt(localStorage.getItem(LS_D)||'0');
-  let namesK=JSON.parse(localStorage.getItem(LS_NK)||'[]');
-  let namesD=JSON.parse(localStorage.getItem(LS_ND)||'[]');
+  let cntK=0, cntD=0;
+  let namesK=[], namesD=[];
   let pendingLevel='';
 
-  function saveAndRender(){
-    localStorage.setItem(LS_K,cntK); localStorage.setItem(LS_D,cntD);
-    localStorage.setItem(LS_NK,JSON.stringify(namesK));
-    localStorage.setItem(LS_ND,JSON.stringify(namesD));
+  function renderCounts(){
     document.getElementById('cnt-slip-kyou').textContent=cntK;
     document.getElementById('cnt-slip-daikyou').textContent=cntD;
+  }
+
+  async function loadSlipData(){
+    try{
+      const r=await fetch(SCRIPT_URL+'?action=getSlipData');
+      const d=await r.json();
+      if(d.success){
+        cntK=d.kyou||0; cntD=d.daikyou||0;
+        namesK=d.names_kyou||[]; namesD=d.names_daikyou||[];
+        renderCounts();
+      }
+    }catch(e){}
   }
 
   function showRandomName(level){
@@ -1257,13 +1262,9 @@ initVisitCount();
     el.textContent=`✦ ${name} 也綁了一張${level} ✦`;
   }
 
-  // 點計數區隨機顯示名字
-  document.getElementById('cnt-slip-kyou').closest('.slip-counts span')||
-    document.getElementById('cnt-slip-kyou').parentElement;
   ['cnt-slip-kyou','cnt-slip-daikyou'].forEach(function(id){
     const el=document.getElementById(id);
     const level=id==='cnt-slip-kyou'?'凶':'大凶';
-    el.closest && el.parentElement && (el.parentElement.style.cursor='pointer');
     el.parentElement.addEventListener('click',function(){showRandomName(level);});
   });
 
@@ -1272,7 +1273,6 @@ initVisitCount();
     document.getElementById('slip-fire-msg').textContent=label+'籤已燃燒淨化！歸零重來 🔥';
     el.classList.add('active');
     setTimeout(()=>el.classList.remove('active'),2800);
-    // 燃燒後清空名字陣列
     if(label==='大凶') namesD=[]; else namesK=[];
   }
 
@@ -1314,32 +1314,36 @@ initVisitCount();
     btns.appendChild(yes); btns.appendChild(anon);
   }
 
-  function submitSlip(name){
+  async function submitSlip(name){
     closeSlipDialog();
-    if(pendingLevel==='大凶'){
-      namesD.push(name);
-      cntD++;
-      if(cntD>=100){setTimeout(()=>{triggerFire('大凶');cntD=0;saveAndRender();},300);return;}
-    } else {
-      namesK.push(name);
-      cntK++;
-      if(cntK>=100){setTimeout(()=>{triggerFire('凶');cntK=0;saveAndRender();},300);return;}
-    }
-    saveAndRender();
+    const type=pendingLevel==='大凶'?'daikyou':'kyou';
+    if(pendingLevel==='大凶'){namesD.push(name);cntD++;}
+    else{namesK.push(name);cntK++;}
+    renderCounts();
     showToast(name==='匿名'?`已將「${pendingLevel}」籤綁上籤牆！`:`${name} 已將「${pendingLevel}」籤綁上籤牆！`);
     showRandomName(pendingLevel);
+    const cnt=pendingLevel==='大凶'?cntD:cntK;
+    if(cnt>=100){
+      setTimeout(()=>{
+        triggerFire(pendingLevel);
+        if(pendingLevel==='大凶') cntD=0; else cntK=0;
+        renderCounts();
+      },300);
+    }
+    try{
+      await fetch(SCRIPT_URL+'?'+new URLSearchParams({action:'bindSlip',type,name}));
+    }catch(e){}
   }
 
   window.closeSlipDialog=function(){
     document.getElementById('slip-dialog').classList.remove('open');
   };
 
-  // 點對話框外關閉
   document.getElementById('slip-dialog').addEventListener('click',function(e){
     if(e.target===this) closeSlipDialog();
   });
 
-  saveAndRender();
+  loadSlipData();
 })();
 </script>
 </body>
