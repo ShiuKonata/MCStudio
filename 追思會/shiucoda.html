@@ -1327,6 +1327,7 @@ initVisitCount();
     }
     saveAndRender();
     showToast(name==='匿名'?`已將「${pendingLevel}」籤綁上籤牆！`:`${name} 已將「${pendingLevel}」籤綁上籤牆！`);
+    showRandomName(pendingLevel);
   }
 
   window.closeSlipDialog=function(){
