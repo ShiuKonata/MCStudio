@@ -1150,7 +1150,7 @@ async function burnPaper(amount){
       if([10,50,100,500].every(a=>sessionStorage.getItem('sc_paper_'+a))){
         document.getElementById('paper-gif-cover').classList.add('shown');
         const t=document.getElementById('toast');
-        t.innerHTML='🕯️ 想再給女兒現金嗎？<br>請重新開啟頁面，才能再次供奉';
+        t.innerHTML='🕯️ 想再給女兒現金嗎？請重新開啟頁面才能再次供奉，或者<a href="https://www.hivebee.com.tw/shiucoda/donate" target="_blank" style="color:var(--accent);text-decoration:underline;">點擊一下前往金錢兌換處</a>';
         t.classList.add('show','permanent');
       }
     }else{btn.disabled=false;}
