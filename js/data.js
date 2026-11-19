@@ -5162,13 +5162,93 @@ const vtubers = [
     shorts: [],
 
     color: "#DDB6B5"
-  }
+  },
+
+  // ── 七期生 ─────────────────────────────────────
+  {
+    id: "jialuo",
+    name: "珈洛．瑪格納斯",
+    nameEn: "Jialuo Magnus",
+    group: "預見娛樂",
+    generation: "七期生",
+    avatar: "",
+    coverImage: "",
+    tagline: "",
+    description: "",
+    debut: "2026-12-18",
+    birthday: "",
+    tags: ["台灣", "預見娛樂", "七期生", "巢NEST"],
+    youtube: "",
+    twitter: "",
+    youtubeChannelId: "",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
+    overrideLinks: [
+      { label: 'HiveBee',    url: '#', class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員',   url: '#', class: 'membership', icon: '💎' },
+      { label: '棉花糖',     url: '#', class: 'marshmallow',icon: '🍬' },
+    ],
+    videos: [{id:"REPLACE_VIDEO_1",title:"",date:""}],
+    shorts: [],
+    color: "#808080"
+  },
+  {
+    id: "yenkyuji",
+    name: "煙玖司",
+    nameEn: "YEN-KYUJI",
+    group: "預見娛樂",
+    generation: "七期生",
+    avatar: "",
+    coverImage: "",
+    tagline: "",
+    description: "",
+    debut: "2026-12-19",
+    birthday: "",
+    tags: ["台灣", "預見娛樂", "七期生", "巢NEST"],
+    youtube: "",
+    twitter: "https://x.com/YENKYUJI",
+    youtubeChannelId: "",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
+    overrideLinks: [
+      { label: 'HiveBee',    url: '#', class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員',   url: '#', class: 'membership', icon: '💎' },
+      { label: '棉花糖',     url: '#', class: 'marshmallow',icon: '🍬' },
+    ],
+    videos: [{id:"REPLACE_VIDEO_1",title:"",date:""}],
+    shorts: [],
+    color: "#808080"
+  },
+  {
+    id: "yatir",
+    name: "亞緹爾",
+    nameEn: "Yatir",
+    group: "預見娛樂",
+    generation: "七期生",
+    avatar: "",
+    coverImage: "",
+    tagline: "",
+    description: "",
+    debut: "2026-12-20",
+    birthday: "",
+    tags: ["台灣", "預見娛樂", "七期生", "巢NEST"],
+    youtube: "",
+    twitter: "",
+    youtubeChannelId: "",
+    ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
+    overrideLinks: [
+      { label: 'HiveBee',    url: '#', class: 'hivebee',    icon: '🐝' },
+      { label: '深度會員',   url: '#', class: 'membership', icon: '💎' },
+      { label: '棉花糖',     url: '#', class: 'marshmallow',icon: '🍬' },
+    ],
+    videos: [{id:"REPLACE_VIDEO_1",title:"",date:""}],
+    shorts: [],
+    color: "#808080"
+  },
 ];
 
 const groups = [...new Set(vtubers.map(v => v.group))];
 
 // 世代篩選清單（依出道順序排列）
-const generationOrder = { '零期生': 0, '一期生': 1, '二期生': 2, '三期生': 3, '四期生': 4, '五期生': 5, '六期生': 6 };
+const generationOrder = { '零期生': 0, '一期生': 1, '二期生': 2, '三期生': 3, '四期生': 4, '五期生': 5, '六期生': 6, '七期生': 7 };
 const generations = [...new Set(vtubers.map(v => v.generation))]
   .sort((a, b) => (generationOrder[a] ?? 99) - (generationOrder[b] ?? 99));
 
@@ -5180,6 +5260,7 @@ const generationTeams = {
   '四期生': '音雲漫步',
   '五期生': 'CaKano',
   '六期生': 'ælis',
+  '七期生': '巢NEST',
 };
 
 // 各世代代表漸層色 [起始色, 結束色]（零期生不顯示卡片）
@@ -5190,6 +5271,7 @@ const generationColors = {
   '四期生': ['#F97316', '#EA580C'],
   '五期生': ['#10B981', '#059669'],
   '六期生': ['#A855F7', '#9333EA'],
+  '七期生': ['#808080', '#606060'],
 };
 
 
