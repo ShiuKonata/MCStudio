@@ -5194,7 +5194,7 @@ const vtubers = [
   {
     id: "yenkyuji",
     name: "煙玖司",
-    nameEn: "YEN-KYUJI",
+    nameEn: "YenKyuji",
     group: "預見娛樂",
     generation: "七期生",
     avatar: "",
