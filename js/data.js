@@ -5220,7 +5220,7 @@ const vtubers = [
   {
     id: "yatir",
     name: "亞緹爾",
-    nameEn: "Yatir",
+    nameEn: "Atier",
     group: "預見娛樂",
     generation: "七期生",
     avatar: "",
