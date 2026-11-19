@@ -5168,7 +5168,7 @@ const vtubers = [
   {
     id: "jialuo",
     name: "珈洛．瑪格納斯",
-    nameEn: "Jialuo Magnus",
+    nameEn: "Jaro Magnus",
     group: "預見娛樂",
     generation: "七期生",
     avatar: "",
