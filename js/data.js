@@ -5223,15 +5223,15 @@ const vtubers = [
     nameEn: "Atier",
     group: "預見娛樂",
     generation: "七期生",
-    avatar: "",
-    coverImage: "",
+    avatar: "https://pbs.twimg.com/profile_images/2122660769892593664/RqVTP4g5_400x400.jpg",
+    coverImage: "https://pbs.twimg.com/profile_banners/2115918251633082368/1794935745/1500x500",
     tagline: "",
-    description: "",
+    description: "今天想做一個小實驗。\n至於結果會變成什麼樣子……我也還不知道。\n那麼——你願意陪我試試看嗎？",
     debut: "2026-12-20",
-    birthday: "",
+    birthday: "05-18",
     tags: ["台灣", "預見娛樂", "七期生", "巢NEST"],
-    youtube: "",
-    twitter: "",
+    youtube: "https://www.youtube.com/@Atier_NEST",
+    twitter: "https://x.com/atier0518",
     youtubeChannelId: "",
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     overrideLinks: [
@@ -5241,7 +5241,7 @@ const vtubers = [
     ],
     videos: [{id:"REPLACE_VIDEO_1",title:"",date:""}],
     shorts: [],
-    color: "#808080"
+    color: "#E3CA9C"
   },
 ];
 
