@@ -5171,15 +5171,15 @@ const vtubers = [
     nameEn: "Jaro Magnus",
     group: "預見娛樂",
     generation: "七期生",
-    avatar: "",
-    coverImage: "",
+    avatar: "https://pbs.twimg.com/profile_images/2122660780651003904/ETp4Ic_I_400x400.jpg",
+    coverImage: "https://pbs.twimg.com/profile_banners/2059531518146646016/1793691449/1500x500",
     tagline: "",
-    description: "",
+    description: "幻術瞬息變化，掌聲此起彼落\n如夢似幻的記憶，在這座劇場中永恆",
     debut: "2026-12-18",
-    birthday: "",
+    birthday: "01-06",
     tags: ["台灣", "預見娛樂", "七期生", "巢NEST"],
-    youtube: "",
-    twitter: "",
+    youtube: "https://www.youtube.com/@JaroMagnus",
+    twitter: "https://x.com/jaromagnus",
     youtubeChannelId: "",
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
     overrideLinks: [
@@ -5189,7 +5189,7 @@ const vtubers = [
     ],
     videos: [{id:"REPLACE_VIDEO_1",title:"",date:""}],
     shorts: [],
-    color: "#808080"
+    color: "#BE57C7"
   },
   {
     id: "yenkyuji",
