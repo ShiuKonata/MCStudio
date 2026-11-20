@@ -5197,14 +5197,14 @@ const vtubers = [
     nameEn: "YenKyuji",
     group: "預見娛樂",
     generation: "七期生",
-    avatar: "",
-    coverImage: "",
+    avatar: "https://pbs.twimg.com/profile_images/2122639655996977152/-xb1qYi0_400x400.jpg",
+    coverImage: "https://pbs.twimg.com/profile_banners/2063890473899761664/1793700011/1500x500",
     tagline: "",
-    description: "",
+    description: "「你好奇我是誰？」\n\n別急著問。\n\n先想想 \n\n你又是怎麼找到我的？\n",
     debut: "2026-12-19",
-    birthday: "",
+    birthday: "03-25",
     tags: ["台灣", "預見娛樂", "七期生", "巢NEST"],
-    youtube: "",
+    youtube: "https://www.youtube.com/@YenKyuji",
     twitter: "https://x.com/YENKYUJI",
     youtubeChannelId: "",
     ytApiKey: "AIzaSyBsmWLwQLY-8wszHDufVCZaGZ0RKkRjPlM",
@@ -5215,7 +5215,7 @@ const vtubers = [
     ],
     videos: [{id:"REPLACE_VIDEO_1",title:"",date:""}],
     shorts: [],
-    color: "#808080"
+    color: "#1b5c99"
   },
   {
     id: "yatir",
