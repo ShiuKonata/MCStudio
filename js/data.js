@@ -3354,6 +3354,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"ffr4Y8NobRw",title:"【Cover】ミッドナイト魯肉飯 / veno｜量產型猫飼步歌貳貳機 Fuka22【cover】",date:"2026-11-20"},
       {id:"3kOcLWFl0j8",title:"【Cover】深海のリトルクライ／sasakure.UK｜量產型猫飼步歌貳貳機 Fuka22【cover】",date:"2026-06-08"},
       {id:"5_OX73v2cXI",title:"【Cover】使用量產型的優勢唱了 プロポーズ／なとり｜量產型猫飼步歌貳貳機 Fuka22【cover】",date:"2026-06-01"},
       {id:"6P5dJ9Zg8aM",title:"【Cover】mosi mosi?／楽音｜量產型猫飼步歌貳貳機 Fuka22【cover】",date:"2026-05-25"},
@@ -3370,6 +3371,7 @@ const vtubers = [
       {id:"vFhf_-jyTzM",title:"晚餐歌／tuki.｜量產型猫飼步歌貳貳機 Fuka22【自彈自唱 Cover】",date:"2024-07-07"},
     ],
     shorts: [
+      {id:"oiAPVJT4Vco",title:"【預告】ミッドナイト魯肉飯 / veno｜量產型猫飼步歌貳貳機 Fuka22",date:"2026-11-20"},
       {id:"MuS2CMMQuSY",title:"〖音雲漫步二週年〗ラブレター / YOASOBI｜@cocor0_0303 @BarkBarkPomi @uchififi @Nekokaifuka22",date:"2026-09-08"},
       {id:"rQhAXff6FHg",title:"嗚嗚嗚嗚好好吃啊｜🤖量產型猫飼步歌貳貳機🐱 Fuka22",date:"2026-09-07"},
       {id:"q24rGTG-JrQ",title:"金箔是不能消化的對吧？所以……？ ฅ 量產型猫飼步歌貳貳機 Fuka22",date:"2026-09-06"},
