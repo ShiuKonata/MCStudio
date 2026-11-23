@@ -2093,6 +2093,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"MYidnZe4SQU",title:"【Cover】【3D COVER】雨愛/楊丞琳 你的呼吸像雨滴滲入我的愛裡｜結月莉莉奈Yuzukiririna",date:"2026-11-23"},
       {id:"xvN0HTvoqOQ",title:"【Cover】ビビデバ/星街彗星 【結月莉莉奈】 #vtuber #shorts #dancecover",date:"2026-06-17"},
       {id:"RTbFm_V7JAo",title:"【愚人節COVER】草莓味/桂香GuiXiang 甜自己一把、放自己一馬🤘｜結月莉莉奈Yuzukiririna",date:"2026-04-01"},
       {id:"C4NfTAD_nOY",title:"【明日方舟：終末地】WE ARE EMPIRE/STARSET｜結月莉莉奈Yuzukiririna",date:"2026-02-08"},
@@ -4832,6 +4833,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"0quJdFVc1Fc",title:"【Cover】【 百花繚乱 】一周年cover  / 珮蕾pele 、@chamamatti、 @yawnii_aelis​",date:"2026-11-19"},
       {id:"OeCZXT1FNTg",title:"【Cover】【 落淚 】cover / 珮蕾pele",date:"2026-08-01"},
       {id:"NqrevkrJOoc",title:"【 我愛你-上海蟹 】cover / 珮蕾pele",date:"2026-02-14"},
       {id:"Nu1FICbgoPw",title:"【ワールドイズマイン/世界第一的公主殿下 】cover / 珮蕾pele",date:"2025-10-25"},
