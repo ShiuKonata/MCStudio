@@ -4833,6 +4833,7 @@ const vtubers = [
     ],
 
     videos: [
+      {id:"X3LUla9RIMg",title:"【Cover】【 老公天下第一 】還債cover / 珮蕾pele",date:"2026-11-25"},
       {id:"0quJdFVc1Fc",title:"【Cover】【 百花繚乱 】一周年cover  / 珮蕾pele 、@chamamatti、 @yawnii_aelis​",date:"2026-11-19"},
       {id:"OeCZXT1FNTg",title:"【Cover】【 落淚 】cover / 珮蕾pele",date:"2026-08-01"},
       {id:"NqrevkrJOoc",title:"【 我愛你-上海蟹 】cover / 珮蕾pele",date:"2026-02-14"},
